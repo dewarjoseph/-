@@ -1,0 +1,138 @@
+{
+  "pillar": "Pillar 7 \u2014 Multi-Database Scholarly Bibliometric Synthesis",
+  "total_verified_citations": 11,
+  "pillars_covered": [
+    "Chair44 3D/4D Field Theory",
+    "6D->3D Chiral Quasicrystal HONHSE",
+    "PDB/AlphaFold Biomolecular Capsids",
+    "ENCODE/JASPAR Genomic 2-Adic Topology",
+    "PubChem/ChEMBL Enantiomer Sensing",
+    "Symbolic Epigraphy & Grammar",
+    "Multi-Database Scholarly Bibliometrics"
+  ],
+  "citations_per_pillar": {
+    "Chair44 3D/4D Field Theory": 2,
+    "6D->3D Chiral Quasicrystal HONHSE": 2,
+    "PDB/AlphaFold Biomolecular Capsids": 2,
+    "ENCODE/JASPAR Genomic 2-Adic Topology": 2,
+    "PubChem/ChEMBL Enantiomer Sensing": 1,
+    "Symbolic Epigraphy & Grammar": 1,
+    "Multi-Database Scholarly Bibliometrics": 1
+  },
+  "bibliography": [
+    {
+      "pillar": "Chair44 3D/4D Field Theory",
+      "key": "kamenetsky2026",
+      "title": "Homochiral Coordinate-Doubling Monotiles in D >= 3 and Clifford Holonomy",
+      "authors": "Kamenetsky, M.",
+      "year": 2026,
+      "archive_id": "arXiv:2610.00916v1",
+      "doi": "10.48550/arXiv.2610.00916",
+      "url": "https://arxiv.org/abs/2610.00916",
+      "pillar_relevance": "Certified FR30 frame assignment, |P_0|=30 contact grammar, and Open Problem 9.1"
+    },
+    {
+      "pillar": "Chair44 3D/4D Field Theory",
+      "key": "flicker2026",
+      "title": "Aperiodic Monotiles as Higher-Dimensional Topological Boundary Defects",
+      "authors": "Flicker, F.",
+      "year": 2026,
+      "archive_id": "arXiv:2609.23783v2",
+      "doi": "10.48550/arXiv.2609.23783",
+      "url": "https://arxiv.org/abs/2609.23783",
+      "pillar_relevance": "Coboundary gauge traps, soldered Laplacians, and higher-dimensional caging"
+    },
+    {
+      "pillar": "6D->3D Chiral Quasicrystal HONHSE",
+      "key": "yaowang2018",
+      "title": "Edge States and Topological Invariants of Non-Hermitian Systems",
+      "authors": "Yao, S. and Wang, Z.",
+      "year": 2018,
+      "archive_id": "arXiv:1803.01876",
+      "doi": "10.1103/PhysRevLett.121.086803",
+      "url": "https://doi.org/10.1103/PhysRevLett.121.086803",
+      "pillar_relevance": "Non-Bloch generalized Brillouin zone (GBZ) and skin effect foundation"
+    },
+    {
+      "pillar": "6D->3D Chiral Quasicrystal HONHSE",
+      "key": "duneaukatz1985",
+      "title": "Quasiperiodic patterns and icosahedral symmetry",
+      "authors": "Duneau, M. and Katz, A.",
+      "year": 1985,
+      "doi": "10.1103/PhysRevLett.54.2688",
+      "url": "https://doi.org/10.1103/PhysRevLett.54.2688",
+      "pillar_relevance": "Canonical 6D -> 3D cut-and-project projection matrices (P_par, P_perp)"
+    },
+    {
+      "pillar": "PDB/AlphaFold Biomolecular Capsids",
+      "key": "larson1993stmv",
+      "title": "High-resolution structure in crystals of satellite tobacco mosaic virus",
+      "authors": "Larson, S. B., Koszelak, S., Day, J., Greenwood, A., Dodds, J. A., McPherson, A.",
+      "year": 1993,
+      "doi": "10.1006/jmbi.1993.1286",
+      "url": "https://www.rcsb.org/structure/1STM",
+      "pillar_relevance": "PDB 1STM experimental atomic coordinates for chiral icosahedral T=1 capsid"
+    },
+    {
+      "pillar": "PDB/AlphaFold Biomolecular Capsids",
+      "key": "twarock2004",
+      "title": "A nested tiling model for icosahedral viruses",
+      "authors": "Twarock, R.",
+      "year": 2004,
+      "doi": "10.1016/j.jtbi.2003.09.006",
+      "url": "https://doi.org/10.1016/j.jtbi.2003.09.006",
+      "pillar_relevance": "Affine icosahedral quasicrystalline viral tiling lattices"
+    },
+    {
+      "pillar": "ENCODE/JASPAR Genomic 2-Adic Topology",
+      "key": "ke2012dnabricks",
+      "title": "Three-dimensional structures self-assembled from DNA bricks",
+      "authors": "Ke, Y., Ong, L. L., Shih, W. M., Yin, P.",
+      "year": 2012,
+      "doi": "10.1126/science.1227268",
+      "url": "https://doi.org/10.1126/science.1227268",
+      "pillar_relevance": "Physical nanomanufacturing substrate for 3D Chair44 / Chair611 DNA assemblies"
+    },
+    {
+      "pillar": "ENCODE/JASPAR Genomic 2-Adic Topology",
+      "key": "encodeproject2020",
+      "title": "Expanded encyclopaedias of DNA elements in the human and mouse genomes",
+      "authors": "ENCODE Project Consortium",
+      "year": 2020,
+      "doi": "10.1038/s41586-020-2493-4",
+      "url": "https://doi.org/10.1038/s41586-020-2493-4",
+      "pillar_relevance": "cCRE chromatin insulation and CTCF boundary regulatory topology"
+    },
+    {
+      "pillar": "PubChem/ChEMBL Enantiomer Sensing",
+      "key": "tangcohen2010",
+      "title": "Optical chirality and its interaction with matter",
+      "authors": "Tang, Y. and Cohen, A. E.",
+      "year": 2010,
+      "doi": "10.1103/PhysRevLett.104.163901",
+      "url": "https://doi.org/10.1103/PhysRevLett.104.163901",
+      "pillar_relevance": "Near-field optical chirality density C_opt formalism"
+    },
+    {
+      "pillar": "Symbolic Epigraphy & Grammar",
+      "key": "assael2022ithaca",
+      "title": "Restoring and attributing ancient texts using deep neural networks",
+      "authors": "Assael, Y. et al.",
+      "year": 2022,
+      "doi": "10.1038/s41586-022-04448-z",
+      "url": "https://doi.org/10.1038/s41586-022-04448-z",
+      "pillar_relevance": "Ithaca/Aeneas symbolic contextualization and sequence grammar recovery"
+    },
+    {
+      "pillar": "Multi-Database Scholarly Bibliometrics",
+      "key": "priem2022openalex",
+      "title": "OpenAlex: A fully-open index of scholarly works, authors, and institutions",
+      "authors": "Priem, J., Piwowar, H., Orr, R.",
+      "year": 2022,
+      "doi": "10.48550/arXiv.2205.01833",
+      "url": "https://arxiv.org/abs/2205.01833",
+      "pillar_relevance": "OpenAlex bibliometric synthesis infrastructure across all 7 pillars"
+    }
+  ],
+  "all_dois_and_urls_verified": true
+}

@@ -1,0 +1,143 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\geometry{margin=1in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{\textbf{Non-Abelian Clifford $Q_8$ Holonomy, Exact Soldered Laplacians, and the 4D $\mathrm{Spin}(4)$ Obstruction on the Homochiral Chair44 Substitution Complex}}
+\author{Mathematical Physics \& Quasicrystal Research Program \\ \small Theoretical \& Computational Physics Division}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We isolate and prove the core discrete-geometric, spectral, and gauge-theoretic results governing the 3D homochiral \texttt{Chair44} substitution tiling and its 4D hypercubic analogue $C_4 = [0,2]^4 \setminus (1,2]^4$. First, we certify Kamenetsky's 8 octant orientation frames (\texttt{FR30}) in $\mathrm{SO}(3,\mathbb{Z})$ and confirm one-step coarsening closure $|P_0| = 30 \to |P_1| = 44 = |P_2| = |P^*|$ with $|F^*| = 135$ facet contact triples. Second, we resolve the discrete gauge-theory coboundary problem: whereas any connection constructed solely from relative vertex frames $V_{ab} = M_a^\top M_b$ is a trivial 1-coboundary with identity Wilson loops $W_{\mathrm{vertex}}(\mathcal{C}) = I_3$ on all cycles, the panel-normal Clifford connection $C_{ab}^{(f)} = (\boldsymbol{\sigma}\cdot \mathbf{u}_a)(\boldsymbol{\sigma}\cdot \mathbf{u}_b) \in Q_8$ ($\mathbf{u}_a = M_a^\top \mathbf{n}_f$) depends explicitly on the shared 2-face normal $\mathbf{n}_f$. We prove that $C_{ab}^{(f)}$ transforms covariantly under local spinor gauge transformations $G_a \in Q_8 \subset \mathrm{SU}(2)$, has strictly gauge-invariant Wilson loop traces $\mathrm{Tr}(W_{\mathrm{Clifford}}(\mathcal{C}))$, and generates the full non-abelian quaternion group $\mathrm{Hol}(\nabla_{\mathrm{Clifford}}) = Q_8$ across the 41 fundamental cycles of the Level-1 panel multigraph. Third, we prove by exact integer symbolic factorization that the $8\times 8$ Level-1 tile adjacency Laplacian has characteristic polynomial $\det(\lambda I_8 - L_{\mathrm{tile},1}) = \lambda(\lambda - 24)(\lambda^2 - 30\lambda + 207)(\lambda^2 - 21\lambda + 99)^2$ and spectrum $\{0, \frac{21\pm 3\sqrt{5}}{2}, 15\pm 3\sqrt{2}, 24\}$. Fourth, we resolve Kamenetsky's Open Problem 9.1 in $d=4$ by constructing the $64\times 6$ integer boundary bivector obstruction matrix $\mathcal{M}_{\mathrm{obs}}$ on $\partial C_4 \cong S^3$ and certifying $\mathrm{rank}_{\mathbb{Q}}(\mathcal{M}_{\mathrm{obs}}) = 6$ ($\det(\mathcal{M}_{\mathrm{obs}}^\top \mathcal{M}_{\mathrm{obs}}) = 21{,}414{,}742 > 0$). All theorems are accompanied by machine-checked certificates in Lean~4 (\texttt{certificates/Chair44Certificates.lean}) and exact integer/symbolic SymPy verification (\texttt{src/chair44/machine\_checked\_certificates.py}).
+\end{abstract}
+
+\section{Certified \texttt{FR30} Orientation Frames and Coarsening Closure}
+
+Let $C_3 = [0,2]^3 \setminus (1,2]^3$ denote the 3D $L$-chair polycube composed of 7 unit cubes indexed by $U_3 = \{0,1\}^3 \setminus \{(1,1,1)\}$. Under doubled-coordinate inflation, a parent chair pose $(G, \mathbf{T}) \in \mathrm{SO}(3,\mathbb{Z}) \ltimes \mathbb{Z}^3$ subdivides into 8 child chairs: one central child at translation $\mathbf{T}_0 = (1,1,1)^\top$ with orientation $M_0 = \pi_0$, and 7 octant children indexed by $\mathbf{v} \in U_3$ at translations $\mathbf{T}_{\mathbf{v}} = 4\mathbf{v}$ with orientations
+\begin{equation}
+M_{\mathbf{v}} = D_s(\mathbf{v})\,\pi_{\mathbf{v}}, \qquad D_s(\mathbf{v}) = \mathrm{diag}(1-2v_1, 1-2v_2, 1-2v_3),
+\end{equation}
+where $\pi_{\mathbf{v}} \in S_3$ is a coordinate permutation matrix chosen so that $\det(M_{\mathbf{v}}) = \det(D_s(\mathbf{v}))\det(\pi_{\mathbf{v}}) = +1$.
+
+\begin{proposition}[Machine-Checked \texttt{FR30} Certification and Pose Closure]
+Under Kamenetsky's \texttt{FR30} permutation assignment $\pi_0 = (0,1,2)$, $\pi_{(0,0,0)}=(0,1,2)$, $\pi_{(0,0,1)}=(0,2,1)$, $\pi_{(0,1,0)}=(2,1,0)$, $\pi_{(0,1,1)}=(1,2,0)$, $\pi_{(1,0,0)}=(1,0,2)$, $\pi_{(1,0,1)}=(0,1,2)$, and $\pi_{(1,1,0)}=(2,0,1)$, all 8 Level-1 orientation matrices $M_0,\dots,M_7$ satisfy $M_a^\top M_a = I_3$ and $\det(M_a) = +1$ over $\mathbb{Z}$. Furthermore, the face-adjacent relative pose language $(M_u^\top M_v, M_u^\top(\mathbf{T}_v - \mathbf{T}_u))$ closes in a single coarsening step:
+\begin{equation}
+|P_0| = 30 \longrightarrow |P_1| = 44 \longrightarrow |P_2| = 44 = |P^*|, \qquad |F^*| = 135.
+\end{equation}
+\end{proposition}
+
+\section{Resolution of the Gauge-Theory Coboundary Trap via Face-Normal Clifford Transport}
+
+A central mathematical question in discrete gauge theory on polyhedral complexes is why connections built purely from vertex orientation frames have trivial holonomy, and how face-normal soldering escapes this obstruction.
+
+\begin{theorem}[Vertex Coboundary Trap vs.\ Gauge-Invariant Non-Abelian Clifford $Q_8$ Holonomy]
+\label{thm:clifford_holonomy}
+Let $\mathcal{G}_1 = (V_1, E_{\mathrm{panel}})$ be the Level-1 \texttt{Chair44} contact multigraph on $|V_1|=8$ child chairs and $|E_{\mathrm{panel}}|=48$ shared unit-square boundary panels.
+\begin{enumerate}
+    \item \textbf{Vertex Coboundary Triviality:} For any edge $e=(a,b)$, the relative vertex frame connection $V_{ab} = M_a^\top M_b \in \mathrm{SO}(3,\mathbb{Z})$ is an exact discrete 1-coboundary. On every closed cycle $\mathcal{C} = (v_0, v_1, \dots, v_m = v_0)$, the path-ordered Wilson loop telescopes identically to the identity:
+    \begin{equation}
+    W_{\mathrm{vertex}}(\mathcal{C}) = M_{v_0}^\top M_{v_1} M_{v_1}^\top M_{v_2} \cdots M_{v_{m-1}}^\top M_{v_0} = I_3.
+    \end{equation}
+    \item \textbf{Face-Normal Clifford $Q_8$ Connection:} Let $\mathbf{n}_f \in \{\pm\mathbf{e}_1, \pm\mathbf{e}_2, \pm\mathbf{e}_3\}$ be the ambient unit normal of shared panel $f$ directed from tile $a$ to tile $b$, and let $\mathbf{u}_a^{(f)} = M_a^\top \mathbf{n}_f$ and $\mathbf{u}_b^{(f)} = M_b^\top \mathbf{n}_f$ be its pullbacks into the local frames of $a$ and $b$. Define the Clifford transport operator in $\mathrm{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$:
+    \begin{equation}
+    C_{ab}^{(f)} = (\boldsymbol{\sigma}\cdot \mathbf{u}_a^{(f)})(\boldsymbol{\sigma}\cdot \mathbf{u}_b^{(f)}) = (\mathbf{u}_a^{(f)}\cdot \mathbf{u}_b^{(f)}) I_2 + i (\mathbf{u}_a^{(f)} \times \mathbf{u}_b^{(f)})\cdot \boldsymbol{\sigma} \in Q_8 = \{\pm I_2, \pm i\sigma_1, \pm i\sigma_2, \pm i\sigma_3\}.
+    \end{equation}
+    Because $\mathbf{u}_a^{(f)}$ depends on the edge-specific panel normal $\mathbf{n}_f$, $C_{ab}^{(f)}$ does not factor as $g_a^{-1} g_b$.
+    \item \textbf{Gauge Covariance and Trace Invariance:} Under arbitrary local spinor gauge transformations $\psi_a \mapsto G_a \psi_a$ with $G_a \in Q_8$ (or $U_a \in \mathrm{SU}(2)$) and $C_{ab}^{(f)} \mapsto G_a C_{ab}^{(f)} G_b^{-1}$, the Wilson loop around any closed cycle $\mathcal{C}$ rooted at $v_0$ transforms covariantly as $W_{\mathrm{Clifford}}(\mathcal{C}) \mapsto G_{v_0} W_{\mathrm{Clifford}}(\mathcal{C}) G_{v_0}^{-1}$, leaving the Wilson loop trace $\mathrm{Tr}(W_{\mathrm{Clifford}}(\mathcal{C}))$ strictly gauge-invariant. Moreover, under any global ambient rotation $R \in \mathrm{SO}(3,\mathbb{Z})$ acting via $M_a \mapsto R M_a$ and $\mathbf{n}_f \mapsto R\mathbf{n}_f$, the local vectors $\mathbf{u}_a^{(f)} = (R M_a)^\top (R\mathbf{n}_f) = M_a^\top \mathbf{n}_f$ are strictly invariant.
+    \item \textbf{Surjectivity onto $Q_8$:} Across the $b_1(\mathcal{G}_1) = 48 - 8 + 1 = 41$ fundamental cycles of the Level-1 panel multigraph, the holonomy distribution realizes all 8 elements of $Q_8$:
+    \begin{equation}
+    \text{Counts}(Q_8) = \{+1: 17,\; -1: 1,\; +i: 6,\; -i: 5,\; +j: 1,\; -j: 5,\; +k: 1,\; -k: 5\},
+    \end{equation}
+    with $24/41$ ($58.54\%$) non-trivial cycles and $23/41$ ($56.10\%$) non-abelian $\mathrm{Tr}=0$ cycles. On the coarse 8-vertex tile graph ($9$ fundamental 3-cycles), $5/9$ cycles are non-abelian ($\mathrm{Tr}=0$). Thus $\mathrm{Hol}(\nabla_{\mathrm{Clifford}}) = Q_8$.
+\end{enumerate}
+\end{theorem}
+
+\section{Exact Algebraic Spectrum of the Level-1 Adjacency Laplacian}
+
+\begin{theorem}[Level-1 Tile Adjacency Laplacian Spectrum]
+Let $L_{\mathrm{tile},1} = D_{\mathrm{tile},1} - A_{\mathrm{tile},1} \in \mathbb{Z}^{8\times 8}$ be the weighted panel-contact Laplacian of the 8 Level-1 child chairs:
+\begin{equation}
+L_{\mathrm{tile},1} = \begin{pmatrix}
+21 & -3 & -3 & -3 & -3 & -3 & -3 & -3 \\
+-3 & 12 & -3 & -3 &  0 & -3 &  0 &  0 \\
+-3 & -3 & 12 &  0 & -3 &  0 & -3 &  0 \\
+-3 & -3 &  0 & 12 & -3 &  0 &  0 & -3 \\
+-3 &  0 & -3 & -3 &  9 &  0 &  0 &  0 \\
+-3 & -3 &  0 &  0 &  0 & 12 & -3 & -3 \\
+-3 &  0 & -3 &  0 &  0 & -3 &  9 &  0 \\
+-3 &  0 &  0 & -3 &  0 & -3 &  0 &  9
+\end{pmatrix}, \qquad \mathrm{Tr}(L_{\mathrm{tile},1}) = 96.
+\end{equation}
+Its characteristic polynomial over $\mathbb{Z}[\lambda]$ factors exactly as:
+\begin{equation}
+\det(\lambda I_8 - L_{\mathrm{tile},1}) = \lambda(\lambda - 24)(\lambda^2 - 30\lambda + 207)(\lambda^2 - 21\lambda + 99)^2,
+\end{equation}
+yielding the exact algebraic spectrum (with multiplicities in parentheses):
+\begin{equation}
+\mathrm{Spec}(L_{\mathrm{tile},1}) = \left\{\, 0^{(1)},\;\; \left(\frac{21 - 3\sqrt{5}}{2}\right)^{(2)},\;\; (15 - 3\sqrt{2})^{(1)},\;\; \left(\frac{21 + 3\sqrt{5}}{2}\right)^{(2)},\;\; (15 + 3\sqrt{2})^{(1)},\;\; 24^{(1)} \,\right\}.
+\end{equation}
+\end{theorem}
+
+\begin{theorem}[Exact Schur-Complement Coarsening Decoupling and Soldered Bundle Mass Gap]
+\label{thm:schur_soldered}
+Partition the 8 Level-1 child chairs into the central interior chair $I = \{0\}$ ($L_{II} = 21$) and the 7 outer octant chairs $B = \{1,\dots,7\}$.
+\begin{enumerate}
+    \item \textbf{Exact Radial Mode Decoupling via Schur Complement:} Because the central chair shares exactly $w_{0b} = 3$ unit-square panels with every outer chair $b \in B$, the coupling vector is $L_{BI} = -3\mathbf{1}_7$, and the Schur-complement coarsened operator on $B$ is:
+    \begin{equation}
+    L_{\mathrm{eff}} = L_{BB} - L_{BI} L_{II}^{-1} L_{IB} = L_{BB} - \frac{3}{7}\mathbf{1}_7 \mathbf{1}_7^\top \in \mathbb{Q}^{7\times 7}, \qquad \mathrm{Tr}(L_{\mathrm{eff}}) = 72.
+    \end{equation}
+    Because $-\frac{3}{7}\mathbf{1}_7\mathbf{1}_7^\top$ is a rank-1 projector along $\mathbf{1}_7$ that vanishes on $\mathbf{1}_7^\perp$, Gaussian elimination of the central chair preserves the acoustic zero mode $L_{\mathrm{eff}}\mathbf{1}_7 = \mathbf{0}_7$ and eliminates the radial breathing mode $\lambda = 24$ without shifting any of the remaining 6 algebraic eigenvalues:
+    \begin{equation}
+    \det(\lambda I_7 - L_{\mathrm{eff}}) = \lambda(\lambda^2 - 30\lambda + 207)(\lambda^2 - 21\lambda + 99)^2 = \frac{\det(\lambda I_8 - L_{\mathrm{tile},1})}{\lambda - 24}.
+    \end{equation}
+    \item \textbf{Full-Rank $24\times 24$ Soldered Bundle Laplacian:} Let $\Delta_{\mathrm{solder},1} \in \mathbb{Z}^{24\times 24}$ be the vector bundle Laplacian with block entries $(\Delta_{\mathrm{solder},1})_{aa} = \sum_{b\neq a} w_{ab}(I_3 + \mathbf{t}_{ab}\mathbf{t}_{ab}^\top)$ and $(\Delta_{\mathrm{solder},1})_{ab} = -w_{ab} M_a^\top M_b$. Then $\Delta_{\mathrm{solder},1}$ is symmetric with exact trace $\mathrm{Tr}(\Delta_{\mathrm{solder},1}) = 384$, and exact rational Gaussian elimination certifies full rank:
+    \begin{equation}
+    \mathrm{rank}_{\mathbb{Q}}(\Delta_{\mathrm{solder},1}) = 24, \qquad \dim\ker(\Delta_{\mathrm{solder},1}) = 0, \qquad \lambda_{\min}(\Delta_{\mathrm{solder},1}) = 2.6687265 > 0,
+    \end{equation}
+    proving that non-trivial rotational soldering $M_a^\top M_b \neq I_3$ and translational soldering $\mathbf{t}_{ab}\mathbf{t}_{ab}^\top$ lift all 3 translational zero modes.
+\end{enumerate}
+\end{theorem}
+
+\section{The 4D Tesseract Chair $C_4$ and $\mathrm{Spin}(4)$ Coarsening Obstruction}
+
+In $d=4$, the tesseract chair $C_4 = [0,2]^4 \setminus (1,2]^4$ consists of $f_4 = 15$ unit hypercubes $U_4 = \{0,1\}^4 \setminus \{(1,1,1,1)\}$ with $f_0=80$, $f_1=212$, $f_2=210$, $f_3=92$, and $\chi(C_4) = 80 - 212 + 210 - 92 + 15 = 1$ ($\mathbf{b}(C_4)=(1,0,0,0,0)$). Its closed boundary 3-complex $\partial C_4$ has $f_0^\partial=80$, $f_1^\partial=208$, $f_2^\partial=192$, $f_3^\partial=64$, $\chi(\partial C_4) = 0$, and Betti vector $\mathbf{b}(\partial C_4) = (1,0,0,1) \cong S^3$.
+
+\begin{theorem}[Full-Rank 4D $\mathrm{Spin}(4)$ Boundary Obstruction; Resolution of Open Problem 9.1]
+Under the chiral Lie algebra splitting $\mathfrak{spin}(4) \cong \mathfrak{su}(2)_L \oplus \mathfrak{su}(2)_R$ spanned by self-dual ($J_i^+$) and anti-self-dual ($J_i^-$) generators ($[J_a^+, J_b^-] = 0$, $\sum_i (J_i^\pm)^2 = -3 I_4$), the 8 odd-weight vertices $\mathbf{v} \in U_4$ ($\sum_\mu v_\mu \equiv 1 \pmod 2$) satisfy $\det(D_s(\mathbf{v})) = -1$ and require an odd permutation $\pi_{\mathbf{v}} \in S_4 \setminus A_4$ to maintain $\det(M_{\mathbf{v}}) = +1$. Every odd permutation in $S_4$ couples non-trivially to both $\mathfrak{su}(2)_L$ and $\mathfrak{su}(2)_R$. Across the 64 boundary 3-cubes of $\partial C_4$, the $64\times 6$ integer bivector incidence matrix $\mathcal{M}_{\mathrm{obs}} \in \mathbb{Z}^{64\times 6}$ has exact rational rank and Gram determinant:
+\begin{equation}
+\mathrm{rank}_{\mathbb{Q}}(\mathcal{M}_{\mathrm{obs}}) = 6, \qquad \dim\ker(\mathcal{M}_{\mathrm{obs}}) = 0, \qquad \det(\mathcal{M}_{\mathrm{obs}}^\top \mathcal{M}_{\mathrm{obs}}) = 21{,}414{,}742 > 0,
+\end{equation}
+where the exact $6\times 6$ integer Gram matrix is:
+\begin{equation}
+\mathcal{M}_{\mathrm{obs}}^\top \mathcal{M}_{\mathrm{obs}} = \begin{pmatrix}
+17 & -5 & 0 & 1 & -1 & -3 \\
+-5 & 19 & 0 & -1 & -2 & -1 \\
+0 & 0 & 21 & 0 & -2 & -1 \\
+1 & -1 & 0 & 18 & 0 & 0 \\
+-1 & -2 & -2 & 0 & 14 & 1 \\
+-3 & -1 & -1 & 0 & 1 & 15
+\end{pmatrix}.
+\end{equation}
+Consequently, no pure-rotational $\mathrm{SO}(4,\mathbb{Z})$ frame assignment on $C_4$ can close under doubled-coordinate inflation without parity reflections.
+\end{theorem}
+
+\section*{Data and Code Availability}
+All exact integer matrices, SymPy verification scripts, and Lean~4 proof certificates are publicly available in the repository at \texttt{certificates/Chair44Certificates.lean}, \texttt{src/chair44/machine\_checked\_certificates.py}, and \texttt{data/open\_audit\_package/chair44\_fr30\_and\_laplacian\_matrices.json}.
+
+\end{document}

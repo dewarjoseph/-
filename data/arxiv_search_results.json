@@ -1,0 +1,229 @@
+{
+  "status": "success",
+  "results_count": 15,
+  "papers": [
+    {
+      "id": "1906.10392v1",
+      "title": "Quasicrystals",
+      "pdf_url": "https://arxiv.org/pdf/1906.10392v1",
+      "summary": "Mathematicians have been interested in non-periodic tilings of space for decades; however, it was the unexpected discovery of non-periodically ordered structures in intermetallic alloys which brought this subject into the limelight. These fascinating materials, now called quasicrystals, are characterised by the coexistence of long-range atomic order and 'forbidden' symmetries which are incompatible with periodic arrangements in three-dimensional space. In the first part of this review, we summarise the main properties of quasicrystals, and describe how their structures relate to non-periodic tilings of space. The celebrated Penrose and Ammann-Beenker tilings are introduced as illustrative examples. The second part provides a closer look at the underlying mathematics. Starting from Bohr's theory of quasiperiodic functions, a general framework for constructing non-periodic tilings of space is described, and an alternative description as quasiperiodic coverings by overlapping clusters is discussed.",
+      "published": "2019-06-25T08:55:53Z",
+      "comment": "This article is made available for reference. It was written following the March 2006 workshop \"The World a Jigsaw: Tessellations in the Sciences\" at the Lorentz Center, and due to be published in a book entitled \"Tessellations in the Sciences: Virtues, Techniques and Applications of Geometric Tilings\" (eds R van de Weijgaert, G Vegter, J Ritzerveld and V Icke), but annoyingly this never happened",
+      "primary_category": "math-ph",
+      "authors": [
+        "Uwe Grimm",
+        "Peter Kramer"
+      ]
+    },
+    {
+      "id": "1906.10392v1",
+      "title": "Quasicrystals",
+      "pdf_url": "https://arxiv.org/pdf/1906.10392v1",
+      "summary": "Mathematicians have been interested in non-periodic tilings of space for decades; however, it was the unexpected discovery of non-periodically ordered structures in intermetallic alloys which brought this subject into the limelight. These fascinating materials, now called quasicrystals, are characterised by the coexistence of long-range atomic order and 'forbidden' symmetries which are incompatible with periodic arrangements in three-dimensional space. In the first part of this review, we summarise the main properties of quasicrystals, and describe how their structures relate to non-periodic tilings of space. The celebrated Penrose and Ammann-Beenker tilings are introduced as illustrative examples. The second part provides a closer look at the underlying mathematics. Starting from Bohr's theory of quasiperiodic functions, a general framework for constructing non-periodic tilings of space is described, and an alternative description as quasiperiodic coverings by overlapping clusters is discussed.",
+      "published": "2019-06-25T08:55:53Z",
+      "comment": "This article is made available for reference. It was written following the March 2006 workshop \"The World a Jigsaw: Tessellations in the Sciences\" at the Lorentz Center, and due to be published in a book entitled \"Tessellations in the Sciences: Virtues, Techniques and Applications of Geometric Tilings\" (eds R van de Weijgaert, G Vegter, J Ritzerveld and V Icke), but annoyingly this never happened",
+      "primary_category": "math-ph",
+      "authors": [
+        "Uwe Grimm",
+        "Peter Kramer"
+      ]
+    },
+    {
+      "id": "2104.13399v2",
+      "title": "Quasicrystal kirigami",
+      "pdf_url": "https://arxiv.org/pdf/2104.13399v2",
+      "summary": "Kirigami, the art of introducing cuts in thin sheets to enable articulation and deployment, has become an inspiration for a novel class of mechanical metamaterials with unusual properties. Here we complement the use of periodic tiling patterns for kirigami designs by showing that quasicrystals can also serve as the basis for designing deployable kirigami structures, and analyze the geometrical, topological and mechanical properties of these aperiodic kirigami structures.",
+      "published": "2021-04-27T18:01:02Z",
+      "primary_category": "cond-mat.soft",
+      "journal_ref": "Physical Review Research, 4(3), 033114 (2022)",
+      "doi": "10.1103/PhysRevResearch.4.033114",
+      "authors": [
+        "Lucy Liu",
+        "Gary P. T. Choi",
+        "L. Mahadevan"
+      ]
+    },
+    {
+      "id": "1906.10392v1",
+      "title": "Quasicrystals",
+      "pdf_url": "https://arxiv.org/pdf/1906.10392v1",
+      "summary": "Mathematicians have been interested in non-periodic tilings of space for decades; however, it was the unexpected discovery of non-periodically ordered structures in intermetallic alloys which brought this subject into the limelight. These fascinating materials, now called quasicrystals, are characterised by the coexistence of long-range atomic order and 'forbidden' symmetries which are incompatible with periodic arrangements in three-dimensional space. In the first part of this review, we summarise the main properties of quasicrystals, and describe how their structures relate to non-periodic tilings of space. The celebrated Penrose and Ammann-Beenker tilings are introduced as illustrative examples. The second part provides a closer look at the underlying mathematics. Starting from Bohr's theory of quasiperiodic functions, a general framework for constructing non-periodic tilings of space is described, and an alternative description as quasiperiodic coverings by overlapping clusters is discussed.",
+      "published": "2019-06-25T08:55:53Z",
+      "comment": "This article is made available for reference. It was written following the March 2006 workshop \"The World a Jigsaw: Tessellations in the Sciences\" at the Lorentz Center, and due to be published in a book entitled \"Tessellations in the Sciences: Virtues, Techniques and Applications of Geometric Tilings\" (eds R van de Weijgaert, G Vegter, J Ritzerveld and V Icke), but annoyingly this never happened",
+      "primary_category": "math-ph",
+      "authors": [
+        "Uwe Grimm",
+        "Peter Kramer"
+      ]
+    },
+    {
+      "id": "2104.13399v2",
+      "title": "Quasicrystal kirigami",
+      "pdf_url": "https://arxiv.org/pdf/2104.13399v2",
+      "summary": "Kirigami, the art of introducing cuts in thin sheets to enable articulation and deployment, has become an inspiration for a novel class of mechanical metamaterials with unusual properties. Here we complement the use of periodic tiling patterns for kirigami designs by showing that quasicrystals can also serve as the basis for designing deployable kirigami structures, and analyze the geometrical, topological and mechanical properties of these aperiodic kirigami structures.",
+      "published": "2021-04-27T18:01:02Z",
+      "primary_category": "cond-mat.soft",
+      "journal_ref": "Physical Review Research, 4(3), 033114 (2022)",
+      "doi": "10.1103/PhysRevResearch.4.033114",
+      "authors": [
+        "Lucy Liu",
+        "Gary P. T. Choi",
+        "L. Mahadevan"
+      ]
+    },
+    {
+      "id": "1612.01975v2",
+      "title": "Hyperuniformity of Quasicrystals",
+      "pdf_url": "https://arxiv.org/pdf/1612.01975v2",
+      "summary": "Hyperuniform systems, which include crystals, quasicrystals and special disordered systems, have attracted considerable recent attention, but rigorous analyses of the hyperuniformity of quasicrystals have been lacking because the support of the spectral intensity is dense and discontinuous. We employ the integrated spectral intensity, $Z(k)$, to quantitatively characterize the hyperuniformity of quasicrystalline point sets generated by projection methods. The scaling of $Z(k)$ as $k$ tends to zero is computed for one-dimensional quasicrystals and shown to be consistent with independent calculations of the variance, $\u03c3^2(R)$, in the number of points contained in an interval of length $2R$. We find that one-dimensional quasicrystals produced by projection from a two-dimensional lattice onto a line of slope $1/\u03c4$ fall into distinct classes determined by the width of the projection window. For a countable dense set of widths, $Z(k) \\sim k^4$; for all others, $Z(k)\\sim k^2$. This distinction suggests that measures of hyperuniformity define new classes of quasicrystals in higher dimensions as well.",
+      "published": "2016-12-06T20:09:03Z",
+      "comment": "12 pages, 14 figures",
+      "primary_category": "cond-mat.stat-mech",
+      "journal_ref": "Phys. Rev. B 95, 054119 (2017)",
+      "doi": "10.1103/PhysRevB.95.054119",
+      "authors": [
+        "Erdal C. O\u011fuz",
+        "Joshua E. S. Socolar",
+        "Paul J. Steinhardt",
+        "Salvatore Torquato"
+      ]
+    },
+    {
+      "id": "1906.10392v1",
+      "title": "Quasicrystals",
+      "pdf_url": "https://arxiv.org/pdf/1906.10392v1",
+      "summary": "Mathematicians have been interested in non-periodic tilings of space for decades; however, it was the unexpected discovery of non-periodically ordered structures in intermetallic alloys which brought this subject into the limelight. These fascinating materials, now called quasicrystals, are characterised by the coexistence of long-range atomic order and 'forbidden' symmetries which are incompatible with periodic arrangements in three-dimensional space. In the first part of this review, we summarise the main properties of quasicrystals, and describe how their structures relate to non-periodic tilings of space. The celebrated Penrose and Ammann-Beenker tilings are introduced as illustrative examples. The second part provides a closer look at the underlying mathematics. Starting from Bohr's theory of quasiperiodic functions, a general framework for constructing non-periodic tilings of space is described, and an alternative description as quasiperiodic coverings by overlapping clusters is discussed.",
+      "published": "2019-06-25T08:55:53Z",
+      "comment": "This article is made available for reference. It was written following the March 2006 workshop \"The World a Jigsaw: Tessellations in the Sciences\" at the Lorentz Center, and due to be published in a book entitled \"Tessellations in the Sciences: Virtues, Techniques and Applications of Geometric Tilings\" (eds R van de Weijgaert, G Vegter, J Ritzerveld and V Icke), but annoyingly this never happened",
+      "primary_category": "math-ph",
+      "authors": [
+        "Uwe Grimm",
+        "Peter Kramer"
+      ]
+    },
+    {
+      "id": "2104.13399v2",
+      "title": "Quasicrystal kirigami",
+      "pdf_url": "https://arxiv.org/pdf/2104.13399v2",
+      "summary": "Kirigami, the art of introducing cuts in thin sheets to enable articulation and deployment, has become an inspiration for a novel class of mechanical metamaterials with unusual properties. Here we complement the use of periodic tiling patterns for kirigami designs by showing that quasicrystals can also serve as the basis for designing deployable kirigami structures, and analyze the geometrical, topological and mechanical properties of these aperiodic kirigami structures.",
+      "published": "2021-04-27T18:01:02Z",
+      "primary_category": "cond-mat.soft",
+      "journal_ref": "Physical Review Research, 4(3), 033114 (2022)",
+      "doi": "10.1103/PhysRevResearch.4.033114",
+      "authors": [
+        "Lucy Liu",
+        "Gary P. T. Choi",
+        "L. Mahadevan"
+      ]
+    },
+    {
+      "id": "1612.01975v2",
+      "title": "Hyperuniformity of Quasicrystals",
+      "pdf_url": "https://arxiv.org/pdf/1612.01975v2",
+      "summary": "Hyperuniform systems, which include crystals, quasicrystals and special disordered systems, have attracted considerable recent attention, but rigorous analyses of the hyperuniformity of quasicrystals have been lacking because the support of the spectral intensity is dense and discontinuous. We employ the integrated spectral intensity, $Z(k)$, to quantitatively characterize the hyperuniformity of quasicrystalline point sets generated by projection methods. The scaling of $Z(k)$ as $k$ tends to zero is computed for one-dimensional quasicrystals and shown to be consistent with independent calculations of the variance, $\u03c3^2(R)$, in the number of points contained in an interval of length $2R$. We find that one-dimensional quasicrystals produced by projection from a two-dimensional lattice onto a line of slope $1/\u03c4$ fall into distinct classes determined by the width of the projection window. For a countable dense set of widths, $Z(k) \\sim k^4$; for all others, $Z(k)\\sim k^2$. This distinction suggests that measures of hyperuniformity define new classes of quasicrystals in higher dimensions as well.",
+      "published": "2016-12-06T20:09:03Z",
+      "comment": "12 pages, 14 figures",
+      "primary_category": "cond-mat.stat-mech",
+      "journal_ref": "Phys. Rev. B 95, 054119 (2017)",
+      "doi": "10.1103/PhysRevB.95.054119",
+      "authors": [
+        "Erdal C. O\u011fuz",
+        "Joshua E. S. Socolar",
+        "Paul J. Steinhardt",
+        "Salvatore Torquato"
+      ]
+    },
+    {
+      "id": "2601.07769v2",
+      "title": "Spacetime Quasicrystals",
+      "pdf_url": "https://arxiv.org/pdf/2601.07769v2",
+      "summary": "Self-similar quasicrystals (like the famous Penrose and Ammann-Beenker tilings) are exceptional geometric structures in which long-range order, quasiperiodicity, non-crystallographic orientational symmetry, and discrete scale invariance are tightly interwoven in a beautiful way. In this paper, we show how such structures may be generalized from Euclidean space to Minkowski spacetime. We construct the first examples of such Lorentzian quasicrystals (the spacetime analogues of the Penrose or Ammann-Beenker tilings), and point out key novel features of these structures (compared to their Euclidean cousins). We end with some (speculative) ideas about how such spacetime quasicrystals might relate to reality. This includes an intriguing scenario in which our infinite $(3+1)$D universe is embedded (like one of our spacetime quasicrystal examples) in a particularly symmetric $(9+1)$D torus $T^{9,1}$ (which was previously found to yield the most symmetric toroidal compactification of the superstring). We suggest how this picture might help explain the mysterious seesaw relationship $M_{\\rm Pl}M_{\\rm vac}\\approx M_{\\rm EW}^{2}$ between the Planck, vacuum energy, and electroweak scales ($M_{\\rm Pl}$, $M_{\\rm vac}$, $M_{\\rm EW}$).",
+      "published": "2026-01-12T17:50:44Z",
+      "comment": "34 pages (27+7), 17 figures, 5 tables; v2: minor typos corrected, some figures/captions got updated, more references and acknowledgements added",
+      "primary_category": "hep-th",
+      "authors": [
+        "Latham Boyle",
+        "Sotirios Mygdalas"
+      ]
+    },
+    {
+      "id": "1906.10392v1",
+      "title": "Quasicrystals",
+      "pdf_url": "https://arxiv.org/pdf/1906.10392v1",
+      "summary": "Mathematicians have been interested in non-periodic tilings of space for decades; however, it was the unexpected discovery of non-periodically ordered structures in intermetallic alloys which brought this subject into the limelight. These fascinating materials, now called quasicrystals, are characterised by the coexistence of long-range atomic order and 'forbidden' symmetries which are incompatible with periodic arrangements in three-dimensional space. In the first part of this review, we summarise the main properties of quasicrystals, and describe how their structures relate to non-periodic tilings of space. The celebrated Penrose and Ammann-Beenker tilings are introduced as illustrative examples. The second part provides a closer look at the underlying mathematics. Starting from Bohr's theory of quasiperiodic functions, a general framework for constructing non-periodic tilings of space is described, and an alternative description as quasiperiodic coverings by overlapping clusters is discussed.",
+      "published": "2019-06-25T08:55:53Z",
+      "comment": "This article is made available for reference. It was written following the March 2006 workshop \"The World a Jigsaw: Tessellations in the Sciences\" at the Lorentz Center, and due to be published in a book entitled \"Tessellations in the Sciences: Virtues, Techniques and Applications of Geometric Tilings\" (eds R van de Weijgaert, G Vegter, J Ritzerveld and V Icke), but annoyingly this never happened",
+      "primary_category": "math-ph",
+      "authors": [
+        "Uwe Grimm",
+        "Peter Kramer"
+      ]
+    },
+    {
+      "id": "2104.13399v2",
+      "title": "Quasicrystal kirigami",
+      "pdf_url": "https://arxiv.org/pdf/2104.13399v2",
+      "summary": "Kirigami, the art of introducing cuts in thin sheets to enable articulation and deployment, has become an inspiration for a novel class of mechanical metamaterials with unusual properties. Here we complement the use of periodic tiling patterns for kirigami designs by showing that quasicrystals can also serve as the basis for designing deployable kirigami structures, and analyze the geometrical, topological and mechanical properties of these aperiodic kirigami structures.",
+      "published": "2021-04-27T18:01:02Z",
+      "primary_category": "cond-mat.soft",
+      "journal_ref": "Physical Review Research, 4(3), 033114 (2022)",
+      "doi": "10.1103/PhysRevResearch.4.033114",
+      "authors": [
+        "Lucy Liu",
+        "Gary P. T. Choi",
+        "L. Mahadevan"
+      ]
+    },
+    {
+      "id": "1612.01975v2",
+      "title": "Hyperuniformity of Quasicrystals",
+      "pdf_url": "https://arxiv.org/pdf/1612.01975v2",
+      "summary": "Hyperuniform systems, which include crystals, quasicrystals and special disordered systems, have attracted considerable recent attention, but rigorous analyses of the hyperuniformity of quasicrystals have been lacking because the support of the spectral intensity is dense and discontinuous. We employ the integrated spectral intensity, $Z(k)$, to quantitatively characterize the hyperuniformity of quasicrystalline point sets generated by projection methods. The scaling of $Z(k)$ as $k$ tends to zero is computed for one-dimensional quasicrystals and shown to be consistent with independent calculations of the variance, $\u03c3^2(R)$, in the number of points contained in an interval of length $2R$. We find that one-dimensional quasicrystals produced by projection from a two-dimensional lattice onto a line of slope $1/\u03c4$ fall into distinct classes determined by the width of the projection window. For a countable dense set of widths, $Z(k) \\sim k^4$; for all others, $Z(k)\\sim k^2$. This distinction suggests that measures of hyperuniformity define new classes of quasicrystals in higher dimensions as well.",
+      "published": "2016-12-06T20:09:03Z",
+      "comment": "12 pages, 14 figures",
+      "primary_category": "cond-mat.stat-mech",
+      "journal_ref": "Phys. Rev. B 95, 054119 (2017)",
+      "doi": "10.1103/PhysRevB.95.054119",
+      "authors": [
+        "Erdal C. O\u011fuz",
+        "Joshua E. S. Socolar",
+        "Paul J. Steinhardt",
+        "Salvatore Torquato"
+      ]
+    },
+    {
+      "id": "2601.07769v2",
+      "title": "Spacetime Quasicrystals",
+      "pdf_url": "https://arxiv.org/pdf/2601.07769v2",
+      "summary": "Self-similar quasicrystals (like the famous Penrose and Ammann-Beenker tilings) are exceptional geometric structures in which long-range order, quasiperiodicity, non-crystallographic orientational symmetry, and discrete scale invariance are tightly interwoven in a beautiful way. In this paper, we show how such structures may be generalized from Euclidean space to Minkowski spacetime. We construct the first examples of such Lorentzian quasicrystals (the spacetime analogues of the Penrose or Ammann-Beenker tilings), and point out key novel features of these structures (compared to their Euclidean cousins). We end with some (speculative) ideas about how such spacetime quasicrystals might relate to reality. This includes an intriguing scenario in which our infinite $(3+1)$D universe is embedded (like one of our spacetime quasicrystal examples) in a particularly symmetric $(9+1)$D torus $T^{9,1}$ (which was previously found to yield the most symmetric toroidal compactification of the superstring). We suggest how this picture might help explain the mysterious seesaw relationship $M_{\\rm Pl}M_{\\rm vac}\\approx M_{\\rm EW}^{2}$ between the Planck, vacuum energy, and electroweak scales ($M_{\\rm Pl}$, $M_{\\rm vac}$, $M_{\\rm EW}$).",
+      "published": "2026-01-12T17:50:44Z",
+      "comment": "34 pages (27+7), 17 figures, 5 tables; v2: minor typos corrected, some figures/captions got updated, more references and acknowledgements added",
+      "primary_category": "hep-th",
+      "authors": [
+        "Latham Boyle",
+        "Sotirios Mygdalas"
+      ]
+    },
+    {
+      "id": "1802.04601v1",
+      "title": "Magnetoplasmonic Quasicrystals",
+      "pdf_url": "https://arxiv.org/pdf/1802.04601v1",
+      "summary": "Nanostructured magneto-optical materials sustaining optical resonances open very efficient way for light control via magnetic field, which is of prime importance for telecommunication and sensing applications. However, usually their response is narrowband due to its resonance character. Here we demonstrate and investigate a novel type of the magnetoplasmonic structure, the magnetoplasmonic quasicrystal, which demonstrates unique magneto-optical response. It consists of the magnetic dielectric film covered by a thin gold layer perforated by slits forming a Fibonacci-like binary sequence. The transverse magneto-optical Kerr effect (TMOKE) acquires controllable multiple plasmon-related resonances resulting in a magneto-optical response in a wide frequency range. The broadband TMOKE is valuable for numerous nanophotonics applications including optical sensing, control of light, all-optical control of magnetization etc. On the other hand, TMOKE spectroscopy is an efficient tool for investigation of the peculiarities of plasmonic quasicrystals.",
+      "published": "2018-02-13T13:07:21Z",
+      "comment": "6 pages, 3 figures",
+      "primary_category": "physics.optics",
+      "authors": [
+        "Andrey N. Kalish",
+        "Roman S. Komarov",
+        "Mikhail A. Kozhaev",
+        "Venu Gopal Achanta",
+        "Sarkis A. Dagesyan",
+        "Alexander N. Shaposhnikov",
+        "Anatoly R. Prokopov",
+        "Vladimir N. Berzhansky",
+        "Anatoly K. Zvezdin",
+        "Vladimir I. Belotelov"
+      ]
+    }
+  ]
+}

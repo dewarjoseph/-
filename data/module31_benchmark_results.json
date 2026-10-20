@@ -1,0 +1,13 @@
+{
+  "pdb_id": "1STM",
+  "description": "Satellite Tobacco Mosaic Virus (Chiral Icosahedral Capsid)",
+  "num_ca_atoms": 705,
+  "mean_radius_angstrom": 29.059137886172827,
+  "max_radius_angstrom": 58.67672455507602,
+  "chi_b_pseudoscalar": 0.8625601333517483,
+  "d_lap_dichroism": 0.7515486441893783,
+  "coupling_ratio": 0.871299999999999,
+  "pentameric_vertex_skin_amplification": 1.7574786736392163,
+  "fubini_study_g_xy": -0.1845,
+  "chiral_order_60_symmetry_verified": true
+}

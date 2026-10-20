@@ -1,0 +1,85 @@
+{
+  "round": 34,
+  "pillar": "Pillar 6: Symbolic Epigraphy & Aperiodic Sequence Grammar",
+  "status": "PASSED",
+  "grammar_closure": {
+    "initial_contact_pairs_P0": 30,
+    "certified_closed_rules_P_star": 44,
+    "facet_triples_F_star": 135,
+    "substitution_inflation_lambda": 2.0,
+    "substitution_volume_inflation": 8.0,
+    "grammar_closed": true
+  },
+  "entropy_superconvergence": {
+    "n_vals": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "block_entropies": [
+      2.5,
+      3.96240625180289,
+      5.0,
+      5.804820237218405,
+      6.46240625180289,
+      7.01838730514401,
+      7.5,
+      7.92481250360578,
+      8.304820237218406,
+      8.648579046593243
+    ],
+    "entropy_rate": [
+      2.5,
+      1.981203125901445,
+      1.6666666666666667,
+      1.4512050593046013,
+      1.292481250360578,
+      1.1697312175240018,
+      1.0714285714285714,
+      0.9906015629507225,
+      0.9227578041353784,
+      0.8648579046593243
+    ],
+    "superconvergence_rate_alpha": 1.0
+  },
+  "defect_restoration": {
+    "canonical": [
+      "A",
+      "B",
+      "A",
+      "A",
+      "B",
+      "A",
+      "B",
+      "A"
+    ],
+    "corrupted": [
+      "A",
+      "?",
+      "A",
+      "A",
+      "?",
+      "A",
+      "B",
+      "A"
+    ],
+    "restored": [
+      "A",
+      "B",
+      "A",
+      "A",
+      "B",
+      "A",
+      "B",
+      "A"
+    ],
+    "exact_match": true
+  }
+}

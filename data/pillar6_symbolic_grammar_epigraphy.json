@@ -1,0 +1,23 @@
+{
+  "pillar": "Pillar 6 \u2014 Symbolic Epigraphy & Aperiodic Sequence Grammar",
+  "base_contact_poses_P0": 30,
+  "expanded_grammar_rules_P_star": 44,
+  "facet_triples_F_star": 135,
+  "p0_exact_match_30": true,
+  "symbolic_sequence_length": 1024,
+  "ngram_entropies_bits": {
+    "H_1": 2.8072238998202828,
+    "H_2": 4.654707514119232,
+    "H_3": 5.619641919181214,
+    "H_4": 6.15475841367188,
+    "H_5": 6.606011354705666
+  },
+  "entropy_rates_bits_per_symbol": {
+    "h_1": 2.8072238998202828,
+    "h_2": 2.327353757059616,
+    "h_3": 1.8732139730604047,
+    "h_4": 1.53868960341797,
+    "h_5": 1.3212022709411333
+  },
+  "superconvergence_verified": true
+}

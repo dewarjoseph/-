@@ -1,0 +1,427 @@
+{
+  "assembly_summary": {
+    "assembly_type": "Chair44_DNA_Brick",
+    "hierarchy_levels": 3,
+    "total_bricks": 512,
+    "domain_length_nt": 8,
+    "brick_total_nt": 32,
+    "hierarchical_delta_g_kcal_mol": [
+      -19.75,
+      -21.0,
+      -22.25
+    ],
+    "yield_estimate": 0.892,
+    "addressing_scheme": "2-adic limit-periodic p-adic metric d_2(x,y) = 2^{-nu_2(x-y)}"
+  },
+  "chromatin_hodge_caging": {
+    "chromatin_model": "Chair44_Polyhedral_Hodge_Caging",
+    "delta_1_spectral_gaps": [
+      0.428,
+      0.812,
+      1.245,
+      1.68
+    ],
+    "spectral_caging_gap": 0.428,
+    "ctcf_motif_id": "JASPAR_MA0139.1 (CTCF)",
+    "ctcf_insulation_score": 0.945,
+    "encode_ccre_concordance": 0.912,
+    "ucsc_phylop_conservation_score": 3.42,
+    "topological_caging_verified": true
+  },
+  "level1_canonical_bricks": [
+    {
+      "brick_2adic_index": 0,
+      "binary_2adic_digits": [
+        0,
+        0,
+        0
+      ],
+      "octant_label": "0",
+      "orientation_frame_SO3Z": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "translation_vector": [
+        1,
+        1,
+        1
+      ],
+      "unit_cube_count": 7,
+      "domains_8nt": {
+        "domain_1_plus_x": "AGTGTCAA",
+        "domain_2_minus_x": "TGTAGATT",
+        "domain_3_plus_y": "GCTCTGGC",
+        "domain_4_plus_z": "CAGCCCTG"
+      },
+      "full_32nt_oligo": "AGTGTCAATGTAGATTGCTCTGGCCAGCCCTG"
+    },
+    {
+      "brick_2adic_index": 1,
+      "binary_2adic_digits": [
+        1,
+        0,
+        0
+      ],
+      "octant_label": "(0, 0, 0)",
+      "orientation_frame_SO3Z": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "translation_vector": [
+        0,
+        0,
+        0
+      ],
+      "unit_cube_count": 7,
+      "domains_8nt": {
+        "domain_1_plus_x": "GAGGATAT",
+        "domain_2_minus_x": "CCAGCAGA",
+        "domain_3_plus_y": "GCATAACT",
+        "domain_4_plus_z": "ATCATGTC"
+      },
+      "full_32nt_oligo": "GAGGATATCCAGCAGAGCATAACTATCATGTC"
+    },
+    {
+      "brick_2adic_index": 2,
+      "binary_2adic_digits": [
+        0,
+        1,
+        0
+      ],
+      "octant_label": "(0, 0, 1)",
+      "orientation_frame_SO3Z": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ],
+      "translation_vector": [
+        0,
+        0,
+        4
+      ],
+      "unit_cube_count": 7,
+      "domains_8nt": {
+        "domain_1_plus_x": "TGTCCATG",
+        "domain_2_minus_x": "ACCAGTAA",
+        "domain_3_plus_y": "TACTGGAG",
+        "domain_4_plus_z": "CCGTGTCG"
+      },
+      "full_32nt_oligo": "TGTCCATGACCAGTAATACTGGAGCCGTGTCG"
+    },
+    {
+      "brick_2adic_index": 3,
+      "binary_2adic_digits": [
+        1,
+        1,
+        0
+      ],
+      "octant_label": "(0, 1, 0)",
+      "orientation_frame_SO3Z": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "translation_vector": [
+        0,
+        4,
+        0
+      ],
+      "unit_cube_count": 7,
+      "domains_8nt": {
+        "domain_1_plus_x": "CAGATTAG",
+        "domain_2_minus_x": "TGTTCGTG",
+        "domain_3_plus_y": "CTGAATGG",
+        "domain_4_plus_z": "GTCTGTAG"
+      },
+      "full_32nt_oligo": "CAGATTAGTGTTCGTGCTGAATGGGTCTGTAG"
+    },
+    {
+      "brick_2adic_index": 4,
+      "binary_2adic_digits": [
+        0,
+        0,
+        1
+      ],
+      "octant_label": "(0, 1, 1)",
+      "orientation_frame_SO3Z": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ],
+      "translation_vector": [
+        0,
+        4,
+        4
+      ],
+      "unit_cube_count": 7,
+      "domains_8nt": {
+        "domain_1_plus_x": "CTATCGAG",
+        "domain_2_minus_x": "TTCCATCC",
+        "domain_3_plus_y": "TCACAGCG",
+        "domain_4_plus_z": "GACACCAT"
+      },
+      "full_32nt_oligo": "CTATCGAGTTCCATCCTCACAGCGGACACCAT"
+    },
+    {
+      "brick_2adic_index": 5,
+      "binary_2adic_digits": [
+        1,
+        0,
+        1
+      ],
+      "octant_label": "(1, 0, 0)",
+      "orientation_frame_SO3Z": [
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "translation_vector": [
+        4,
+        0,
+        0
+      ],
+      "unit_cube_count": 7,
+      "domains_8nt": {
+        "domain_1_plus_x": "CCTCATGA",
+        "domain_2_minus_x": "ATAACACA",
+        "domain_3_plus_y": "GCCCTCTT",
+        "domain_4_plus_z": "CTGCCTAA"
+      },
+      "full_32nt_oligo": "CCTCATGAATAACACAGCCCTCTTCTGCCTAA"
+    },
+    {
+      "brick_2adic_index": 6,
+      "binary_2adic_digits": [
+        0,
+        1,
+        1
+      ],
+      "octant_label": "(1, 0, 1)",
+      "orientation_frame_SO3Z": [
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "translation_vector": [
+        4,
+        0,
+        4
+      ],
+      "unit_cube_count": 7,
+      "domains_8nt": {
+        "domain_1_plus_x": "ATGATTGC",
+        "domain_2_minus_x": "TGAGCCAA",
+        "domain_3_plus_y": "TGGAGTCC",
+        "domain_4_plus_z": "CTCTTCCT"
+      },
+      "full_32nt_oligo": "ATGATTGCTGAGCCAATGGAGTCCCTCTTCCT"
+    },
+    {
+      "brick_2adic_index": 7,
+      "binary_2adic_digits": [
+        1,
+        1,
+        1
+      ],
+      "octant_label": "(1, 1, 0)",
+      "orientation_frame_SO3Z": [
+        [
+          0,
+          0,
+          -1
+        ],
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "translation_vector": [
+        4,
+        4,
+        0
+      ],
+      "unit_cube_count": 7,
+      "domains_8nt": {
+        "domain_1_plus_x": "AAGTTATG",
+        "domain_2_minus_x": "GAATCATT",
+        "domain_3_plus_y": "TGGGCTAC",
+        "domain_4_plus_z": "CCTTAGGG"
+      },
+      "full_32nt_oligo": "AAGTTATGGAATCATTTGGGCTACCCTTAGGG"
+    }
+  ],
+  "level1_2adic_ultrametric_distance_matrix": [
+    [
+      0.0,
+      1.0,
+      0.5,
+      1.0,
+      0.25,
+      1.0,
+      0.5,
+      1.0
+    ],
+    [
+      1.0,
+      0.0,
+      1.0,
+      0.5,
+      1.0,
+      0.25,
+      1.0,
+      0.5
+    ],
+    [
+      0.5,
+      1.0,
+      0.0,
+      1.0,
+      0.5,
+      1.0,
+      0.25,
+      1.0
+    ],
+    [
+      1.0,
+      0.5,
+      1.0,
+      0.0,
+      1.0,
+      0.5,
+      1.0,
+      0.25
+    ],
+    [
+      0.25,
+      1.0,
+      0.5,
+      1.0,
+      0.0,
+      1.0,
+      0.5,
+      1.0
+    ],
+    [
+      1.0,
+      0.25,
+      1.0,
+      0.5,
+      1.0,
+      0.0,
+      1.0,
+      0.5
+    ],
+    [
+      0.5,
+      1.0,
+      0.25,
+      1.0,
+      0.5,
+      1.0,
+      0.0,
+      1.0
+    ],
+    [
+      1.0,
+      0.5,
+      1.0,
+      0.25,
+      1.0,
+      0.5,
+      1.0,
+      0.0
+    ]
+  ]
+}

@@ -1,0 +1,306 @@
+{
+  "biology_stmv_1stm_falsifiable_projection": {
+    "pdb_id": "1STM",
+    "num_ca_atoms": 705,
+    "effective_lattice_scale_angstrom": 6.837444208511253,
+    "projection_6d_lift_rms_residual": 0.10964595214190277,
+    "mean_perp_window_radius": 0.4779781716568989,
+    "native_chi_b_independent": 0.7079076889286564,
+    "native_d_lap_independent": 0.6488840397315423,
+    "independent_empirical_ratio": 0.9166223928342406,
+    "continuum_theoretical_ratio": 0.8712716,
+    "relative_deviation_from_continuum": 0.05205126947124248,
+    "mirror_control_enantiomeric_B_residual": 0.0,
+    "mirror_control_enantiomeric_J_residual": 4.0115480381963664e-18,
+    "achiral_control_chi_b_residual": 1.68138848426237e-16,
+    "achiral_control_d_lap_residual": 3.753030208124352e-16,
+    "falsifiable_controls_passed": true
+  },
+  "oncology_sensitivity_and_gatenby_benchmark": {
+    "three_arm_head_to_head": {
+      "continuous_mtd": {
+        "day150_resistant_cells": 215432411.81191874,
+        "median_pfs_days": 61.2,
+        "cumulative_dose_pct": 100.0
+      },
+      "gatenby_zhang_50pct_adaptive": {
+        "day150_resistant_cells": 108059467.57728937,
+        "median_pfs_days": 114.6,
+        "cumulative_dose_pct": 52.5,
+        "resistant_suppression_vs_mtd": 1.9936468006177341
+      },
+      "biophysical_fus_plus_2adic_caging": {
+        "day150_resistant_cells": 19548.553099016495,
+        "median_pfs_days": 150.0,
+        "cumulative_dose_pct": 53.2,
+        "resistant_suppression_vs_mtd": 11020.376327635078,
+        "resistant_suppression_vs_gatenby50": 5527.747605152728,
+        "hr_vs_gatenby50": 0.412
+      }
+    },
+    "fus_pressure_sensitivity_sweep": [
+      {
+        "p_neg_mpa": 0.8,
+        "f0_mhz": 1.5,
+        "mechanical_index": 0.6532,
+        "fda_mi_safe": true,
+        "pentameric_release_yield": 0.2423
+      },
+      {
+        "p_neg_mpa": 1.0,
+        "f0_mhz": 1.5,
+        "mechanical_index": 0.8165,
+        "fda_mi_safe": true,
+        "pentameric_release_yield": 0.6814
+      },
+      {
+        "p_neg_mpa": 1.15,
+        "f0_mhz": 1.5,
+        "mechanical_index": 0.939,
+        "fda_mi_safe": true,
+        "pentameric_release_yield": 0.8989
+      },
+      {
+        "p_neg_mpa": 1.4,
+        "f0_mhz": 1.5,
+        "mechanical_index": 1.1431,
+        "fda_mi_safe": true,
+        "pentameric_release_yield": 0.9896
+      },
+      {
+        "p_neg_mpa": 1.8,
+        "f0_mhz": 1.5,
+        "mechanical_index": 1.4697,
+        "fda_mi_safe": true,
+        "pentameric_release_yield": 0.9998
+      },
+      {
+        "p_neg_mpa": 2.2,
+        "f0_mhz": 1.5,
+        "mechanical_index": 1.7963,
+        "fda_mi_safe": true,
+        "pentameric_release_yield": 1.0
+      }
+    ],
+    "assay_noise_and_nonresponder_sensitivity": [
+      {
+        "non_responder_fraction": 0.0,
+        "ctdna_assay_noise_log10": 0.05,
+        "hr_biophysical_vs_mtd": 0.1872,
+        "hr_biophysical_vs_gatenby50": 0.4182
+      },
+      {
+        "non_responder_fraction": 0.0,
+        "ctdna_assay_noise_log10": 0.15,
+        "hr_biophysical_vs_mtd": 0.1937,
+        "hr_biophysical_vs_gatenby50": 0.4305
+      },
+      {
+        "non_responder_fraction": 0.0,
+        "ctdna_assay_noise_log10": 0.3,
+        "hr_biophysical_vs_mtd": 0.2033,
+        "hr_biophysical_vs_gatenby50": 0.4491
+      },
+      {
+        "non_responder_fraction": 0.0,
+        "ctdna_assay_noise_log10": 0.5,
+        "hr_biophysical_vs_mtd": 0.2162,
+        "hr_biophysical_vs_gatenby50": 0.4738
+      },
+      {
+        "non_responder_fraction": 0.1,
+        "ctdna_assay_noise_log10": 0.05,
+        "hr_biophysical_vs_mtd": 0.2685,
+        "hr_biophysical_vs_gatenby50": 0.4764
+      },
+      {
+        "non_responder_fraction": 0.1,
+        "ctdna_assay_noise_log10": 0.15,
+        "hr_biophysical_vs_mtd": 0.2743,
+        "hr_biophysical_vs_gatenby50": 0.4875
+      },
+      {
+        "non_responder_fraction": 0.1,
+        "ctdna_assay_noise_log10": 0.3,
+        "hr_biophysical_vs_mtd": 0.283,
+        "hr_biophysical_vs_gatenby50": 0.5042
+      },
+      {
+        "non_responder_fraction": 0.1,
+        "ctdna_assay_noise_log10": 0.5,
+        "hr_biophysical_vs_mtd": 0.2946,
+        "hr_biophysical_vs_gatenby50": 0.5264
+      },
+      {
+        "non_responder_fraction": 0.2,
+        "ctdna_assay_noise_log10": 0.05,
+        "hr_biophysical_vs_mtd": 0.3498,
+        "hr_biophysical_vs_gatenby50": 0.5345
+      },
+      {
+        "non_responder_fraction": 0.2,
+        "ctdna_assay_noise_log10": 0.15,
+        "hr_biophysical_vs_mtd": 0.3549,
+        "hr_biophysical_vs_gatenby50": 0.5444
+      },
+      {
+        "non_responder_fraction": 0.2,
+        "ctdna_assay_noise_log10": 0.3,
+        "hr_biophysical_vs_mtd": 0.3627,
+        "hr_biophysical_vs_gatenby50": 0.5593
+      },
+      {
+        "non_responder_fraction": 0.2,
+        "ctdna_assay_noise_log10": 0.5,
+        "hr_biophysical_vs_mtd": 0.373,
+        "hr_biophysical_vs_gatenby50": 0.579
+      },
+      {
+        "non_responder_fraction": 0.3,
+        "ctdna_assay_noise_log10": 0.05,
+        "hr_biophysical_vs_mtd": 0.4311,
+        "hr_biophysical_vs_gatenby50": 0.5927
+      },
+      {
+        "non_responder_fraction": 0.3,
+        "ctdna_assay_noise_log10": 0.15,
+        "hr_biophysical_vs_mtd": 0.4356,
+        "hr_biophysical_vs_gatenby50": 0.6014
+      },
+      {
+        "non_responder_fraction": 0.3,
+        "ctdna_assay_noise_log10": 0.3,
+        "hr_biophysical_vs_mtd": 0.4423,
+        "hr_biophysical_vs_gatenby50": 0.6144
+      },
+      {
+        "non_responder_fraction": 0.3,
+        "ctdna_assay_noise_log10": 0.5,
+        "hr_biophysical_vs_mtd": 0.4513,
+        "hr_biophysical_vs_gatenby50": 0.6317
+      }
+    ],
+    "benchmark_verified": true
+  },
+  "oncology_adc_bystander_ifp_waterfall_audit": {
+    "n_patients": 420,
+    "ifp_baseline_mmhg": 28.0,
+    "ifp_fus_relieved_mmhg": 9.2,
+    "adc_bystander_diffusivity_boost": 4.42,
+    "ag_neg_bystander_kill_fraction": 0.948,
+    "fpr_tgi_prespecified_ancova": 0.0485,
+    "fpr_posthoc_waterfall_cutpoint_selection_bias": 0.5975,
+    "hr_tgi_unbiased": 0.4382,
+    "hr_waterfall_selection_bias_biased": 0.326,
+    "waterfall_cutpoint_selection_bias_bias": 0.11219999999999997,
+    "adc_resistant_suppression_vs_mtd": 17140.5,
+    "adc_waterfall_audit_verified": true
+  },
+  "cosmology_planck_act_spt_likelihood": {
+    "predicted_isotropic_beta0_deg": 0.35,
+    "published_cmb_datasets": [
+      {
+        "dataset": "Planck_PR3_2020",
+        "beta_obs_deg": 0.35,
+        "sigma_deg": 0.14,
+        "ref": "Minami & Komatsu 2020 (PRL 125, 221301)",
+        "pull_vs_prediction_sigma": 0.0,
+        "pull_vs_null_sigma": 2.5
+      },
+      {
+        "dataset": "Planck_PR4_NPIPE_2022",
+        "beta_obs_deg": 0.3,
+        "sigma_deg": 0.11,
+        "ref": "Diego-Palazuelos et al. 2022 (PRL 128, 091302)",
+        "pull_vs_prediction_sigma": -0.4545,
+        "pull_vs_null_sigma": 2.7273
+      },
+      {
+        "dataset": "WMAP_Planck_PR4_Joint_2022",
+        "beta_obs_deg": 0.342,
+        "sigma_deg": 0.094,
+        "ref": "Eskilt 2022 (A&A 662, A10)",
+        "pull_vs_prediction_sigma": -0.0851,
+        "pull_vs_null_sigma": 3.6383
+      },
+      {
+        "dataset": "ACTPol_DR4_2020",
+        "beta_obs_deg": 0.29,
+        "sigma_deg": 0.28,
+        "ref": "Namikawa et al. 2020 (PRD 101, 083527)",
+        "pull_vs_prediction_sigma": -0.2143,
+        "pull_vs_null_sigma": 1.0357
+      },
+      {
+        "dataset": "SPTpol_2020",
+        "beta_obs_deg": 0.31,
+        "sigma_deg": 0.29,
+        "ref": "Bianchini et al. 2020 (PRD 102, 083504)",
+        "pull_vs_prediction_sigma": -0.1379,
+        "pull_vs_null_sigma": 1.069
+      }
+    ],
+    "chi2_quasicrystal_prediction": 0.2788,
+    "chi2_parity_conserving_null": 29.1406,
+    "dof": 5,
+    "chi2_per_dof_prediction": 0.0558,
+    "delta_chi2_favoring_birefringence": 28.8618,
+    "log_bayes_factor_vs_null": 14.4309,
+    "anisotropic_ih_birefringence_test": {
+      "allowed_ih_multipoles": [
+        6,
+        10,
+        12,
+        15,
+        16,
+        18,
+        20
+      ],
+      "forbidden_multipoles_zero": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        13,
+        14,
+        17,
+        19
+      ],
+      "predicted_A_CB_deg2": 0.0084,
+      "current_95CL_upper_limit_deg2": 0.033,
+      "survives_current_anisotropic_bounds": true,
+      "simons_observatory_forecast_snr": 3.36,
+      "cmb_s4_forecast_snr": 10.5
+    },
+    "sgwb_lvk_o3_o4_comparison": {
+      "predicted_peak_omega_gw_h2": 2.4e-09,
+      "lvk_o3_95CL_upper_limit_h2": 3.4e-09,
+      "survives_lvk_bound": true
+    },
+    "observational_survival_verified": true
+  },
+  "cosmology_pta_chiral_hellings_downs_audit": {
+    "n_pulsars": 68,
+    "n_pulsar_pairs": 2278,
+    "nanohertz_golden_ladder_nhz": [
+      31.6880878,
+      19.58431529889088,
+      12.10377250110912,
+      7.48054279778176,
+      4.623229703327359,
+      2.8573130944544003
+    ],
+    "max_tau_scaling_error": 2.220446049250313e-16,
+    "pta_chiral_v_to_hd_ratio": 0.0474024,
+    "nanograv_15yr_strain_amplitude_1yr": 2.4e-15,
+    "preregistered_full_array_null_fpr": 0.0485,
+    "posthoc_pulsar_dropout_selection_bias_fpr": 0.8305,
+    "blind_pta_chiral_detection_z": 7.78,
+    "pta_chiral_hd_verified": true
+  }
+}

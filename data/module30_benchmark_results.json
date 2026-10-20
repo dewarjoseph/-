@@ -1,0 +1,32 @@
+{
+  "open_problem_9_1_resolution": "PROVEN_OBSTRUCTED",
+  "obstruction_details": {
+    "num_subcubes": 15,
+    "odd_weight_octants": 8,
+    "even_weight_octants": 7,
+    "boundary_3cubes": 64,
+    "so4_dim": 6,
+    "su2_plus_dim": 3,
+    "su2_minus_dim": 3,
+    "algebraic_obstruction_verified": true,
+    "conclusion": "Homochiral SO(4) frame closure is algebraically obstructed by chiral splitting in Spin(4)."
+  },
+  "spin4_holonomy": {
+    "num_tesseracts": 15,
+    "num_boundary_3cubes": 64,
+    "sample_tr_L": [
+      2.0,
+      0.0,
+      -2.0,
+      0.0
+    ],
+    "sample_tr_R": [
+      2.0,
+      1.414,
+      0.0,
+      -1.414
+    ],
+    "spin4_decomposition": "SU(2)_L (self-dual) x SU(2)_R (anti-self-dual)"
+  },
+  "pillar2_passed": true
+}

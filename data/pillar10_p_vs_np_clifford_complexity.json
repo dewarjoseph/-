@@ -1,0 +1,209 @@
+{
+  "pillar": "Pillar 10 (Module 51): Clifford-Holonomy & Cohomological Complexity Theory (P vs. NP)",
+  "lean4_certificate_file": "certificates/PvsNPCliffordCertificates.lean",
+  "theorem_10_1_coboundary_vs_clifford_dichotomy": {
+    "coboundary_tree_propagation_exact": true,
+    "coboundary_trivial_cycle_fraction": 1.0,
+    "clifford_multigraph_nonabelian_fraction": 0.560976,
+    "exhaustive_512_nonabelian_cycle": {
+      "total_gauges_checked": 512,
+      "base_wilson_loop": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "base_wilson_trace": 0,
+      "unfrustrated_identity_hits": 0,
+      "max_trace_drift": 0,
+      "no_go_obstruction_certified": true
+    },
+    "exhaustive_512_central_z2_cycle": {
+      "total_gauges_checked": 512,
+      "base_wilson_loop": [
+        -1,
+        0,
+        0,
+        0
+      ],
+      "base_wilson_trace": -2,
+      "unfrustrated_identity_hits": 0,
+      "max_trace_drift": 0,
+      "no_go_obstruction_certified": true
+    },
+    "full_8clause_cube_min_unsat": 1,
+    "punctured_7clause_chair3_min_unsat": 0,
+    "punctured_chair3_unique_witness": [
+      1,
+      1,
+      1
+    ],
+    "dichotomy_certified": true
+  },
+  "theorem_10_2_2adic_schur_and_spin4_unsat": {
+    "ultrametric_triples_checked": 4096,
+    "ultrametric_violations": 0,
+    "ultrametric_exact_verified": true,
+    "schur_zero_mode_preserved": true,
+    "schur_trace_rational": 72,
+    "soldered_laplacian_rank": 24,
+    "soldered_laplacian_trace": 384,
+    "spin4_obstruction_rank": 6,
+    "spin4_gram_determinant": 21414742,
+    "level1_charpoly_factored": "lambda*(lambda - 24)*(lambda**2 - 30*lambda + 207)*(lambda**2 - 21*lambda + 99)**2",
+    "renormalization_and_unsat_certified": true
+  },
+  "theorem_10_3_hodge_hellmann_feynman_repair": {
+    "cochain_nilpotency_d1_d2_zero": true,
+    "num_vertices": 8,
+    "num_edges": 12,
+    "num_plaquettes": 6,
+    "b1_insulated": 0,
+    "gap_insulated": 0.428,
+    "b1_frustrated_ablated": 1,
+    "gap_frustrated_ablated": 0.0,
+    "hellmann_feynman_sensitivities": [
+      1.344622,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "identified_bottleneck_plaquette_p_star": 0,
+    "b1_repaired": 0,
+    "gap_repaired": 0.4264,
+    "hodge_repair_certified": true
+  },
+  "theorem_10_4_honhse_hypercube_witness_funneling": {
+    "eta_drive": 1.098612,
+    "transfer_ratio_t_plus_over_t_minus": 3.0,
+    "hypercube_scaling": [
+      {
+        "n_vars": 4,
+        "hypercube_states_N": 16,
+        "zero_mode_residual_max": 7.793369502896803e-16,
+        "ipr_chiral_Wb": 0.452122,
+        "ipr_mirror_neg_Wb": 0.452122,
+        "ipr_achiral_Wa": 0.0625,
+        "ipr_gain_over_hermitian": 7.23,
+        "witness_corner_prob_Wb": 0.6561,
+        "anti_witness_corner_prob_neg_Wb": 0.6561,
+        "witness_corner_prob_Wa": 0.0625,
+        "witness_prob_amplification": 10.5,
+        "skin_polarization_Wb": 0.8,
+        "skin_polarization_neg_Wb": -0.8,
+        "skin_polarization_Wa": 0.0,
+        "parity_inversion_residual": 1.1102230246251565e-16
+      },
+      {
+        "n_vars": 6,
+        "hypercube_states_N": 64,
+        "zero_mode_residual_max": 2.342385489517608e-15,
+        "ipr_chiral_Wb": 0.304007,
+        "ipr_mirror_neg_Wb": 0.304007,
+        "ipr_achiral_Wa": 0.015625,
+        "ipr_gain_over_hermitian": 19.46,
+        "witness_corner_prob_Wb": 0.531441,
+        "anti_witness_corner_prob_neg_Wb": 0.531441,
+        "witness_corner_prob_Wa": 0.015625,
+        "witness_prob_amplification": 34.01,
+        "skin_polarization_Wb": 0.8,
+        "skin_polarization_neg_Wb": -0.8,
+        "skin_polarization_Wa": 0.0,
+        "parity_inversion_residual": 4.440892098500626e-16
+      },
+      {
+        "n_vars": 8,
+        "hypercube_states_N": 256,
+        "zero_mode_residual_max": 2.4693751651446723e-15,
+        "ipr_chiral_Wb": 0.204414,
+        "ipr_mirror_neg_Wb": 0.204414,
+        "ipr_achiral_Wa": 0.003906,
+        "ipr_gain_over_hermitian": 52.33,
+        "witness_corner_prob_Wb": 0.430467,
+        "anti_witness_corner_prob_neg_Wb": 0.430467,
+        "witness_corner_prob_Wa": 0.003906,
+        "witness_prob_amplification": 110.2,
+        "skin_polarization_Wb": 0.8,
+        "skin_polarization_neg_Wb": -0.8,
+        "skin_polarization_Wa": 0.0,
+        "parity_inversion_residual": 3.3306690738754696e-16
+      }
+    ],
+    "n8_ipr_gain": 52.33,
+    "n8_witness_amplification": 110.2,
+    "n8_parity_residual": 3.3306690738754696e-16,
+    "point_gap_winding_number": 1,
+    "min_point_gap_determinant": 0.3421,
+    "ep_immunity_certified": true,
+    "honhse_funneling_certified": true
+  },
+  "theorem_10_5_blind_phase_transition_audit": {
+    "critical_alpha_c": 4.267,
+    "phase_transition_curve": [
+      {
+        "alpha_m_over_n": 2.0,
+        "m_clauses": 14,
+        "unplanted_sat_fraction": 1.0,
+        "blind_honhse_planted_recovery": 1.0,
+        "achiral_baseline_recovery": 0.24
+      },
+      {
+        "alpha_m_over_n": 3.0,
+        "m_clauses": 21,
+        "unplanted_sat_fraction": 1.0,
+        "blind_honhse_planted_recovery": 1.0,
+        "achiral_baseline_recovery": 0.04
+      },
+      {
+        "alpha_m_over_n": 3.5,
+        "m_clauses": 24,
+        "unplanted_sat_fraction": 0.92,
+        "blind_honhse_planted_recovery": 1.0,
+        "achiral_baseline_recovery": 0.08
+      },
+      {
+        "alpha_m_over_n": 4.0,
+        "m_clauses": 28,
+        "unplanted_sat_fraction": 0.92,
+        "blind_honhse_planted_recovery": 1.0,
+        "achiral_baseline_recovery": 0.04
+      },
+      {
+        "alpha_m_over_n": 4.267,
+        "m_clauses": 30,
+        "unplanted_sat_fraction": 0.84,
+        "blind_honhse_planted_recovery": 1.0,
+        "achiral_baseline_recovery": 0.04
+      },
+      {
+        "alpha_m_over_n": 4.5,
+        "m_clauses": 32,
+        "unplanted_sat_fraction": 0.76,
+        "blind_honhse_planted_recovery": 1.0,
+        "achiral_baseline_recovery": 0.04
+      },
+      {
+        "alpha_m_over_n": 5.0,
+        "m_clauses": 35,
+        "unplanted_sat_fraction": 0.56,
+        "blind_honhse_planted_recovery": 1.0,
+        "achiral_baseline_recovery": 0.04
+      },
+      {
+        "alpha_m_over_n": 6.0,
+        "m_clauses": 42,
+        "unplanted_sat_fraction": 0.16,
+        "blind_honhse_planted_recovery": 1.0,
+        "achiral_baseline_recovery": 0.0
+      }
+    ],
+    "post_hoc_restarts_M": 32,
+    "null_unsat_cores_audited": 250,
+    "fpr_post_hoc_peek": 0.7836,
+    "fpr_pre_registered_exact": 0.0,
+    "blind_planted_recovery_at_alpha_c": 1.0,
+    "falsification_audit_passed": true
+  },
+  "pillar10_all_verified": true
+}

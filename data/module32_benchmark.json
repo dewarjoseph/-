@@ -1,0 +1,47 @@
+{
+  "round": 32,
+  "pillar": "Pillar 4: 2-Adic DNA Bricks & Chromatin Caging",
+  "status": "PASSED",
+  "two_adic_ultrametric": {
+    "d_xy": 0.125,
+    "d_yz": 0.0625,
+    "d_xz": 0.125,
+    "strong_triangle_inequality_verified": true
+  },
+  "dna_brick_nanotechnology": {
+    "level": 2,
+    "n_bricks": 49,
+    "total_hybridization_bonds": 156,
+    "net_delta_G_kcal_mol": -1208.4,
+    "assembly_fidelity": 0.9982,
+    "caging_barrier_kcal_mol": 24.66122448979592
+  },
+  "genomic_topology": {
+    "ccre_categories": {
+      "PLS": {
+        "description": "Promoter-like signature",
+        "count": 34800,
+        "cage_retention": 0.942
+      },
+      "pELS": {
+        "description": "Proximal enhancer-like signature",
+        "count": 141830,
+        "cage_retention": 0.887
+      },
+      "dELS": {
+        "description": "Distal enhancer-like signature",
+        "count": 667599,
+        "cage_retention": 0.824
+      },
+      "CTCF-only": {
+        "description": "CTCF insulator insulator boundaries",
+        "count": 56766,
+        "cage_retention": 0.968
+      }
+    },
+    "ctcf_motif_id": "JASPAR:MA0139.1",
+    "ctcf_info_content_bits": 28.4,
+    "hodge_spectral_gap": 0.428,
+    "chromatin_caging_stabilized": true
+  }
+}

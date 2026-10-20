@@ -1,0 +1,48 @@
+{
+  "round": 28,
+  "timestamp": "2026-10-18T20:46:28Z",
+  "elapsed_sec": 0.3151416778564453,
+  "parameters": {
+    "R_patch": 3.0,
+    "eta": 0.25
+  },
+  "patch_sizes": {
+    "W_b": 1187,
+    "minus_W_b": 1187,
+    "W_a": 1331
+  },
+  "ipr": {
+    "corner_amplification_W_b": 2.267009675945723,
+    "corner_amplification_minus_W_b": 2.2582041677917393,
+    "corner_amplification_W_a": 1.5308259060756177,
+    "mean_ipr_corner": 0.012306832988516347,
+    "mean_ipr_bulk": 0.005428663635227907
+  },
+  "torque_pinning": {
+    "tau_z_W_b": -2.4272855963666568e-09,
+    "tau_z_minus_W_b": -2.9158201876962095e-09,
+    "tau_z_W_a": 0.0,
+    "parity_sum_residual": -5.343105784062866e-09
+  },
+  "torus_3d": {
+    "winding_W_b": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "net_winding_W_b": 0,
+    "min_point_gap": 0.10000000000000003,
+    "ep_immune": true
+  },
+  "errata_reconciliation_table3": {
+    "delta_kappa_W_b": 0.0151898,
+    "delta_kappa_minus_W_b": -0.0151999,
+    "parity_sum_residual": -1.0100000000000733e-05,
+    "typo_fixed": "10^-5 instead of 10^-3"
+  }
+}

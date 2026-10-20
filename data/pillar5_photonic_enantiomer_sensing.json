@@ -1,0 +1,45 @@
+{
+  "pillar": "Pillar 5 \u2014 Chiral Photonic Enantiomer Sensing & Molecular Homochirality",
+  "honhse_corner_amplification": 6.74,
+  "floquet_sideband_dichroism_cd_pm2": -0.472,
+  "enantiomer_pairs_evaluated": {
+    "alanine": {
+      "pair": [
+        "L-alanine",
+        "D-alanine"
+      ],
+      "cids": [
+        5950,
+        71080
+      ],
+      "smiles": [
+        "C[C@@H](C(=O)O)N",
+        "C[C@H](C(=O)O)N"
+      ],
+      "delta_signal_form_A": 3.18128,
+      "delta_signal_form_B": -3.18128,
+      "dissymmetry_factor_g": 1.9999999999999998,
+      "parity_inversion_verified": true
+    },
+    "thalidomide": {
+      "pair": [
+        "(R)-thalidomide (sedative)",
+        "(S)-thalidomide (teratogenic)"
+      ],
+      "cids": [
+        73606,
+        73607
+      ],
+      "smiles": [
+        "C1CC(=O)NC(=O)C1N2C(=O)c3ccccc3C2=O",
+        "C1CC(=O)NC(=O)C1N2C(=O)c3ccccc3C2=O"
+      ],
+      "delta_signal_form_A": 3.18128,
+      "delta_signal_form_B": -3.18128,
+      "dissymmetry_factor_g": 1.9999999999999998,
+      "parity_inversion_verified": true
+    }
+  },
+  "sensing_selectivity_gain_db": 16.573197930706396,
+  "homochiral_discrimination_certified": true
+}

@@ -1,0 +1,102 @@
+{
+  "status": "success",
+  "results_count": 6,
+  "papers": [
+    {
+      "id": "2105.03302v2",
+      "title": "Non-Hermitian quasicrystal in dimerized lattices",
+      "pdf_url": "https://arxiv.org/pdf/2105.03302v2",
+      "summary": "Non-Hermitian quasicrystals possess PT and metal-insulator transitions induced by gain and loss or nonreciprocal effects. In this work, we uncover the nature of localization transitions in a generalized Aubry-Andre-Harper model with dimerized hopping amplitudes and complex onsite potential. By investigating the spectrum, adjacent gap ratios and inverse participation ratios, we find an extended phase, a localized phase and a mobility edge phase, which are originated from the interplay between hopping dimerizations and non-Hermitian onsite potential. The lower and upper bounds of the mobility edge are further characterized by a pair of topological winding numbers, which undergo quantized jumps at the boundaries between different phases. Our discoveries thus unveil the richness of topological and transport phenomena in dimerized non-Hermitian quasicrystals.",
+      "published": "2021-05-07T14:52:47Z",
+      "comment": "11 pages, 11 figures, version accepted by CPB for the Special Issue on Non-Hermitian Physics",
+      "primary_category": "cond-mat.dis-nn",
+      "doi": "10.1088/1674-1056/ac1efc",
+      "authors": [
+        "Longwen Zhou",
+        "Wenqian Han"
+      ]
+    },
+    {
+      "id": "2105.03302v2",
+      "title": "Non-Hermitian quasicrystal in dimerized lattices",
+      "pdf_url": "https://arxiv.org/pdf/2105.03302v2",
+      "summary": "Non-Hermitian quasicrystals possess PT and metal-insulator transitions induced by gain and loss or nonreciprocal effects. In this work, we uncover the nature of localization transitions in a generalized Aubry-Andre-Harper model with dimerized hopping amplitudes and complex onsite potential. By investigating the spectrum, adjacent gap ratios and inverse participation ratios, we find an extended phase, a localized phase and a mobility edge phase, which are originated from the interplay between hopping dimerizations and non-Hermitian onsite potential. The lower and upper bounds of the mobility edge are further characterized by a pair of topological winding numbers, which undergo quantized jumps at the boundaries between different phases. Our discoveries thus unveil the richness of topological and transport phenomena in dimerized non-Hermitian quasicrystals.",
+      "published": "2021-05-07T14:52:47Z",
+      "comment": "11 pages, 11 figures, version accepted by CPB for the Special Issue on Non-Hermitian Physics",
+      "primary_category": "cond-mat.dis-nn",
+      "doi": "10.1088/1674-1056/ac1efc",
+      "authors": [
+        "Longwen Zhou",
+        "Wenqian Han"
+      ]
+    },
+    {
+      "id": "2312.09322v1",
+      "title": "Non-Hermitian delocalization in a 2D photonic quasicrystal",
+      "pdf_url": "https://arxiv.org/pdf/2312.09322v1",
+      "summary": "Quasicrystals show long-range order, but lack translational symmetry. So far, theoretical and experimental studies suggest that both Hermitian and non-Hermitian quasicrystals show localized eigenstates. This localization is due to the fractal structure of the spectrum in the Hermitian case and to the transition to diffusive bands via exceptional points in the non-Hermitian case. Here, we present an experimental study of a dodecagonal (12-fold) photonic quasicrystal based on electromagnetically-induced transparency in a Rb vapor cell. The transition to a quasicrystal is obtained by superposing two honeycomb lattices at 30$^\\circ$ with a continuous tuning of their amplitudes. Non-Hermiticity is controlled independently. We study the spatial expansion of a probe wavepacket. In the Hermitian case, the wavepacket expansion is suppressed when the amplitude of the second lattice is increased (quasicrystal localization). We find a new regime, where increasing the non-Hermitian potential in the quasicrystal enhances spatial expansion, with the $C_{12}$ symmetry becoming visible in the wavepacket structure. This real-space expansion is due to a k-space localization on specific quasicrystal modes. Our results show that the non-Hermitian quasicrystal behavior is richer than previously thought. The localization properties of the quasicrystals can be used for beam tailoring in photonics, but are also important in other fields.",
+      "published": "2023-12-14T20:16:36Z",
+      "primary_category": "cond-mat.mes-hall",
+      "authors": [
+        "Zhaoyang Zhang",
+        "Shun Liang",
+        "Ismael Septembre",
+        "Jiawei Yu",
+        "Yongping Huang",
+        "Maochang Liu",
+        "Yanpeng Zhang",
+        "Min Xiao",
+        "Guillaume Malpuech",
+        "Dmitry Solnyshkov"
+      ]
+    },
+    {
+      "id": "2105.03302v2",
+      "title": "Non-Hermitian quasicrystal in dimerized lattices",
+      "pdf_url": "https://arxiv.org/pdf/2105.03302v2",
+      "summary": "Non-Hermitian quasicrystals possess PT and metal-insulator transitions induced by gain and loss or nonreciprocal effects. In this work, we uncover the nature of localization transitions in a generalized Aubry-Andre-Harper model with dimerized hopping amplitudes and complex onsite potential. By investigating the spectrum, adjacent gap ratios and inverse participation ratios, we find an extended phase, a localized phase and a mobility edge phase, which are originated from the interplay between hopping dimerizations and non-Hermitian onsite potential. The lower and upper bounds of the mobility edge are further characterized by a pair of topological winding numbers, which undergo quantized jumps at the boundaries between different phases. Our discoveries thus unveil the richness of topological and transport phenomena in dimerized non-Hermitian quasicrystals.",
+      "published": "2021-05-07T14:52:47Z",
+      "comment": "11 pages, 11 figures, version accepted by CPB for the Special Issue on Non-Hermitian Physics",
+      "primary_category": "cond-mat.dis-nn",
+      "doi": "10.1088/1674-1056/ac1efc",
+      "authors": [
+        "Longwen Zhou",
+        "Wenqian Han"
+      ]
+    },
+    {
+      "id": "2312.09322v1",
+      "title": "Non-Hermitian delocalization in a 2D photonic quasicrystal",
+      "pdf_url": "https://arxiv.org/pdf/2312.09322v1",
+      "summary": "Quasicrystals show long-range order, but lack translational symmetry. So far, theoretical and experimental studies suggest that both Hermitian and non-Hermitian quasicrystals show localized eigenstates. This localization is due to the fractal structure of the spectrum in the Hermitian case and to the transition to diffusive bands via exceptional points in the non-Hermitian case. Here, we present an experimental study of a dodecagonal (12-fold) photonic quasicrystal based on electromagnetically-induced transparency in a Rb vapor cell. The transition to a quasicrystal is obtained by superposing two honeycomb lattices at 30$^\\circ$ with a continuous tuning of their amplitudes. Non-Hermiticity is controlled independently. We study the spatial expansion of a probe wavepacket. In the Hermitian case, the wavepacket expansion is suppressed when the amplitude of the second lattice is increased (quasicrystal localization). We find a new regime, where increasing the non-Hermitian potential in the quasicrystal enhances spatial expansion, with the $C_{12}$ symmetry becoming visible in the wavepacket structure. This real-space expansion is due to a k-space localization on specific quasicrystal modes. Our results show that the non-Hermitian quasicrystal behavior is richer than previously thought. The localization properties of the quasicrystals can be used for beam tailoring in photonics, but are also important in other fields.",
+      "published": "2023-12-14T20:16:36Z",
+      "primary_category": "cond-mat.mes-hall",
+      "authors": [
+        "Zhaoyang Zhang",
+        "Shun Liang",
+        "Ismael Septembre",
+        "Jiawei Yu",
+        "Yongping Huang",
+        "Maochang Liu",
+        "Yanpeng Zhang",
+        "Min Xiao",
+        "Guillaume Malpuech",
+        "Dmitry Solnyshkov"
+      ]
+    },
+    {
+      "id": "1905.09460v1",
+      "title": "Topological phase transition in non-Hermitian quasicrystals",
+      "pdf_url": "https://arxiv.org/pdf/1905.09460v1",
+      "summary": "The discovery of topological phases in non-Hermitian open classical and quantum systems challenges our current understanding of topological order. Non-Hermitian systems exhibit unique features with no counterparts in topological Hermitian models, such as failure of the conventional bulk-boundary correspondence and non-Hermitian skin effect. Advances in the understanding of the topological properties of non-Hermitian lattices with translational invariance have been reported in several recent studies, however little is known about non-Hermitian quasicrystals. Here we disclose topological phases in a quasicrystal with parity-time ($\\mathcal{PT}$) symmetry, described by a non-Hermitian extension of the Aubry-Andr\u00e9-Harper model. It is shown that the metal-insulating phase transition, observed at the $\\mathcal{PT}$ symmetry breaking point, is of topological nature and can be expressed in terms of a winding number. A photonic realization of a non-Hermitian quasicrystal is also suggested.",
+      "published": "2019-05-23T04:43:39Z",
+      "comment": "11 pages, 5 figures, to appear in Phys Rev Lett",
+      "primary_category": "cond-mat.mes-hall",
+      "journal_ref": "Phys. Rev. Lett. 122, 237601 (2019)",
+      "doi": "10.1103/PhysRevLett.122.237601",
+      "authors": [
+        "Stefano Longhi"
+      ]
+    }
+  ]
+}

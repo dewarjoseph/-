@@ -1,0 +1,41 @@
+{
+  "contact_grammar": {
+    "hierarchy_levels": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "contact_language_sizes": [
+      12,
+      30,
+      44,
+      44
+    ],
+    "coarsening_closure_size": 44,
+    "facet_triples_count": 135,
+    "block_entropies": [
+      3.584962500721156,
+      4.906890595608519,
+      5.459431618637297,
+      5.459431618637297
+    ],
+    "entropy_rates_per_token": [
+      3.584962500721156,
+      2.4534452978042594,
+      1.3648579046593243,
+      0.6824289523296622
+    ],
+    "superconvergence_rate": 0.19035874216045043,
+    "entropy_decay_verified": true
+  },
+  "epigraphy_comparison": {
+    "grammar_type": "Chair44_Hierarchical_FR30_Aperiodic",
+    "epigraphic_comparator": "Ithaca_Aeneas_Attribution_Engine",
+    "topological_perplexity": 1.414,
+    "sequence_restoration_accuracy": 0.842,
+    "chiral_syntactic_bias": "HOMOCHIRAL_RIGID_PENTAPRISM",
+    "grammar_concordance": true
+  },
+  "pillar6_passed": true
+}

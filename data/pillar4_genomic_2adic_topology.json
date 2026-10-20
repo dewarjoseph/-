@@ -1,0 +1,26 @@
+{
+  "pillar": "Pillar 4 \u2014 2-Adic DNA Brick Self-Assembly & Chromatin Polymer Caging",
+  "dna_brick_model": {
+    "num_tiles": 8,
+    "num_contacts": 16,
+    "laplacian_eigenvalues": [
+      -1.0658141036401503e-14,
+      7.14589803375031,
+      7.145898033750313,
+      10.757359312880716,
+      13.854101966249683,
+      13.854101966249686,
+      19.242640687119287,
+      24.0
+    ],
+    "spectral_gap_lambda1": 7.14589803375031,
+    "caging_protection_ratio": 0.29774575140625054,
+    "mean_2adic_distance": 0.4375
+  },
+  "jaspar_tf": "CTCF (MA0139.1)",
+  "jaspar_motif_length_bp": 19,
+  "jaspar_mean_information_content_bits": 1.1957894736842105,
+  "jaspar_max_information_content_bits": 1.92,
+  "encode_ccre_boundary_insulation_index": 8.544989648779318,
+  "2adic_topological_protection_certified": true
+}

@@ -1,0 +1,30 @@
+{
+  "benchmark": "Module 28",
+  "timestamp": "2026-10-18 12:43:05",
+  "elapsed_seconds": 1.104888916015625,
+  "ipr": 0.0485,
+  "corner_weight": 0.674,
+  "bulk_weight": 0.1,
+  "corner_amplification": 6.74,
+  "torque_pinning": {
+    "tau_x": -0.5029701101289057,
+    "tau_y": -0.09753640910406577,
+    "tau_z": 5.1687223021210125,
+    "tau_norm": 5.194052610363813
+  },
+  "torus_3d_winding": {
+    "winding_number": 1,
+    "min_point_gap": 0.062499999999999556,
+    "ep_immunity": true
+  },
+  "parity_audit": {
+    "delta_kappa_W_b": 0.01518977,
+    "delta_kappa_neg_W_b": -0.0151999,
+    "parity_sum_residual": -1.013e-05,
+    "delta_kappa_W_a": 0.0,
+    "errata_reconciled": true,
+    "opposite_sign_verified": true,
+    "achiral_zero_verified": true
+  },
+  "all_passed": true
+}

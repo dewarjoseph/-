@@ -1,0 +1,1 @@
+Notified user to check AlphaFold DB terms at https://alphafold.ebi.ac.uk/ at 2026-10-18T12:29:32.9992358-07:00

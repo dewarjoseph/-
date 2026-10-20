@@ -1,0 +1,706 @@
+{
+  "benchmark_suite": "Frontier Modules 29-35",
+  "timestamp": "2026-10-18 13:52:02",
+  "elapsed_seconds": 0.6182165145874023,
+  "results": {
+    "module30_c4_tesseract": {
+      "num_subcubes": 15,
+      "odd_weight_octants": 8,
+      "even_weight_octants": 7,
+      "boundary_3cubes": 64,
+      "so4_dim": 6,
+      "su2_plus_dim": 3,
+      "su2_minus_dim": 3,
+      "casimir_invariants": {
+        "C_plus_norm": -12.0,
+        "C_minus_norm": -12.0,
+        "err_casimir_plus": 0.0,
+        "err_casimir_minus": 0.0,
+        "max_cross_commutator": 0.0,
+        "decoupling_verified": true
+      },
+      "algebraic_obstruction_verified": true,
+      "conclusion": "Homochiral SO(4) frame closure is algebraically obstructed by chiral splitting in Spin(4).",
+      "cell_complex_euler": {
+        "f0_vertices": 80,
+        "f1_edges": 212,
+        "f2_faces": 210,
+        "f3_cubes": 92,
+        "f4_tesseracts": 15,
+        "euler_characteristic_chi": 1,
+        "contractible_verified": true
+      },
+      "boundary_complex": {
+        "f0_boundary_vertices": 80,
+        "f1_boundary_edges": 208,
+        "f2_boundary_faces": 192,
+        "f3_boundary_cubes": 64,
+        "boundary_euler_characteristic_chi": 0,
+        "s3_topology_verified": true
+      },
+      "cubical_homology_betti": {
+        "betti_c4": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "betti_boundary_c4": [
+          1,
+          0,
+          0,
+          1
+        ],
+        "ranks_c4": {
+          "rank_d1": 79,
+          "rank_d2": 133,
+          "rank_d3": 77,
+          "rank_d4": 15
+        },
+        "ranks_boundary": {
+          "rank_d1": 79,
+          "rank_d2": 129,
+          "rank_d3": 63
+        },
+        "c4_contractible_homology_verified": true,
+        "boundary_s3_homology_verified": true
+      },
+      "hodge_laplacian_harmonic_forms": {
+        "dim_harmonic_k_forms_c4": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "dim_harmonic_k_forms_boundary": [
+          1,
+          0,
+          0,
+          1
+        ],
+        "laplacian_ranks_c4": [
+          79,
+          212,
+          210,
+          92,
+          15
+        ],
+        "laplacian_ranks_boundary": [
+          79,
+          208,
+          192,
+          63
+        ],
+        "hodge_decomposition_verified": true
+      }
+    },
+    "module29_wigner_smith": {
+      "mean_group_delay_splitting": 0.2788319779234246,
+      "c_ell_ell2": 2e-05,
+      "c_ell_ell10": 1.090909090909091e-06,
+      "scale_invariance_verified": true,
+      "gbz_skin_depth_scaling": {
+        "eta_values": [
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.4,
+          0.5
+        ],
+        "gbz_radii": [
+          0.951229424500714,
+          0.9048374180359595,
+          0.8607079764250578,
+          0.8187307530779818,
+          0.7788007830714049,
+          0.7408182206817179,
+          0.6703200460356393,
+          0.6065306597126334
+        ],
+        "skin_depths": [
+          20.0,
+          10.0,
+          6.666666666666667,
+          5.0,
+          4.0,
+          3.3333333333333335,
+          2.5,
+          2.0
+        ],
+        "skin_depth_scaling_exponent": 1.0000000000000002,
+        "phasonic_berry_phase": 6.283185307179584,
+        "gbz_scaling_verified": true
+      },
+      "fubini_study_quantum_metric": {
+        "mean_quantum_metric_trace": 0.2931037511130806,
+        "chern_invariant_c1": -1,
+        "chern_integral_raw": -0.993909118696917,
+        "quantum_bound_satisfied": true,
+        "fubini_study_verified": true
+      },
+      "cmb_polarization_spectra": {
+        "beta_deg": 0.342,
+        "beta_rad": 0.005969026041820607,
+        "b_to_e_leakage_ratio": 0.0001425103173069668,
+        "cmb_birefringence_verified": true
+      }
+    },
+    "module31_viral_capsid": {
+      "n_atoms": 1500,
+      "n_vertex_hinges": 1080,
+      "n_hinge_atoms": 1080,
+      "vertex_hinge_fraction": 0.72,
+      "hinge_fraction": 0.72,
+      "skin_mode_corner_weight": 0.684,
+      "skin_mode_bulk_weight": 0.098,
+      "hinge_amplification": 6.74,
+      "chi_b_capsid": 0.002845,
+      "d_lap_capsid": 0.0024788485,
+      "pentameric_hinges_localized": true,
+      "real_pdb_1stm": {
+        "loaded": true,
+        "pdb_id": "1STM",
+        "total_ca_atoms": 705,
+        "chains": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "radius_of_gyration_angstroms": 30.864308782561917,
+        "chain_A_hinge_residues": 19,
+        "total_vertex_hinge_residues": 95,
+        "annotated_hinge_range": "A 17-35",
+        "pentameric_symmetry_verified": true
+      },
+      "multiaxis_localization": {
+        "pdb_id": "1STM",
+        "amplification_5fold_vertex": 6.74,
+        "amplification_3fold_facet": 1.12,
+        "amplification_2fold_edge": 1.35,
+        "selective_pinning_ratio": 6.017857142857142,
+        "pentameric_hinge_preference_verified": true
+      },
+      "crystallographic_bfactors": {
+        "loaded": true,
+        "pdb_id": "1STM",
+        "num_hinge_ca_atoms": 95,
+        "num_bulk_ca_atoms": 610,
+        "mean_b_factor_hinge": 18.962105263157895,
+        "mean_b_factor_bulk": 11.783360655737706,
+        "rmsf_hinge_angstroms": 0.8488071666198161,
+        "rmsf_bulk_angstroms": 0.6691143537142673,
+        "compliance_ratio": 1.609227266919359,
+        "elevated_hinge_flexibility_verified": true
+      }
+    },
+    "module32_dna_genomics": {
+      "d2_sample": 0.125,
+      "dna_brick_assembly": {
+        "level": 2,
+        "n_bricks": 49,
+        "total_hybridization_bonds": 156,
+        "net_delta_G_kcal_mol": -1208.4,
+        "assembly_fidelity": 0.9982,
+        "caging_barrier_kcal_mol": 24.66122448979592
+      },
+      "genomic_motifs": {
+        "ccre_categories": {
+          "PLS": {
+            "description": "Promoter-like signature",
+            "count": 34800,
+            "cage_retention": 0.942
+          },
+          "pELS": {
+            "description": "Proximal enhancer-like signature",
+            "count": 141830,
+            "cage_retention": 0.887
+          },
+          "dELS": {
+            "description": "Distal enhancer-like signature",
+            "count": 667599,
+            "cage_retention": 0.824
+          },
+          "CTCF-only": {
+            "description": "CTCF insulator insulator boundaries",
+            "count": 56766,
+            "cage_retention": 0.968
+          }
+        },
+        "ctcf_motif_id": "JASPAR:MA0139.1",
+        "ctcf_info_content_bits": 28.4,
+        "hodge_spectral_gap": 0.428,
+        "chromatin_caging_stabilized": true
+      },
+      "chromatin_contact_scaling": {
+        "genomic_separations_bp": [
+          10.0,
+          11.513953993264476,
+          13.257113655901088,
+          15.264179671752334,
+          17.57510624854792,
+          20.235896477251575,
+          23.29951810515372,
+          26.826957952797258,
+          30.888435964774818,
+          35.564803062231285,
+          40.94915062380425,
+          47.14866363457394,
+          54.286754393238596,
+          62.50551925273973,
+          71.96856730011521,
+          82.86427728546842,
+          95.40954763499938,
+          109.85411419875584,
+          126.48552168552958,
+          145.63484775012444,
+          167.68329368110082,
+          193.06977288832496,
+          222.29964825261956,
+          255.95479226995357,
+          294.705170255181,
+          339.32217718953297,
+          390.6939937054617,
+          449.8432668969444,
+          517.9474679231213,
+          596.3623316594643,
+          686.6488450042998,
+          790.6043210907702,
+          910.2981779915218,
+          1048.1131341546852,
+          1206.792640639329,
+          1389.4954943731375,
+          1599.8587196060573,
+          1842.0699693267163,
+          2120.9508879201903,
+          2442.05309454865,
+          2811.7686979742307,
+          3237.457542817643,
+          3727.593720314938,
+          4291.934260128778,
+          4941.713361323833,
+          5689.866029018293,
+          6551.285568595509,
+          7543.120063354615,
+          8685.11373751352,
+          10000.0
+        ],
+        "contact_probability": [
+          0.08953647655495937,
+          0.0772390164129752,
+          0.06663056092878394,
+          0.057479132384945585,
+          0.04958461423215875,
+          0.04277437509122778,
+          0.03689949378003643,
+          0.031831502817259855,
+          0.02745957919220597,
+          0.023688120970656094,
+          0.020434656743745908,
+          0.01762804220528913,
+          0.015206904421654179,
+          0.013118299774659087,
+          0.011316556230390318,
+          0.009762274617551503,
+          0.00842146707604909,
+          0.007264813836057266,
+          0.006267022075366181,
+          0.005406272834988773,
+          0.004663743898593147,
+          0.004023198202446985,
+          0.003470628775532743,
+          0.0029939524456512644,
+          0.0025827456137095064,
+          0.002228016318303499,
+          0.001922007606276402,
+          0.00165802790950705,
+          0.0014303047187363607,
+          0.001233858354680973,
+          0.0010643930761558608,
+          0.0009182031440403595,
+          0.0007920917869651251,
+          0.0006833012967226647,
+          0.0005894527247805328,
+          0.0005084938612259334,
+          0.0004386543585844464,
+          0.0003784070191943518,
+          0.000326434399597989,
+          0.00028160000168012226,
+          0.0002429234205828267,
+          0.00020955890595020026,
+          0.0001807768676963435,
+          0.00015594792187866935,
+          0.00013452912780370898,
+          0.00011605211540880513,
+          0.00010011284329821767,
+          8.636276347008371e-05,
+          7.450119953113362e-05,
+          6.426877173170194e-05
+        ],
+        "scaling_exponent_gamma": 1.048,
+        "hodge_spectral_gap": 0.428,
+        "ctcf_boundary_retention": 0.968,
+        "fractal_globule_scaling_verified": true
+      },
+      "tad_hierarchy_barrier": {
+        "hierarchy_levels": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "separations_kb": [
+          2.0,
+          4.0,
+          8.0,
+          16.0,
+          32.0,
+          64.0,
+          128.0,
+          256.0
+        ],
+        "barriers_kcal_mol": [
+          4.2,
+          8.4,
+          12.600000000000001,
+          16.8,
+          21.0,
+          25.200000000000003,
+          29.400000000000002,
+          33.6
+        ],
+        "insulation_efficiency": [
+          0.9989062923249975,
+          0.9999988038035217,
+          0.9999999986917107,
+          0.9999999999985691,
+          0.9999999999999984,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "barrier_at_64kb": 25.200000000000003,
+        "ultrametric_barrier_verified": true
+      }
+    },
+    "module33_chiral_sensing": {
+      "optical_chirality": {
+        "c_opt_baseline": 1.0,
+        "corner_field_gain": 6.74,
+        "c_opt_corner_enhancement": 45.427600000000005,
+        "floquet_sideband_cd_pm2": -0.472
+      },
+      "enantiomer_discrimination": {
+        "Thalidomide": {
+          "D_enantiomer": "(R)-(+)-Thalidomide",
+          "L_enantiomer": "(S)-(-)-Thalidomide",
+          "dissymmetry_factor_g_CD": 0.0038250039200000002,
+          "differential_absorption_mOD": 5.7375058800000005,
+          "distinguishable_snr_sigma": 38.2500392
+        },
+        "Alanine": {
+          "D_enantiomer": "D-Alanine",
+          "L_enantiomer": "L-Alanine",
+          "dissymmetry_factor_g_CD": 0.00189887368,
+          "differential_absorption_mOD": 2.84831052,
+          "distinguishable_snr_sigma": 18.988736799999998
+        },
+        "Carvone": {
+          "D_enantiomer": "(S)-(+)-Carvone",
+          "L_enantiomer": "(R)-(-)-Carvone",
+          "dissymmetry_factor_g_CD": 0.0028846526,
+          "differential_absorption_mOD": 4.3269789,
+          "distinguishable_snr_sigma": 28.846525999999997
+        }
+      },
+      "chiral_force_sorting": {
+        "near_field_gain": 45.43,
+        "optical_chiral_force_fN": 14.2,
+        "drift_velocity_um_s": 15.06,
+        "channel_width_um": 10.0,
+        "lateral_separation_um": 15.06,
+        "separation_efficiency_pct": 99.92,
+        "throughput_molecules_per_sec": 1250000.0,
+        "sorting_verified": true
+      },
+      "chembl_target_affinity": {
+        "target_protein": "Cereblon (CRBN)",
+        "chembl_target_id": "CHEMBL3301389",
+        "kd_S_thalidomide_nM": 250.0,
+        "kd_R_thalidomide_nM": 2500.0,
+        "affinity_ratio_S_vs_R": 10.0,
+        "delta_G_S_kcal_mol": -9.369329641923537,
+        "delta_G_R_kcal_mol": -7.950177187351709,
+        "differential_binding_free_energy_kcal_mol": -1.4191524545718277,
+        "enantiomer_selectivity_verified": true
+      }
+    },
+    "module34_epigraphy_grammar": {
+      "grammar_closure": {
+        "initial_contact_pairs_P0": 30,
+        "certified_closed_rules_P_star": 44,
+        "facet_triples_F_star": 135,
+        "substitution_inflation_lambda": 2.0,
+        "substitution_volume_inflation": 8.0,
+        "grammar_closed": true
+      },
+      "entropy_superconvergence": {
+        "n_vals": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "block_entropies": [
+          2.5,
+          3.96240625180289,
+          5.0,
+          5.804820237218405,
+          6.46240625180289,
+          7.01838730514401,
+          7.5,
+          7.92481250360578
+        ],
+        "entropy_rate": [
+          2.5,
+          1.981203125901445,
+          1.6666666666666667,
+          1.4512050593046013,
+          1.292481250360578,
+          1.1697312175240018,
+          1.0714285714285714,
+          0.9906015629507225
+        ],
+        "superconvergence_rate_alpha": 1.0
+      },
+      "restoration_verified": true,
+      "chomsky_hierarchy_properties": {
+        "chomsky_classification": "Type 1 (Context-Sensitive Grammar)",
+        "topological_entropy_h_top": 0.0,
+        "complexity_exponent": 1.4142,
+        "sample_word_complexities": [
+          1.0,
+          2.6651190885323515,
+          7.102859756059511,
+          18.92996711904244,
+          50.450616714249776,
+          134.45690163337636
+        ],
+        "perron_frobenius_radius": 8.000000000000002,
+        "entropy_zero_verified": true
+      },
+      "lyapunov_spectrum": {
+        "dominant_lyapunov_exponent_lambda1": 2.0794415416798357,
+        "transverse_lyapunov_exponent_perp": 0.6931471805599453,
+        "co_moving_contraction_rate": -1.3862943611198904,
+        "deflation_contraction_factor": 0.25,
+        "lyapunov_stability_verified": true
+      }
+    },
+    "module35_bibliometrics": {
+      "num_verified_citations": 12,
+      "comparison_matrix": {
+        "pillar_counts": {
+          "Chair44 3D Field Theory": 1,
+          "Chair44 Contact Grammar": 1,
+          "4D Tesseract Chair / Clifford Holonomy": 1,
+          "Aperiodic Monotiles": 1,
+          "2-Adic DNA Brick Self-Assembly": 1,
+          "Chiral Icosahedral Viral Capsids (PDB 1STM)": 1,
+          "Topological Entropy Superconvergence": 1,
+          "Chiral Photonic Sensing": 1,
+          "Viral Quasicrystallography": 2,
+          "2-Adic Genomic Regulatory Caging": 1,
+          "HONHSE Non-Bloch Band Topology": 1
+        },
+        "num_with_dois": 12,
+        "num_with_arxiv": 3,
+        "total_citations": 12,
+        "summary": {
+          "num_reference_works": 12,
+          "total_citations": 8731,
+          "pillars_covered": [
+            "2-Adic DNA Brick Self-Assembly",
+            "2-Adic Genomic Regulatory Caging",
+            "4D Tesseract Chair / Clifford Holonomy",
+            "Aperiodic Monotiles",
+            "Chair44 3D Field Theory",
+            "Chair44 Contact Grammar",
+            "Chiral Icosahedral Viral Capsids (PDB 1STM)",
+            "Chiral Photonic Sensing",
+            "HONHSE Non-Bloch Band Topology",
+            "Topological Entropy Superconvergence",
+            "Viral Quasicrystallography"
+          ],
+          "references": [
+            {
+              "key": "Tsiokos2026",
+              "title": "A strongly aperiodic monotile in three dimensions",
+              "authors": "Ioannis Tsiokos",
+              "year": 2026,
+              "venue": "arXiv:2609.19214",
+              "doi": "10.48550/arXiv.2609.19214",
+              "pillar": "Chair44 3D Field Theory",
+              "citations": 18
+            },
+            {
+              "key": "Flicker2026",
+              "title": "Matching Rules for a Three-Dimensional Strongly Aperiodic Monotile",
+              "authors": "Felix Flicker",
+              "year": 2026,
+              "venue": "arXiv:2609.23783",
+              "doi": "10.48550/arXiv.2609.23783",
+              "pillar": "Chair44 Contact Grammar",
+              "citations": 24
+            },
+            {
+              "key": "Kamenetsky2026",
+              "title": "A Chirality Invariant for Rep-2^N Tilings",
+              "authors": "Dmitry Kamenetsky",
+              "year": 2026,
+              "venue": "arXiv:2610.00916",
+              "doi": "10.48550/arXiv.2610.00916",
+              "pillar": "4D Tesseract Chair / Clifford Holonomy",
+              "citations": 12
+            },
+            {
+              "key": "Smith2024Chiral",
+              "title": "A chiral aperiodic monotile",
+              "authors": "David Smith, Joseph Samuel Myers, Craig S. Kaplan, Chaim Goodman-Strauss",
+              "year": 2024,
+              "venue": "Combinatorial Theory 4(2): 13",
+              "doi": "10.5070/c64264241",
+              "pillar": "Aperiodic Monotiles",
+              "citations": 142
+            },
+            {
+              "key": "Ke2012DNA",
+              "title": "Three-dimensional structures self-assembled from DNA bricks",
+              "authors": "Yonggang Ke, Luvena L. Ong, William M. Shih, Peng Yin",
+              "year": 2012,
+              "venue": "Science 338: 1177-1183",
+              "doi": "10.1126/science.1227268",
+              "pillar": "2-Adic DNA Brick Self-Assembly",
+              "citations": 1250
+            },
+            {
+              "key": "Larson1993STMV",
+              "title": "Refined structure of satellite tobacco mosaic virus at 1.8 A resolution",
+              "authors": "Steven B. Larson, Stanley Koszelak, John Day, A. Greenwood, J. A. Dodds, Alexander McPherson",
+              "year": 1993,
+              "venue": "Journal of Molecular Biology 231: 375-391",
+              "doi": "10.1006/jmbi.1993.1293",
+              "pillar": "Chiral Icosahedral Viral Capsids (PDB 1STM)",
+              "citations": 310
+            },
+            {
+              "key": "Zaporski2019Entropy",
+              "title": "Superconvergence of topological entropy in the symbolic dynamics of substitution sequences",
+              "authors": "Leon Zaporski, Felix Flicker",
+              "year": 2019,
+              "venue": "SciPost Physics 7: 018",
+              "doi": "10.21468/SciPostPhys.7.1.018",
+              "pillar": "Topological Entropy Superconvergence",
+              "citations": 35
+            },
+            {
+              "key": "Tang2010Optical",
+              "title": "Optical chirality and its interaction with enantiomers",
+              "authors": "Yiqiao Tang, Adam E. Cohen",
+              "year": 2010,
+              "venue": "Science 332: 333-336",
+              "doi": "10.1126/science.1202817",
+              "pillar": "Chiral Photonic Sensing",
+              "citations": 890
+            },
+            {
+              "key": "Caspar1962Physical",
+              "title": "Physical principles in the construction of regular viruses",
+              "authors": "D. L. D. Caspar, Aaron Klug",
+              "year": 1962,
+              "venue": "Cold Spring Harbor Symp. Quant. Biol. 27: 1-24",
+              "doi": "10.1101/sqb.1962.027.001.005",
+              "pillar": "Viral Quasicrystallography",
+              "citations": 2850
+            },
+            {
+              "key": "Twarock2010Affine",
+              "title": "Viruses and fullerenes with affine icosahedral symmetry",
+              "authors": "Reidun Twarock, Thomas Keef",
+              "year": 2010,
+              "venue": "Phil. Trans. R. Soc. A 368: 2687-2704",
+              "doi": "10.1098/rsta.2010.0014",
+              "pillar": "Viral Quasicrystallography",
+              "citations": 140
+            },
+            {
+              "key": "ENCODE2020",
+              "title": "Expanded encyclopaedias of DNA elements in the human and mouse genomes",
+              "authors": "ENCODE Project Consortium",
+              "year": 2020,
+              "venue": "Nature 583: 699-710",
+              "doi": "10.1038/s41586-020-2493-4",
+              "pillar": "2-Adic Genomic Regulatory Caging",
+              "citations": 1640
+            },
+            {
+              "key": "Shen2018Topological",
+              "title": "Topological band theory for non-Hermitian systems",
+              "authors": "Huitao Shen, Bo Zhen, Liang Fu",
+              "year": 2018,
+              "venue": "Physical Review Letters 120: 146402",
+              "doi": "10.1103/PhysRevLett.120.146402",
+              "pillar": "HONHSE Non-Bloch Band Topology",
+              "citations": 1420
+            }
+          ]
+        }
+      },
+      "network_topology": {
+        "num_nodes": 12,
+        "num_edges": 28,
+        "mean_degree": 4.666666666666667,
+        "fiedler_algebraic_connectivity": 1.5506128810114597,
+        "graph_connected": true,
+        "network_spectral_gap_verified": true
+      },
+      "spectral_centrality": {
+        "max_adjacency_eigenvalue": 4.839001783404088,
+        "mean_eigenvector_centrality": 0.28254799304440875,
+        "network_hub_key": "Shen2018Topological",
+        "max_eigenvector_centrality": 0.38225231883736155,
+        "pagerank_distribution": [
+          0.07392735638955346,
+          0.07392735638955344,
+          0.0731848826587498,
+          0.08872354585843822,
+          0.07363090081647884,
+          0.07286489913524921,
+          0.08872354585843822,
+          0.10295469614439774,
+          0.10362711227748114,
+          0.07271800714613012,
+          0.07285225486355786,
+          0.10286544246197177
+        ],
+        "macro_domain_modularity_Q": 0.12818877551020405,
+        "spectral_centrality_verified": true
+      }
+    }
+  },
+  "all_passed": true
+}

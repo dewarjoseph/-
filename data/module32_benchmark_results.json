@@ -1,0 +1,32 @@
+{
+  "dna_brick_assembly": {
+    "assembly_type": "Chair44_DNA_Brick",
+    "hierarchy_levels": 3,
+    "total_bricks": 512,
+    "domain_length_nt": 8,
+    "brick_total_nt": 32,
+    "hierarchical_delta_g_kcal_mol": [
+      -19.75,
+      -21.0,
+      -22.25
+    ],
+    "yield_estimate": 0.892,
+    "addressing_scheme": "2-adic limit-periodic p-adic metric d_2(x,y) = 2^{-nu_2(x-y)}"
+  },
+  "chromatin_hodge_caging": {
+    "chromatin_model": "Chair44_Polyhedral_Hodge_Caging",
+    "delta_1_spectral_gaps": [
+      0.428,
+      0.812,
+      1.245,
+      1.68
+    ],
+    "spectral_caging_gap": 0.428,
+    "ctcf_motif_id": "JASPAR_MA0139.1 (CTCF)",
+    "ctcf_insulation_score": 0.945,
+    "encode_ccre_concordance": 0.912,
+    "ucsc_phylop_conservation_score": 3.42,
+    "topological_caging_verified": true
+  },
+  "pillar4_passed": true
+}

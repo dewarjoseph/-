@@ -1,0 +1,187 @@
+{
+  "metadata": {
+    "title": "Legacy Quasicrystal Chair44 Benchmark Suite (Modules 1\u201327)",
+    "timestamp": "2026-10-18T22:06:49Z",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+  },
+  "projector_orthogonality": {
+    "err_P_par_P_par_T": 1.1102230246251565e-16,
+    "err_P_perp_P_perp_T": 1.1102230246251565e-16,
+    "err_P_par_P_perp_T": 2.5299988060788043e-17,
+    "err_completeness": 2.220446049250313e-16,
+    "max_error": 2.220446049250313e-16,
+    "under_machine_precision": true,
+    "passed": true
+  },
+  "chair44_field_theory": {
+    "cubes_count": 7,
+    "panels_count": 24,
+    "P0_count": 30,
+    "P_star_count": 44,
+    "facet_triples_F_star": 135,
+    "level1_laplacian_max_error": 1.0658141036401503e-14,
+    "level1_eigenvalues": [
+      -1.0658141036401503e-14,
+      7.14589803375031,
+      7.145898033750313,
+      10.757359312880716,
+      13.854101966249683,
+      13.854101966249686,
+      19.242640687119287,
+      24.0
+    ],
+    "clifford_nontrivial_pct": 58.536585365853654,
+    "soldered_commutator_norm": 130.3533658944026,
+    "polyhedral_counts": [
+      117,
+      252,
+      144,
+      8
+    ],
+    "hodge_caging_verified": true,
+    "lambda7_determinant": 7
+  },
+  "weyl_continuum_limits": {
+    "chi_b_infinity": 0.0017668438750250398,
+    "d_lap_infinity": 0.001539400923576484,
+    "ratio_unrounded": 0.8712716190357609,
+    "ratio_rounded_4decimals": 0.8713,
+    "errata_r43_reconciled": true,
+    "patch_R6_chi_b": 0.005373381835213252,
+    "patch_R6_d_lap": 0.005942418954892707,
+    "patch_R6_sites": 10705,
+    "parity_sum_B_max": 9.787042262380152e-20,
+    "achiral_chi_a": 1.418824503725123e-16
+  },
+  "quantum_metric": {
+    "g_xy_W_b": -0.25249999734336975,
+    "g_xy_W_bm": 0.25249999734336975,
+    "g_xy_W_a": 0.0,
+    "parity_sum_residual": 0.0,
+    "achiral_residual": 0.0,
+    "parity_audit_passed": true
+  },
+  "honhse_and_table3_scaling": {
+    "skin_ipr": 0.003603055826238498,
+    "corner_weight": 0.0,
+    "bulk_weight": 0.1431728751679613,
+    "amplification": 0.0,
+    "table3_data": [
+      {
+        "eta": 0.05,
+        "kappa_plus": 0.07036,
+        "kappa_minus": 0.03725,
+        "delta_kappa_W_b": 0.0331009,
+        "delta_kappa_W_bm": -0.0351612,
+        "z_plus_norm": 0.9320582185426519,
+        "parity_sum_residual": -0.0020603,
+        "erratum_r42_reconciled": true
+      },
+      {
+        "eta": 0.1,
+        "kappa_plus": 0.07809,
+        "kappa_minus": 0.05452,
+        "delta_kappa_W_b": 0.0235663,
+        "delta_kappa_W_bm": -0.0238189,
+        "z_plus_norm": 0.9248811834911439,
+        "parity_sum_residual": -0.00025264,
+        "erratum_r42_reconciled": true
+      },
+      {
+        "eta": 0.15,
+        "kappa_plus": 0.09241,
+        "kappa_minus": 0.07012,
+        "delta_kappa_W_b": 0.0222965,
+        "delta_kappa_W_bm": -0.0223509,
+        "z_plus_norm": 0.9117312630857386,
+        "parity_sum_residual": -5.4447e-05,
+        "erratum_r42_reconciled": true
+      },
+      {
+        "eta": 0.2,
+        "kappa_plus": 0.10251,
+        "kappa_minus": 0.08379,
+        "delta_kappa_W_b": 0.018723,
+        "delta_kappa_W_bm": -0.0187148,
+        "z_plus_norm": 0.9025691240165568,
+        "parity_sum_residual": 8.1824e-06,
+        "erratum_r42_reconciled": true
+      },
+      {
+        "eta": 0.25,
+        "kappa_plus": 0.10925,
+        "kappa_minus": 0.09406,
+        "delta_kappa_W_b": 0.0151898,
+        "delta_kappa_W_bm": -0.0151999,
+        "z_plus_norm": 0.8965062629143513,
+        "parity_sum_residual": -1.013e-05,
+        "erratum_r42_reconciled": true
+      },
+      {
+        "eta": 0.35,
+        "kappa_plus": 0.11893,
+        "kappa_minus": 0.10871999999999998,
+        "delta_kappa_W_b": 0.010214299999999999,
+        "delta_kappa_W_bm": -0.010200599999999999,
+        "z_plus_norm": 0.8878699494831833,
+        "parity_sum_residual": 1.3683999999999998e-05,
+        "erratum_r42_reconciled": true
+      }
+    ],
+    "erratum_r42_reconciled": true
+  },
+  "floquet_and_persistent_currents": {
+    "cd_pm2": -47.195,
+    "spectral_loop_area_W_b": 0.25740707912370253,
+    "spectral_loop_area_W_bm": -0.25740707912370253,
+    "spectral_loop_area_W_a": 0.0,
+    "J_edge_W_b": 0.0144568,
+    "J_edge_W_bm": -0.014467,
+    "J_edge_W_a": -1.33707e-05,
+    "m_z_W_b": 0.00593727,
+    "Phi_B_W_b": 0.00723804
+  },
+  "cosmological_birefringence": {
+    "achromatic_optical_rotation_deg": 0.18,
+    "observed_cmb_beta_deg": 0.342,
+    "power_spectrum_scaling": "C_ell ~ ell^-2",
+    "physical_scaling_dictionary": {
+      "photonic_metamaterials": {
+        "domain": "Photonic Metamaterials / Optomechanics",
+        "length_scale_a0": "1.0 - 5.0 um",
+        "frequency_scale_omega0": "2pi x 60 THz (infrared)",
+        "energy_scale_E0": "0.25 eV",
+        "non_hermitian_drift_eta": "Differential Gain/Loss Delta_gamma = 2 v_g eta / a_0 ~ 10^13 s^-1",
+        "chiral_metric_g_xy": "Transverse optical rotation theta_rot = g_xy omega d / c ~ 15 deg/mm",
+        "corner_torque_tau_z": "Optical radiation torque tau_opt = tau_z P / omega ~ 10^-18 N m",
+        "optical_chirality_density": "C_opt = (eps0/2) E . curl(E) + (1/2 mu0) B . curl(B)"
+      },
+      "biomolecular_capsids": {
+        "domain": "Viral Quasicrystallography & Nanocages (PDB 1STM)",
+        "length_scale_a0": "1.5 - 3.0 nm (C_alpha peptide bond spacing)",
+        "frequency_scale_omega0": "sqrt(gamma/m) ~ 2pi x 1 THz (protein acoustic phonon)",
+        "energy_scale_E0": "4.1 meV ~ 0.1 k_B T (at 300 K)",
+        "non_hermitian_drift_eta": "Active hydrodynamic force eta = f_act a_0 / (k_B T) ~ 0.2 (f ~ 0.3 pN)",
+        "chiral_metric_g_xy": "Circular dichroism Delta_eps ~ 20 M^-1 cm^-1",
+        "corner_torque_tau_z": "Acoustic torque tau_bio = tau_z k_B T ~ 0.4 pN nm",
+        "elastic_network_operator": "Tirion harmonic elastic network L_bio"
+      },
+      "flrw_cosmology": {
+        "domain": "FLRW Cosmology & Cosmic Web Magnetogenesis",
+        "length_scale_a0": "Hubble radius H_0^-1 ~ 1.4 x 10^26 m",
+        "frequency_scale_omega0": "Hubble expansion rate H(z) ~ 10^-18 s^-1",
+        "energy_scale_E0": "hbar H_0 ~ 10^-33 eV",
+        "non_hermitian_drift_eta": "Primordial chiral drift eta = (1/2) g_a_gamma (d_phi/dt) H^-1",
+        "chiral_metric_g_xy": "Cosmic birefringence Delta_alpha = (1/2) g_xy Delta_phi ~ 0.34 deg",
+        "corner_torque_tau_z": "Cosmological lepton asymmetry torque density",
+        "magnetic_seed_flux": "Persistent current J_edge => Seed field B_seed ~ 10^-15 G"
+      },
+      "continuum_operator_mapping": {
+        "laplacian_wave_operator": "nabla^2 psi(x) <-> - (1 / a_0^2) (L psi)_i",
+        "momentum_minimal_coupling": "p -> p - q A = hbar (k + i (eta / a_0) z_hat)",
+        "minimal_coupling": "p -> p - q A = hbar (k + i (eta / a_0) z_hat)",
+        "generalized_dispersion": "omega(k, eta) = v_g sqrt(k^2 - (eta / a_0)^2 + 2 i k_z (eta / a_0))"
+      }
+    }
+  }
+}

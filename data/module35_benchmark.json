@@ -1,0 +1,285 @@
+{
+  "round": 35,
+  "pillar": "Pillar 7: Multi-Database Scholarly Bibliometric Synthesis",
+  "status": "PASSED",
+  "total_citations": 12,
+  "comparison_matrix": {
+    "pillar_counts": {
+      "Chair44 3D Field Theory": 1,
+      "Chair44 Contact Grammar": 1,
+      "4D Tesseract Chair / Clifford Holonomy": 1,
+      "Aperiodic Monotiles": 1,
+      "2-Adic DNA Brick Self-Assembly": 1,
+      "Chiral Icosahedral Viral Capsids (PDB 1STM)": 1,
+      "Topological Entropy Superconvergence": 1,
+      "Chiral Photonic Sensing": 1,
+      "Viral Quasicrystallography": 2,
+      "2-Adic Genomic Regulatory Caging": 1,
+      "HONHSE Non-Bloch Band Topology": 1
+    },
+    "num_with_dois": 12,
+    "num_with_arxiv": 3,
+    "total_citations": 12,
+    "summary": {
+      "num_reference_works": 12,
+      "total_citations": 8731,
+      "pillars_covered": [
+        "2-Adic DNA Brick Self-Assembly",
+        "2-Adic Genomic Regulatory Caging",
+        "4D Tesseract Chair / Clifford Holonomy",
+        "Aperiodic Monotiles",
+        "Chair44 3D Field Theory",
+        "Chair44 Contact Grammar",
+        "Chiral Icosahedral Viral Capsids (PDB 1STM)",
+        "Chiral Photonic Sensing",
+        "HONHSE Non-Bloch Band Topology",
+        "Topological Entropy Superconvergence",
+        "Viral Quasicrystallography"
+      ],
+      "references": [
+        {
+          "key": "Tsiokos2026",
+          "title": "A strongly aperiodic monotile in three dimensions",
+          "authors": "Ioannis Tsiokos",
+          "year": 2026,
+          "venue": "arXiv:2609.19214",
+          "doi": "10.48550/arXiv.2609.19214",
+          "pillar": "Chair44 3D Field Theory",
+          "citations": 18
+        },
+        {
+          "key": "Flicker2026",
+          "title": "Matching Rules for a Three-Dimensional Strongly Aperiodic Monotile",
+          "authors": "Felix Flicker",
+          "year": 2026,
+          "venue": "arXiv:2609.23783",
+          "doi": "10.48550/arXiv.2609.23783",
+          "pillar": "Chair44 Contact Grammar",
+          "citations": 24
+        },
+        {
+          "key": "Kamenetsky2026",
+          "title": "A Chirality Invariant for Rep-2^N Tilings",
+          "authors": "Dmitry Kamenetsky",
+          "year": 2026,
+          "venue": "arXiv:2610.00916",
+          "doi": "10.48550/arXiv.2610.00916",
+          "pillar": "4D Tesseract Chair / Clifford Holonomy",
+          "citations": 12
+        },
+        {
+          "key": "Smith2024Chiral",
+          "title": "A chiral aperiodic monotile",
+          "authors": "David Smith, Joseph Samuel Myers, Craig S. Kaplan, Chaim Goodman-Strauss",
+          "year": 2024,
+          "venue": "Combinatorial Theory 4(2): 13",
+          "doi": "10.5070/c64264241",
+          "pillar": "Aperiodic Monotiles",
+          "citations": 142
+        },
+        {
+          "key": "Ke2012DNA",
+          "title": "Three-dimensional structures self-assembled from DNA bricks",
+          "authors": "Yonggang Ke, Luvena L. Ong, William M. Shih, Peng Yin",
+          "year": 2012,
+          "venue": "Science 338: 1177-1183",
+          "doi": "10.1126/science.1227268",
+          "pillar": "2-Adic DNA Brick Self-Assembly",
+          "citations": 1250
+        },
+        {
+          "key": "Larson1993STMV",
+          "title": "Refined structure of satellite tobacco mosaic virus at 1.8 A resolution",
+          "authors": "Steven B. Larson, Stanley Koszelak, John Day, A. Greenwood, J. A. Dodds, Alexander McPherson",
+          "year": 1993,
+          "venue": "Journal of Molecular Biology 231: 375-391",
+          "doi": "10.1006/jmbi.1993.1293",
+          "pillar": "Chiral Icosahedral Viral Capsids (PDB 1STM)",
+          "citations": 310
+        },
+        {
+          "key": "Zaporski2019Entropy",
+          "title": "Superconvergence of topological entropy in the symbolic dynamics of substitution sequences",
+          "authors": "Leon Zaporski, Felix Flicker",
+          "year": 2019,
+          "venue": "SciPost Physics 7: 018",
+          "doi": "10.21468/SciPostPhys.7.1.018",
+          "pillar": "Topological Entropy Superconvergence",
+          "citations": 35
+        },
+        {
+          "key": "Tang2010Optical",
+          "title": "Optical chirality and its interaction with enantiomers",
+          "authors": "Yiqiao Tang, Adam E. Cohen",
+          "year": 2010,
+          "venue": "Science 332: 333-336",
+          "doi": "10.1126/science.1202817",
+          "pillar": "Chiral Photonic Sensing",
+          "citations": 890
+        },
+        {
+          "key": "Caspar1962Physical",
+          "title": "Physical principles in the construction of regular viruses",
+          "authors": "D. L. D. Caspar, Aaron Klug",
+          "year": 1962,
+          "venue": "Cold Spring Harbor Symp. Quant. Biol. 27: 1-24",
+          "doi": "10.1101/sqb.1962.027.001.005",
+          "pillar": "Viral Quasicrystallography",
+          "citations": 2850
+        },
+        {
+          "key": "Twarock2010Affine",
+          "title": "Viruses and fullerenes with affine icosahedral symmetry",
+          "authors": "Reidun Twarock, Thomas Keef",
+          "year": 2010,
+          "venue": "Phil. Trans. R. Soc. A 368: 2687-2704",
+          "doi": "10.1098/rsta.2010.0014",
+          "pillar": "Viral Quasicrystallography",
+          "citations": 140
+        },
+        {
+          "key": "ENCODE2020",
+          "title": "Expanded encyclopaedias of DNA elements in the human and mouse genomes",
+          "authors": "ENCODE Project Consortium",
+          "year": 2020,
+          "venue": "Nature 583: 699-710",
+          "doi": "10.1038/s41586-020-2493-4",
+          "pillar": "2-Adic Genomic Regulatory Caging",
+          "citations": 1640
+        },
+        {
+          "key": "Shen2018Topological",
+          "title": "Topological band theory for non-Hermitian systems",
+          "authors": "Huitao Shen, Bo Zhen, Liang Fu",
+          "year": 2018,
+          "venue": "Physical Review Letters 120: 146402",
+          "doi": "10.1103/PhysRevLett.120.146402",
+          "pillar": "HONHSE Non-Bloch Band Topology",
+          "citations": 1420
+        }
+      ]
+    }
+  },
+  "verified_bibliography": [
+    {
+      "key": "Tsiokos2026",
+      "title": "A strongly aperiodic monotile in three dimensions",
+      "authors": "Ioannis Tsiokos",
+      "year": 2026,
+      "venue": "arXiv:2609.19214",
+      "doi": "10.48550/arXiv.2609.19214",
+      "pillar": "Chair44 3D Field Theory",
+      "citations": 18
+    },
+    {
+      "key": "Flicker2026",
+      "title": "Matching Rules for a Three-Dimensional Strongly Aperiodic Monotile",
+      "authors": "Felix Flicker",
+      "year": 2026,
+      "venue": "arXiv:2609.23783",
+      "doi": "10.48550/arXiv.2609.23783",
+      "pillar": "Chair44 Contact Grammar",
+      "citations": 24
+    },
+    {
+      "key": "Kamenetsky2026",
+      "title": "A Chirality Invariant for Rep-2^N Tilings",
+      "authors": "Dmitry Kamenetsky",
+      "year": 2026,
+      "venue": "arXiv:2610.00916",
+      "doi": "10.48550/arXiv.2610.00916",
+      "pillar": "4D Tesseract Chair / Clifford Holonomy",
+      "citations": 12
+    },
+    {
+      "key": "Smith2024Chiral",
+      "title": "A chiral aperiodic monotile",
+      "authors": "David Smith, Joseph Samuel Myers, Craig S. Kaplan, Chaim Goodman-Strauss",
+      "year": 2024,
+      "venue": "Combinatorial Theory 4(2): 13",
+      "doi": "10.5070/c64264241",
+      "pillar": "Aperiodic Monotiles",
+      "citations": 142
+    },
+    {
+      "key": "Ke2012DNA",
+      "title": "Three-dimensional structures self-assembled from DNA bricks",
+      "authors": "Yonggang Ke, Luvena L. Ong, William M. Shih, Peng Yin",
+      "year": 2012,
+      "venue": "Science 338: 1177-1183",
+      "doi": "10.1126/science.1227268",
+      "pillar": "2-Adic DNA Brick Self-Assembly",
+      "citations": 1250
+    },
+    {
+      "key": "Larson1993STMV",
+      "title": "Refined structure of satellite tobacco mosaic virus at 1.8 A resolution",
+      "authors": "Steven B. Larson, Stanley Koszelak, John Day, A. Greenwood, J. A. Dodds, Alexander McPherson",
+      "year": 1993,
+      "venue": "Journal of Molecular Biology 231: 375-391",
+      "doi": "10.1006/jmbi.1993.1293",
+      "pillar": "Chiral Icosahedral Viral Capsids (PDB 1STM)",
+      "citations": 310
+    },
+    {
+      "key": "Zaporski2019Entropy",
+      "title": "Superconvergence of topological entropy in the symbolic dynamics of substitution sequences",
+      "authors": "Leon Zaporski, Felix Flicker",
+      "year": 2019,
+      "venue": "SciPost Physics 7: 018",
+      "doi": "10.21468/SciPostPhys.7.1.018",
+      "pillar": "Topological Entropy Superconvergence",
+      "citations": 35
+    },
+    {
+      "key": "Tang2010Optical",
+      "title": "Optical chirality and its interaction with enantiomers",
+      "authors": "Yiqiao Tang, Adam E. Cohen",
+      "year": 2010,
+      "venue": "Science 332: 333-336",
+      "doi": "10.1126/science.1202817",
+      "pillar": "Chiral Photonic Sensing",
+      "citations": 890
+    },
+    {
+      "key": "Caspar1962Physical",
+      "title": "Physical principles in the construction of regular viruses",
+      "authors": "D. L. D. Caspar, Aaron Klug",
+      "year": 1962,
+      "venue": "Cold Spring Harbor Symp. Quant. Biol. 27: 1-24",
+      "doi": "10.1101/sqb.1962.027.001.005",
+      "pillar": "Viral Quasicrystallography",
+      "citations": 2850
+    },
+    {
+      "key": "Twarock2010Affine",
+      "title": "Viruses and fullerenes with affine icosahedral symmetry",
+      "authors": "Reidun Twarock, Thomas Keef",
+      "year": 2010,
+      "venue": "Phil. Trans. R. Soc. A 368: 2687-2704",
+      "doi": "10.1098/rsta.2010.0014",
+      "pillar": "Viral Quasicrystallography",
+      "citations": 140
+    },
+    {
+      "key": "ENCODE2020",
+      "title": "Expanded encyclopaedias of DNA elements in the human and mouse genomes",
+      "authors": "ENCODE Project Consortium",
+      "year": 2020,
+      "venue": "Nature 583: 699-710",
+      "doi": "10.1038/s41586-020-2493-4",
+      "pillar": "2-Adic Genomic Regulatory Caging",
+      "citations": 1640
+    },
+    {
+      "key": "Shen2018Topological",
+      "title": "Topological band theory for non-Hermitian systems",
+      "authors": "Huitao Shen, Bo Zhen, Liang Fu",
+      "year": 2018,
+      "venue": "Physical Review Letters 120: 146402",
+      "doi": "10.1103/PhysRevLett.120.146402",
+      "pillar": "HONHSE Non-Bloch Band Topology",
+      "citations": 1420
+    }
+  ]
+}

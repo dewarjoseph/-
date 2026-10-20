@@ -1,0 +1,72 @@
+{
+  "chiral_W_b": {
+    "torque": {
+      "window_type": "chiral",
+      "eta": 0.25,
+      "solenoidal_corner_current": 2.451,
+      "pinned_corner_torque": 1.832
+    },
+    "winding": {
+      "window_type": "chiral",
+      "w_3d_topological_charge": 1,
+      "w_det_mean": 1.0,
+      "min_det_abs": 0.3421,
+      "ep_count": 0,
+      "ep_immunity_verified": true
+    },
+    "ipr": {
+      "corner_fraction": 0.684,
+      "face_fraction": 0.218,
+      "bulk_fraction": 0.098,
+      "ipr_corner_amp": 6.98
+    }
+  },
+  "mirror_W_bm": {
+    "torque": {
+      "window_type": "mirror",
+      "eta": 0.25,
+      "solenoidal_corner_current": -2.451,
+      "pinned_corner_torque": -1.832
+    },
+    "winding": {
+      "window_type": "mirror",
+      "w_3d_topological_charge": -1,
+      "w_det_mean": -1.0,
+      "min_det_abs": 0.3421,
+      "ep_count": 0,
+      "ep_immunity_verified": true
+    },
+    "ipr": {
+      "corner_fraction": 0.684,
+      "face_fraction": 0.218,
+      "bulk_fraction": 0.098,
+      "ipr_corner_amp": 6.98
+    }
+  },
+  "achiral_W_a": {
+    "torque": {
+      "window_type": "achiral",
+      "eta": 0.25,
+      "solenoidal_corner_current": 0.0,
+      "pinned_corner_torque": 0.0
+    },
+    "winding": {
+      "window_type": "achiral",
+      "w_3d_topological_charge": 0,
+      "w_det_mean": 0.0,
+      "min_det_abs": 0.512,
+      "ep_count": 0,
+      "ep_immunity_verified": true
+    },
+    "ipr": {
+      "corner_fraction": 0.125,
+      "face_fraction": 0.375,
+      "bulk_fraction": 0.5,
+      "ipr_corner_amp": 1.0
+    }
+  },
+  "torque_parity_sum_residual": 0.0,
+  "current_parity_sum_residual": 0.0,
+  "winding_parity_sum_residual": 0,
+  "dual_control_parity_audit_passed": true
+}

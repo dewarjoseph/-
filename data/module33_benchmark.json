@@ -1,0 +1,39 @@
+{
+  "round": 33,
+  "pillar": "Pillar 5: Chiral Photonic Enantiomer Sensing",
+  "status": "PASSED",
+  "optical_chirality_enhancement": {
+    "c_opt_baseline": 1.0,
+    "corner_field_gain": 6.74,
+    "c_opt_corner_enhancement": 45.427600000000005,
+    "floquet_sideband_cd_pm2": -0.472
+  },
+  "enantiomer_discrimination": {
+    "Thalidomide": {
+      "D_enantiomer": "(R)-(+)-Thalidomide",
+      "L_enantiomer": "(S)-(-)-Thalidomide",
+      "dissymmetry_factor_g_CD": 0.0038250039200000002,
+      "differential_absorption_mOD": 5.7375058800000005,
+      "distinguishable_snr_sigma": 38.2500392
+    },
+    "Alanine": {
+      "D_enantiomer": "D-Alanine",
+      "L_enantiomer": "L-Alanine",
+      "dissymmetry_factor_g_CD": 0.00189887368,
+      "differential_absorption_mOD": 2.84831052,
+      "distinguishable_snr_sigma": 18.988736799999998
+    },
+    "Carvone": {
+      "D_enantiomer": "(S)-(+)-Carvone",
+      "L_enantiomer": "(R)-(-)-Carvone",
+      "dissymmetry_factor_g_CD": 0.0028846526,
+      "differential_absorption_mOD": 4.3269789,
+      "distinguishable_snr_sigma": 28.846525999999997
+    }
+  },
+  "targets_evaluated": [
+    "Thalidomide",
+    "Alanine",
+    "Carvone"
+  ]
+}

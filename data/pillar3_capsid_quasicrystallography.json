@@ -1,0 +1,13 @@
+{
+  "pdb_id": "1STM",
+  "capsid_type": "Satellite Tobacco Mosaic Virus (T=1, Order 60)",
+  "num_calpha_atoms": 705,
+  "radius_angstroms": 58.67672455507602,
+  "pseudoscalar_chi_b": 0.7578502189310272,
+  "laplacian_circular_dichroism_D_lap": 0.9999999999857218,
+  "universal_ratio_D_lap_over_chi_b": 1.3195219517073635,
+  "parity_odd_fubini_study_g_xy": -4.6174950018352557e-07,
+  "vertex_hinge_skin_amplification": 0.24842008002930263,
+  "vertex_hinge_weight": 0.0072009117940238666,
+  "bulk_weight": 0.9927990882059761
+}

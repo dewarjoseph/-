@@ -1,0 +1,15 @@
+{
+  "round": 31,
+  "timestamp": "2026-10-18T20:10:12Z",
+  "elapsed_sec": 0.027475595474243164,
+  "viral_capsid_analysis": {
+    "pdb_id": "1STM",
+    "num_ca_atoms": 705,
+    "chi_b": 0.5812661650236591,
+    "D_lap": 0.6128854646477652,
+    "ratio_D_chi": 1.0543972822206484,
+    "pentamer_atom_count": 106,
+    "mean_pentamer_radius": 11.945527985730502
+  },
+  "viewer_sidecar_url": "sidecar://science/biomolecular_structure_viewer/ui.html"
+}

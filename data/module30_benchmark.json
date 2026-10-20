@@ -1,0 +1,94 @@
+{
+  "round": 30,
+  "pillar": "Pillar 2: 4D Tesseract Chair & Spin(4) Holonomy",
+  "status": "PASSED",
+  "c4_geometry": {
+    "num_subcubes": 15,
+    "boundary_panels": 64,
+    "odd_weight_octants": 8,
+    "even_weight_octants": 7
+  },
+  "spin4_algebra": {
+    "so4_dimension": 6,
+    "su2_plus_dim": 3,
+    "su2_minus_dim": 3
+  },
+  "kamenetsky_open_problem_9_1": {
+    "obstructed": true,
+    "proof_summary": "Homochiral SO(4) frame closure is algebraically obstructed by chiral splitting in Spin(4)."
+  },
+  "cell_complex_euler": {
+    "f0_vertices": 80,
+    "f1_edges": 212,
+    "f2_faces": 210,
+    "f3_cubes": 92,
+    "f4_tesseracts": 15,
+    "euler_characteristic_chi": 1,
+    "contractible_verified": true
+  },
+  "boundary_complex_euler": {
+    "f0_boundary_vertices": 80,
+    "f1_boundary_edges": 208,
+    "f2_boundary_faces": 192,
+    "f3_boundary_cubes": 64,
+    "boundary_euler_characteristic_chi": 0,
+    "s3_topology_verified": true
+  },
+  "cubical_homology_betti": {
+    "betti_c4": [
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "betti_boundary_c4": [
+      1,
+      0,
+      0,
+      1
+    ],
+    "ranks_c4": {
+      "rank_d1": 79,
+      "rank_d2": 133,
+      "rank_d3": 77,
+      "rank_d4": 15
+    },
+    "ranks_boundary": {
+      "rank_d1": 79,
+      "rank_d2": 129,
+      "rank_d3": 63
+    },
+    "c4_contractible_homology_verified": true,
+    "boundary_s3_homology_verified": true
+  },
+  "hodge_laplacian_harmonic_forms": {
+    "dim_harmonic_k_forms_c4": [
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "dim_harmonic_k_forms_boundary": [
+      1,
+      0,
+      0,
+      1
+    ],
+    "laplacian_ranks_c4": [
+      79,
+      212,
+      210,
+      92,
+      15
+    ],
+    "laplacian_ranks_boundary": [
+      79,
+      208,
+      192,
+      63
+    ],
+    "hodge_decomposition_verified": true
+  }
+}

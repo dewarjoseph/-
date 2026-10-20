@@ -1,0 +1,21 @@
+{
+  "identifiers": {
+    "IdentifierList": {
+      "CID": [
+        71080
+      ]
+    }
+  },
+  "properties": {
+    "PropertyTable": {
+      "Properties": [
+        {
+          "CID": 71080,
+          "SMILES": "C[C@H](C(=O)O)N",
+          "ConnectivitySMILES": "CC(C(=O)O)N",
+          "InChIKey": "QNAYBMKLOCPYGJ-UWTATZPHSA-N"
+        }
+      ]
+    }
+  }
+}

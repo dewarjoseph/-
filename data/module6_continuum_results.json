@@ -1,0 +1,47 @@
+{
+  "projection_orthogonality": {
+    "err_P_par_P_par_T": 1.1102230246251565e-16,
+    "err_P_perp_P_perp_T": 1.1102230246251565e-16,
+    "err_P_par_P_perp_T": 2.5299988060788043e-17,
+    "err_completeness": 2.220446049250313e-16,
+    "all_under_machine_eps": true
+  },
+  "weyl_continuum_limits": {
+    "chi_b_infinity": 0.0017668438750250398,
+    "d_lap_infinity": 0.001539400923576484,
+    "universal_ratio": 0.8712716190357609,
+    "ratio_rounded_4decimals": 0.8713,
+    "vol_W": 11.798558927309225,
+    "n_gl": 16
+  },
+  "quantum_metric_audit": {
+    "g_xy_W_b": -0.25249999734336975,
+    "g_xy_W_bm": 0.25249999734336975,
+    "g_xy_W_a": 0.0,
+    "parity_sum_residual": 0.0,
+    "achiral_residual": 0.0,
+    "parity_audit_passed": true
+  },
+  "honhse_erratum_audit": {
+    "delta_kappa_W_b": 0.01518977,
+    "delta_kappa_W_bm": -0.0151999,
+    "parity_sum": -1.0130000000000555e-05,
+    "residual_magnitude_order": "1e-5",
+    "erratum_verified": true,
+    "reconciled": true
+  },
+  "floquet_audit": {
+    "cd_b": -0.47195,
+    "cd_bm": 0.47195,
+    "cd_a": 0.0,
+    "cd_W_b": -0.47195,
+    "cd_W_bm": 0.47195,
+    "cd_W_a": 0.0,
+    "cd_sum_residual": 0.0,
+    "cd_parity_sum_residual": 0.0,
+    "current_sum_residual": 1.020000000000014e-05,
+    "edge_current_parity_sum_residual": 1.020000000000014e-05,
+    "parity_audit_passed": true
+  },
+  "all_checks_passed": true
+}

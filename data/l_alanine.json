@@ -1,0 +1,21 @@
+{
+  "identifiers": {
+    "IdentifierList": {
+      "CID": [
+        5950
+      ]
+    }
+  },
+  "properties": {
+    "PropertyTable": {
+      "Properties": [
+        {
+          "CID": 5950,
+          "SMILES": "C[C@@H](C(=O)O)N",
+          "ConnectivitySMILES": "CC(C(=O)O)N",
+          "InChIKey": "QNAYBMKLOCPYGJ-REOHCLBHSA-N"
+        }
+      ]
+    }
+  }
+}

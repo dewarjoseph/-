@@ -1,0 +1,1265 @@
+{
+  "benchmark_suite": "Cross-Disciplinary Modules 29-35",
+  "timestamp": "2026-10-18 13:52:25",
+  "elapsed_seconds": 0.5793848037719727,
+  "pillars": {
+    "module29_wigner_smith_cosmology": {
+      "mean_group_delay_splitting": 0.16247174001020376,
+      "ell_range": [
+        2,
+        50
+      ],
+      "scale_invariance_verified": true,
+      "fubini_study_quantum_metric": {
+        "mean_quantum_metric_trace": 0.2931037511130806,
+        "chern_invariant_c1": -1,
+        "chern_integral_raw": -0.993909118696917,
+        "quantum_bound_satisfied": true,
+        "fubini_study_verified": true
+      }
+    },
+    "module30_c4_tesseract": {
+      "num_subcubes": 15,
+      "odd_weight_octants": 8,
+      "even_weight_octants": 7,
+      "boundary_3cubes": 64,
+      "so4_dim": 6,
+      "su2_plus_dim": 3,
+      "su2_minus_dim": 3,
+      "casimir_invariants": {
+        "C_plus_norm": -12.0,
+        "C_minus_norm": -12.0,
+        "err_casimir_plus": 0.0,
+        "err_casimir_minus": 0.0,
+        "max_cross_commutator": 0.0,
+        "decoupling_verified": true
+      },
+      "algebraic_obstruction_verified": true,
+      "conclusion": "Homochiral SO(4) frame closure is algebraically obstructed by chiral splitting in Spin(4).",
+      "euler_characteristic": {
+        "f0_vertices": 80,
+        "f1_edges": 212,
+        "f2_faces": 210,
+        "f3_cubes": 92,
+        "f4_tesseracts": 15,
+        "euler_characteristic_chi": 1,
+        "contractible_verified": true
+      },
+      "boundary_complex": {
+        "f0_boundary_vertices": 80,
+        "f1_boundary_edges": 208,
+        "f2_boundary_faces": 192,
+        "f3_boundary_cubes": 64,
+        "boundary_euler_characteristic_chi": 0,
+        "s3_topology_verified": true
+      },
+      "cubical_homology_betti": {
+        "betti_c4": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "betti_boundary_c4": [
+          1,
+          0,
+          0,
+          1
+        ],
+        "ranks_c4": {
+          "rank_d1": 79,
+          "rank_d2": 133,
+          "rank_d3": 77,
+          "rank_d4": 15
+        },
+        "ranks_boundary": {
+          "rank_d1": 79,
+          "rank_d2": 129,
+          "rank_d3": 63
+        },
+        "c4_contractible_homology_verified": true,
+        "boundary_s3_homology_verified": true
+      },
+      "hodge_laplacian_harmonic_forms": {
+        "dim_harmonic_k_forms_c4": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "dim_harmonic_k_forms_boundary": [
+          1,
+          0,
+          0,
+          1
+        ],
+        "laplacian_ranks_c4": [
+          79,
+          212,
+          210,
+          92,
+          15
+        ],
+        "laplacian_ranks_boundary": [
+          79,
+          208,
+          192,
+          63
+        ],
+        "hodge_decomposition_verified": true
+      }
+    },
+    "module31_viral_capsid": {
+      "n_atoms": 1500,
+      "n_vertex_hinges": 1080,
+      "n_hinge_atoms": 1080,
+      "vertex_hinge_fraction": 0.72,
+      "hinge_fraction": 0.72,
+      "skin_mode_corner_weight": 0.684,
+      "skin_mode_bulk_weight": 0.098,
+      "hinge_amplification": 6.74,
+      "chi_b_capsid": 0.002845,
+      "d_lap_capsid": 0.0024788485,
+      "pentameric_hinges_localized": true,
+      "pdb_1stm_experimental": {
+        "loaded": true,
+        "pdb_id": "1STM",
+        "total_ca_atoms": 705,
+        "chains": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "radius_of_gyration_angstroms": 30.864308782561917,
+        "chain_A_hinge_residues": 19,
+        "total_vertex_hinge_residues": 95,
+        "annotated_hinge_range": "A 17-35",
+        "pentameric_symmetry_verified": true
+      },
+      "crystallographic_bfactors": {
+        "loaded": true,
+        "pdb_id": "1STM",
+        "num_hinge_ca_atoms": 95,
+        "num_bulk_ca_atoms": 610,
+        "mean_b_factor_hinge": 18.962105263157895,
+        "mean_b_factor_bulk": 11.783360655737706,
+        "rmsf_hinge_angstroms": 0.8488071666198161,
+        "rmsf_bulk_angstroms": 0.6691143537142673,
+        "compliance_ratio": 1.609227266919359,
+        "elevated_hinge_flexibility_verified": true
+      }
+    },
+    "module32_dna_genomics": {
+      "dna_brick_yield": {
+        "level": 2,
+        "n_bricks": 49,
+        "total_hybridization_bonds": 156,
+        "net_delta_G_kcal_mol": -1208.4,
+        "assembly_fidelity": 0.9982,
+        "caging_barrier_kcal_mol": 24.66122448979592
+      },
+      "genomic_motifs": {
+        "ccre_categories": {
+          "PLS": {
+            "description": "Promoter-like signature",
+            "count": 34800,
+            "cage_retention": 0.942
+          },
+          "pELS": {
+            "description": "Proximal enhancer-like signature",
+            "count": 141830,
+            "cage_retention": 0.887
+          },
+          "dELS": {
+            "description": "Distal enhancer-like signature",
+            "count": 667599,
+            "cage_retention": 0.824
+          },
+          "CTCF-only": {
+            "description": "CTCF insulator insulator boundaries",
+            "count": 56766,
+            "cage_retention": 0.968
+          }
+        },
+        "ctcf_motif_id": "JASPAR:MA0139.1",
+        "ctcf_info_content_bits": 28.4,
+        "hodge_spectral_gap": 0.428,
+        "chromatin_caging_stabilized": true,
+        "jaspar_pfm_empirical": {
+          "loaded": true,
+          "matrix_id": "MA0139.1",
+          "factor_name": "CTCF",
+          "consensus_length": 19,
+          "core_information_content_bits": 17.205108119684034,
+          "combined_caging_information_bits": 28.4,
+          "pfm_shape": [
+            4,
+            19
+          ],
+          "jaspar_pfm_verified": true
+        }
+      },
+      "tad_hierarchy_barrier": {
+        "hierarchy_levels": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "separations_kb": [
+          2.0,
+          4.0,
+          8.0,
+          16.0,
+          32.0,
+          64.0,
+          128.0,
+          256.0
+        ],
+        "barriers_kcal_mol": [
+          4.2,
+          8.4,
+          12.600000000000001,
+          16.8,
+          21.0,
+          25.200000000000003,
+          29.400000000000002,
+          33.6
+        ],
+        "insulation_efficiency": [
+          0.9989062923249975,
+          0.9999988038035217,
+          0.9999999986917107,
+          0.9999999999985691,
+          0.9999999999999984,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "barrier_at_64kb": 25.200000000000003,
+        "ultrametric_barrier_verified": true
+      }
+    },
+    "module33_chiral_sensing": {
+      "optical_chirality": {
+        "c_opt_baseline": 1.0,
+        "corner_field_gain": 6.74,
+        "c_opt_corner_enhancement": 45.427600000000005,
+        "floquet_sideband_cd_pm2": -0.472
+      },
+      "enantiomer_discrimination": {
+        "Thalidomide": {
+          "D_enantiomer": "(R)-(+)-Thalidomide",
+          "L_enantiomer": "(S)-(-)-Thalidomide",
+          "dissymmetry_factor_g_CD": 0.0038250039200000002,
+          "differential_absorption_mOD": 5.7375058800000005,
+          "distinguishable_snr_sigma": 38.2500392
+        },
+        "Alanine": {
+          "D_enantiomer": "D-Alanine",
+          "L_enantiomer": "L-Alanine",
+          "dissymmetry_factor_g_CD": 0.00189887368,
+          "differential_absorption_mOD": 2.84831052,
+          "distinguishable_snr_sigma": 18.988736799999998
+        },
+        "Carvone": {
+          "D_enantiomer": "(S)-(+)-Carvone",
+          "L_enantiomer": "(R)-(-)-Carvone",
+          "dissymmetry_factor_g_CD": 0.0028846526,
+          "differential_absorption_mOD": 4.3269789,
+          "distinguishable_snr_sigma": 28.846525999999997
+        }
+      },
+      "pubchem_stereochemistry": {
+        "loaded": true,
+        "D_alanine": {
+          "cid": 71080,
+          "smiles": "C[C@H](C(=O)O)N",
+          "inchikey": "QNAYBMKLOCPYGJ-UWTATZPHSA-N"
+        },
+        "L_alanine": {
+          "cid": 5950,
+          "smiles": "C[C@@H](C(=O)O)N",
+          "inchikey": "QNAYBMKLOCPYGJ-REOHCLBHSA-N"
+        },
+        "enantiomeric_parity_inverted": true,
+        "inchikeys_differ": true,
+        "stereochemistry_verified": true
+      },
+      "chembl_target_affinity": {
+        "target_protein": "Cereblon (CRBN)",
+        "chembl_target_id": "CHEMBL3301389",
+        "kd_S_thalidomide_nM": 250.0,
+        "kd_R_thalidomide_nM": 2500.0,
+        "affinity_ratio_S_vs_R": 10.0,
+        "delta_G_S_kcal_mol": -9.369329641923537,
+        "delta_G_R_kcal_mol": -7.950177187351709,
+        "differential_binding_free_energy_kcal_mol": -1.4191524545718277,
+        "enantiomer_selectivity_verified": true
+      }
+    },
+    "module34_epigraphy_grammar": {
+      "grammar_closure": {
+        "initial_contact_pairs_P0": 30,
+        "certified_closed_rules_P_star": 44,
+        "facet_triples_F_star": 135,
+        "substitution_inflation_lambda": 2.0,
+        "substitution_volume_inflation": 8.0,
+        "grammar_closed": true
+      },
+      "entropy_superconvergence": {
+        "n_vals": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "block_entropies": [
+          2.5,
+          3.96240625180289,
+          5.0,
+          5.804820237218405,
+          6.46240625180289,
+          7.01838730514401,
+          7.5,
+          7.92481250360578
+        ],
+        "entropy_rate": [
+          2.5,
+          1.981203125901445,
+          1.6666666666666667,
+          1.4512050593046013,
+          1.292481250360578,
+          1.1697312175240018,
+          1.0714285714285714,
+          0.9906015629507225
+        ],
+        "superconvergence_rate_alpha": 1.0
+      },
+      "transition_matrix": {
+        "num_states": 44,
+        "spectral_radius": 8.000000000000002,
+        "expected_volume_inflation": 8.0,
+        "perron_frobenius_verified": true
+      },
+      "lyapunov_spectrum": {
+        "dominant_lyapunov_exponent_lambda1": 2.0794415416798357,
+        "transverse_lyapunov_exponent_perp": 0.6931471805599453,
+        "co_moving_contraction_rate": -1.3862943611198904,
+        "deflation_contraction_factor": 0.25,
+        "lyapunov_stability_verified": true
+      }
+    },
+    "module35_bibliometric_synthesis": {
+      "num_bibliography_entries": 12,
+      "comparison_matrix": {
+        "pillar_counts": {
+          "Chair44 3D Field Theory": 1,
+          "Chair44 Contact Grammar": 1,
+          "4D Tesseract Chair / Clifford Holonomy": 1,
+          "Aperiodic Monotiles": 1,
+          "2-Adic DNA Brick Self-Assembly": 1,
+          "Chiral Icosahedral Viral Capsids (PDB 1STM)": 1,
+          "Topological Entropy Superconvergence": 1,
+          "Chiral Photonic Sensing": 1,
+          "Viral Quasicrystallography": 2,
+          "2-Adic Genomic Regulatory Caging": 1,
+          "HONHSE Non-Bloch Band Topology": 1
+        },
+        "num_with_dois": 12,
+        "num_with_arxiv": 3,
+        "total_citations": 12,
+        "summary": {
+          "num_reference_works": 12,
+          "total_citations": 8731,
+          "pillars_covered": [
+            "2-Adic DNA Brick Self-Assembly",
+            "2-Adic Genomic Regulatory Caging",
+            "4D Tesseract Chair / Clifford Holonomy",
+            "Aperiodic Monotiles",
+            "Chair44 3D Field Theory",
+            "Chair44 Contact Grammar",
+            "Chiral Icosahedral Viral Capsids (PDB 1STM)",
+            "Chiral Photonic Sensing",
+            "HONHSE Non-Bloch Band Topology",
+            "Topological Entropy Superconvergence",
+            "Viral Quasicrystallography"
+          ],
+          "references": [
+            {
+              "key": "Tsiokos2026",
+              "title": "A strongly aperiodic monotile in three dimensions",
+              "authors": "Ioannis Tsiokos",
+              "year": 2026,
+              "venue": "arXiv:2609.19214",
+              "doi": "10.48550/arXiv.2609.19214",
+              "pillar": "Chair44 3D Field Theory",
+              "citations": 18
+            },
+            {
+              "key": "Flicker2026",
+              "title": "Matching Rules for a Three-Dimensional Strongly Aperiodic Monotile",
+              "authors": "Felix Flicker",
+              "year": 2026,
+              "venue": "arXiv:2609.23783",
+              "doi": "10.48550/arXiv.2609.23783",
+              "pillar": "Chair44 Contact Grammar",
+              "citations": 24
+            },
+            {
+              "key": "Kamenetsky2026",
+              "title": "A Chirality Invariant for Rep-2^N Tilings",
+              "authors": "Dmitry Kamenetsky",
+              "year": 2026,
+              "venue": "arXiv:2610.00916",
+              "doi": "10.48550/arXiv.2610.00916",
+              "pillar": "4D Tesseract Chair / Clifford Holonomy",
+              "citations": 12
+            },
+            {
+              "key": "Smith2024Chiral",
+              "title": "A chiral aperiodic monotile",
+              "authors": "David Smith, Joseph Samuel Myers, Craig S. Kaplan, Chaim Goodman-Strauss",
+              "year": 2024,
+              "venue": "Combinatorial Theory 4(2): 13",
+              "doi": "10.5070/c64264241",
+              "pillar": "Aperiodic Monotiles",
+              "citations": 142
+            },
+            {
+              "key": "Ke2012DNA",
+              "title": "Three-dimensional structures self-assembled from DNA bricks",
+              "authors": "Yonggang Ke, Luvena L. Ong, William M. Shih, Peng Yin",
+              "year": 2012,
+              "venue": "Science 338: 1177-1183",
+              "doi": "10.1126/science.1227268",
+              "pillar": "2-Adic DNA Brick Self-Assembly",
+              "citations": 1250
+            },
+            {
+              "key": "Larson1993STMV",
+              "title": "Refined structure of satellite tobacco mosaic virus at 1.8 A resolution",
+              "authors": "Steven B. Larson, Stanley Koszelak, John Day, A. Greenwood, J. A. Dodds, Alexander McPherson",
+              "year": 1993,
+              "venue": "Journal of Molecular Biology 231: 375-391",
+              "doi": "10.1006/jmbi.1993.1293",
+              "pillar": "Chiral Icosahedral Viral Capsids (PDB 1STM)",
+              "citations": 310
+            },
+            {
+              "key": "Zaporski2019Entropy",
+              "title": "Superconvergence of topological entropy in the symbolic dynamics of substitution sequences",
+              "authors": "Leon Zaporski, Felix Flicker",
+              "year": 2019,
+              "venue": "SciPost Physics 7: 018",
+              "doi": "10.21468/SciPostPhys.7.1.018",
+              "pillar": "Topological Entropy Superconvergence",
+              "citations": 35
+            },
+            {
+              "key": "Tang2010Optical",
+              "title": "Optical chirality and its interaction with enantiomers",
+              "authors": "Yiqiao Tang, Adam E. Cohen",
+              "year": 2010,
+              "venue": "Science 332: 333-336",
+              "doi": "10.1126/science.1202817",
+              "pillar": "Chiral Photonic Sensing",
+              "citations": 890
+            },
+            {
+              "key": "Caspar1962Physical",
+              "title": "Physical principles in the construction of regular viruses",
+              "authors": "D. L. D. Caspar, Aaron Klug",
+              "year": 1962,
+              "venue": "Cold Spring Harbor Symp. Quant. Biol. 27: 1-24",
+              "doi": "10.1101/sqb.1962.027.001.005",
+              "pillar": "Viral Quasicrystallography",
+              "citations": 2850
+            },
+            {
+              "key": "Twarock2010Affine",
+              "title": "Viruses and fullerenes with affine icosahedral symmetry",
+              "authors": "Reidun Twarock, Thomas Keef",
+              "year": 2010,
+              "venue": "Phil. Trans. R. Soc. A 368: 2687-2704",
+              "doi": "10.1098/rsta.2010.0014",
+              "pillar": "Viral Quasicrystallography",
+              "citations": 140
+            },
+            {
+              "key": "ENCODE2020",
+              "title": "Expanded encyclopaedias of DNA elements in the human and mouse genomes",
+              "authors": "ENCODE Project Consortium",
+              "year": 2020,
+              "venue": "Nature 583: 699-710",
+              "doi": "10.1038/s41586-020-2493-4",
+              "pillar": "2-Adic Genomic Regulatory Caging",
+              "citations": 1640
+            },
+            {
+              "key": "Shen2018Topological",
+              "title": "Topological band theory for non-Hermitian systems",
+              "authors": "Huitao Shen, Bo Zhen, Liang Fu",
+              "year": 2018,
+              "venue": "Physical Review Letters 120: 146402",
+              "doi": "10.1103/PhysRevLett.120.146402",
+              "pillar": "HONHSE Non-Bloch Band Topology",
+              "citations": 1420
+            }
+          ]
+        }
+      },
+      "arxiv_cross_validation": {
+        "loaded": true,
+        "query_results_count": 15,
+        "primary_categories": [
+          "cond-mat.soft",
+          "cond-mat.stat-mech",
+          "hep-th",
+          "math-ph",
+          "physics.optics"
+        ],
+        "arxiv_verified": true
+      },
+      "spectral_centrality": {
+        "max_adjacency_eigenvalue": 4.839001783404088,
+        "mean_eigenvector_centrality": 0.28254799304440875,
+        "network_hub_key": "Shen2018Topological",
+        "max_eigenvector_centrality": 0.38225231883736155,
+        "pagerank_distribution": [
+          0.07392735638955346,
+          0.07392735638955344,
+          0.0731848826587498,
+          0.08872354585843822,
+          0.07363090081647884,
+          0.07286489913524921,
+          0.08872354585843822,
+          0.10295469614439774,
+          0.10362711227748114,
+          0.07271800714613012,
+          0.07285225486355786,
+          0.10286544246197177
+        ],
+        "macro_domain_modularity_Q": 0.12818877551020405,
+        "spectral_centrality_verified": true
+      }
+    }
+  },
+  "all_passed": true,
+  "pillar8_oncology_theranostics": {
+    "track1_nanocarrier": {
+      "A_5fold_gain": 6.74,
+      "A_3fold_gain": 1.12,
+      "selectivity_ratio": 6.017857142857142,
+      "pentameric_valve_release_yield": 0.9931763890250569,
+      "off_target_release_baseline": 9.959888661450249e-11,
+      "bulk_parasitic_leakage": 6.918806266919637e-14
+    },
+    "track2_chromatin_cage": {
+      "wt": {
+        "ctcf_integrity": 1.0,
+        "betti_b1_uncaged_loops": 0,
+        "hodge_gap_lambda1": 0.42799999999999994,
+        "dE_barrier_kcal": 25.200000000000003,
+        "enhancer_hijack_leak_prob": 0.032000012037839407,
+        "insulation_retention": 0.9679999879621606
+      },
+      "mut": {
+        "ctcf_integrity": 0.0,
+        "betti_b1_uncaged_loops": 1,
+        "hodge_gap_lambda1": 0.0,
+        "dE_barrier_kcal": 0.0,
+        "enhancer_hijack_leak_prob": 1.0,
+        "insulation_retention": 0.0
+      },
+      "restored": {
+        "ctcf_integrity": 0.98,
+        "betti_b1_uncaged_loops": 0,
+        "hodge_gap_lambda1": 0.4216229788421236,
+        "dE_barrier_kcal": 24.696,
+        "enhancer_hijack_leak_prob": 0.033683931845482386,
+        "insulation_retention": 0.9663160681545176
+      }
+    },
+    "track3_evolution": {
+      "untreated_malignant_day150": 227722852.17684352,
+      "mtd_malignant_day150": 215450105.12406006,
+      "mtd_resistant_day150": 215432411.81191874,
+      "adaptive_malignant_day150": 6729534.683894166,
+      "adaptive_resistant_day150": 19548.553099016495,
+      "adaptive_quiescent_wt_day150": 190394899.4082955,
+      "resistant_suppression_factor": 11020.376327635078
+    },
+    "track4_wetlab_stokes_fus": {
+      "f_fus_mhz": 1.5,
+      "p_neg_mpa": 1.15,
+      "mechanical_index": 0.9389710680668849,
+      "fda_safety_limit": 1.9,
+      "fda_compliant": true,
+      "spatial_peak_intensity_w_cm2": 41.28683816183816,
+      "gamma_stokes_s_inv": 16638620067.1915,
+      "parametric_gain_ratio": 12.83613336024475,
+      "effective_eta_wetlab": 0.24316448618339906,
+      "gbz_skin_depth_sites": 4.112442633772523
+    },
+    "track5_inverse_soldered_repair": {
+      "damaged_lambda1": 0.00278968192192429,
+      "damaged_leak_prob": 0.9778148886336426,
+      "plaquette_hellmann_feynman_gradients": [
+        0.11112231260769127,
+        2.4303332991611204e-05,
+        3.4975983804178335e-06,
+        3.493766882392423e-06,
+        3.4975983804178335e-06
+      ],
+      "optimal_clamp_plaquette_index": 0,
+      "repaired_lambda1": 0.4216229788421236,
+      "repaired_insulation_retention": 0.9663160681545176,
+      "oncogene_atlas": {
+        "MYC": {
+          "ensembl_id": "ENSG00000136997",
+          "grch38_locus": "chr8:127735434-127742951",
+          "tad_window_grch38": "chr8:126800000-128800000",
+          "ctcf_motif_jaspar": "MA0139.1",
+          "scale_level_k": 6,
+          "wt_insulation_score": 0.968,
+          "hijacked_super_enhancer": "PVT1 / 8q24 Super-Enhancer Cluster"
+        },
+        "EGFR": {
+          "ensembl_id": "ENSG00000146648",
+          "grch38_locus": "chr7:55019017-55211628",
+          "tad_window_grch38": "chr7:54800000-55600000",
+          "ctcf_motif_jaspar": "MA0139.1",
+          "scale_level_k": 6,
+          "wt_insulation_score": 0.964,
+          "hijacked_super_enhancer": "LANCL2-EGFR Extrachromosomal/TAD Enhancer"
+        },
+        "BCL2": {
+          "ensembl_id": "ENSG00000171791",
+          "grch38_locus": "chr18:63123346-63319779",
+          "tad_window_grch38": "chr18:62800000-63600000",
+          "ctcf_motif_jaspar": "MA0139.1",
+          "scale_level_k": 5,
+          "wt_insulation_score": 0.952,
+          "hijacked_super_enhancer": "IGH-BCL2 / 18q21 Regulatory Plaquette"
+        }
+      }
+    },
+    "track6_spatial_3d_spheroid_pde": {
+      "r_grid_mm": [
+        0.1,
+        0.3041666666666667,
+        0.5083333333333334,
+        0.7125,
+        0.9166666666666667,
+        1.1208333333333336,
+        1.3250000000000002,
+        1.529166666666667,
+        1.7333333333333336,
+        1.9375000000000002,
+        2.141666666666667,
+        2.3458333333333337,
+        2.5500000000000003,
+        2.754166666666667,
+        2.958333333333334,
+        3.1625000000000005,
+        3.366666666666667,
+        3.5708333333333337,
+        3.7750000000000004,
+        3.9791666666666674,
+        4.183333333333334,
+        4.3875,
+        4.591666666666667,
+        4.795833333333333,
+        5.0
+      ],
+      "cereblon_target_ensembl": "ENSG00000113851",
+      "chembl_ids": [
+        "CHEMBL1201182",
+        "CHEMBL848",
+        "CHEMBL468"
+      ],
+      "stereoselectivity_kd_ratio": 23.31081081081081,
+      "enantiopurity_fraction": 0.9992,
+      "core_resistant_density_mtd": 0.22712112225680509,
+      "core_resistant_density_adaptive": 0.0002962679259982715,
+      "spatial_resistant_suppression_ratio": 766.6071900679865,
+      "peripheral_stromal_preservation_mtd": 0.15227978266120124,
+      "peripheral_stromal_preservation_adaptive": 0.6711661400696793
+    },
+    "track7_virtual_clinical_trial": {
+      "n_train_calibration": 100,
+      "n_patients_per_arm": 1000,
+      "frozen_biomarker_threshold": 9639257.308567675,
+      "reference_clinical_trials": [
+        "NCT02415621",
+        "NCT03712293",
+        "NCT04590469"
+      ],
+      "median_pfs_mtd_days": 86.40749370378009,
+      "median_pfs_adaptive_days": 180.0,
+      "day180_progression_rate_mtd": 1.0,
+      "day180_progression_rate_adaptive": 0.107,
+      "hazard_ratio_adaptive_vs_mtd": 0.053461928833141326,
+      "cumulative_dose_reduction_pct": 54.2,
+      "obrien_fleming_interim_z_boundaries": [
+        4.048,
+        2.8623682502431445,
+        2.337113889679605,
+        2.024
+      ],
+      "blind_zoh_selection_bias_audit": {
+        "visit_interval_days": 7.0,
+        "biomarker_noise_sigma": 0.15,
+        "oracle_selection_bias_resistant_cells": 19548.553099016495,
+        "blind_zoh_resistant_cells": 19494.54700652625,
+        "oracle_selection_bias_malignant_burden": 6729534.683894166,
+        "blind_zoh_malignant_burden": 7379721.875945706,
+        "selection_bias_loss_log10": 0.04005495311268541,
+        "blind_zoh_suppression_factor_vs_mtd": 11050.906273420858,
+        "no_subclone_selection_bias_verified": true,
+        "robust_under_blind_sampling": true
+      },
+      "ctdna_mrd_kalman_audit": {
+        "ctdna_lod_cells": 1500000.0,
+        "visit_interval_days": 7.0,
+        "n_censored_visits": 0,
+        "kalman_filtered_resistant_cells": 21064.003448886575,
+        "kalman_filtered_malignant_burden": 8073275.41337592,
+        "mrd_censoring_loss_log10": 0.07906472179245828,
+        "kalman_suppression_factor_vs_mtd": 10227.515027458197,
+        "causal_mrd_filter_verified": true
+      }
+    },
+    "track8_transcranial_bbb_fus_gbm": {
+      "n_gbm_patients": 500,
+      "egfr_locus_grch38": "chr7:55019017-55211628",
+      "transcranial_fus_freq_mhz": 0.65,
+      "mean_uncompensated_pentameric_yield": 0.5781662828378805,
+      "mean_sae_compensated_pentameric_yield": 0.9160260074069386,
+      "max_in_situ_mechanical_index": 1.6241739150909655,
+      "zero_fda_mi_violations": true,
+      "transcranial_sae_control_verified": true
+    },
+    "track9_pkpd_bayesian_control": {
+      "n_patients": 400,
+      "clearance_cv": 0.35,
+      "trough_assay_noise_cv": 0.12,
+      "naive_grade34_toxicity_rate": 0.075,
+      "bayesian_grade34_toxicity_rate": 0.0,
+      "pk_selection_bias_loss_log10": 0.01647442093986193,
+      "bayesian_resistant_suppression_vs_mtd": 10609.750173242008,
+      "causal_pkpd_bayesian_verified": true
+    },
+    "track10_immunogenic_ctl_landmark_audit": {
+      "n_patients": 600,
+      "landmark_day": 42.0,
+      "pd1_axis_targets": [
+        "PDCD1 (ENSG00000188389)",
+        "CD274 (ENSG00000120217)",
+        "CRBN (ENSG00000113851)"
+      ],
+      "hr_immortal_time_selection_bias_biased": 0.4331,
+      "hr_causal_landmark_unbiased": 0.5337,
+      "immortal_time_selection_bias_hr_bias": 0.1006,
+      "ctl_bystander_resistant_suppression_vs_mtd": 12845.6,
+      "landmark_selection_calibration_verified": true
+    },
+    "track11_metastatic_competing_risks_ipcw": {
+      "n_patients": 500,
+      "metastatic_graph_fiedler_eigenvalue": 0.01479,
+      "naive_censored_relapse_180d_selection_bias": 0.324,
+      "ipcw_unbiased_relapse_180d": 0.5072,
+      "informative_censoring_bias_removed": 0.192,
+      "subdistribution_hr_ipcw": 0.5586,
+      "metastatic_3node_suppression_vs_mtd": 9842.5,
+      "competing_risks_ipcw_verified": true
+    },
+    "track12_circadian_floquet_chronotherapy": {
+      "n_patients": 500,
+      "circadian_genes": [
+        "PER2 (ENSG00000132326)",
+        "ARNTL/BMAL1 (ENSG00000133794)"
+      ],
+      "actigraphy_phase_noise_rad": 0.22,
+      "mean_floquet_resonance_efficiency": 0.988,
+      "phase_agnostic_neutropenia_rate": 0.202,
+      "chrono_floquet_neutropenia_rate": 0.064,
+      "neutropenia_reduction_pct": 68.32,
+      "hr_future_covariate_selection_bias_biased": 0.3912,
+      "hr_causal_andersen_gill_unbiased": 0.4754,
+      "future_covariate_selection_bias_hr_bias": 0.0842,
+      "chrono_phase_noise_loss_log10": 0.0054,
+      "floquet_resistant_suppression_vs_mtd": 13420.8,
+      "causal_chronotherapy_verified": true
+    },
+    "track13_ecdna_hub_basket_trial": {
+      "n_baskets": 6,
+      "baskets": [
+        "GBM",
+        "NSCLC",
+        "CRC",
+        "PDAC",
+        "TNBC",
+        "HGSOC"
+      ],
+      "n_patients_total": 300,
+      "ecdna_percolation_untreated": 0.892,
+      "ecdna_percolation_caged_collapsed": 0.034,
+      "fwer_continuous_basket_selection_bias": 0.518,
+      "fwer_simon_holm_controlled": 0.04,
+      "cherry_picked_orr_selection_bias": 0.726,
+      "hierarchical_shrinkage_orr_unbiased": 0.648,
+      "ecdna_resistant_suppression_vs_mtd": 14280.4,
+      "ecdna_basket_audit_verified": true
+    },
+    "track14_scrna_pseudotime_ddml_audit": {
+      "n_treated": 300,
+      "n_external_rwe": 600,
+      "rna_velocity_curl_hijacked": 0.842,
+      "rna_velocity_curl_caged": 0.018,
+      "fpr_ddml_blinded_control": 0.052,
+      "fpr_outcome_guided_caliper_selection_bias": 0.638,
+      "hr_ddml_unbiased": 0.4822,
+      "hr_caliper_selection_bias_biased": 0.3682,
+      "synthetic_control_selection_bias_bias": 0.114,
+      "scrna_resistant_suppression_vs_mtd": 14950.2,
+      "scrna_ddml_audit_verified": true
+    },
+    "track15_cart_stromal_crs_audit": {
+      "n_patients": 400,
+      "cart_diffusivity_boost_factor": 4.86,
+      "crs_grade34_bolus_rate": 0.185,
+      "crs_grade34_acoustic_pulsed_rate": 0.024,
+      "fpr_gcomp_treatment_policy": 0.042,
+      "fpr_posthoc_crs_rescue_selection_bias": 0.704,
+      "hr_gcomp_unbiased": 0.4495,
+      "hr_crs_selection_bias_biased": 0.341,
+      "crs_collider_selection_bias_bias": 0.1085,
+      "cart_resistant_suppression_vs_mtd": 15640.5,
+      "cart_crs_audit_verified": true
+    },
+    "track16_radioligand_actinium_msm_audit": {
+      "n_patients": 450,
+      "ti_bed_standard": 2.15,
+      "ti_bed_phasonic": 5.6288,
+      "ti_gain_factor_tau2": 2.618,
+      "nephro_xerostomia_grade34_std": 0.148,
+      "nephro_xerostomia_grade34_phasonic": 0.016,
+      "fpr_iptw_msm_controlled": 0.056,
+      "fpr_posthoc_cumulative_dose_selection_bias": 0.774,
+      "hr_msm_unbiased": 0.4418,
+      "hr_dose_selection_bias_biased": 0.334,
+      "dose_modification_selection_bias_bias": 0.1078,
+      "radioligand_resistant_suppression_vs_mtd": 16420.8,
+      "radioligand_msm_audit_verified": true
+    }
+  },
+  "pillar9_cosmology_multimessenger": {
+    "theorem_3_1": {
+      "projector_idempotency_error": 5.551115123125783e-17,
+      "projector_orthogonality_error": 2.7755575615628914e-17,
+      "v_completeness_error": 1.1102230246251565e-16,
+      "w_completeness_error": 2.220446049250313e-16,
+      "vw_orthogonality_error": 1.894229344338786e-17,
+      "star_squared_norm_error": 1.1102230246251565e-16,
+      "num_triacontahedral_facet_normals": 30,
+      "certified": true
+    },
+    "inflation_and_bispectrum": {
+      "perron_frobenius_eigenvalue": 4.23606797749979,
+      "exact_tau_cubed": 4.23606797749979,
+      "inflation_steps": 24,
+      "effective_efolds_Ne": 11.549083801430484,
+      "comoving_volume_expansion": 1114577054219522.6,
+      "bispectrum_chiral_invariant": 0.13788197515246883,
+      "bispectrum_origin_shift_error": 2.9495010342654896e-16,
+      "naive_fft_a_amp_origin_drift": 0.1759301966610527,
+      "origin_artifact_resolved": true
+    },
+    "cmb_birefringence": {
+      "isotropic_beta0_deg": 0.35,
+      "eb_cross_correlation_amplitude": 0.012216089076326576,
+      "allowed_ih_multipoles": [
+        6,
+        10,
+        12,
+        15,
+        16,
+        18,
+        20
+      ],
+      "forbidden_low_multipoles_zero": true,
+      "c_ell_beta_spectrum": {
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 1.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0,
+        "10": 0.47678140934412266,
+        "11": 0.0,
+        "12": 0.36602142398640636,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 0.2648420783951333,
+        "16": 0.24118224767293736,
+        "17": 0.0,
+        "18": 0.20331722832703836,
+        "19": 0.0,
+        "20": 0.1745122103783815
+      },
+      "num_sky_hotspots": 12,
+      "hotspot_angular_radius_deg": 2.4,
+      "sky_hotspots": [
+        {
+          "vertex_id": 0,
+          "galactic_l_deg": 90.0,
+          "galactic_b_deg": 58.282525588538995
+        },
+        {
+          "vertex_id": 1,
+          "galactic_l_deg": -90.0,
+          "galactic_b_deg": 58.282525588538995
+        },
+        {
+          "vertex_id": 2,
+          "galactic_l_deg": 0.0,
+          "galactic_b_deg": 31.717474411461005
+        },
+        {
+          "vertex_id": 3,
+          "galactic_l_deg": 180.0,
+          "galactic_b_deg": 31.717474411461005
+        },
+        {
+          "vertex_id": 4,
+          "galactic_l_deg": 58.282525588538995,
+          "galactic_b_deg": 0.0
+        },
+        {
+          "vertex_id": 5,
+          "galactic_l_deg": 121.717474411461,
+          "galactic_b_deg": 0.0
+        },
+        {
+          "vertex_id": 6,
+          "galactic_l_deg": -90.0,
+          "galactic_b_deg": -58.282525588538995
+        },
+        {
+          "vertex_id": 7,
+          "galactic_l_deg": 90.0,
+          "galactic_b_deg": -58.282525588538995
+        },
+        {
+          "vertex_id": 8,
+          "galactic_l_deg": -180.0,
+          "galactic_b_deg": -31.717474411461005
+        },
+        {
+          "vertex_id": 9,
+          "galactic_l_deg": -0.0,
+          "galactic_b_deg": -31.717474411461005
+        },
+        {
+          "vertex_id": 10,
+          "galactic_l_deg": -121.717474411461,
+          "galactic_b_deg": -0.0
+        },
+        {
+          "vertex_id": 11,
+          "galactic_l_deg": -58.282525588538995,
+          "galactic_b_deg": -0.0
+        }
+      ]
+    },
+    "phasonic_magnetogenesis": {
+      "k_modes_mpc_inv": [
+        1.0,
+        1.618033988749895,
+        2.618033988749895,
+        4.23606797749979,
+        6.854101966249686,
+        11.090169943749476,
+        17.944271909999163,
+        29.03444185374864
+      ],
+      "b_field_spectrum_gauss": [
+        1.4e-15,
+        1.1006119288603926e-15,
+        8.652475842498528e-16,
+        6.80215580459304e-16,
+        5.347524157501473e-16,
+        4.203963484010886e-16,
+        3.3049516849970556e-16,
+        2.598192320582153e-16
+      ],
+      "b_igm_at_1mpc_gauss": 1.4e-15,
+      "fractional_magnetic_helicity": 0.9985,
+      "exceeds_fermi_lat_blazar_lower_bound": true
+    },
+    "frb_golden_ratio_multiplets": {
+      "echo_delays_ms": [
+        1.0,
+        1.618033988749895,
+        2.618033988749895,
+        4.23606797749979,
+        6.854101966249686
+      ],
+      "echo_amplitudes": [
+        1.0,
+        0.6804714174518991,
+        0.4630413499689967,
+        0.315086403752244,
+        0.21440729178111087
+      ],
+      "faraday_rm_steps_rad_m2": [
+        12.5,
+        20.225424859373685,
+        32.72542485937369,
+        52.95084971874737,
+        85.67627457812107
+      ],
+      "golden_ratio_delay_ratios": [
+        1.618033988749895,
+        1.618033988749895,
+        1.618033988749895,
+        1.6180339887498951
+      ],
+      "max_golden_ratio_lock_error": 2.220446049250313e-16,
+      "matched_filter_snr_boost": 2.1844648791908554
+    },
+    "chiral_sgwb_spectrum": {
+      "f_pta_anchor_hz": 3.17e-08,
+      "golden_ratio_frequency_knees_hz": [
+        3.17e-08,
+        5.129167744337167e-08,
+        8.299167744337167e-08,
+        1.3428335488674333e-07,
+        2.1727503233011503e-07,
+        3.515583872168584e-07,
+        5.688334195469735e-07,
+        9.203918067638318e-07
+      ],
+      "omega_gw_h2_spectrum": [
+        1.7136411938983128e-09,
+        2.0279888720986493e-09,
+        2.4e-09,
+        2.0279888720986493e-09,
+        1.7136411938983128e-09,
+        1.4480188633315092e-09,
+        1.2235692255938478e-09,
+        1.0339103223944521e-09
+      ],
+      "circular_polarization_asymmetry": 0.3729042448,
+      "universal_weyl_ratio_locked": 0.8713,
+      "max_frequency_ratio_error": 2.220446049250313e-16
+    },
+    "selection_calibration_look_elsewhere_audit": {
+      "n_null_trials": 250,
+      "n_posthoc_grid_ratios": 50,
+      "preregistered_tau_locked": 1.618033988749895,
+      "preregistered_null_fpr": 0.028,
+      "uncorrected_posthoc_selection_bias_fpr": 0.612,
+      "sidak_corrected_grid_fpr": 0.052,
+      "selection_bias_fpr_inflation_factor": 21.857142857142858,
+      "blind_injected_signal_z_score": 7.517058685595251,
+      "zero_free_parameter_preregistration_verified": true
+    },
+    "cmb_sgwb_cross_coherence": {
+      "allowed_ih_multipoles": [
+        6,
+        10,
+        12,
+        15,
+        16,
+        18,
+        20
+      ],
+      "forbidden_multipoles_zero": true,
+      "normalized_ih_coherence": 1.0,
+      "cross_coherence_spectrum": {
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 1.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0,
+        "10": 1.0,
+        "11": 0.0,
+        "12": 1.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 1.0,
+        "16": 1.0,
+        "17": 0.0,
+        "18": 1.0,
+        "19": 0.0,
+        "20": 1.0
+      },
+      "n_so3_null_scrambles": 1000,
+      "so3_scramble_null_fpr": 0.06,
+      "joint_multimessenger_snr_boost": 1.4142135623730951,
+      "joint_cmb_sgwb_detection_z": 10.634885989045674,
+      "cross_coherence_verified": true
+    },
+    "cosmic_dawn_21cm_bispectrum": {
+      "redshift_band": [
+        15.0,
+        25.0
+      ],
+      "k_bao_anchor_mpc_inv": 0.068,
+      "golden_ratio_k_cascade_mpc_inv": [
+        0.068,
+        0.11002631123499286,
+        0.17802631123499288,
+        0.28805262246998575,
+        0.46607893370497866,
+        0.7541315561749644
+      ],
+      "max_k_ratio_error": 0.0,
+      "b21_equilateral_to_folded_ratio": 0.8713,
+      "foreground_wedge_null_fpr": 0.048,
+      "blind_21cm_detection_z": 7.103244282704059,
+      "cosmic_dawn_21cm_verified": true
+    },
+    "lisa_sigw_pbh_audit": {
+      "lisa_sigw_frequencies_hz": [
+        0.0034,
+        0.005501315561749642,
+        0.008901315561749642,
+        0.014402631123499285,
+        0.02330394668524893,
+        0.03770657780874822
+      ],
+      "pbh_horizon_masses_solar": [
+        1.25e-13,
+        4.7745751406263145e-14,
+        1.823725421878943e-14,
+        6.96601125010515e-15,
+        2.6607795315260225e-15,
+        1.0163273444729182e-15
+      ],
+      "max_mass_tau2_scaling_error": 4.440892098500626e-16,
+      "weyl_chiral_tensor_ratio": 0.8713,
+      "null_bayes_factor_specificity": 0.968,
+      "mean_unconstrained_18param_noise_overfit_chi2": 18.131546011475752,
+      "occam_penalty_18param_nats": 36.8491010599989,
+      "mean_injected_delta_ln_bayes": 32.41848166766835,
+      "sigw_phason_audit_verified": true
+    },
+    "uhecr_neutrino_liv_audit": {
+      "n_astrophysical_sources": 40,
+      "e_qg_tau_gev": 2.882177544092682e+18,
+      "linear_n1_cpt_violation_wa": 0.0,
+      "quadratic_n2_chiral_coeff_wb": 0.001766512,
+      "preregistered_null_fpr": 0.052,
+      "posthoc_window_selection_bias_fpr": 0.85,
+      "blind_liv_detection_z": 6.816034377854681,
+      "phasonic_liv_audit_verified": true
+    },
+    "weak_lensing_chiral_eeb_audit": {
+      "n_tomographic_bins": 10,
+      "n_redshift_triplets": 120,
+      "chiral_eeb_to_eee_ratio": 0.0015392,
+      "preregistered_tomo_null_fpr": 0.06,
+      "posthoc_triplet_selection_bias_fpr": 1.0,
+      "blind_eeb_detection_z": 7.4530388801449785,
+      "weak_lensing_eeb_verified": true
+    },
+    "standard_siren_h0_audit": {
+      "n_sirens": 300,
+      "delta_w_tau_amplitude": 0.011518,
+      "gw_em_distance_ratio_z2": 1.0009708,
+      "malmquist_uncorrected_h0_bias_km_s_mpc": 2.84,
+      "selection_corrected_null_fpr": 0.04,
+      "posthoc_host_selection_bias_fpr": 0.88,
+      "blind_siren_detection_z": 6.906081661569917,
+      "standard_siren_audit_verified": true
+    },
+    "cmb_spectral_distortion_audit": {
+      "n_freq_channels": 64,
+      "mu_tau_distortion": 2.184e-08,
+      "mu_to_y_weyl_tau2_ratio": 0.332807,
+      "orthogonal_fg_marginalized_null_fpr": 0.058,
+      "posthoc_fg_tuning_selection_bias_fpr": 0.862,
+      "blind_mu_detection_z": 7.207251200437659,
+      "cmb_spectral_distortion_verified": true
+    },
+    "lyman_alpha_bispectrum_audit": {
+      "n_qso_sightlines": 400,
+      "k_lya_cascade_s_per_km": [
+        0.0085,
+        0.013753,
+        0.022253,
+        0.036007,
+        0.05826,
+        0.094266
+      ],
+      "max_tau_scaling_error": 0.0,
+      "flux_bispectrum_eq_to_sq_ratio": 0.538493,
+      "continuum_projected_null_fpr": 0.05,
+      "posthoc_continuum_spline_selection_bias_fpr": 0.854,
+      "blind_lya_detection_z": 7.494430543542455,
+      "lyman_alpha_bispectrum_verified": true
+    },
+    "ksz_velocity_bispectrum_audit": {
+      "n_clusters": 5000,
+      "r_ksz_cascade_mpc_h": [
+        25.0,
+        40.4508,
+        65.4508,
+        105.9017,
+        171.3525,
+        277.2542
+      ],
+      "max_tau_scaling_error": 2.220446049250313e-16,
+      "ksz_velocity_bispectrum_ratio": 0.0024904,
+      "preregistered_ksz_null_fpr": 0.042,
+      "posthoc_photoz_richness_selection_bias_fpr": 0.802,
+      "blind_ksz_detection_z": 7.726937707198413,
+      "ksz_bispectrum_verified": true
+    },
+    "figures": {
+      "png": "figures/pillar9_cosmology_multimessenger.png",
+      "pdf": "figures/pillar9_cosmology_multimessenger.pdf"
+    },
+    "frb_dm_rm_helicity_audit": {
+      "n_frbs": 2000,
+      "ell_frb_cascade": [
+        15.0,
+        24.2705,
+        39.2705,
+        63.541,
+        102.8115,
+        166.3525
+      ],
+      "max_tau_scaling_error": 2.220446049250313e-16,
+      "frb_dm_rm_helicity_ratio": 0.0005879,
+      "preregistered_frb_null_fpr": 0.05,
+      "posthoc_host_dm_clipping_selection_bias_fpr": 0.804,
+      "blind_frb_helicity_detection_z": 7.598820545636525,
+      "frb_helicity_verified": true
+    }
+  },
+  "orchestration_ticks": 27
+}
