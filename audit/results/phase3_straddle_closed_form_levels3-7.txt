@@ -1,0 +1,9 @@
+level 3: inter-tile N_k=7728 (formula 7728), straddling B_k=1392 (formula 1392), classes b_k={'1': 865, '-1': 194, 'i': 28, 'j': 277, 'k': 28}  (0s)
+   conjectured closed form: {'1': 865, '-1': 194, 'j': 277, 'i': 28, 'k': 28}  match: True
+level 4: inter-tile N_k=67680 (formula 67680), straddling B_k=5856 (formula 5856), classes b_k={'1': 3601, '-1': 1154, 'i': 28, 'j': 1045, 'k': 28}  (1s)
+   conjectured closed form: {'1': 3601, '-1': 1154, 'j': 1045, 'i': 28, 'k': 28}  match: True
+level 5: inter-tile N_k=565440 (formula 565440), straddling B_k=24000 (formula 24000), classes b_k={'1': 14833, '-1': 4994, 'i': 28, 'j': 4117, 'k': 28}  (6s)
+   conjectured closed form: {'1': 14833, '-1': 4994, 'j': 4117, 'i': 28, 'k': 28}  match: True
+level 6: inter-tile N_k=4620672 (formula 4620672), straddling B_k=97152 (formula 97152), classes b_k={'1': 60337, '-1': 20354, 'i': 28, 'j': 16405, 'k': 28}  (33s)
+   conjectured closed form: {'1': 60337, '-1': 20354, 'j': 16405, 'i': 28, 'k': 28}  match: True
+level 7: inter-tile N_k=37356288 (formula 37356288), straddling B_k=390912 (formula 390912), classes b_k={'1': 243505, '-1': 81794, 'i': 28, 'j': 65557, 'k': 28}  (219s)
