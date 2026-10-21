@@ -78,3 +78,5 @@ B. 1-STAR AND 2-STAR TYPE FREQUENCIES FROM THE COLLARED SUBSTITUTION; PER-TILE -
    mean 11/2 = 5.500000
  per-tile distribution of the number of NON-FLAT plaquettes among the 48: 19: 0.09375, 24: 0.21875, 26: 0.06250, 27: 0.10938, 28: 0.29688, 31: 0.06250, 32: 0.01562, 33: 0.01562, 37: 0.12500
  2-star types: 165; u_2 = Phi_2 u_1 / 8: sum 1, min 1/512 = 1.953e-03, max 3/32 = 0.0938, max denominator 512
+   T_6: complete 2-stars 232560, max |census fraction - u_2| = 1.28e-02
+ saved audit/results/phase5b_e_star_frequencies.txt;  wall time Part B 45s; total 70s, rss 0.35 GB
