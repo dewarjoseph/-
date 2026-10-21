@@ -1,0 +1,30 @@
+=== fr30: FR30 chair / Clifford Q8 (reference) ===   (pinned operator; python 3.13.16, numpy 2.5.3, OMP_NUM_THREADS=1)
+[fr30] level 3: n=512 dim=1024 |E|=5376 nnz=14328 bulk coordination 24, boundary tiles 287 (0.561); interface tile counts {d: |I_d|} = {1: 269, 2: 501, 3: 512}; link labels {'-1': 2052, '+i': 329, '-i': 308, '-j': 644, '-k': 329, '+j': 644, '+k': 308, '+1': 762}; build 1.0s
+   dense eigh (evr, subset_by_index=(0,3)) (1s, maxrss 0.12 GB)
+   lowest 4: [9.3784702 9.3784702 9.5894029 9.5894029]   residuals: [7.9e-14 2.2e-14 4.0e-14 8.4e-14]
+   ground pair (split 2.0e-14, gap to next pair 0.21093): IPR=0.0125475 [vec1 0.0125475, vec2 0.0125475]  IPR*n=6.4243  P=79.7  p_max=0.0362 s50=27 s90=145  boundary weight=0.1327 (tile fraction 0.561)
+   S2(d)    d=1..L: 0.41575  0.08328  0.01255   1/S2(d): 2.405  12.008  79.697   (uniform: 8  64  512)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.7821 [0.5254, 1.489]  d=2: 0.9924 [0.9785, 1.014]  d=3: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [0.6136 0.1578 0.0808 0.017  0.0111 0.0808 0.0278 0.0111]
+   check vs known IPR*n 6.424: diff +0.0003;  vs known E0 9.37847: diff +2.10e-07
+[fr30] level 4: n=4096 dim=8192 |E|=46080 nnz=120824 bulk coordination 24, boundary tiles 1331 (0.325); interface tile counts {d: |I_d|} = {1: 1277, 2: 2895, 3: 4085, 4: 4096}; link labels {'+i': 2581, '-1': 17412, '-k': 2581, '+j': 6148, '+k': 2536, '-i': 2536, '-j': 6148, '+1': 6138}; build 9.9s
+   lobpcg(block=8, seed=0, tol=1e-7, diag precond) (9s, maxrss 0.17 GB)  warnings: Exited postprocessing with accuracies 
+   lowest 4: [8.9196344 8.9196344 8.9487868 8.9487868]   residuals: [3.2e-08 5.3e-08 1.5e-08 9.3e-09]
+   ground pair (split 6.6e-14, gap to next pair 0.02915): IPR=0.002233 [vec1 0.002233, vec2 0.002233]  IPR*n=9.1464  P=447.8  p_max=0.0089 s50=166 s90=762  boundary weight=0.0075 (tile fraction 0.325)
+   S2(d)    d=1..L: 0.31631  0.07366  0.01277  0.00223   1/S2(d): 3.161  13.576  78.288  447.829   (uniform: 8  64  512  4096)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.6557 [0.3118, 2.103]  d=2: 0.8581 [0.7068, 1.214]  d=3: 0.9996 [0.9973, 1.002]  d=4: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [0.5098 0.1763 0.106  0.0242 0.0193 0.106  0.0392 0.0193]
+   check vs known IPR*n 9.146: diff +0.0004;  vs known E0 8.91963: diff +4.36e-06
+[fr30] level 5: n=32768 dim=65536 |E|=380928 nnz=991224 bulk coordination 24, boundary tiles 5723 (0.175); interface tile counts {d: |I_d|} = {1: 5597, 2: 14595, 3: 25379, 4: 32757, 5: 32768}; link labels {'+i': 20525, '-1': 143364, '+j': 53252, '+k': 20432, '-k': 20525, '-i': 20432, '-j': 53252, '+1': 49146}; build 70.4s
+   lobpcg(block=6, seed=0, tol=1e-7, diag precond) (215s, maxrss 0.67 GB)  warnings: Exited at iteration 2874 with accuracies ; Exited postprocessing with accuracies 
+   lowest 4: [8.7970113 8.7970113 8.79898   8.79898  ]   residuals: [2.6e-08 2.7e-08 1.0e-08 6.9e-08]
+   ground pair (split -1.8e-15, gap to next pair 0.00197): IPR=0.000608227 [vec1 0.000608227, vec2 0.000608227]  IPR*n=19.9304  P=1644.1  p_max=0.00447 s50=716 s90=4186  boundary weight=0.0007 (tile fraction 0.175)
+   S2(d)    d=1..L: 0.30746  0.05762  0.01385  0.00331  0.00061   1/S2(d): 3.252  17.356  72.186  301.777  1644.123   (uniform: 8  64  512  4096  32768)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.5816 [0.1708, 3.405]  d=2: 0.7735 [0.4454, 1.737]  d=3: 0.8593 [0.7745, 1.109]  d=4: 0.9999 [0.9997, 1.000]  d=5: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [0.4956 0.2075 0.0818 0.0601 0.0243 0.0818 0.0246 0.0243]
+   check vs known IPR*n 20.0: diff -0.0696;  vs known E0 8.79701: diff +1.31e-06
+   scaling 3->4: IPR*n ratio 1.424, alpha = -log(IPR_(k+1)/IPR_k)/log 8 = 0.830; 1/S2(d) growth ratios: d=1: 1.314, d=2: 1.131, d=3: 0.982; bottom decrement +0.45884
+   scaling 4->5: IPR*n ratio 2.179, alpha = -log(IPR_(k+1)/IPR_k)/log 8 = 0.625; 1/S2(d) growth ratios: d=1: 1.029, d=2: 1.278, d=3: 0.922, d=4: 0.674; bottom decrement +0.12262
+   saved; maxrss 0.67 GB
+[fr30] level 4 DENSE CROSS-CHECK (eigh evr subset (0,3), 200s, maxrss 1.20 GB): lowest 4 [8.9196344 8.9196344 8.9487868 8.9487868] residuals [1.0e-13 2.1e-13 1.7e-13 2.1e-13]; max|E_dense - E_lobpcg| = 7.28e-14; IPR*n dense 9.14635 (diff vs lobpcg +1.2e-07); max|S2 diff| 1.3e-09
+   vs phase-5 saved dense level-4 pinned eigenvalues: max|diff| = 7.11e-14

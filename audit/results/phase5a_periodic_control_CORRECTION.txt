@@ -1,0 +1,14 @@
+CORRECTION to the conclusion stated in phase5a_periodic_control.txt / phase5a_periodic_control_T.txt (Task B2a)
+
+The B2a numbers (crystal, 44539 records, flux fractions, regression, bijection range) were re-derived
+independently in Task D2 (audit/phase5a_d2_census_verify.py, audit/results/phase5a_d2_census_verify.txt,
+audit/phase5a_d2_counterexample_check.py) and reproduce to 3e-14.  The CONCLUSION drawn from them,
+"FR30 is more frustrated than every flux-matched periodic decoration" (flux-matched maximum 8.1772 over
+1551 records), does NOT hold: it was an artefact of sampling only four random decorations per non-2L
+index-8 sublattice.  D2 found, among 2104 flux-matched random index-4/index-8 decorations, E_per up to
+8.957872 (3 above 8.770, 43 above 8.1772), and a constrained hill-climb reached a flux-matched
+E_per = 9.633732; every counterexample was confirmed by a real-space torus Hamiltonian.
+What survives: flux fractions do not determine the band bottom (matched range at least [4.50, 9.63]);
+the regression mean (6.33) and matched median (5.6-6.6) lie below the FR30 bound 8.770;
+FR30 lies in the top 0.15% of the flux-matched periodic distribution sampled by D2, not above it.
+See deliverables/PHASE5A_CRITICAL_PATH_DOSSIER.md section 4.5.

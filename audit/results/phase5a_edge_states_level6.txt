@@ -1,0 +1,40 @@
+level 6 (builder grid): n=262144 tiles, dim=524288, panels=3096576, boundary tiles=23723, interface tiles by depth {d: |I_d|} = {1: 23453, 2: 65643, 3: 132479, 4: 210507, 5: 262133, 6: 262144}, link labels {'+1': 393210, '+j': 442372, '-j': 442372, '-k': 163933, '+i': 163933, '-i': 163744, '+k': 163744, '-1': 1163268}, build 3.2s rss=0.37GB
+operator checks: nnz(H_pin)=4800508, hermiticity max|H-H^+|=0.0e+00, max|H_pin - per-edge reference| = None, H_pin - H_free = diag(24-deg): 0.0e+00
+H_pin Chebyshev-filtered subspace iteration: K=8, block m=24, lam_max=48, tol=1e-06
+   pass   0 deg  20 nmv    22  theta_1=9.3108852 theta_K=9.3251443 theta_m=9.3546269  res[:K] max=5.35e-01 min=5.31e-01 res[K:] min=5.35e-01 orth=1.3e-15  44s rss=1.56GB
+   pass   1 deg  30 nmv    53  theta_1=8.8318989 theta_K=8.8371803 theta_m=8.8485521  res[:K] max=6.65e-02 min=6.41e-02 res[K:] min=6.57e-02 orth=1.3e-15  102s rss=1.56GB
+   pass   2 deg  45 nmv    99  theta_1=8.7821479 theta_K=8.7870547 theta_m=8.7988603  res[:K] max=1.72e-02 min=1.62e-02 res[K:] min=1.47e-02 orth=1.1e-15  189s rss=1.56GB
+   pass   3 deg  67 nmv   167  theta_1=8.7710107 theta_K=8.7719514 theta_m=8.7744634  res[:K] max=2.80e-03 min=1.96e-03 res[K:] min=2.17e-03 orth=1.8e-15  295s rss=1.56GB
+   pass   4 deg  77 nmv   245  theta_1=8.7705062 theta_K=8.7713642 theta_m=8.7733018  res[:K] max=1.35e-03 min=1.07e-03 res[K:] min=1.17e-03 orth=8.9e-16  392s rss=1.56GB
+   pass   5 deg  87 nmv   333  theta_1=8.7702578 theta_K=8.7709298 theta_m=8.7725528  res[:K] max=8.76e-04 min=5.40e-04 res[K:] min=6.48e-04 orth=1.6e-15  482s rss=1.56GB
+   pass   6 deg  97 nmv   431  theta_1=8.7701699 theta_K=8.7706831 theta_m=8.7723211  res[:K] max=4.95e-04 min=2.54e-04 res[K:] min=3.51e-04 orth=1.3e-15  580s rss=1.56GB
+   pass   7 deg 107 nmv   539  theta_1=8.7701422 theta_K=8.7705874 theta_m=8.7722448  res[:K] max=2.46e-04 min=1.23e-04 res[K:] min=2.23e-04 orth=8.9e-16  669s rss=1.56GB
+   pass   8 deg 117 nmv   657  theta_1=8.7701351 theta_K=8.7705534 theta_m=8.7721961  res[:K] max=1.23e-04 min=5.23e-05 res[K:] min=1.06e-04 orth=8.9e-16  757s rss=1.56GB
+   pass   9 deg 127 nmv   785  theta_1=8.7701338 theta_K=8.7705448 theta_m=8.7721540  res[:K] max=5.33e-05 min=1.88e-05 res[K:] min=4.41e-05 orth=1.8e-15  878s rss=1.56GB
+   pass  10 deg 137 nmv   923  theta_1=8.7701336 theta_K=8.7705431 theta_m=8.7721159  res[:K] max=2.08e-05 min=5.61e-06 res[K:] min=1.65e-05 orth=1.1e-15  996s rss=1.56GB
+   pass  11 deg 147 nmv  1071  theta_1=8.7701336 theta_K=8.7705428 theta_m=8.7720802  res[:K] max=7.47e-06 min=1.38e-06 res[K:] min=5.38e-06 orth=6.7e-16  1155s rss=1.56GB
+   pass  12 deg 150 nmv  1222  theta_1=8.7701336 theta_K=8.7705428 theta_m=8.7720475  res[:K] max=2.61e-06 min=3.18e-07 res[K:] min=1.66e-06 orth=1.1e-15  1264s rss=1.56GB
+   pass  13 deg 150 nmv  1373  theta_1=8.7701336 theta_K=8.7705428 theta_m=8.7720159  res[:K] max=9.00e-07 min=7.27e-08 res[K:] min=5.07e-07 orth=6.7e-16  1373s rss=1.56GB
+H_pin ChebFSI: lowest [8.770134 8.770134 8.770242 8.770242 8.770335 8.770335]  residuals (exact sparse) max 9.00e-07 min 7.27e-08; |res_fast - res_sparse| max 2.8e-17; matvecs 1373 (1375s, rss=1.56GB)
+H_pin: lambda_1..8 = [8.770134, 8.770134, 8.770242, 8.770242, 8.770335, 8.770335, 8.770543, 8.770543]; lambda_K=8.770543; Kramers pairing max|l_2j-l_2j-1| = 5.6e-10; min gap between consecutive doublets 9.29e-05
+   #  0 lambda=8.7701336 res=7.3e-08 IPR=0.000163 IPR*n=42.789 P=6126.4 bw=0.0000 interface w(d)={'1': 0.5661, '2': 0.744, '3': 0.7985, '4': 0.8624, '5': 1.0, '6': 1.0}  S2(d)=[1.0, 0.2007, 0.0384, 0.0113, 0.0034, 0.0009, 0.0002]
+   #  1 lambda=8.7701336 res=3.4e-07 IPR=0.000163 IPR*n=42.789 P=6126.4 bw=0.0000 interface w(d)={'1': 0.5661, '2': 0.744, '3': 0.7985, '4': 0.8624, '5': 1.0, '6': 1.0}  S2(d)=[1.0, 0.2007, 0.0384, 0.0113, 0.0034, 0.0009, 0.0002]
+   #  2 lambda=8.7702418 res=1.1e-07 IPR=0.000169 IPR*n=44.387 P=5905.9 bw=0.0000 interface w(d)={'1': 0.5569, '2': 0.7433, '3': 0.7986, '4': 0.8625, '5': 1.0, '6': 1.0}  S2(d)=[1.0, 0.204, 0.036, 0.0112, 0.0035, 0.0009, 0.0002]
+   #  3 lambda=8.7702418 res=4.2e-07 IPR=0.000169 IPR*n=44.384 P=5906.2 bw=0.0000 interface w(d)={'1': 0.5569, '2': 0.7433, '3': 0.7986, '4': 0.8625, '5': 1.0, '6': 1.0}  S2(d)=[1.0, 0.204, 0.036, 0.0112, 0.0035, 0.0009, 0.0002]
+   #  4 lambda=8.7703347 res=1.5e-07 IPR=0.000159 IPR*n=41.670 P=6290.9 bw=0.0000 interface w(d)={'1': 0.5488, '2': 0.7442, '3': 0.799, '4': 0.8626, '5': 1.0, '6': 1.0}  S2(d)=[1.0, 0.2001, 0.038, 0.0107, 0.0032, 0.0008, 0.0002]
+   #  5 lambda=8.7703347 res=4.7e-07 IPR=0.000159 IPR*n=41.670 P=6290.9 bw=0.0000 interface w(d)={'1': 0.5488, '2': 0.7442, '3': 0.799, '4': 0.8626, '5': 1.0, '6': 1.0}  S2(d)=[1.0, 0.2001, 0.038, 0.0107, 0.0032, 0.0008, 0.0002]
+   #  6 lambda=8.7705428 res=1.7e-07 IPR=0.000221 IPR*n=57.886 P=4528.7 bw=0.0000 interface w(d)={'1': 0.5394, '2': 0.7403, '3': 0.798, '4': 0.8623, '5': 1.0, '6': 1.0}  S2(d)=[1.0, 0.2395, 0.0495, 0.0144, 0.0044, 0.0012, 0.0002]
+   #  7 lambda=8.7705428 res=9.0e-07 IPR=0.000221 IPR*n=57.885 P=4528.7 bw=0.0000 interface w(d)={'1': 0.5394, '2': 0.7403, '3': 0.798, '4': 0.8623, '5': 1.0, '6': 1.0}  S2(d)=[1.0, 0.2395, 0.0495, 0.0144, 0.0044, 0.0012, 0.0002]
+   avg lowest 8: mean IPR*n=46.682, mean boundary weight=0.0000, interface {'1': 0.5527989880688714, '2': 0.7429465114448712, '3': 0.7985267724204845, '4': 0.8624532828063336, '5': 0.9999991061395774, '6': 1.0}, tile fractions {d: |I_d|/n} = {1: 0.0895, 2: 0.2504, 3: 0.5054, 4: 0.803, 5: 1.0, 6: 1.0}
+H_free: skipped
+   pass   0 deg  20 nmv    22  theta_1=1.0774598 theta_K=1.2172276 theta_m=1.5301445  res[:K] max=9.96e-01 min=9.61e-01 res[K:] min=9.71e-01 orth=6.7e-16  3s rss=1.56GB
+   pass   1 deg  30 nmv    53  theta_1=0.0935551 theta_K=0.1790141 theta_m=0.3755395  res[:K] max=1.24e-01 min=9.82e-02 res[K:] min=1.10e-01 orth=7.8e-16  6s rss=1.56GB
+   pass   2 deg  45 nmv    99  theta_1=0.0370808 theta_K=0.1081513 theta_m=0.2547802  res[:K] max=1.80e-02 min=5.33e-03 res[K:] min=1.27e-02 orth=1.8e-15  12s rss=1.56GB
+   pass   3 deg  67 nmv   167  theta_1=0.0364609 theta_K=0.1073321 theta_m=0.2176432  res[:K] max=5.58e-04 min=2.12e-05 res[K:] min=3.92e-04 orth=8.9e-16  19s rss=1.56GB
+   pass   4 deg  77 nmv   245  theta_1=0.0364608 theta_K=0.1073320 theta_m=0.2159591  res[:K] max=1.07e-06 min=7.64e-09 res[K:] min=9.49e-07 orth=6.7e-16  30s rss=1.56GB
+   pass   5 deg  80 nmv   326  theta_1=0.0364608 theta_K=0.1073320 theta_m=0.2156733  res[:K] max=1.22e-09 min=1.71e-12 res[K:] min=9.50e-11 orth=6.7e-16  39s rss=1.56GB
+trivial pinned (tile operator): lowest [0.036461, 0.057949, 0.057949, 0.071649, 0.082854, 0.082854, 0.103988, 0.107332] residuals max 1.2e-09 (40s)
+   #  0 lambda=0.0364608 res=2.6e-12 IPR=0.000013 IPR*n=3.471 P=75518.6 bw=0.0009 interface w(d)={'1': 0.1638, '2': 0.329, '3': 0.5607, '4': 0.8278, '5': 1.0, '6': 1.0} S2(d)=[1.0, 0.2467, 0.0411, 0.0064, 0.0008, 0.0001, 0.0]
+   #  1 lambda=0.0579492 res=1.7e-12 IPR=0.000014 IPR*n=3.704 P=70768.4 bw=0.0012 interface w(d)={'1': 0.1615, '2': 0.3267, '3': 0.5609, '4': 0.8277, '5': 1.0, '6': 1.0} S2(d)=[1.0, 0.1884, 0.038, 0.0065, 0.0009, 0.0001, 0.0]
+   #  2 lambda=0.0579492 res=1.0e-11 IPR=0.000014 IPR*n=3.704 P=70768.4 bw=0.0012 interface w(d)={'1': 0.1615, '2': 0.3267, '3': 0.5609, '4': 0.8277, '5': 1.0, '6': 1.0} S2(d)=[1.0, 0.1884, 0.038, 0.0065, 0.0009, 0.0001, 0.0]
+saved /home/user/-/audit/results/phase5a_edge_states_level6.json  total 1434s  max rss 1.56 GB

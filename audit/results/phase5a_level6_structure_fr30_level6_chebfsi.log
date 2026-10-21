@@ -1,0 +1,11 @@
+=== FR30 Chair44 tiling, Q8 Clifford links, pinned diagonal 24: level 6 ===  (started 2026-10-21 06:20:44, OMP_NUM_THREADS=1)
+[fr30 L6] geometry: n=262144 tiles (7 unit cubes each), box 128^3, panels |E|=3096576, 24 frames, max degree 24, boundary tiles (deg<24) 23723 = 0.0905 n; links {'+1': 393210, '-1': 1163268, '+i': 163933, '-i': 163744, '+j': 442372, '-j': 442372, '+k': 163744, '-k': 163933}  (2.2s, rss 0.28 GB)
+   H = 24 I - A: dim 524288, nnz 4800508, max|H - H^dagger| = 0.0e+00  (3.4s, rss 0.91 GB)
+   pass   0 deg  20 nmv    22  theta_1=9.3080831 theta_K=9.3144261 theta_m=9.3597106  res[:K] max=5.32e-01 min=5.31e-01 res[K:] min=5.32e-01 orth=2.2e-15  23s rss=1.60GB
+   pass   1 deg  30 nmv    53  theta_1=8.8302628 theta_K=8.8331629 theta_m=8.8532298  res[:K] max=6.55e-02 min=6.40e-02 res[K:] min=6.52e-02 orth=1.1e-15  48s rss=1.60GB
+   pass   2 deg  45 nmv    99  theta_1=8.7818105 theta_K=8.7842295 theta_m=8.8005190  res[:K] max=1.65e-02 min=1.57e-02 res[K:] min=1.33e-02 orth=1.1e-15  81s rss=1.60GB
+   pass   3 deg  67 nmv   167  theta_1=8.7708126 theta_K=8.7713342 theta_m=8.7752612  res[:K] max=2.61e-03 min=2.32e-03 res[K:] min=2.32e-03 orth=7.8e-16  135s rss=1.60GB
+   pass   4 deg  77 nmv   245  theta_1=8.7703590 theta_K=8.7707184 theta_m=8.7739101  res[:K] max=1.24e-03 min=1.08e-03 res[K:] min=1.19e-03 orth=8.9e-16  219s rss=1.60GB
+   pass   5 deg  80 nmv   326  theta_1=8.7702092 theta_K=8.7704667 theta_m=8.7730257  res[:K] max=7.04e-04 min=4.99e-04 res[K:] min=6.26e-04 orth=1.3e-15  306s rss=1.60GB
+   pass   6 deg  80 nmv   407  theta_1=8.7701611 theta_K=8.7703392 theta_m=8.7726865  res[:K] max=4.17e-04 min=2.73e-04 res[K:] min=4.09e-04 orth=8.9e-16  385s rss=1.60GB
+   pass   7 deg  80 nmv   488  theta_1=8.7701435 theta_K=8.7702849 theta_m=8.7725871  res[:K] max=2.78e-04 min=1.60e-04 res[K:] min=2.39e-04 orth=1.3e-15  464s rss=1.60GB

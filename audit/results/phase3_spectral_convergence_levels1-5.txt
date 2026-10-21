@@ -1,0 +1,71 @@
+level 1: dim=16  (0s)
+   clifford        lowest 4 = [2.88942 2.88942 5.87896 5.87896]  mean=12.0000  max=22.7727
+   trivial         lowest 4 = [-0.      0.      7.1459  7.1459]  mean=12.0000  max=24.0000
+   randomQ8        lowest 4 = [6.63769 6.63769 7.56591 7.56591]  mean=12.0000  max=22.6676
+   adjointonly     lowest 4 = [3.05301 3.05301 6.16296 6.16296]  mean=12.0000  max=23.6817
+   randdecoration  lowest 4 = [3.85937 3.85937 4.84425 4.84425]  mean=12.0000  max=22.4074
+level 2: dim=128  (0s)
+   clifford        lowest 4 = [4.72646 4.72646 4.83117 4.83117]  mean=18.0000  max=33.8979
+   trivial         lowest 4 = [-0.       0.       1.70063  1.70063]  mean=18.0000  max=35.5938
+   randomQ8        lowest 4 = [8.44078 8.44078 8.80743 8.80743]  mean=18.0000  max=29.9927
+   adjointonly     lowest 4 = [4.22471 4.22471 4.5965  4.5965 ]  mean=18.0000  max=34.1291
+   randdecoration  lowest 4 = [5.39306 5.39306 5.57016 5.57016]  mean=18.0000  max=33.5715
+level 3: dim=1024  (2s)
+   clifford        lowest 4 = [5.11494 5.11494 5.13524 5.13524]  mean=21.0000  max=37.3029
+   trivial         lowest 4 = [0.      0.      0.43866 0.43866]  mean=21.0000  max=42.3822
+   randomQ8        lowest 4 = [8.95123 8.95123 9.30882 9.30882]  mean=21.0000  max=32.4117
+   adjointonly     lowest 4 = [4.92919 4.92919 4.94659 4.94659]  mean=21.0000  max=40.3237
+   randdecoration  lowest 4 = [5.81252 5.81252 5.85909 5.85909]  mean=21.0000  max=38.5604
+level 4: dim=8192  (372s)
+   clifford        lowest 4 = [5.2097  5.2097  5.20996 5.20996]  mean=22.5000  max=37.9606
+   trivial         lowest 4 = [-0.       0.       0.11174  0.11174]  mean=22.5000  max=44.1094
+   randomQ8        lowest 4 = [8.96816 8.96816 9.3593  9.3593 ]  mean=22.5000  max=33.4125
+   adjointonly     lowest 4 = [5.11356 5.11356 5.11373 5.11373]  mean=22.5000  max=41.2013
+   randdecoration  lowest 4 = [6.01793 6.01793 6.02029 6.02029]  mean=22.5000  max=39.4907
+
+KOLMOGOROV DISTANCE BETWEEN SUCCESSIVE NORMALIZED SPECTRAL MEASURES (IDS)
+ clifford       : d_K(N_k, N_(k+1)) for k=1..: [0.3594 0.1699 0.0745]  ratios: [0.473 0.438]
+ trivial        : d_K(N_k, N_(k+1)) for k=1..: [0.4375 0.1738 0.0735]  ratios: [0.397 0.423]
+ randomQ8       : d_K(N_k, N_(k+1)) for k=1..: [0.5781 0.2168 0.0989]  ratios: [0.375 0.456]
+ adjointonly    : d_K(N_k, N_(k+1)) for k=1..: [0.3594 0.1445 0.0662]  ratios: [0.402 0.458]
+ randdecoration : d_K(N_k, N_(k+1)) for k=1..: [0.375  0.1426 0.0691]  ratios: [0.38  0.485]
+
+DISTANCE BETWEEN MODELS AT THE LARGEST LEVEL
+ d_K(clifford, trivial) at level 4: 0.0527
+ d_K(clifford, randomQ8) at level 4: 0.1497
+ d_K(clifford, adjointonly) at level 4: 0.0193
+ d_K(clifford, randdecoration) at level 4: 0.0332
+ d_K(trivial, randomQ8) at level 4: 0.1445
+ d_K(trivial, adjointonly) at level 4: 0.0415
+ d_K(trivial, randdecoration) at level 4: 0.0544
+ d_K(randomQ8, adjointonly) at level 4: 0.1445
+ d_K(randomQ8, randdecoration) at level 4: 0.1492
+ d_K(adjointonly, randdecoration) at level 4: 0.0208
+
+PERSISTENT SPECTRAL GAPS (relative width > 0.02*spectral range) AND IDS VALUES AT THE GAPS
+ clifford:
+   level 2: [(np.float64(6.0784), np.float64(6.9296), 0.09375), (np.float64(9.305), np.float64(10.0076), 0.20312), (np.float64(10.0076), np.float64(11.2485), 0.21875), (np.float64(14.8811), np.float64(15.7385), 0.39062), (np.float64(17.4013), np.float64(18.0046), 0.5), (np.float64(18.3398), np.float64(18.9582), 0.53125), (np.float64(19.3176), np.float64(20.3193), 0.57812), (np.float64(20.5755), np.float64(21.2865), 0.60938), (np.float64(22.4575), np.float64(23.0541), 0.67188), (np.float64(23.3059), np.float64(24.3775), 0.70312), (np.float64(27.261), np.float64(28.0956), 0.89062), (np.float64(28.678), np.float64(29.8568), 0.92188)]
+   level 3: []
+   level 4: []
+ trivial:
+   level 2: [(np.float64(0.0), np.float64(1.7006), 0.01562), (np.float64(1.7006), np.float64(2.8164), 0.04688), (np.float64(2.8164), np.float64(3.9364), 0.0625), (np.float64(3.9364), np.float64(5.775), 0.09375), (np.float64(5.775), np.float64(8.1992), 0.10938), (np.float64(8.1992), np.float64(9.0), 0.125), (np.float64(9.0), np.float64(10.5539), 0.15625), (np.float64(11.1841), np.float64(12.1483), 0.25), (np.float64(12.4846), np.float64(13.5392), 0.29688), (np.float64(13.5392), np.float64(14.5274), 0.3125), (np.float64(15.329), np.float64(16.099), 0.4375), (np.float64(16.9661), np.float64(17.7962), 0.5)]
+   level 3: [(np.float64(3.3081), np.float64(4.2825), 0.03711), (np.float64(40.1062), np.float64(41.1276), 0.99414), (np.float64(41.1276), np.float64(42.3822), 0.99805)]
+   level 4: []
+ adjointonly:
+   level 2: [(np.float64(6.7715), np.float64(7.8461), 0.10938), (np.float64(10.3447), np.float64(10.9993), 0.23438), (np.float64(15.9491), np.float64(16.6305), 0.4375), (np.float64(18.3727), np.float64(19.2977), 0.53125), (np.float64(22.8246), np.float64(23.4634), 0.70312), (np.float64(25.2194), np.float64(26.0222), 0.78125), (np.float64(26.7619), np.float64(27.4119), 0.82812), (np.float64(29.1745), np.float64(30.4459), 0.92188), (np.float64(30.7456), np.float64(31.4337), 0.95312), (np.float64(31.4337), np.float64(32.2675), 0.96875), (np.float64(32.2675), np.float64(34.1291), 0.98438)]
+   level 3: [(np.float64(35.7989), np.float64(37.2016), 0.97656)]
+   level 4: []
+ randomQ8:
+   level 2: [(np.float64(10.0646), np.float64(10.8841), 0.10938), (np.float64(10.8841), np.float64(11.5691), 0.125), (np.float64(11.6948), np.float64(12.2123), 0.15625), (np.float64(14.7404), np.float64(15.2441), 0.34375), (np.float64(19.8982), np.float64(20.3414), 0.65625), (np.float64(21.4217), np.float64(21.8915), 0.71875), (np.float64(22.6732), np.float64(23.3937), 0.78125), (np.float64(23.6784), np.float64(24.168), 0.8125), (np.float64(24.168), np.float64(24.7269), 0.82812), (np.float64(24.7269), np.float64(25.6955), 0.84375), (np.float64(25.6955), np.float64(26.1342), 0.85938), (np.float64(27.2477), np.float64(27.6887), 0.9375)]
+   level 3: [(np.float64(9.8006), np.float64(10.6519), 0.01758)]
+   level 4: []
+ randdecoration:
+   level 2: [(np.float64(10.3801), np.float64(11.0254), 0.23438), (np.float64(14.4804), np.float64(15.1282), 0.375), (np.float64(17.7333), np.float64(18.326), 0.5), (np.float64(20.2149), np.float64(20.8777), 0.59375), (np.float64(22.4593), np.float64(23.0585), 0.67188), (np.float64(23.2439), np.float64(23.8275), 0.70312), (np.float64(27.4926), np.float64(28.119), 0.89062), (np.float64(28.9257), np.float64(29.6887), 0.9375), (np.float64(29.6887), np.float64(30.7948), 0.95312), (np.float64(30.7948), np.float64(32.2235), 0.96875), (np.float64(32.2235), np.float64(33.5715), 0.98438)]
+   level 3: []
+   level 4: []
+
+LOWEST EIGENVALUE SCALING (clifford FR30), including sparse level 5 if feasible
+ level 5 (dim 65536) lowest 4 via shift-invert: [5.24993 5.24993 5.24993 5.24993] (595s)
+ lambda_min by level: {1: 2.88942, 2: 4.72646, 3: 5.11494, 4: 5.2097, 5: 5.24993}
+
+[exited with code 0]

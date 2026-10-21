@@ -1,0 +1,158 @@
+====================================================================================================
+INTERFACE ANALYSIS, level-2 approximant at Gamma: lowest 128 states (interface fraction 0.828, n=64)
+   state   0: E=8.191512  tile IPR x n =    1.37  interface weight = 0.911 (fraction 0.828, ratio 1.10)  bulk-like
+   state   1: E=8.191512  tile IPR x n =    1.37  interface weight = 0.911 (fraction 0.828, ratio 1.10)  bulk-like
+   state   2: E=8.451760  tile IPR x n =    1.32  interface weight = 0.935 (fraction 0.828, ratio 1.13)  bulk-like
+   state   3: E=8.451760  tile IPR x n =    1.32  interface weight = 0.935 (fraction 0.828, ratio 1.13)  bulk-like
+   state   4: E=9.127424  tile IPR x n =    1.27  interface weight = 0.844 (fraction 0.828, ratio 1.02)  bulk-like
+   state   5: E=9.127424  tile IPR x n =    1.27  interface weight = 0.844 (fraction 0.828, ratio 1.02)  bulk-like
+   state   6: E=10.298127  tile IPR x n =    1.29  interface weight = 0.930 (fraction 0.828, ratio 1.12)  bulk-like
+   state   7: E=10.298127  tile IPR x n =    1.29  interface weight = 0.930 (fraction 0.828, ratio 1.12)  bulk-like
+   state   8: E=10.867390  tile IPR x n =    1.54  interface weight = 0.888 (fraction 0.828, ratio 1.07)  bulk-like
+   state   9: E=10.867390  tile IPR x n =    1.54  interface weight = 0.888 (fraction 0.828, ratio 1.07)  bulk-like
+   state  10: E=11.057538  tile IPR x n =    1.53  interface weight = 0.902 (fraction 0.828, ratio 1.09)  bulk-like
+   state  11: E=11.057538  tile IPR x n =    1.53  interface weight = 0.902 (fraction 0.828, ratio 1.09)  bulk-like
+   state  12: E=11.848304  tile IPR x n =    1.60  interface weight = 0.782 (fraction 0.828, ratio 0.94)  bulk-like
+   state  14: E=12.851347  tile IPR x n =    1.49  interface weight = 0.908 (fraction 0.828, ratio 1.10)  bulk-like
+   state  16: E=13.186845  tile IPR x n =    1.62  interface weight = 0.930 (fraction 0.828, ratio 1.12)  bulk-like
+   state  18: E=14.111709  tile IPR x n =    1.33  interface weight = 0.805 (fraction 0.828, ratio 0.97)  bulk-like
+   state  20: E=14.570995  tile IPR x n =    1.29  interface weight = 0.834 (fraction 0.828, ratio 1.01)  bulk-like
+   state  22: E=14.792745  tile IPR x n =    1.36  interface weight = 0.866 (fraction 0.828, ratio 1.05)  bulk-like
+   state  24: E=15.113709  tile IPR x n =    1.47  interface weight = 0.888 (fraction 0.828, ratio 1.07)  bulk-like
+   state  26: E=15.700353  tile IPR x n =    1.31  interface weight = 0.863 (fraction 0.828, ratio 1.04)  bulk-like
+   state  28: E=16.597191  tile IPR x n =    1.48  interface weight = 0.842 (fraction 0.828, ratio 1.02)  bulk-like
+   state  30: E=16.895144  tile IPR x n =    1.43  interface weight = 0.789 (fraction 0.828, ratio 0.95)  bulk-like
+   state  32: E=17.204376  tile IPR x n =    1.44  interface weight = 0.827 (fraction 0.828, ratio 1.00)  bulk-like
+   state  34: E=17.581876  tile IPR x n =    1.52  interface weight = 0.885 (fraction 0.828, ratio 1.07)  bulk-like
+   state  36: E=18.390268  tile IPR x n =    1.43  interface weight = 0.806 (fraction 0.828, ratio 0.97)  bulk-like
+   state  38: E=18.500765  tile IPR x n =    1.43  interface weight = 0.798 (fraction 0.828, ratio 0.96)  bulk-like
+   state  40: E=19.276292  tile IPR x n =    1.46  interface weight = 0.765 (fraction 0.828, ratio 0.92)  bulk-like
+   state  42: E=19.916897  tile IPR x n =    1.50  interface weight = 0.690 (fraction 0.828, ratio 0.83)  bulk-like
+   state  44: E=20.494963  tile IPR x n =    1.50  interface weight = 0.884 (fraction 0.828, ratio 1.07)  bulk-like
+   state  46: E=20.936225  tile IPR x n =    1.54  interface weight = 0.850 (fraction 0.828, ratio 1.03)  bulk-like
+   state  48: E=21.184251  tile IPR x n =    1.53  interface weight = 0.874 (fraction 0.828, ratio 1.06)  bulk-like
+   state  50: E=21.681488  tile IPR x n =    1.40  interface weight = 0.868 (fraction 0.828, ratio 1.05)  bulk-like
+   state  52: E=22.028942  tile IPR x n =    1.72  interface weight = 0.813 (fraction 0.828, ratio 0.98)  bulk-like
+   state  54: E=22.646536  tile IPR x n =    1.68  interface weight = 0.791 (fraction 0.828, ratio 0.95)  bulk-like
+   state  56: E=22.944462  tile IPR x n =    1.39  interface weight = 0.841 (fraction 0.828, ratio 1.02)  bulk-like
+   state  58: E=23.262196  tile IPR x n =    1.72  interface weight = 0.794 (fraction 0.828, ratio 0.96)  bulk-like
+   state  60: E=23.727916  tile IPR x n =    1.37  interface weight = 0.855 (fraction 0.828, ratio 1.03)  bulk-like
+   state  62: E=24.396625  tile IPR x n =    1.79  interface weight = 0.707 (fraction 0.828, ratio 0.85)  bulk-like
+   state  64: E=24.590612  tile IPR x n =    2.42  interface weight = 0.730 (fraction 0.828, ratio 0.88)  bulk-like
+   state  66: E=25.118110  tile IPR x n =    1.49  interface weight = 0.824 (fraction 0.828, ratio 0.99)  bulk-like
+   state  68: E=25.577171  tile IPR x n =    1.50  interface weight = 0.728 (fraction 0.828, ratio 0.88)  bulk-like
+   state  70: E=25.880839  tile IPR x n =    1.52  interface weight = 0.736 (fraction 0.828, ratio 0.89)  bulk-like
+   state  72: E=26.516060  tile IPR x n =    1.44  interface weight = 0.718 (fraction 0.828, ratio 0.87)  bulk-like
+   state  74: E=26.825865  tile IPR x n =    1.58  interface weight = 0.726 (fraction 0.828, ratio 0.88)  bulk-like
+   state  76: E=26.996130  tile IPR x n =    1.71  interface weight = 0.675 (fraction 0.828, ratio 0.81)  bulk-like
+   state  78: E=27.483202  tile IPR x n =    1.53  interface weight = 0.712 (fraction 0.828, ratio 0.86)  bulk-like
+   state  80: E=27.854810  tile IPR x n =    1.89  interface weight = 0.658 (fraction 0.828, ratio 0.79)  bulk-like
+   state  82: E=28.065392  tile IPR x n =    1.58  interface weight = 0.714 (fraction 0.828, ratio 0.86)  bulk-like
+   state  84: E=28.599127  tile IPR x n =    1.80  interface weight = 0.594 (fraction 0.828, ratio 0.72)  bulk-like
+   state  86: E=29.054889  tile IPR x n =    1.46  interface weight = 0.744 (fraction 0.828, ratio 0.90)  bulk-like
+   state  88: E=29.207353  tile IPR x n =    1.42  interface weight = 0.769 (fraction 0.828, ratio 0.93)  bulk-like
+   state  90: E=29.491865  tile IPR x n =    1.45  interface weight = 0.825 (fraction 0.828, ratio 1.00)  bulk-like
+   state  92: E=29.939734  tile IPR x n =    1.47  interface weight = 0.735 (fraction 0.828, ratio 0.89)  bulk-like
+   state  94: E=30.624852  tile IPR x n =    1.49  interface weight = 0.861 (fraction 0.828, ratio 1.04)  bulk-like
+   state  96: E=30.733717  tile IPR x n =    1.30  interface weight = 0.863 (fraction 0.828, ratio 1.04)  bulk-like
+   state  98: E=31.241578  tile IPR x n =    1.47  interface weight = 0.821 (fraction 0.828, ratio 0.99)  bulk-like
+   state 100: E=31.735065  tile IPR x n =    2.02  interface weight = 0.776 (fraction 0.828, ratio 0.94)  bulk-like
+   state 102: E=32.139706  tile IPR x n =    1.61  interface weight = 0.819 (fraction 0.828, ratio 0.99)  bulk-like
+   state 104: E=32.741477  tile IPR x n =    1.25  interface weight = 0.852 (fraction 0.828, ratio 1.03)  bulk-like
+   state 106: E=33.144752  tile IPR x n =    1.55  interface weight = 0.923 (fraction 0.828, ratio 1.11)  bulk-like
+   state 108: E=33.563862  tile IPR x n =    1.47  interface weight = 0.808 (fraction 0.828, ratio 0.98)  bulk-like
+   state 110: E=34.645398  tile IPR x n =    1.57  interface weight = 0.948 (fraction 0.828, ratio 1.14)  bulk-like
+   state 112: E=34.913422  tile IPR x n =    1.41  interface weight = 0.906 (fraction 0.828, ratio 1.09)  bulk-like
+   state 114: E=35.217059  tile IPR x n =    1.44  interface weight = 0.873 (fraction 0.828, ratio 1.05)  bulk-like
+   state 116: E=36.637729  tile IPR x n =    1.54  interface weight = 0.916 (fraction 0.828, ratio 1.11)  bulk-like
+   state 118: E=36.827067  tile IPR x n =    1.47  interface weight = 0.905 (fraction 0.828, ratio 1.09)  bulk-like
+   state 120: E=37.401057  tile IPR x n =    1.35  interface weight = 0.969 (fraction 0.828, ratio 1.17)  bulk-like
+   state 122: E=37.879280  tile IPR x n =    1.53  interface weight = 0.936 (fraction 0.828, ratio 1.13)  bulk-like
+   state 124: E=38.664669  tile IPR x n =    1.70  interface weight = 0.991 (fraction 0.828, ratio 1.20)  bulk-like
+   state 126: E=38.851983  tile IPR x n =    1.42  interface weight = 0.982 (fraction 0.828, ratio 1.19)  bulk-like
+ lowest bulk-like state (interface weight <= 1.5 x fraction): E = 8.191512 (index 0);  compare pinned patch level 2: 10.77695 and E_bulk <= 8.77013
+[interface analysis level 2 done in 0s]
+====================================================================================================
+INTERFACE ANALYSIS, level-3 approximant at Gamma: lowest 60 states (interface fraction 0.561, n=512)
+   state   0: E=8.288654  tile IPR x n =    2.73  interface weight = 0.834 (fraction 0.561, ratio 1.49)  bulk-like
+   state   1: E=8.288654  tile IPR x n =    2.73  interface weight = 0.834 (fraction 0.561, ratio 1.49)  bulk-like
+   state   2: E=8.330532  tile IPR x n =    2.67  interface weight = 0.829 (fraction 0.561, ratio 1.48)  bulk-like
+   state   3: E=8.330532  tile IPR x n =    2.67  interface weight = 0.829 (fraction 0.561, ratio 1.48)  bulk-like
+   state   4: E=8.399943  tile IPR x n =    2.56  interface weight = 0.807 (fraction 0.561, ratio 1.44)  bulk-like
+   state   5: E=8.399943  tile IPR x n =    2.56  interface weight = 0.807 (fraction 0.561, ratio 1.44)  bulk-like
+   state   6: E=8.460218  tile IPR x n =    2.56  interface weight = 0.815 (fraction 0.561, ratio 1.45)  bulk-like
+   state   7: E=8.460218  tile IPR x n =    2.56  interface weight = 0.815 (fraction 0.561, ratio 1.45)  bulk-like
+   state   8: E=8.541681  tile IPR x n =    2.71  interface weight = 0.802 (fraction 0.561, ratio 1.43)  bulk-like
+   state   9: E=8.541681  tile IPR x n =    2.71  interface weight = 0.802 (fraction 0.561, ratio 1.43)  bulk-like
+   state  10: E=8.635059  tile IPR x n =    2.84  interface weight = 0.802 (fraction 0.561, ratio 1.43)  bulk-like
+   state  11: E=8.635059  tile IPR x n =    2.84  interface weight = 0.802 (fraction 0.561, ratio 1.43)  bulk-like
+   state  12: E=8.983443  tile IPR x n =    2.06  interface weight = 0.723 (fraction 0.561, ratio 1.29)  bulk-like
+   state  14: E=9.011963  tile IPR x n =    2.27  interface weight = 0.768 (fraction 0.561, ratio 1.37)  bulk-like
+   state  16: E=9.116998  tile IPR x n =    2.28  interface weight = 0.682 (fraction 0.561, ratio 1.22)  bulk-like
+   state  18: E=9.163804  tile IPR x n =    2.17  interface weight = 0.700 (fraction 0.561, ratio 1.25)  bulk-like
+   state  20: E=9.214311  tile IPR x n =    2.09  interface weight = 0.727 (fraction 0.561, ratio 1.30)  bulk-like
+   state  22: E=9.302378  tile IPR x n =    1.61  interface weight = 0.702 (fraction 0.561, ratio 1.25)  bulk-like
+   state  24: E=9.394960  tile IPR x n =    2.26  interface weight = 0.505 (fraction 0.561, ratio 0.90)  bulk-like
+   state  26: E=9.586846  tile IPR x n =    1.64  interface weight = 0.534 (fraction 0.561, ratio 0.95)  bulk-like
+   state  28: E=9.658820  tile IPR x n =    1.57  interface weight = 0.572 (fraction 0.561, ratio 1.02)  bulk-like
+   state  30: E=9.718052  tile IPR x n =    1.62  interface weight = 0.495 (fraction 0.561, ratio 0.88)  bulk-like
+   state  32: E=9.752670  tile IPR x n =    1.68  interface weight = 0.510 (fraction 0.561, ratio 0.91)  bulk-like
+   state  34: E=9.817228  tile IPR x n =    1.69  interface weight = 0.502 (fraction 0.561, ratio 0.89)  bulk-like
+   state  36: E=9.854357  tile IPR x n =    1.49  interface weight = 0.549 (fraction 0.561, ratio 0.98)  bulk-like
+   state  38: E=9.888483  tile IPR x n =    1.61  interface weight = 0.556 (fraction 0.561, ratio 0.99)  bulk-like
+   state  40: E=9.931248  tile IPR x n =    1.83  interface weight = 0.507 (fraction 0.561, ratio 0.91)  bulk-like
+   state  42: E=10.093010  tile IPR x n =    1.57  interface weight = 0.552 (fraction 0.561, ratio 0.98)  bulk-like
+   state  44: E=10.127759  tile IPR x n =    1.55  interface weight = 0.531 (fraction 0.561, ratio 0.95)  bulk-like
+   state  46: E=10.210859  tile IPR x n =    1.80  interface weight = 0.489 (fraction 0.561, ratio 0.87)  bulk-like
+   state  48: E=10.224649  tile IPR x n =    1.64  interface weight = 0.511 (fraction 0.561, ratio 0.91)  bulk-like
+   state  50: E=10.286477  tile IPR x n =    1.52  interface weight = 0.533 (fraction 0.561, ratio 0.95)  bulk-like
+   state  52: E=10.328460  tile IPR x n =    1.56  interface weight = 0.598 (fraction 0.561, ratio 1.07)  bulk-like
+   state  54: E=10.386255  tile IPR x n =    1.59  interface weight = 0.558 (fraction 0.561, ratio 0.99)  bulk-like
+   state  56: E=10.428364  tile IPR x n =    1.71  interface weight = 0.600 (fraction 0.561, ratio 1.07)  bulk-like
+   state  58: E=10.479091  tile IPR x n =    1.59  interface weight = 0.531 (fraction 0.561, ratio 0.95)  bulk-like
+ lowest bulk-like state (interface weight <= 1.5 x fraction): E = 8.288654 (index 0);  compare pinned patch level 3: 9.37847 and E_bulk <= 8.77013
+[interface analysis level 3 done in 3s]
+====================================================================================================
+INTERFACE ANALYSIS, level-4 approximant at Gamma: lowest 40 states (interface fraction 0.325, n=4096)
+/home/user/-/audit/phase5a_periodic_approximants.py:183: UserWarning: Exited postprocessing with accuracies 
+[2.47617201e-07 4.19869148e-07 2.82416850e-07 5.13736775e-07
+ 2.67386710e-07 3.14931820e-07 2.53241358e-07 4.81843021e-07
+ 3.44630297e-07 4.74818119e-07 3.33834944e-07 4.93038862e-07
+ 1.68427005e-07 1.43976823e-07 1.56908015e-07 1.59800086e-07
+ 1.93394749e-07 3.46685609e-07 2.24785709e-07 4.00129251e-07
+ 2.07398084e-07 5.10769896e-07 2.94749004e-07 3.84300984e-07
+ 7.98914033e-08 2.83484667e-07 1.22473252e-07 2.03993204e-07
+ 3.05899982e-07 3.90768064e-07 2.87052677e-07 4.65354479e-07
+ 3.17725856e-07 3.96557135e-07 5.79090287e-08 1.91290553e-07
+ 2.14173764e-07 3.03963736e-07 2.04389910e-07 1.30973580e-06]
+not reaching the requested tolerance 1e-06.
+  w, V = spl.lobpcg(H, X, M=M, largest=False, tol=1e-6, maxiter=1500); o = np.argsort(w.real); w = w.real[o]; V = V[:, o]
+   LOBPCG residuals: max 1.3e-06  (47s)
+   state   0: E=8.361024  tile IPR x n =   15.10  interface weight = 0.798 (fraction 0.325, ratio 2.46)  interface
+   state   1: E=8.361024  tile IPR x n =   15.10  interface weight = 0.798 (fraction 0.325, ratio 2.46)  interface
+   state   2: E=8.372299  tile IPR x n =   15.60  interface weight = 0.802 (fraction 0.325, ratio 2.47)  interface
+   state   3: E=8.372299  tile IPR x n =   15.60  interface weight = 0.802 (fraction 0.325, ratio 2.47)  interface
+   state   4: E=8.373665  tile IPR x n =   15.41  interface weight = 0.801 (fraction 0.325, ratio 2.47)  interface
+   state   5: E=8.373665  tile IPR x n =   15.41  interface weight = 0.801 (fraction 0.325, ratio 2.47)  interface
+   state   6: E=8.378818  tile IPR x n =   15.77  interface weight = 0.798 (fraction 0.325, ratio 2.46)  interface
+   state   7: E=8.378818  tile IPR x n =   15.77  interface weight = 0.798 (fraction 0.325, ratio 2.46)  interface
+   state   8: E=8.389401  tile IPR x n =   17.12  interface weight = 0.801 (fraction 0.325, ratio 2.47)  interface
+   state   9: E=8.389401  tile IPR x n =   17.12  interface weight = 0.801 (fraction 0.325, ratio 2.47)  interface
+   state  10: E=8.389469  tile IPR x n =   17.23  interface weight = 0.801 (fraction 0.325, ratio 2.47)  interface
+   state  11: E=8.389469  tile IPR x n =   17.23  interface weight = 0.801 (fraction 0.325, ratio 2.47)  interface
+   state  12: E=8.779147  tile IPR x n =    4.19  interface weight = 0.654 (fraction 0.325, ratio 2.01)  interface
+   state  14: E=8.784954  tile IPR x n =    4.04  interface weight = 0.660 (fraction 0.325, ratio 2.03)  interface
+   state  16: E=8.814317  tile IPR x n =    4.27  interface weight = 0.646 (fraction 0.325, ratio 1.99)  interface
+   state  18: E=8.817507  tile IPR x n =    4.81  interface weight = 0.648 (fraction 0.325, ratio 1.99)  interface
+   state  20: E=8.825860  tile IPR x n =    4.26  interface weight = 0.641 (fraction 0.325, ratio 1.97)  interface
+   state  22: E=8.831387  tile IPR x n =    4.06  interface weight = 0.641 (fraction 0.325, ratio 1.97)  interface
+   state  24: E=8.882050  tile IPR x n =    2.27  interface weight = 0.331 (fraction 0.325, ratio 1.02)  bulk-like
+   state  26: E=8.898297  tile IPR x n =    2.24  interface weight = 0.332 (fraction 0.325, ratio 1.02)  bulk-like
+   state  28: E=8.902738  tile IPR x n =    2.29  interface weight = 0.299 (fraction 0.325, ratio 0.92)  bulk-like
+   state  30: E=8.907033  tile IPR x n =    2.87  interface weight = 0.249 (fraction 0.325, ratio 0.77)  bulk-like
+   state  32: E=8.921254  tile IPR x n =    2.50  interface weight = 0.256 (fraction 0.325, ratio 0.79)  bulk-like
+   state  34: E=8.932578  tile IPR x n =    2.40  interface weight = 0.266 (fraction 0.325, ratio 0.82)  bulk-like
+   state  36: E=8.935022  tile IPR x n =    2.38  interface weight = 0.285 (fraction 0.325, ratio 0.88)  bulk-like
+   state  38: E=8.938459  tile IPR x n =    2.36  interface weight = 0.337 (fraction 0.325, ratio 1.04)  bulk-like
+ lowest bulk-like state (interface weight <= 1.5 x fraction): E = 8.882050 (index 24);  compare pinned patch level 4: 8.91963 and E_bulk <= 8.77013
+[interface analysis level 4 done in 47s]

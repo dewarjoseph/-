@@ -1,0 +1,28 @@
+=== FR30 Chair44 tiling, Q8 Clifford links, pinned diagonal 24: level 6 ===  (started 2026-10-21 06:13:14, OMP_NUM_THREADS=1)
+[fr30 L6] geometry: n=262144 tiles (7 unit cubes each), box 128^3, panels |E|=3096576, 24 frames, max degree 24, boundary tiles (deg<24) 23723 = 0.0905 n; links {'+1': 393210, '-1': 1163268, '+i': 163933, '-i': 163744, '+j': 442372, '-j': 442372, '+k': 163744, '-k': 163933}  (7.4s, rss 0.28 GB)
+   H = 24 I - A: dim 524288, nnz 4800508, max|H - H^dagger| = 0.0e+00  (11.2s, rss 0.91 GB)
+   lobpcg chunk:  475 it (470s, 0.99s/it), cumulative   475: lambda=[8.770199  8.7702527 8.7703743 8.7704747] res=[0. 0. 0. 0.]  rss 0.91 GB
+   lobpcg chunk:  411 it (295s, 0.72s/it), cumulative   886: lambda=[8.7701344 8.7701448 8.7702542 8.7703261] res=[0. 0. 0. 0.]  rss 0.91 GB
+   lobpcg chunk:  495 it (277s, 0.56s/it), cumulative  1381: lambda=[8.7701336 8.7701338 8.7702421 8.7702481] res=[1.3e-05 1.1e-04 1.6e-04 5.9e-04]  rss 0.91 GB
+   lobpcg chunk:  494 it (229s, 0.46s/it), cumulative  1875: lambda=[8.7701336 8.7701336 8.7702418 8.7702419] res=[8.4e-07 4.1e-06 1.3e-05 4.5e-05]  rss 0.91 GB
+   lobpcg chunk:  493 it (201s, 0.41s/it), cumulative  2368: lambda=[8.7701336 8.7701336 8.7702418 8.7702418] res=[3.8e-07 3.3e-07 2.9e-06 6.8e-06]  rss 0.91 GB
+   lobpcg chunk:  492 it (160s, 0.33s/it), cumulative  2860: lambda=[8.7701336 8.7701336 8.7702418 8.7702418] res=[3.5e-07 2.7e-07 9.6e-07 1.6e-06]  rss 0.91 GB
+   lobpcg chunk:  237 it (59s, 0.25s/it), cumulative  3097: lambda=[8.7701336 8.7701336 8.7702418 8.7702418] res=[3.5e-07 2.7e-07 1.1e-06 1.0e-06]  rss 0.91 GB
+   lobpcg chunk:    3 it (0s, 0.16s/it), cumulative  3100: lambda=[8.7701336 8.7701336 8.7702418 8.7702418] res=[3.5e-07 2.6e-07 7.5e-07 9.8e-07]  rss 0.91 GB
+   solver: lobpcg(block=4, seed=0, tol=1e-06, maxiter=4000, chunks of <= 500 it, warm restart)  iterations=3100  (1692s)  converged=True  stop: all 4 block residuals < tol=1e-06
+   lowest eigenvalues (Rayleigh quotients): [8.7701336 8.7701336 8.7702418 8.7702418]
+   residuals ||H psi - lambda psi||:        [3.49e-07 2.63e-07 7.51e-07 9.79e-07]
+   Kramers split lambda_2 - lambda_1 = 6.79e-13;  gap to next pair lambda_3 - lambda_1 = 1.082e-04;  eigenvector angle bound res_1/gap = 3.2e-03
+   Kramers pair check: IPR vec1 0.000163227, vec2 0.000163228, max_a |p1_a - p2_a| = 5.6e-08
+   ground state: tile IPR=0.000163227  IPR*n=42.7890  P=1/IPR=6126.4  p_max=0.00107  s50=2726 (0.0104 n)  s90=21548 (0.0822 n)
+   boundary weight (deg < bulk) = 0.00002  (boundary tile fraction 0.0905, enhancement 0.000)
+    d     8^d       S2(d)    1/S2(d)  1/S2/8^d  D2(d) | interface w(d)    tiles fraction  w/frac
+    1       8    0.200714      4.982    0.6228  2.317 |        0.56607    23453   0.0895   6.327
+    2      64   0.0384481     26.009    0.4064  2.384 |        0.74403    65643   0.2504   2.971
+    3     512   0.0112565     88.838    0.1735  1.772 |        0.79851   132479   0.5054   1.580
+    4    4096  0.00339612    294.454    0.0719  1.729 |        0.86244   210507   0.8030   1.074
+    5   32768 0.000877097   1140.125    0.0348  1.953 |        1.00000   262133   1.0000   1.000
+    6  262144 0.000163227   6126.428    0.0234  2.426 |        1.00000   262144   1.0000   1.000
+   depth-1 child weights (depth-first child order): [0.3532 0.1879 0.1119 0.0956 0.0454 0.1119 0.0488 0.0454]
+   second pair (lambda=8.7702418, res 7.5e-07): IPR*n=44.3906 s50=2756 s90=22312 1/S2(d)=[4.9, 27.74, 89.61, 289.74, 1122.5, 5905.4] interface w(1)=0.5569
+   saved audit/results/phase5a_fr30_level6_groundstate_weights.npy and phase5a_level6_structure_fr30_level6.json;  total 1712s, max rss 0.91 GB

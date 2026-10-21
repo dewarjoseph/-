@@ -1,0 +1,36 @@
+====================================================================================================
+4b. k=4 EXHAUSTIVE: sublattice S=diag[2, 2, 1] (L/L' = Z2xZ2), all 24^3 = 13824 frame triples (M_0 = I), coarse minimiser + exact flux
+ E_per: min=-0.000000 max=16.000000 mean=9.4834 median=9.6186  fraction >=8.0: 0.7762  >=8.77: 0.6400   (842s)
+ histogram of E_per (unit bins): [0,1):0, [1,2):4, [2,3):24, [3,4):26, [4,5):242, [5,6):286, [6,7):1000, [7,8):1511, [8,9):2402, [9,10):2621, [10,11):2508, [11,12):1743, [12,13):1039, [13,14):302
+ E_per by non-trivial plaquette fraction:
+   f_nontriv=0.0000: n=    1  E_per min=-0.0000 median=-0.0000 max=-0.0000
+   f_nontriv=0.2222: n=    6  E_per min=1.8020 median=1.8345 max=4.0000
+   f_nontriv=0.2500: n=   24  E_per min=2.2742 median=2.5446 max=6.1171
+   f_nontriv=0.2778: n=   12  E_per min=2.7340 median=2.7340 max=6.4353
+   f_nontriv=0.3333: n=   12  E_per min=3.0557 median=3.7574 max=11.4629
+   f_nontriv=0.3611: n=   32  E_per min=4.5189 median=5.0902 max=9.8020
+   f_nontriv=0.3889: n=   64  E_per min=4.0280 median=4.7968 max=9.7379
+   f_nontriv=0.4167: n=   88  E_per min=3.9485 median=6.0150 max=8.5217
+   f_nontriv=0.4444: n=  260  E_per min=4.2725 median=6.1864 max=12.0000
+   f_nontriv=0.4722: n=  128  E_per min=4.5490 median=7.1325 max=13.6754
+   f_nontriv=0.5000: n=  492  E_per min=4.8744 median=6.5946 max=12.6107
+   f_nontriv=0.5278: n=  312  E_per min=5.3134 median=7.1162 max=11.9218
+   f_nontriv=0.5556: n=  944  E_per min=5.5861 median=7.7870 max=13.0000
+   f_nontriv=0.5833: n=  728  E_per min=5.9171 median=8.1521 max=13.7538
+   f_nontriv=0.6111: n= 1988  E_per min=6.2171 median=8.5711 max=13.4515
+   f_nontriv=0.6389: n= 1248  E_per min=6.5589 median=9.6523 max=14.0632
+   f_nontriv=0.6667: n= 1655  E_per min=7.0157 median=9.6878 max=16.0000
+   f_nontriv=0.6944: n= 2192  E_per min=7.5101 median=9.9384 max=14.6154
+   f_nontriv=0.7222: n= 1660  E_per min=7.5002 median=10.5711 max=16.0000
+   f_nontriv=0.7500: n= 1392  E_per min=8.5545 median=10.7443 max=14.6283
+   f_nontriv=0.7778: n=  586  E_per min=9.2960 median=11.6791 max=15.0653
+ k=4 S=[[2, 0, 0], [0, 2, 0], [0, 0, 1]] tri=(2, 23, 21) [exh] [top, full] k= 4  E_per=16.000000000  theta_min=[0.0, 0.0, 0.0] (Gamma)  gap12=1.2e-14 (generic q: 1.4e-14) gap13=1.954e-14  distinct_minima=2  flux: nontriv=0.7222 traceless=0.4444 -1=0.2778  classes={'1': 20, '-1': 20, 'i': 0, 'j': 32, 'k': 0} (inter-tile plaquettes=72)
+      Hessian (Richardson FD, h=0.02/0.01) = [+9.20000 -9.80000 -7.20000; -9.80000 +18.00000 +0.60000; -7.20000 +0.60000 +8.40000]  eigs=[-0.95291, 10.97186, 25.58105]  Richardson change=4.3e-05 raw |FD(0.02)-FD(0.01)|=1.1e-02
+      Hessian (2nd-order PT, degeneracy g=4, non-scalar part 9.0e+00) = [+9.60000 -7.60000 -5.60000; -7.60000 +22.00000 -2.80000; -5.60000 -2.80000 +11.20000]  max|PT-FD|=4.0e+00  |grad|=0.0e+00
+ k=4 S=[[2, 0, 0], [0, 2, 0], [0, 0, 1]] tri=(2, 21, 23) [exh] [top, full] k= 4  E_per=16.000000000  theta_min=[0.0, 0.0, 0.0] (Gamma)  gap12=5.3e-15 (generic q: 7.1e-15) gap13=7.105e-15  distinct_minima=2  flux: nontriv=0.7222 traceless=0.4444 -1=0.2778  classes={'1': 20, '-1': 20, 'i': 0, 'j': 32, 'k': 0} (inter-tile plaquettes=72)
+      Hessian (Richardson FD, h=0.02/0.01) = [+9.20000 -9.80000 -7.20000; -9.80000 +18.00000 +0.60000; -7.20000 +0.60000 +8.40000]  eigs=[-0.95291, 10.97186, 25.58105]  Richardson change=4.3e-05 raw |FD(0.02)-FD(0.01)|=1.1e-02
+      Hessian (2nd-order PT, degeneracy g=4, non-scalar part 8.6e+00) = [+9.60000 -7.60000 -5.60000; -7.60000 +22.00000 -2.80000; -5.60000 -2.80000 +11.20000]  max|PT-FD|=4.0e+00  |grad|=0.0e+00
+ k=4 S=[[2, 0, 0], [0, 2, 0], [0, 0, 1]] tri=(3, 1, 2) [exh] [top, full] k= 4  E_per=16.000000000  theta_min=[1.0, 1.0, 0.5] (TRIM)  gap12=1.4e-14 (generic q: 2.1e-14) gap13=4.000e+00  distinct_minima=1  flux: nontriv=0.6667 traceless=0.0000 -1=0.6667  classes={'1': 24, '-1': 48, 'i': 0, 'j': 0, 'k': 0} (inter-tile plaquettes=72)
+      Hessian (Richardson FD, h=0.02/0.01) = [+10.00000 -4.00000 -4.00000; -4.00000 +10.00000 -4.00000; -4.00000 -4.00000 +10.00000]  eigs=[2.0, 14.0, 14.0]  Richardson change=1.1e-06 raw |FD(0.02)-FD(0.01)|=1.6e-03
+      Hessian (2nd-order PT, degeneracy g=2, non-scalar part 1.8e-15) = [+10.00000 -4.00000 -4.00000; -4.00000 +10.00000 -4.00000; -4.00000 -4.00000 +10.00000]  max|PT-FD|=7.4e-08  |grad|=1.2e-15
+[stage A2 0 done in 842s; 13827 records saved]

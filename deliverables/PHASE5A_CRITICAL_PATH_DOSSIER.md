@@ -1,0 +1,224 @@
+# Phase V-A — The Critical Path: Dossier
+
+**Scope.** Four parts of the Phase V-A brief (computational evidence reconstructed independently; the band edge near 8.76 defined and attacked as an infinite-volume object; the type recursion as a kernel-checked Lean theorem; physical realization with falsification criteria) plus the mandatory targets H1–H6, and the question added last: *is there a reproducible relationship between the spectral edge and the spatial organization of the decoration that survives controls with matched flux fractions?*
+
+**Status vocabulary** (used for every claim): **[P]** proved in this repository with an explicit argument; **[K]** kernel-checked in Lean 4.34.1 without Mathlib; **[E]** reproduced computationally with reported residuals, by code written for this phase; **[C]** computationally supported conjecture; **[U]** unresolved; **[Cite]** depends on a cited theorem whose statement was checked only against metadata (no full text available in this environment).
+
+Branch: `claude/phase5a-critical-path` (created from `claude/magical-euler-0vm2f8` at e2677db). Interim commits 1dd61cc, b337be7 (snapshots of agent outputs while runs were still in progress; two text outputs in those snapshots were partial and are superseded by the working-tree files committed below). Final commit: the commit that carries this version of the dossier (listed in Appendix A together with all interim snapshots); the appendix is the authoritative changed-file inventory.
+
+---
+
+## 1. Provenance of the object
+
+**Definitions (shared with production code because they define the object).** Chair prototile $C_3=[0,2]^3\setminus(1,2]^3$ (7 unit cubes $U_3=\{0,1\}^3\setminus\{(1,1,1)\}$), inflation 2, 8 children: the centre child $(P(\pi_0),(1,1,1))$ and seven octant children $(D_s(v)P(\pi_v),4v)$ in doubled coordinates, frames given by the FR30 permutation table; frames lie in $SO(3,\mathbb Z)$ and all 24 occur (7 at level 1, 24 at level 2). Links on the shared unit panel $f$ with normal $n$ between tiles $a,b$ with frames $M_a,M_b$: $C_{ab}=(\sigma\cdot M_a^T n)(\sigma\cdot M_b^T n)\in Q_8$, $C_{ba}=C_{ab}^\dagger$. Quaternion dictionary $e_m=-i\sigma_m$, so $C_{ab}=-(u_au_b)$.
+
+**Source of the data under test.** The `measured` dictionary in `audit/phase4_type_substitution_proof.py` (class-resolved inter-tile plaquette counts at levels 1–5), the recursion data exported to `certificates/TypeSubstitutionCertificate.lean`, the Phase V pinned-patch bottoms 10.77695, 9.37847, 8.91963, 8.79701, 8.77013 (levels 2–6), and the Phase V participation ratios.
+
+**Convention audit (A4) [E].** From the relations $i^2=j^2=k^2=ijk=-1$ alone the Q8 table is unique among $8^6$ candidates; the dictionary $e_m=-i\sigma_m$ is a homomorphism (64 products checked); the integer Q8 routine in the repository and the Lean `qmul`/`cliffordLink` agree on every product. One genuine convention defect was found: the numpy labeller `q8label` in `audit/independent_clifford_q8_audit.py` names the matrix $+i\sigma_m$ "$+m$", which is the quaternion $-m$; all signed histograms of traceless classes in `audit/results/phase3_*.txt` are therefore sign-flipped relative to the quaternion convention. No conjugacy-class count or frequency is affected (classes agree 36/36). A documentation error was found in Phase 2 §2.1: the panel count is $12(8^k-4^k)=48,576,5376,\dots$, not $48\cdot12^{k-1}$.
+
+**Gauge content [E].** The five class frequencies $19/36,13/144,1/9,23/144,1/9$ are invariant under Q8-valued gauge transformations and under the local-frame convention, but the split of the traceless part into $i/j/k$ is *not* SU(2)-gauge-invariant (in the ambient spin-lift gauge the axis label of 17/60 level-1 and 253/792 level-2 plaquettes depends on the base tile). The SU(2)-invariant content is $(19/36,\;13/144,\;55/144)$ for classes $\{+1\},\{-1\},\{\text{traceless}\}$. Documents calling the $i/j/k$ split "gauge-invariant" should say "invariant under Q8 gauge transformations".
+
+---
+
+## 2. Independent verification (Part I)
+
+### 2.1 Enumerator written without production imports (A1) [E]
+
+`audit/phase5a_independent_enumerator.py` imports only the standard library and numpy. It represents frames as signed permutations (not matrices), Q8 as abstract (sign, basis) pairs with a table derived from the relations, generates tiles breadth-first with explicit ancestor tracking, parametrises plaquettes by lattice edge rather than by cube, and evaluates holonomies with two mutually checked evaluators (scalar and vectorised). Pauli-matrix cross-checks are run on every link at levels 1–2.
+
+| level $m$ | $N_m$ | $\{+1\}$ | $\{-1\}$ | $\{\pm i\}$ | $\{\pm j\}$ | $\{\pm k\}$ |
+|---|---|---|---|---|---|---|
+| 1 | 60 | 26 | 3 | 12 | 7 | 12 |
+| 2 | 792 | 385 | 42 | 124 | 117 | 124 |
+| 3 | 7728 | 3945 | 530 | 1020 | 1213 | 1020 |
+| 4 | 67680 | 35161 | 5394 | 8188 | 10749 | 8188 |
+| 5 | 565440 | 296121 | 48146 | 65532 | 90109 | 65532 |
+
+Every entry equals the recursion output recorded in `audit/results/phase4_type_substitution_proof.txt`, and $N_m=18\cdot8^m-24\cdot4^m+6\cdot2^m$ holds exactly. Straddling counts $B_m=24\cdot4^m-18\cdot2^m$ and their class resolution match the Phase 3 files at levels 3–5. A deliberate perturbation of two FR30 permutations keeps the geometry and $N_m$ but changes the class vector, so the enumerator is decoration-sensitive. Run time 0.96 s, 81 MB. Ten unit tests (`tests/test_phase5a_independent_enumerator.py`).
+
+**Adversarial verification of A1.** Three independent referees re-derived the level-1 and level-2 geometry and links (one by a from-scratch matrix implementation, `audit/phase5a_referee_geometry.py`, `audit/phase5a_referee_links_check.py`; results in `audit/results/phase5a_referee_*.txt`). Two referees returned *not refuted*, each having reproduced every number of the A1 claim by its own code path (three mutually agreeing code paths in one case); the third referee's run was lost when the orchestrating process died and was not repeated. The D1 enumerator of §4.5, written later and independently of A1 (dense owner grid, integer Q8 codes, cyclic panel products), reproduces the same class counts at levels 1–3 and the level-5 totals, which is a fourth independent reproduction.
+
+### 2.2 Type-system audit (A2) [E]
+
+`audit/phase5a_type_system_audit.py` (23 tests). All 49 panel and 108 plaquette representatives are valid, recompute to their keys and classes, are reconstructible from the key alone, and match the Lean certificate data byte for byte. Every inter-tile panel/plaquette of $T_1..T_5$ (up to 380 928 panels, 565 440 plaquettes) has a representative key; the class and the canonical link label are functions of the type on every instance; inflation images were verified on all 576 + 792 level-2 instances. 11 618 rigid-motion checks passed; the intrinsic key is in fact invariant under the full hyperoctahedral group $O(3,\mathbb Z)$ (harmless, since $\det=-1$ frames never occur). Eight loop orderings never change the class; reversal is inversion, base change is conjugation. Random Q8 and SU(2) gauges change most links but no class.
+
+Two findings correct the brief rather than the code: reversing one tile's face normals is the central gauge transformation $-I$ and changes **zero** classes (the brief predicted a change); a plaquette key consisting only of relative frames does not determine the class (18 of 78 coarse keys at level 2 carry two classes), so the local cube positions in the key are essential.
+
+### 2.3 Recursion as a theorem with explicit conventions (A3) [P + E]
+
+`audit/phase5a_recursion_theorem_audit.py` and `deliverables/PHASE5A_RECURSION_THEOREM.md` (six numbered statements with hypotheses and proofs; 15 tests). Conventions fixed: vectors are columns, $S[r,c]$ counts outputs of type $r$ per input of type $c$, so the column sums are 4 (panels, $M$), 4 (panel→plaquette, $A$), 2 (plaquettes, $B$); row sums are not constant. The affine recursion $v_{m+1}=8^m f+Sv_m$ was proved coordinate-wise by parity category and checked exhaustively for $m=1,2,3$ (every inflated tile contributes exactly the forcing pair). Characteristic polynomials $\lambda^{44}(\lambda-4)(\lambda-1)^4$ and $\lambda^{103}(\lambda-2)(\lambda-1)^4$; nonzero part semisimple; nilpotency index 2 (ranks of $S,S^2,S^3$ are 27, 10, 10).
+
+Correction to Phase V wording: FR30 has **no** self-reproducing panel type with $M[c,c]=4$. The stable interface object is a 7-type sink block $\{0,2,5,9,14,25,42\}$ of rank 2 with characteristic polynomial $\lambda^5(\lambda-4)(\lambda-1)$. The closed form $64v_m=8^mW_8+4^mW_4+2^mW_2+W_1$ holds for all $m\ge2$ (checked to $m=9$; the Lean base case at $m=3$ is therefore stronger than needed), and fails at $m=1$.
+
+**Counterexamples bounding the general theorem [P + E]** (`audit/phase5a_counterexamples.py`): Fibonacci (irrational frequencies $1/\varphi,1/\varphi^2$); the non-primitive rule $a\to aa,\ b\to bb$ (seed-dependent limit); Thue–Morse 2-blocks (spectrum $\{2,1,-1,0\}$, the $-1$ is the non-clean eigenvalue); period doubling ($\{2,-1\}$). Rationality of limits needs primitivity plus a rational Perron data set; cleanness is not automatic.
+
+### 2.4 Clean-spectrum criterion (H6) [P + E]
+
+Condensation criterion: the substitution matrix is clean (spectrum $\subset\{K,1,0\}$ with $K$ the inflation count) iff every non-sink strongly connected component is a singleton with loop weight 0 or 1 and every sink component has non-Perron spectrum in $\{0,1\}$; then $\mathrm{mult}(K)=\#\text{sinks}$. Verified clause by clause on $M$ and $B$ for FR30 (clean), the achiral decoration (clean, three rank-1 sinks), and random decorations #0 and #1 (not clean: 3-cycles, an 11-type irreducible block, sink blocks with eigenvalues $2,-1,(-1\pm\sqrt{17})/2$).
+
+**Outcome H6: proved theorem.**
+
+---
+
+## 3. Theorem audit: the infinite-volume framework (H1) [P unless marked]
+
+Deliverable: `deliverables/PHASE5A_INFINITE_VOLUME_FRAMEWORK.md` (Task B3). Statements proved there, each with hypotheses:
+
+1. **Hull.** $\Omega$ (tilings all of whose patches are legal) is a non-empty compact $\mathbb Z^3$-subshift of finite local complexity over 168 letters; a fixed point exists with $\sigma^2(\omega^*)=\omega^*+(2,2,2)$. Correction: the pose $(I,-(1,1,1))$ is not a valid seed (its inflations exhaust only an octant); the correct seed is the central word at $-(2/3)(1,1,1)$.
+2. **Frame substitution.** $24\times24$ matrix with row and column sums 8, spectrum $\{8,2^{(20)},0^{(3)}\}$, uniform frame frequencies $1/24$, primitivity exponent 2.
+3. **Notch rule and recognizability.** A chair is central in its supertile iff at least two (equivalently all seven) of its cubes are notches of other chairs. Unique composition follows; hence **aperiodicity** of every hull element. This closes the "external, unverified" aperiodicity item of the Phase V ledger.
+4. **Repetitivity and minimality.** Every legal patch in $T_m$ occurs in every level-$(m+2)$ supertile of every $\omega$.
+5. **Unique ergodicity [Cite]** (Solomyak 1997; Lee–Moody–Solomyak 2002).
+6. **Operator.** $H_\omega=24-A_\omega$ on $\ell^2(\text{tiles})\otimes\mathbb C^2$: bounded, self-adjoint, $0\le H\le48$, $\langle\psi,H\psi\rangle=\sum_f|\psi_a-C_f\psi_b|^2$; gauge, translation and $SO(3,\mathbb Z)$ covariance (no spin rotation); quaternionic symmetry $J^2=-1$, Kramers doublets.
+7. **Constancy of the spectrum** on the hull (direct Weyl-sequence proof using minimality); $E_{\rm bulk}=\inf\sigma(H_\omega)$ is well defined.
+8. **Compression theorem.** $H^{\rm pin}_m=24-A$ on $T_m$ is exactly the compression of $H_\omega$; $\lambda_{\min}(H^{\rm pin}_m)$ is non-increasing and converges to $E_{\rm bulk}$.
+9. **Certified bounds [P + E].** Exact rational Rayleigh quotients: $E_{\rm bulk}\le10.776950512,\ 9.378470210,\ 8.919634360,\ 8.797011333$ (levels 2–5). The level-6 value 8.77013 is a floating-point Rayleigh–Ritz value, not a certificate.
+10. **Positive lower bound [P + E].** $E_{\rm bulk}\ge3137451/2000000=1.5687255$, via the plaquette decomposition $H=\tfrac14\sum_e h_e$, the closure of the 72 legal vertex-star types under the collared substitution (two seeds give the same 72; complete stars of $T_5$ are exactly these 72), and exact rational $LDL^*$ pivots for all 207 plaquette signatures. **Adversarial check (C2, `audit/phase5a_c2_lower_bound_check.py`, `audit/results/phase5a_c2_lower_bound_check.txt`): confirmed and improved.** C2 verified the decomposition identity exactly on $T_3$ (every panel lies in exactly four edge cycles; $(1/4)\sum_e h_e$ equals $D-A$ with zero error, and the pinned form on interior tiles), re-extracted the star types with its own code (70 in $T_4$, 72 in $T_5$, closure orbit from one star equals the 72), re-derived the plaquette spectra analytically ($\lambda_{\min}\in\{0,\,2-2\cos(\pi/8),\,2-\sqrt3,\,2-\sqrt2,\,1,\,2\}$), re-certified the 161 non-flat signatures by its own exact $LDL^*$ (0 failures; the test rejects $\mu_e+2.2\cdot10^{-5}$, so the pivots do detect $\lambda_{\min}$) and reproduced $3137451/2000000$ exactly. Completeness was attacked at scale: the complete vertex stars of $T_6$ (238 328), of three rotated and translated copies of $T_6$, and of $T_7$ (2 000 376 stars, 2 097 152 tiles) are exactly the same 72 types; no new type appears. The bound is loose because it discards cross-star correlations (the $T_5$ ground state has Rayleigh quotient 8.797 while the star minimum is 1.569). Grouping edges into vertex blocks ($2\times2\times2$ cubes, weight 1/4) under the same 72-type closure gives a **certified improvement $E_{\rm bulk}\ge12805833/4000000=3.2014583$** (246 block signatures, 0 exact failures); a radius-2 (3-block) decomposition evaluated on the 165 two-star types of $T_5$ (the same 165 occur in $T_6$) gives 4.008 in floating point, uncertified because the completeness of the two-star types was not proved. The rigorous bracket is therefore $3.2015\le E_{\rm bulk}\le8.7970$.
+11. **The gap is a flux effect [P].** For the trivial connection on the same hull $\inf\sigma=0$.
+12. **IDS [P].** $\|N^{\rm pin}_m-N^{\rm free}_m\|_\infty\le24\cdot2^{-m}$; both converge uniformly to one $N_\infty$ (identification with the hull IDS is [Cite]).
+13. **Effective mass [P, conditional].** Any hull-covariant effective-mass tensor is isotropic (Schur, $SO(3,\mathbb Z)$ with trivial spin action).
+
+**Outcome H1: proved theorem** (items 1–4, 6–13), with unique ergodicity cited.
+
+---
+
+## 4. Spectral result (Part II, H2–H5)
+
+### 4.1 What the two bottoms are (H2) [P + E]
+
+The free-boundary bottom $5.25$ is the energy of a state localized on the patch boundary (boundary weight 0.93 at levels 3–5 while the boundary fraction falls 0.56→0.17; participation 87–104 tiles independent of $n$). It is a surface artefact of the reduced diagonal. The pinned bottom is the compression of the bulk operator; its limit **is** the infinite-volume edge $E_{\rm bulk}$. Reproduced at levels 2–6 by an independent Chebyshev-filtered subspace solver and by matrix-free LOBPCG: 10.776951, 9.378470, 8.919634, 8.797011, 8.770134 (residuals $10^{-14}$ to $7\cdot10^{-8}$; level 6 Kramers doublet, next doublet 8.770242). Decrements 1.399, 0.459, 0.123, 0.027 with ratios 0.33, 0.27, 0.22.
+
+Rigorous bracket: $1.5687\le E_{\rm bulk}\le8.79702$ (certified, exact value 8.797011333; the adversarial check C2 of §3 raised the certified lower bound to 3.2015), $\le8.77013$ (IEEE). $E_{\rm bulk}\approx8.76$ is **[C]** (geometric decay of decrements unproved).
+
+**Outcome H2: proved theorem for the bracket and the identification; conjecture for the value 8.76.**
+
+### 4.2 Extended or localized (H3) [E → C]
+
+Pinned ground-state tile participation $\mathrm{IPR}\cdot n=2.39,\,6.42,\,9.15,\,19.93,\,42.79$ at levels 2–6 (level 6 recomputed, not quoted). Two-point exponents $\alpha$ in $\mathrm{IPR}\sim n^{-\alpha}$: 0.52, 0.83, 0.63, 0.63. For the lowest eight states: 0.56, 0.77, 0.56, 0.55. The extended control (trivial links, same graph) gives $\mathrm{IPR}\cdot n=2.26,2.89,3.26,3.47$, $\alpha\to1$. Boundary weight of the pinned states is $\le0.001$ at level 5 and 0.0000 at level 6.
+
+Spatial organization: depth-1 interface weight 0.78, 0.66, 0.58, 0.57 (levels 3–6) against interface tile fractions 0.53, 0.31, 0.17, 0.09 (enrichment 1.5→6.3); participation is 0.26–0.35 of the interface-network size $T_L=8,53,269,1277,5597,23453$ (growth →4, i.e. two-dimensional surfaces, predicted asymptotic $\alpha=2/3$). Generalized dimension $D_2=2.49,1.88,1.90$ from consecutive level pairs; box-counting local dimensions 1.7–2.5 at fine scales (uniform state: 3; trivial control: 2.0→3.0). The lowest ≈75 states per patch form an interface band of width 0.44 (level 4) → 0.11 (level 5).
+
+Controls at levels 3–5 (`audit/results/phase5a_scaling_controls.txt`; criterion $|\alpha_{4\to5}-0.625|\le0.10$ shares, $\ge0.25$ does not): unit cube with the FR30-type decoration 0.75 (ambiguous); random admissible substitution decorations seeds 1, 2 → 0.09, 0.11 (localizing; do not share), seed 3 → 0.65 (shares); sign-stripped links 0.89, i.i.d. random Q8 links $-0.25$, trivial links 0.94 (do not share). The cube control was extended to level 6 in this session (`audit/results/phase5a_scaling_controls_cube.txt`): $\mathrm{IPR}\cdot n=7.84,10.29,17.21,31.32$ at levels 3–6, $\alpha=0.87,0.75,0.71$, bottom decrements 0.053, 0.0089, 0.0012 (bottom 1.85089 at level 6). So a periodic-geometry tiling carrying the *same hierarchical decoration* also shows sub-extended growth, weaker than FR30's ($\mathrm{IPR}\cdot n$ ratio per level 1.82 versus 2.15) and with a much faster-converging edge; the hierarchy of the frame field, not the chair geometry, is what the two systems share.
+
+**Outcome H3: computationally supported conjecture** — the edge states are neither extended nor localized at accessible sizes; they live on the hierarchical interface network with $D_2\approx1.9$. The exponent is not stable over the window (0.52–0.83), so no clean power law is claimed. Independent checks of these numbers: the level-3 to level-5 bottoms, participation ratios, box-counting dimensions and interface weights were recomputed by a second script with a different graph builder (vectorised owner grid, C3, `audit/results/phase5a_level6_structure.txt`) and agree to all printed digits (e.g. $\mathrm{IPR}\cdot n$ 6.424, 9.146, 19.930); the level-6 bottom 8.770134 and $\mathrm{IPR}\cdot n=42.789$ were obtained by two solvers (LOBPCG, 3100 iterations, residual $3.5\cdot10^{-7}$; Chebyshev-filtered subspace iteration, $\theta_1=8.770144$ at residual $2.8\cdot10^{-4}$ when stopped) and the saved level-6 weight vector was re-analysed in this session (IPR·n 42.789, $S_2(d)$ and $s_{50}/s_{90}$ identical). The two adversarial skeptic reviews scheduled for this task were lost with the orchestrating process and were not repeated.
+
+### 4.3 Homogenization (H4) [U with obstruction stated]
+
+No Floquet decomposition exists on $\Omega$; periodic approximants necessarily carry illegal seams (aperiodicity, item 3 above). The exact obligations are stated in the framework document §5.3 (strong resolvent convergence of approximants, uniform non-degeneracy of the edge, convergence of the Hessians). IDS counting exponents near the edge (B4, `audit/results/phase5a_ids_edge.txt`): calibration controls show that a true parabolic edge appears at these sizes with local exponents 1.65–1.93 because of the Dirichlet surface term, so $3/2$ is not the right finite-size benchmark; FR30 at level 4 gives 1.32–1.39 in the two upper windows (bootstrap median 1.34 [1.31, 1.37]), far below the matched trivial control (1.88–1.93), inconsistent with a Dirichlet-sampled parabolic edge at this size; level-5 FR30 did not finish. **Outcome H4: unresolved, leaning anomalous; obstruction identified.**
+
+### 4.4 Effective mass (H5) [P conditional + E]
+
+If an effective mass exists it is a scalar (item 13). For periodic Q8 decorations with $2L\subset L'$ the Richardson finite-difference and degenerate-perturbation-theory Hessians agree to $2\cdot10^{-6}$ and are scalar to $4\cdot10^{-14}$ (e.g. the natural FR30 bijection on $2\Lambda_7$: $E_{\rm per}=10.644234$, Hessian eigenvalues 11.45, 26.62, 26.94); at band touchings no effective-mass description exists. For the aperiodic operator no construction is available. **Outcome H5: unresolved for the hull; the only unconditional statement is the isotropy theorem.**
+
+### 4.5 The relationship asked for: spectral edge versus spatial organization at matched flux
+
+**Periodic census (B2a) [E], and its adversarial re-check (D2) [E].** The $\Lambda_7$ chair crystal ($\phi(x,y,z)=x+2y+4z \bmod 7$ is a bijection on $U_3$, so chairs at $\ker\phi$ tile $\mathbb Z^3$; 24 panels per chair, 14 neighbours; 18 inter-tile plaquettes per chair, so FR30's limit 18 is geometric) was decorated with frame fields constant on cosets of sublattices of index 1, 2, 4, 8 and solved by exact Bloch theory. D2 re-derived the crystal, rewrote the Bloch solver and the flux code from scratch (`audit/phase5a_d2_census_verify.py`, `audit/phase5a_d2_counterexample_check.py`), recomputed 326 census records (maximum discrepancy $3\cdot10^{-14}$ in $E_{\rm per}$, class counts identical) and the regression (coefficients, rms 0.532 and the prediction 6.330 at the FR30 fractions reproduce to all printed digits), and confirmed the 40 320-bijection range. It also found that about 0.1 % of the records computed on a coarse $4^3$ grid overestimate their band bottom (worst case 8.000 recorded versus 7.485 true), which can only lower the census.
+
+**The census conclusion is refuted.** B2a's statement "no flux-matched periodic decoration reaches 8.77" (maximum 8.18 over 1551 matched records) was an artefact of sampling only four random decorations per non-$2L$ index-8 sublattice. D2's rejection-sampled search over all 35 index-4 and 155 index-8 sublattices produced 2104 flux-matched decorations with $E_{\rm per}$ in $[4.497,\ 8.958]$ (median 6.64; 43 above the census maximum 8.18; 3 above 8.770), and a constrained hill-climb reached a flux-matched $E_{\rm per}=9.634$. Each counterexample was confirmed by a real-space torus Hamiltonian built without Bloch code (eigenvalues agree to $3\cdot10^{-13}$) and by a 2×2-matrix holonomy recount.
+
+| population | count | $E$ range | median |
+|---|---|---|---|
+| all periodic decorations (B2a records) | 44 539 | 0 – 16.000 | — |
+| flux-matched periodic, B2a records | 1 551 | 4.50 – 8.18 | 5.61 |
+| flux-matched periodic, D2 random search | 2 104 | 4.50 – **8.96** | 6.64 |
+| flux-matched periodic, D2 hill-climb | — | up to **9.63** | — |
+| random substitution decorations (D1) | 18 | 5.27 – 8.49 | 7.34 |
+| flux-matched among them | 9 | 6.85 – **8.49** | — |
+| FR30 (aperiodic), rigorous | — | $\le 8.79702$ certified, $\le 8.77013$ | — |
+
+**Aperiodic controls at matched flux (D1) [E].** `audit/phase5a_flux_vs_edge.py` (own vectorised plaquette enumerator, self-checked against the FR30 class counts at levels 1–3; 5 unit tests) computed, for FR30 and 18 parity-admissible random *substitution* decorations of the same chair (seeds 1–6, 101–112; seeds 1–3 are the decorations of the scaling controls), the level-5 class fractions of the 565 440 inter-tile plaquettes, the pinned bottoms at levels 4 and 5 (LOBPCG, residuals $\le5\cdot10^{-7}$), and four statistics of the spatial organisation of frustration. Full table: `audit/results/phase5a_flux_vs_edge.txt`. Every substitution decoration lies above the periodic flux regression, by +1.14 to +2.49 (18 random ones: mean +1.62, sd 0.31; FR30 +2.49); in the periodic population the residuals are symmetric with rms 0.53 and 95th percentile of $|r|$ equal to 1.08, so 19 out of 19 positive residuals with mean +1.6 is not a fluctuation of that population. Within the substitution family flux again explains most of the variance ($E_0\approx-2.33+18.67f_{\rm trl}+36.36f_{-1}$, rms 0.33); a flux-only model fitted on the 18 random decorations predicts 7.98 for FR30 (error +0.82). No random substitution decoration reaches FR30 (max 8.49, seed 108), and at matched flux the substitution edge still varies by 1.6.
+
+Which organisation statistic carries the substitution excess is **not settled**. Within the flux-matched substitution set ($n=10$) the edge orders with the uniformity of frustration over tiles (Spearman of $E_0$ with the coefficient of variation of the per-tile count of $-1$ plaquettes: $-0.89$, $p=0.001$; with a nearest-neighbour clustering index: $-0.71$, $p=0.02$; FR30 is the most uniform and least clustered of all 19), but after linearly removing the flux dependence over all 19 these partial correlations vanish (+0.04, +0.10) because both statistics track $f_{-1}$. The one statistic with a surviving partial correlation is the enrichment of *traceless* plaquettes on the top-level supertile interface (partial Spearman $-0.59$, $p=0.008$; FR30 has the smallest value, 0.445). Adding these statistics to the flux model does not predict FR30's excess (error still +0.68 to +0.84). Nineteen decorations and four candidate statistics support at most **[C]**.
+
+**Statement of the relationship (what survives matched-flux controls), and what does not.**
+
+> *Survives [E → C].* (i) Flux-class fractions do not determine the Q8 band edge: at FR30's fractions, periodic decorations of the chair crystal span at least $[4.50,\ 9.63]$ and substitution decorations span $[6.85,\ 8.80]$. (ii) Hierarchical (substitution) organisation of the frame field raises the edge relative to the periodic population of the same flux: all 19 substitution decorations tested lie 1.1–2.5 above the periodic regression, three to five times its rms. (iii) Among substitution decorations FR30 has the highest edge, the most uniformly distributed $-1$ frustration and the strongest depletion of traceless plaquettes from top-level interfaces; its edge states live on the hierarchical interface network ($D_2\approx1.9$).
+>
+> *Does not survive [refuted by D2].* "FR30's edge exceeds every flux-matched periodic decoration." Flux-matched pure-translation decorations of index 8 reach 8.96 by random sampling and 9.63 by hill-climbing, above FR30's bound. FR30 is in the top 0.15 % of the flux-matched periodic distribution sampled by D2 (3 of 2104 above 8.770), not above it; a claim that the FR30 value is unreachable by periodic systems at matched flux would be false.
+
+What is **proved** here: the FR30 numbers (certified upper bound 8.79701, convergence of the pinned sequence to the hull edge, the 18-plaquette geometric count). What is **numerical**: every control value (Bloch bottoms refined to $10^{-14}$ and confirmed by real-space tori; LOBPCG bottoms to $10^{-7}$) and the coverage (pure-translation periodic decorations of index $\le8$; 18 random substitution decorations at level 5). What is **open**: the mechanism behind (ii) and (iii), the infinite-volume values of the aperiodic controls (their level-5 pinned bottoms are upper bounds; the closest, seed 108 at 8.49, drops 0.11 from level 4 to 5 while FR30 drops 0.12 then 0.027, so the ordering is unlikely but not proved to persist), and whether (i)–(iii) hold for other substitution tilings.
+
+---
+
+## 5. Lean status (Part III)
+
+Toolchain: Lean 4.34.1 (commit 5045d005), x86_64 Linux, no Mathlib, binary at `/tmp/claude-0/-home-user--/3e28775d-be57-5932-b9d4-6e0f425b644f/scratchpad/leandl/lean-4.34.1-linux/bin/lean`. Command for the certificate: `lean certificates/TypeSubstitutionCertificate.lean`. The file contains no `sorry`, no `native_decide`, no `axiom`; 14 `decide +kernel` data checks.
+
+Changes this phase (A5): a data-independent theorem `closed_form_general` (hypotheses: linear step on an arbitrary finite type system, eigen-identities, base case at $j=2$ — the redundant $u_0=f$ hypothesis is kept for the requested signature) proved by induction; `closed_form_all` is now its instantiation and the original direct induction is kept as `closed_form_all_direct`; a Q8 section with `q8_closed`, `q8_conj_is_inverse`, `q8_class_conj_invariant`, `q8_class_inverse_invariant`, all by `decide` with **no axioms**. No theorem was removed or changed in statement; the certificate data block is byte-identical to HEAD.
+
+Compile records: a scratch copy with `decide +kernel` replaced by `native_decide` compiles with zero errors and warnings in 24.9 s (`audit/results/phase5a_lean_general_theorem_compile.txt`); a data-free extract compiles with the kernel in 2.6 s, `closed_form_general` depending on `[propext, Quot.sound]`.
+
+**Full kernel compile of the real regenerated certificate [K].** Run in this session as a single process after the shared jobs had finished (record: `audit/results/phase5a_lean_full_kernel_compile.txt`; the file compiled has sha256 `f8f89bb…0de68`):
+
+```
+lean certificates/TypeSubstitutionCertificate.lean
+EXIT=0  wall=454s  peakRSS=11298MB   (Lean 4.34.1, commit 5045d005; 0 errors, 0 warnings)
+'TypeSubstitution.closed_form_all'          depends on axioms: [propext, Quot.sound]
+'TypeSubstitution.class_counts_closed_form' depends on axioms: [propext, Quot.sound]
+'TypeSubstitution.total_closed_form'        depends on axioms: [propext, Quot.sound]
+'TypeSubstitution.limit_frequencies'        depends on axioms: [propext]
+'TypeSubstitution.closed_form_general'      depends on axioms: [propext, Quot.sound]
+'TypeSubstitution.closed_form_all_direct'   depends on axioms: [propext, Classical.choice, Quot.sound]
+'TypeSubstitution.q8_closed'                depends on axioms: [propext]
+'TypeSubstitution.q8_conj_is_inverse'       does not depend on any axioms
+'TypeSubstitution.q8_class_conj_invariant'  does not depend on any axioms
+'TypeSubstitution.q8_class_inverse_invariant' does not depend on any axioms
+```
+
+The 14 `decide +kernel` data checks (among them `types_distinct`, `panel_images_certified`, `plaquette_images_certified`, `classes_certified`, `standard_level1_certified`, `equivariance_certified`, `seed_certified`, `level1_geometry_matches_recursion`, `level2_geometry_matches_recursion`, `eigen_check`, `u1_check`, `u2_check`, `base_check`) are discharged by the kernel; every theorem's axiom footprint is within `propext`, `Quot.sound`, `Classical.choice` (the standard Lean core axioms); no theorem depends on a `native_decide` axiom or on `sorryAx`.
+
+What the Lean theorem states and does not state: it certifies the finite data (types, images, classes, level-1 and level-2 geometry) and the arithmetic consequences (recursion, closed form for $m\ge3$, limit frequencies). It does **not** formalize the geometric lemma that every inter-tile plaquette of $T_m$ has one of the 108 types (this is the content verified computationally to level 5 in §2.2), nor anything about the hull or the operator.
+
+---
+
+## 6. Physical prediction and falsification criterion (Part IV)
+
+What is physical here is a tight-binding spin-½ hopping problem on the chair tiling with Q8 (π-flux-type) link phases, realizable in principle in photonic or microwave lattices, cold-atom optical tilings, or circuit-QED arrays where SU(2) link operators are engineered; no gravity prediction follows from any result in this dossier, and none is manufactured (the only gravity-adjacent statement is the isotropy of any covariant effective-mass tensor, item 13 of §3, which is a symmetry statement about the lattice, not a continuum derivation).
+
+**Prediction P1 (edge position).** The bulk spectral edge of the pinned FR30 Clifford operator lies in $[3.2015, 8.79702]$ with the sequence of pinned-patch bottoms converging to it from above; numerically $8.76\pm0.01$. **Falsified** if a measurement or an exact computation of the hull spectrum finds spectral weight below 8.70 away from boundaries, or if the pinned-patch sequence turns out not to be non-increasing (that would contradict a proved theorem and indicate an implementation error).
+
+**Prediction P2 (hierarchy effect at matched flux).** A parity-admissible random substitution decoration of the chair has a level-5 pinned bottom above the periodic flux regression $-1.904+14.303f_{\rm trl}+30.696f_{-1}$ evaluated at its own level-5 fractions, by at least +0.5. **Falsified** by one substitution decoration with residual below +0.5 (19 of 19 tested lie at +1.1 or above; a sample of 200 at level 4 is the cheap test, item 1 of §9). Not predicted: that FR30's edge exceeds all flux-matched periodic decorations; D2 showed this false (9.63 reachable).
+
+**Prediction P3 (edge-state organization).** The lowest states of any sufficiently large legal patch concentrate on the hierarchical interface network with participation about 0.3 of the network size and $D_2\approx1.9$. **Falsified** by an extended ($\mathrm{IPR}\cdot n\to$ const) or exponentially localized ($\mathrm{IPR}\to$ const) ground state at level 7 or beyond.
+
+---
+
+## 7. Literature assessment
+
+No network access to full texts was available; the Consensus search tool and metadata confirm existence of the cited works but not their exact statements. Cited: Solomyak 1997 (unique ergodicity of primitive substitution tilings), Lee–Moody–Solomyak 2002, Lenz–Stollmann 2005 and Lenz–Veselić 2009 (IDS and gap labelling for strictly ergodic Delone systems), Bellissard–Benedetti–Gambaudo 2006, Kaminker–Putnam 2003. Known theory covers almost-periodic/periodic homogenization (Kozlov; Jikov–Kozlov–Oleinik; Birman–Suslina; Allaire–Piatnitski), none of which covers a discrete aperiodic internal-type edge with Kramers degeneracy; this is the stated obstruction for H4.
+
+Novelty, as far as can be assessed without full-text access: (i) a kernel-checked exact finite-state renormalization of holonomy classes for a 3D substitution tiling with a non-abelian (Q8) connection; (ii) a certified two-sided bracket $3.2015\le E_{\rm bulk}\le8.7971$ for the bulk edge via vertex-star closure; (iii) the flux-matched census and its re-check showing that flux fractions do not determine the edge and that substitution decorations lie systematically above the periodic flux regression. Items (i)–(ii) are **[P/K]**; item (iii) is **[E]**.
+
+---
+
+## 8. Publication decision
+
+**Decision:** publish the mathematics (Parts I–III) now; report the spectral-edge/organization results as computational findings with the controls and the refuted claim stated explicitly (the version of the claim in which FR30 exceeds all flux-matched periodic decorations must not appear); make no physical-realization claims beyond a tight-binding model.
+
+**Title.** *Exact finite-state renormalization of a Q8 connection on the three-dimensional chair tiling, with a certified bracket for its bulk spectral edge*
+
+**Abstract.** We decorate the FR30 chair substitution tiling of $\mathbb R^3$ with an $SO(3,\mathbb Z)$ frame field and a Q8-valued connection on shared panels. We prove that holonomy conjugacy classes of inter-tile plaquettes satisfy an exact affine recursion on 49 panel types and 108 plaquette types whose matrix has spectrum $\{8,4,2,1,0\}$ and is semisimple on its nonzero part, giving closed forms for all class counts and rational limit frequencies $19/36,13/144,1/9,23/144,1/9$; the recursion and a general closed-form theorem are kernel-checked in Lean 4 without external libraries. We establish aperiodicity, minimality and finite local complexity of the decorated hull, define the bulk operator $H=24-A$ on $\ell^2\otimes\mathbb C^2$, prove constancy of its spectrum and that pinned-patch compressions converge to the bulk edge, and certify $3.2015\le E_{\rm bulk}\le8.7971$ by exact rational arithmetic. A census of 44 539 periodic Q8 decorations of the chair crystal, re-verified adversarially, shows that the band bottom is not determined by flux-class fractions (at FR30's fractions periodic decorations span at least 4.5 to 9.6), while all nineteen substitution decorations tested, FR30 among them, lie 1.1 to 2.5 above the periodic flux regression; the edge states of finite patches concentrate on the hierarchical interface network with correlation dimension near 1.9.
+
+---
+
+## 9. Next three actions
+
+1. Identify the organisation statistic behind the FR30 excess: extend the substitution-decoration sample from 18 to ≥200 decorations at level 4 (3 s each for the bottom, 2 s for the flux and organisation statistics), add the interface depletion of traceless plaquettes at depths 1–3 and the type-graph cleanness (H6) as candidate predictors, and test the level-4→5 stability of any predictor found; then run the top five controls at level 6 to check that FR30 remains above them in the infinite-volume limit.
+2. Level-7 pinned computation (dim $4.2\cdot10^6$, matrix-free Chebyshev filtering, estimated 4–6 h on this machine) to extend the exponent window for H3 and test the predicted asymptote $\alpha=2/3$.
+3. Replace the floating-point level-6 bound by a certified rational Rayleigh quotient, and tighten the lower bound by passing from vertex stars (radius 1) to radius-2 collared patches (closure census first; the 72-type census took 2 s, a radius-2 census is estimated at minutes).
+
+---
+
+## Appendix A. Changed files, tests, failures
+
+**Branch and commits.** All work is on `claude/phase5a-critical-path`, branched from `claude/magical-euler-0vm2f8` at e2677db; nothing was pushed to any other branch and no file of the user's earlier work was overwritten (the two modified tracked files are the Lean template and the generated certificate, both extended, no theorem removed or changed in statement). Relative to e2677db: 192 files changed, 190 added, 2 modified. Interim snapshots: 1dd61cc, b337be7, 57b90b8, 918a9f6, bc40007, 1d48b00, e325947, 36b4255, f550cbe, 771ac94, a0dc40a, 5466a53, 30a2f1d, d5e4888, 7163367 (snapshots taken while agents were still writing may hold partial versions of a few result files; the final versions are in the last commit).
+
+**New code (audit/).** `phase5a_independent_enumerator.py`, `phase5a_type_system_audit.py`, `phase5a_recursion_theorem_audit.py`, `phase5a_counterexamples.py`, `phase5a_q8_conventions.py`, `phase5a_referee_geometry.py`, `phase5a_referee_links_check.py` (Gate A); `phase5a_frame_substitution.py`, `phase5a_certified_upper_bound.py`, `phase5a_star_closure_lower_bound.py`, `phase5a_periodic_control.py`, `phase5a_periodic_approximants.py`, `phase5a_edge_states.py`, `phase5a_scaling.py`, `phase5a_controls.py`, `phase5a_ids_edge.py`, `phase5a_scaling_controls.py`, `phase5a_level6_structure.py` (Gate B and C); `phase5a_flux_vs_edge.py`, `phase5a_d2_census_verify.py`, `phase5a_d2_counterexample_check.py`, `phase5a_c2_lower_bound_check.py` (D and C2). Modified: `audit/lean_template_type_substitution.lean` (+146/−2), `certificates/TypeSubstitutionCertificate.lean` (regenerated from the template; data block byte-identical to e2677db).
+
+**Deliverables.** `deliverables/PHASE5A_INFINITE_VOLUME_FRAMEWORK.md` (H1 theorems), `deliverables/PHASE5A_RECURSION_THEOREM.md` (recursion theorems, H6), this dossier. Results under `audit/results/phase5a_*` (text, JSON, `.npy` ground-state weights, logs), including `phase5a_lean_full_kernel_compile.txt` and `phase5a_periodic_control_CORRECTION.txt`.
+
+**Tests.** New: `tests/test_phase5a_independent_enumerator.py` (10), `test_phase5a_type_system.py` (23), `test_phase5a_recursion_theorem.py` (15), `test_phase5a_q8.py` (15), `test_phase5a_lean_general_theorem.py` (7), `test_phase5a_flux_vs_edge.py` (5), `test_phase5a_referee_geometry.py`, `test_phase5a_referee_links_check.py`. Final run in this session (after all code changes): `python3 -m unittest` over `test_independent_audit_regression.py` and the six new `test_phase5a_*.py` suites listed first: 91 tests, OK, 1 skipped (80.6 s); the two referee suites separately: 6 tests, OK. Invocation: `python3 -m unittest tests/<file>` (isolated mode `-I` with `-m unittest tests/...` fails to import the `tests` package; `python3 -I tests/<file>` works). The repository's pre-existing test files other than `test_independent_audit_regression.py` were not run in this phase.
+
+**Failures and things not done.** (1) The orchestrating workflow runner died once (all four workflows lost after a context reset); the lost pieces were redone directly: D1 by the author of this dossier, D2 and C2 by fresh agents; the third A1 referee, the two B1 skeptic reviews and the B2b/B4 level-5 completions were **not** repeated. (2) B4's level-5 FR30 IDS run and the random-decoration IDS controls did not finish; H4 stays unresolved. (3) The level-6 FR30 bound 8.77013 is floating point, not a rational certificate. (4) The periodic census conclusion of B2a was refuted by D2 and is corrected in §4.5 and in `audit/results/phase5a_periodic_control_CORRECTION.txt`; the B2a output files are left as written. (5) A documentation sign error in `audit/independent_clifford_q8_audit.py`'s `q8label` (signed labels, not classes) and the Phase 2 panel-count formula were found and are recorded, not patched, to avoid touching the user's files. (6) The Lean compile needs 11.3 GB and fails with exit 137 when run alongside other heavy jobs; it was run alone.
+
+**Unavailable in this environment.** Mathlib (the certificate is deliberately Mathlib-free); full-text literature access (citations checked against metadata only); `/usr/bin/time` (peak memory measured with `resource` and `/proc`).

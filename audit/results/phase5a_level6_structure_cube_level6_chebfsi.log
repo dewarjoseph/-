@@ -1,0 +1,10 @@
+=== unit-cube block substitution, FR30-type decoration, Q8 Clifford links, pinned diagonal 6: level 6 ===  (started 2026-10-21 06:22:32, OMP_NUM_THREADS=1)
+[cube L6] geometry: n=262144 tiles (1 unit cubes each), box 64^3, panels |E|=774144, 24 frames, max degree 6, boundary tiles (deg<6) 23816 = 0.0909 n; links {'-1': 407844, '+i': 37449, '-i': 37449, '+j': 112933, '-j': 112933, '+k': 32768, '-k': 32768}  (1.6s, rss 0.19 GB)
+   H = 6 I - A: dim 524288, nnz 3620864, max|H - H^dagger| = 0.0e+00  (0.5s, rss 0.40 GB)
+   pass   0 deg  20 nmv    22  theta_1=2.0029557 theta_K=2.0050507 theta_m=2.0169653  res[:K] max=1.39e-01 min=1.39e-01 res[K:] min=1.39e-01 orth=1.1e-15  19s rss=1.34GB
+   pass   1 deg  30 nmv    53  theta_1=1.8698268 theta_K=1.8706049 theta_m=1.8759238  res[:K] max=1.73e-02 min=1.72e-02 res[K:] min=1.71e-02 orth=1.0e-15  52s rss=1.34GB
+   pass   2 deg  45 nmv    99  theta_1=1.8540286 theta_K=1.8546598 theta_m=1.8577826  res[:K] max=3.89e-03 min=3.72e-03 res[K:] min=3.70e-03 orth=8.9e-16  99s rss=1.34GB
+   pass   3 deg  55 nmv   155  theta_1=1.8515019 theta_K=1.8519063 theta_m=1.8544852  res[:K] max=1.32e-03 min=1.26e-03 res[K:] min=1.34e-03 orth=8.9e-16  153s rss=1.34GB
+   pass   4 deg  65 nmv   221  theta_1=1.8509832 theta_K=1.8513734 theta_m=1.8533069  res[:K] max=5.59e-04 min=4.14e-04 res[K:] min=4.21e-04 orth=1.1e-15  218s rss=1.34GB
+   pass   5 deg  75 nmv   297  theta_1=1.8508956 theta_K=1.8512137 theta_m=1.8530045  res[:K] max=2.07e-04 min=1.45e-04 res[K:] min=1.37e-04 orth=1.2e-15  286s rss=1.34GB
+   pass   6 deg  80 nmv   378  theta_1=1.8508836 theta_K=1.8511870 theta_m=1.8528563  res[:K] max=7.50e-05 min=4.80e-05 res[K:] min=4.55e-05 orth=1.4e-15  359s rss=1.34GB

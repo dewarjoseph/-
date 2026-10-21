@@ -1,0 +1,36 @@
+=== randdec2: chair / random admissible decoration, seed 2 ===   (pinned operator; python 3.13.16, numpy 2.5.3, OMP_NUM_THREADS=1)
+   decoration seed 2 (draw 1), permutation table pi_v (frame M_v = D_s(v) P(pi_v), P(pi)[i, pi_i] = 1):
+      0          -> (2, 0, 1)   (FR30 (0, 1, 2))
+      (0, 0, 0)  -> (0, 1, 2)   (FR30 same)
+      (0, 0, 1)  -> (0, 2, 1)   (FR30 same)
+      (0, 1, 0)  -> (0, 2, 1)   (FR30 (2, 1, 0))
+      (0, 1, 1)  -> (1, 2, 0)   (FR30 same)
+      (1, 0, 0)  -> (2, 1, 0)   (FR30 (1, 0, 2))
+      (1, 0, 1)  -> (1, 2, 0)   (FR30 (0, 1, 2))
+      (1, 1, 0)  -> (0, 1, 2)   (FR30 (2, 0, 1))
+   tiling check (levels 1-3): no overlaps, exact chair supertile
+[randdec2] level 3: n=512 dim=1024 |E|=5376 nnz=14328 bulk coordination 24, boundary tiles 287 (0.561); interface tile counts {d: |I_d|} = {1: 269, 2: 501, 3: 512}; link labels {'-k': 672, '-j': 495, '-1': 1412, '+k': 682, '+i': 652, '+j': 514, '-i': 642, '+1': 307}; build 0.5s
+   dense eigh (evr, subset_by_index=(0,3)) (1s, maxrss 0.12 GB)
+   lowest 4: [8.3330737 8.3330737 8.7389792 8.7389792]   residuals: [5.8e-14 5.0e-14 6.4e-14 2.3e-14]
+   ground pair (split -1.1e-14, gap to next pair 0.40591): IPR=0.0136848 [vec1 0.0136848, vec2 0.0136848]  IPR*n=7.0066  P=73.1  p_max=0.0424 s50=27 s90=108  boundary weight=0.1059 (tile fraction 0.561)
+   S2(d)    d=1..L: 0.29834  0.06358  0.01368   1/S2(d): 3.352  15.729  73.074   (uniform: 8  64  512)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.8922 [0.5254, 1.698]  d=2: 0.9980 [0.9785, 1.020]  d=3: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [0.4929 0.1593 0.0346 0.1328 0.0071 0.0826 0.056  0.0348]
+[randdec2] level 4: n=4096 dim=8192 |E|=46080 nnz=120824 bulk coordination 24, boundary tiles 1331 (0.325); interface tile counts {d: |I_d|} = {1: 1277, 2: 2895, 3: 4085, 4: 4096}; link labels {'-1': 12288, '+i': 5589, '+k': 5883, '-j': 4182, '-k': 5864, '+j': 4218, '-i': 5570, '+1': 2486}; build 8.6s
+   lobpcg(block=8, seed=0, tol=1e-7, diag precond) (5s, maxrss 0.17 GB)  warnings: Exited at iteration 509 with accuracies ; Exited postprocessing with accuracies 
+   lowest 4: [7.4554656 7.4554656 7.7758983 7.7758983]   residuals: [4.9e-08 5.6e-08 2.5e-08 2.2e-08]
+   ground pair (split 2.3e-14, gap to next pair 0.32043): IPR=0.016874 [vec1 0.016874, vec2 0.016874]  IPR*n=69.1159  P=59.3  p_max=0.0388 s50=21 s90=128  boundary weight=0.0747 (tile fraction 0.325)
+   S2(d)    d=1..L: 0.23193  0.21464  0.06980  0.01687   1/S2(d): 4.312  4.659  14.326  59.263   (uniform: 8  64  512  4096)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.8722 [0.3118, 2.798]  d=2: 0.9064 [0.7068, 1.282]  d=3: 1.0000 [0.9973, 1.003]  d=4: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [4.3697e-02 2.1828e-01 2.3179e-01 2.7524e-05 4.9901e-06 2.3631e-01 2.6983e-01 6.8725e-05]
+[randdec2] level 5: n=32768 dim=65536 |E|=380928 nnz=991224 bulk coordination 24, boundary tiles 5723 (0.175); interface tile counts {d: |I_d|} = {1: 5597, 2: 14595, 3: 25379, 4: 32757, 5: 32768}; link labels {'+j': 34263, '-1': 102328, '+k': 48904, '+i': 46249, '-j': 34192, '-k': 48866, '-i': 46211, '+1': 19915}; build 54.6s
+   lobpcg(block=6, seed=0, tol=1e-7, diag precond) (88s, maxrss 0.67 GB)  warnings: Exited postprocessing with accuracies 
+   lowest 4: [7.1581381 7.1581381 7.1633238 7.1633238]   residuals: [1.3e-08 7.9e-09 5.8e-09 4.0e-08]
+   ground pair (split 1.0e-13, gap to next pair 0.00519): IPR=0.0134251 [vec1 0.0134251, vec2 0.0134251]  IPR*n=439.9137  P=74.5  p_max=0.0359 s50=27 s90=147  boundary weight=0.0000 (tile fraction 0.175)
+   S2(d)    d=1..L: 0.51646  0.18935  0.18305  0.06265  0.01343   1/S2(d): 1.936  5.281  5.463  15.961  74.487   (uniform: 8  64  512  4096  32768)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.6379 [0.1708, 3.735]  d=2: 0.8997 [0.4454, 2.020]  d=3: 0.9177 [0.7745, 1.185]  d=4: 1.0000 [0.9997, 1.000]  d=5: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [2.3078e-01 6.7398e-01 9.4898e-06 9.4606e-02 2.6608e-04 1.6890e-04 2.6773e-09 1.9211e-04]
+   scaling 3->4: IPR*n ratio 9.864, alpha = -log(IPR_(k+1)/IPR_k)/log 8 = -0.101; 1/S2(d) growth ratios: d=1: 1.286, d=2: 0.296, d=3: 0.196; bottom decrement +0.87761
+   scaling 4->5: IPR*n ratio 6.365, alpha = -log(IPR_(k+1)/IPR_k)/log 8 = 0.110; 1/S2(d) growth ratios: d=1: 0.449, d=2: 1.134, d=3: 0.381, d=4: 0.269; bottom decrement +0.29733
+   saved; maxrss 0.67 GB
+[randdec2] level 4 DENSE CROSS-CHECK (eigh evr subset (0,3), 210s, maxrss 1.20 GB): lowest 4 [7.4554656 7.4554656 7.7758983 7.7758983] residuals [1.8e-13 5.2e-14 1.4e-13 1.6e-13]; max|E_dense - E_lobpcg| = 2.58e-14; IPR*n dense 69.11585 (diff vs lobpcg -7.4e-08); max|S2 diff| 1.5e-10

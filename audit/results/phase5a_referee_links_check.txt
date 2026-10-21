@@ -1,0 +1,44 @@
+phase5a referee check of A1 panel/link claims (three code paths)
+ numpy 2.5.3, python 3.13.16
+
+(R) REFEREE FROM-SCRATCH IMPLEMENTATION
+ level 1: tiles=8 cubes=56 fills_chair=True dets=[1]
+   internal faces=120 intra-tile faces=72 -> shared panels=48 (face-count formula 48)
+   link values={'+1': 6, '-1': 24, 'traceless': 18, 'other': 0}  elements={'+1': 6, '+i*sigma1': 5, '+i*sigma2': 2, '+i*sigma3': 2, '-1': 24, '-i*sigma1': 2, '-i*sigma2': 2, '-i*sigma3': 5}  all in Q8=True
+   (sigma.u_a)(sigma.u_b) == -(u_a u_b) under e_i=-i sigma_i on 48/48 panels; under e_i=+i sigma_i on 30/48 panels
+   value class independent of orientation=True and of normal sign=True; distinct (u_a,u_b) pairs occurring=18 (of 36)
+ level 2: tiles=64 cubes=448 fills_chair=True dets=[1]
+   internal faces=1152 intra-tile faces=576 -> shared panels=576 (face-count formula 576)
+   link values={'+1': 90, '-1': 228, 'traceless': 258, 'other': 0}  elements={'+1': 90, '+i*sigma1': 43, '+i*sigma2': 52, '+i*sigma3': 34, '-1': 228, '-i*sigma1': 34, '-i*sigma2': 52, '-i*sigma3': 43}  all in Q8=True
+   (sigma.u_a)(sigma.u_b) == -(u_a u_b) under e_i=-i sigma_i on 576/576 panels; under e_i=+i sigma_i on 318/576 panels
+   value class independent of orientation=True and of normal sign=True; distinct (u_a,u_b) pairs occurring=30 (of 36)
+ 36 signed-axis pairs: identity holds under e_i=-i sigma_i on 36/36; fails under e_i=+i sigma_i on 24/36
+ e_i -> -i sigma_i is a homomorphism on 64/64 Q8 products; e_i -> +i sigma_i on 40/64 (expected 64 and <64)
+
+(R) PERTURBATION CONTROLS (same point set; the numbers below must differ from FR30 for the counts to be informative)
+ all_identity_perms                 level 1: fills_chair=True dets=[-1, 1] panels=48 values={'+1': 12, '-1': 36, 'traceless': 0, 'other': 0} same_as_FR30=False
+ all_identity_perms                 level 2: fills_chair=True dets=[-1, 1] panels=576 values={'+1': 180, '-1': 396, 'traceless': 0, 'other': 0} same_as_FR30=False
+ swap_two_3cycles_(011)<->(110)     level 1: fills_chair=True dets=[1] panels=48 values={'+1': 6, '-1': 12, 'traceless': 30, 'other': 0} same_as_FR30=False
+ swap_two_3cycles_(011)<->(110)     level 2: fills_chair=True dets=[1] panels=576 values={'+1': 90, '-1': 156, 'traceless': 330, 'other': 0} same_as_FR30=False
+ one_odd_perm_(001)->(102)          level 1: fills_chair=True dets=[1] panels=48 values={'+1': 5, '-1': 22, 'traceless': 21, 'other': 0} same_as_FR30=False
+ one_odd_perm_(001)->(102)          level 2: fills_chair=True dets=[1] panels=576 values={'+1': 82, '-1': 208, 'traceless': 286, 'other': 0} same_as_FR30=False
+
+(P) REPOSITORY PRIMITIVES audit/independent_clifford_q8_audit.py (tiles_at_level, panel_edges, clifford_link, q8label)
+ level 1: shared panels=48 link values={'+1': 6, '-1': 24, 'traceless': 18, 'other': 0} labels={'+1': 6, '+i': 5, '+j': 2, '+k': 2, '-1': 24, '-i': 2, '-j': 2, '-k': 5} tiles+frames identical to (R)=True
+ level 2: shared panels=576 link values={'+1': 90, '-1': 228, 'traceless': 258, 'other': 0} labels={'+1': 90, '+i': 43, '+j': 52, '+k': 34, '-1': 228, '-i': 34, '-j': 52, '-k': 43} tiles+frames identical to (R)=True
+
+(A) A1 MODULE audit/phase5a_independent_enumerator.py run in-process (no files rewritten)
+ level 1: {'shared_panels': 48, 'pauli_agrees_on_all_panels': True, 'link_values': {'+1': 6, '-1': 24, 'traceless': 18}}
+ level 2: {'shared_panels': 576, 'pauli_agrees_on_all_panels': True, 'link_values': {'+1': 90, '-1': 228, 'traceless': 258}}
+ A1.pauli_identity_check() (36 pairs + 64 products): True
+ A1.pauli_identity_check() with e_i=+i sigma_i instead: False (must be False)
+ A1 level-1 panel check with e_i=+i sigma_i: pauli_agrees=False (must be False); values={'+1': 6, '-1': 24, 'traceless': 18}
+ A1 level-1 frames (perm,signs,T) identical to (R) frames in the same child order: True
+
+A1 saved JSON panel entries == in-process recomputation: True
+
+VERDICT TABLE (claimed vs. (R) vs. (P) vs. (A))
+ level 1: claim panels=48 values={'+1': 6, '-1': 24, 'traceless': 18} | R panels=48 values={'+1': 6, '-1': 24, 'traceless': 18} | P panels=48 values={'+1': 6, '-1': 24, 'traceless': 18} | A panels=48 values={'+1': 6, '-1': 24, 'traceless': 18} | ALL AGREE: True
+ level 2: claim panels=576 values={'+1': 90, '-1': 228, 'traceless': 258} | R panels=576 values={'+1': 90, '-1': 228, 'traceless': 258} | P panels=576 values={'+1': 90, '-1': 228, 'traceless': 258} | A panels=576 values={'+1': 90, '-1': 228, 'traceless': 258} | ALL AGREE: True
+CLAIMED NUMBERS REPRODUCED BY ALL THREE CODE PATHS: True
+total time 1.82 s

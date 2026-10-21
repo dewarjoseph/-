@@ -1,0 +1,128 @@
+PHASE 5a / TASK A4 -- Q8 CONVENTIONS AND FREQUENCY NORMALIZATION (all numbers computed in this run)
+====================================================================================================
+0. ABSTRACT Q8 DERIVED FROM i^2 = j^2 = k^2 = ijk = -1  (-1 central, (-1)^2 = 1)
+   ijk=-1, right-multiply by k: (ij)(k k)=(ij)(-1)=-k  =>  ij = k
+   ij=k, left-multiply by i: (i i)j = -j = ik  =>  ik = -j
+   ij=k, right-multiply by j: i(j j) = -i = kj  =>  kj = -i
+   ijk=-1, left-multiply by i: (i i)(jk) = -(jk) = -i  =>  jk = i
+   jk=i, left-multiply by j: (j j)k = -k = ji  =>  ji = -k
+   jk=i, right-multiply by i: j(ki) = i i = -1; left-multiply by j: -(ki) = -j  =>  ki = j
+   basis table: {'ij': '+k', 'ik': '-j', 'ji': '-k', 'jk': '+i', 'ki': '+j', 'kj': '-i'}
+   group axioms / structure: {'relations': True, 'closed': True, 'associative': True, 'identity': True, 'inverses': True, 'centre': [(-1, '1'), (1, '1')], 'n_classes': 5, 'class_function_matches_orbits': True, 'classes_closed_under_inversion': True}
+   exhaustive search over 8^6 = 262144 candidate tables: 1 satisfy ijk=-1 + associativity; equals derived table: True
+
+====================================================================================================
+1. PAULI / QUATERNION DICTIONARY  e_m = -i sigma_m
+   e1e2=e3: True
+   e2e3=e1: True
+   e3e1=e2: True
+   em^2=-1: True
+   e1e2e3=-1: True
+   phi_homomorphism_64: True
+   phi_injective: True
+   phi_in_SU2: True
+   (sigma.u_a)(sigma.u_b) == -(u_a u_b)_quat on 36/36 ordered signed-axis pairs
+   repo _clifford_link_quat_int agrees on 36/36 pairs; disagreements: []
+   independent-audit numpy q8label: CLASS agrees on 36/36; SIGNED label agrees on 12/36
+   reason: q8label names +i sigma_m as '+m' (True) but +i sigma_m = -e_m = quaternion -m (True);
+   so q8label's signs of the six non-central elements are the negatives of the quaternion dictionary (first 6 disagreements): [((1, 0, 0), (0, 1, 0), '-k', '+k'), ((1, 0, 0), (0, -1, 0), '+k', '-k'), ((1, 0, 0), (0, 0, 1), '+j', '-j'), ((1, 0, 0), (0, 0, -1), '-j', '+j'), ((-1, 0, 0), (0, 1, 0), '+k', '-k'), ((-1, 0, 0), (0, -1, 0), '-k', '+k')]
+   table of all 36 pairs (u_a, u_b, quaternion C, repo C, numpy q8label):
+      ((1, 0, 0), (1, 0, 0), '+1', '+1', '+1')
+      ((1, 0, 0), (-1, 0, 0), '-1', '-1', '-1')
+      ((1, 0, 0), (0, 1, 0), '-k', '-k', '+k')
+      ((1, 0, 0), (0, -1, 0), '+k', '+k', '-k')
+      ((1, 0, 0), (0, 0, 1), '+j', '+j', '-j')
+      ((1, 0, 0), (0, 0, -1), '-j', '-j', '+j')
+      ((-1, 0, 0), (1, 0, 0), '-1', '-1', '-1')
+      ((-1, 0, 0), (-1, 0, 0), '+1', '+1', '+1')
+      ((-1, 0, 0), (0, 1, 0), '+k', '+k', '-k')
+      ((-1, 0, 0), (0, -1, 0), '-k', '-k', '+k')
+      ((-1, 0, 0), (0, 0, 1), '-j', '-j', '+j')
+      ((-1, 0, 0), (0, 0, -1), '+j', '+j', '-j')
+      ((0, 1, 0), (1, 0, 0), '+k', '+k', '-k')
+      ((0, 1, 0), (-1, 0, 0), '-k', '-k', '+k')
+      ((0, 1, 0), (0, 1, 0), '+1', '+1', '+1')
+      ((0, 1, 0), (0, -1, 0), '-1', '-1', '-1')
+      ((0, 1, 0), (0, 0, 1), '-i', '-i', '+i')
+      ((0, 1, 0), (0, 0, -1), '+i', '+i', '-i')
+      ((0, -1, 0), (1, 0, 0), '-k', '-k', '+k')
+      ((0, -1, 0), (-1, 0, 0), '+k', '+k', '-k')
+      ((0, -1, 0), (0, 1, 0), '-1', '-1', '-1')
+      ((0, -1, 0), (0, -1, 0), '+1', '+1', '+1')
+      ((0, -1, 0), (0, 0, 1), '+i', '+i', '-i')
+      ((0, -1, 0), (0, 0, -1), '-i', '-i', '+i')
+      ((0, 0, 1), (1, 0, 0), '-j', '-j', '+j')
+      ((0, 0, 1), (-1, 0, 0), '+j', '+j', '-j')
+      ((0, 0, 1), (0, 1, 0), '+i', '+i', '-i')
+      ((0, 0, 1), (0, -1, 0), '-i', '-i', '+i')
+      ((0, 0, 1), (0, 0, 1), '+1', '+1', '+1')
+      ((0, 0, 1), (0, 0, -1), '-1', '-1', '-1')
+      ((0, 0, -1), (1, 0, 0), '+j', '+j', '-j')
+      ((0, 0, -1), (-1, 0, 0), '-j', '-j', '+j')
+      ((0, 0, -1), (0, 1, 0), '-i', '-i', '+i')
+      ((0, 0, -1), (0, -1, 0), '+i', '+i', '-i')
+      ((0, 0, -1), (0, 0, 1), '-1', '-1', '-1')
+      ((0, 0, -1), (0, 0, -1), '+1', '+1', '+1')
+   Lean qmul (translated: (a[0]*b[0] - a[1]*b[1] - a[2]*b[2] - a[3]*b[3], a[0]*b[1] + a[1]*b[0] + a[2]*b[3] - a[3]*b[2],
+   a[0]*b[2] - a[1]*b[3] + a[2]*b[0] + a[3]*b[1], a[0]*b[3] + a[1]*b[2] - a[2]*b[1] + a[3]*b[0])) == derived table on 64 products: True
+
+====================================================================================================
+2. LEVEL-1 LINKS AND PLAQUETTE WILSON LOOPS
+   links: {'n_links': 48, 'reverse_normal_is_inverse': 48, 'reverse_normal_is_dagger': 48, 'repo_int_routine_agrees': 48, 'numpy_matrix_agrees': 48, 'link_classes': {'-1': 24, 'k': 7, 'i': 7, 'j': 4, '1': 6}}
+   level 1: plaquettes=84 inter-tile=60; class independent of base point & orientation (8 variants): 84/84
+            inter-tile with varying SIGNED label across the 8 variants: 31/60
+            inter-tile class counts: {'1': 26, 'i': 12, 'j': 7, 'k': 12, '-1': 3}; signed labels at base cube 0, forward orientation: {'+1': 26, '+i': 6, '-j': 2, '-i': 6, '+k': 6, '-1': 3, '+j': 5, '-k': 6}
+   level 2: plaquettes=984 inter-tile=792; class independent of base point & orientation (8 variants): 984/984
+            inter-tile with varying SIGNED label across the 8 variants: 365/792
+            inter-tile class counts: {'1': 385, 'i': 124, '-1': 42, 'j': 117, 'k': 124}; signed labels at base cube 0, forward orientation: {'+1': 385, '+i': 64, '-1': 42, '-j': 55, '-i': 60, '+k': 64, '+j': 62, '-k': 60}
+
+====================================================================================================
+3. GROUP ELEMENT vs GAUGE-INVARIANT HOLONOMY
+   base-point/orientation example (level 1): {'cubes': [[0, 0, 2], [1, 0, 2], [1, 1, 2], [0, 1, 2]], 'tiles': [2, 2, 0, 2], 'labels_of_8_variants': ['+i', '+i', '+i', '+i', '-i', '-i', '-i', '-i'], 'classes': ['i']}
+   base-point/orientation example (level 1): {'cubes': [[0, 1, 1], [1, 1, 1], [1, 2, 1], [0, 2, 1]], 'tiles': [1, 0, 0, 3], 'labels_of_8_variants': ['-j', '-j', '-j', '-j', '+j', '+j', '+j', '+j'], 'classes': ['j']}
+   random Q8 gauge transformation at level 1 (G = ['-j', '-j', '+k', '+i', '-i', '-k', '-j', '-j']): classes equal 60/60, signed labels equal 39/60; example: {'cubes': [[0, 0, 2], [1, 0, 2], [1, 1, 2], [0, 1, 2]], 'base_tile': 2, 'gauge_at_base': '+k', 'before': '+i', 'after': '-i'}
+   SU(2) conjugation does not preserve Q8 classes: {'image_of_i': '-k', 'class_before': 'i', 'class_after': 'k', 'trace_before': 0, 'trace_after': 0}
+   generic SU(2) conjugation leaves Q8 entirely: {'rotation': '1 rad about (1,2,3)/sqrt14', 'image_matrix': [[(9.039317626806291e-19+0.35127851212351696j), (-0.7403488404607821-0.5731378554489869j)], [(0.7403488404607822-0.5731378554489869j), (-3.8990334055961484e-18-0.35127851212351696j)]], 'min_frobenius_distance_to_Q8': 1.0191195406608942, 'trace': (-2.9951016429155193e-18+0j), 'in_Q8': False}
+   level 1: local-frame classes {'1': 26, 'i': 12, 'j': 7, 'k': 12, '-1': 3} | ambient-axis classes (base cube 0) {'1': 26, 'x': 12, 'y': 7, '-1': 3, 'z': 12} | plaquettes whose AMBIENT axis depends on the base tile: 17/60 | spin-lift numeric check 31/31
+            example: {'cubes': [[0, 1, 1], [0, 2, 1], [0, 2, 2], [0, 1, 2]], 'base_tiles': [1, 3, 4, 2], 'local_class': 'i', 'ambient_axis_per_base_tile': ['x', 'z', 'z', 'x']}
+   level 2: local-frame classes {'1': 385, 'i': 124, '-1': 42, 'j': 117, 'k': 124} | ambient-axis classes (base cube 0) {'1': 385, 'x': 121, '-1': 42, 'y': 123, 'z': 121} | plaquettes whose AMBIENT axis depends on the base tile: 253/792
+            example: {'cubes': [[0, 1, 1], [0, 2, 1], [0, 2, 2], [0, 1, 2]], 'base_tiles': [9, 11, 12, 10], 'local_class': 'i', 'ambient_axis_per_base_tile': ['x', 'z', 'z', 'x']}
+   => the frequencies refer to Q8 classes = (trace, axis-in-local-frame); axis labels are meaningful only relative to the gauge-fixed local frames;
+      the SU(2)-gauge-invariant (and base-point-independent in any gauge) content is the trace class {+1},{-1},{Tr=0}.
+
+====================================================================================================
+4. LIMITS AND NORMALIZATION FROM THE LEAN CERTIFICATE DATA ONLY
+   parsed: 49 panel types, 108 plaquette types, N=157; S column sums panels [8], plaquettes [2]
+   (8I - S) u = f solved over Fractions; residual verified exactly.  sum over plaquette types of u = 18; sum over panel types = 12
+   class limits u_c: {'1': '19/2', '-1': '13/8', 'i': '2', 'j': '23/8', 'k': '2'};  frequencies u_c/18: {'1': '19/36', '-1': '13/144', 'i': '1/9', 'j': '23/144', 'k': '1/9'}; Tr=0 total 55/144
+   equals (19/36, 13/144, 1/9, 23/144, 1/9): True;  W8L/D == u: True;  v_m - 8^m u = S^(m-1)(f - 8u) for m=1..7: True
+   recursion v_{m+1} = S v_m + 8^m f, v_1 = f:
+     m=1: plaquettes 60 (18*8^m-24*4^m+6*2^m = 60: True); panels 48 (12*(8^m-4^m) = 48: True); classes {'1': 26, '-1': 3, 'i': 12, 'j': 7, 'k': 12}
+          direct values read from audit/results: plaquettes {'phase5a_independent_enumerator.txt': 60, 'phase3_plaquette_recursion_levels1-5.txt': 60, 'phase5a_type_system_audit.txt': 60} panels {'phase5a_independent_enumerator.txt': 48, 'phase5a_type_system_audit.txt': 48} classes-match True -> all match recursion: True
+     m=2: plaquettes 792 (18*8^m-24*4^m+6*2^m = 792: True); panels 576 (12*(8^m-4^m) = 576: True); classes {'1': 385, '-1': 42, 'i': 124, 'j': 117, 'k': 124}
+          direct values read from audit/results: plaquettes {'phase5a_independent_enumerator.txt': 792, 'phase3_plaquette_recursion_levels1-5.txt': 792, 'phase5a_type_system_audit.txt': 792} panels {'phase5a_independent_enumerator.txt': 576, 'phase5a_type_system_audit.txt': 576} classes-match True -> all match recursion: True
+     m=3: plaquettes 7728 (18*8^m-24*4^m+6*2^m = 7728: True); panels 5376 (12*(8^m-4^m) = 5376: True); classes {'1': 3945, '-1': 530, 'i': 1020, 'j': 1213, 'k': 1020}
+          direct values read from audit/results: plaquettes {'phase5a_independent_enumerator.txt': 7728, 'phase3_plaquette_recursion_levels1-5.txt': 7728, 'phase5a_type_system_audit.txt': 7728} panels {'phase5a_type_system_audit.txt': 5376} classes-match True -> all match recursion: True
+     m=4: plaquettes 67680 (18*8^m-24*4^m+6*2^m = 67680: True); panels 46080 (12*(8^m-4^m) = 46080: True); classes {'1': 35161, '-1': 5394, 'i': 8188, 'j': 10749, 'k': 8188}
+          direct values read from audit/results: plaquettes {'phase5a_independent_enumerator.txt': 67680, 'phase3_plaquette_recursion_levels1-5.txt': 67680, 'phase5a_type_system_audit.txt': 67680} panels {'phase5a_type_system_audit.txt': 46080} classes-match True -> all match recursion: True
+     m=5: plaquettes 565440 (18*8^m-24*4^m+6*2^m = 565440: True); panels 380928 (12*(8^m-4^m) = 380928: True); classes {'1': 296121, '-1': 48146, 'i': 65532, 'j': 90109, 'k': 65532}
+          direct values read from audit/results: plaquettes {'phase5a_independent_enumerator.txt': 565440, 'phase3_plaquette_recursion_levels1-5.txt': 565440, 'phase5a_type_system_audit.txt': 565440} panels {'phase5a_type_system_audit.txt': 380928} classes-match True -> all match recursion: True
+     m=6: plaquettes 4620672 (18*8^m-24*4^m+6*2^m = 4620672: True); panels 3096576 (12*(8^m-4^m) = 3096576: True); classes {'1': 2429305, '-1': 405522, 'i': 524284, 'j': 737277, 'k': 524284}
+     m=7: plaquettes 37356288 (18*8^m-24*4^m+6*2^m = 37356288: True); panels 24969216 (12*(8^m-4^m) = 24969216: True); classes {'1': 19677945, '-1': 3325970, 'i': 4194300, 'j': 5963773, 'k': 4194300}
+   normalization identities m=1..7: True; agreement with directly enumerated values (levels present in files): True
+   NOTE: Phase 2 document states |E_k| = 48*12^(k-1) 'verified k<=3: 48, 576, 5376' -- 48*12^2 = 6912 != 5376; the correct closed form is 12*(8^k - 4^k).
+
+====================================================================================================
+5. DECORATION DEPENDENCE (Thm 1.3 / Sec 1.4 counterexample) AND MIRROR INVARIANCE (Thm 2.4), RE-VERIFIED
+   level1_plaquette_classes: {'1': 26, 'i': 12, 'j': 7, 'k': 12, '-1': 3}
+   tile3_frame_times_perm120_classes: {'1': 31, 'i': 12, 'k': 11, 'j': 4, '-1': 2}
+   classes_changed: True
+   fundamental_cycle_traces_before: [(-2, 1), (0, 23), (2, 17)]
+   fundamental_cycle_traces_after: [(-2, 1), (0, 22), (2, 18)]
+   mirror_links_equal_sigma1_C_sigma1: 48
+   n_links: 48
+   mirror_plaquette_classes: {'1': 26, '-1': 3, 'k': 12, 'i': 12, 'j': 7}
+   mirror_classes_equal: True
+   => frequencies are invariants of the FR30-decorated Clifford connection modulo Q8 gauge (parity-invariant), NOT of the point-set tiling.
+
+total time 2.4s

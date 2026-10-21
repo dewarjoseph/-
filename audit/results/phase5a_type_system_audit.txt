@@ -1,0 +1,91 @@
+PHASE 5a / TASK A2 -- TYPE-SYSTEM ADVERSARIAL AUDIT  (all numbers computed in this run)
+phase-4 derivation loaded: 49 panel types, 108 plaquette types; keys pairwise distinct: True
+tiling cross-check (phase-4 inflate vs independent tiles_at_level), levels 1-3: [True, True, True]
+
+=== A. REPRESENTATIVES ===
+ panel reps   : n=49 invalid=[] key_mismatch=[] reconstruction_fail=[] not_Gamma_equiv=[] -> ok=True
+ plaquette reps: n=108 invalid=[] key_mismatch=[] class_mismatch=[] reconstruction_fail=[] not_Gamma_equiv=[] -> ok=True
+   distinct tiles per plaquette representative: {2: 40, 3: 24, 4: 44}
+ Lean certificate data vs Python reps: {'present': True, 'lean_panel_reps': 49, 'lean_plaq_reps': 108, 'panel_match': True, 'plaq_match': True, 'ints_per_panel_line': [28], 'ints_per_plaq_line': [53]}
+
+=== B. COVERAGE ===
+ level 1: tiles=8 cubes=56 | panels=48 distinct panel keys=33 (new 33) unknown=0 link-label conflicts=0 | plaquettes=60 distinct plaquette keys=49 (new 49) unknown=0 class conflicts=0
+          class counts {'1': 26, '-1': 3, 'i': 12, 'j': 7, 'k': 12}  == recursion: True;  type-resolved counts == recursion: panels True plaquettes True  [0.1 s]
+ level 2: tiles=64 cubes=448 | panels=576 distinct panel keys=49 (new 16) unknown=0 link-label conflicts=0 | plaquettes=792 distinct plaquette keys=88 (new 39) unknown=0 class conflicts=0
+          class counts {'1': 385, '-1': 42, 'i': 124, 'j': 117, 'k': 124}  == recursion: True;  type-resolved counts == recursion: panels True plaquettes True  [0.7 s]
+          inflation images recomputed on ALL instances: panels 576 (mismatch 0), plaquettes 792 (mismatch 0)
+ level 3: tiles=512 cubes=3584 | panels=5376 distinct panel keys=49 (new 0) unknown=0 link-label conflicts=0 | plaquettes=7728 distinct plaquette keys=108 (new 20) unknown=0 class conflicts=0
+          class counts {'1': 3945, '-1': 530, 'i': 1020, 'j': 1213, 'k': 1020}  == recursion: True;  type-resolved counts == recursion: panels True plaquettes True  [8.2 s]
+ level 4: tiles=4096 cubes=28672 | panels=46080 distinct panel keys=49 (new 0) unknown=0 link-label conflicts=0 | plaquettes=67680 distinct plaquette keys=108 (new 0) unknown=0 class conflicts=0
+          class counts {'1': 35161, '-1': 5394, 'i': 8188, 'j': 10749, 'k': 8188}  == recursion: True;  type-resolved counts == recursion: panels True plaquettes True  [81.0 s]
+ level 5: tiles=32768 cubes=229376 | panels=380928 distinct panel keys=49 (new 0) unknown=0 link-label conflicts=0 | plaquettes=565440 distinct plaquette keys=108 (new 0) unknown=0 class conflicts=0
+          class counts {'1': 296121, '-1': 48146, 'i': 65532, 'j': 90109, 'k': 65532}  == recursion: True;  type-resolved counts == recursion: panels True plaquettes True  [947.7 s]
+ union of keys over levels 1..5: 49 panel, 108 plaquette; representatives not seen: 0 panel, 0 plaquette
+
+=== C. INVARIANCE UNDER RIGID MOTIONS ===
+ ambient_panel_RAND_changed: 2450
+ ambient_panel_REFL_changed: 1176
+ ambient_panel_SO3_changed: 1127
+ ok_improper_also_invariant: True
+ ok_proper: True
+ panel_RAND_checks: 2450
+ panel_RAND_fail: 0
+ panel_REFL_checks: 1176
+ panel_REFL_fail: 0
+ panel_SO3_checks: 1176
+ panel_SO3_fail: 0
+ panel_reps: 49
+ plaq_RAND_checks: 5400
+ plaq_RAND_class_fail: 0
+ plaq_RAND_fail: 0
+ plaq_REFL_checks: 2592
+ plaq_REFL_class_fail: 0
+ plaq_REFL_fail: 0
+ plaq_SO3_checks: 2592
+ plaq_SO3_class_fail: 0
+ plaq_SO3_fail: 0
+ plaq_reps: 108
+ first failures: []
+ note: the key is invariant under the 24 improper elements as well (REFL rows). This is harmless: a reflection maps
+       SO(3,Z) frames to det=-1 frames, which never occur in the tiling, so on actual configurations equal key <=> related by SO(3,Z) x Z^3.
+
+=== D. ORIENTATION / PATH ORDERING ===
+ 108 representatives: {'plaquettes': 108, 'constant_label_-1': 11, 'reversal_is_inverse': 108, 'base_change_is_conjugation': 108, 'constant_label_1': 35, 'sign_varies_i': 20, 'sign_varies_j': 22, 'sign_varies_k': 20}
+ level 2, inter-tile plaquettes: {'plaquettes': 792, 'sign_varies_i': 124, 'reversal_is_inverse': 792, 'base_change_is_conjugation': 792, 'sign_varies_k': 124, 'constant_label_1': 385, 'sign_varies_j': 117, 'constant_label_-1': 42}
+ level 2, all four-present plaquettes (incl. intra-tile): {'plaquettes': 984, 'constant_label_1': 577, 'reversal_is_inverse': 984, 'base_change_is_conjugation': 984, 'sign_varies_i': 124, 'sign_varies_k': 124, 'sign_varies_j': 117, 'constant_label_-1': 42}
+ examples (base, i, j, labels by (start, reversed)): {'i': ((3, 3, 4), 0, 2, {'(0, 0)': '-i', '(0, 1)': '+i', '(1, 0)': '-i', '(1, 1)': '+i', '(2, 0)': '-i', '(2, 1)': '+i', '(3, 0)': '-i', '(3, 1)': '+i'}), 'k': ((3, 3, 4), 1, 2, {'(0, 0)': '-k', '(0, 1)': '-k', '(1, 0)': '-k', '(1, 1)': '-k', '(2, 0)': '+k', '(2, 1)': '+k', '(3, 0)': '+k', '(3, 1)': '+k'}), '1': ((4, 3, 4), 0, 2, {'(0, 0)': '+1', '(0, 1)': '+1', '(1, 0)': '+1', '(1, 1)': '+1', '(2, 0)': '+1', '(2, 1)': '+1', '(3, 0)': '+1', '(3, 1)': '+1'}), 'j': ((2, 3, 3), 0, 1, {'(0, 0)': '+j', '(0, 1)': '-j', '(1, 0)': '+j', '(1, 1)': '-j', '(2, 0)': '+j', '(2, 1)': '-j', '(3, 0)': '+j', '(3, 1)': '-j'}), '-1': ((2, 2, 5), 0, 2, {'(0, 0)': '-1', '(0, 1)': '-1', '(1, 0)': '-1', '(1, 1)': '-1', '(2, 0)': '-1', '(2, 1)': '-1', '(3, 0)': '-1', '(3, 1)': '-1'})}
+
+=== E. GAUGE TRANSFORMATIONS (level 2) ===
+ tiles=64 inter-tile links=576 plaquettes checked=984 fundamental cycles=513
+ round 0: {'q8_links_changed': 492, 'q8_signed_labels_changed': 191, 'q8_classes_changed': 0, 'q8_non_q8_holonomies': 0, 'q8_cycle_classes_unchanged': True, 'su2_links_changed': 576, 'su2_links_still_in_q8': 0, 'su2_max_trace_deviation': 1.5551673854545466e-15, 'su2_cycle_max_trace_deviation': 2.2244864681976203e-15}
+ round 1: {'q8_links_changed': 535, 'q8_signed_labels_changed': 175, 'q8_classes_changed': 0, 'q8_non_q8_holonomies': 0, 'q8_cycle_classes_unchanged': True, 'su2_links_changed': 576, 'su2_links_still_in_q8': 0, 'su2_max_trace_deviation': 9.01303769912332e-16, 'su2_cycle_max_trace_deviation': 1.7827685923966094e-15}
+ round 2: {'q8_links_changed': 497, 'q8_signed_labels_changed': 186, 'q8_classes_changed': 0, 'q8_non_q8_holonomies': 0, 'q8_cycle_classes_unchanged': True, 'su2_links_changed': 576, 'su2_links_still_in_q8': 0, 'su2_max_trace_deviation': 1.3414946104959113e-15, 'su2_cycle_max_trace_deviation': 1.7858885525242135e-15}
+ classes/traces invariant: True; links change under gauge: True
+
+=== F. NEGATIVE CONTROLS ===
+ F1 level 1: star tile 3 has 12 incident links; baseline classes {'1': 26, '-1': 3, 'i': 12, 'j': 7, 'k': 12}
+    reverse_normal_in_star_factor          {'links_changed': 12, 'plaquettes_touching_star': 17, 'plaquette_classes_changed': 0, 'plaquette_signed_labels_changed': 0, 'non_q8_holonomies': 0, 'class_counts': {'1': 26, '-1': 3, 'i': 12, 'j': 7, 'k': 12}}
+    reverse_normal_both_factors_if_star    {'links_changed': 0, 'plaquettes_touching_star': 17, 'plaquette_classes_changed': 0, 'plaquette_signed_labels_changed': 0, 'non_q8_holonomies': 0, 'class_counts': {'1': 26, '-1': 3, 'i': 12, 'j': 7, 'k': 12}}
+    reverse_normal_globally                {'links_changed': 0, 'plaquettes_touching_star': 17, 'plaquette_classes_changed': 0, 'plaquette_signed_labels_changed': 0, 'non_q8_holonomies': 0, 'class_counts': {'1': 26, '-1': 3, 'i': 12, 'j': 7, 'k': 12}}
+    forget_frame_of_star                   {'links_changed': 12, 'plaquettes_touching_star': 17, 'plaquette_classes_changed': 9, 'plaquette_signed_labels_changed': 9, 'non_q8_holonomies': 0, 'class_counts': {'1': 31, '-1': 2, 'i': 12, 'j': 3, 'k': 12}}
+    permute_local_normal_of_star           {'links_changed': 12, 'plaquettes_touching_star': 17, 'plaquette_classes_changed': 11, 'plaquette_signed_labels_changed': 11, 'non_q8_holonomies': 0, 'class_counts': {'1': 31, '-1': 2, 'i': 11, 'j': 4, 'k': 12}}
+ F1 level 2: star tile 3 has 24 incident links; baseline classes {'1': 385, '-1': 42, 'i': 124, 'j': 117, 'k': 124}
+    reverse_normal_in_star_factor          {'links_changed': 24, 'plaquettes_touching_star': 47, 'plaquette_classes_changed': 0, 'plaquette_signed_labels_changed': 0, 'non_q8_holonomies': 0, 'class_counts': {'1': 385, '-1': 42, 'i': 124, 'j': 117, 'k': 124}}
+    reverse_normal_both_factors_if_star    {'links_changed': 0, 'plaquettes_touching_star': 47, 'plaquette_classes_changed': 0, 'plaquette_signed_labels_changed': 0, 'non_q8_holonomies': 0, 'class_counts': {'1': 385, '-1': 42, 'i': 124, 'j': 117, 'k': 124}}
+    reverse_normal_globally                {'links_changed': 0, 'plaquettes_touching_star': 47, 'plaquette_classes_changed': 0, 'plaquette_signed_labels_changed': 0, 'non_q8_holonomies': 0, 'class_counts': {'1': 385, '-1': 42, 'i': 124, 'j': 117, 'k': 124}}
+    forget_frame_of_star                   {'links_changed': 24, 'plaquettes_touching_star': 47, 'plaquette_classes_changed': 22, 'plaquette_signed_labels_changed': 27, 'non_q8_holonomies': 0, 'class_counts': {'1': 387, '-1': 38, 'i': 124, 'j': 119, 'k': 124}}
+    permute_local_normal_of_star           {'links_changed': 24, 'plaquettes_touching_star': 47, 'plaquette_classes_changed': 29, 'plaquette_signed_labels_changed': 29, 'non_q8_holonomies': 0, 'class_counts': {'1': 389, '-1': 37, 'i': 122, 'j': 121, 'k': 123}}
+ F2 (ambient / coarse keys, level 2): {'level': 2, 'intrinsic_panel_types_with_several_instances': 49, 'intrinsic_types_whose_instances_have_different_ambient_keys': 49, 'example_equal_intrinsic_different_ambient': (12, ((3, 3, 4), 2, ((((1, 0, 0), (0, 0, 1), (0, -1, 0)), (2, 2, 6)), (((1, 0, 0), (0, 1, 0), (0, 0, 1)), (3, 3, 3)))), ((1, 1, 2), 2, ((((1, 0, 0), (0, 0, 1), (0, -1, 0)), (0, 0, 4)), (((1, 0, 0), (0, 1, 0), (0, 0, 1)), (1, 1, 1))))), 'coarse_panel_keys': 17, 'coarse_panel_keys_merging_several_intrinsic_types': 17, 'coarse_panel_keys_with_conflicting_images': 17, 'coarse_plaq_keys': 78, 'coarse_plaq_keys_merging_several_intrinsic_types': 50, 'coarse_plaq_keys_with_conflicting_images_or_classes': 22, 'coarse_plaq_keys_with_conflicting_classes': 18}
+ F3 level 1: {'level': 1, 'strict_total': 60, 'strict_counts': {'1': 26, '-1': 3, 'i': 12, 'j': 7, 'k': 12}, 'strict_1_m1_tr0': (26, 3, 31), 'loose_total': 105, 'loose_counts': {'1': 29, '-1': 33, 'i': 17, 'j': 9, 'k': 17}, 'loose_non_q8': 0, 'loose_1_m1_tr0': (29, 33, 43), 'extra_edges_counted_by_loose_convention': 45}
+ F3 level 2: {'level': 2, 'strict_total': 792, 'strict_counts': {'1': 385, '-1': 42, 'i': 124, 'j': 117, 'k': 124}, 'strict_1_m1_tr0': (385, 42, 365), 'loose_total': 1071, 'loose_counts': {'1': 388, '-1': 210, 'i': 159, 'j': 155, 'k': 159}, 'loose_non_q8': 0, 'loose_1_m1_tr0': (388, 210, 473), 'extra_edges_counted_by_loose_convention': 279}
+
+=== G. MISSING-NEIGHBOUR HANDLING ===
+ level 1: {'level': 1, 'cubes': 56, 'edges_adjacent_to_tiling': 276, 'hist_(present_cubes, min(tiles,2))': {'1 present, single-tile': 54, '2 present, single-tile': 90, '2 present, inter-tile': 42, '3 present, single-tile': 3, '3 present, inter-tile': 3, '4 present, single-tile': 24, '4 present, inter-tile': 60}, 'excluded_lt4_present': 192, 'excluded_lt4_present_touching_2plus_tiles': 45, 'four_present_inter_tile': 60, 'four_present_intra_tile': 24, 'phase4_enumeration_count': 60, 'phase4_equals_four_present_inter_tile': True}
+ level 2: {'level': 2, 'cubes': 448, 'edges_adjacent_to_tiling': 1752, 'hist_(present_cubes, min(tiles,2))': {'1 present, single-tile': 108, '2 present, single-tile': 378, '2 present, inter-tile': 270, '3 present, single-tile': 3, '3 present, inter-tile': 9, '4 present, single-tile': 192, '4 present, inter-tile': 792}, 'excluded_lt4_present': 768, 'excluded_lt4_present_touching_2plus_tiles': 279, 'four_present_inter_tile': 792, 'four_present_intra_tile': 192, 'phase4_enumeration_count': 792, 'phase4_equals_four_present_inter_tile': True}
+ level 3: {'level': 3, 'cubes': 3584, 'edges_adjacent_to_tiling': 12336, 'hist_(present_cubes, min(tiles,2))': {'1 present, single-tile': 216, '2 present, single-tile': 1530, '2 present, inter-tile': 1302, '3 present, single-tile': 3, '3 present, inter-tile': 21, '4 present, single-tile': 1536, '4 present, inter-tile': 7728}, 'excluded_lt4_present': 3072, 'excluded_lt4_present_touching_2plus_tiles': 1323, 'four_present_inter_tile': 7728, 'four_present_intra_tile': 1536, 'phase4_enumeration_count': 7728, 'phase4_equals_four_present_inter_tile': True}
+ level 4: {'level': 4, 'cubes': 28672, 'edges_adjacent_to_tiling': 92256, 'hist_(present_cubes, min(tiles,2))': {'1 present, single-tile': 432, '2 present, single-tile': 6138, '2 present, inter-tile': 5670, '3 present, single-tile': 3, '3 present, inter-tile': 45, '4 present, single-tile': 12288, '4 present, inter-tile': 67680}, 'excluded_lt4_present': 12288, 'excluded_lt4_present_touching_2plus_tiles': 5715, 'four_present_inter_tile': 67680, 'four_present_intra_tile': 12288, 'phase4_enumeration_count': 67680, 'phase4_equals_four_present_inter_tile': True}
+ source conventions: {'phase4_seed_requires_all_four_present': True, 'phase4_rep_search_requires_all_four_present': True, 'phase4_returns_None_for_single_tile': True, 'lean_isInterTilePlaquette_requires_allPresent': True}
+
+total wall time 1199.5 s
+written: /home/user/-/audit/results/phase5a_type_system_audit.txt
+         /home/user/-/audit/results/phase5a_type_system_audit.json

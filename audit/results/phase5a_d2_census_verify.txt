@@ -1,0 +1,119 @@
+##############################################################################################################
+# phase5a_d2_census_verify.py  stages=['crystal', 'records', 'search', 'regress', 'bijections']  cmd: OMP_NUM_THREADS=1 python3 -u -I audit/phase5a_d2_census_verify.py 
+# numpy 2.5.3; seeds: numpy default_rng(20261021)
+==============================================================================================================
+1. LAMBDA_7 CHAIR CRYSTAL -- own re-derivation of claim (a)
+ basis rows [[1, 1, 1], [2, 1, -1], [-1, 2, 1]], det=7, phi(rows)=[0, 0, 0] (all 0: rows lie in ker phi); index of ker phi in Z^3 = 7 = |det|, so rows span ker phi iff det=+-7: True
+ phi on U3: [((0, 0, 0), 0), ((0, 0, 1), 4), ((0, 1, 0), 2), ((0, 1, 1), 6), ((1, 0, 0), 1), ((1, 0, 1), 5), ((1, 1, 0), 3)] -> bijection onto Z_7: True (asserted at import)
+ direct cover count on 14^3 box by all ker(phi)-translates of the chair meeting it: once=2744, zero=0, >1=0  (exact tiling <=> 2744,0,0)
+ owner map: owner(c) in ker phi and c - owner(c) in U3 for all box cubes: True
+ chair: 7 cubes x 6 faces = 42 face slots; internal adjacencies = 9 (x2 slots); boundary panels = 24; distinct neighbour chairs = 14
+    d=(-2, -1, 1)  L-coords=[0, -1, 0]  panels=1  normals={(-1, 0, 0): 1}  |d|^2=6
+    d=(-2, 1, 0)  L-coords=[-1, 0, 1]  panels=2  normals={(-1, 0, 0): 2}  |d|^2=5
+    d=(-1, -1, -1)  L-coords=[-1, 0, 0]  panels=3  normals={(-1, 0, 0): 1, (0, -1, 0): 1, (0, 0, -1): 1}  |d|^2=3
+    d=(-1, 0, 2)  L-coords=[1, -1, 0]  panels=2  normals={(0, 0, 1): 2}  |d|^2=5
+    d=(-1, 1, -2)  L-coords=[-2, 1, 1]  panels=1  normals={(0, 0, -1): 1}  |d|^2=6
+    d=(-1, 2, 1)  L-coords=[0, 0, 1]  panels=1  normals={(0, 1, 0): 1}  |d|^2=6
+    d=(0, -2, 1)  L-coords=[1, -1, -1]  panels=2  normals={(0, -1, 0): 2}  |d|^2=5
+    d=(0, 2, -1)  L-coords=[-1, 1, 1]  panels=2  normals={(0, 1, 0): 2}  |d|^2=5
+    d=(1, -2, -1)  L-coords=[0, 0, -1]  panels=1  normals={(0, -1, 0): 1}  |d|^2=6
+    d=(1, -1, 2)  L-coords=[2, -1, -1]  panels=1  normals={(0, 0, 1): 1}  |d|^2=6
+    d=(1, 0, -2)  L-coords=[-1, 1, 0]  panels=2  normals={(0, 0, -1): 2}  |d|^2=5
+    d=(1, 1, 1)  L-coords=[1, 0, 0]  panels=3  normals={(1, 0, 0): 1, (0, 1, 0): 1, (0, 0, 1): 1}  |d|^2=3
+    d=(2, -1, 0)  L-coords=[1, 0, -1]  panels=2  normals={(1, 0, 0): 2}  |d|^2=5
+    d=(2, 1, -1)  L-coords=[0, 1, 0]  panels=1  normals={(1, 0, 0): 1}  |d|^2=6
+ multiplicity symmetric under d->-d: True;  sum=24
+ lattice edges in 21^3 box (3 per cube): 27783 = 21 per chair; internal to one chair: 3969 = 3.0000 per chair; inter-tile: 18.0000 per chair (claim: 18)
+ chair-intrinsic count of internal lattice edges (all 4 cubes in the chair): 3 -> inter-tile plaquettes per chair = 21 - 3 = 18
+==============================================================================================================
+2. Q8 TABLES vs the audited primitive clifford_link (cross-check only)
+ 2000 random (M_a,M_b,n): own table == clifford_link: mismatches=0;  C_ba == C_ab^dagger for all 24x24x6: True;  C independent of the sign of n: True;  class labels agree with q8label: True;  Q8 closed under product: True
+ FR30 level-1 frames (SO3Z indices): {'centre': 0, '(0, 0, 0)': 0, '(0, 0, 1)': 4, '(0, 1, 0)': 21, '(0, 1, 1)': 13, '(1, 0, 0)': 10, '(1, 0, 1)': 2, '(1, 1, 0)': 19}
+==============================================================================================================
+3. TORUS STRUCTURE CHECKS (own coset / plaquette code)
+ S=[[1, 0, 0], [0, 1, 0], [0, 0, 1]] k=1: cosets=1 reps=[[0, 0, 0]]; hops=24 (=24: True); lattice edges=21, internal=3 (=3k: True), inter-tile=18 (=18k: True)
+ S=[[1, 0, 0], [0, 1, 0], [0, 0, 2]] k=2: cosets=2 reps=[[0, 0, 0], [0, 0, 1]]; hops=48 (=48: True); lattice edges=42, internal=6 (=3k: True), inter-tile=36 (=18k: True)
+ S=[[2, 0, 0], [0, 2, 0], [0, 0, 1]] k=4: cosets=4 reps=[[0, 0, 0], [0, 1, 0], [1, 0, 0], [1, 1, 0]]; hops=96 (=96: True); lattice edges=84, internal=12 (=3k: True), inter-tile=72 (=18k: True)
+ S=[[1, 0, 2], [0, 1, 2], [0, 0, 4]] k=4: cosets=4 reps=[[0, 0, 0], [0, 0, 1], [0, 0, 2], [0, 0, 3]]; hops=96 (=96: True); lattice edges=84, internal=12 (=3k: True), inter-tile=72 (=18k: True)
+ S=[[2, 0, 0], [0, 2, 0], [0, 0, 2]] k=8: cosets=8 reps=[[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]]; hops=192 (=192: True); lattice edges=168, internal=24 (=3k: True), inter-tile=144 (=18k: True)
+ S=[[1, 0, 4], [0, 1, 5], [0, 0, 8]] k=8: cosets=8 reps=[[0, 0, 0], [0, 0, 1], [0, 0, 2], [0, 0, 3], [0, 0, 4], [0, 0, 5], [0, 0, 6], [0, 0, 7]]; hops=192 (=192: True); lattice edges=168, internal=24 (=3k: True), inter-tile=144 (=18k: True)
+ number of HNF sublattices: index 2: 7, index 4: 35, index 8: 155  (formula sum_{d|n} d*sigma(d): 7, 35, 155)
+ k=1 all frames I: E_per=0.000000000000 at theta=[0.0, 0.0, 0.0]; flux fractions=(0.0, 0.0, 0.0)
+[crystal stage wall 0.7s]
+==============================================================================================================
+4. RECOMPUTATION OF A RANDOM SAMPLE OF B2a RECORDS (own Bloch solver: 8^3 grid + Nelder-Mead/BFGS refinement from 3 best grid points; own torus flux)
+ records loaded: 44685 lines, 44539 distinct (S, frames) decorations: {1: 2, 2: 168, 4: 42751, 8: 1618}   (claim (b): 44539)
+ claim (b) from records: E_per min=-0.000000 max=16.000000; fraction > 8.770: 0.3891; fraction >= 8.770: 0.3891
+ sample size: 326 (6 mandatory + k=2:60, k=4:160, k=8:100 random)
+ wall time 28.2s for 326 decorations
+ E_per discrepancy (mine - record): max|dE|=3.020e-14, median|dE|=3.6e-15; #|dE|>1e-6: 0; #|dE|>1e-3: 0; most negative dE (mine lower = record missed a lower point): -3.020e-14; most positive dE (mine higher = my minimiser worse): 1.599e-14
+   k=1: n=1 max|dE|=0.000e+00
+   k=2: n=60 max|dE|=1.243e-14
+   k=4: n=163 max|dE|=2.665e-14
+   k=8: n=102 max|dE|=3.020e-14
+ flux-fraction discrepancy: max|d f_nontriv|=0.0e+00, max|d f_traceless|=0.0e+00, max|d f_-1|=0.0e+00; exact class-count agreement (+1,-1,traceless,inter): 326/326
+ mandatory decorations:
+   k=4 S=[[1, 0, 2], [0, 1, 2], [0, 0, 4]] tri=(18, 2, 10)        E_rec=8.177175792 E_mine=8.177175792 dE=+0.00e+00 theta_mine=[0.3328, 0.3342, 0.5444] grid8_min=8.211955
+   k=4 S=[[1, 1, 1], [0, 2, 1], [0, 0, 2]] tri=(15, 20, 15)       E_rec=8.081541593 E_mine=8.081541593 dE=+1.78e-15 theta_mine=[0.9212, 0.9233, 0.913] grid8_min=8.124728
+   k=8 S=[[1, 0, 4], [0, 1, 5], [0, 0, 8]] random#1               E_rec=7.930233151 E_mine=7.930233151 dE=-1.15e-14 theta_mine=[0.2603, 0.2755, 0.5255] grid8_min=7.961688
+   k=4 S=[[1, 1, 0], [0, 2, 1], [0, 0, 2]] tri=(23, 23, 14)       E_rec=7.929901004 E_mine=7.929901004 dE=-8.88e-15 theta_mine=[0.0465, 0.037, 0.9089] grid8_min=8.112862
+   k=8 2L FR30 natural bijection [1, 2, 3, 4, 5, 6, 7, 0]         E_rec=10.644234146 E_mine=10.644234146 dE=+7.11e-15 theta_mine=[1.0, 0.0, 1.0] grid8_min=10.644234
+   k=1 frame=[[1, 0, 0], [0, 1, 0], [0, 0, 1]]                    E_rec=0.000000000 E_mine=0.000000000 dE=+0.00e+00 theta_mine=[0.0, 0.0, 0.0] grid8_min=0.000000
+ five largest |dE|:
+   k=8 S=[[1, 1, 2], [0, 2, 0], [0, 0, 4]] random#1               E_rec=11.891240303 E_mine=11.891240303 dE=-3.020e-14
+   k=4 S=[[2, 0, 0], [0, 2, 0], [0, 0, 1]] tri=(21, 4, 19) [exh]  E_rec=10.201924125 E_mine=10.201924125 dE=-2.665e-14
+   k=8 2L random#364                                              E_rec=8.149203214 E_mine=8.149203214 dE=-2.665e-14
+   k=8 2L random#186                                              E_rec=9.875725115 E_mine=9.875725115 dE=-2.487e-14
+   k=8 2L FR30 bijection [4, 5, 2, 7, 3, 0, 1, 6]                 E_rec=11.007956524 E_mine=11.007956524 dE=-2.487e-14
+ claim (c) from records (own filter, strict <): n=1551, E_per min=4.4967 median=5.6073 max=8.1772; top-4 labels: ['k=4 S=[[1, 0, 2], [0, 1, 2], [0, 0, 4]] tri=(18, 2, 10)', 'k=4 S=[[1, 1, 1], [0, 2, 1], [0, 0, 2]] tri=(15, 20, 15', 'k=8 S=[[1, 0, 4], [0, 1, 5], [0, 0, 8]] random#1', 'k=4 S=[[1, 1, 0], [0, 2, 1], [0, 0, 2]] tri=(23, 23, 14']
+ extra A2 check: 1500 random '[exh]' records (coarse 4^3 minimiser in B2a) recomputed in 100.3s: #(record - mine > 1e-6) = 1 (0.0007), max overestimate = 0.0736, #(mine - record > 1e-6) = 0; records >= 8.770: 551, of which true value < 8.770: 0
+[records stage wall 129.3s]
+==============================================================================================================
+5. COUNTEREXAMPLE SEARCH: random decorations on ALL index-4 and index-8 HNF sublattices (own code)
+ 190 sublattices; frames: coset 0 fixed to I (global right factor is a unitary conjugation of H), others uniform in SO(3,Z)
+ flux computed for 100000 random decorations in 8.0s: flux-matched (|dfn|<0.03,|dft|<0.04,|dfm|<0.04): 2104 (0.0210)
+ Bloch band bottom for 3000 uniform random decorations (329.7s): E_per min=0.864471 max=14.079002 mean=9.3076; fraction >8.770: 0.6257
+   of which flux-matched: 52, E_per max=7.994780
+ Bloch band bottom for ALL 2104 flux-matched decorations (192.4s): E_per min=4.496732 median=6.637185 max=8.957872
+   number of flux-matched with E_per > 8.770: 3;  > 8.5: 12;  > 8.18: 43;  > 8.1772: 43
+ top-5 flux-matched random decorations:
+   E_per=8.957872 k=8 S=[[1, 0, 6], [0, 1, 6], [0, 0, 8]] frames=[0, 15, 1, 3, 3, 6, 8, 0] flux nontriv=0.5000 traceless=0.3750 -1=0.1250
+   E_per=8.855728 k=8 S=[[1, 0, 5], [0, 1, 6], [0, 0, 8]] frames=[0, 19, 20, 0, 10, 3, 10, 17] flux nontriv=0.5000 traceless=0.4028 -1=0.0972
+   E_per=8.836991 k=8 S=[[1, 3, 1], [0, 4, 0], [0, 0, 2]] frames=[0, 0, 14, 19, 22, 4, 1, 1] flux nontriv=0.4931 traceless=0.3681 -1=0.1250
+   E_per=8.730600 k=8 S=[[1, 0, 2], [0, 1, 3], [0, 0, 8]] frames=[0, 9, 21, 8, 21, 9, 10, 1] flux nontriv=0.5000 traceless=0.3750 -1=0.1250
+   E_per=8.700539 k=8 S=[[1, 1, 1], [0, 2, 1], [0, 0, 4]] frames=[0, 19, 19, 10, 22, 18, 18, 11] flux nontriv=0.4653 traceless=0.3542 -1=0.1111
+ HILL-CLIMB (greedy best-improvement over all single-coset frame changes, flux-match constraint, 200 steps max, random constrained kick when stuck) from E_per=8.957872 on S=[[1, 0, 6], [0, 1, 6], [0, 0, 8]]
+   step   0: current E=9.079873 best E=9.079873 (#constrained neighbours 29, kicks so far 0)
+   step  25: current E=9.347249 best E=9.633732 (#constrained neighbours 33, kicks so far 8)
+   step  50: current E=8.753522 best E=9.633732 (#constrained neighbours 31, kicks so far 16)
+   step  75: current E=9.052328 best E=9.633732 (#constrained neighbours 37, kicks so far 24)
+   step 100: current E=8.734437 best E=9.633732 (#constrained neighbours 65, kicks so far 33)
+   step 125: current E=8.565771 best E=9.633732 (#constrained neighbours 74, kicks so far 40)
+   step 150: current E=8.099669 best E=9.633732 (#constrained neighbours 35, kicks so far 48)
+   step 175: current E=8.920760 best E=9.633732 (#constrained neighbours 40, kicks so far 54)
+   step 199: current E=8.612791 best E=9.633732 (#constrained neighbours 37, kicks so far 61)
+ hill-climb done in 181.2s (9264 screening/refined Bloch evaluations): best flux-matched E_per=9.633732 (12^3-grid recheck 9.633732) frames=[2, 2, 10, 10, 7, 6, 16, 10] S=[[1, 0, 6], [0, 1, 6], [0, 0, 8]] flux nontriv=0.5000 traceless=0.3750 -1=0.1250
+ SUMMARY item 3: max flux-matched E_per found = 9.633732;  overall max over the 3000 uniform decorations = 14.079002;  any flux-matched > 8.770: True;  > 8.5: True;  > 8.18: True
+[search stage wall 711.3s]
+==============================================================================================================
+6. CLAIM (d): own least-squares regression on the records
+ n=44539 distinct decorations: E_per ~ -1.9040 + 14.3032 f_traceless + 30.6963 f_-1 ; rms residual 0.5324; sd(E)=2.7505; R^2=0.9625; prediction at FR30 fractions: 6.3302  (claim: -1.904 + 14.303 ft + 30.696 fm, rms 0.532, 6.330)
+ residual max=3.487 min=-3.739; 95th percentile |res|=1.076; fraction with |res|>2: 0.0034
+ Pearson corr(E, f_nontriv)=0.8736, corr(E, f_traceless)=0.5082, corr(E, f_-1)=0.6732
+   k=2 only (n=168): coef=[-0.906, 12.657, 29.816] rms=0.674 pred@FR30=6.620
+   k=4 only (n=42751): coef=[-1.893, 14.259, 30.675] rms=0.524 pred@FR30=6.322
+   k=8 only (n=1618): coef=[-1.36, 14.458, 27.916] rms=0.612 pred@FR30=6.682
+   one-variable fit E ~ -1.484 + 16.809 f_nontriv: rms=1.338, pred@17/36=6.453
+   among the 1551 flux-matched records: E range [4.4967,8.1772], regression predictions range [5.364,7.297]
+[regress stage wall 0.7s]
+==============================================================================================================
+7. CLAIM (e): FR30 level-1 frames on the cosets of 2L (own code), natural bijection + random bijections
+ cosets of 2L (reps m): [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]]; eps=m mod 2: [(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1), (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1)]; natural bijection (FR30 frame index per coset): [1, 2, 3, 4, 5, 6, 7, 0]  (B2a label order: [1,2,3,4,5,6,7,0])
+ natural bijection: E_per=10.644234146 (12^3 grid + refinement) at theta=[1.0, 0.0, 1.0]; flux nontriv=0.7083 traceless=0.5278 -1=0.1806  (claim: 10.644234146; record flux 0.7083/0.5278/0.1806)
+ 200 random bijections (22.4s): E_per min=9.791483 max=13.022226 mean=11.1931; all in [9.613979, 14.176070]: True; all > 8.770: True
+ B2a stage-C arrays: 40320 values, min=9.613979 max=14.176070, mean=11.23806  (claim: [9.613979, 14.176070]); my 200 values all occur in the arrays (|diff|<1e-6): True; max over my sample of min|E_mine - E_C|: 2.31e-14
+ 2L: 2L subset of ker phi, index 8; FR30 frames are 8 specific SO(3,Z) elements: [0, 0, 2, 4, 10, 13, 19, 21] (centre and child (0,0,0) are both the identity)
+[bijections stage wall 22.4s]
+[total wall 865.0s]
+# ADDENDUM (same session): re-check of the one large coarse-grid overestimate found in a preliminary records-stage run (different random sample)
+ k=4 S=[[1, 0, 0], [0, 1, 0], [0, 0, 4]] tri=(2, 1, 3) [exh]: record E=8.000000000 (B2a coarse 4^3, theta_rec=[1.0, 1.0, 0.5]); mine: 4^3-grid+refine=7.484776596, 8^3=7.484776596, 16^3=7.484776596 at theta=[0.05599, 0.05276, 0.5887]; record - mine = 0.515223; flux-matched: False

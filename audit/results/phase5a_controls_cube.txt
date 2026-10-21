@@ -1,0 +1,23 @@
+=== unit-cube block substitution control (8 octant children at corners v, frames D_s(v) P(pi_v), FR30-type decoration, (1,1,1) -> odd (0,2,1)); unit-cube tiles, bulk coordination 6, pinned diagonal 6 ===
+   decoration: (0, 0, 0):(0, 1, 2), (0, 0, 1):(0, 2, 1), (0, 1, 0):(2, 1, 0), (0, 1, 1):(1, 2, 0), (1, 0, 0):(1, 0, 2), (1, 0, 1):(0, 1, 2), (1, 1, 0):(2, 0, 1), (1, 1, 1):(0, 2, 1)
+   link labels: {'-k': 64, '-1': 740, '+i': 73, '+k': 64, '-j': 165, '+j': 165, '-i': 73}
+[cube/fr30type/pinned6] level 3 n=512 dim=1024 |E|=1344 dense eigh (1s)
+   lowest 8: [1.913948 1.913948 1.975308 1.975308 1.985109 1.985109 1.999106 1.999106]
+   residuals ||H psi - lambda psi||: [1.9e-14 1.0e-14 1.8e-14 1.7e-14 1.8e-14 1.8e-14 1.8e-14 1.5e-14]
+   ground state (Kramers pair, split 2.4e-15): tile IPR=0.0153043 [vec1 0.0153043, vec2 0.0153043]  IPR*n=7.8358  P=1/IPR=65.3  p_max=0.0459 s50=24 s90=170  boundary weight=0.0645 (boundary tile fraction 0.578)
+[cube/fr30type/pinned6] level 4 n=4096 dim=8192 |E|=11520 lobpcg(block=10,seed=0,tol=1e-7) (6s)
+   lowest 8: [1.861013 1.861013 1.869242 1.869242 1.874675 1.874675 1.877035 1.877035]
+   residuals ||H psi - lambda psi||: [6.7e-09 3.7e-08 2.3e-08 3.1e-08 9.2e-09 3.3e-08 4.0e-08 6.8e-08]
+   ground state (Kramers pair, split 0.0e+00): tile IPR=0.00251269 [vec1 0.00251269, vec2 0.00251269]  IPR*n=10.2920  P=1/IPR=398.0  p_max=0.0128 s50=153 s90=861  boundary weight=0.0064 (boundary tile fraction 0.330)
+   scaling 3->4: bottom 1.91395 -> 1.86101 (decrement +0.05294); IPR*n 7.836 -> 10.292 (ratio 1.313); IPR ~ n^(-gamma), gamma=0.869 (extended 1, localized 0)
+[cube/trivial/pinned6] level 3 n=512 dim=1024 |E|=1344 dense eigh (1s)
+   lowest 8: [0.361844 0.361844 0.709141 0.709141 0.709141 0.709141 0.709141 0.709141]
+   residuals ||H psi - lambda psi||: [5.0e-15 2.4e-14 1.1e-14 1.1e-14 8.6e-15 9.3e-15 1.2e-14 1.1e-14]
+   ground state (Kramers pair, split -1.1e-16): tile IPR=0.00462963 [vec1 0.00462963, vec2 0.00462963]  IPR*n=2.3704  P=1/IPR=216.0  p_max=0.01 s50=77 s90=260  boundary weight=0.1480 (boundary tile fraction 0.578)
+   exact Dirichlet box: lambda_0 = 6 - 6 cos(pi/(L+1)) = 0.361844275 (diff +2.8e-16); exact IPR*n = (1.5 L/(L+1))^3 = 2.37037 (diff +2.2e-15)
+[cube/trivial/pinned6] level 4 n=4096 dim=8192 |E|=11520 lobpcg(block=10,seed=0,tol=1e-7) (2s)
+   lowest 8: [0.102161 0.102161 0.203163 0.203163 0.203163 0.203163 0.203163 0.203163]
+   residuals ||H psi - lambda psi||: [2.5e-08 4.6e-08 8.5e-09 8.5e-09 9.4e-09 3.0e-08 6.0e-08 1.2e-07]
+   ground state (Kramers pair, split 8.6e-16): tile IPR=0.000686953 [vec1 0.000686953, vec2 0.000686953]  IPR*n=2.8138  P=1/IPR=1455.7  p_max=0.00159 s50=512 s90=1703  boundary weight=0.0236 (boundary tile fraction 0.330)
+   exact Dirichlet box: lambda_0 = 6 - 6 cos(pi/(L+1)) = 0.102161402 (diff +6.4e-16); exact IPR*n = (1.5 L/(L+1))^3 = 2.81376 (diff +2.0e-09)
+   scaling 3->4: bottom 0.36184 -> 0.10216 (decrement +0.25968); IPR*n 2.370 -> 2.814 (ratio 1.187); IPR ~ n^(-gamma), gamma=0.918 (extended 1, localized 0)

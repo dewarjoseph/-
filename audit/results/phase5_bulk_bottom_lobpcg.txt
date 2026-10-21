@@ -1,0 +1,33 @@
+/home/user/-/audit/phase5_bulk_bottom_lobpcg.py:37: UserWarning: Exited postprocessing with accuracies 
+[5.19717176e-09 8.81250989e-09 1.65448514e-08 5.66144399e-09
+ 3.93569280e-08 1.24550861e-07]
+not reaching the requested tolerance 1e-07.
+  w, V = spl.lobpcg(H, X, M=M, largest=False, tol=tol, maxiter=maxiter)
+level 4 dim    8192 pinned: lowest [8.91963 8.91963 8.94879 8.94879]  IPR_tiles=0.00223 (1/n=0.000244)  boundary tiles 1331/4096=0.325  ground-state boundary weight=0.007  (7s)
+/home/user/-/audit/phase5_bulk_bottom_lobpcg.py:37: UserWarning: Exited postprocessing with accuracies 
+[1.06224679e-08 1.08347797e-07 3.53430368e-09 5.44716207e-08
+ 1.48288781e-08 5.47532846e-08]
+not reaching the requested tolerance 1e-07.
+  w, V = spl.lobpcg(H, X, M=M, largest=False, tol=tol, maxiter=maxiter)
+level 5 dim   65536 free  : lowest [5.24993 5.24993 5.24993 5.24993]  IPR_tiles=0.00957 (1/n=0.000031)  boundary tiles 5723/32768=0.175  ground-state boundary weight=0.926  (73s)
+/home/user/-/audit/phase5_bulk_bottom_lobpcg.py:37: UserWarning: Exited at iteration 2874 with accuracies 
+[2.68109834e-08 2.60008808e-08 2.73944580e-08 6.38231362e-08
+ 1.41462127e-07 9.93801570e-08]
+not reaching the requested tolerance 1e-07.
+Use iteration 2874 instead with accuracy 
+6.414529036485005e-08.
+
+  w, V = spl.lobpcg(H, X, M=M, largest=False, tol=tol, maxiter=maxiter)
+/home/user/-/audit/phase5_bulk_bottom_lobpcg.py:37: UserWarning: Exited postprocessing with accuracies 
+[2.62970280e-08 2.65204787e-08 1.01560006e-08 6.87073744e-08
+ 8.22236516e-08 1.52076352e-07]
+not reaching the requested tolerance 1e-07.
+  w, V = spl.lobpcg(H, X, M=M, largest=False, tol=tol, maxiter=maxiter)
+level 5 dim   65536 pinned: lowest [8.79701 8.79701 8.79898 8.79898]  IPR_tiles=0.00061 (1/n=0.000031)  boundary tiles 5723/32768=0.175  ground-state boundary weight=0.001  (135s)
+/home/user/-/audit/phase5_bulk_bottom_lobpcg.py:37: UserWarning: Exited postprocessing with accuracies 
+[1.67362438e-08 2.15887335e-08 3.07170090e-08 1.64994699e-08
+ 1.59452032e-08 1.33536164e-07]
+not reaching the requested tolerance 1e-07.
+  w, V = spl.lobpcg(H, X, M=M, largest=False, tol=tol, maxiter=maxiter)
+level 6 dim  524288 pinned: lowest [8.77013 8.77013 8.77024 8.77024]  IPR_tiles=0.00016 (1/n=0.000004)  boundary tiles 23723/262144=0.090  ground-state boundary weight=0.000  (2742s)
+EXIT=0

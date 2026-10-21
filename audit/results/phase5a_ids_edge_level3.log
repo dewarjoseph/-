@@ -1,0 +1,8 @@
+=== phase5a_ids_edge compute: model=fr30 level=3 K=400 (threads OMP=2) ===
+patch level 3: n=512 tiles, panels=5376, frames=24, boundary tiles=287, link labels {'-1': 2052, '+i': 329, '-i': 308, '-j': 644, '-k': 329, '+j': 644, '+k': 308, '+1': 762}, build 0.5s rss=0.10GB
+operator dim 1024 nnz 8700 hermitian; build 0.0s
+dense eigvalsh dim 1024: 2s rss=0.13GB; lambda_min=9.378470210 lambda_max=37.512406 mean=24.000000 (trace/dim = 24.000)
+Kramers pairing of the 400 reported eigenvalues: max|lambda_(2j) - lambda_(2j-1)| = 7.5e-14
+lowest 12: [ 9.3784702  9.3784702  9.5894029  9.5894029  9.7091872  9.7091872  9.8487967  9.8487967  9.9403505  9.9403505 10.0615524 10.0615524]
+lambda_k at k = 8, 32, 128, 400: 9.8487967 10.6142977 13.5887553 21.3293226; max residual 0.0e+00
+saved audit/results/phase5a_ids_edge_level3.npy/.json  (rss 0.13 GB)

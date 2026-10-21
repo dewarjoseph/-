@@ -1,0 +1,18 @@
+=== unit-cube block substitution, FR30-type decoration, Q8 Clifford links, pinned diagonal 6: level 3 ===  (started 2026-10-21 06:01:16, OMP_NUM_THREADS=1)
+[cube L3] geometry: n=512 tiles (1 unit cubes each), box 8^3, panels |E|=1344, 24 frames, max degree 6, boundary tiles (deg<6) 296 = 0.5781 n; links {'-1': 740, '+i': 73, '-i': 73, '+j': 165, '-j': 165, '+k': 64, '-k': 64}  (0.6s, rss 0.09 GB)
+   H = 6 I - A: dim 1024, nnz 6400, max|H - H^dagger| = 0.0e+00  (0.0s, rss 0.09 GB)
+   validation vs object builders (level 3): |E| 1344 vs 1344, max|H_grid - H_objects| = 0.0e+00, degrees identical: True  (0.1s)
+   solver: dense eigh (full spectrum)  iterations=None  (3s)  converged=True
+   lowest eigenvalues (Rayleigh quotients): [1.9139482 1.9139482 1.9753077 1.9753077]
+   residuals ||H psi - lambda psi||:        [1.14e-14 1.87e-14 1.67e-14 1.67e-14]
+   Kramers split lambda_2 - lambda_1 = 2.22e-16;  gap to next pair lambda_3 - lambda_1 = 6.136e-02;  eigenvector angle bound res_1/gap = 1.9e-13
+   Kramers pair check: IPR vec1 0.0153043, vec2 0.0153043, max_a |p1_a - p2_a| = 1.5e-15
+   ground state: tile IPR=0.0153043  IPR*n=7.8358  P=1/IPR=65.3  p_max=0.0459  s50=24 (0.0469 n)  s90=170 (0.3320 n)
+   boundary weight (deg < bulk) = 0.06451  (boundary tile fraction 0.5781, enhancement 0.112)
+    d     8^d       S2(d)    1/S2(d)  1/S2/8^d  D2(d) | interface w(d)    tiles fraction  w/frac
+    1       8    0.135462      7.382    0.9228  2.884 |        0.85910      296   0.5781   1.486
+    2      64   0.0727699     13.742    0.2147  0.896 |        0.99994      504   0.9844   1.016
+    3     512   0.0153043     65.341    0.1276  2.249 |        1.00000      512   1.0000   1.000
+   depth-1 child weights (depth-first child order): [0.0848 0.1263 0.1823 0.1066 0.1066 0.1263 0.1823 0.0848]
+   second pair (lambda=1.9753077, res 1.7e-14): IPR*n=2.7824 s50=65 s90=245 1/S2(d)=[5.85, 35.37, 184.01] interface w(1)=0.5790
+   saved audit/results/phase5a_cube_level3_groundstate_weights.npy and phase5a_level6_structure_cube_level3.json;  total 3s, max rss 0.14 GB

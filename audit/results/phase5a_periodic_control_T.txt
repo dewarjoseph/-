@@ -1,0 +1,34 @@
+====================================================================================================
+7. COMPARISON: E_per versus flux density over ALL periodic decorations analysed (stages A1, A2, A3);  FR30 aperiodic reference marked
+ FR30 (aperiodic, pinned finite patches, upper bounds on E_bulk): level 5: 8.79701, level 6: 8.77013; flux: nontriv=17/36=0.4722 traceless=55/144=0.3819 -1=13/144=0.0903
+ distinct periodic decorations: 44539 (k=2: 168, k=4: 42751, k=8: 1618);  global E_per max = 16.000000  e.g. ['k=4 S=[[2, 0, 0], [0, 2, 0], [0, 0, 1]] tri=(2, 21, 23) [exh]', 'k=4 S=[[2, 0, 0], [0, 2, 0], [0, 0, 1]] tri=(2, 23, 21) [exh]']
+ fraction of decorations with E_per >= 8.770: 0.3891;  with E_per in [8.5, 9.0]: 0.0734
+ binned by non-trivial plaquette fraction f_nontriv (inter-tile plaquettes):
+   f in [0.00,0.05): n=   12  E_per min=-0.0000 10%=-0.0000 median=0.0000 90%=0.0000 max=0.0000  k's=[1, 2, 4]
+   f in [0.10,0.15): n=   18  E_per min=0.8645 10%=0.8645 median=0.9010 90%=1.8614 max=2.0000  k's=[4]
+   f in [0.15,0.20): n=   61  E_per min=1.4170 10%=1.4170 median=1.7574 90%=3.5147 max=5.5237  k's=[4]
+   f in [0.20,0.25): n=  171  E_per min=1.5736 10%=1.8345 median=2.4083 90%=4.6907 max=6.0000  k's=[2, 4]
+   f in [0.25,0.30): n= 1167  E_per min=2.1994 10%=2.3023 median=3.0422 90%=4.5813 max=9.5623  k's=[4]
+   f in [0.30,0.35): n= 3053  E_per min=2.4304 10%=3.0557 median=3.8572 90%=4.8688 max=11.4629  k's=[2, 4, 8]
+   f in [0.35,0.40): n= 5703  E_per min=3.1576 10%=3.6642 median=4.6433 90%=6.1232 max=11.3514  k's=[4, 8]
+   f in [0.40,0.45): n= 5443  E_per min=3.6463 10%=4.3484 median=5.0248 90%=6.8613 max=14.7399  k's=[2, 4, 8]
+   f in [0.45,0.50): n=  533  E_per min=4.5490 10%=4.9777 median=6.5958 90%=9.1221 max=13.6754  k's=[4, 8]  <== FR30 f_nontriv=17/36=0.4722 lies in this bin (FR30 E<=8.770)
+   f in [0.50,0.55): n= 2227  E_per min=4.6139 10%=5.7382 median=6.8524 90%=9.7448 max=15.2476  k's=[4, 8]
+   f in [0.55,0.60): n= 5103  E_per min=5.5275 10%=6.4427 median=7.9549 90%=10.5592 max=14.0393  k's=[4, 8]
+   f in [0.60,0.65): n= 7499  E_per min=5.9856 10%=6.8603 median=8.9849 90%=11.1539 max=14.6909  k's=[4, 8]
+   f in [0.65,0.70): n= 8097  E_per min=6.9664 10%=8.1788 median=9.7296 90%=11.8664 max=16.0000  k's=[2, 4, 8]
+   f in [0.70,0.75): n= 3151  E_per min=7.5002 10%=8.7864 median=10.5448 90%=12.4115 max=16.0000  k's=[4, 8]
+   f in [0.75,0.80): n= 2295  E_per min=8.5545 10%=9.3707 median=11.1478 90%=12.8991 max=15.0653  k's=[4, 8]
+   f in [0.80,0.85): n=    6  E_per min=11.4966 10%=11.6475 median=12.0233 90%=12.7719 max=13.0609  k's=[4, 8]
+ decorations with |f_nontriv - 17/36| < 0.03: n=4411  E_per min=3.6463 median=5.8669 max=15.2476;  number with E_per >= 8.770: 385 (0.087);  >= 8.5: 442
+ decorations matching ALL THREE FR30 class fractions within (0.03,0.04,0.04): n=1551  E_per min=4.4967 median=5.6073 max=8.1772
+     k=4 S=[[1, 0, 2], [0, 1, 2], [0, 0, 4]] tri=(18, 2, 10)                E_per=8.17718 theta=[0.667, 0.666, 0.456] flux nontriv=0.5000 traceless=0.3889 -1=0.1111
+     k=4 S=[[1, 1, 1], [0, 2, 1], [0, 0, 2]] tri=(15, 20, 15)               E_per=8.08154 theta=[0.079, 0.077, 0.087] flux nontriv=0.5000 traceless=0.3889 -1=0.1111
+     k=8 S=[[1, 0, 4], [0, 1, 5], [0, 0, 8]] random#1                       E_per=7.93023 theta=[0.74, 0.725, 0.474] flux nontriv=0.4792 traceless=0.3611 -1=0.1181
+     k=4 S=[[1, 1, 0], [0, 2, 1], [0, 0, 2]] tri=(23, 23, 14)               E_per=7.92990 theta=[0.046, 0.037, 0.909] flux nontriv=0.5000 traceless=0.4167 -1=0.0833
+ Pearson corr(E_per, f_nontriv) = 0.8736;  corr(E_per, f_traceless) = 0.5082;  corr(E_per, f_-1) = 0.6732
+ least-squares E_per ~ -1.904 + 14.303 f_traceless + 30.696 f_-1 ;  rms residual 0.5324 (sd of E_per 2.7505);  prediction at the FR30 fractions: 6.3302  (FR30 actual <= 8.770)
+ minimum location: Gamma 17605, other TRIM 59, generic 26875 of 44539;  lowest band exactly degenerate at generic q: 18024
+ exhaustive FR30-frame bijections onto L/2L (stage C, 4 chunks, 40320 of 40320 bijections): E_per min=9.613979 max=14.176070 mean=11.23806 sd=0.61227; fraction >= 8.770: 1.0000;  distinct values (6 decimals): 2518
+[stage T done in 1s]
+ note on stage C: every E_per value occurs with multiplicity 16 (2516 values) or 32 (2 values): the crystal is invariant under the 8 translations of L/2L (which permute the cosets) and two of the eight FR30 frames are the identity (centre and child (0,0,0)), so bijections fall into orbits of size 8 x 2 = 16 with equal spectra (40320/16 = 2520 orbits, 2518 distinct values); this is why the four chunks (grouped by the frame on coset 0) have identical statistics.  The natural bijection (10.644234) lies at the 17th percentile of the 40320 bijection energies; all are >= 9.613979 > 8.770.

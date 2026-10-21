@@ -1,0 +1,12 @@
+====================================================================================================
+C2. BIJECTIONS OF THE FR30 LEVEL-1 FRAMES ONTO L/2L, chunk 2/4 (10080 of 40320), coarse minimiser (validated to 1e-13)
+ bijections evaluated: 10080;  E_per min=9.613979 max=14.176070 mean=11.23806 sd=0.61227;  fraction >= 8.770: 1.0000
+ histogram (0.5 bins): [9.5,10.0):116, [10.0,10.5):964, [10.5,11.0):2620, [11.0,11.5):3120, [11.5,12.0):2160, [12.0,12.5):812, [12.5,13.0):244
+ distinct E_per values (6 decimals): 2518; the five largest: [(13.400469, 4), (13.454267, 4), (13.850702, 4), (14.006566, 4), (14.17607, 4)]
+ k=8 2L FR30 bijection [5, 0, 1, 2, 7, 6, 4, 3] [chunk 2 top] k= 8  E_per=14.176069966  theta_min=[0.0, 1.0, 0.0] (Gamma)  gap12=1.2e-14 (generic q: 0.0e+00) gap13=1.655e+00  distinct_minima=1  flux: nontriv=0.7917 traceless=0.5000 -1=0.2917  classes={'1': 30, '-1': 42, 'i': 20, 'j': 28, 'k': 24} (inter-tile plaquettes=144)
+      Hessian (Richardson FD, h=0.02/0.01) = [+15.48254 -3.32824 -3.14523; -3.32824 +14.94371 -1.02820; -3.14523 -1.02820 +14.08439]  eigs=[9.78797, 15.51596, 19.20672]  Richardson change=4.0e-06 raw |FD(0.02)-FD(0.01)|=3.9e-03
+      Hessian (2nd-order PT, degeneracy g=2, non-scalar part 1.9e-14) = [+15.48254 -3.32824 -3.14523; -3.32824 +14.94371 -1.02820; -3.14523 -1.02820 +14.08439]  max|PT-FD|=2.6e-07  |grad|=2.5e-12
+ k=8 2L FR30 bijection [5, 1, 0, 2, 7, 6, 4, 3] [chunk 2 top] k= 8  E_per=14.176069966  theta_min=[0.0, 1.0, 0.0] (Gamma)  gap12=1.2e-14 (generic q: 0.0e+00) gap13=1.655e+00  distinct_minima=1  flux: nontriv=0.7917 traceless=0.5000 -1=0.2917  classes={'1': 30, '-1': 42, 'i': 20, 'j': 28, 'k': 24} (inter-tile plaquettes=144)
+      Hessian (Richardson FD, h=0.02/0.01) = [+15.48254 -3.32824 -3.14523; -3.32824 +14.94371 -1.02820; -3.14523 -1.02820 +14.08439]  eigs=[9.78797, 15.51596, 19.20672]  Richardson change=4.0e-06 raw |FD(0.02)-FD(0.01)|=3.9e-03
+      Hessian (2nd-order PT, degeneracy g=2, non-scalar part 1.9e-14) = [+15.48254 -3.32824 -3.14523; -3.32824 +14.94371 -1.02820; -3.14523 -1.02820 +14.08439]  max|PT-FD|=2.6e-07  |grad|=2.5e-12
+[stage C2 done in 459s]

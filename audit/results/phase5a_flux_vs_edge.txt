@@ -1,0 +1,49 @@
+PHASE V-A, TASK D1: pinned spectral edge of substitution (aperiodic) chair decorations versus flux fractions and the spatial organisation of frustration
+All numbers computed by audit/phase5a_flux_vs_edge.py in this run.  E_fit = periodic-census regression -1.904 + 14.303 f_trl + 30.696 f_-1 (Task B2a).
+Organisation statistics at level 5 (see module docstring): CV(-1), enr1(-1), enr1(trl), pair(-1).  r = E0(L5) - E_fit.
+
+decoration   f_nontriv   f_trl    f_-1 |     E0 L4     E0 L5      res |   E_fit       r |  CV(-1) enr1(-1) enr1(trl) pair(-1) | IPR*n L5  w_int1
+fr30            0.4763  0.3912  0.0851 |   8.91963   8.79701  7.0e-08 |   6.304  +2.493 |   0.455    2.444     0.445    0.999 |   19.930   0.582
+randdec1        0.4768  0.4381  0.0386 |   6.92890   6.68919  6.4e-08 |   5.549  +1.141 |   0.858    2.618     0.766    1.289 |  477.713   0.851
+randdec2        0.4919  0.4533  0.0387 |   7.45547   7.15814  1.1e-07 |   5.766  +1.392 |   0.803    2.066     0.713    1.089 |  439.914   0.638
+randdec3        0.4377  0.3589  0.0787 |   7.27433   7.16957  3.2e-08 |   5.647  +1.523 |   0.726    2.765     0.602    1.227 |   61.185   0.504
+randdec4        0.4699  0.3654  0.1045 |   8.39631   8.29505  4.2e-08 |   6.530  +1.765 |   0.603    0.679     0.934    1.207 |  115.411   0.218
+randdec5        0.4584  0.4230  0.0354 |   7.49956   7.36807  4.5e-08 |   5.233  +2.135 |   0.763    2.379     0.685    1.101 |   67.688   0.415
+randdec6        0.4541  0.3391  0.1150 |   7.80294   7.70022  8.2e-08 |   6.476  +1.224 |   0.531    0.662     0.931    1.151 |  474.756   0.772
+randdec101      0.4886  0.4273  0.0613 |   7.91496   7.79087  1.1e-07 |   6.089  +1.702 |   0.654    1.608     0.755    1.151 |   65.080   0.347
+randdec102      0.4754  0.4400  0.0354 |   7.14531   7.04185  9.0e-08 |   5.475  +1.567 |   1.039    1.901     0.718    1.728 |  212.392   0.550
+randdec103      0.4532  0.3918  0.0615 |   7.67298   7.12191  8.9e-08 |   5.586  +1.536 |   0.724    1.916     0.738    1.211 |  264.652   0.742
+randdec104      0.4031  0.4017  0.0014 |   5.66545   5.27160  5.5e-08 |   3.885  +1.387 |   4.455   10.611     0.736   10.277 |    6.010   0.534
+randdec105      0.4653  0.4212  0.0441 |   7.57176   7.49923  9.8e-08 |   5.473  +2.026 |   0.830    2.165     0.732    1.199 |  184.525   0.856
+randdec106      0.4768  0.4087  0.0680 |   7.97945   7.69597  1.3e-07 |   6.030  +1.666 |   0.630    1.875     0.666    1.133 |  429.635   0.898
+randdec107      0.4652  0.4192  0.0460 |   7.32530   7.30793  1.9e-07 |   5.505  +1.803 |   0.830    2.017     0.839    1.290 |   68.446   0.032
+randdec108      0.4705  0.3830  0.0875 |   8.60774   8.49386  6.3e-08 |   6.259  +2.234 |   0.619    1.126     0.700    1.195 |   35.829   0.560
+randdec109      0.4567  0.4115  0.0452 |   6.94134   6.89535  3.7e-08 |   5.370  +1.525 |   0.916    1.283     0.887    1.442 |  119.114   0.409
+randdec110      0.4731  0.4103  0.0628 |   7.73448   7.72350  1.5e-08 |   5.892  +1.832 |   0.655    2.269     0.750    1.147 |   66.303   0.042
+randdec111      0.4463  0.3516  0.0946 |   7.82116   7.55614  2.4e-08 |   6.030  +1.526 |   0.850    0.286     1.105    1.485 |   90.995   0.787
+randdec112      0.4531  0.3900  0.0631 |   7.22827   6.85053  5.0e-07 |   5.611  +1.239 |   0.731    0.768     0.910    1.271 |  190.769   0.679
+
+FR30: E0(L5) = 8.79701, E_fit = 6.304, residual +2.493 (periodic census rms 0.532)
+random substitution decorations (n=18): E0(L5) range [5.272, 8.494], residual r range [+1.141, +2.234], mean +1.623, sd 0.306
+number of random decorations with E0(L5) > FR30's E0(L5): 0;  with residual > FR30's: 0
+random decorations matching all three FR30 fractions within (0.03, 0.04, 0.04): 9; their E0(L5): [8.295, 7.7909, 7.1219, 7.696, 7.3079, 8.4939, 6.8954, 7.7235, 6.8505]
+  CV(-1)     vs residual r: Spearman -0.379 (p=0.110), Pearson -0.247 (p=0.308);  vs E0(L5): Spearman -0.811 (p=0.000);  FR30 value 0.455, rank among 19: 19
+  enr1(-1)   vs residual r: Spearman +0.068 (p=0.781), Pearson -0.099 (p=0.688);  vs E0(L5): Spearman -0.307 (p=0.201);  FR30 value 2.444, rank among 19: 4
+  enr1(trl)  vs residual r: Spearman -0.409 (p=0.082), Pearson -0.513 (p=0.025);  vs E0(L5): Spearman -0.128 (p=0.601);  FR30 value 0.445, rank among 19: 19
+  pair(-1)   vs residual r: Spearman -0.454 (p=0.051), Pearson -0.219 (p=0.368);  vs E0(L5): Spearman -0.635 (p=0.003);  FR30 value 0.999, rank among 19: 19
+  own least squares over the substitution decorations: E0(L5) ~ -2.334 + 18.667 f_trl + 36.361 f_-1, rms 0.334 (sd E0 0.738); FR30 residual to THIS fit +0.733
+
+SUPPLEMENT (same run data): partial analysis controlling for flux
+ fit over all 19 substitution decorations: E0(L5) ~ -2.334 + 18.667 f_trl + 36.361 f_-1; rms 0.334
+  cv_minus        partial (flux-residualised) correlation with E0: Spearman +0.042 (p=0.864), Pearson -0.018 (p=0.940)
+  pair_minus      partial (flux-residualised) correlation with E0: Spearman +0.096 (p=0.694), Pearson +0.026 (p=0.914)
+  enr1_minus      partial (flux-residualised) correlation with E0: Spearman +0.300 (p=0.212), Pearson +0.226 (p=0.352)
+  enr1_traceless  partial (flux-residualised) correlation with E0: Spearman -0.586 (p=0.008), Pearson -0.548 (p=0.015)
+ flux-matched substitution decorations (n=9) + FR30: E0 range [6.851, 8.494] vs FR30 8.797; spread at matched flux 1.643
+  within the matched set (n=10): Spearman(E0, cv_minus) = -0.891 (p=0.001); FR30 cv_minus = 0.455, rank 1 of 10 (1 = smallest)
+  within the matched set (n=10): Spearman(E0, pair_minus) = -0.709 (p=0.022); FR30 pair_minus = 0.999, rank 1 of 10 (1 = smallest)
+  within the matched set (n=10): Spearman(E0, enr1_minus) = +0.176 (p=0.627); FR30 enr1_minus = 2.444, rank 10 of 10 (1 = smallest)
+  within the matched set (n=10): Spearman(E0, enr1_traceless) = -0.467 (p=0.174); FR30 enr1_traceless = 0.445, rank 1 of 10 (1 = smallest)
+  model [flux only] fitted on the 18 random decorations: R^2 0.816; prediction for FR30 7.975 (actual 8.797, error +0.822)
+  model [flux + CV(-1)] fitted on the 18 random decorations: R^2 0.818; prediction for FR30 7.953 (actual 8.797, error +0.844)
+  model [flux + CV(-1) + pair(-1)] fitted on the 18 random decorations: R^2 0.825; prediction for FR30 8.114 (actual 8.797, error +0.683)

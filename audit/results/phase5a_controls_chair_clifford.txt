@@ -1,0 +1,11 @@
+=== chair / clifford (pinned, diagonal 24) ===
+   convention: FR30 Clifford Q8 links C_ab = (sigma.M_a^T n)(sigma.M_b^T n)
+[chair/clifford/pinned] level 3 n=512 dim=1024 |E|=5376 dense eigh (15s)
+   lowest 8: [9.37847  9.37847  9.589403 9.589403 9.709187 9.709187 9.848797 9.848797]
+   residuals ||H psi - lambda psi||: [9.4e-14 3.5e-14 6.9e-14 6.7e-14 5.8e-14 7.4e-14 8.0e-14 8.7e-14]
+   ground state (Kramers pair, split 8.9e-15): tile IPR=0.0125475 [vec1 0.0125475, vec2 0.0125475]  IPR*n=6.4243  P=1/IPR=79.7  p_max=0.0362 s50=27 s90=145  boundary weight=0.1327 (boundary tile fraction 0.561)
+[chair/clifford/pinned] level 4 n=4096 dim=8192 |E|=46080 lobpcg(block=10,seed=0,tol=1e-7) (99s)
+   lowest 8: [8.919634 8.919634 8.948787 8.948787 8.956989 8.956989 8.968624 8.968624]
+   residuals ||H psi - lambda psi||: [1.7e-08 2.6e-08 2.1e-08 1.8e-08 1.7e-08 2.4e-08 6.4e-09 2.8e-08]
+   ground state (Kramers pair, split -2.8e-14): tile IPR=0.002233 [vec1 0.002233, vec2 0.002233]  IPR*n=9.1464  P=1/IPR=447.8  p_max=0.0089 s50=166 s90=762  boundary weight=0.0075 (boundary tile fraction 0.325)
+   check vs phase-5 dense level-4 pinned eigenvalues: max|diff| = 5.68e-14

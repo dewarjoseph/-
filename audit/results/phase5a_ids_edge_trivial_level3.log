@@ -1,0 +1,7 @@
+=== phase5a_ids_edge compute: model=trivial level=3 K=400 (threads OMP=2) ===
+patch level 3: n=512 tiles, panels=5376, frames=24, boundary tiles=287, link labels {'-1': 2052, '+i': 329, '-i': 308, '-j': 644, '-k': 329, '+j': 644, '+k': 308, '+1': 762}, build 0.5s rss=0.10GB
+operator dim 512 nnz 3838 hermitian; build 0.0s
+dense eigvalsh dim 512: 4s rss=0.10GB; lambda_min=1.669512258 lambda_max=42.860059 mean=24.000000 (trace/dim = 24.000)
+lowest 12: [1.6695123 1.6695123 2.7124757 2.7124757 2.7124757 2.7124757 3.2889466 3.2889466 3.8544531 3.8544531 3.8544531 3.8544531]
+lambda_k at k = 8, 32, 128, 400: 3.2889466 6.4530198 12.8146257 22.4143382; max residual 0.0e+00
+saved audit/results/phase5a_ids_edge_trivial_level3.npy/.json  (rss 0.10 GB)

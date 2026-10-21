@@ -1,0 +1,48 @@
+|P0| histogram: {26: 3, 29: 6, 30: 15, 31: 18, 32: 96, 33: 90, 34: 192, 35: 186, 36: 426, 37: 432, 38: 537, 39: 330, 40: 414, 42: 72, 43: 96, 44: 576, 45: 456, 46: 732, 47: 720, 48: 474, 49: 60, 50: 72, 51: 36, 52: 108, 53: 108, 54: 306}
+
+=== decorations with |P0| = 26: 3 ===
+  |P0|=26 #0: |P0|=26  M-factors=['lambda - 4', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=True  f(+1)=181/288 f(-1)=65/288
+  |P0|=26 #1: |P0|=26  M-factors=['lambda - 4', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=True  f(+1)=181/288 f(-1)=65/288
+  |P0|=26 #2: |P0|=26  M-factors=['lambda - 4', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=True  f(+1)=181/288 f(-1)=65/288
+
+=== decorations with |P0| = 29: 6 ===
+  |P0|=29 #0: |P0|=29  M-factors=['lambda - 4', 'lambda - 2', 'lambda - 1', 'lambda**2 - 3*lambda + 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=False  f(+1)=25*2**(223/301)*3**(118/301)*5**(228/301)*7**(292/301)/2352 f(-1)=11759/145152
+  |P0|=29 #1: |P0|=29  M-factors=['lambda - 4', 'lambda - 2', 'lambda - 1', 'lambda**2 - 3*lambda + 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=False  f(+1)=25*2**(223/301)*3**(118/301)*5**(228/301)*7**(292/301)/2352 f(-1)=11759/145152
+  |P0|=29 #2: |P0|=29  M-factors=['lambda - 4', 'lambda - 2', 'lambda - 1', 'lambda**2 - 3*lambda + 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=False  f(+1)=25*2**(223/301)*3**(118/301)*5**(228/301)*7**(292/301)/2352 f(-1)=11759/145152
+  |P0|=29 #3: |P0|=29  M-factors=['lambda - 4', 'lambda - 2', 'lambda - 1', 'lambda**2 - 3*lambda + 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=False  f(+1)=25*2**(223/301)*3**(118/301)*5**(228/301)*7**(292/301)/2352 f(-1)=11759/145152
+  |P0|=29 #4: |P0|=29  M-factors=['lambda - 4', 'lambda - 2', 'lambda - 1', 'lambda**2 - 3*lambda + 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=False  f(+1)=25*2**(223/301)*3**(118/301)*5**(228/301)*7**(292/301)/2352 f(-1)=11759/145152
+  |P0|=29 #5: |P0|=29  M-factors=['lambda - 4', 'lambda - 2', 'lambda - 1', 'lambda**2 - 3*lambda + 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=False  f(+1)=25*2**(223/301)*3**(118/301)*5**(228/301)*7**(292/301)/2352 f(-1)=11759/145152
+
+=== decorations with |P0| = 30: 15 ===
+  |P0|=30 #0: |P0|=30  M-factors=['lambda - 4', 'lambda - 2', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=False  f(+1)=2675/4704 f(-1)=505/7056
+  |P0|=30 #1: |P0|=30  M-factors=['lambda - 4', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=True  f(+1)=2311/4032 f(-1)=313/4032
+  |P0|=30 #2: |P0|=30  M-factors=['lambda - 4', 'lambda - 2', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=False  f(+1)=2675/4704 f(-1)=505/7056
+  |P0|=30 #3: |P0|=30  M-factors=['lambda - 4', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=True  f(+1)=19/36 f(-1)=13/144
+  |P0|=30 #4: |P0|=30  M-factors=['lambda - 4', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=True  f(+1)=2311/4032 f(-1)=313/4032
+  |P0|=30 #5: |P0|=30  M-factors=['lambda - 4', 'lambda - 2', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=False  f(+1)=2675/4704 f(-1)=505/7056
+  |P0|=30 #6: |P0|=30  M-factors=['lambda - 4', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=True  f(+1)=2311/4032 f(-1)=313/4032
+  |P0|=30 #7: |P0|=30  M-factors=['lambda - 4', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=True  f(+1)=2311/4032 f(-1)=313/4032
+  |P0|=30 #8: |P0|=30  M-factors=['lambda - 4', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=True  f(+1)=19/36 f(-1)=13/144
+  |P0|=30 #9: |P0|=30  M-factors=['lambda - 4', 'lambda - 2', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=False  f(+1)=2675/4704 f(-1)=505/7056
+  |P0|=30 #10: |P0|=30  M-factors=['lambda - 4', 'lambda - 2', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=False  f(+1)=2675/4704 f(-1)=505/7056
+  |P0|=30 #11: |P0|=30  M-factors=['lambda - 4', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=True  f(+1)=19/36 f(-1)=13/144
+  |P0|=30 #12: |P0|=30  M-factors=['lambda - 4', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=True  f(+1)=2311/4032 f(-1)=313/4032
+  |P0|=30 #13: |P0|=30  M-factors=['lambda - 4', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=True  f(+1)=2311/4032 f(-1)=313/4032
+  |P0|=30 #14: |P0|=30  M-factors=['lambda - 4', 'lambda - 2', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=False  f(+1)=2675/4704 f(-1)=505/7056
+
+=== sample of decorations with |P0| >= 50 (of 630) ===
+  large-P0 #294: |P0|=50  M-factors=['lambda - 4', 'lambda - 2', 'lambda - 1', 'lambda**2 + lambda + 1', 'lambda**3 - 4*lambda**2 + 6*lambda - 5']  B-factors=['lambda - 2', 'lambda - 1', 'lambda**2 + 2*lambda + 2', 'lambda**2 + lambda + 1', 'lambda**3 - lambda**2 - 2']  clean=False  f(+1)=10026522145/19625441472 f(-1)=9052517/204431682
+  large-P0 #14: |P0|=53  M-factors=['lambda - 4', 'lambda - 1', 'lambda**2 - 3*lambda + 1', 'lambda**2 + lambda + 1']  B-factors=['lambda - 2', 'lambda - 1', 'lambda**2 + lambda + 1']  clean=False  f(+1)=144882887/253423296 f(-1)=2**(525/694)*3**(667/694)*5**(296/347)*7**(73/347)/252
+  large-P0 #419: |P0|=54  M-factors=['lambda - 4', 'lambda - 1', 'lambda**2 - lambda + 1', 'lambda**2 + lambda + 1', 'lambda**3 - 2*lambda**2 - 1']  B-factors=['lambda - 2', 'lambda - 1', 'lambda**2 + lambda + 1']  clean=False  f(+1)=219948959/394557408 f(-1)=21728495/197278704
+  large-P0 #324: |P0|=51  M-factors=['lambda - 4', 'lambda - 2', 'lambda - 1', 'lambda**2 + lambda + 1', 'lambda**3 - 4*lambda**2 + 6*lambda - 5']  B-factors=['lambda - 2', 'lambda - 1', 'lambda**2 + lambda + 1']  clean=False  f(+1)=22999783/40618368 f(-1)=215507/1766016
+  large-P0 #503: |P0|=52  M-factors=['lambda - 4', 'lambda - 1', 'lambda**2 - 2*lambda - 1', 'lambda**2 + lambda + 1']  B-factors=['lambda - 2', 'lambda - 1', 'lambda**2 + 2*lambda + 2', 'lambda**2 + lambda + 1', 'lambda**3 - lambda**2 - 2']  clean=False  f(+1)=12366143081/24679484928 f(-1)=1529324995/24679484928
+  large-P0 #507: |P0|=54  M-factors=['lambda - 4', 'lambda - 2', 'lambda + 2', 'lambda - 1', 'lambda**2 - 2*lambda - 1', 'lambda**2 + lambda + 1']  B-factors=['lambda - 2', 'lambda - 1', 'lambda**2 + 2*lambda + 2', 'lambda**2 + lambda + 1', 'lambda**3 - lambda**2 - 2']  clean=False  f(+1)=358305993/685541248 f(-1)=355078907/6169871232
+
+=== sample of decorations with |P0| in 36..38 (of 1395) ===
+  mid-P0 #568: |P0|=38  M-factors=['lambda - 4', 'lambda + 1', 'lambda - 1', 'lambda**2 - 3*lambda + 1', 'lambda**2 + lambda + 1']  B-factors=['lambda - 2', 'lambda - 1', 'lambda**2 + 1', 'lambda**2 + lambda + 1', 'lambda**3 - lambda**2 - lambda - 1']  clean=False  f(+1)=787200619/1324438416 f(-1)=90173411/662219208
+  mid-P0 #794: |P0|=38  M-factors=['lambda - 4', 'lambda - 2', 'lambda + 3', 'lambda - 1', 'lambda**2 + lambda + 1', 'lambda**3 - 2*lambda**2 - 9*lambda + 12']  B-factors=['lambda - 1', 'lambda - 2', 'lambda + 1', 'lambda**2 + lambda + 1']  clean=False  f(+1)=2911711/5108832 f(-1)=690661/10217664
+  mid-P0 #63: |P0|=38  M-factors=['lambda - 4', 'lambda + 1', 'lambda - 2', 'lambda - 1']  B-factors=['lambda - 2', 'lambda - 1']  clean=False  f(+1)=55247/96768 f(-1)=377/16128
+  mid-P0 #182: |P0|=36  M-factors=['lambda - 4', 'lambda - 1', 'lambda**3 - 4*lambda**2 + 6*lambda - 5']  B-factors=['lambda - 2', 'lambda - 1']  clean=False  f(+1)=3889111/7233408 f(-1)=12605/314496
+  mid-P0 #1: |P0|=38  M-factors=['lambda - 4', 'lambda + 1', 'lambda - 3', 'lambda - 1']  B-factors=['lambda - 1', 'lambda - 2']  clean=False  f(+1)=629/1080 f(-1)=161/1440
+  mid-P0 #532: |P0|=36  M-factors=['lambda - 4', 'lambda - 2', 'lambda + 1', 'lambda - 1', 'lambda**2 + 2', 'lambda**2 + lambda + 1']  B-factors=['lambda - 2', 'lambda - 1', 'lambda**2 + lambda + 1', 'lambda**3 - lambda**2 - 2']  clean=False  f(+1)=2442058247/4332037248 f(-1)=1462542511/12996111744
+EXIT=0

@@ -1,0 +1,33 @@
+Phase V-A: full kernel compile of the regenerated certificate, single process, no other heavy jobs except one 1-core Python run (cube level 6)
+command: cd /home/user/- && $LEAN certificates/TypeSubstitutionCertificate.lean   (LEAN = Lean 4.34.1 release binary, no Mathlib, no lake project)
+sha256 of the compiled file: f8f89bbbef9cf3c8e370c53d251f19cc30126e85fc01126f8404a2794500de68
+occurrences of 'decide +kernel': 14; occurrences of sorry/native_decide/axiom declarations: 0
+start 2026-10-21T07:26:18Z
+Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)
+EXIT=0 wall=454s peakRSS=11298MB
+end 2026-10-21T07:33:52Z
+
+== complete compiler output (stdout+stderr) ==
+'TypeSubstitution.types_distinct' depends on axioms: [propext]
+'TypeSubstitution.panel_images_certified' depends on axioms: [propext]
+'TypeSubstitution.plaquette_images_certified' depends on axioms: [propext]
+'TypeSubstitution.classes_certified' depends on axioms: [propext]
+'TypeSubstitution.standard_level1_certified' depends on axioms: [propext]
+'TypeSubstitution.equivariance_certified' depends on axioms: [propext]
+'TypeSubstitution.seed_certified' depends on axioms: [propext]
+'TypeSubstitution.level1_geometry_matches_recursion' depends on axioms: [propext]
+'TypeSubstitution.level2_geometry_matches_recursion' depends on axioms: [propext]
+'TypeSubstitution.eigen_check' depends on axioms: [propext]
+'TypeSubstitution.u1_check' depends on axioms: [propext]
+'TypeSubstitution.u2_check' depends on axioms: [propext]
+'TypeSubstitution.base_check' depends on axioms: [propext]
+'TypeSubstitution.closed_form_all' depends on axioms: [propext, Quot.sound]
+'TypeSubstitution.class_counts_closed_form' depends on axioms: [propext, Quot.sound]
+'TypeSubstitution.total_closed_form' depends on axioms: [propext, Quot.sound]
+'TypeSubstitution.limit_frequencies' depends on axioms: [propext]
+'TypeSubstitution.closed_form_general' depends on axioms: [propext, Quot.sound]
+'TypeSubstitution.closed_form_all_direct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TypeSubstitution.q8_closed' depends on axioms: [propext]
+'TypeSubstitution.q8_conj_is_inverse' does not depend on any axioms
+'TypeSubstitution.q8_class_conj_invariant' does not depend on any axioms
+'TypeSubstitution.q8_class_inverse_invariant' does not depend on any axioms

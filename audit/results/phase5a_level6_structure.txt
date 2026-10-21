@@ -1,0 +1,91 @@
+PHASE 5a / TASK C3 -- LEVEL-6 GROUND-STATE STRUCTURE: FR30 CHAIR VERSUS THE PERIODIC-GEOMETRY (UNIT-CUBE) CONTROL
+All numbers below are numerical results of this script (ground state = lowest Kramers pair of the pinned operator); residuals are ||H psi - lambda psi||_2.
+
+Phase 5a / Task C3: ground-state structure at level 6 -- FR30 Chair44 tiling versus the periodic-geometry (unit-cube)
+control that shares the FR30-type decoration hierarchy but not the chair geometry.
+
+Operator (conventions identical to audit/phase5_bulk_bottom_lobpcg.py and audit/phase5a_controls.py):
+  Hilbert space l^2(tiles) x C^2; (A psi)_a = sum over shared unit panels f=(a,b) of C_ab psi_b with
+  C_ab = (sigma.M_a^T n_f)(sigma.M_b^T n_f) in Q8 and C_ba = C_ab^dagger; panels between the same pair of tiles are
+  summed with multiplicity.  FR30 chair: H_pin = 24 I - A (bulk coordination 24).  Unit-cube control: H = 6 I - A
+  (bulk coordination 6, FR30-type decoration {v: FR30[v], (1,1,1) -> (0,2,1)} exactly as phase5a_controls.part_cube).
+Geometry: vectorized re-implementation (dense owner grid of unit cubes) of tiles_at_level/panel_edges (chair) and of
+  phase5a_controls.cube_tiles (cube) with the SAME depth-first tile order, so that tile_index // 8**(L-d) is the depth-d
+  ancestor.  At levels <= 5 the sparse operator is cross-validated entry by entry against the object builders
+  (independent_clifford_q8_audit.tiles_at_level / panel_edges / clifford_link, phase5a_controls.cube_tiles / build_H).
+Solver: dense eigh at level 3 (dim 1024); otherwise LOBPCG with k=2 wanted + 2 guard vectors (block 4), diagonal
+  preconditioner, seed 0, tol 1e-6, at most 4000 iterations in total.  LOBPCG runs in chunks of <= 500 iterations, each
+  chunk restarted from the current Ritz block (the conjugate direction P is dropped at a restart), which gives progress
+  logging and a wall-clock budget; eigenvalues are recomputed as Rayleigh quotients of the normalized Ritz vectors and
+  residual norms ||H psi - lambda psi||_2 are reported for every vector of the block.
+Ground-state diagnostics (tile density p_a = |psi_a1|^2 + |psi_a2|^2, sum 1, averaged over the Kramers pair; it is the
+  same for every unit vector of the pair):  IPR = sum_a p_a^2, IPR*n, P = 1/IPR;  box counting S2(d) = sum over the 8^d
+  depth-d children of (weight in child)^2, 1/S2(d) = effective number of occupied depth-d children, local correlation
+  dimension D2(d) = log2(S2(d-1)/S2(d)) (3 for a uniform state, S2(0) = 1);  interface weight at depth d = weight on
+  tiles incident to a shared panel joining two different depth-d children, with the fraction of such tiles;  boundary
+  weight = weight on tiles with degree < bulk coordination;  s50, s90 = number of tiles carrying 50% / 90% of the weight.
+
+0. SOLVER RECORDS PER (system, level) -- the primary record (marked *) is the converged one with the smallest ground-state residual
+  * cube L3 [lobpcg] dense eigh (full spectrum)                                   it=None 3s rss=0.14GB conv=True (wanted pair conv=True) lambda_1=1.9139482 res_1=1.1e-14 IPR*n=7.8358 s50=24 1/S2(1)=7.382
+  * cube L4 [lobpcg] lobpcg(block=4, seed=0, tol=1e-06, maxiter=4000, chunks of < it=424 3s rss=0.11GB conv=True (wanted pair conv=True) lambda_1=1.8610131 res_1=4.1e-07 IPR*n=10.2920 s50=153 1/S2(1)=6.846  stop: all 4 block residuals < tol=1e-06
+  * cube L5 [lobpcg] lobpcg(block=4, seed=0, tol=1e-06, maxiter=4000, chunks of < it=784 158s rss=0.28GB conv=True (wanted pair conv=True) lambda_1=1.8521062 res_1=7.0e-07 IPR*n=17.2095 s50=786 1/S2(1)=6.589  stop: all 4 block residuals < tol=1e-06
+  * fr30 L3 [lobpcg] dense eigh (full spectrum)                                   it=None 3s rss=0.15GB conv=True (wanted pair conv=True) lambda_1=9.3784702 res_1=9.5e-14 IPR*n=6.4243 s50=27 1/S2(1)=2.405
+    fr30 L4 [lobpcg] lobpcg(block=4, seed=0, tol=1e-06, maxiter=4000, chunks of < it=629 42s rss=0.17GB conv=True (wanted pair conv=True) lambda_1=8.9196344 res_1=6.1e-07 IPR*n=9.1464 s50=166 1/S2(1)=3.161  stop: all 4 block residuals < tol=1e-06
+  * fr30 L4 [chebfsi] chebfsi(block=32, K=4, lam_max=48.0, tol=1e-07, seed=0; Zhou it=221 1s rss=0.17GB conv=True (wanted pair conv=True) lambda_1=8.9196344 res_1=3.7e-09 IPR*n=9.1464 s50=166 1/S2(1)=3.161  stop: res[:4] < tol
+    cross-check None vs chebfsi: |d lambda_1| = 3.0e-13, |d lambda_3| = 9.0e-13, |d IPR*n| = 1.92e-06, |d 1/S2(1)| = 1.01e-06, |d interface w(1)| = 1.16e-08, s50 166 vs 166
+    tile-density difference max_a |p_a - p'_a| = 6.90e-09, L1 = 8.32e-07
+  * fr30 L5 [lobpcg] lobpcg(block=4, seed=0, tol=1e-06, maxiter=4000, chunks of < it=972 185s rss=0.73GB conv=True (wanted pair conv=True) lambda_1=8.7970113 res_1=6.8e-07 IPR*n=19.9304 s50=716 1/S2(1)=3.252  stop: all 4 block residuals < tol=1e-06
+
+1. PER-LEVEL RESULTS (primary records)
+system L       n     dim  lambda_min    resid gap pair2    IPR*n  quoted        P    s50     s90       bw solver                    it      s    GB
+---------------------------------------------------------------------------------------------------------------------------------------------------
+cube   3     512    1024    1.913948  1.1e-14  6.14e-02    7.836   7.836     65.3     24     170  0.06451 dense eigh (full spect     -      3  0.14
+cube   4    4096    8192    1.861013  4.1e-07  8.23e-03   10.292  10.292    398.0    153     861  0.00638 lobpcg(block=4, seed=0   424      3  0.11
+cube   5   32768   65536    1.852106  7.0e-07  1.46e-03   17.209       -   1904.1    786    5233  0.00056 lobpcg(block=4, seed=0   784    158  0.28
+fr30   3     512    1024    9.378470  9.5e-14  2.11e-01    6.424   6.424     79.7     27     145  0.13271 dense eigh (full spect     -      3  0.15
+fr30   4    4096    8192    8.919634  3.7e-09  2.92e-02    9.146   9.146    447.8    166     762  0.00748 chebfsi(block=32, K=4,   221      1  0.17
+fr30   5   32768   65536    8.797011  6.8e-07  1.97e-03   19.930    20.0   1644.1    716    4186  0.00070 lobpcg(block=4, seed=0   972    185  0.73
+
+   lowest 4 eigenvalues and residuals:
+   cube L3: lambda = [1.9139482 1.9139482 1.9753077 1.9753077]  res = [1.1e-14 1.9e-14 1.7e-14 1.7e-14]
+   cube L4: lambda = [1.8610131 1.8610131 1.8692416 1.8692416]  res = [4.1e-07 6.9e-07 9.3e-07 9.9e-07]
+   cube L5: lambda = [1.8521062 1.8521062 1.8535642 1.8535642]  res = [7.0e-07 7.5e-07 7.6e-07 9.9e-07]
+   fr30 L3: lambda = [9.3784702 9.3784702 9.5894029 9.5894029]  res = [9.5e-14 3.6e-14 8.8e-14 4.1e-14]
+   fr30 L4: lambda = [8.9196344 8.9196344 8.9487868 8.9487868]  res = [3.7e-09 1.7e-09 3.9e-08 2.2e-08]
+   fr30 L5: lambda = [8.7970113 8.7970113 8.79898   8.79898  ]  res = [6.8e-07 8.5e-07 7.5e-07 9.6e-07]
+
+2. BOX COUNTING: 1/S2(d) = effective number of occupied depth-d children (8^d children; uniform state gives 8^d), D2(d) = log2(S2(d-1)/S2(d)) (uniform 3)
+   cube L3 (n=512): 1/S2(d) d=1..3: 7.382  13.742  65.341   | occupied fraction 1/S2/8^d: 0.923 0.215 0.128   | D2(d): 2.88 0.90 2.25
+   cube L4 (n=4096): 1/S2(d) d=1..4: 6.846  11.779  67.849  397.980   | occupied fraction 1/S2/8^d: 0.856 0.184 0.133 0.097   | D2(d): 2.78 0.78 2.53 2.55
+   cube L5 (n=32768): 1/S2(d) d=1..5: 6.589  10.895  49.022  312.065  1904.067   | occupied fraction 1/S2/8^d: 0.824 0.170 0.096 0.076 0.058   | D2(d): 2.72 0.73 2.17 2.67 2.61
+   fr30 L3 (n=512): 1/S2(d) d=1..3: 2.405  12.008  79.697   | occupied fraction 1/S2/8^d: 0.301 0.188 0.156   | D2(d): 1.27 2.32 2.73
+   fr30 L4 (n=4096): 1/S2(d) d=1..4: 3.161  13.576  78.288  447.829   | occupied fraction 1/S2/8^d: 0.395 0.212 0.153 0.109   | D2(d): 1.66 2.10 2.53 2.52
+   fr30 L5 (n=32768): 1/S2(d) d=1..5: 3.252  17.356  72.185  301.776  1644.121   | occupied fraction 1/S2/8^d: 0.407 0.271 0.141 0.074 0.050   | D2(d): 1.70 2.42 2.06 2.06 2.45
+
+3. INTERFACE WEIGHTS: weight on tiles incident to a panel joining two different depth-d children / fraction of such tiles (enhancement = ratio)
+   cube L3: d1: 0.8591/0.5781 (1.49)  d2: 0.9999/0.9844 (1.02)  d3: 1.0000/1.0000 (1.00)
+   cube L4: d1: 0.5386/0.3301 (1.63)  d2: 0.7733/0.7559 (1.02)  d3: 1.0000/0.9980 (1.00)  d4: 1.0000/1.0000 (1.00)
+   cube L5: d1: 0.2895/0.1760 (1.64)  d2: 0.4429/0.4636 (0.96)  d3: 0.7735/0.8220 (0.94)  d4: 1.0000/0.9998 (1.00)  d5: 1.0000/1.0000 (1.00)
+   fr30 L3: d1: 0.7821/0.5254 (1.49)  d2: 0.9924/0.9785 (1.01)  d3: 1.0000/1.0000 (1.00)
+   fr30 L4: d1: 0.6557/0.3118 (2.10)  d2: 0.8581/0.7068 (1.21)  d3: 0.9996/0.9973 (1.00)  d4: 1.0000/1.0000 (1.00)
+   fr30 L5: d1: 0.5816/0.1708 (3.41)  d2: 0.7735/0.4454 (1.74)  d3: 0.8593/0.7745 (1.11)  d4: 0.9999/0.9997 (1.00)  d5: 1.0000/1.0000 (1.00)
+
+4. GROWTH OF IPR*n WITH LEVEL (n = 8^L tiles).  Two-point exponents between consecutive levels: beta = log(IPR*n ratio)/log 8 (IPR*n ~ n^beta), gamma = 1 - beta (IPR ~ n^-gamma; extended gamma=1, localized gamma=0)
+   fr30: computed IPR*n: L3: 6.424, L4: 9.146, L5: 19.930   | quoted in task context: L3: 6.424, L4: 9.146, L5: 20.0, L6: 42.0   (levels 3-4 from phase5a_controls (dense / LOBPCG tol 1e-7); level 5 = 0.00061*32768 and level 6 = 0.00016*262144 from phase5_bulk_bottom_lobpcg (IPR printed with 5 decimals, so +-3% and +-8% quantization))
+      computed  3->4: IPR*n 6.424 -> 9.146  ratio 1.424  beta=0.170  gamma=0.830
+      computed  4->5: IPR*n 9.146 -> 19.930  ratio 2.179  beta=0.375  gamma=0.625
+      computed+quoted 5->6: IPR*n 19.930 -> 42.000  ratio 2.107  beta=0.358  gamma=0.642
+   cube: computed IPR*n: L3: 7.836, L4: 10.292, L5: 17.209   | quoted in task context: L3: 7.836, L4: 10.292   (levels 3-4 from phase5a_controls part cube)
+      computed  3->4: IPR*n 7.836 -> 10.292  ratio 1.313  beta=0.131  gamma=0.869
+      computed  4->5: IPR*n 10.292 -> 17.209  ratio 1.672  beta=0.247  gamma=0.753
+
+5. GROWTH OF 1/S2(d) WITH DEPTH d INSIDE THE LEVEL-6 (AND LEVEL-5) STATES: two-point exponent per depth step, log8(1/S2(d+1) / 1/S2(d)) = D2(d+1)/3 (1 = space filling)
+   cube L5: d1->2: 0.242  d2->3: 0.723  d3->4: 0.890  d4->5: 0.870
+   fr30 L5: d1->2: 0.805  d2->3: 0.685  d3->4: 0.688  d4->5: 0.815
+
+6. SAME-n COMPARISON (FR30 chair vs cube control at equal tile number)
+   L3 n=512: IPR*n FR30 6.424 vs cube 7.836 (ratio 0.820);  s50 27 vs 24;  s90 145 vs 170;  1/S2(1) 2.405 vs 7.382;  1/S2(2) 12.008 vs 13.742;  interface w(1) 0.7821 vs 0.8591;  bw 0.1327 vs 0.0645
+   L4 n=4096: IPR*n FR30 9.146 vs cube 10.292 (ratio 0.889);  s50 166 vs 153;  s90 762 vs 861;  1/S2(1) 3.161 vs 6.846;  1/S2(2) 13.576 vs 11.779;  interface w(1) 0.6557 vs 0.5386;  bw 0.0075 vs 0.0064
+   L5 n=32768: IPR*n FR30 19.930 vs cube 17.209 (ratio 1.158);  s50 716 vs 786;  s90 4186 vs 5233;  1/S2(1) 3.252 vs 6.589;  1/S2(2) 17.356 vs 10.895;  interface w(1) 0.5816 vs 0.2895;  bw 0.0007 vs 0.0006
+
+saved audit/results/phase5a_level6_structure.json

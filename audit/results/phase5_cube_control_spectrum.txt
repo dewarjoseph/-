@@ -1,0 +1,6 @@
+unit-cube/FR30-type level 2: tiles=64 panels=144 bulk degree=6 free   lowest=[0.89672 0.89672 0.96169 0.96169]
+unit-cube/FR30-type level 2: tiles=64 panels=144 bulk degree=6 pinned lowest=[2.11533 2.11533 2.36374 2.36374]
+unit-cube/FR30-type level 3: tiles=512 panels=1344 bulk degree=6 free   lowest=[0.9719  0.9719  0.98023 0.98023]
+unit-cube/FR30-type level 3: tiles=512 panels=1344 bulk degree=6 pinned lowest=[1.91395 1.91395 1.97531 1.97531]
+mirror test level 2: FR30 lowest [4.726465 4.726465 4.831174 4.831174 4.97875  4.97875 ] ; mirrored [4.726465 4.726465 4.831174 4.831174 4.97875  4.97875 ] ; max|diff|=3.82e-14
+mirror test level 3: FR30 lowest [5.114941 5.114941 5.13524  5.13524  5.143911 5.143911] ; mirrored [5.114941 5.114941 5.13524  5.13524  5.143911 5.143911] ; max|diff|=9.77e-14

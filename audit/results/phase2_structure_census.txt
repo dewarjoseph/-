@@ -1,0 +1,28 @@
+========================================================================
+A. CYCLE-COUNT RECONCILIATION (monograph Table 2 claims 48 / 416 / 3424 cycles)
+ level 1: panel multigraph |V|=8 |E|=48 b1=41; simple tile graph |E|=16 b1=9; cube graph |V|=56 |E|=120 b1=65; directed panel edges=96
+ level 2: panel multigraph |V|=64 |E|=576 b1=513; simple tile graph |E|=183 b1=120; cube graph |V|=448 |E|=1152 b1=705; directed panel edges=1152
+ level 3: panel multigraph |V|=512 |E|=5376 b1=4865; simple tile graph |E|=1663 b1=1152; cube graph |V|=3584 |E|=9984 b1=6401; directed panel edges=10752
+ -> no natural graph reproduces 48/416/3424; at level 1 the published 'cycles' equals |E| (edges), not b1.
+
+========================================================================
+B. LINK CLASSIFICATION AND ADJOINT (SPIN-1) REDUCTION
+ link kinds: {'V u_b = -u_b -> C=-1': 24, 'V u_b perp u_b -> C=+-i sigma_k': 18, 'V u_b = u_b  -> C=+1': 6}  classification exact: True
+ ambient-gauge adjoint connection = (M_a M_b^T) * k_ab with k_ab in Klein group V4: True
+ adjoint holonomy image size (subset of V4, order 4): 4  abelian: True
+
+========================================================================
+C. MIRROR-IMAGE TILING: WILSON-LOOP TRACES ARE PARITY-INVARIANT
+ trace multiset original: [(-2, 1), (0, 23), (2, 17)]  mirrored: [(-2, 2), (0, 26), (2, 13)]  equal: False
+ mirrored links == sigma_x C sigma_x (global gauge transformation): True
+
+========================================================================
+D. DECORATION CENSUS: ALL PARITY-ADMISSIBLE HOMOCHIRAL FRAME DECORATIONS
+ decorations enumerated: 6561  (369s)
+ holonomy-group order histogram over decorations: {4: 9, 8: 6552}
+ FR30: |Hol|=8, nontrivial fund. cycles=58.5%, nontrivial plaquettes=56.67%, W=-1 plaquettes=5.00%, |P0|(level2)=30
+ nontrivial-plaquette fraction over census: min=41.67 median=53.33 max=61.67; FR30 percentile=77.4
+ |P0| at level 2 histogram: {26: 3, 29: 6, 30: 15, 31: 18, 32: 96, 33: 90, 34: 192, 35: 186, 36: 426, 37: 432, 38: 537, 39: 330, 40: 414, 42: 72, 43: 96, 44: 576, 45: 456, 46: 732, 47: 720, 48: 474, 49: 60, 50: 72, 51: 36, 52: 108, 53: 108, 54: 306}
+ decorations with |P0|=30 (the FR30 value): 15  of which |Hol|=8: 15
+ decorations with |Hol|=8: 6552 ; with trivial holonomy: 0
+ statistics multiset independent of central permutation pi_0: False
