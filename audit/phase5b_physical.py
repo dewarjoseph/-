@@ -31,7 +31,7 @@ def su2(nvec, eps):
     n = nvec / np.linalg.norm(nvec); return np.cos(eps) * np.eye(2) + 1j * np.sin(eps) * sum(n[k] * SIG[k] for k in range(3))
 
 def lowest(H, k=4):
-    lam, V, res, _ = eig_lobpcg(H, 2, extra=2, tol=1e-7)
+    lam, V, res, _ = eig_lobpcg(H, 4, extra=2, tol=1e-7)
     return [float(x) for x in lam[:4]], float(max(res[:2])), V[:, 0]
 
 def study(dec, label):

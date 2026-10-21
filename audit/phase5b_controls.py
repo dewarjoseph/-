@@ -14,10 +14,9 @@ so the tile graph, the coordination and the link rule are identical; only the FR
                   step: the coarse hierarchy is FR30's, the finest-scale frames are random.
   fine<seed>      independent random rule at the first inflation step(s) down to depth L-1, FR30 rule at the last step:
                   the finest-scale (level-1 block) structure is FR30's, the coarse arrangement is random.
-  shuffle<seed>   FR30 frames, but the assignment of child frames to octant positions is randomly permuted per parent
-                  (same multiset of frames per parent, random spatial arrangement).  Admissibility (parity) may be violated;
-                  we keep only the det = +1 frames by construction (frames are rotations), so the operator is well defined,
-                  and report the plaquette classes that result.
+  shuffle<seed>   FR30 permutation parts randomly re-assigned among octant positions of equal parity, per parent (the
+                  position-dependent sign matrices are kept, so admissibility holds): same multiset of local rotations as
+                  FR30 in every parent, random spatial arrangement, no self-similarity.
   flip<seed,p>    FR30 with a fraction p of tiles' frames replaced by an independent admissible-parity frame (local defects).
 
 For each system: level-4 (and level-3) pinned bottom with residual, the level-4 class fractions, the Phase V-B predictor
@@ -67,10 +66,17 @@ def system_tiles(name, level):
         rng = np.random.default_rng(int(name[4:]))
         return inflate_tiles(level, lambda d, p: ops_of(random_dec(rng)) if d < level else FR30_OPS), {'seed': int(name[4:])}
     if name.startswith('shuffle'):
+        # per parent: keep the centre frame and the position-dependent sign matrices D_s(v); randomly permute the FR30
+        # permutation parts pi_v among the even-|v| octants and among the odd-|v| octants (admissibility preserved, so the
+        # local rule stays inside the 6561-decoration space; the multiset of FR30 rotations per parent is unchanged).
         rng = np.random.default_rng(int(name[7:]))
+        ev = [v for v in U3 if sum(v) % 2 == 0]; od = [v for v in U3 if sum(v) % 2 == 1]
         def rule(d, p):
-            frames = [g for g, _ in FR30_OPS]; pos = [t for _, t in FR30_OPS]; perm = rng.permutation(8)
-            return [(frames[perm[k]], pos[k]) for k in range(8)]
+            dec = {'0': FR30['0']}
+            for grp in (ev, od):
+                perm = rng.permutation(len(grp))
+                for k, v in enumerate(grp): dec[v] = FR30[grp[perm[k]]]
+            return ops_of(dec)
         return inflate_tiles(level, rule), {'seed': int(name[7:])}
     if name.startswith('flip'):
         seed, p = name[4:].split(','); rng = np.random.default_rng(int(seed)); p = float(p)
@@ -118,18 +124,17 @@ def run(names, levels=(3, 4)):
 
 def table():
     recs = [json.loads(l) for l in open(os.path.join(RES, 'phase5b_controls.jsonl'))]
-    fitp = os.path.join(RES, 'phase5b_sweep_fit.json')
-    fit = json.load(open(fitp)) if os.path.exists(fitp) else None
+    fits = {L: json.load(open(os.path.join(RES, f'phase5b_sweep_fit_L{L}.json'))) for L in (3, 4) if os.path.exists(os.path.join(RES, f'phase5b_sweep_fit_L{L}.json'))}
     lines = []
     P = lambda s='': (print(s), lines.append(s))
     P("PHASE V-B, WORKSTREAM C: INTERVENTIONS ON THE FRAME FIELD (same chair geometry, coordination 24, Q8 rule, pinned operator)")
     P("Fixed in every row: tile graph (8^L chairs of the level-L supertile), panel multiset, link rule, pinned diagonal.  Changed: the frame field as described in the module docstring.")
-    if fit: P(f"flux baseline from the census (level {fit['level']}): Y ~ {fit['c0']:.3f} + {fit['c_trl']:.3f} f_trl + {fit['c_m1']:.3f} f_m1 (rms {fit['rms']:.3f})")
+    for L, fit in fits.items(): P(f"flux baseline from the census (level {L}, n={fit['n']}): Y ~ {fit['c0']:.3f} + {fit['c_trl']:.3f} f_trl + {fit['c_m1']:.3f} f_m1 (rms {fit['rms']:.3f}, CV R^2 {fit['cv_r2']:.3f})")
     for L in sorted({r['level'] for r in recs}):
         P(); P(f"--- level {L} ---")
         P(f"{'system':<14} {'lambda_min':>10} {'res':>8} | {'f_nontriv':>9} {'f_trl':>7} {'f_m1':>7} | {'E_fit':>7} {'resid':>7} | {'enr1_trl':>8} {'enr1_m1':>7} {'cv_m1':>6} {'Cp_m1m1':>7} | {'IPR*n':>7} {'w_int1':>6} {'bw':>6}")
         for r in [r for r in recs if r['level'] == L]:
-            pr = r['pred']; ef = (fit['c0'] + fit['c_trl'] * pr['f_trl'] + fit['c_m1'] * pr['f_m1']) if (fit and fit['level'] == L) else float('nan')
+            pr = r['pred']; fit = fits.get(L); ef = (fit['c0'] + fit['c_trl'] * pr['f_trl'] + fit['c_m1'] * pr['f_m1']) if fit else float('nan')
             P(f"{r['system']:<14} {r['lambda'][0]:10.5f} {r['residual']:8.1e} | {pr['f_nontriv']:9.4f} {pr['f_trl']:7.4f} {pr['f_m1']:7.4f} | {ef:7.3f} {r['lambda'][0]-ef:+7.3f} | "
               f"{pr['enr1_trl']:8.3f} {pr['enr1_m1']:7.3f} {pr['cv_m1']:6.3f} {pr['Cp_m1_m1']:7.3f} | {r['ipr_n']:7.2f} {r['interface1_weight']:6.3f} {r['boundary_weight']:6.3f}")
     with open(os.path.join(RES, 'phase5b_controls.txt'), 'w') as f: f.write('\n'.join(lines) + '\n')

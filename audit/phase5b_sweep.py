@@ -326,6 +326,8 @@ def analyze():
         c0 = ols(X0, y); r2in = 1 - ((y - X0 @ c0) ** 2).sum() / ((y - y.mean()) ** 2).sum(); cvr2, cvrmse = cv_r2(X0, y, folds)
         P(f" flux baseline Y ~ {c0[0]:.3f} + {c0[1]:.3f} f_trl + {c0[2]:.3f} f_m1: in-sample R^2 {r2in:.4f}, 10-fold CV R^2 {cvr2:.4f}, CV-RMSE {cvrmse:.4f}")
         res0 = y - X0 @ c0
+        with open(os.path.join(RES, f'phase5b_sweep_fit_L{3 if ykey == "L3" else 4}.json'), 'w') as fh:
+            json.dump({'level': 3 if ykey == 'L3' else 4, 'c0': float(c0[0]), 'c_trl': float(c0[1]), 'c_m1': float(c0[2]), 'rms': float(res0.std()), 'n': int(n), 'cv_r2': float(cvr2)}, fh)
         if fr is not None: P(f" FR30 flux-baseline residual {res0[fr]:+.4f} = {res0[fr]/res0.std():+.2f} sd; residual rank {int((res0 > res0[fr]).sum()) + 1} of {n}")
         rng = np.random.default_rng(FOLD_SEED)
         rows = []

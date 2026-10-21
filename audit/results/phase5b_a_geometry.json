@@ -1,0 +1,161 @@
+{
+ "link_mismatches": 0,
+ "1": {
+  "tiles": 8,
+  "poses_identical": true,
+  "cubes_identical": true,
+  "box_filled": true,
+  "panels": 48,
+  "panel_multiset_equal": true,
+  "classes": [
+   60,
+   26,
+   3,
+   12,
+   7,
+   12
+  ],
+  "dossier": [
+   60,
+   26,
+   3,
+   12,
+   7,
+   12
+  ],
+  "match": true,
+  "fractions": [
+   0.5666666666666667,
+   0.5166666666666667,
+   0.05
+  ]
+ },
+ "2": {
+  "tiles": 64,
+  "poses_identical": true,
+  "cubes_identical": true,
+  "box_filled": true,
+  "panels": 576,
+  "panel_multiset_equal": true,
+  "classes": [
+   792,
+   385,
+   42,
+   124,
+   117,
+   124
+  ],
+  "dossier": [
+   792,
+   385,
+   42,
+   124,
+   117,
+   124
+  ],
+  "match": true,
+  "fractions": [
+   0.5138888888888888,
+   0.46085858585858586,
+   0.05303030303030303
+  ]
+ },
+ "3": {
+  "tiles": 512,
+  "poses_identical": true,
+  "cubes_identical": true,
+  "box_filled": true,
+  "panels": 5376,
+  "panel_multiset_equal": true,
+  "classes": [
+   7728,
+   3945,
+   530,
+   1020,
+   1213,
+   1020
+  ],
+  "dossier": [
+   7728,
+   3945,
+   530,
+   1020,
+   1213,
+   1020
+  ],
+  "match": true,
+  "fractions": [
+   0.48951863354037267,
+   0.4209368530020704,
+   0.06858178053830227
+  ]
+ },
+ "4": {
+  "tiles": 4096,
+  "poses_identical": true,
+  "cubes_identical": true,
+  "box_filled": true,
+  "panels": 46080,
+  "panel_multiset_equal": true,
+  "classes": [
+   67680,
+   35161,
+   5394,
+   8188,
+   10749,
+   8188
+  ],
+  "dossier": [
+   67680,
+   35161,
+   5394,
+   8188,
+   10749,
+   8188
+  ],
+  "match": true,
+  "fractions": [
+   0.48048167848699763,
+   0.40078309692671393,
+   0.07969858156028369
+  ]
+ },
+ "level5_flux_vs_edge": {
+  "N": 565440,
+  "n_plus": 296121,
+  "n_minus": 48146,
+  "n_traceless": 221173,
+  "f_nontriv": 0.4762998726655348,
+  "f_traceless": 0.3911520232031692,
+  "f_minus": 0.08514784946236559
+ },
+ "level5_independent_enumerator": {
+  "plaquettes_total": 663744,
+  "inter_tile": 565440,
+  "straddling": 24000,
+  "classes": {
+   "1": 296121,
+   "-1": 48146,
+   "i": 65532,
+   "j": 90109,
+   "k": 65532
+  },
+  "straddling_classes": {
+   "1": 14833,
+   "-1": 4994,
+   "i": 28,
+   "j": 4117,
+   "k": 28
+  },
+  "signed_labels_quaternion_convention": {
+   "+1": 296121,
+   "+i": 32752,
+   "+j": 45098,
+   "+k": 32752,
+   "-1": 48146,
+   "-i": 32780,
+   "-j": 45011,
+   "-k": 32780
+  }
+ }
+}
