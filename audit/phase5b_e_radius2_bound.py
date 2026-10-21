@@ -244,11 +244,6 @@ def leading_minors_positive(Re, Im, p, q):
         minors.append(pr)
         for i in range(k + 1, n):
             air, aii = A[i][k]
-            if air == 0 and aii == 0:
-                if prev != 1:
-                    for j in range(k + 1, n):
-                        xr, xi = A[i][j]; A[i][j] = ((pr * xr) // prev, (pr * xi) // prev)
-                continue
             for j in range(k + 1, n):
                 xr, xi = A[i][j]; bkr, bki = A[k][j]
                 # (a_kk a_ij - a_ik a_kj) / prev ,  a_kk real
@@ -262,7 +257,7 @@ def leading_minors_positive(Re, Im, p, q):
 # self-test of the exact test on random Hermitian Gaussian-integer matrices against numpy
 rng = np.random.default_rng(1)
 for trial in range(200):
-    n = int(rng.integers(1, 7)); Z = rng.integers(-3, 4, (n, n)) + 1j * rng.integers(-3, 4, (n, n)); Hm = Z @ Z.conj().T
+    n = int(rng.integers(1, 9)); Z = (rng.integers(-3, 4, (n, n)) + 1j * rng.integers(-3, 4, (n, n))) * (rng.random((n, n)) < 0.5); Hm = Z @ Z.conj().T
     Re, Im = np.rint(Hm.real).astype(np.int64), np.rint(Hm.imag).astype(np.int64)
     ev = np.linalg.eigvalsh(Re + 1j * Im)
     for mu in [ev[0] - 0.5, ev[0] + 0.5, (ev[0] + ev[-1]) / 2]:

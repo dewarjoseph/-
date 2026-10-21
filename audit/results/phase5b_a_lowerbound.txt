@@ -1,0 +1,7 @@
+PHASE V-B / A (f): exact rational LDL^* certificates (own code, real symmetric embedding) and the star-sum lower bound
+ T_4: 67680 inter-tile lattice edges, 672 distinct signatures (pattern + signed links); distinct lambda_min: [0.0, 0.152240935, 0.267949192, 0.585786438, 1.0, 2.0]
+   analytic 2-2cos(theta/l): [np.float64(0.152240935), np.float64(0.267949192), np.float64(0.585786438), np.float64(1.0), np.float64(2.0)]
+   own exact LDL^T (real embedding, Fractions): 544 non-flat signatures certified h_e - mu_e > 0 with mu_e = (floor(1e6 lambda)-2)/1e6: failures 0; the same test rejects mu_e + 2.2e-5 for 544/544; 128 flat signatures: exact elimination {'psd-singular': 128}  (1s)
+   T_4: 2744 tiles with complete vertex stars of 4096; inter-tile edges per complete tile [48]; new signatures beyond T_4: 0; min over complete tiles of sum_e mu_e = 3137451/500000 = 6.2749020 -> E_bulk >= 3137451/2000000 = 1.5687255 (dossier 3137451/2000000 = 1.5687255; equal: True); 16 distinct star sums  (16s)
+   T_5: 27000 tiles with complete vertex stars of 32768; inter-tile edges per complete tile [48]; new signatures beyond T_4: 16; min over complete tiles of sum_e mu_e = 3137451/500000 = 6.2749020 -> E_bulk >= 3137451/2000000 = 1.5687255 (dossier 3137451/2000000 = 1.5687255; equal: True); 16 distinct star sums  (121s)
+ total 149s, rss 0.23 GB
