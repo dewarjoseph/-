@@ -1,0 +1,10 @@
+====================================================================================================
+B. SUPERCELL CHECKS, k=8 L'=2L, FR30 frames (natural bijection)
+ Bloch band bottom (12^3 grid + Nelder-Mead): E_per = 10.644234146 at theta=[1.0, 1.0, 1.0]  gap12=1.24e-14
+ torus 2x2x2 supercell (dim 128): lowest [10.644234, 10.644234, 14.98465, 14.98465];  union of Bloch spectra on the commensurate 2^3 grid: lowest [10.644234, 10.644234, 14.98465, 14.98465];  max |sorted spectra difference| = 5.68e-14
+ torus 4x4x4 supercell (dim 1024): lowest [10.644234, 10.644234, 12.358561, 12.358561];  union of Bloch spectra on the commensurate 4^3 grid: lowest [10.644234, 10.644234, 12.358561, 12.358561];  max |sorted spectra difference| = 1.85e-13
+ open pinned 2x2x2 supercell (dim 128, hard walls): lowest [14.693819, 14.693819, 15.600063, 15.600063]  excess over E_per: 4.049585  x N^2 = 16.1983
+ open pinned 4x4x4 supercell (dim 1024, hard walls): lowest [12.036916, 12.036916, 12.638035, 12.638035]  excess over E_per: 1.392682  x N^2 = 22.2829
+ open pinned 6x6x6 supercell (dim 3456, hard walls): lowest [11.331783, 11.331783, 11.648211, 11.648211]  excess over E_per: 0.687549  x N^2 = 24.7518
+ open pinned 8x8x8 supercell (dim 8192, hard walls): lowest [11.051283, 11.051283, 11.242823, 11.242823]  excess over E_per: 0.407049  x N^2 = 26.0511
+[stage B done in 29s]

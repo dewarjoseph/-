@@ -1,0 +1,697 @@
+{
+ "script": "audit/phase5a_independent_enumerator.py",
+ "maxlevel": 5,
+ "levels": {
+  "1": {
+   "geometry": {
+    "tiles": 8,
+    "cube_slots": 56,
+    "distinct_cubes": 56,
+    "pairwise_disjoint": true,
+    "all_in_box": true,
+    "target_cubes": 56,
+    "fills_chair_exactly": true,
+    "all_frames_det_plus1": true
+   },
+   "vectorised": {
+    "plaquettes_total": 84,
+    "inter_tile": 60,
+    "straddling": 60,
+    "classes": {
+     "1": 26,
+     "-1": 3,
+     "i": 12,
+     "j": 7,
+     "k": 12
+    },
+    "straddling_classes": {
+     "1": 26,
+     "-1": 3,
+     "i": 12,
+     "j": 7,
+     "k": 12
+    },
+    "signed_labels_quaternion_convention": {
+     "+1": 26,
+     "+i": 6,
+     "+j": 5,
+     "+k": 6,
+     "-1": 3,
+     "-i": 6,
+     "-j": 2,
+     "-k": 6
+    }
+   },
+   "time_s": 0.01,
+   "formula_N": 60,
+   "formula_B": 60,
+   "matches_formula_N": true,
+   "matches_formula_B": true,
+   "scalar": {
+    "plaquettes_total": 84,
+    "inter_tile": 60,
+    "classes": {
+     "1": 26,
+     "-1": 3,
+     "i": 12,
+     "j": 7,
+     "k": 12
+    }
+   },
+   "scalar_time_s": 0.0,
+   "scalar_matches_vectorised": true,
+   "panels": {
+    "shared_panels": 48,
+    "pauli_agrees_on_all_panels": true,
+    "link_values": {
+     "+1": 6,
+     "-1": 24,
+     "traceless": 18
+    }
+   },
+   "level1_frames": [
+    {
+     "perm": [
+      0,
+      1,
+      2
+     ],
+     "signs": [
+      1,
+      1,
+      1
+     ],
+     "T": [
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "perm": [
+      0,
+      1,
+      2
+     ],
+     "signs": [
+      1,
+      1,
+      1
+     ],
+     "T": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "perm": [
+      0,
+      2,
+      1
+     ],
+     "signs": [
+      1,
+      -1,
+      1
+     ],
+     "T": [
+      0,
+      0,
+      4
+     ]
+    },
+    {
+     "perm": [
+      2,
+      1,
+      0
+     ],
+     "signs": [
+      1,
+      -1,
+      1
+     ],
+     "T": [
+      0,
+      4,
+      0
+     ]
+    },
+    {
+     "perm": [
+      2,
+      0,
+      1
+     ],
+     "signs": [
+      -1,
+      1,
+      -1
+     ],
+     "T": [
+      0,
+      4,
+      4
+     ]
+    },
+    {
+     "perm": [
+      1,
+      0,
+      2
+     ],
+     "signs": [
+      1,
+      -1,
+      1
+     ],
+     "T": [
+      4,
+      0,
+      0
+     ]
+    },
+    {
+     "perm": [
+      0,
+      1,
+      2
+     ],
+     "signs": [
+      -1,
+      1,
+      -1
+     ],
+     "T": [
+      4,
+      0,
+      4
+     ]
+    },
+    {
+     "perm": [
+      1,
+      2,
+      0
+     ],
+     "signs": [
+      -1,
+      1,
+      -1
+     ],
+     "T": [
+      4,
+      4,
+      0
+     ]
+    }
+   ]
+  },
+  "2": {
+   "geometry": {
+    "tiles": 64,
+    "cube_slots": 448,
+    "distinct_cubes": 448,
+    "pairwise_disjoint": true,
+    "all_in_box": true,
+    "target_cubes": 448,
+    "fills_chair_exactly": true,
+    "all_frames_det_plus1": true
+   },
+   "vectorised": {
+    "plaquettes_total": 984,
+    "inter_tile": 792,
+    "straddling": 312,
+    "classes": {
+     "1": 385,
+     "-1": 42,
+     "i": 124,
+     "j": 117,
+     "k": 124
+    },
+    "straddling_classes": {
+     "1": 177,
+     "-1": 18,
+     "i": 28,
+     "j": 61,
+     "k": 28
+    },
+    "signed_labels_quaternion_convention": {
+     "+1": 385,
+     "+i": 64,
+     "+j": 62,
+     "+k": 64,
+     "-1": 42,
+     "-i": 60,
+     "-j": 55,
+     "-k": 60
+    }
+   },
+   "time_s": 0.0,
+   "formula_N": 792,
+   "formula_B": 312,
+   "matches_formula_N": true,
+   "matches_formula_B": true,
+   "scalar": {
+    "plaquettes_total": 984,
+    "inter_tile": 792,
+    "classes": {
+     "1": 385,
+     "-1": 42,
+     "i": 124,
+     "j": 117,
+     "k": 124
+    }
+   },
+   "scalar_time_s": 0.01,
+   "scalar_matches_vectorised": true,
+   "panels": {
+    "shared_panels": 576,
+    "pauli_agrees_on_all_panels": true,
+    "link_values": {
+     "+1": 90,
+     "-1": 228,
+     "traceless": 258
+    }
+   }
+  },
+  "3": {
+   "geometry": {
+    "tiles": 512,
+    "cube_slots": 3584,
+    "distinct_cubes": 3584,
+    "pairwise_disjoint": true,
+    "all_in_box": true,
+    "target_cubes": 3584,
+    "fills_chair_exactly": true,
+    "all_frames_det_plus1": true
+   },
+   "vectorised": {
+    "plaquettes_total": 9264,
+    "inter_tile": 7728,
+    "straddling": 1392,
+    "classes": {
+     "1": 3945,
+     "-1": 530,
+     "i": 1020,
+     "j": 1213,
+     "k": 1020
+    },
+    "straddling_classes": {
+     "1": 865,
+     "-1": 194,
+     "i": 28,
+     "j": 277,
+     "k": 28
+    },
+    "signed_labels_quaternion_convention": {
+     "+1": 3945,
+     "+i": 508,
+     "+j": 614,
+     "+k": 508,
+     "-1": 530,
+     "-i": 512,
+     "-j": 599,
+     "-k": 512
+    }
+   },
+   "time_s": 0.01,
+   "formula_N": 7728,
+   "formula_B": 1392,
+   "matches_formula_N": true,
+   "matches_formula_B": true,
+   "scalar": {
+    "plaquettes_total": 9264,
+    "inter_tile": 7728,
+    "classes": {
+     "1": 3945,
+     "-1": 530,
+     "i": 1020,
+     "j": 1213,
+     "k": 1020
+    }
+   },
+   "scalar_time_s": 0.07,
+   "scalar_matches_vectorised": true
+  },
+  "4": {
+   "geometry": {
+    "tiles": 4096,
+    "cube_slots": 28672,
+    "distinct_cubes": 28672,
+    "pairwise_disjoint": true,
+    "all_in_box": true,
+    "target_cubes": 28672,
+    "fills_chair_exactly": true,
+    "all_frames_det_plus1": true
+   },
+   "vectorised": {
+    "plaquettes_total": 79968,
+    "inter_tile": 67680,
+    "straddling": 5856,
+    "classes": {
+     "1": 35161,
+     "-1": 5394,
+     "i": 8188,
+     "j": 10749,
+     "k": 8188
+    },
+    "straddling_classes": {
+     "1": 3601,
+     "-1": 1154,
+     "i": 28,
+     "j": 1045,
+     "k": 28
+    },
+    "signed_labels_quaternion_convention": {
+     "+1": 35161,
+     "+i": 4088,
+     "+j": 5394,
+     "+k": 4088,
+     "-1": 5394,
+     "-i": 4100,
+     "-j": 5355,
+     "-k": 4100
+    }
+   },
+   "time_s": 0.06,
+   "formula_N": 67680,
+   "formula_B": 5856,
+   "matches_formula_N": true,
+   "matches_formula_B": true
+  },
+  "5": {
+   "geometry": {
+    "tiles": 32768,
+    "cube_slots": 229376,
+    "distinct_cubes": 229376,
+    "pairwise_disjoint": true,
+    "all_in_box": true,
+    "target_cubes": 229376,
+    "fills_chair_exactly": true,
+    "all_frames_det_plus1": true
+   },
+   "vectorised": {
+    "plaquettes_total": 663744,
+    "inter_tile": 565440,
+    "straddling": 24000,
+    "classes": {
+     "1": 296121,
+     "-1": 48146,
+     "i": 65532,
+     "j": 90109,
+     "k": 65532
+    },
+    "straddling_classes": {
+     "1": 14833,
+     "-1": 4994,
+     "i": 28,
+     "j": 4117,
+     "k": 28
+    },
+    "signed_labels_quaternion_convention": {
+     "+1": 296121,
+     "+i": 32752,
+     "+j": 45098,
+     "+k": 32752,
+     "-1": 48146,
+     "-i": 32780,
+     "-j": 45011,
+     "-k": 32780
+    }
+   },
+   "time_s": 0.86,
+   "formula_N": 565440,
+   "formula_B": 24000,
+   "matches_formula_N": true,
+   "matches_formula_B": true
+  }
+ },
+ "checks": {
+  "q8_table_selfcheck": true,
+  "signed_perm_selfcheck": true,
+  "pauli_identity_all_36_pairs_and_homomorphism": true,
+  "child_operator_dets": {
+   "(0, 0, 0)": 1,
+   "(0, 0, 1)": 1,
+   "(0, 1, 0)": 1,
+   "(0, 1, 1)": 1,
+   "(1, 0, 0)": 1,
+   "(1, 0, 1)": 1,
+   "(1, 1, 0)": 1
+  }
+ },
+ "comparison_phase4_recursion": {
+  "1": {
+   "recursion": {
+    "classes": {
+     "1": 26,
+     "-1": 3,
+     "i": 12,
+     "j": 7,
+     "k": 12
+    },
+    "N": 60
+   },
+   "enumerated": {
+    "classes": {
+     "1": 26,
+     "-1": 3,
+     "i": 12,
+     "j": 7,
+     "k": 12
+    },
+    "N": 60
+   },
+   "exact_match": true
+  },
+  "2": {
+   "recursion": {
+    "classes": {
+     "1": 385,
+     "-1": 42,
+     "i": 124,
+     "j": 117,
+     "k": 124
+    },
+    "N": 792
+   },
+   "enumerated": {
+    "classes": {
+     "1": 385,
+     "-1": 42,
+     "i": 124,
+     "j": 117,
+     "k": 124
+    },
+    "N": 792
+   },
+   "exact_match": true
+  },
+  "3": {
+   "recursion": {
+    "classes": {
+     "1": 3945,
+     "-1": 530,
+     "i": 1020,
+     "j": 1213,
+     "k": 1020
+    },
+    "N": 7728
+   },
+   "enumerated": {
+    "classes": {
+     "1": 3945,
+     "-1": 530,
+     "i": 1020,
+     "j": 1213,
+     "k": 1020
+    },
+    "N": 7728
+   },
+   "exact_match": true
+  },
+  "4": {
+   "recursion": {
+    "classes": {
+     "1": 35161,
+     "-1": 5394,
+     "i": 8188,
+     "j": 10749,
+     "k": 8188
+    },
+    "N": 67680
+   },
+   "enumerated": {
+    "classes": {
+     "1": 35161,
+     "-1": 5394,
+     "i": 8188,
+     "j": 10749,
+     "k": 8188
+    },
+    "N": 67680
+   },
+   "exact_match": true
+  },
+  "5": {
+   "recursion": {
+    "classes": {
+     "1": 296121,
+     "-1": 48146,
+     "i": 65532,
+     "j": 90109,
+     "k": 65532
+    },
+    "N": 565440
+   },
+   "enumerated": {
+    "classes": {
+     "1": 296121,
+     "-1": 48146,
+     "i": 65532,
+     "j": 90109,
+     "k": 65532
+    },
+    "N": 565440
+   },
+   "exact_match": true
+  }
+ },
+ "phase4_file_levels_present": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7
+ ],
+ "comparison_phase3_straddle": {
+  "3": {
+   "file": {
+    "N": 7728,
+    "B": 1392,
+    "classes": {
+     "1": 865,
+     "-1": 194,
+     "i": 28,
+     "j": 277,
+     "k": 28
+    }
+   },
+   "enumerated": {
+    "classes": {
+     "1": 865,
+     "-1": 194,
+     "i": 28,
+     "j": 277,
+     "k": 28
+    },
+    "B": 1392,
+    "N": 7728
+   },
+   "exact_match": true
+  },
+  "4": {
+   "file": {
+    "N": 67680,
+    "B": 5856,
+    "classes": {
+     "1": 3601,
+     "-1": 1154,
+     "i": 28,
+     "j": 1045,
+     "k": 28
+    }
+   },
+   "enumerated": {
+    "classes": {
+     "1": 3601,
+     "-1": 1154,
+     "i": 28,
+     "j": 1045,
+     "k": 28
+    },
+    "B": 5856,
+    "N": 67680
+   },
+   "exact_match": true
+  },
+  "5": {
+   "file": {
+    "N": 565440,
+    "B": 24000,
+    "classes": {
+     "1": 14833,
+     "-1": 4994,
+     "i": 28,
+     "j": 4117,
+     "k": 28
+    }
+   },
+   "enumerated": {
+    "classes": {
+     "1": 14833,
+     "-1": 4994,
+     "i": 28,
+     "j": 4117,
+     "k": 28
+    },
+    "B": 24000,
+    "N": 565440
+   },
+   "exact_match": true
+  }
+ },
+ "comparison_lean_level1": {
+  "cubes": {
+   "lean": 56,
+   "enumerated": 56,
+   "match": true
+  },
+  "panels": {
+   "lean": 48,
+   "enumerated": 48,
+   "match": true
+  },
+  "links_minus1": {
+   "lean": 24,
+   "enumerated": 24,
+   "match": true
+  },
+  "links_plus1": {
+   "lean": 6,
+   "enumerated": 6,
+   "match": true
+  },
+  "links_traceless": {
+   "lean": 18,
+   "enumerated": 18,
+   "match": true
+  },
+  "plaquettes": {
+   "lean": 60,
+   "enumerated": 60,
+   "match": true
+  },
+  "plaq_plus1": {
+   "lean": 26,
+   "enumerated": 26,
+   "match": true
+  },
+  "plaq_minus1": {
+   "lean": 3,
+   "enumerated": 3,
+   "match": true
+  },
+  "plaq_traceless": {
+   "lean": 31,
+   "enumerated": 31,
+   "match": true
+  }
+ },
+ "all_checks_passed": true,
+ "total_time_s": 1.08
+}

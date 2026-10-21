@@ -1,0 +1,9 @@
+level 5 (builder objects): n=32768 tiles, dim=65536, panels=380928, boundary tiles=5723, interface tiles by depth {d: |I_d|} = {1: 5597, 2: 14595, 3: 25379, 4: 32757, 5: 32768}, link labels {'+i': 20525, '-1': 143364, '+j': 53252, '+k': 20432, '-k': 20525, '-i': 20432, '-j': 53252, '+1': 49146}, build 3.6s rss=0.34GB
+operator checks: nnz(H_pin)=593916, hermiticity max|H-H^+|=0.0e+00, max|H_pin - per-edge reference| = 0.0, H_pin - H_free = diag(24-deg): 0.0e+00
+H_pin Chebyshev-filtered subspace iteration: K=128, block m=192, lam_max=48, tol=1e-07
+   pass   0 deg  20 nmv    22  theta_1=9.2238991 theta_K=9.4908703 theta_m=9.6733929  res[:K] max=5.94e-01 min=5.22e-01 res[K:] min=5.89e-01 orth=1.1e-15  32s rss=1.09GB
+   pass   1 deg  30 nmv    53  theta_1=8.8173289 theta_K=8.9894134 theta_m=9.0588957  res[:K] max=9.53e-02 min=5.69e-02 res[K:] min=6.73e-02 orth=1.1e-15  74s rss=1.09GB
+   pass   2 deg  45 nmv    99  theta_1=8.7970767 theta_K=8.9365811 theta_m=8.9807899  res[:K] max=1.60e-02 min=3.21e-03 res[K:] min=1.26e-02 orth=1.2e-15  148s rss=1.09GB
+   pass   3 deg  67 nmv   167  theta_1=8.7970113 theta_K=8.9309008 theta_m=8.9638935  res[:K] max=2.97e-03 min=7.12e-06 res[K:] min=1.81e-03 orth=1.1e-15  232s rss=1.09GB
+   pass   4 deg  77 nmv   245  theta_1=8.7970113 theta_K=8.9305098 theta_m=8.9586649  res[:K] max=3.19e-04 min=2.06e-09 res[K:] min=1.46e-04 orth=1.1e-15  310s rss=1.09GB
+   pass   5 deg  80 nmv   326  theta_1=8.7970113 theta_K=8.9305059 theta_m=8.9573866  res[:K] max=1.37e-05 min=1.33e-13 res[K:] min=5.82e-06 orth=1.2e-15  459s rss=1.09GB

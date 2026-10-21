@@ -1,0 +1,27 @@
+==============================================================================
+1. LEGAL VERTEX-STAR TYPES = FORWARD ORBIT OF ONE LEGAL STAR UNDER THE COLLARED SUBSTITUTION
+ seed: interior tile 1 of T_3, vertex-star has 27 tiles
+   round 1: 8 new types, total 9
+   round 2: 33 new types, total 42
+   round 3: 30 new types, total 72
+   round 4: 0 new types, total 72
+ |V| = 72 legal vertex-star types (sizes 9..27 tiles)  (2s)
+ Phi(V) subset V (closure): True
+ complete vertex-stars of T_3: 40 types; all in V: True; V \ S_3: 32  (0s)
+ complete vertex-stars of T_4: 70 types; all in V: True; V \ S_4: 2  (2s)
+ complete vertex-stars of T_5: 72 types; all in V: True; V \ S_5: 0  (19s)
+ forward orbit from a second seed (tile 511): 72 types; equal to V: True
+==============================================================================
+2. PLAQUETTE FORMS h_e, lambda_min, AND S(type) = sum over edges touching the center
+ distinct plaquette signatures (pattern, links): 207
+ distinct lambda_min(h_e) values: [0.0, 0.152240935, 0.267949192, 0.585786438, 1.0, 2.0]
+ analytic check: simple l-cycle with holonomy angle theta has lambda_min = 2-2cos(theta/l):  l=4,theta=pi: 0.585786; l=4,theta=pi/2: 0.152241; l=3,theta=pi: 1.000000; l=3,theta=pi/2: 0.267949; l=2,theta=pi: 2.000000; l=2,theta=pi/2: 0.585786
+ S(type): min 6.274967, median 8.797064, max 20.388421
+ inter-tile plaquettes touching a tile: 48..48; non-flat among them: 19..37
+ weakest type: 27 tiles in star, 48 inter-tile plaquettes, 24 non-flat, S = 6.274967
+ FLOAT lower bound: E_bulk >= (1/4) min S = 1.568742
+==============================================================================
+3. EXACT CERTIFICATION lambda_min(h_e) >= mu_e BY RATIONAL LDL^* PIVOTS
+ certified 163 non-flat signatures (mu_e = lambda_min - 2e-6 rounded), 44 flat signatures assigned 0
+ CERTIFIED: E_bulk >= (1/4) min_types sum_e mu_e = 3137451/500000/4 = 1.568725
+ sanity: every legal star has at least one non-flat plaquette: True

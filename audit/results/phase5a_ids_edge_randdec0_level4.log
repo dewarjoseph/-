@@ -1,0 +1,4 @@
+=== phase5a_ids_edge compute: model=randdec level=4 K=400 (threads OMP=2) ===
+random admissible decoration #0 (rng seed 20261021): {'0': [2, 0, 1], '(0, 0, 0)': [0, 1, 2], '(0, 0, 1)': [2, 1, 0], '(0, 1, 0)': [0, 2, 1], '(0, 1, 1)': [1, 2, 0], '(1, 0, 0)': [0, 2, 1], '(1, 0, 1)': [2, 0, 1], '(1, 1, 0)': [0, 1, 2]}
+patch level 4: n=4096 tiles, panels=46080, frames=24, boundary tiles=1331, link labels {'+k': 3593, '-1': 12024, '-j': 6011, '-k': 3585, '+j': 5851, '-i': 5484, '+1': 4064, '+i': 5468}, build 2.3s rss=0.12GB
+operator dim 8192 nnz 76148 hermitian; build 0.1s

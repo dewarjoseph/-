@@ -1,0 +1,10 @@
+=== chair / trivial (pinned, diagonal 24) ===
+   convention: all links I_2 on the FR30 graph (no flux)
+[chair/trivial/pinned] level 3 n=512 dim=1024 |E|=5376 dense eigh (8s)
+   lowest 8: [1.669512 1.669512 2.712476 2.712476 2.712476 2.712476 3.288947 3.288947]
+   residuals ||H psi - lambda psi||: [5.8e-14 5.8e-14 5.5e-14 8.1e-14 5.2e-14 5.6e-14 6.5e-14 5.9e-14]
+   ground state (Kramers pair, split 7.1e-15): tile IPR=0.00441246 [vec1 0.00441246, vec2 0.00441246]  IPR*n=2.2592  P=1/IPR=226.6  p_max=0.011 s50=80 s90=271  boundary weight=0.2148 (boundary tile fraction 0.561)
+[chair/trivial/pinned] level 4 n=4096 dim=8192 |E|=46080 lobpcg(block=10,seed=0,tol=1e-7) (32s)
+   lowest 8: [0.502729 0.502729 0.812074 0.812074 0.812074 0.812074 0.999408 0.999408]
+   residuals ||H psi - lambda psi||: [2.9e-08 4.4e-08 1.9e-08 4.5e-08 3.2e-08 6.8e-08 3.5e-08 9.5e-08]
+   ground state (Kramers pair, split 2.3e-15): tile IPR=0.000704232 [vec1 0.000704232, vec2 0.000704232]  IPR*n=2.8845  P=1/IPR=1420.0  p_max=0.00173 s50=498 s90=1708  boundary weight=0.0408 (boundary tile fraction 0.325)

@@ -1,0 +1,34 @@
+level 3 (builder objects): n=512 tiles, dim=1024, panels=5376, boundary tiles=287, interface tiles by depth {d: |I_d|} = {1: 269, 2: 501, 3: 512}, link labels {'-1': 2052, '+i': 329, '-i': 308, '-j': 644, '-k': 329, '+j': 644, '+k': 308, '+1': 762}, build 0.4s rss=0.09GB
+operator checks: nnz(H_pin)=8700, hermiticity max|H-H^+|=0.0e+00, max|H_pin - per-edge reference| = 0.0, H_pin - H_free = diag(24-deg): 0.0e+00
+H_pin dense: lowest [9.37847  9.37847  9.589403 9.589403 9.709187 9.709187]  max residual (K=64) 8.44e-14  (1s, rss=0.13GB)
+   pass   0 deg  20 nmv    22  theta_1=9.3917239 theta_K=11.6787412 theta_m=13.2015564  res[:K] max=4.96e-01 min=1.99e-01 res[K:] min=4.21e-01 orth=4.4e-16  0s rss=0.13GB
+   pass   1 deg  30 nmv    53  theta_1=9.3784702 theta_K=11.5178169 theta_m=12.4736918  res[:K] max=6.11e-03 min=3.06e-06 res[K:] min=3.45e-03 orth=6.7e-16  0s rss=0.13GB
+   pass   2 deg  40 nmv    94  theta_1=9.3784702 theta_K=11.5177775 theta_m=12.4147572  res[:K] max=2.01e-08 min=7.92e-15 res[K:] min=1.71e-08 orth=4.4e-16  0s rss=0.13GB
+VALIDATION dense vs ChebFSI (K=64, block 96, 94 matvecs, 0s): max|lambda_dense - lambda_cheb| = 3.20e-14, Cheb residuals max 2.0e-08, min singular value of <V_dense|V_cheb> = 1.000000 (1 = identical subspaces)
+   ground-state IPR*n dense 6.4243 vs ChebFSI 6.4243
+H_pin: lambda_1..8 = [9.37847, 9.37847, 9.589403, 9.589403, 9.709187, 9.709187, 9.848797, 9.848797]; lambda_K=11.517777; Kramers pairing max|l_2j-l_2j-1| = 2.8e-14; min gap between consecutive doublets 1.65e-02
+   #  0 lambda=9.3784702 res=8.0e-14 IPR=0.012547 IPR*n=6.424 P=79.7 bw=0.1327 interface w(d)={'1': 0.7821, '2': 0.9924, '3': 1.0}  S2(d)=[1.0, 0.4157, 0.0833, 0.0125]
+   #  1 lambda=9.3784702 res=1.8e-14 IPR=0.012547 IPR*n=6.424 P=79.7 bw=0.1327 interface w(d)={'1': 0.7821, '2': 0.9924, '3': 1.0}  S2(d)=[1.0, 0.4157, 0.0833, 0.0125]
+   #  2 lambda=9.5894029 res=4.0e-14 IPR=0.008441 IPR*n=4.322 P=118.5 bw=0.1661 interface w(d)={'1': 0.8308, '2': 0.9993, '3': 1.0}  S2(d)=[1.0, 0.2636, 0.0494, 0.0084]
+   #  3 lambda=9.5894029 res=8.4e-14 IPR=0.008441 IPR*n=4.322 P=118.5 bw=0.1661 interface w(d)={'1': 0.8308, '2': 0.9993, '3': 1.0}  S2(d)=[1.0, 0.2636, 0.0494, 0.0084]
+   #  4 lambda=9.7091872 res=5.2e-14 IPR=0.008815 IPR*n=4.513 P=113.4 bw=0.1965 interface w(d)={'1': 0.7993, '2': 0.9993, '3': 1.0}  S2(d)=[1.0, 0.2708, 0.0552, 0.0088]
+   #  5 lambda=9.7091872 res=7.2e-14 IPR=0.008815 IPR*n=4.513 P=113.4 bw=0.1965 interface w(d)={'1': 0.7993, '2': 0.9993, '3': 1.0}  S2(d)=[1.0, 0.2708, 0.0552, 0.0088]
+   #  6 lambda=9.8487967 res=7.9e-14 IPR=0.006089 IPR*n=3.117 P=164.2 bw=0.2541 interface w(d)={'1': 0.7753, '2': 0.9992, '3': 1.0}  S2(d)=[1.0, 0.1971, 0.0365, 0.0061]
+   #  7 lambda=9.8487967 res=6.4e-14 IPR=0.006089 IPR*n=3.117 P=164.2 bw=0.2541 interface w(d)={'1': 0.7753, '2': 0.9992, '3': 1.0}  S2(d)=[1.0, 0.1971, 0.0365, 0.0061]
+   avg lowest 8: mean IPR*n=4.594, mean boundary weight=0.1873, interface {'1': 0.7968749907105926, '2': 0.9975574569773775, '3': 1.0}, tile fractions {d: |I_d|/n} = {1: 0.5254, 2: 0.9785, 3: 1.0}
+H_pin LOBPCG(k=6, seed 0) cross-check: [9.37847, 9.37847, 9.589403, 9.589403, 9.709187, 9.709187] residuals ['5.2e-08', '4.9e-08', '2.5e-08', '5.8e-08', '5.9e-08', '9.4e-08'] ground-state IPR*n=6.424 (0s) warnings: []
+H_free: lowest [5.114941, 5.114941, 5.13524, 5.13524, 5.143911, 5.143911, 5.210331, 5.210331] residuals max 7.9e-14  (1s)
+   #  0 lambda=5.1149413 res=4.2e-14 IPR=0.011515 IPR*n=5.896 P=86.8 boundary weight=0.9276 interface w(d)={'1': 0.1674, '2': 0.7648, '3': 1.0}
+   #  1 lambda=5.1149413 res=5.6e-14 IPR=0.011515 IPR*n=5.896 P=86.8 boundary weight=0.9276 interface w(d)={'1': 0.1674, '2': 0.7648, '3': 1.0}
+   #  2 lambda=5.1352396 res=6.3e-14 IPR=0.015088 IPR*n=7.725 P=66.3 boundary weight=0.9289 interface w(d)={'1': 0.1324, '2': 0.7435, '3': 1.0}
+   #  3 lambda=5.1352396 res=4.8e-14 IPR=0.015088 IPR*n=7.725 P=66.3 boundary weight=0.9289 interface w(d)={'1': 0.1324, '2': 0.7435, '3': 1.0}
+   avg lowest 8: mean IPR*n=8.310, mean boundary weight=0.9287 (boundary tile fraction 0.5605)
+trivial pinned (tile operator): lowest [1.669512, 2.712476, 2.712476, 3.288947, 3.854453, 3.854453, 4.737899, 4.817316] residuals max 2.6e-14 (0s)
+   #  0 lambda=1.6695123 res=2.6e-14 IPR=0.004412 IPR*n=2.259 P=226.6 bw=0.2148 interface w(d)={'1': 0.7272, '2': 0.994, '3': 1.0} S2(d)=[1.0, 0.2058, 0.0314, 0.0044]
+   #  1 lambda=2.7124757 res=1.3e-14 IPR=0.004792 IPR*n=2.454 P=208.7 bw=0.2935 interface w(d)={'1': 0.6792, '2': 0.9989, '3': 1.0} S2(d)=[1.0, 0.1757, 0.0324, 0.0048]
+   #  2 lambda=2.7124757 res=1.8e-14 IPR=0.004792 IPR*n=2.454 P=208.7 bw=0.2935 interface w(d)={'1': 0.6792, '2': 0.9989, '3': 1.0} S2(d)=[1.0, 0.1757, 0.0324, 0.0048]
+trivial free (tile operator): lowest [0.0, 0.438665, 0.438665, 0.719001, 1.024765, 1.024765, 1.498141, 2.222823] residuals max 2.0e-14 (0s)
+   #  0 lambda=0.0000000 res=1.9e-14 IPR=0.001953 IPR*n=1.000 P=512.0 bw=0.5605 interface w(d)={'1': 0.5254, '2': 0.9785, '3': 1.0} S2(d)=[1.0, 0.125, 0.0156, 0.002]
+   #  1 lambda=0.4386647 res=1.2e-14 IPR=0.004270 IPR*n=2.186 P=234.2 bw=0.6501 interface w(d)={'1': 0.4022, '2': 0.9625, '3': 1.0} S2(d)=[1.0, 0.2313, 0.0332, 0.0043]
+   #  2 lambda=0.4386647 res=1.8e-14 IPR=0.004270 IPR*n=2.186 P=234.2 bw=0.6501 interface w(d)={'1': 0.4022, '2': 0.9625, '3': 1.0} S2(d)=[1.0, 0.2313, 0.0332, 0.0043]
+saved /home/user/-/audit/results/phase5a_edge_states_level3.json  total 3s  max rss 0.14 GB

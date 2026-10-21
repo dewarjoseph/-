@@ -1,0 +1,76 @@
+phase5a independent enumerator (no imports from audit/ or src/)
+ Q8 table self-check (relations, closure, associativity, inverses, 5 classes closed under inversion): OK
+ signed-permutation arithmetic vs numpy on all 48 signed permutations (and all 48x48 compositions): True
+ (sigma.u_a)(sigma.u_b) = -(u_a u_b) on all 36 signed-axis pairs; Q8->SU(2) homomorphism on 64 products: True
+ det(D_s(v) P(pi_v)) for v in U3: {'(0, 0, 0)': 1, '(0, 0, 1)': 1, '(0, 1, 0)': 1, '(0, 1, 1)': 1, '(1, 0, 0)': 1, '(1, 0, 1)': 1, '(1, 1, 0)': 1}
+
+LEVEL 1: N=4
+ geometry: tiles=8 cube_slots=56 distinct=56 disjoint=True fills [0,4)^3 \ [2,4)^3 exactly=True (target 56 cubes) det+1=True
+ plaquettes: total=84 inter-tile=60 straddling=60  [0.0s]
+ inter-tile classes: {'1': 26, '-1': 3, 'i': 12, 'j': 7, 'k': 12}
+ straddling classes: {'1': 26, '-1': 3, 'i': 12, 'j': 7, 'k': 12}
+ signed labels (quaternion convention, loop +e_i,+e_j,-e_i,-e_j from x-e_i-e_j): {'+1': 26, '+i': 6, '+j': 5, '+k': 6, '-1': 3, '-i': 6, '-j': 2, '-k': 6}
+ N_m formula 18*8^m-24*4^m+6*2^m = 60: match=True;  B_m formula 24*4^m-18*2^m = 60: match=True
+ scalar (pure-Python, dict map) evaluator: total=84 inter=60 classes={'1': 26, '-1': 3, 'i': 12, 'j': 7, 'k': 12} matches vectorised=True
+ panels: shared unit faces=48 link values={'+1': 6, '-1': 24, 'traceless': 18} Pauli-matrix agreement on every panel=True
+
+LEVEL 2: N=8
+ geometry: tiles=64 cube_slots=448 distinct=448 disjoint=True fills [0,8)^3 \ [4,8)^3 exactly=True (target 448 cubes) det+1=True
+ plaquettes: total=984 inter-tile=792 straddling=312  [0.0s]
+ inter-tile classes: {'1': 385, '-1': 42, 'i': 124, 'j': 117, 'k': 124}
+ straddling classes: {'1': 177, '-1': 18, 'i': 28, 'j': 61, 'k': 28}
+ signed labels (quaternion convention, loop +e_i,+e_j,-e_i,-e_j from x-e_i-e_j): {'+1': 385, '+i': 64, '+j': 62, '+k': 64, '-1': 42, '-i': 60, '-j': 55, '-k': 60}
+ N_m formula 18*8^m-24*4^m+6*2^m = 792: match=True;  B_m formula 24*4^m-18*2^m = 312: match=True
+ scalar (pure-Python, dict map) evaluator: total=984 inter=792 classes={'1': 385, '-1': 42, 'i': 124, 'j': 117, 'k': 124} matches vectorised=True
+ panels: shared unit faces=576 link values={'+1': 90, '-1': 228, 'traceless': 258} Pauli-matrix agreement on every panel=True
+
+LEVEL 3: N=16
+ geometry: tiles=512 cube_slots=3584 distinct=3584 disjoint=True fills [0,16)^3 \ [8,16)^3 exactly=True (target 3584 cubes) det+1=True
+ plaquettes: total=9264 inter-tile=7728 straddling=1392  [0.0s]
+ inter-tile classes: {'1': 3945, '-1': 530, 'i': 1020, 'j': 1213, 'k': 1020}
+ straddling classes: {'1': 865, '-1': 194, 'i': 28, 'j': 277, 'k': 28}
+ signed labels (quaternion convention, loop +e_i,+e_j,-e_i,-e_j from x-e_i-e_j): {'+1': 3945, '+i': 508, '+j': 614, '+k': 508, '-1': 530, '-i': 512, '-j': 599, '-k': 512}
+ N_m formula 18*8^m-24*4^m+6*2^m = 7728: match=True;  B_m formula 24*4^m-18*2^m = 1392: match=True
+ scalar (pure-Python, dict map) evaluator: total=9264 inter=7728 classes={'1': 3945, '-1': 530, 'i': 1020, 'j': 1213, 'k': 1020} matches vectorised=True
+
+LEVEL 4: N=32
+ geometry: tiles=4096 cube_slots=28672 distinct=28672 disjoint=True fills [0,32)^3 \ [16,32)^3 exactly=True (target 28672 cubes) det+1=True
+ plaquettes: total=79968 inter-tile=67680 straddling=5856  [0.1s]
+ inter-tile classes: {'1': 35161, '-1': 5394, 'i': 8188, 'j': 10749, 'k': 8188}
+ straddling classes: {'1': 3601, '-1': 1154, 'i': 28, 'j': 1045, 'k': 28}
+ signed labels (quaternion convention, loop +e_i,+e_j,-e_i,-e_j from x-e_i-e_j): {'+1': 35161, '+i': 4088, '+j': 5394, '+k': 4088, '-1': 5394, '-i': 4100, '-j': 5355, '-k': 4100}
+ N_m formula 18*8^m-24*4^m+6*2^m = 67680: match=True;  B_m formula 24*4^m-18*2^m = 5856: match=True
+
+LEVEL 5: N=64
+ geometry: tiles=32768 cube_slots=229376 distinct=229376 disjoint=True fills [0,64)^3 \ [32,64)^3 exactly=True (target 229376 cubes) det+1=True
+ plaquettes: total=663744 inter-tile=565440 straddling=24000  [0.9s]
+ inter-tile classes: {'1': 296121, '-1': 48146, 'i': 65532, 'j': 90109, 'k': 65532}
+ straddling classes: {'1': 14833, '-1': 4994, 'i': 28, 'j': 4117, 'k': 28}
+ signed labels (quaternion convention, loop +e_i,+e_j,-e_i,-e_j from x-e_i-e_j): {'+1': 296121, '+i': 32752, '+j': 45098, '+k': 32752, '-1': 48146, '-i': 32780, '-j': 45011, '-k': 32780}
+ N_m formula 18*8^m-24*4^m+6*2^m = 565440: match=True;  B_m formula 24*4^m-18*2^m = 24000: match=True
+
+COMPARISON WITH audit/results/phase4_type_substitution_proof.txt (recursion predictions; read, not recomputed)
+ level 1: recursion {'1': 26, '-1': 3, 'i': 12, 'j': 7, 'k': 12} N=60 | enumerated {'1': 26, '-1': 3, 'i': 12, 'j': 7, 'k': 12} N=60 | EXACT MATCH: True
+ level 2: recursion {'1': 385, '-1': 42, 'i': 124, 'j': 117, 'k': 124} N=792 | enumerated {'1': 385, '-1': 42, 'i': 124, 'j': 117, 'k': 124} N=792 | EXACT MATCH: True
+ level 3: recursion {'1': 3945, '-1': 530, 'i': 1020, 'j': 1213, 'k': 1020} N=7728 | enumerated {'1': 3945, '-1': 530, 'i': 1020, 'j': 1213, 'k': 1020} N=7728 | EXACT MATCH: True
+ level 4: recursion {'1': 35161, '-1': 5394, 'i': 8188, 'j': 10749, 'k': 8188} N=67680 | enumerated {'1': 35161, '-1': 5394, 'i': 8188, 'j': 10749, 'k': 8188} N=67680 | EXACT MATCH: True
+ level 5: recursion {'1': 296121, '-1': 48146, 'i': 65532, 'j': 90109, 'k': 65532} N=565440 | enumerated {'1': 296121, '-1': 48146, 'i': 65532, 'j': 90109, 'k': 65532} N=565440 | EXACT MATCH: True
+
+COMPARISON WITH audit/results/phase3_straddle_closed_form_levels3-7.txt (class-resolved straddling counts; read)
+ level 3: file b_k={'1': 865, '-1': 194, 'i': 28, 'j': 277, 'k': 28} B=1392 | enumerated {'1': 865, '-1': 194, 'i': 28, 'j': 277, 'k': 28} B=1392 | EXACT MATCH: True
+ level 4: file b_k={'1': 3601, '-1': 1154, 'i': 28, 'j': 1045, 'k': 28} B=5856 | enumerated {'1': 3601, '-1': 1154, 'i': 28, 'j': 1045, 'k': 28} B=5856 | EXACT MATCH: True
+ level 5: file b_k={'1': 14833, '-1': 4994, 'i': 28, 'j': 4117, 'k': 28} B=24000 | enumerated {'1': 14833, '-1': 4994, 'i': 28, 'j': 4117, 'k': 28} B=24000 | EXACT MATCH: True
+
+COMPARISON WITH certificates/Chair44GeometryToMatrix.lean (level 1; read)
+ cubes           : lean=56 enumerated=56 match=True
+ panels          : lean=48 enumerated=48 match=True
+ links_minus1    : lean=24 enumerated=24 match=True
+ links_plus1     : lean=6 enumerated=6 match=True
+ links_traceless : lean=18 enumerated=18 match=True
+ plaquettes      : lean=60 enumerated=60 match=True
+ plaq_plus1      : lean=26 enumerated=26 match=True
+ plaq_minus1     : lean=3 enumerated=3 match=True
+ plaq_traceless  : lean=31 enumerated=31 match=True
+
+ALL CHECKS PASSED: True
+total time 1.08 s

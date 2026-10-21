@@ -1,0 +1,75 @@
+PHASE 5a / TASK B4: integrated density of states near the edge of the pinned FR30 operator, with controls
+================================================================================================================================
+Eigenvalues lambda_1 <= lambda_2 <= ... are counted with multiplicity (each Kramers pair
+  contributes 2).  N(E) = #{i : lambda_i <= E} (right-continuous).  For a window k in [k1, k2] the points
+  (x, y) = (log(lambda - E0), log N(lambda)) at the DISTINCT eigenvalues lambda in the window (lambda > E0) are fitted
+  by least squares y = alpha x + c; the 'two-point' exponent is log(N(lambda_k2)/N(lambda_k1)) /
+  log((lambda_k2 - E0)/(lambda_k1 - E0)).  A bootstrap-style spread is the 16-84 percentile range of alpha over
+  random contiguous sub-windows [k1, k2] with 8 <= k1, k2 <= K, k2 >= 2 k1, >= 8 distinct eigenvalues.
+  E0 conventions: (a) the extrapolated bulk edge (FR30: 8.76; trivial and cube: 0 exactly; random decoration:
+  geometric extrapolation of the level-3,4,5 bottoms), (b) E0 = lambda_1 of the same level.
+  Dirichlet-collapse test (H4/H5): if the patch spectrum near the edge is that of a homogenized effective-mass
+  operator with hard walls, lambda_k(L+1) - E0 = (lambda_k(L) - E0)/4 (1 + O(1/2^L)) for fixed k << n; the ratios
+  r_k(E0) = (lambda_k(5) - E0)/(lambda_k(4) - E0), k <= 200, are reported for the stated E0 and the E0 that
+  minimizes the spread of log r_k (an independent estimate of the edge).
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+trivial connection on the FR30 graph, pinned (24 - A_0) | level 4 (n = 4096 tiles), K = 400 lowest eigenvalues; solver: dense eigvalsh (LAPACK), dim 4096; max residual 0.0e+00
+   lambda_1 = 0.5027285; lambda_8 = 0.9994079; lambda_32 = 1.9867146; lambda_128 = 4.2133023; lambda_K = 7.6848271
+   E0 = 0.00000 (extrapolated bulk edge):
+      k in [  8, 32] ( 13 distinct eigenvalues): alpha_LS = 1.926 +- 0.110 (nominal), alpha_2pt = 2.018, rms log-resid 0.078
+      k in [ 32,128] ( 49 distinct eigenvalues): alpha_LS = 1.882 +- 0.026 (nominal), alpha_2pt = 1.844, rms log-resid 0.037
+      k in [128,400] (136 distinct eigenvalues): alpha_LS = 1.930 +- 0.008 (nominal), alpha_2pt = 1.896, rms log-resid 0.015
+      k in [  8,400] (196 distinct eigenvalues): alpha_LS = 1.904 +- 0.005 (nominal), alpha_2pt = 1.918, rms log-resid 0.031
+      bootstrap over 2999 random sub-windows: alpha median 1.888, 16-84% [1.851, 1.962], range [1.684, 2.018]
+      k in [8,400] fits of N(E): power law alpha=1.904 rel.rms 0.031; pure C(E-E0)^1.5 rel.rms 0.146; Weyl two-term a(E-E0)^1.5 + b(E-E0): a=28.874 b=-29.335 rel.rms 0.147 (|surface/volume| term at k=K: -0.366)
+   E0 = 0.50273 (lambda_1 of this level):
+      k in [  8, 32] ( 13 distinct eigenvalues): alpha_LS = 1.229 +- 0.078 (nominal), alpha_2pt = 1.267, rms log-resid 0.086
+      k in [ 32,128] ( 49 distinct eigenvalues): alpha_LS = 1.564 +- 0.022 (nominal), alpha_2pt = 1.513, rms log-resid 0.037
+      k in [128,400] (136 distinct eigenvalues): alpha_LS = 1.762 +- 0.008 (nominal), alpha_2pt = 1.725, rms log-resid 0.016
+      k in [  8,400] (196 distinct eigenvalues): alpha_LS = 1.588 +- 0.008 (nominal), alpha_2pt = 1.464, rms log-resid 0.060
+      bootstrap over 2999 random sub-windows: alpha median 1.686, 16-84% [1.604, 1.798], range [1.192, 1.854]
+      k in [8,400] fits of N(E): power law alpha=1.588 rel.rms 0.056; pure C(E-E0)^1.5 rel.rms 0.057; Weyl two-term a(E-E0)^1.5 + b(E-E0): a=27.023 b=-18.162 rel.rms 0.145 (|surface/volume| term at k=K: -0.251)
+--------------------------------------------------------------------------------------------------------------------------------
+ideal Dirichlet cube L^3 (6 - A on Z^3 box), exact, alpha_bulk = 3/2 | level 4 (n = 4096 tiles), K = 400 lowest eigenvalues; solver: exact formula; max residual 0.0e+00
+   lambda_1 = 0.1021614; lambda_8 = 0.2031631; lambda_32 = 0.4686751; lambda_128 = 1.0780181; lambda_K = 1.9845726
+   E0 = 0.00000 (extrapolated bulk edge):
+      k in [  8, 32] (  5 distinct eigenvalues): alpha_LS = 1.660 +- 0.143 (nominal), alpha_2pt = 1.731, rms log-resid 0.071
+      k in [ 32,128] ( 14 distinct eigenvalues): alpha_LS = 1.732 +- 0.055 (nominal), alpha_2pt = 1.628, rms log-resid 0.046
+      k in [128,400] ( 32 distinct eigenvalues): alpha_LS = 1.814 +- 0.021 (nominal), alpha_2pt = 1.817, rms log-resid 0.021
+      k in [  8,400] ( 49 distinct eigenvalues): alpha_LS = 1.772 +- 0.010 (nominal), alpha_2pt = 1.716, rms log-resid 0.038
+      bootstrap over 2970 random sub-windows: alpha median 1.791, 16-84% [1.769, 1.806], range [1.651, 1.888]
+      k in [8,400] fits of N(E): power law alpha=1.772 rel.rms 0.038; pure C(E-E0)^1.5 rel.rms 0.126; Weyl two-term a(E-E0)^1.5 + b(E-E0): a=202.589 b=-83.233 rel.rms 0.141 (|surface/volume| term at k=K: -0.292)
+   E0 = 0.10216 (lambda_1 of this level):
+      k in [  8, 32] (  5 distinct eigenvalues): alpha_LS = 1.058 +- 0.125 (nominal), alpha_2pt = 1.123, rms log-resid 0.097
+      k in [ 32,128] ( 14 distinct eigenvalues): alpha_LS = 1.483 +- 0.050 (nominal), alpha_2pt = 1.385, rms log-resid 0.049
+      k in [128,400] ( 32 distinct eigenvalues): alpha_LS = 1.688 +- 0.020 (nominal), alpha_2pt = 1.687, rms log-resid 0.021
+      k in [  8,400] ( 49 distinct eigenvalues): alpha_LS = 1.479 +- 0.022 (nominal), alpha_2pt = 1.337, rms log-resid 0.094
+      bootstrap over 2970 random sub-windows: alpha median 1.649, 16-84% [1.568, 1.683], range [1.191, 1.725]
+      k in [8,400] fits of N(E): power law alpha=1.479 rel.rms 0.086; pure C(E-E0)^1.5 rel.rms 0.032; Weyl two-term a(E-E0)^1.5 + b(E-E0): a=188.800 b=-46.100 rel.rms 0.153 (|surface/volume| term at k=K: -0.178)
+--------------------------------------------------------------------------------------------------------------------------------
+ideal Dirichlet cube L^3 (6 - A on Z^3 box), exact, alpha_bulk = 3/2 | level 5 (n = 32768 tiles), K = 200 lowest eigenvalues; solver: exact formula; max residual 0.0e+00
+   lambda_1 = 0.0271685; lambda_8 = 0.0542549; lambda_32 = 0.1262128; lambda_128 = 0.2955844; lambda_K = 0.3746494
+   E0 = 0.00000 (extrapolated bulk edge):
+      k in [  8, 32] (  5 distinct eigenvalues): alpha_LS = 1.645 +- 0.137 (nominal), alpha_2pt = 1.714, rms log-resid 0.069
+      k in [ 32,128] ( 14 distinct eigenvalues): alpha_LS = 1.686 +- 0.049 (nominal), alpha_2pt = 1.594, rms log-resid 0.042
+      k in [128,200] (  9 distinct eigenvalues): alpha_LS = 1.702 +- 0.083 (nominal), alpha_2pt = 1.753, rms log-resid 0.018
+      k in [  8,200] ( 26 distinct eigenvalues): alpha_LS = 1.707 +- 0.017 (nominal), alpha_2pt = 1.666, rms log-resid 0.042
+      bootstrap over 2832 random sub-windows: alpha median 1.684, 16-84% [1.659, 1.736], range [1.617, 1.829]
+      k in [8,200] fits of N(E): power law alpha=1.707 rel.rms 0.042; pure C(E-E0)^1.5 rel.rms 0.088; Weyl two-term a(E-E0)^1.5 + b(E-E0): a=1118.799 b=-155.832 rel.rms 0.068 (|surface/volume| term at k=K: -0.228)
+   E0 = 0.02717 (lambda_1 of this level):
+      k in [  8, 32] (  5 distinct eigenvalues): alpha_LS = 1.053 +- 0.122 (nominal), alpha_2pt = 1.116, rms log-resid 0.095
+      k in [ 32,128] ( 14 distinct eigenvalues): alpha_LS = 1.449 +- 0.045 (nominal), alpha_2pt = 1.361, rms log-resid 0.045
+      k in [128,200] (  9 distinct eigenvalues): alpha_LS = 1.564 +- 0.076 (nominal), alpha_2pt = 1.609, rms log-resid 0.018
+      k in [  8,200] ( 26 distinct eigenvalues): alpha_LS = 1.358 +- 0.030 (nominal), alpha_2pt = 1.261, rms log-resid 0.091
+      bootstrap over 2832 random sub-windows: alpha median 1.498, 16-84% [1.449, 1.528], range [1.179, 1.581]
+      k in [8,200] fits of N(E): power law alpha=1.358 rel.rms 0.087; pure C(E-E0)^1.5 rel.rms 0.024; Weyl two-term a(E-E0)^1.5 + b(E-E0): a=970.439 b=-3.458 rel.rms 0.104 (|surface/volume| term at k=K: -0.006)
+--------------------------------------------------------------------------------------------------------------------------------
+DIRICHLET-COLLAPSE TEST between levels 4 and 5: r_k(E0) = (lambda_k(5) - E0)/(lambda_k(4) - E0), k <= 200 (homogenized hard-wall box: r_k -> 1/4 for all k)
+   cube     E0 stated 0.00000: r_1=0.2659 r_8=0.2671 r_200=0.2774, median 0.2727 [16-84%: 0.2693, 0.2776], std(log r)=0.016 | best-collapse E0 = -0.0035: median r 0.2764 [0.2746, 0.2801], std(log r)=0.013
+--------------------------------------------------------------------------------------------------------------------------------
+SAME-ENERGY IDS RATIO N_5(E)/N_4(E) at E = lambda_k(5), k = 8, 32, 128, 200 (bulk-like states: -> 8 = volume ratio; a ratio below 8 means the level-4 count at that energy is relatively inflated or the edge has not converged)
+   cube     k=8: E=0.05425 N4=  0 N5=  8 ratio=inf(N4=0)  k=32: E=0.12621 N4=  2 N5= 34 ratio=17.00  k=128: E=0.29558 N4=  8 N5=132 ratio=16.50  k=200: E=0.37465 N4= 20 N5=200 ratio=10.00
+
+saved audit/results/phase5a_ids_edge.txt and audit/results/phase5a_ids_edge_fit.json

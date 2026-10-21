@@ -1,0 +1,67 @@
+==============================================================================
+1. FRAME-TYPE SUBSTITUTION
+ child rotational parts g_c (row-major), det=+1 checked:
+   center    t=(1, 1, 1)  g=(1, 0, 0, 0, 1, 0, 0, 0, 1)
+   (0, 0, 0) t=(0, 0, 0)  g=(1, 0, 0, 0, 1, 0, 0, 0, 1)
+   (0, 0, 1) t=(0, 0, 4)  g=(1, 0, 0, 0, 0, 1, 0, -1, 0)
+   (0, 1, 0) t=(0, 4, 0)  g=(0, 0, 1, 0, -1, 0, 1, 0, 0)
+   (0, 1, 1) t=(0, 4, 4)  g=(0, 1, 0, 0, 0, -1, -1, 0, 0)
+   (1, 0, 0) t=(4, 0, 0)  g=(0, -1, 0, 1, 0, 0, 0, 0, 1)
+   (1, 0, 1) t=(4, 0, 4)  g=(-1, 0, 0, 0, 1, 0, 0, 0, -1)
+   (1, 1, 0) t=(4, 4, 0)  g=(0, 0, -1, -1, 0, 0, 0, 1, 0)
+ frames occurring at level 1: 7
+ frames occurring at level 2: 24
+ set H of occurring frames: |H| = 24  (|SO(3,Z)| = 24)  H = SO(3,Z): True
+ frame substitution matrix F[G',G] = #{children of a G-tile with frame G'}:
+ column sums: [8]  row sums: [8]
+ F is a sum of 8 permutation matrices (right multiplications by g_c): doubly stochastic after /8
+ spectrum of F (moduli, sorted): [8.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 0.0, 0.0, 0.0]
+ Perron-Frobenius eigenvalue 8 simple: True ; second largest modulus: 2.0
+ primitivity exponent (smallest k with F^k > 0 entrywise): 2
+ identity frame in H and reachable from every frame in k steps: True
+ stabilizer of the chair cube-set in SO(3,Z) (frames giving the same cube set): order 3  -> 8 geometric orientations, 24 decorated prototiles
+==============================================================================
+2. NESTING T_m subset T_{m+1} AS THE (0,0,0)-CHILD, WITH IDENTICAL LINKS
+ level 1: poses(T_1) subset poses(T_2): True   |T_1|=8 |T_2|=64
+   panels among T_1-tiles: in T_1 48, in T_2 restricted 48; identical multisets with identical links: True
+ level 2: poses(T_2) subset poses(T_3): True   |T_2|=64 |T_3|=512
+   panels among T_2-tiles: in T_2 576, in T_3 restricted 576; identical multisets with identical links: True
+ level 3: poses(T_3) subset poses(T_4): True   |T_3|=512 |T_4|=4096
+   panels among T_3-tiles: in T_3 5376, in T_4 restricted 5376; identical multisets with identical links: True
+==============================================================================
+3. LINK RULE IS FRAME-ROTATION COVARIANT: links of sigma^m(t) equal links of T_m for every frame G of t
+ level 1: for all 24 frames G, the panel list and Q8 link labels of sigma^1((G,0)) equal those of T_1: True
+ level 2: for all 24 frames G, the panel list and Q8 link labels of sigma^2((G,0)) equal those of T_2: True
+==============================================================================
+4. COORDINATION 24, BOUNDARY TILES, SURFACE BOUND
+ external unit faces of one chair: 24  (7 cubes x 6 faces = 42, minus 2 x 9 internal adjacencies)
+ level 1: tiles 8=8^1, panels 48, max degree 21, boundary tiles b_m=8  b_m/8^m=1.0000  24*4^m=96  b_m<=24*4^m: True  all boundary tiles touch the surface: True  all non-surface tiles have degree 24: True  (0s)
+ level 2: tiles 64=8^2, panels 576, max degree 24, boundary tiles b_m=53  b_m/8^m=0.8281  24*4^m=384  b_m<=24*4^m: True  all boundary tiles touch the surface: True  all non-surface tiles have degree 24: True  (0s)
+ level 3: tiles 512=8^3, panels 5376, max degree 24, boundary tiles b_m=287  b_m/8^m=0.5605  24*4^m=1536  b_m<=24*4^m: True  all boundary tiles touch the surface: True  all non-surface tiles have degree 24: True  (0s)
+ level 4: tiles 4096=8^4, panels 46080, max degree 24, boundary tiles b_m=1331  b_m/8^m=0.3250  24*4^m=6144  b_m<=24*4^m: True  all boundary tiles touch the surface: True  all non-surface tiles have degree 24: True  (1s)
+ level 5: tiles 32768=8^5, panels 380928, max degree 24, boundary tiles b_m=5723  b_m/8^m=0.1747  24*4^m=24576  b_m<=24*4^m: True  all boundary tiles touch the surface: True  all non-surface tiles have degree 24: True  (5s)
+==============================================================================
+5. RECOGNIZABILITY: PARITY OF BOUNDING-BOX CORNERS AND THE NOTCH RULE
+ level 1: bounding-box corner parities: {(1, 1, 1): 1, (0, 0, 0): 7}
+   central chairs: 1 = 8^0; notch-cube counts of central chairs: {7: 1}; of outer chairs: {0: 7}
+   notch rule (central <=> 7 notch cubes; outer <= 1): True;  every outer notch is a cube of the central chair of its own supertile: True
+   central-chair box centers mod 4: {(2, 2, 2): 1}
+ level 2: bounding-box corner parities: {(1, 1, 1): 8, (0, 0, 0): 56}
+   central chairs: 8 = 8^1; notch-cube counts of central chairs: {7: 8}; of outer chairs: {1: 7, 0: 49}
+   notch rule (central <=> 7 notch cubes; outer <= 1): True;  every outer notch is a cube of the central chair of its own supertile: True
+   central-chair box centers mod 4: {(0, 0, 0): 1, (2, 2, 2): 7}
+ level 3: bounding-box corner parities: {(1, 1, 1): 64, (0, 0, 0): 448}
+   central chairs: 64 = 8^2; notch-cube counts of central chairs: {7: 64}; of outer chairs: {1: 63, 0: 385}
+   notch rule (central <=> 7 notch cubes; outer <= 1): True;  every outer notch is a cube of the central chair of its own supertile: True
+   central-chair box centers mod 4: {(0, 0, 0): 8, (2, 2, 2): 56}
+ level 4: bounding-box corner parities: {(1, 1, 1): 512, (0, 0, 0): 3584}
+   central chairs: 512 = 8^3; notch-cube counts of central chairs: {7: 512}; of outer chairs: {1: 511, 0: 3073}
+   notch rule (central <=> 7 notch cubes; outer <= 1): True;  every outer notch is a cube of the central chair of its own supertile: True
+   central-chair box centers mod 4: {(0, 0, 0): 64, (2, 2, 2): 448}
+==============================================================================
+6. FIXED-POINT SEEDS
+ central child of pose (I,(-1,-1,-1)) is (g,T) = ((1, 0, 0, 0, 1, 0, 0, 0, 1), (-1, -1, -1)) -> self: True
+ (0,0,0)-child of the root (I,0) is (I,0): the nested T_m exhaust the octant [0,oo)^3 only (box [0,2^(m+1))^3 minus [2^m,2^(m+1))^3)
+  sigma^1(seed) bounding box (-2, -2, -2)..(2, 2, 2) (expected [-2^(m-1), 3*2^(m-1)) ), cubes 56 = 7*8^1: True
+  sigma^2(seed) bounding box (-4, -4, -4)..(4, 4, 4) (expected [-2^(m-1), 3*2^(m-1)) ), cubes 448 = 7*8^2: True
+  sigma^3(seed) bounding box (-8, -8, -8)..(8, 8, 8) (expected [-2^(m-1), 3*2^(m-1)) ), cubes 3584 = 7*8^3: True

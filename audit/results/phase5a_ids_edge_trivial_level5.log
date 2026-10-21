@@ -1,0 +1,10 @@
+=== phase5a_ids_edge compute: model=trivial level=5 K=200 (threads OMP=1) ===
+patch level 5: n=32768 tiles, panels=380928, frames=24, boundary tiles=5723, link labels {'+i': 20525, '-1': 143364, '+j': 53252, '+k': 20432, '-k': 20525, '-i': 20432, '-j': 53252, '+1': 49146}, build 7.8s rss=0.35GB
+operator dim 32768 nnz 264190 hermitian; build 0.1s
+Lanczos theta_max=44.543001 residual 4.3e-07 -> certified upper bound b=44.543002
+   cheb pass  0 deg  30 nmv    32  theta_1=0.21533553 theta_K=1.99375807 theta_m=2.680182  res[:K] max=6.2e-01 median=5.1e-01  15s rss=0.35GB
+   cheb pass  1 deg  40 nmv    73  theta_1=0.13860196 theta_K=1.55149821 theta_m=1.936340  res[:K] max=3.2e-02 median=3.0e-03  28s rss=0.35GB
+   cheb pass  2 deg  50 nmv   124  theta_1=0.13860196 theta_K=1.54959466 theta_m=1.882701  res[:K] max=1.7e-04 median=1.2e-07  40s rss=0.35GB
+   cheb pass  3 deg  60 nmv   185  theta_1=0.13860196 theta_K=1.54959462 theta_m=1.858194  res[:K] max=8.9e-08 median=1.1e-13  54s rss=0.35GB
+   lobpcg polish: block 104, 2s, warnings: none; res[:K] max=3.3e-09 median=4.3e-14
+   LOBPCG polish moved the Ritz values by at most 1.8e-14; total solve 57s rss=0.40GB

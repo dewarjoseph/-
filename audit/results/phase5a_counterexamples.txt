@@ -1,0 +1,32 @@
+phase5a_counterexamples.py  sympy 1.14.0
+
+(a) Fibonacci a->ab, b->a
+ rule {'a': 'ab', 'b': 'a'}; matrix (columns = parents) [[1, 1], [1, 0]]; column sums [2, 1] (NOT constant -> not constant length)
+ charpoly lambda**2 - lambda - 1; eigenvalues {1/2 - sqrt(5)/2: 1, 1/2 + sqrt(5)/2: 1}; Perron root 1/2 + sqrt(5)/2 = phi: True
+ exact recursion v_(n+1) = Mat v_n reproduces the letter counts of sigma^n(a) for n = 1..12: True
+ normalized Perron vector (limiting letter frequencies) = [-1/2 + sqrt(5)/2, 3/2 - sqrt(5)/2] = (1/phi, 1/phi^2): True; irrational: True
+ VERDICT: finite type + exact recursion + primitivity do NOT imply rational frequencies; the integer Perron root (constant length) is needed.
+
+(b) non-primitive a->aa, b->bb
+ rule {'a': 'aa', 'b': 'bb'}; matrix [[2, 0], [0, 2]]; column sums [2, 2] (constant length 2); charpoly (lambda - 2)**2
+ primitive (some power strictly positive): False; sink components: {a}, {b} (two sinks -> eigenvalue 2 has multiplicity 2)
+ normalized counts after 10 inflations, by seed: {'a': [1, 0], 'b': [0, 1], 'ab': [1/2, 1/2], 'aab': [2/3, 1/3]}  -> seed-dependent: True
+ CONTRAST (forced recursion v_(m+1) = Mat v_m + 8^m f, f = [1, 2], v_1 = seed): (8 - Mat)^(-1) f = [1/6, 1/3]; deviations |v_m/8^m - lim| at m = 5, 10, 20 for seeds (1,0), (0,1), (5,7): {'[1, 0]': [[1/6144, 1/768], [1/6291456, 1/786432], [1/6597069766656, 1/824633720832]], '[0, 1]': [[1/1536, 5/6144], [1/1572864, 5/6291456], [1/1649267441664, 5/6597069766656]], '[5, 7]': [[11/6144, 13/6144], [11/6291456, 13/6291456], [11/6597069766656, 13/6597069766656]]}
+   deviations decay by the exact factor (2/8)^5 = 4^(-5) per 5 levels (here exactly 4^(-m) (v_1/2 - 2f/3)): True  -> the forced limit is seed-independent without primitivity because 8 > rho(Mat) = 2.
+ VERDICT: for a HOMOGENEOUS recursion, seed-independence of the limit needs primitivity (or at least a unique sink component);
+          for the FR30 supertile recursion it follows instead from the dominant forcing eigenvalue 8 > rho(S) = 4.
+
+(c) Thue-Morse 0->01, 1->10 and its 2-block substitution
+ letter rule {'0': '01', '1': '10'}; letter matrix [[1, 1], [1, 1]]; charpoly lambda*(lambda - 2); eigenvalues {2: 1, 0: 1}; clean (nonzero spec in {2,1}): True; letter frequencies [1/2, 1/2]
+ 2-block alphabet ['00', '01', '10', '11']; induced rule {'00': ['01', '10'], '01': ['01', '11'], '10': ['10', '00'], '11': ['10', '01']}
+ 2-block matrix (columns = parent blocks) [[0, 0, 1, 0], [1, 1, 0, 1], [1, 0, 1, 1], [0, 1, 0, 0]]; column sums [2, 2, 2, 2]
+ 2-block charpoly lambda*(lambda - 2)*(lambda - 1)*(lambda + 1); eigenvalues {2: 1, 1: 1, -1: 1, 0: 1}; clean (nonzero spec in {2,1}): False
+ Jordan form diagonal [-1, 0, 1, 2] (semisimple: True)
+ 2-block limiting frequencies (normalized Perron vector) [1/6, 1/3, 1/3, 1/6]; rational: True; empirical on sigma^14(0) (16383 blocks): [910/5461, 1/3, 1/3, 2731/16383]
+ VERDICT: letter spectrum clean = True, induced 2-block spectrum clean = False; see the deliverable for the reading.
+
+(d) period-doubling 0->01, 1->00
+ rule {'0': '01', '1': '00'}; matrix [[1, 2], [1, 0]]; column sums [2, 2] (constant length 2, primitive: True)
+ charpoly (lambda - 2)*(lambda + 1); eigenvalues {2: 1, -1: 1}; clean: False; limiting frequencies [2/3, 1/3]; rational: True
+ exact closed form v_n = P diag(2^n, (-1)^n) P^-1 v_0 equals the direct counts of sigma^n(0) for n = 0..6: True; e.g. v_n = [43, 21] at n = 6; coefficient vector along (2^n, (-1)^n): [-1/3, 1/3]
+ VERDICT: constant length and primitivity give rational frequencies even though the spectrum is NOT clean; the non-clean eigenvalue -1 produces an exact (-1)^n oscillation in the finite-size corrections.

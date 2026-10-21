@@ -1,0 +1,9 @@
+=== phase5a_ids_edge compute: model=randdec level=3 K=400 (threads OMP=2) ===
+random admissible decoration #0 (rng seed 20261021): {'0': [2, 0, 1], '(0, 0, 0)': [0, 1, 2], '(0, 0, 1)': [2, 1, 0], '(0, 1, 0)': [0, 2, 1], '(0, 1, 1)': [1, 2, 0], '(1, 0, 0)': [0, 2, 1], '(1, 0, 1)': [2, 0, 1], '(1, 1, 0)': [0, 1, 2]}
+patch level 3: n=512 tiles, panels=5376, frames=24, boundary tiles=287, link labels {'-k': 419, '-j': 720, '-1': 1408, '+j': 677, '+k': 416, '-i': 637, '+1': 505, '+i': 594}, build 0.5s rss=0.10GB
+operator dim 1024 nnz 9128 hermitian; build 0.0s
+dense eigvalsh dim 1024: 5s rss=0.13GB; lambda_min=8.411357685 lambda_max=38.782810 mean=24.000000 (trace/dim = 24.000)
+Kramers pairing of the 400 reported eigenvalues: max|lambda_(2j) - lambda_(2j-1)| = 9.4e-14
+lowest 12: [8.4113577 8.4113577 8.5597232 8.5597232 8.8079154 8.8079154 9.0807567 9.0807567 9.184444  9.184444  9.3823858 9.3823858]
+lambda_k at k = 8, 32, 128, 400: 9.0807567 10.4981329 14.0254435 21.6725596; max residual 0.0e+00
+saved audit/results/phase5a_ids_edge_randdec0_level3.npy/.json  (rss 0.13 GB)

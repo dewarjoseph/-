@@ -1,0 +1,60 @@
+====================================================================================================
+LEVEL-1 PERIODIC APPROXIMANT: 8 chairs per cell, Bloch dimension 16, period lattice 2^1 Lambda_7, 192 oriented panels (= 24 per chair), interface tiles (touching another supertile copy): 8/8 = 1.000  (build 0s)
+ exact torus flux: inter-tile plaquettes 144 (=18.0 per chair), classes {'1': 73, '-1': 7, 'i': 16, 'j': 32, 'k': 16};  fractions: nontriv=0.49306 (FR30 limit 17/36=0.47222), traceless=0.44444 (55/144=0.38194), -1=0.04861 (13/144=0.09028)  (0s)
+   theta=(0.0, 0.0, 0.0): lowest [9.931976, 9.931976, 13.646564, 13.646564]
+   theta=(0.0, 0.0, 0.5): lowest [9.523613, 9.523613, 15.314291, 15.314291]
+   theta=(0.0, 0.5, 0.0): lowest [10.265444, 10.265444, 15.100009, 15.100009]
+   theta=(0.0, 0.5, 0.5): lowest [9.053026, 9.053026, 15.629125, 15.629125]
+   theta=(0.5, 0.0, 0.0): lowest [10.616065, 10.616065, 15.882046, 15.882046]
+   theta=(0.5, 0.0, 0.5): lowest [11.041678, 11.041678, 14.646361, 14.646361]
+   theta=(0.5, 0.5, 0.0): lowest [10.541922, 10.541922, 14.751028, 14.751028]
+   theta=(0.5, 0.5, 0.5): lowest [10.964927, 10.964927, 15.278506, 15.278506]
+ minimum over the 8 TRIMs: E=9.053026477 at theta=(0.0, 0.5, 0.5)  (0s)
+ 8^3 grid (512 points evaluated): min E=8.350426141 at theta=[0.0, 0.625, 0.625], max of lowest band=11.067638  (0s)
+   BFGS from theta=[0.0, 0.625, 0.625]: E=8.334571899 at theta=[0.98582, 0.55643, 0.6433] |grad|=1.3e-09 evals=12 (0s)
+   BFGS from theta=[0.0, 0.375, 0.375]: E=8.334571899 at theta=[0.01418, 0.44357, 0.3567] |grad|=1.3e-09 evals=12 (0s)
+ BAND BOTTOM E_per(1) = 8.334571899 at theta=[0.01418, 0.44357, 0.3567] (generic);  lowest four at the minimum [8.3345719, 11.1658329, 14.4220124, 15.5573084] (gap12=2.8e+00);  ground-state tile IPR=0.13003 (1/n=0.12500), weight on interface tiles=1.0000 (their fraction 1.000)
+   degeneracy of the lowest band at a generic q: gap12=3.25e+00
+ Hessian of the lowest band at the minimum (ambient q, Richardson FD) = [+10.71794 -0.05331 +5.25005; -0.05331 +16.87958 +3.96050; +5.25005 +3.96050 +6.29928]  eigs=[2.04607, 13.22746, 18.62326]  Richardson change=3.8e-05
+[level 1 done in 0s]
+====================================================================================================
+LEVEL-2 PERIODIC APPROXIMANT: 64 chairs per cell, Bloch dimension 128, period lattice 2^2 Lambda_7, 1536 oriented panels (= 24 per chair), interface tiles (touching another supertile copy): 53/64 = 0.828  (build 0s)
+ exact torus flux: inter-tile plaquettes 1152 (=18.0 per chair), classes {'1': 608, '-1': 56, 'i': 152, 'j': 184, 'k': 152};  fractions: nontriv=0.47222 (FR30 limit 17/36=0.47222), traceless=0.42361 (55/144=0.38194), -1=0.04861 (13/144=0.09028)  (0s)
+   theta=(0.0, 0.0, 0.0): lowest [8.191512, 8.191512, 8.45176, 8.45176]
+   theta=(0.0, 0.0, 0.5): lowest [7.76876, 7.76876, 9.051552, 9.051552]
+   theta=(0.0, 0.5, 0.0): lowest [7.800951, 7.800951, 9.039121, 9.039121]
+   theta=(0.0, 0.5, 0.5): lowest [7.805436, 7.805436, 9.018194, 9.018194]
+   theta=(0.5, 0.0, 0.0): lowest [8.518654, 8.518654, 8.904008, 8.904008]
+   theta=(0.5, 0.0, 0.5): lowest [8.440685, 8.440685, 8.729422, 8.729422]
+   theta=(0.5, 0.5, 0.0): lowest [8.367149, 8.367149, 8.780242, 8.780242]
+   theta=(0.5, 0.5, 0.5): lowest [8.470919, 8.470919, 8.734708, 8.734708]
+ minimum over the 8 TRIMs: E=7.768759898 at theta=(0.0, 0.0, 0.5)  (0s)
+ 6^3 grid (216 points evaluated): min E=7.514205102 at theta=[0.0, 0.3333, 0.3333], max of lowest band=8.518654  (1s)
+   BFGS from theta=[0.0, 0.3333, 0.3333]: E=7.510496297 at theta=[0.02163, 0.32676, 0.35575] |grad|=4.4e-09 evals=11 (1s)
+   BFGS from theta=[0.0, 0.6667, 0.6667]: E=7.510496297 at theta=[0.97837, 0.67324, 0.64425] |grad|=4.4e-09 evals=11 (1s)
+ BAND BOTTOM E_per(2) = 7.510496297 at theta=[0.02163, 0.32676, 0.35575] (generic);  lowest four at the minimum [7.5104963, 8.3583961, 8.4339471, 9.2338971] (gap12=8.5e-01);  ground-state tile IPR=0.01784 (1/n=0.01562), weight on interface tiles=0.8833 (their fraction 0.828)
+   degeneracy of the lowest band at a generic q: gap12=8.08e-01
+ Hessian of the lowest band at the minimum (ambient q, Richardson FD) = [+10.79039 +0.61685 +0.81866; +0.61685 +9.30667 +0.98601; +0.81866 +0.98601 +11.40699]  eigs=[8.86965, 10.22562, 12.40879]  Richardson change=1.2e-06
+[level 2 done in 1s]
+====================================================================================================
+LEVEL-3 PERIODIC APPROXIMANT: 512 chairs per cell, Bloch dimension 1024, period lattice 2^3 Lambda_7, 12288 oriented panels (= 24 per chair), interface tiles (touching another supertile copy): 287/512 = 0.561  (build 0s)
+ exact torus flux: inter-tile plaquettes 9216 (=18.0 per chair), classes {'1': 4816, '-1': 748, 'i': 1072, 'j': 1508, 'k': 1072};  fractions: nontriv=0.47743 (FR30 limit 17/36=0.47222), traceless=0.39627 (55/144=0.38194), -1=0.08116 (13/144=0.09028)  (2s)
+   theta=(0.0, 0.0, 0.0): lowest [8.288654, 8.288654, 8.330532, 8.330532]
+   theta=(0.0, 0.0, 0.5): lowest [8.271947, 8.271947, 8.362967, 8.362967]
+   theta=(0.0, 0.5, 0.0): lowest [8.272426, 8.272426, 8.363498, 8.363498]
+   theta=(0.0, 0.5, 0.5): lowest [8.272558, 8.272558, 8.359051, 8.359051]
+   theta=(0.5, 0.0, 0.0): lowest [8.310548, 8.310548, 8.322785, 8.322785]
+   theta=(0.5, 0.0, 0.5): lowest [8.309333, 8.309333, 8.33779, 8.33779]
+   theta=(0.5, 0.5, 0.0): lowest [8.304116, 8.304116, 8.332693, 8.332693]
+   theta=(0.5, 0.5, 0.5): lowest [8.307033, 8.307033, 8.338472, 8.338472]
+ minimum over the 8 TRIMs: E=8.271947055 at theta=(0.0, 0.0, 0.5)  (7s)
+ 4^3 grid (64 points evaluated): min E=8.251565955 at theta=[0.0, 0.25, 0.25], max of lowest band=8.310548  (47s)
+   BFGS from theta=[0.0, 0.25, 0.25]: E=8.245887553 at theta=[0.05852, 0.36574, 0.37711] |grad|=3.3e-10 evals=11 (77s)
+   BFGS from theta=[0.0, 0.75, 0.75]: E=8.245887553 at theta=[0.94148, 0.63426, 0.62289] |grad|=3.3e-10 evals=11 (107s)
+ BAND BOTTOM E_per(3) = 8.245887553 at theta=[0.05852, 0.36574, 0.37711] (generic);  lowest four at the minimum [8.2458876, 8.3235982, 8.3257398, 8.3709495] (gap12=7.8e-02);  ground-state tile IPR=0.00520 (1/n=0.00195), weight on interface tiles=0.8299 (their fraction 0.561)
+   degeneracy of the lowest band at a generic q: gap12=7.20e-02
+ Hessian of the lowest band at the minimum (ambient q, Richardson FD) = [+3.63849 +0.01554 +0.01883; +0.01554 +3.13766 -0.01985; +0.01883 -0.01985 +3.50928]  eigs=[3.13606, 3.50788, 3.6415]  Richardson change=1.9e-06
+[level 3 done in 147s]
+====================================================================================================
+LEVEL-4 PERIODIC APPROXIMANT: 4096 chairs per cell, Bloch dimension 8192, period lattice 2^4 Lambda_7, 98304 oriented panels (= 24 per chair), interface tiles (touching another supertile copy): 1331/4096 = 0.325  (build 5s)
+ exact torus flux: inter-tile plaquettes 73728 (=18.0 per chair), classes {'1': 38864, '-1': 6572, 'i': 8240, 'j': 11812, 'k': 8240};  fractions: nontriv=0.47287 (FR30 limit 17/36=0.47222), traceless=0.38373 (55/144=0.38194), -1=0.08914 (13/144=0.09028)  (20s)
