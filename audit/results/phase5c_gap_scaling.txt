@@ -1,0 +1,12 @@
+PHASE V-C ITEM 4: PINNED GAP UNDER COARSE-GRAINING
+ pinned FR30 bottoms k=2..6: [np.float64(10.776951), np.float64(9.37847), np.float64(8.919634), np.float64(8.797011), np.float64(8.770134)]
+ decrements: [1.39848, 0.458836, 0.122623, 0.026878]  ratios: [0.3281, 0.2672, 0.2192]  (1/4 = Dirichlet 1/side^2 law)
+ CERTIFIED (exact rationals): 72147403/18000000 = 4.008189056 <= E_bulk <= 8.770133629330
+ extrapolations (numerical): geometric 8.76259; 4^-k 8.76117; 4^-k+8^-k 8.76189
+ trivial connection (no flux): bottoms [4.751193, 1.669512, 0.502729, 0.138602, 0.036461]; ratio per level [0.3514, 0.3011, 0.2757, 0.2631]; 4^k * bottom [76.019, 106.849, 128.699, 141.928, 149.344] -> 0 gap
+ free boundary FR30: [4.726465, 5.114941, 5.209699, 5.249931] (surface band; bulk spectrum identical by the boundary-independence theorem)
+ VERDICT: the infinite-volume gap is NONZERO, proved: E_bulk >= 4.008 (> 0). It is a bulk flux-frustration gap: the
+ same graph with trivial links has E_bulk = 0 (bottoms fall by ~1/4 per level, i.e. 1/side^2), and the gap does not
+ depend on the pinned boundary (pinned and free IDS converge to the same limit). Its size is O(1) in hopping units,
+ i.e. at the lattice scale: m ~ (E_bulk)^(1/2)/a in a wave equation, or E_bulk/a in Hamiltonian units. It is a
+ cutoff-scale mass, not a light mass; the model has no free parameter that could make it parametrically smaller than 1/a.
