@@ -379,7 +379,7 @@ def stage_records(rng, n2=60, n4=160, n8=100, n_a2=1500):
 # =====================================================================================================================
 # 5. Counterexample search
 # =====================================================================================================================
-def stage_search(rng, n_flux=60000, n_bloch_uniform=3000, hill_steps=200, ngrid_search=8):
+def stage_search(rng, n_flux=100000, n_bloch_uniform=3000, hill_steps=200, ngrid_search=8):
     log("=" * 110); log("5. COUNTEREXAMPLE SEARCH: random decorations on ALL index-4 and index-8 HNF sublattices (own code)")
     subs = [(4, S) for S in hnf_list(4)] + [(8, S) for S in hnf_list(8)]
     log(f" {len(subs)} sublattices; frames: coset 0 fixed to I (global right factor is a unitary conjugation of H), others uniform in SO(3,Z)")
@@ -421,11 +421,15 @@ def stage_search(rng, n_flux=60000, n_bloch_uniform=3000, hill_steps=200, ngrid_
                 if g == cur[c]: continue
                 fr2 = cur.copy(); fr2[c] = g
                 if flux_matched(*cr.flux_fractions(fr2)): cands.append(fr2)
+        # screen all constrained neighbours by a 6^3 grid (upper bound on their band bottom), then refine the best 5
         Ec = []
         for fr2 in cands:
-            Ec.append(cr.band_bottom(fr2, ngrid=4, nstart=2)['E']); nbloch += 1
-        if cands and max(Ec) > curE + 1e-9:
-            j = int(np.argmax(Ec)); cur = cands[j]; curE = cr.band_bottom(cur, ngrid=ngrid_search)['E']; stuck = 0
+            Ec.append(cr.band_bottom(fr2, ngrid=6, refine=False)['E']); nbloch += 1
+        ref = []
+        for j in np.argsort(Ec)[::-1][:5]:
+            ref.append((cr.band_bottom(cands[j], ngrid=ngrid_search)['E'], j)); nbloch += 1
+        if ref and max(ref)[0] > curE + 1e-9:
+            e, j = max(ref); cur = cands[j]; curE = e; stuck = 0
         else:
             stuck += 1; nkick += 1
             # random kick: change two cosets at random subject to the constraint (sideways/downhill move)
@@ -437,7 +441,7 @@ def stage_search(rng, n_flux=60000, n_bloch_uniform=3000, hill_steps=200, ngrid_
             log(f"   step {step:3d}: current E={curE:.6f} best E={glob_best[0]:.6f} (#constrained neighbours {len(cands)}, kicks so far {nkick})")
     Eb = cr.band_bottom(glob_best[1], ngrid=12)['E']
     fnb, ftb, fmb = cr.flux_fractions(glob_best[1])
-    log(f" hill-climb done in {time.time()-t:.1f}s ({nbloch} coarse Bloch evaluations): best flux-matched E_per={glob_best[0]:.6f} (12^3-grid recheck {Eb:.6f}) frames={glob_best[1].tolist()} "
+    log(f" hill-climb done in {time.time()-t:.1f}s ({nbloch} screening/refined Bloch evaluations): best flux-matched E_per={glob_best[0]:.6f} (12^3-grid recheck {Eb:.6f}) frames={glob_best[1].tolist()} "
         f"S={S.tolist()} flux nontriv={fnb:.4f} traceless={ftb:.4f} -1={fmb:.4f}")
     overall = max(Eu.max(), Em.max(), glob_best[0])
     log(f" SUMMARY item 3: max flux-matched E_per found = {max(Em.max(), glob_best[0]):.6f};  overall max over the {len(res_u)} uniform decorations = {Eu.max():.6f};  "
