@@ -1,0 +1,2 @@
+====================================================================================================
+4b. k=4 EXHAUSTIVE: sublattice S=diag[2, 2, 1] (L/L' = Z2xZ2), all 24^3 = 13824 frame triples (M_0 = I), coarse minimiser + exact flux

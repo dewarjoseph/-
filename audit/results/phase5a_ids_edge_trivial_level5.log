@@ -8,3 +8,7 @@ Lanczos theta_max=44.543001 residual 4.3e-07 -> certified upper bound b=44.54300
    cheb pass  3 deg  60 nmv   185  theta_1=0.13860196 theta_K=1.54959462 theta_m=1.858194  res[:K] max=8.9e-08 median=1.1e-13  54s rss=0.35GB
    lobpcg polish: block 104, 2s, warnings: none; res[:K] max=3.3e-09 median=4.3e-14
    LOBPCG polish moved the Ritz values by at most 1.8e-14; total solve 57s rss=0.40GB
+   independent LOBPCG(block 10, random start) lowest 8: [0.138602  0.138602  0.221824  0.221824  0.221824  0.221824  0.2740722 0.2740722]; max|diff| vs pipeline = 2.3e-15 (res max 5.3e-08, 12s)
+lowest 12: [0.138602  0.138602  0.221824  0.221824  0.221824  0.221824  0.2740722 0.2740722 0.318092  0.318092  0.318092  0.318092 ]
+lambda_k at k = 8, 32, 128, 200: 0.2740722 0.5459559 1.2108284 1.5495946; max residual 3.3e-09
+saved audit/results/phase5a_ids_edge_trivial_level5.npy/.json  (rss 0.40 GB)

@@ -23,3 +23,11 @@
 
 ====================================================================================================
 6. k=8, L'=2L: 600 RANDOM SO(3,Z) FRAME ASSIGNMENTS (M_0 = I);  k=8 OTHER INDEX-8 SUBLATTICES: 155 x 4 random assignments
+ 600 random decorations of L/2L: E_per min=6.267314 max=13.683070 mean=10.4162 sd=1.1805 fraction >=8.77: 0.9033  (115s)
+ k=8 2L random#327 frames=[0, 0, 21, 17, 6, 3, 23, 2] [top] k= 8  E_per=13.564256203  theta_min=[0.0, 0.0, 0.0] (Gamma)  gap12=1.2e-14 (generic q: 1.8e-15) gap13=2.196e+00  distinct_minima=1  flux: nontriv=0.7500 traceless=0.4861 -1=0.2639  classes={'1': 36, '-1': 38, 'i': 18, 'j': 38, 'k': 14} (inter-tile plaquettes=144)
+      Hessian (Richardson FD, h=0.02/0.01) = [+16.20105 -6.66664 -4.81284; -6.66664 +18.62540 -1.53168; -4.81284 -1.53168 +15.75871]  eigs=[7.80767, 18.09427, 24.68321]  Richardson change=2.1e-05 raw |FD(0.02)-FD(0.01)|=6.4e-03
+      Hessian (2nd-order PT, degeneracy g=2, non-scalar part 3.2e-14) = [+16.20105 -6.66663 -4.81284; -6.66663 +18.62540 -1.53167; -4.81284 -1.53167 +15.75871]  max|PT-FD|=1.4e-06  |grad|=0.0e+00
+ k=8 2L random#408 frames=[0, 7, 17, 7, 10, 11, 6, 8] [top] k= 8  E_per=13.683070366  theta_min=[1.0, 0.0, 1.0] (Gamma)  gap12=2.3e-14 (generic q: 3.6e-15) gap13=9.565e-01  distinct_minima=1  flux: nontriv=0.7778 traceless=0.5278 -1=0.2500  classes={'1': 32, '-1': 36, 'i': 28, 'j': 20, 'k': 28} (inter-tile plaquettes=144)
+      Hessian (Richardson FD, h=0.02/0.01) = [+12.45344 -1.65916 -4.37024; -1.65916 +18.61828 -3.35435; -4.37024 -3.35435 +17.96464]  eigs=[9.01617, 17.94069, 22.0795]  Richardson change=9.7e-05 raw |FD(0.02)-FD(0.01)|=7.7e-03
+      Hessian (2nd-order PT, degeneracy g=2, non-scalar part 3.9e-14) = [+12.45344 -1.65916 -4.37024; -1.65916 +18.61828 -3.35435; -4.37024 -3.35435 +17.96464]  max|PT-FD|=6.5e-06  |grad|=5.7e-14
+ number of index-8 sublattices (HNF count): 155

@@ -7,3 +7,4 @@ H_pin Chebyshev-filtered subspace iteration: K=128, block m=192, lam_max=48, tol
    pass   3 deg  67 nmv   167  theta_1=8.7970113 theta_K=8.9309008 theta_m=8.9638935  res[:K] max=2.97e-03 min=7.12e-06 res[K:] min=1.81e-03 orth=1.1e-15  232s rss=1.09GB
    pass   4 deg  77 nmv   245  theta_1=8.7970113 theta_K=8.9305098 theta_m=8.9586649  res[:K] max=3.19e-04 min=2.06e-09 res[K:] min=1.46e-04 orth=1.1e-15  310s rss=1.09GB
    pass   5 deg  80 nmv   326  theta_1=8.7970113 theta_K=8.9305059 theta_m=8.9573866  res[:K] max=1.37e-05 min=1.33e-13 res[K:] min=5.82e-06 orth=1.2e-15  459s rss=1.09GB
+   pass   6 deg  80 nmv   407  theta_1=8.7970113 theta_K=8.9305059 theta_m=8.9572077  res[:K] max=4.00e-07 min=1.32e-14 res[K:] min=2.16e-07 orth=8.9e-16  608s rss=1.09GB

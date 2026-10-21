@@ -19,3 +19,9 @@ H_pin: lambda_1..8 = [8.919634, 8.919634, 8.948787, 8.948787, 8.956989, 8.956989
    #  7 lambda=8.9686237 res=1.9e-13 IPR=0.001460 IPR*n=5.979 P=685.0 bw=0.0102 interface w(d)={'1': 0.6729, '2': 0.8691, '3': 0.9996, '4': 1.0}  S2(d)=[1.0, 0.2419, 0.0401, 0.0082, 0.0015]
    avg lowest 8: mean IPR*n=7.377, mean boundary weight=0.0091, interface {'1': 0.6671328826674509, '2': 0.8661015514251607, '3': 0.9996716109852286, '4': 1.0}, tile fractions {d: |I_d|/n} = {1: 0.3118, 2: 0.7068, 3: 0.9973, 4: 1.0}
 H_pin LOBPCG(k=6, seed 0) cross-check: [8.919634, 8.919634, 8.948787, 8.948787, 8.956989, 8.956989] residuals ['5.2e-09', '8.8e-09', '1.7e-08', '5.7e-09', '3.9e-08', '1.2e-07'] ground-state IPR*n=9.146 (7s) warnings: ['Exited postprocessing with accuracies \n[5.19717176e-09 8.81250989e-09 1.65448514e-08 5.66144399e-09\n 3.93569280e-08 1.24550861e-07]\nnot reaching the requested tolerance 1e-07.']
+H_free: lowest [5.209699, 5.209699, 5.209961, 5.209961, 5.209962, 5.209962, 5.24658, 5.24658] residuals max 1.9e-13  (673s)
+   #  0 lambda=5.2096992 res=1.6e-13 IPR=0.011325 IPR*n=46.386 P=88.3 boundary weight=0.9271 interface w(d)={'1': 0.0077, '2': 0.2473, '3': 0.812, '4': 1.0}
+   #  1 lambda=5.2096992 res=1.9e-13 IPR=0.011325 IPR*n=46.386 P=88.3 boundary weight=0.9271 interface w(d)={'1': 0.0077, '2': 0.2473, '3': 0.812, '4': 1.0}
+   #  2 lambda=5.2099609 res=1.4e-13 IPR=0.015436 IPR*n=63.227 P=64.8 boundary weight=0.9271 interface w(d)={'1': 0.0079, '2': 0.2472, '3': 0.8119, '4': 1.0}
+   #  3 lambda=5.2099609 res=1.6e-13 IPR=0.015436 IPR*n=63.227 P=64.8 boundary weight=0.9271 interface w(d)={'1': 0.0079, '2': 0.2472, '3': 0.8119, '4': 1.0}
+   avg lowest 8: mean IPR*n=62.278, mean boundary weight=0.9269 (boundary tile fraction 0.3250)
