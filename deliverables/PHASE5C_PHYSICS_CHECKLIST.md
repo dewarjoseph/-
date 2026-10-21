@@ -20,9 +20,10 @@ None of the four checks supports the claim that this framework displaces continu
 | k = 1 | 8 | 14.966, 14.966, 14.990 | 0.002 | −0.294 … −0.144, mean −0.205 |
 | k = 2 | 64 | 14.9561, 14.9561, 14.9565 | 3×10⁻⁵ | −0.301 … −0.141, mean −0.207 |
 | k = 3 | 512 | 14.9561 (×3) | < 10⁻⁵ | −0.301 … −0.141, mean −0.207 |
+| k = 4 | 4096 | 14.9561 (×3) | < 10⁻⁵ | −0.3012 … −0.1411, mean −0.2067 |
 | simple cubic reference (exact) | 1 | 1 (×3) | 0 | −1/12 … −1/36 |
 
-[[K4]]
+The k = 4 approximant (4096 tiles, shift-invert, 1001 s) reproduces k = 3 to all printed digits, so the coefficients have converged in the approximant sequence.
 
 **Reading.**
 
@@ -151,7 +152,7 @@ None of these is supported by any computation in this repository. The rigorous m
 
 ## 7. Files, tests, commands
 
-New scripts: `audit/phase5c_dirac.py`, `audit/phase5c_q8_gauge.py`, `audit/phase5c_gap_scaling.py`. Results: `audit/results/phase5c_{dispersion,dirac,dirac_lowmodes_L2,dirac_lowmodes_L3,q8_gauge,gap_scaling}.*`. Tests: `tests/test_phase5c.py`. [[TESTS]]
+New scripts: `audit/phase5c_dirac.py`, `audit/phase5c_q8_gauge.py`, `audit/phase5c_gap_scaling.py`. Results: `audit/results/phase5c_{dispersion,dirac,dirac_lowmodes_L2,dirac_lowmodes_L3,q8_gauge,gap_scaling}.*`. Tests: `tests/test_phase5c.py`. `python3 -m unittest tests/test_phase5c.py`: 7 tests, OK (Q₈ group axioms, heat-bath distribution against exact weights, agreement of the two engines and the strong-coupling limit, FR30 plaquette value, index theorem and flatness at level 1, k = 1 dispersion isotropy and evenness, certified bracket).
 
 ```
 python3 -u -I audit/phase5c_dirac.py dispersion 4        # Bloch fits on approximants k=1..4
