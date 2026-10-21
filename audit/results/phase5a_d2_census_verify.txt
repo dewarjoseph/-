@@ -87,3 +87,4 @@
    step  25: current E=9.347249 best E=9.633732 (#constrained neighbours 33, kicks so far 8)
    step  50: current E=8.753522 best E=9.633732 (#constrained neighbours 31, kicks so far 16)
    step  75: current E=9.052328 best E=9.633732 (#constrained neighbours 37, kicks so far 24)
+   step 100: current E=8.734437 best E=9.633732 (#constrained neighbours 65, kicks so far 33)
