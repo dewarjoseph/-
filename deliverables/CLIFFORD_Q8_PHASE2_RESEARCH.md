@@ -426,8 +426,8 @@ Section 3.3 and Section 6 of this document describe $E_0\approx5.27$ as the spec
 hopping operator. Phase V (`deliverables/PHASE5_UNIVERSAL_GEOMETRIC_DYNAMICS.md`, Section 3) shows this is the bottom
 of a **surface band** created by the free (degree-type) boundary: the free-boundary ground state carries 93% of its
 weight on boundary tiles at every level from 2 to 5. With bulk coordination imposed on every tile (the compression of
-the infinite bulk operator) the lowest eigenvalue decreases monotonically through 10.777, 9.378, 8.920, 8.797 at levels
-2 to 5, so the bulk spectral infimum satisfies $E_{\rm bulk}\le8.797$ and is numerically near 8.75. The limiting
+the infinite bulk operator) the lowest eigenvalue decreases monotonically through 10.777, 9.378, 8.920, 8.797, 8.770 at levels
+2 to 6, so the bulk spectral infimum satisfies $E_{\rm bulk}\le8.770$ and is numerically near 8.76. The limiting
 spectral measure is the same for both boundary conditions (Phase V Theorem D). Everything else in this document is
 unaffected; Proposition 3.1 and Corollary 3.2 were upgraded to theorems in Section 9 and are now also kernel-checked
 in `certificates/TypeSubstitutionCertificate.lean`.

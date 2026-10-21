@@ -30,7 +30,8 @@ rational identities (Section 5 states exactly which steps are kernel-checked and
 The phase also **corrects** a claim of Phase 2: the spectral bottom $E_0\approx5.27$ of the Clifford hopping
 operator is a surface band, not the bulk spectral infimum. The ground state of the free-boundary operator carries
 93% of its weight on boundary tiles at every level from 2 to 5; with bulk coordination imposed on all tiles the bulk
-infimum is bracketed above by 8.92 (level 4) and is still decreasing (Section 3).
+infimum is bracketed above by 8.770 (level 6, 262,144 tiles) with geometrically shrinking decrements, giving
+$E_{\rm bulk}\approx8.76$ (Section 3).
 
 And it **bounds the universality** of the hierarchy: the exact-law structure persists for a periodic cubic geometry
 with an aperiodic decoration, so it is a property of self-reproducing *decorations*, not of aperiodic *geometry*;
@@ -226,15 +227,17 @@ for all $m$, decreasing in $m$ along nested approximants; no such inequality hol
 | 3 | 512 | 5.11494 | 0.928 | 9.37847 | 0.133 |
 | 4 | 4096 | 5.20970 | 0.927 | 8.91963 | 0.007 |
 | 5 | 32768 | 5.24993 | 0.926 | 8.79701 | 0.001 |
+| 6 | 262144 | — | — | 8.77013 | 0.000 |
 
 "Boundary weight" is the probability mass of the ground state on tiles with fewer than 24 panels; the fraction of
-such tiles falls as 0.83, 0.56, 0.33, 0.18 while the weight stays at 0.93: the free ground state is a genuine
+such tiles falls as 0.83, 0.56, 0.33, 0.18, 0.09 while the weight stays at 0.93: the free ground state is a genuine
 surface state, and the free $\lambda_{\min}\to\approx5.27$ is the bottom of a **surface band**, not the bulk
 infimum. The pinned $\lambda_{\min}$ decreases monotonically (compression property) toward the bulk infimum
-$E_{\rm bulk}$; the current bracket is $E_{\rm bulk}\le8.79701$, with the decrements $1.40,\ 0.46,\ 0.12$ (ratios $0.33,\ 0.27$)
-suggesting $E_{\rm bulk}\approx8.75$ (level 6 by LOBPCG: see `audit/results/phase5_bulk_bottom_lobpcg.txt`). For the trivial connection the pinned values $4.75,1.67,0.50,\dots\to0$ with
+$E_{\rm bulk}$; the current bracket is $E_{\rm bulk}\le8.77013$ (level 6, matrix-free LOBPCG,
+`audit/results/phase5_bulk_bottom_lobpcg.txt`), with decrements $1.399,\ 0.458,\ 0.123,\ 0.027$ whose ratios
+$0.33,\ 0.27,\ 0.22$ decrease, so the remaining tail is below $0.01$ and $E_{\rm bulk}\approx8.76$. For the trivial connection the pinned values $4.75,1.67,0.50,\dots\to0$ with
 ratios tending to $1/4$, the Dirichlet $L^{-2}$ law of an extended band edge; the Clifford ratios are
-$0.33,\ 0.27$. Controls: random i.i.d. $Q_8$ links give a strongly localized free ground state (tile IPR
+$0.33,\ 0.27,\ 0.22$; the level-6 pinned ground state has tile IPR $42/n$ and zero boundary weight (extended). Controls: random i.i.d. $Q_8$ links give a strongly localized free ground state (tile IPR
 0.39 at level 4, boundary weight 0.99) and a pinned bottom near 14.7; a random admissible decoration gives free
 $\lambda_{\min}=6.02$ at level 4 (Phase 2).
 
@@ -243,7 +246,7 @@ operator" was wrong: it is the bottom of the free-boundary surface band. The bul
 
 ### 3.3 Distinctions the data support
 
-- **Spectral infimum** $E_{\rm bulk}=\inf\operatorname{spec}H_\infty$: exists, bounded above by the pinned values, numerically $\approx8.7$ [N]. It is positive because the $Q_8$ flux frustrates the uniform state ($H^{\rm free}\ge0$ with equality only for a flat connection).
+- **Spectral infimum** $E_{\rm bulk}=\inf\operatorname{spec}H_\infty$: exists, bounded above by the pinned values, $\le8.770$ and numerically $\approx8.76$ [N]. It is positive because the $Q_8$ flux frustrates the uniform state ($H^{\rm free}\ge0$ with equality only for a flat connection).
 - **Spectral gap**: $[0,E_{\rm bulk})$ is a gap of the bulk operator relative to the trivial connection's spectrum starting at 0; whether the bulk spectrum above $E_{\rm bulk}$ has further gaps is not established (no persistent gaps of relative width $>2\%$ at levels 3 and 4, Phase 2).
 - **Mobility gap / localization**: the pinned ground state is extended (tile IPR $\approx9/n$), the free ground state is surface-localized, the random-$Q_8$ ground state is point-localized. No mobility-gap statement for the bulk is established.
 - **Mass parameter / mass gap**: not applicable. There is no relativistic dispersion, Lorentz structure or field; $E_{\rm bulk}$ is a band bottom of a graph operator. Any identification with a mass would require an effective-mass continuum description (Section 4.3), which is not established.
@@ -400,7 +403,7 @@ The real $4n\times4n$ operator has the spectrum of the complex $2n\times2n$ one 
 - **Finite-size scaling and uncertainty.** All quoted eigenvalues are exact to the displayed digits for the ideal
   network; fabrication disorder enters as random link perturbations, whose effect must be measured, not assumed.
   The scaling of the free bottom ($4.726,5.115,5.210,5.250$) converges geometrically (ratio $\approx0.42$) and the
-  pinned bottom decreases toward $E_{\rm bulk}$; a level-4 sample determines both to about 1%.
+  pinned bottom decreases toward $E_{\rm bulk}\approx8.76$; a level-4 sample determines both to about 2%.
 - **Parameters requiring external measurement.** Coupling strength and its uniformity, loss (quality factor), and
   the achievable sign fidelity of inverting couplers. No values are assumed here.
 
@@ -494,7 +497,7 @@ by matrix-free LOBPCG, which reproduces the level-4 dense values to all printed 
 | Limiting frequencies 19/36, 13/144, 1/9, 23/144, 1/9 | formally verified [K] as identities of the certified eigenvector; limit interpretation [P] |
 | Theorem D (same limiting spectral measure, free vs pinned) | proved [P] |
 | Theorem E (no continuum gauge field) | proved [P] |
-| Free spectral bottom $\to5.27$ is a surface band; bulk infimum $\le8.92$ (level 4) | numerical [N], levels 2 to 5 |
+| Free spectral bottom $\to5.27$ is a surface band; bulk infimum $\le8.770$ (level 6), $\approx8.76$ | numerical [N], levels 2 to 6 |
 | Bulk ground state extended; random-$Q_8$ ground state localized | numerical [N], IPR |
 | Homogenized effective-mass continuum near $E_{\rm bulk}$ | conjectural; level-4 IDS exponents inconclusive |
 | Experimental signatures of Section 6 | physically untested [H]; numbers exact for the ideal model |
