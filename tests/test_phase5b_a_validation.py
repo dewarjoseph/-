@@ -69,15 +69,19 @@ class TestBoundaryConditions(Base):
             self.assertTrue(np.array_equal(D.toarray().diagonal(), expected))
 
     def test_pinned_patch_is_exact_compression_of_next_level(self):
-        """T_L is the (0,0,0)-child subtree of T_{L+1}: same poses as the first 8^L tiles and H_pin(T_L) equals the
-        leading 2*8^L block of H_pin(T_{L+1}) entry by entry (compression theorem, Lemma 3.1 / Theorem 3.2)."""
+        """T_L is the (0,0,0)-child subtree of T_{L+1}.  In the depth-first order of the pose recursion the child
+        order is [centre, (0,0,0), (0,0,1), ...], so the (0,0,0)-subtree occupies tile indices 8^L .. 2*8^L - 1 (NOT
+        the first 8^L, which are the centre child's subtree).  Its poses equal those of T_L and H_pin(T_L) equals the
+        corresponding diagonal block of H_pin(T_{L+1}) entry by entry (compression theorem, Lemma 3.1 / Theorem 3.2)."""
         for L in (1, 2):
-            small = self.L[L]; big = self.L[L + 1]; n = len(small['tiles'])
+            small = self.L[L]; big = self.L[L + 1]; n = len(small['tiles']); off = n
             for a in range(n):
-                self.assertTrue((small['tiles'][a][0] == big['tiles'][a][0]).all())
-                self.assertTrue((small['tiles'][a][1] == big['tiles'][a][1]).all())
-                self.assertEqual(small['tiles'][a][2], big['tiles'][a][2])
-            block = big['Hp'][:2 * n, :2 * n]
+                self.assertTrue((small['tiles'][a][0] == big['tiles'][off + a][0]).all())
+                self.assertTrue((small['tiles'][a][1] == big['tiles'][off + a][1]).all())
+                self.assertEqual(small['tiles'][a][2], big['tiles'][off + a][2])
+            # and the centre child's subtree is NOT pose-identical (it is translated)
+            self.assertFalse(all((small['tiles'][a][1] == big['tiles'][a][1]).all() for a in range(n)))
+            block = big['Hp'][2 * off:2 * off + 2 * n, 2 * off:2 * off + 2 * n]
             diff = (block - small['Hp']).tocsr(); diff.eliminate_zeros()
             self.assertEqual(diff.nnz, 0)
 
@@ -89,10 +93,13 @@ class TestBoundaryConditions(Base):
             r = slice(2 * a, 2 * a + 2)
             self.assertTrue(np.array_equal(Hp[r], Hf[r]))
             self.assertTrue(np.array_equal(Hp[r, r], 24 * I2))
-            # the off-diagonal row blocks are minus a sum of unitaries, one per panel: their squared Frobenius norm is 2 per panel
-            offdiag = Hp[r].copy(); offdiag[:, r] = 0
-            self.assertAlmostEqual(float((np.abs(offdiag) ** 2).sum()), 2 * 24, places=9)
-            self.assertEqual(d['deg'][a], 24)
+            # the row equals 24 I - sum over the 24 panels at a of C_f (panels between the same pair of tiles add up)
+            row = np.zeros((2, Hp.shape[1]), complex); row[:, r] = 24 * I2; npan = 0
+            for (x, y, ax, _) in d['panels']:
+                if x == a: row[:, 2*y:2*y+2] -= d['link'](x, y, ax); npan += 1
+                elif y == a: row[:, 2*x:2*x+2] -= d['link'](x, y, ax).conj().T; npan += 1
+            self.assertEqual(npan, 24)
+            self.assertTrue(np.array_equal(Hp[r], row))
 
 
 class TestGraphConstruction(Base):
@@ -230,14 +237,20 @@ class TestNumericalPrecision(Base):
                 self.assertEqual(V.gaussian_integer_defect(4 * H), 0.0)
                 nz, defect = V.hermiticity_defect(H)
                 self.assertEqual((nz, defect), (0, 0.0))
-                vals = set(np.round(H.data.real).astype(int).tolist()) | set(np.round(H.data.imag).astype(int).tolist())
-                self.assertTrue(vals <= {-1, 0, 1} | set(range(0, 25)))
+                # entries: diagonal 24 (pinned) or the degree (free); off-diagonal blocks are minus sums of Q8 matrices over
+                # the panels shared by the pair, so entries of modulus > 1 occur exactly where tiles share several panels
+                re = np.rint(H.data.real).astype(int); im = np.rint(H.data.imag).astype(int)
+                self.assertTrue((np.abs(re) <= 24).all() and (np.abs(im) <= 24).all())
+                mult = collections.Counter((a, b) for a, b, ax, _ in self.L[L]['panels'])
+                self.assertTrue((np.maximum(np.abs(re), np.abs(im))[(H.tocoo().row // 2) != (H.tocoo().col // 2)] <= max(mult.values())).all())
+                if max(mult.values()) > 1: self.assertTrue((np.maximum(np.abs(re), np.abs(im)) > 1).sum() > 2 * len(self.L[L]['tiles']))
 
     def test_links_are_q8_and_match_audited_primitive(self):
         d = self.L[2]
         for a, b, ax, _ in d['panels']:
             C = d['link'](a, b, ax)
             self.assertTrue(any(np.allclose(C, q) for q in Q8))
+            self.assertEqual(V.signed_label(C), V.q8label(C))
             self.assertTrue(np.allclose(C, clifford_link(d['tiles'][a][0], d['tiles'][b][0], V.E3[ax])))
             self.assertTrue(np.allclose(V.pauli_link(d['tiles'][b][0], d['tiles'][a][0], V.E3[ax]), C.conj().T))   # C_ba = C_ab^+
 

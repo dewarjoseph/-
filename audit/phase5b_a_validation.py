@@ -71,9 +71,15 @@ def classify(W):
     assert abs(X[0, 0]) > 0.5 and abs(X[0, 1]) < 1e-9, X
     return 'k'
 
+_Q8_KEYS = {}
+for _name, _mat in [('+1', I2), ('-1', -I2)] + [(f'{s}{n}', s_ * 1j * SIG[k]) for k, n in enumerate('ijk') for s, s_ in (('+', 1), ('-', -1))]:
+    _Q8_KEYS[tuple(np.rint(_mat.view(float).ravel()).astype(int).tolist())] = _name
 def signed_label(W):
-    """Signed Q8 label of a matrix in the MATRIX convention: '+i' means +i*sigma_1 (= quaternion -i)."""
-    return q8label(W)
+    """Signed Q8 label of a matrix in the MATRIX convention of q8label: '+i' means +i*sigma_1 (= quaternion -i).
+    Dictionary lookup on the rounded entries (own implementation; agrees with q8label, checked in the tests)."""
+    key = tuple(np.rint(np.ascontiguousarray(W).view(float).ravel()).astype(int).tolist())
+    assert np.allclose(np.array(key, float).view(complex), W.ravel(), atol=1e-9), 'not in Q8'
+    return _Q8_KEYS[key]
 
 # ============================================================================================ 1. own geometry
 def own_poses(frames, level):
@@ -431,8 +437,8 @@ def plaquette_form(cycle_tiles, cycle_links):
 
 def all_edges_with_forms(tiles, owner, link):
     """Every lattice edge of the patch whose 4 cubes are present and belong to >= 2 tiles: (signature, tiles).
-    signature = (pattern of tile identities in cyclic order, signed link labels), the key for lambda_min caching."""
-    out = []
+    signature = (pattern of tile identities in cyclic order, signed link labels), the key for lambda_min caching.
+    Generator (the level-5 patch has 565 440 such edges)."""
     for a, (_, _, cs) in enumerate(tiles):
         for c in cs:
             for (i, j) in ((0, 1), (1, 2), (0, 2)):
@@ -451,8 +457,7 @@ def all_edges_with_forms(tiles, owner, link):
                     C = link(t1, t2, axes[s]) if s < 2 else link(t2, t1, axes[s]).conj().T
                     # steps 0,1 go +e_i, +e_j (lower -> upper cube, our stored orientation); steps 2,3 go -e_i, -e_j
                     links.append(C); sig_links.append(signed_label(C))
-                out.append(((pattern, tuple(sig_links)), cyc, links))
-    return out
+                yield ((pattern, tuple(sig_links)), cyc, links)
 
 # ============================================================================================ 7. CLI parts
 def say_factory(tag):
@@ -667,14 +672,14 @@ def part_lowerbound(level=4, full_star_level=5):
     say, dump = say_factory('lowerbound'); out = {}
     say("PHASE V-B / A (f): exact rational LDL^* certificates (own code, real symmetric embedding) and the star-sum lower bound")
     t0 = time.time(); tiles, owner, panels, link = build(level); n = len(tiles)
-    edges = all_edges_with_forms(tiles, owner, link)
-    sigs = {}
-    for sig, cyc, links in edges:
+    sigs = {}; nedges = 0
+    for sig, cyc, links in all_edges_with_forms(tiles, owner, link):
+        nedges += 1
         if sig not in sigs:
             H, labels = plaquette_form(cyc, links); sigs[sig] = H
     lam = {s: float(np.linalg.eigvalsh(H)[0]) for s, H in sigs.items()}
     vals = sorted(set(round(v, 9) for v in lam.values()))
-    say(f" T_{level}: {len(edges)} inter-tile lattice edges, {len(sigs)} distinct signatures (pattern + signed links); distinct lambda_min: {vals}")
+    say(f" T_{level}: {nedges} inter-tile lattice edges, {len(sigs)} distinct signatures (pattern + signed links); distinct lambda_min: {vals}")
     say(f"   analytic 2-2cos(theta/l): {sorted(set(round(2-2*np.cos(t/l), 9) for t in (np.pi/2, np.pi) for l in (2,3,4)))}")
     nonflat = [s for s in sigs if lam[s] > 1e-9]; flat = [s for s in sigs if lam[s] <= 1e-9]
     mu = {}; fails = 0; rejects = 0; t1 = time.time()
@@ -691,7 +696,7 @@ def part_lowerbound(level=4, full_star_level=5):
     out['n_signatures'] = len(sigs); out['n_nonflat'] = len(nonflat); out['failures'] = fails; out['rejects'] = rejects
     # star sums at this level and at full_star_level: S(a) = sum over inter-tile edges touching tile a of mu_e; complete-star tiles only
     def star_sums(L):
-        tl, ow, pn, lk = build(L); ed = all_edges_with_forms(tl, ow, lk)
+        tl, ow, pn, lk = build(L)
         # complete star: all 26-neighbours of all 7 cubes are present
         NB = [d for d in itertools.product((-1, 0, 1), repeat=3) if d != (0, 0, 0)]
         complete = np.ones(len(tl), bool)
@@ -699,7 +704,7 @@ def part_lowerbound(level=4, full_star_level=5):
             for c in cs:
                 if not all((c[0]+d[0], c[1]+d[1], c[2]+d[2]) in ow for d in NB): complete[a] = False; break
         S = [Fraction(0)] * len(tl); cnt = np.zeros(len(tl), int); newsig = 0
-        for sig, cyc, links in ed:
+        for sig, cyc, links in all_edges_with_forms(tl, ow, lk):
             if sig not in mu:
                 H, _ = plaquette_form(cyc, links); l = float(np.linalg.eigvalsh(H)[0]); newsig += 1
                 if l > 1e-9:
