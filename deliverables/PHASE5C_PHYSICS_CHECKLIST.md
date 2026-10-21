@@ -139,7 +139,20 @@ Script: `audit/phase5c_gap_scaling.py`; data: `audit/results/phase5c_gap_scaling
 
 ## 5. Phase V-B continuation
 
-The decoration census killed in Phase V-B was resumed. [[CENSUS]]
+The decoration census killed in Phase V-B was resumed. It is now **complete**: all 6561 admissible decorations at level 3, and 296 of the 401 preregistered level-4 decorations. This supersedes the partial numbers in the Phase V-B report, which were based on 2371 and 128 records. Data: `audit/results/phase5b_sweep.json`, analysis `audit/results/phase5b_sweep_analysis.txt`. **[E]**
+
+| outcome | n | FR30 value | FR30 rank | flux-only CV-R² | FR30 flux residual | FR30 residual rank | after forward selection of structural predictors |
+|---|---|---|---|---|---|---|---|
+| level-3 pinned bottom | 6561 (complete) | 9.3785 | 57 (top 0.9 %) | 0.796 | +0.638 (+2.64 sd) | 48 | +0.504 (+2.52 sd), rank 49 |
+| level-4 pinned bottom | 296 of 401 | 8.9196 | 4 | 0.774 | +0.799 (+3.04 sd) | **1** | +0.622 (+3.35 sd), rank 1 |
+
+There are only 1098 distinct level-3 values among the 6561 decorations, because global axis relabelings give about six copies of each. The 56 decorations above FR30 at level 3 are therefore roughly ten distinct rules. Exact flux matches occur only among such copies: 6479 distinct class-count vectors, and FR30's vector is unique.
+
+**Updated reading.**
+
+- **The census conclusions of Phase V-B stand.** FR30 is not the maximal decoration at level 3. Flux fractions explain about 80 % of the variance. No bounded-radius structural statistic explains FR30's residual: of the preregistered primaries, cv_m1 and pair_m1 are now significant, but with ΔCV-R² ≤ 0.002.
+- **The level-4 result sharpens.** Among the 296 sampled level-4 decorations FR30 has the largest flux-corrected residual, and it stays first after adding nine structural predictors. The residual ranking at level 4 does not reproduce the level-3 ranking (48th at level 3, 1st at level 4).
+- **Open, and cheap to settle.** Either FR30's advantage grows with level, or the level-4 sample simply missed the ≈ 10 rules that beat it at level 3. Computing level-4 bottoms for those rules settles it; the level-4 bottom of the earlier rival 4757 is 9.17, above FR30.
 
 ## 6. What would have to be true for the larger program, stated as obligations
 
