@@ -5,7 +5,7 @@ with other jobs, `OMP_NUM_THREADS=1`, one heavy process at a time, peak RSS of a
 operator above level 5 (dim 65 536). All numbers below were computed in this session unless the method column says
 "read from artifact". Code: `audit/phase5b_a_validation.py`; tests: `tests/test_phase5b_a_validation.py`; raw outputs:
 `audit/results/phase5b_a_{geometry,bottoms,periodic,controls,lowerbound}.{txt,json}`,
-`audit/results/phase5b_a_lean_datafree_{extract.lean,compile.txt}`.
+`audit/results/phase5b_a_lean_datafree_{extract.lean,compile.txt}`, `audit/results/phase5b_a_reruns.txt` (logs of the re-run Phase V-A scripts).
 
 **Method labels.** *independent* = own code written for this workstream with a different design from the Phase V-A
 scripts (per-tile/per-cube Pauli-matrix plaquette evaluation; own owner map and panel list; own COO assembly of
@@ -49,8 +49,8 @@ identical, own panel multiset identical to `panel_edges`, own `pauli_link` ident
 | (e) D2 from consecutive levels | 2.49, 1.88, 1.90 (3→4, 4→5, 5→6) | 2.49, 1.88, 1.90 (5→6 from the stored level-6 weights) | independent / read | none |
 | (f) exact lower bound | 3137451/2000000 = 1.5687255 | min over complete-star tiles of T_4 (2744 tiles) and of T_5 (27000 tiles) of Σ_e μ_e = 3137451/500000 exactly, /4 = 3137451/2000000; 544 (T_4) + 16 (T_5) non-flat signatures certified by own exact LDL^T, 0 failures; every certificate rejects μ_e + 2.2e-5; 128 flat signatures exactly singular | independent | none |
 | (f) same, Phase V-A script | 3137451/2000000 | `phase5a_star_closure_lower_bound.py` re-run from a scratch copy: output identical to the stored file (timing lines excluded): 72 star types, 207 signatures, 163 certified non-flat | re-run | none |
-| (f) improved bound | 12805833/4000000 = 3.2014583 | PENDING_C2 | re-run | PENDING_C2D |
-| (f) certified upper bounds | 10.776950512, 9.378470210, 8.919634360, 8.797011333 | PENDING_CUB | re-run | PENDING_CUBD |
+| (f) improved bound | 12805833/4000000 = 3.2014583 | `phase5a_c2_lower_bound_check.py 36` re-run from a scratch copy: 246 vertex-block signatures (229 non-flat, max dim 16), 0 exact LDL^* failures, CERTIFIED 12805833/4000000 = 3.201458250 (float 3.201472); edge bound 3137451/2000000 and 161/44 signatures reproduced in the same run; 3-block value 4.008198 reproduced, still uncertified | re-run only (no independent exact check of the block certificates in this session) | none |
+| (f) certified upper bounds | 10.776950512, 9.378470210, 8.919634360, 8.797011333 | re-run of `phase5a_certified_upper_bound.py` (scratch copy): levels 2–4 give the identical rationals 3033441878476984/281474975238239, 1319902366216346/140737490935935, 1255326883536563/140737482371670; level 5 (LOBPCG tol 1e-6, residual 5.4e-7, 178 s) gives a DIFFERENT, tighter certificate 1238069312580488/140737492338431 = 8.797011315 | re-run | D5: the level-5 rational is not a reproducible number (it is the Rayleigh quotient of whatever approximate vector the run produced); both are valid upper bounds, the new one is 1.8e-8 tighter |
 | (f) Lean theorem dependency list | 23 declarations, axioms ⊆ {propext, Quot.sound, Classical.choice}, 14 `decide +kernel` | read from `phase5a_lean_full_kernel_compile.txt` (EXIT=0, 454 s, 11.3 GB, sha256 f8f89bb…0de68 = current file); data-free extract (lines 40–79, 181–195, 205–222, 576–705; 212 lines, no data, no sorry/native_decide/axiom) compiled with the kernel in 4.4 s: `closed_form_general`, `step_case_general` depend on [propext, Quot.sound]; `q8_closed` on [propext]; `q8_conj_is_inverse`, `q8_class_conj_invariant`, `q8_class_inverse_invariant` on no axioms — identical to the full-compile record | read + extract compiled | none |
 
 ## 2. Details and definitions
@@ -60,7 +60,7 @@ with lower-corner cube `c` is surrounded by `c, c+e_i, c+e_i+e_j, c+e_j`; it is 
 cubes are in the patch and belong to ≥ 2 tiles. The holonomy is the ordered product of explicit 2×2 Pauli-matrix links
 `(σ·M_a^T n)(σ·M_b^T n)` (identity inside a tile), classified by trace (±2) and, for traceless holonomies, by the Pauli
 axis. No Q8 code table, no grid slicing, no cube→edge attribution shared with the Phase V-A enumerators. Run times:
-3.4 s at level 4; level 5 own run: PENDING_OWN5.
+3.4 s at level 4; level 5 own run: 12.0 s, 0.21 GB, classes 565440; 296121, 48146, 65532, 90109, 65532 — identical to the dossier, so the level-5 counts are also reproduced by the independent implementation.
 
 **(b) Operator.** `H_pin = 24 I − A`, `A_ab = Σ_panels (a,b) C_ab`, `C_ba = C_ab^†`, panels between the same pair summed
 with multiplicity. Own assembly checks: Hermiticity defect exactly 0 (no nonzero entry in `H − H^†`), all entries
@@ -121,7 +121,14 @@ the set of `λ_min` values and the star sums agree.
   8.797011333; the Ritz value obtained here is 8.797011315 (residual 1.9e-8) and C2's value 8.797011315 (residual
   5.9e-7). The certified rational is an upper bound 1.8e-8 above the Ritz value, consistent; the rounded 8.797011 is
   fine, but "8.7970113" (certified-upper-bound file) rounds the Ritz value up. No action needed.
-* No numerical discrepancy with any dossier value was found in items (a)–(f).
+* **D5 (certificate reproducibility).** The level-5 certified rational 8.797011333 (= 2476138622922986/281474983842677)
+  is the exact Rayleigh quotient of the particular rounded LOBPCG vector of the Phase V-A run (tol 1e-4); re-running
+  the same script with tol 1e-6 gives a different rounded vector and the tighter certificate
+  1238069312580488/140737492338431 = 8.797011315. The dossier's wording "exact value 8.797011333" should read
+  "certified upper bound 8.797011333 (one admissible certificate)"; the rigorous statement E_bulk ≤ 8.79702 is
+  unaffected and can be sharpened to E_bulk ≤ 8.797011315 with the new certificate (recorded in
+  `audit/results/phase5b_a_reruns.txt`). Levels 2–4 reproduce the identical rationals (dense ground vectors).
+* No numerical discrepancy with any dossier value was found in items (a)–(f) beyond D5.
 
 ## 4. Tests
 
@@ -143,7 +150,8 @@ defect exactly 0, all links in Q8 and equal to `clifford_link`, `C_ba = C_ab^†
   (IPR·n 42.789, 1/S2(d) = 4.982, 26.009, 88.838, 294.454, 1140.125, 6126.428); its interface weights were not
   recomputed (they need the level-6 panel list, not built here).
 * The level-5 bottom obtained here is a LOBPCG Ritz value (residual 1.9e-8), not an exact certificate; the exact
-  certificates were re-run with the Phase V-A script (see table). The lower bound 3137451/2000000 is reproduced
+  certificates were re-run with the Phase V-A script (see table and D5). The improved bound 12805833/4000000 was only
+  re-run, not independently re-certified (the edge certificates were: 560 signatures with own exact arithmetic). The lower bound 3137451/2000000 is reproduced
   exactly, but the star-type closure argument (72 types, Lemma 3.5) was not re-derived here; what was recomputed is the
   minimum of the certified star sums over all complete stars of T_4 and T_5.
 * The full Lean certificate was not recompiled (11.3 GB); the dependency list is read from the Phase V-A record whose
