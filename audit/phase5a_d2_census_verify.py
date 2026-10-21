@@ -317,7 +317,7 @@ def dedupe(recs):
         seen.add(key); u.append(r)
     return u
 
-def stage_records(rng, n2=60, n4=160, n8=100):
+def stage_records(rng, n2=60, n4=160, n8=100, n_a2=1500):
     log("=" * 110); log("4. RECOMPUTATION OF A RANDOM SAMPLE OF B2a RECORDS (own Bloch solver: 8^3 grid + Nelder-Mead/BFGS refinement from 3 best grid points; own torus flux)")
     allr = load_records(); uniq = dedupe(allr)
     ks = collections.Counter(r['k'] for r in uniq)
@@ -364,6 +364,16 @@ def stage_records(rng, n2=60, n4=160, n8=100):
     mt = [r for r in uniq if flux_matched(r['f_nontriv'], r['f_traceless'], r['f_minus1'])]
     Em = np.array([r['E'] for r in mt])
     log(f" claim (c) from records (own filter, strict <): n={len(mt)}, E_per min={Em.min():.4f} median={np.median(Em):.4f} max={Em.max():.4f}; top-4 labels: {[r['label'][:55] for r in sorted(mt, key=lambda r: -r['E'])[:4]]}")
+    # Extra: the A2 exhaustive records were computed by B2a with a COARSE 4^3 grid; check a larger sample of them for
+    # overestimates (a record value is an eigenvalue at some q, hence an upper bound on the true band bottom)
+    a2 = [r for r in uniq if r['label'].endswith('[exh]')]
+    idx = rng.choice(len(a2), size=min(n_a2, len(a2)), replace=False); t = time.time(); d = []; cross = 0; hi_rec = 0
+    for i in idx:
+        r = a2[i]; cr = crystal(np.array(r['S'])); e = cr.band_bottom(np.array(r['frames']))['E']; d.append(e - r['E'])
+        hi_rec += r['E'] >= 8.770; cross += (r['E'] >= 8.770) and (e < 8.770)
+    d = np.array(d)
+    log(f" extra A2 check: {len(d)} random '[exh]' records (coarse 4^3 minimiser in B2a) recomputed in {time.time()-t:.1f}s: #(record - mine > 1e-6) = {int(np.sum(d < -1e-6))} ({np.mean(d < -1e-6):.4f}), "
+        f"max overestimate = {-d.min():.4f}, #(mine - record > 1e-6) = {int(np.sum(d > 1e-6))}; records >= 8.770: {hi_rec}, of which true value < 8.770: {cross}")
     return rows
 
 # =====================================================================================================================

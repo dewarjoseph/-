@@ -138,7 +138,26 @@ Changes this phase (A5): a data-independent theorem `closed_form_general` (hypot
 
 Compile records: a scratch copy with `decide +kernel` replaced by `native_decide` compiles with zero errors and warnings in 24.9 s (`audit/results/phase5a_lean_general_theorem_compile.txt`); a data-free extract compiles with the kernel in 2.6 s, `closed_form_general` depending on `[propext, Quot.sound]`.
 
-**Full kernel compile of the real regenerated certificate:** [[LEAN]]
+**Full kernel compile of the real regenerated certificate [K].** Run in this session as a single process after the shared jobs had finished (record: `audit/results/phase5a_lean_full_kernel_compile.txt`; the file compiled has sha256 `f8f89bb…0de68`):
+
+```
+lean certificates/TypeSubstitutionCertificate.lean
+EXIT=0  wall=454s  peakRSS=11298MB   (Lean 4.34.1, commit 5045d005; 0 errors, 0 warnings)
+'TypeSubstitution.closed_form_all'          depends on axioms: [propext, Quot.sound]
+'TypeSubstitution.class_counts_closed_form' depends on axioms: [propext, Quot.sound]
+'TypeSubstitution.total_closed_form'        depends on axioms: [propext, Quot.sound]
+'TypeSubstitution.limit_frequencies'        depends on axioms: [propext]
+'TypeSubstitution.closed_form_general'      depends on axioms: [propext, Quot.sound]
+'TypeSubstitution.closed_form_all_direct'   depends on axioms: [propext, Classical.choice, Quot.sound]
+'TypeSubstitution.q8_closed'                depends on axioms: [propext]
+'TypeSubstitution.q8_conj_is_inverse'       does not depend on any axioms
+'TypeSubstitution.q8_class_conj_invariant'  does not depend on any axioms
+'TypeSubstitution.q8_class_inverse_invariant' does not depend on any axioms
+```
+
+The 14 `decide +kernel` data checks (among them `types_distinct`, `panel_images_certified`, `plaquette_images_certified`, `classes_certified`, `standard_level1_certified`, `equivariance_certified`, `seed_certified`, `level1_geometry_matches_recursion`, `level2_geometry_matches_recursion`, `eigen_check`, `u1_check`, `u2_check`, `base_check`) are discharged by the kernel; every theorem's axiom footprint is within `propext`, `Quot.sound`, `Classical.choice` (the standard Lean core axioms); no theorem depends on a `native_decide` axiom or on `sorryAx`.
+
+What the Lean theorem states and does not state: it certifies the finite data (types, images, classes, level-1 and level-2 geometry) and the arithmetic consequences (recursion, closed form for $m\ge3$, limit frequencies). It does **not** formalize the geometric lemma that every inter-tile plaquette of $T_m$ has one of the 108 types (this is the content verified computationally to level 5 in §2.2), nor anything about the hull or the operator.
 
 ---
 
