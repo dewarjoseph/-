@@ -1,6 +1,6 @@
 # Phase V-B — The FR30 Excess: Mechanism, Scaling, and Falsification
 
-Branch `claude/phase5b-excess-mechanism` (from `main` at aa05095, which contains all Phase V-A work). Final commit: [[COMMIT]]. Status vocabulary: **[K]** kernel-checked in Lean; **[P]** proved outside Lean (hypotheses stated); **[X]** exact computational certificate (integer or rational arithmetic); **[E]** numerical evidence with residuals reported; **[C]** conjecture; **[U]** unresolved.
+Branch `claude/phase5b-excess-mechanism` (from `main` at aa05095, which contains all Phase V-A work). Final commit: 2aede8a (report; this hash-recording commit follows it). Status vocabulary: **[K]** kernel-checked in Lean; **[P]** proved outside Lean (hypotheses stated); **[X]** exact computational certificate (integer or rational arithmetic); **[E]** numerical evidence with residuals reported; **[C]** conjecture; **[U]** unresolved.
 
 ## 0. Executive summary
 
@@ -164,7 +164,7 @@ The 0.31 separation survives link errors up to ε ≈ 0.1 rad and on-site disord
 
 **Stop record.** All runs killed at 18:01:48 UTC (census lanes PIDs 2035/2038, level-4 sample 3569, level-7 3739/3740); no Python process remained. Incomplete at stop: census 2371/6561, level-4 sample 128/401, level 7 at pass 1 of ≈ 30.
 
-**Commits on `claude/phase5b-excess-mechanism`** (from `main` aa05095): 140a815 (preregistered protocol, before any census result) … [[COMMIT]] (final). 91 files added, 0 modified, 0 deleted relative to `main`.
+**Commits on `claude/phase5b-excess-mechanism`** (from `main` aa05095): 140a815 (preregistered protocol, before any census result) … 2aede8a (report; this hash-recording commit follows it) (final). 91 files added, 0 modified, 0 deleted relative to `main`.
 
 **New code (audit/).** `phase5b_sweep.py` (census, level-4 sample, merge, preregistered analysis), `phase5b_controls.py` (hierarchy interventions), `phase5b_physical.py` (robustness), `phase5b_a_validation.py` (baseline reproduction), `phase5b_d_scaling.py` (independent scaling), `phase5b_d_level7.py` (checkpointed level-7 solver and exact certifier), `phase5b_e_level6_certificate.py`, `phase5b_e_radius2_bound.py`, `phase5b_e_recursion_correlations.py`, `phase5b_e_ids_moments.py`.
 
