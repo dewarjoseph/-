@@ -24,3 +24,10 @@ Use iteration 2874 instead with accuracy
 not reaching the requested tolerance 1e-07.
   w, V = spl.lobpcg(H, X, M=M, largest=False, tol=tol, maxiter=maxiter)
 level 5 dim   65536 pinned: lowest [8.79701 8.79701 8.79898 8.79898]  IPR_tiles=0.00061 (1/n=0.000031)  boundary tiles 5723/32768=0.175  ground-state boundary weight=0.001  (135s)
+/home/user/-/audit/phase5_bulk_bottom_lobpcg.py:37: UserWarning: Exited postprocessing with accuracies 
+[1.67362438e-08 2.15887335e-08 3.07170090e-08 1.64994699e-08
+ 1.59452032e-08 1.33536164e-07]
+not reaching the requested tolerance 1e-07.
+  w, V = spl.lobpcg(H, X, M=M, largest=False, tol=tol, maxiter=maxiter)
+level 6 dim  524288 pinned: lowest [8.77013 8.77013 8.77024 8.77024]  IPR_tiles=0.00016 (1/n=0.000004)  boundary tiles 23723/262144=0.090  ground-state boundary weight=0.000  (2742s)
+EXIT=0
