@@ -9,8 +9,8 @@ chair / random admissible decoration, seed 1           7.72170   6.92890   6.689
 chair / random admissible decoration, seed 2           8.33307   7.45547   7.15814         - |    7.007   69.116  439.914        - |  -0.101   0.110       - |   6.365 0.0000  5.6e-08  dense L4 check: max|dE| 2.6e-14, dIPR*n -7.4e-08
 chair / random admissible decoration, seed 3           7.91578   7.27433   7.16957         - |    7.134   29.282   61.185        - |   0.321   0.646       - |   2.090 0.0016  1.8e-07  dense L4 check: max|dE| 3.2e-14, dIPR*n -2.1e-08
 FR30 graph / sign-stripped links (+ class rep.)        6.95908   6.14626   6.00095         - |    3.543    5.730    7.178        - |   0.769   0.892       - |   1.253 0.0015  7.5e-08  dense L4 check: max|dE| 7.0e-14, dIPR*n -2.1e-09
-FR30 graph / i.i.d. random Q8 links (seed 11)         15.14494  14.69494  14.40827         - |   17.086  125.416 1692.418        - |   0.041  -0.251       - |  13.494 0.0007  6.7e-08  (no dense L4 check)
-FR30 graph / trivial links (no flux)                   1.66951   0.50273   0.13860         - |    2.259    2.885    3.264        - |   0.882   0.941       - |   1.132 0.0063  6.6e-08  (no dense L4 check)
+FR30 graph / i.i.d. random Q8 links (seed 11)         15.14494  14.69494  14.40827         - |   17.086  125.416 1692.418        - |   0.041  -0.251       - |  13.494 0.0007  6.7e-08  dense L4 check: max|dE| 3.6e-14, dIPR*n +8.0e-09
+FR30 graph / trivial links (no flux)                   1.66951   0.50273   0.13860         - |    2.259    2.885    3.264        - |   0.882   0.941       - |   1.132 0.0063  6.6e-08  dense L4 check: max|dE| 3.6e-15, dIPR*n -2.4e-09
 
 LOWEST 4 EIGENVALUES AND RESIDUALS
   FR30 chair / Clifford Q8 (reference)                 L3: [9.37847  9.37847  9.589403 9.589403]  res max 8.4e-14  [dense eigh (evr, subset_by_index=(0,3)), 1s]
