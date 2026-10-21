@@ -329,12 +329,13 @@ and the control scripts test it against independent implementations.
 | `class_counts_closed_form`, `total_closed_form` | exact finite-size law for every class and for $N_m$ | from `closed_form_all` | same |
 | `limit_frequencies` | $\sum W_8=18D$, $\sum W_4=-24D$, $\sum W_2=6D$, $\sum W_1=0$; $36\,W_8(+1)=19\sum W_8$, $144\,W_8(-1)=13\sum W_8$, $9\,W_8(i)=\sum W_8$, $144\,W_8(j)=23\sum W_8$, $9\,W_8(k)=\sum W_8$ | `decide +kernel` | verified (17 s, 1.1 GB) |
 
-**Kernel run record.** Each `decide +kernel` theorem was checked by the Lean 4.34.1 kernel in its own file (all other
-checks temporarily replaced by `native_decide` so that only the named theorem is kernel-evaluated); times and peak
-resident memory are listed above (`run_monitored.py`, log reproduced in `audit/results/phase5_lean_kernel_runs.txt`).
-All fourteen checks passed. The hand-written proofs (`closed_form_all` and its consequences) typecheck in the same
-files. A single-process compilation of the whole certificate requires roughly the sum of the peaks because the kernel
-caches persist within one process; its outcome is recorded in Section 9.
+**Kernel run record.** The complete certificate compiles in a single Lean 4.34.1 process with **0 errors and
+0 warnings in 430 s with a peak resident memory of 11.3 GB** (`audit/results/phase5_lean_full_compile.txt`), and
+`#print axioms` reports `[propext]` for every `decide +kernel` theorem and `[propext, Classical.choice, Quot.sound]`
+for the three induction theorems (the latter two enter only through `funext` and `omega`). No `native_decide`, no
+`sorry`, no axiom declarations. Each kernel check was additionally run in its own file (all other checks temporarily
+replaced by `native_decide`), which gives the per-theorem times and peak memories in the table
+(`audit/results/phase5_lean_kernel_runs.txt`); the level-2 geometry enumeration is the heaviest at 167 s and 11.3 GB.
 
 **Proof boundary.** Formal: the finite type system is derived from the substitution rule (not pasted), the recursion
 is defined from certified image lists that Lean re-derives, and the closed form for *all* $m\ge3$ is a theorem whose
@@ -379,10 +380,12 @@ The real $4n\times4n$ operator has the spectrum of the complex $2n\times2n$ one 
 
   Decisive null tests: the untwisted network (all bundles $+I_4$) has $\lambda_{\min}=0$ and the plain weighted
   Laplacian spectrum; the mirror-reflected sample has an identical spectrum (gauge equivalence, Phase 2 Theorem 2.4;
-  checked numerically to $10^{-12}$ at levels 2 and 3 in `audit/results/phase5_cube_control_spectrum.txt`); a random
+  checked numerically: the six lowest eigenvalues of the FR30 sample and of its mirror image agree to $10^{-13}$ at levels 2 and 3, `audit/results/phase5_cube_control_spectrum.txt`); a random
   admissible decoration shifts the free bottom by $+14\%$ at level 2; i.i.d. random $Q_8$ bundles give 8.44 and a
-  point-localized ground state; the alternative substitution (unit-cube geometry with the same decoration rule)
-  gives the values recorded in `audit/results/phase5_cube_control_spectrum.txt`.
+  point-localized ground state; the alternative substitution (unit-cube geometry with the same decoration rule, bulk coordination 6 instead of 24)
+  gives free bottoms 0.897 and 0.972 and pinned bottoms 2.115 and 1.914 at levels 2 and 3 (0.15 to 0.16 of its
+  coordination, versus 0.20 to 0.21 for the chair), a different spectrum on a different graph with the same decoration
+  rule (`audit/results/phase5_cube_control_spectrum.txt`).
 - **Smallest discriminating system.** Level 2 (64 tiles, 256 resonators, 576 bundles) already separates the free
   bottom (4.73) from the untwisted value (0), from the random decoration (5.39) and from random bundles (8.44) by
   far more than any plausible fabrication tolerance; level 3 (2048 resonators) is needed to see the surface band
@@ -458,8 +461,9 @@ not predict. Where the result is a specialization of known theory, Section 2.5 s
 
 ## 9. Phase IX: repository changes and verification
 
-Interim commit of this phase (final numbers for the level-6 bulk bottom, the unit-cube control spectra and the
-single-process Lean compilation are appended in the follow-up commit recorded at the end of this section).
+Commits of this phase on branch `claude/magical-euler-0vm2f8`: `ea661c5` (interim: all artifacts, per-theorem
+kernel runs) and the follow-up commit that is the branch head at the time of the final report (single-process Lean
+compile record, level-6 bulk bottom, unit-cube control, this section).
 
 **New files.** `audit/export_type_certificate.py`, `audit/lean_template_type_substitution.lean`,
 `certificates/TypeSubstitutionCertificate.lean` (generated), `audit/phase5_dynamics_boundary.py`,

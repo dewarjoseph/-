@@ -29,7 +29,7 @@ def spectrum(tiles, pinned, k=4):
     if 2*n <= 2048: w = np.linalg.eigvalsh(H.toarray())[:k]
     else: w = np.sort(spl.eigsh(H, k=k, sigma=-1.0 if not pinned else 0.0, which='LM', return_eigenvectors=False))
     return w, bulk, len(edges)
-for lvl in (2, 3, 4):
+for lvl in (2, 3):
     t = cube_tiles(lvl)
     for pinned in (False, True):
         w, bulk, ne = spectrum(t, pinned)
