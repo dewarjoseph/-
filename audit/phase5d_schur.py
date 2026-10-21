@@ -82,7 +82,10 @@ class Glued:
         for c, Rc in enumerate(Rs):
             o0, o1 = self.offs[c], self.offs[c + 1]; K[o0:o1, o0:o1] = Rc
         return K
-    def lam_min(self, M, k=1): return sla.eigvalsh(M, subset_by_index=(0, k - 1))
+    def lam_min(self, M, k=1):
+        if M.shape[0] <= 1200: return sla.eigvalsh(M, subset_by_index=(0, k - 1))
+        w = spl.eigsh(M, k=max(k, 2), which='SA', tol=1e-12, v0=np.ones(M.shape[0], complex), ncv=60, maxiter=20000, return_eigenvectors=False)
+        return np.sort(w)[:k]
     def features(self, E):
         Rs = self.R(E); K = self.K(E, Rs)
         evs = [sla.eigh(Rc) for Rc in Rs]
