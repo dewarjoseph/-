@@ -36,9 +36,9 @@ $\mathrm{E1\_FLOATDIFF}$. The operator itself is the vectorised grid builder of 
 entry by entry at level 4 against the object builders (`tiles_at_level`/`panel_edges`/`clifford_link`) before the run,
 Hermitian to $0.0$, with 3096576 panels and the same $Q_8$ label census as the Phase V-A run.
 *Solver (status [N], only affects tightness).* LOBPCG, block 4, diagonal preconditioner, seed 0, chunks of $\le600$
-iterations with warm restart; E1_ITERS iterations, final ground-state residual $\|H\psi-\lambda\psi\|=\mathrm{E1\_RES}$,
-Kramers split E1_SPLIT, gap to the next pair $1.08\cdot10^{-4}$; E1_TIME s wall, 1.0 GB. Float Rayleigh quotient
-E1_FLOAT; certificate minus float $=\mathrm{E1\_GAP}$.
+iterations with warm restart; 2396 iterations, final ground-state residual $\|H\psi-\lambda\psi\|=\mathrm{E1\_RES}$,
+Kramers split $1.7\cdot10^{-12}$, gap to the next pair $1.08\cdot10^{-4}$; 2384 s wall, 1.0 GB. Float Rayleigh quotient
+$8.7701336290$; certificate minus float $=\mathrm{E1\_GAP}$.
 *Files.* `audit/phase5b_e_level6_certificate.py`, `audit/results/phase5b_e_level6_certificate.txt`,
 `audit/results/phase5b_e_fr30_level6_groundstate.npy` (complex128, unit norm, depth-first tile order, 2 spinor
 components per tile).
@@ -283,7 +283,7 @@ same two tiles (file `audit/phase5b_e_ids_moments.py`, output `audit/results/pha
 
 | # | statement | hypotheses | status |
 |---|---|---|---|
-| 1.1 | $E_{\rm bulk}\le$ E1_RATIONAL $=$ E1_DECIMAL (level 6) | compression Thm 3.2(a) [P], Rayleigh | **[X]** two bit-identical exact evaluations; solver residual E1_RES [N] |
+| 1.1 | $E_{\rm bulk}\le$ 19748585252900893/2251799811448142 $=$ 8.770133629330 (level 6) | compression Thm 3.2(a) [P], Rayleigh | **[X]** two bit-identical exact evaluations; solver residual 2.2\cdot10^{-7} [N] |
 | 2.2 | $r$-star of a child $\subset\sigma(\lceil r/2\rceil$-star of parent$)$ | none (parity) | **[P]**, checked for $r=1,2,3$ on all types |
 | 2.3 | $\mathcal V_2=\Phi_2(\mathcal V_1)=\Phi_{22}$-orbit of any seed; $|\mathcal V_2|=165$ | Thms 1.8, 1.10, Lemma 3.5 [P] | **[P + X]**; census $\mathcal T_5,\mathcal T_6,\mathcal T_7$ identical |
 | 2.4 | $\langle\psi,H\psi\rangle=\frac1{18}\sum_ck_c(\psi)$ | Prop. 2.2 | **[P]**, exact check on $\mathcal T_3$ |
@@ -310,8 +310,8 @@ New files (all with prefix `phase5b_e_`): `audit/phase5b_e_level6_certificate.py
 this ledger.
 
 Commands (repository root, `OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 -u -I …`, three jobs ran concurrently on 4 cores):
-* `audit/phase5b_e_level6_certificate.py 6 3300` — E1_TIME s, 1.0 GB (geometry 3 s, $H$ 5 s, LOBPCG E1_LOBPCG s, exact
-  certificate E1_CERTTIME s). A level-4 smoke test (4.5 s) reproduced the Phase V-A certificate $8.919634360$.
+* `audit/phase5b_e_level6_certificate.py 6 3300` — 2384 s, 1.0 GB (geometry 3 s, $H$ 5 s, LOBPCG 2370 s, exact
+  certificate 14 s). A level-4 smoke test (4.5 s) reproduced the Phase V-A certificate $8.919634360$.
 * `audit/phase5b_e_radius2_bound.py 7` — 387 s and 517 s in two runs (the second concurrent with two other jobs), 0.67 GB
   (of which the $\mathcal T_7$ census 272 s, the 162 exact Sylvester certificates < 1 s, canonicalisation 51 s). A first
   run aborted on a bug in a (since removed) zero-pivot shortcut of the Bareiss routine; the final routine has no shortcut
@@ -322,7 +322,7 @@ Commands (repository root, `OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 -u 
 * `python3 -m unittest tests/test_phase5b_e_results.py` — < 1 s.
 
 Caveats. (1) The upper bound is the Rayleigh quotient of a *rounded LOBPCG vector*; its tightness (not its validity)
-depends on the solver residual E1_RES. (2) The lower bound uses $\lambda_{\min}$ in floating point only to *choose*
+depends on the solver residual 2.2\cdot10^{-7}. (2) The lower bound uses $\lambda_{\min}$ in floating point only to *choose*
 $\mu_c$; validity rests on the exact Sylvester certificates. Both bounds depend on the [P] theorems of the framework
 (recognizability, repetitivity, the 72-type closure), not on unique ergodicity. (3) All "frequencies" are limits along
 the supertile sequence $\mathcal T_m$; their identification with hull frequencies (and the IDS moments with the hull IDS of
