@@ -312,8 +312,8 @@ for an engineered medium. It is not a theory of fundamental interactions.
 | Thm 3.3 unconditional limit intervals | proved (given $B_k$ formula to level 5, which is measured) | `phase3_plaquette_recursion.py 5` |
 | Non-flatness for all 6561 decorations at level 1 | proved by exhaustive computation | `phase2_structure_census.py` |
 | $\mathrm{Hol}=Q_8$ at levels 1 to 3 | computational (exact arithmetic) | audit script |
-| Prop. 3.1 closed forms for $N_k,B_k,b_k(c)$ | conjecture, verified $k\le7$, two out-of-sample | `phase3_level6_straddle.py` |
-| Cor. 3.2 exact limits $19/36,13/144,1/9,23/144,1/9$ | conditional on Prop. 3.1 | §3.2 |
+| Prop. 3.1 closed forms for $N_k,B_k,b_k(c)$ | **theorem** (Section 9; computer-assisted, exact) | `phase4_type_substitution_proof.py` |
+| Cor. 3.2 exact limits $19/36,13/144,1/9,23/144,1/9$ | **theorem** (Section 9) | `phase4_type_substitution_proof.py` |
 | $E_0\approx5.27$ | numerical extrapolation from levels 1 to 5 | `phase3_spectral_convergence.py` |
 | Absence of persistent spectral gaps | numerical, levels 3 to 4, 2% threshold | same |
 | Monograph cycle table (48/416/3424, 100%) | refuted | §1 |
@@ -325,8 +325,8 @@ for an engineered medium. It is not a theory of fundamental interactions.
 
 ## 6. Open problems, ranked
 
-1. **Prove Proposition 3.1** (interface self-similarity of the chair substitution from level 3 on). Feasible: a
-   finite case analysis of the eight child interfaces; would make Corollary 3.2 a theorem.
+1. ~~Prove Proposition 3.1~~ Done in Section 9 by a finite type-substitution computation. Remaining: a
+   human-readable proof that explains why the interface spectrum is exactly $\{4,1,0\}$ and $\{2,1,0\}$.
 2. **Identify $N_\infty$.** Is the limiting spectral measure of the Clifford hopping operator absolutely
    continuous, and is $E_0$ an algebraic number? Feasible numerically to level 6 with sparse methods; the
    gap-labeling group of the chair hull ($\mathbb Z[1/2]$) predicts dyadic IDS values at any gap that does open.
@@ -376,3 +376,43 @@ lattice produces propagating gauge degrees of freedom. None of these is suggeste
   `audit/phase3_spectral_convergence.py` (new), building on `audit/independent_clifford_q8_audit.py`
 - `audit/results/*.txt` (saved outputs of the long computations)
 - `tests/test_independent_audit_regression.py` (11 regression tests, 2.4 s, no imports from `src/`)
+
+
+---
+
+## 9. Addendum (2026-10-21): Proposition 3.1 and Corollary 3.2 are theorems
+
+`audit/phase4_type_substitution_proof.py` (output in `audit/results/phase4_type_substitution_proof.txt`) derives,
+from the inflation rule alone, a finite type system for the two kinds of objects that carry the straddling
+plaquettes: *panel types* (the intrinsic relative configuration of the two tiles sharing a unit panel) and
+*plaquette types* (the intrinsic relative configuration of the at most four tiles around a lattice edge, canonicalized
+over base cube and orientation). Inflating one representative of each type gives the images:
+
+- each panel type $\rho$ inflates to exactly 4 fine panels (types $M\rho$) and 4 fine interior plaquettes (types $A\rho$);
+- each plaquette type $\theta$ inflates to exactly 2 fine plaquettes along the inflated edge (types $B\theta$);
+- each tile inflates to a rotated copy of $\mathcal T_1$, contributing the fixed level-1 type vectors $p_1$ (48 panels), $\pi_1$ (60 plaquettes).
+
+Closure under inflation terminates with **49 panel types and 108 plaquette types**. Because the substitution is
+equivariant under rigid motions of $SO(3,\mathbb Z)\ltimes\mathbb Z^3$ and the types are intrinsic, the type of a
+coarse object determines the multiset of types of its fine images. Hence, exactly,
+$$P_{m+1}=8^m p_1+M P_m,\qquad \Pi_{m+1}=8^m\pi_1+A P_m+B\,\Pi_m ,$$
+and $\mathrm{Count}_m(c)=\sum_{\theta\in c}\Pi_m(\theta)$. The recursion reproduces the directly enumerated
+class-resolved counts at levels 1 to 5 (all five classes, all levels) and the straddling counts at levels 6 and 7.
+
+**Exact spectrum.** $\det(\lambda-M)=\lambda^{44}(\lambda-4)(\lambda-1)^4$,
+$\det(\lambda-B)=\lambda^{103}(\lambda-2)(\lambda-1)^4$; the nonzero eigenvalues $4,2,1$ are semisimple and the
+nilpotent part has index 2. With the forcing eigenvalue 8 (simple), $v_m=(P_m,\Pi_m,8^m)$ satisfies
+$v_m=8^mu+\sum_{\lambda\in\{4,2,1\}}\lambda^m u_\lambda$ exactly for $m\ge3$. Therefore:
+
+**Theorem 9.1 (exact finite-size law).** For every class $c$ and every $m\ge3$,
+$\mathrm{Count}_m(c)=A_c8^m+B_c4^m+C_c2^m+D_c$ with the rational constants implied by Proposition 3.1, and
+$N_m=18\cdot8^m-24\cdot4^m+6\cdot2^m$ for all $m\ge1$.
+
+**Theorem 9.2 (exact limiting frequencies).** $\lim_m N_m/8^m=18$ and
+$$f(+1)=\tfrac{19}{36},\qquad f(-1)=\tfrac{13}{144},\qquad f(\pm i)=f(\pm k)=\tfrac19,\qquad f(\pm j)=\tfrac{23}{144},$$
+obtained as the normalized eigenvalue-8 eigenvector of the affine type operator in exact rational arithmetic.
+
+Both proofs are computer-assisted: the finite type system and the matrices are produced by exact integer
+computation from axioms A1–A6, the equivariance and decomposition arguments are the only non-computational steps,
+and the rational linear algebra is exact. The ledger entries "Prop. 3.1: conjecture" and "Cor. 3.2: conditional" in
+Section 5 are superseded by these theorems.

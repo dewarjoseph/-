@@ -130,3 +130,18 @@ class TestRefutedClaims(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestTypeSubstitutionRecursion(unittest.TestCase):
+    """The finite type-substitution recursion derived from the inflation rule reproduces enumerated class counts."""
+    def test_recursion_matches_enumeration_levels_1_to_3(self):
+        import importlib.util, io, contextlib
+        spec = importlib.util.spec_from_file_location("p4", os.path.join(ROOT, "audit", "phase4_type_substitution_proof.py"))
+        # run the module up to the recursion (the SymPy spectral analysis is skipped here for speed)
+        src = open(spec.origin).read().split("# ---------------- exact spectral analysis")[0]
+        ns = {"__name__": "p4", "__file__": spec.origin}
+        with contextlib.redirect_stdout(io.StringIO()):
+            exec(compile(src, spec.origin, "exec"), ns)
+        self.assertEqual((len(ns["ptypes_all"]), len(ns["qtypes_all"])), (49, 108))
+        for m in (1, 2, 3):
+            self.assertEqual({c: ns["rec"][m][c] for c in ns["CLASSES"]}, ns["measured"][m])
