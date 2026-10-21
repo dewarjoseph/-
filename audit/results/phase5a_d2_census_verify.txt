@@ -72,3 +72,16 @@
 5. COUNTEREXAMPLE SEARCH: random decorations on ALL index-4 and index-8 HNF sublattices (own code)
  190 sublattices; frames: coset 0 fixed to I (global right factor is a unitary conjugation of H), others uniform in SO(3,Z)
  flux computed for 100000 random decorations in 8.0s: flux-matched (|dfn|<0.03,|dft|<0.04,|dfm|<0.04): 2104 (0.0210)
+ Bloch band bottom for 3000 uniform random decorations (329.7s): E_per min=0.864471 max=14.079002 mean=9.3076; fraction >8.770: 0.6257
+   of which flux-matched: 52, E_per max=7.994780
+ Bloch band bottom for ALL 2104 flux-matched decorations (192.4s): E_per min=4.496732 median=6.637185 max=8.957872
+   number of flux-matched with E_per > 8.770: 3;  > 8.5: 12;  > 8.18: 43;  > 8.1772: 43
+ top-5 flux-matched random decorations:
+   E_per=8.957872 k=8 S=[[1, 0, 6], [0, 1, 6], [0, 0, 8]] frames=[0, 15, 1, 3, 3, 6, 8, 0] flux nontriv=0.5000 traceless=0.3750 -1=0.1250
+   E_per=8.855728 k=8 S=[[1, 0, 5], [0, 1, 6], [0, 0, 8]] frames=[0, 19, 20, 0, 10, 3, 10, 17] flux nontriv=0.5000 traceless=0.4028 -1=0.0972
+   E_per=8.836991 k=8 S=[[1, 3, 1], [0, 4, 0], [0, 0, 2]] frames=[0, 0, 14, 19, 22, 4, 1, 1] flux nontriv=0.4931 traceless=0.3681 -1=0.1250
+   E_per=8.730600 k=8 S=[[1, 0, 2], [0, 1, 3], [0, 0, 8]] frames=[0, 9, 21, 8, 21, 9, 10, 1] flux nontriv=0.5000 traceless=0.3750 -1=0.1250
+   E_per=8.700539 k=8 S=[[1, 1, 1], [0, 2, 1], [0, 0, 4]] frames=[0, 19, 19, 10, 22, 18, 18, 11] flux nontriv=0.4653 traceless=0.3542 -1=0.1111
+ HILL-CLIMB (greedy best-improvement over all single-coset frame changes, flux-match constraint, 200 steps max, random constrained kick when stuck) from E_per=8.957872 on S=[[1, 0, 6], [0, 1, 6], [0, 0, 8]]
+   step   0: current E=9.079873 best E=9.079873 (#constrained neighbours 29, kicks so far 0)
+   step  25: current E=9.347249 best E=9.633732 (#constrained neighbours 33, kicks so far 8)

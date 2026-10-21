@@ -24,3 +24,13 @@
    interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.2895 [0.1760, 1.645]  d=2: 0.4429 [0.4636, 0.955]  d=3: 0.7735 [0.8220, 0.941]  d=4: 1.0000 [0.9998, 1.000]  d=5: 1.0000 [1.0000, 1.000]
    depth-1 child weights: [0.1336 0.0394 0.2024 0.1246 0.1246 0.0394 0.2024 0.1336]
 [cube] level 6: n=262144 dim=524288 |E|=774144 nnz=6717440 bulk coordination 6, boundary tiles 23816 (0.091); interface tile counts {d: |I_d|} = {1: 23816, 2: 67032, 3: 137144, 4: 222840, 5: 262136, 6: 262144}; link labels {'-k': 32768, '-1': 407844, '+i': 37449, '+k': 32768, '-j': 112933, '+j': 112933, '-i': 37449}; build 100.9s
+   lobpcg(block=6, seed=0, tol=1e-7, diag precond) (4609s, maxrss 1.84 GB)  warnings: Exited at iteration 7681 with accuracies ; Exited postprocessing with accuracies 
+   lowest 4: [1.8508823 1.8508823 1.8511827 1.8511827]   residuals: [2.9e-10 2.1e-08 2.4e-09 3.8e-08]
+   ground pair (split 2.5e-14, gap to next pair 0.00030): IPR=0.000119482 [vec1 0.000119482, vec2 0.000119482]  IPR*n=31.3215  P=8369.5  p_max=0.00123 s50=3804 s90=31805  boundary weight=0.0000 (tile fraction 0.091)
+   S2(d)    d=1..L: 0.15854  0.09744  0.02435  0.00469  0.00073  0.00012   1/S2(d): 6.308  10.263  41.076  213.217  1365.020  8369.462   (uniform: 8  64  512  4096  32768  262144)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.1425 [0.0909, 1.569]  d=2: 0.2140 [0.2557, 0.837]  d=3: 0.4401 [0.5232, 0.841]  d=4: 0.7746 [0.8501, 0.911]  d=5: 1.0000 [1.0000, 1.000]  d=6: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [0.1661 0.0247 0.195  0.1141 0.1141 0.0247 0.195  0.1661]
+   scaling 3->4: IPR*n ratio 1.313, alpha = -log(IPR_(k+1)/IPR_k)/log 8 = 0.869; 1/S2(d) growth ratios: d=1: 0.927, d=2: 0.857, d=3: 1.038; bottom decrement +0.05294
+   scaling 4->5: IPR*n ratio 1.672, alpha = -log(IPR_(k+1)/IPR_k)/log 8 = 0.753; 1/S2(d) growth ratios: d=1: 0.962, d=2: 0.925, d=3: 0.723, d=4: 0.784; bottom decrement +0.00891
+   scaling 5->6: IPR*n ratio 1.820, alpha = -log(IPR_(k+1)/IPR_k)/log 8 = 0.712; 1/S2(d) growth ratios: d=1: 0.957, d=2: 0.942, d=3: 0.838, d=4: 0.683, d=5: 0.717; bottom decrement +0.00122
+   saved; maxrss 1.84 GB

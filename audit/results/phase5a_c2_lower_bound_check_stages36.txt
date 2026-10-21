@@ -19,4 +19,21 @@ STAGE 3: star types, lambda_min(h_e), star sums, exact certificate
    flat signatures: exact elimination of h_e finds a non-positive pivot (singular) for all 44 -> mu=0 is the best constant
  CERTIFIED (own arithmetic): (1/4) min_types sum mu_e = 3137451/500000/4 = 3137451/2000000 = 1.568725500
    equals claimed 3137451/2000000: True
- stage 3 wall time 10.6s
+ stage 3 wall time 4.5s
+==========================================================================================
+STAGE 6: cheap improvements (FLOAT ONLY, UNCERTIFIED)
+ (a) vertex-block (2x2x2, weight 1/4) decomposition, 72 types: E_bulk >= min_type sum_v lambda_min(k_v) = 3.201472  (edge version: 1.568742)
+     distinct vertex-block signatures: 246 (non-flat 229, max dim 16); exact LDL^* failures: 0
+     CERTIFIED (own exact arithmetic, same closure/completeness hypotheses as the 72-type argument): E_bulk >= 12805833/4000000 = 3.201458250  (1.4s)
+     convex mixing edge/vertex decompositions: best t=0.000, bound 3.201472
+ (b) 2-stars (Chebyshev radius 2, 215 positions) of T_5: complete 25648, distinct types 165
+     cubes with full 3-block inside T_5: 205560 of 229376; distinct 3-block signatures: 3888
+     distinct lambda_min(B_c) values: 93, min 0.586840, max 1.752998 (16s)
+     tiles with complete 2-star and all 63 blocks defined: 25648
+     3-block (weight 1/18) decomposition evaluated on T_5 2-star types: E_bulk >= 4.008198   [UNCERTIFIED: completeness of 2-star types not established here]
+     for comparison on the same tiles: edge bound 1.568742, vertex-block bound 3.201472
+     best convex mix (edge, vertex, 3-block) weights (np.float64(0.0), np.float64(0.0), np.float64(1.0)): 4.008198  [UNCERTIFIED]
+     2-star types in T_6: 165 (complete 232560); T_5 types subset: True; new in T_6: 0 (40s)
+ stage 6 wall time 59.9s
+==========================================================================================
+total wall time 64.7s

@@ -529,7 +529,7 @@ if 5 in STAGES:
         Hl, labels, sig = h_form(cyc, own_loc, f5)
         lam_u[r] = lam_min(Hl) if len(labels) > 1 else 0.0
     lam_e = lam_u[inv.ravel()]
-    say(f" distinct interior edge signatures in T_5: {len(uc)} (inter-tile: {(lam_e >= 0).sum() - sum(1 for r in range(len(uc)) if (pat[first[r]]==0).all())})")
+    say(f" distinct interior edge signatures in T_5 (incl. boundary-adjacent ones, labelled by first-occurrence pattern): {len(uc)}; inter-tile edges: {(pat != 0).any(1).sum()}, single-tile edges: {(pat == 0).all(1).sum()}")
     # norms of psi on V(e)
     w2 = (np.abs(PSI5) ** 2).sum(1)
     firstocc = np.ones((ne, 4), bool)
@@ -567,7 +567,7 @@ if 6 in STAGES:
     say("=" * 90); say("STAGE 6: cheap improvements (FLOAT ONLY, UNCERTIFIED)"); t0 = time.time()
     # (a) vertex-block decomposition: <psi,Hpsi> = sum_v k_v(psi), k_v = (1/4) * (form of the 12 faces of the 2x2x2 block at v)
     #     bound: E >= min_type sum_{v vertex of center} lambda_min(k_v), needs only the 72 types.
-    S_vert = {}
+    S_vert = {}; S_vert_cert = {}; vsigs = {}
     for k in TYPES:
         poses, center = poses_from_key(k); own = owner_dict(poses)
         fidx = np.array([gidx[key(g)] for g, t in poses])
@@ -576,15 +576,37 @@ if 6 in STAGES:
         for c in ccubes:
             for d in itertools.product((0, 1), repeat=3): verts.add((c[0]+d[0], c[1]+d[1], c[2]+d[2]))
         assert len(verts) == 26
-        tot = 0.0
+        tot = 0.0; totc = []
         for v in verts:
             block = [(v[0]-a, v[1]-b, v[2]-c) for a, b, c in itertools.product((0, 1), repeat=3)]
             assert all(q in own for q in block)
             Hb, tiles = block_form(block, own, fidx)
-            if len(tiles) > 1: tot += max(lam_min(Hb), 0.0) / 4
-        S_vert[k] = tot
+            if len(tiles) > 1:
+                lam = lam_min(Hb); tot += max(lam, 0.0) / 4
+                # signature for the exact certificate cache: owner labels of the 8 cubes (first occurrence) + frames
+                lab = []; seen = {}
+                for q in block:
+                    t = own[q]; seen.setdefault(t, len(seen)); lab.append((seen[t], int(fidx[t])))
+                vs = tuple(lab)
+                if vs not in vsigs: vsigs[vs] = (Hb, lam)
+                else: assert abs(vsigs[vs][1] - lam) < 1e-9
+                totc.append(vs)
+        S_vert[k] = tot; S_vert_cert[k] = totc
     vmin = min(S_vert.values())
     say(f" (a) vertex-block (2x2x2, weight 1/4) decomposition, 72 types: E_bulk >= min_type sum_v lambda_min(k_v) = {vmin:.6f}  (edge version: {Sv[0]/4:.6f})")
+    # exact certificate of (a) with the same rational LDL^* machinery (blocks have <= 8 tiles -> <= 16x16 Gaussian-integer matrices)
+    t1 = time.time(); MUV = {}; nfail = 0
+    for vs, (Hb, lam) in vsigs.items():
+        assert exact_hermitian_check(Hb)
+        if lam <= 1e-9:
+            ok, _ = exact_pd(Hb, Fraction(0)); assert not ok; MUV[vs] = Fraction(0); continue
+        mu = Fraction(int(lam * 10**6) - 2, 10**6)
+        ok, _ = exact_pd(Hb, mu)
+        if not ok: nfail += 1; say(f"   vertex-block certificate FAILED for {vs}")
+        MUV[vs] = mu if ok else Fraction(0)
+    vcert = min(sum(MUV[vs] for vs in S_vert_cert[k]) for k in TYPES) / 4
+    say(f"     distinct vertex-block signatures: {len(vsigs)} (non-flat {sum(1 for v in vsigs.values() if v[1] > 1e-9)}, max dim {max(v[0].shape[0] for v in vsigs.values())}); exact LDL^* failures: {nfail}")
+    say(f"     CERTIFIED (own exact arithmetic, same closure/completeness hypotheses as the 72-type argument): E_bulk >= {vcert} = {float(vcert):.9f}  ({time.time()-t1:.1f}s)")
     # convex mixing: H = t*(edge decomposition) + (1-t)*(vertex decomposition), bound min_type [t*S_e/4 + (1-t)*S_v]
     best = (0, -1)
     for t in np.linspace(0, 1, 1001):

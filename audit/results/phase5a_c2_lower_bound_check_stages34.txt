@@ -20,3 +20,15 @@ STAGE 3: star types, lambda_min(h_e), star sums, exact certificate
  CERTIFIED (own arithmetic): (1/4) min_types sum mu_e = 3137451/500000/4 = 3137451/2000000 = 1.568725500
    equals claimed 3137451/2000000: True
  stage 3 wall time 10.5s
+==========================================================================================
+STAGE 4: completeness attack — complete vertex stars of T_6 (and T_7), rotated/translated copies
+ T_6 generated: 262144 tiles, 1835008 cubes, owner grid 128^3 (8 MB) (1.0s)
+ T_6: complete 1-stars 238328, incomplete 23816, distinct types 72; subset of the 72: True; equal: True; new types: 0
+ independent boundary criterion (all 26 neighbours of all 7 cubes occupied): 238328 complete tiles — agrees with 238328: True
+ rotated copy (frame #22, shift (1, 2, 4)): complete 238328, types 72, equal to the 72: True
+ rotated copy (frame #13, shift (3, 4, -3)): complete 238328, types 72, equal to the 72: True
+ rotated copy (frame #1, shift (-2, -2, 4)): complete 238328, types 72, equal to the 72: True
+ T_7: 2097152 tiles, complete 1-stars 2000376, incomplete 96776, distinct types 72; equal to the 72: True; new: 0 (89s)
+ stage 4 wall time 181.9s
+==========================================================================================
+total wall time 193.4s
