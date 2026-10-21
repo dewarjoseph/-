@@ -34,3 +34,4 @@
    scaling 4->5: IPR*n ratio 1.672, alpha = -log(IPR_(k+1)/IPR_k)/log 8 = 0.753; 1/S2(d) growth ratios: d=1: 0.962, d=2: 0.925, d=3: 0.723, d=4: 0.784; bottom decrement +0.00891
    scaling 5->6: IPR*n ratio 1.820, alpha = -log(IPR_(k+1)/IPR_k)/log 8 = 0.712; 1/S2(d) growth ratios: d=1: 0.957, d=2: 0.942, d=3: 0.838, d=4: 0.683, d=5: 0.717; bottom decrement +0.00122
    saved; maxrss 1.84 GB
+[cube] level 4 DENSE CROSS-CHECK (eigh evr subset (0,3), 199s, maxrss 1.17 GB): lowest 4 [1.8610131 1.8610131 1.8692416 1.8692416] residuals [4.2e-14 4.5e-14 4.8e-14 4.6e-14]; max|E_dense - E_lobpcg| = 1.27e-14; IPR*n dense 10.29199 (diff vs lobpcg -3.5e-07); max|S2 diff| 9.1e-10

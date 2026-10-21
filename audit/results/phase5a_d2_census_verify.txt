@@ -88,3 +88,32 @@
    step  50: current E=8.753522 best E=9.633732 (#constrained neighbours 31, kicks so far 16)
    step  75: current E=9.052328 best E=9.633732 (#constrained neighbours 37, kicks so far 24)
    step 100: current E=8.734437 best E=9.633732 (#constrained neighbours 65, kicks so far 33)
+   step 125: current E=8.565771 best E=9.633732 (#constrained neighbours 74, kicks so far 40)
+   step 150: current E=8.099669 best E=9.633732 (#constrained neighbours 35, kicks so far 48)
+   step 175: current E=8.920760 best E=9.633732 (#constrained neighbours 40, kicks so far 54)
+   step 199: current E=8.612791 best E=9.633732 (#constrained neighbours 37, kicks so far 61)
+ hill-climb done in 181.2s (9264 screening/refined Bloch evaluations): best flux-matched E_per=9.633732 (12^3-grid recheck 9.633732) frames=[2, 2, 10, 10, 7, 6, 16, 10] S=[[1, 0, 6], [0, 1, 6], [0, 0, 8]] flux nontriv=0.5000 traceless=0.3750 -1=0.1250
+ SUMMARY item 3: max flux-matched E_per found = 9.633732;  overall max over the 3000 uniform decorations = 14.079002;  any flux-matched > 8.770: True;  > 8.5: True;  > 8.18: True
+[search stage wall 711.3s]
+==============================================================================================================
+6. CLAIM (d): own least-squares regression on the records
+ n=44539 distinct decorations: E_per ~ -1.9040 + 14.3032 f_traceless + 30.6963 f_-1 ; rms residual 0.5324; sd(E)=2.7505; R^2=0.9625; prediction at FR30 fractions: 6.3302  (claim: -1.904 + 14.303 ft + 30.696 fm, rms 0.532, 6.330)
+ residual max=3.487 min=-3.739; 95th percentile |res|=1.076; fraction with |res|>2: 0.0034
+ Pearson corr(E, f_nontriv)=0.8736, corr(E, f_traceless)=0.5082, corr(E, f_-1)=0.6732
+   k=2 only (n=168): coef=[-0.906, 12.657, 29.816] rms=0.674 pred@FR30=6.620
+   k=4 only (n=42751): coef=[-1.893, 14.259, 30.675] rms=0.524 pred@FR30=6.322
+   k=8 only (n=1618): coef=[-1.36, 14.458, 27.916] rms=0.612 pred@FR30=6.682
+   one-variable fit E ~ -1.484 + 16.809 f_nontriv: rms=1.338, pred@17/36=6.453
+   among the 1551 flux-matched records: E range [4.4967,8.1772], regression predictions range [5.364,7.297]
+[regress stage wall 0.7s]
+==============================================================================================================
+7. CLAIM (e): FR30 level-1 frames on the cosets of 2L (own code), natural bijection + random bijections
+ cosets of 2L (reps m): [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]]; eps=m mod 2: [(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1), (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1)]; natural bijection (FR30 frame index per coset): [1, 2, 3, 4, 5, 6, 7, 0]  (B2a label order: [1,2,3,4,5,6,7,0])
+ natural bijection: E_per=10.644234146 (12^3 grid + refinement) at theta=[1.0, 0.0, 1.0]; flux nontriv=0.7083 traceless=0.5278 -1=0.1806  (claim: 10.644234146; record flux 0.7083/0.5278/0.1806)
+ 200 random bijections (22.4s): E_per min=9.791483 max=13.022226 mean=11.1931; all in [9.613979, 14.176070]: True; all > 8.770: True
+ B2a stage-C arrays: 40320 values, min=9.613979 max=14.176070, mean=11.23806  (claim: [9.613979, 14.176070]); my 200 values all occur in the arrays (|diff|<1e-6): True; max over my sample of min|E_mine - E_C|: 2.31e-14
+ 2L: 2L subset of ker phi, index 8; FR30 frames are 8 specific SO(3,Z) elements: [0, 0, 2, 4, 10, 13, 19, 21] (centre and child (0,0,0) are both the identity)
+[bijections stage wall 22.4s]
+[total wall 865.0s]
+# ADDENDUM (same session): re-check of the one large coarse-grid overestimate found in a preliminary records-stage run (different random sample)
+ k=4 S=[[1, 0, 0], [0, 1, 0], [0, 0, 4]] tri=(2, 1, 3) [exh]: record E=8.000000000 (B2a coarse 4^3, theta_rec=[1.0, 1.0, 0.5]); mine: 4^3-grid+refine=7.484776596, 8^3=7.484776596, 16^3=7.484776596 at theta=[0.05599, 0.05276, 0.5887]; record - mine = 0.515223; flux-matched: False
