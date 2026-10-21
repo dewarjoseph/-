@@ -1,0 +1,21 @@
+=== FR30 Chair44 tiling, Q8 Clifford links, pinned diagonal 24: level 4 ===  (started 2026-10-21 06:01:40, OMP_NUM_THREADS=1)
+[fr30 L4] geometry: n=4096 tiles (7 unit cubes each), box 32^3, panels |E|=46080, 24 frames, max degree 24, boundary tiles (deg<24) 1331 = 0.3250 n; links {'+1': 6138, '-1': 17412, '+i': 2581, '-i': 2536, '+j': 6148, '-j': 6148, '+k': 2536, '-k': 2581}  (1.4s, rss 0.09 GB)
+   H = 24 I - A: dim 8192, nnz 72700, max|H - H^dagger| = 0.0e+00  (0.2s, rss 0.11 GB)
+   validation vs object builders (level 4): |E| 46080 vs 46080, max|H_grid - H_objects| = 0.0e+00, degrees identical: True  (10.6s)
+   lobpcg chunk:  503 it (32s, 0.06s/it), cumulative   503: lambda=[8.9196344 8.9196344 8.9487868 8.9487868] res=[6.3e-07 9.1e-07 8.7e-07 5.3e-05]  rss 0.17 GB
+   lobpcg chunk:  126 it (9s, 0.07s/it), cumulative   629: lambda=[8.9196344 8.9196344 8.9487868 8.9487868] res=[6.1e-07 9.0e-07 8.6e-07 9.6e-07]  rss 0.17 GB
+   solver: lobpcg(block=4, seed=0, tol=1e-06, maxiter=4000, chunks of <= 500 it, warm restart)  iterations=629  (42s)  converged=True  stop: all 4 block residuals < tol=1e-06
+   lowest eigenvalues (Rayleigh quotients): [8.9196344 8.9196344 8.9487868 8.9487868]
+   residuals ||H psi - lambda psi||:        [6.06e-07 8.96e-07 8.59e-07 9.58e-07]
+   Kramers split lambda_2 - lambda_1 = 4.12e-13;  gap to next pair lambda_3 - lambda_1 = 2.915e-02;  eigenvector angle bound res_1/gap = 2.1e-05
+   Kramers pair check: IPR vec1 0.002233, vec2 0.002233, max_a |p1_a - p2_a| = 1.5e-08
+   ground state: tile IPR=0.002233  IPR*n=9.1464  P=1/IPR=447.8  p_max=0.0089  s50=166 (0.0405 n)  s90=762 (0.1860 n)
+   boundary weight (deg < bulk) = 0.00748  (boundary tile fraction 0.3250, enhancement 0.023)
+    d     8^d       S2(d)    1/S2(d)  1/S2/8^d  D2(d) | interface w(d)    tiles fraction  w/frac
+    1       8     0.31631      3.161    0.3952  1.661 |        0.65569     1277   0.3118   2.103
+    2      64   0.0736588     13.576    0.2121  2.102 |        0.85807     2895   0.7068   1.214
+    3     512   0.0127734     78.288    0.1529  2.528 |        0.99963     4085   0.9973   1.002
+    4    4096    0.002233    447.829    0.1093  2.516 |        1.00000     4096   1.0000   1.000
+   depth-1 child weights (depth-first child order): [0.5098 0.1763 0.106  0.0242 0.0193 0.106  0.0392 0.0193]
+   second pair (lambda=8.9487868, res 8.6e-07): IPR*n=7.3723 s50=225 s90=918 1/S2(d)=[4.36, 23.37, 104.94, 555.59] interface w(1)=0.6816
+   saved audit/results/phase5a_fr30_level4_groundstate_weights.npy and phase5a_level6_structure_fr30_level4.json;  total 54s, max rss 0.17 GB

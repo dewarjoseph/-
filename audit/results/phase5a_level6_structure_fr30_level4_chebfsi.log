@@ -1,0 +1,24 @@
+=== FR30 Chair44 tiling, Q8 Clifford links, pinned diagonal 24: level 4 ===  (started 2026-10-21 06:20:20, OMP_NUM_THREADS=1)
+[fr30 L4] geometry: n=4096 tiles (7 unit cubes each), box 32^3, panels |E|=46080, 24 frames, max degree 24, boundary tiles (deg<24) 1331 = 0.3250 n; links {'+1': 6138, '-1': 17412, '+i': 2581, '-i': 2536, '+j': 6148, '-j': 6148, '+k': 2536, '-k': 2581}  (0.2s, rss 0.09 GB)
+   H = 24 I - A: dim 8192, nnz 72700, max|H - H^dagger| = 0.0e+00  (0.0s, rss 0.11 GB)
+   validation vs object builders (level 4): |E| 46080 vs 46080, max|H_grid - H_objects| = 0.0e+00, degrees identical: True  (1.0s)
+   pass   0 deg  20 nmv    22  theta_1=9.3620901 theta_K=9.4011115 theta_m=9.9366186  res[:K] max=5.70e-01 min=5.58e-01 res[K:] min=5.74e-01 orth=1.1e-15  0s rss=0.17GB
+   pass   1 deg  30 nmv    53  theta_1=8.9389611 theta_K=8.9738608 theta_m=9.1882809  res[:K] max=6.50e-02 min=5.59e-02 res[K:] min=5.83e-02 orth=4.4e-16  0s rss=0.17GB
+   pass   2 deg  45 nmv    99  theta_1=8.9196680 theta_K=8.9489819 theta_m=9.0960350  res[:K] max=5.03e-03 min=2.40e-03 res[K:] min=3.15e-03 orth=8.9e-16  1s rss=0.17GB
+   pass   3 deg  55 nmv   155  theta_1=8.9196344 theta_K=8.9487868 theta_m=9.0833663  res[:K] max=4.81e-05 min=5.77e-06 res[K:] min=1.09e-05 orth=1.0e-15  1s rss=0.17GB
+   pass   4 deg  65 nmv   221  theta_1=8.9196344 theta_K=8.9487868 theta_m=9.0763900  res[:K] max=3.88e-08 min=1.68e-09 res[K:] min=1.02e-08 orth=6.7e-16  1s rss=0.17GB
+   solver: chebfsi(block=32, K=4, lam_max=48.0, tol=1e-07, seed=0; Zhou-Saad Chebyshev filter + Rayleigh-Ritz, audit/phase5a_edge_states.py)  iterations=221  (1s)  converged=True  stop: res[:4] < tol
+   lowest eigenvalues (Rayleigh quotients): [8.9196344 8.9196344 8.9487868 8.9487868]
+   residuals ||H psi - lambda psi||:        [3.74e-09 1.68e-09 3.88e-08 2.21e-08]
+   Kramers split lambda_2 - lambda_1 = 1.42e-14;  gap to next pair lambda_3 - lambda_1 = 2.915e-02;  eigenvector angle bound res_1/gap = 1.3e-07
+   Kramers pair check: IPR vec1 0.002233, vec2 0.002233, max_a |p1_a - p2_a| = 1.6e-10
+   ground state: tile IPR=0.002233  IPR*n=9.1464  P=1/IPR=447.8  p_max=0.0089  s50=166 (0.0405 n)  s90=762 (0.1860 n)
+   boundary weight (deg < bulk) = 0.00748  (boundary tile fraction 0.3250, enhancement 0.023)
+    d     8^d       S2(d)    1/S2(d)  1/S2/8^d  D2(d) | interface w(d)    tiles fraction  w/frac
+    1       8     0.31631      3.161    0.3952  1.661 |        0.65569     1277   0.3118   2.103
+    2      64   0.0736589     13.576    0.2121  2.102 |        0.85807     2895   0.7068   1.214
+    3     512   0.0127734     78.288    0.1529  2.528 |        0.99963     4085   0.9973   1.002
+    4    4096    0.002233    447.829    0.1093  2.516 |        1.00000     4096   1.0000   1.000
+   depth-1 child weights (depth-first child order): [0.5098 0.1763 0.106  0.0242 0.0193 0.106  0.0392 0.0193]
+   second pair (lambda=8.9487868, res 3.9e-08): IPR*n=7.3723 s50=225 s90=918 1/S2(d)=[4.36, 23.37, 104.94, 555.59] interface w(1)=0.6816
+   saved audit/results/phase5a_fr30_level4_groundstate_weights_chebfsi.npy and phase5a_level6_structure_fr30_level4_chebfsi.json;  total 3s, max rss 0.17 GB

@@ -1,0 +1,133 @@
+phase5a Task A5: Lean template generalization (closed_form_general) and Q8 class-invariance theorems
+Date: 2026-10-21T06:18:10Z   Lean: Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)
+
+== Files changed ==
+  audit/lean_template_type_substitution.lean   (template: + applyG, CFG, applyG_add/smul/congr, step_case_general, closed_form_general,
+                                                closed_form_all_direct, applyS_eq_applyG, CF_eq_CFG; closed_form_all now := instantiation;
+                                                + qconj, q8Elements, q8_closed, q8_conj_is_inverse, q8_class_conj_invariant, q8_class_inverse_invariant)
+  certificates/TypeSubstitutionCertificate.lean (regenerated: python3 -I audit/export_type_certificate.py ; data block byte-identical to HEAD)
+  git diff --stat (template, certificate):
+     audit/lean_template_type_substitution.lean    | 146 +++++++++++++++++++++++++-
+     certificates/TypeSubstitutionCertificate.lean | 146 +++++++++++++++++++++++++-
+     2 files changed, 288 insertions(+), 4 deletions(-)
+
+== sha256 ==
+f8f89bbbef9cf3c8e370c53d251f19cc30126e85fc01126f8404a2794500de68  certificates/TypeSubstitutionCertificate.lean
+e7539a7f13aa05992186ac83681cf13fad1775095426179f467656e7c871a856  audit/lean_template_type_substitution.lean
+ab0884d44b9762f2e63ef87e6e9aae83dd625e55f862540aef9fb47a49d3bfcf  /tmp/claude-0/-home-user--/3e28775d-be57-5932-b9d4-6e0f425b644f/scratchpad/phase5a_TypeSubstitutionCertificate_native.lean
+82f7b5babfb2a75ca6e70e24fcd51d38f1c9143b0e924bb8148be83785af03a0  /tmp/claude-0/-home-user--/3e28775d-be57-5932-b9d4-6e0f425b644f/scratchpad/phase5a_general_theorem_datafree.lean
+
+== Step 1: regenerate certificate ==
+  command: cd /home/user/- && python3 -u -I audit/export_type_certificate.py
+  | common denominator D = 64 ; lim N_m/8^m = 18
+  |   f(+1) = 19/36
+  |   f(-1) = 13/144
+  |   f(i) = 1/9
+  |   f(j) = 23/144
+  |   f(k) = 1/9
+  | exported certificates/TypeSubstitutionCertificate.lean: 49 panel types, 108 plaquette types, D=64
+  | 
+  | real	0m30.911s
+  | user	0m16.113s
+  | sys	0m0.095s
+  | EXIT=0
+
+== Step 2: scratch copy with every 'decide +kernel' replaced by 'native_decide' (14 replacements; the real certificate is untouched) ==
+  command: sed 's/decide +kernel/native_decide/g' certificates/TypeSubstitutionCertificate.lean > /tmp/claude-0/-home-user--/3e28775d-be57-5932-b9d4-6e0f425b644f/scratchpad/phase5a_TypeSubstitutionCertificate_native.lean
+  diff certificate vs scratch:
+         14 <   decide +kernel
+         14 >   native_decide
+
+== Step 3: compile the scratch copy (NOT the real certificate; the full kernel run is left to the orchestrator) ==
+  command: cd /tmp/claude-0/-home-user--/3e28775d-be57-5932-b9d4-6e0f425b644f/scratchpad && /tmp/claude-0/-home-user--/3e28775d-be57-5932-b9d4-6e0f425b644f/scratchpad/leandl/lean-4.34.1-linux/bin/lean phase5a_TypeSubstitutionCertificate_native.lean
+  output (complete; zero errors, zero warnings):
+  | 'TypeSubstitution.types_distinct' depends on axioms: [propext,
+  |  TypeSubstitution.types_distinct._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.panel_images_certified' depends on axioms: [propext,
+  |  TypeSubstitution.panel_images_certified._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.plaquette_images_certified' depends on axioms: [propext,
+  |  TypeSubstitution.plaquette_images_certified._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.classes_certified' depends on axioms: [propext,
+  |  TypeSubstitution.classes_certified._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.standard_level1_certified' depends on axioms: [propext,
+  |  TypeSubstitution.standard_level1_certified._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.equivariance_certified' depends on axioms: [propext,
+  |  TypeSubstitution.equivariance_certified._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.seed_certified' depends on axioms: [propext,
+  |  TypeSubstitution.seed_certified._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.level1_geometry_matches_recursion' depends on axioms: [propext,
+  |  TypeSubstitution.level1_geometry_matches_recursion._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.level2_geometry_matches_recursion' depends on axioms: [propext,
+  |  TypeSubstitution.level2_geometry_matches_recursion._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.eigen_check' depends on axioms: [propext, TypeSubstitution.eigen_check._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.u1_check' depends on axioms: [propext, TypeSubstitution.u1_check._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.u2_check' depends on axioms: [propext, TypeSubstitution.u2_check._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.base_check' depends on axioms: [propext, TypeSubstitution.base_check._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.closed_form_all' depends on axioms: [propext,
+  |  Quot.sound,
+  |  TypeSubstitution.base_check._native.native_decide.ax_1_1,
+  |  TypeSubstitution.eigen_check._native.native_decide.ax_1_1,
+  |  TypeSubstitution.u1_check._native.native_decide.ax_1_1,
+  |  TypeSubstitution.u2_check._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.class_counts_closed_form' depends on axioms: [propext,
+  |  Quot.sound,
+  |  TypeSubstitution.base_check._native.native_decide.ax_1_1,
+  |  TypeSubstitution.eigen_check._native.native_decide.ax_1_1,
+  |  TypeSubstitution.u1_check._native.native_decide.ax_1_1,
+  |  TypeSubstitution.u2_check._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.total_closed_form' depends on axioms: [propext,
+  |  Quot.sound,
+  |  TypeSubstitution.base_check._native.native_decide.ax_1_1,
+  |  TypeSubstitution.eigen_check._native.native_decide.ax_1_1,
+  |  TypeSubstitution.u1_check._native.native_decide.ax_1_1,
+  |  TypeSubstitution.u2_check._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.limit_frequencies' depends on axioms: [propext,
+  |  TypeSubstitution.limit_frequencies._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.closed_form_general' depends on axioms: [propext, Quot.sound]
+  | 'TypeSubstitution.closed_form_all_direct' depends on axioms: [propext,
+  |  Classical.choice,
+  |  Quot.sound,
+  |  TypeSubstitution.base_check._native.native_decide.ax_1_1,
+  |  TypeSubstitution.eigen_check._native.native_decide.ax_1_1,
+  |  TypeSubstitution.u1_check._native.native_decide.ax_1_1,
+  |  TypeSubstitution.u2_check._native.native_decide.ax_1_1]
+  | 'TypeSubstitution.q8_closed' depends on axioms: [propext]
+  | 'TypeSubstitution.q8_conj_is_inverse' does not depend on any axioms
+  | 'TypeSubstitution.q8_class_conj_invariant' does not depend on any axioms
+  | 'TypeSubstitution.q8_class_inverse_invariant' does not depend on any axioms
+  | 
+  | real	0m24.895s
+  | user	0m13.955s
+  | sys	0m0.635s
+  | EXIT=0
+
+== Step 4: data-free extract (prelude + fold lemmas + general section only; no certificate data, no native_decide) compiled with the kernel ==
+  file: /tmp/claude-0/-home-user--/3e28775d-be57-5932-b9d4-6e0f425b644f/scratchpad/phase5a_general_theorem_datafree.lean
+  command: cd /tmp/claude-0/-home-user--/3e28775d-be57-5932-b9d4-6e0f425b644f/scratchpad && /tmp/claude-0/-home-user--/3e28775d-be57-5932-b9d4-6e0f425b644f/scratchpad/leandl/lean-4.34.1-linux/bin/lean phase5a_general_theorem_datafree.lean
+  output:
+  | 'TypeSubstitution.closed_form_general' depends on axioms: [propext, Quot.sound]
+  | 'TypeSubstitution.step_case_general' depends on axioms: [propext, Quot.sound]
+  | 'TypeSubstitution.q8_closed' depends on axioms: [propext]
+  | 'TypeSubstitution.q8_conj_is_inverse' does not depend on any axioms
+  | 'TypeSubstitution.q8_class_conj_invariant' does not depend on any axioms
+  | 'TypeSubstitution.q8_class_inverse_invariant' does not depend on any axioms
+  | 
+  | real	0m2.643s
+  | user	0m1.917s
+  | sys	0m0.126s
+  | EXIT=0
+
+== Notes ==
+  * The new hand proofs (closed_form_general, step_case_general, applyG_*) and the Q8 theorems (plain 'decide') are kernel-checked in BOTH compiles above;
+    only the 14 data checks were run through native_decide in the scratch copy. Axioms of closed_form_general: [propext, Quot.sound]; of the Q8 class
+    theorems: none.
+  * closed_form_all (statement unchanged) is now 'closed_form_general N Sentry fvec W8 W4 W2 W1 D useq rfl rfl eigen_identities base_case'; its axiom list
+    in the scratch compile is [propext, Quot.sound, base_check, eigen_check, u1_check, u2_check] (the old direct proof, kept as closed_form_all_direct,
+    additionally uses Classical.choice).
+  * First compile attempt (compile1.log) had one linter warning (unused hu0); second attempt placed 'set_option ... in' after a doc comment and failed to
+    parse (compile2.log); third attempt is the one recorded above.
+
+== Step 5: tests ==
+  command: cd /home/user/- && PHASE5A_LEAN=/tmp/claude-0/-home-user--/3e28775d-be57-5932-b9d4-6e0f425b644f/scratchpad/leandl/lean-4.34.1-linux/bin/lean python3 -u -I -m pytest -q tests/test_phase5a_lean_general_theorem.py tests/test_independent_audit_regression.py -k 'phase5a_lean or certificate_file_matches' -p no:cacheprovider
+  | ........                                                                 [100%]
+  | 8 passed, 15 deselected in 3.90s

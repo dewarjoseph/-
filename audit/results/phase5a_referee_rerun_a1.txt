@@ -1,0 +1,3 @@
+rerun wall time 1.45 s
+saved lines 75 fresh lines 75
+line differences (ignoring timings): 0 | length equal: True

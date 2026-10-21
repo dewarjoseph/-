@@ -1,0 +1,26 @@
+=== cube: unit cube / FR30-type decoration / Clifford (pinned 6) ===   (pinned operator; python 3.13.16, numpy 2.5.3, OMP_NUM_THREADS=1)
+   decoration: (0, 0, 0):(0, 1, 2), (0, 0, 1):(0, 2, 1), (0, 1, 0):(2, 1, 0), (0, 1, 1):(1, 2, 0), (1, 0, 0):(1, 0, 2), (1, 0, 1):(0, 1, 2), (1, 1, 0):(2, 0, 1), (1, 1, 1):(0, 2, 1)
+[cube] level 3: n=512 dim=1024 |E|=1344 nnz=11776 bulk coordination 6, boundary tiles 296 (0.578); interface tile counts {d: |I_d|} = {1: 296, 2: 504, 3: 512}; link labels {'-k': 64, '-1': 740, '+i': 73, '+k': 64, '-j': 165, '+j': 165, '-i': 73}; build 0.2s
+   dense eigh (evr, subset_by_index=(0,3)) (1s, maxrss 0.11 GB)
+   lowest 4: [1.9139482 1.9139482 1.9753077 1.9753077]   residuals: [5.2e-15 1.7e-14 1.3e-14 1.7e-14]
+   ground pair (split 2.0e-15, gap to next pair 0.06136): IPR=0.0153043 [vec1 0.0153043, vec2 0.0153043]  IPR*n=7.8358  P=65.3  p_max=0.0459 s50=24 s90=170  boundary weight=0.0645 (tile fraction 0.578)
+   S2(d)    d=1..L: 0.13546  0.07277  0.01530   1/S2(d): 7.382  13.742  65.341   (uniform: 8  64  512)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.8591 [0.5781, 1.486]  d=2: 0.9999 [0.9844, 1.016]  d=3: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [0.0848 0.1263 0.1823 0.1066 0.1066 0.1263 0.1823 0.0848]
+   check vs known IPR*n 7.836: diff -0.0002
+[cube] level 4: n=4096 dim=8192 |E|=11520 nnz=100352 bulk coordination 6, boundary tiles 1352 (0.330); interface tile counts {d: |I_d|} = {1: 1352, 2: 3096, 3: 4088, 4: 4096}; link labels {'-k': 512, '-1': 6180, '+i': 585, '+k': 512, '-j': 1573, '+j': 1573, '-i': 585}; build 1.6s
+   lobpcg(block=8, seed=0, tol=1e-7, diag precond) (4s, maxrss 0.13 GB)  warnings: Exited postprocessing with accuracies 
+   lowest 4: [1.8610131 1.8610131 1.8692416 1.8692416]   residuals: [3.1e-08 4.7e-08 2.5e-08 4.3e-08]
+   ground pair (split -2.0e-15, gap to next pair 0.00823): IPR=0.00251269 [vec1 0.00251269, vec2 0.00251269]  IPR*n=10.2920  P=398.0  p_max=0.0128 s50=153 s90=861  boundary weight=0.0064 (tile fraction 0.330)
+   S2(d)    d=1..L: 0.14607  0.08489  0.01474  0.00251   1/S2(d): 6.846  11.779  67.849  397.979   (uniform: 8  64  512  4096)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.5386 [0.3301, 1.632]  d=2: 0.7733 [0.7559, 1.023]  d=3: 1.0000 [0.9980, 1.002]  d=4: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [0.1278 0.0796 0.2078 0.0848 0.0848 0.0796 0.2078 0.1278]
+   check vs known IPR*n 10.292: diff -0.0000
+[cube] level 5: n=32768 dim=65536 |E|=95232 nnz=827392 bulk coordination 6, boundary tiles 5768 (0.176); interface tile counts {d: |I_d|} = {1: 5768, 2: 15192, 3: 26936, 4: 32760, 5: 32768}; link labels {'-k': 4096, '-1': 50468, '+i': 4681, '+k': 4096, '-j': 13605, '+j': 13605, '-i': 4681}; build 12.0s
+   lobpcg(block=6, seed=0, tol=1e-7, diag precond) (75s, maxrss 0.33 GB)  warnings: Exited postprocessing with accuracies 
+   lowest 4: [1.8521062 1.8521062 1.8535642 1.8535642]   residuals: [3.3e-08 5.4e-08 1.4e-08 8.8e-08]
+   ground pair (split 2.7e-14, gap to next pair 0.00146): IPR=0.000525192 [vec1 0.000525192, vec2 0.000525192]  IPR*n=17.2095  P=1904.1  p_max=0.0036 s50=786 s90=5233  boundary weight=0.0006 (tile fraction 0.176)
+   S2(d)    d=1..L: 0.15176  0.09179  0.02040  0.00320  0.00053   1/S2(d): 6.589  10.895  49.022  312.065  1904.066   (uniform: 8  64  512  4096  32768)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.2895 [0.1760, 1.645]  d=2: 0.4429 [0.4636, 0.955]  d=3: 0.7735 [0.8220, 0.941]  d=4: 1.0000 [0.9998, 1.000]  d=5: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [0.1336 0.0394 0.2024 0.1246 0.1246 0.0394 0.2024 0.1336]
+[cube] level 6: n=262144 dim=524288 |E|=774144 nnz=6717440 bulk coordination 6, boundary tiles 23816 (0.091); interface tile counts {d: |I_d|} = {1: 23816, 2: 67032, 3: 137144, 4: 222840, 5: 262136, 6: 262144}; link labels {'-k': 32768, '-1': 407844, '+i': 37449, '+k': 32768, '-j': 112933, '+j': 112933, '-i': 37449}; build 100.9s

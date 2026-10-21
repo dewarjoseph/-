@@ -1,0 +1,149 @@
+TASK C1: LEVEL-5 PARTICIPATION SCALING OF THE PINNED GROUND STATE, FR30 AND CONTROLS (numerical evidence; all numbers from this run)
+alpha_(k->k+1) = -log(IPR_(k+1)/IPR_k)/log 8 (1 extended, 0 localized); IPR*n = 1 for a uniform state; 1/S2(d) = effective number of occupied depth-d children (8^d uniform)
+
+system                                                   E0 L3     E0 L4     E0 L5 | IPR*n L3 IPR*n L4 IPR*n L5 | a(3->4) a(4->5) | ratio45  bw L5  max res
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+FR30 chair / Clifford Q8 (reference)                   9.37847   8.91963   8.79701 |    6.424    9.146   19.930 |   0.830   0.625 |   2.179 0.0007  6.9e-08  (no dense L4 check)
+unit cube / FR30-type decoration / Clifford (pinned 6)   1.91395   1.86101   1.85211 |    7.836   10.292   17.209 |   0.869   0.753 |   1.672 0.0006  8.8e-08  (no dense L4 check)
+chair / random admissible decoration, seed 1           7.72170   6.92890   6.68919 |    8.824   72.011  477.713 |  -0.010   0.090 |   6.634 0.0012  6.5e-08  (no dense L4 check)
+chair / random admissible decoration, seed 2           8.33307   7.45547   7.15814 |    7.007   69.116  439.914 |  -0.101   0.110 |   6.365 0.0000  5.6e-08  (no dense L4 check)
+chair / random admissible decoration, seed 3           7.91578   7.27433   7.16957 |    7.134   29.282   61.185 |   0.321   0.646 |   2.090 0.0016  1.8e-07  (no dense L4 check)
+FR30 graph / sign-stripped links (+ class rep.)        6.95908   6.14626   6.00095 |    3.543    5.730    7.178 |   0.769   0.892 |   1.253 0.0015  7.5e-08  (no dense L4 check)
+FR30 graph / i.i.d. random Q8 links (seed 11)         15.14494  14.69494  14.40827 |   17.086  125.416 1692.418 |   0.041  -0.251 |  13.494 0.0007  6.7e-08  (no dense L4 check)
+FR30 graph / trivial links (no flux)                   1.66951   0.50273   0.13860 |    2.259    2.885    3.264 |   0.882   0.941 |   1.132 0.0063  6.6e-08  (no dense L4 check)
+
+LOWEST 4 EIGENVALUES AND RESIDUALS
+  FR30 chair / Clifford Q8 (reference)                 L3: [9.37847  9.37847  9.589403 9.589403]  res max 8.4e-14  [dense eigh (evr, subset_by_index=(0,3)), 1s]
+  FR30 chair / Clifford Q8 (reference)                 L4: [8.919634 8.919634 8.948787 8.948787]  res max 5.3e-08  [lobpcg(block=8, seed=0, tol=1e-7, diag precond), 9s]
+  FR30 chair / Clifford Q8 (reference)                 L5: [8.797011 8.797011 8.79898  8.79898 ]  res max 6.9e-08  [lobpcg(block=6, seed=0, tol=1e-7, diag precond), 215s]
+  unit cube / FR30-type decoration / Clifford (pinned 6) L3: [1.913948 1.913948 1.975308 1.975308]  res max 1.7e-14  [dense eigh (evr, subset_by_index=(0,3)), 0s]
+  unit cube / FR30-type decoration / Clifford (pinned 6) L4: [1.861013 1.861013 1.869242 1.869242]  res max 4.7e-08  [lobpcg(block=8, seed=0, tol=1e-7, diag precond), 4s]
+  unit cube / FR30-type decoration / Clifford (pinned 6) L5: [1.852106 1.852106 1.853564 1.853564]  res max 8.8e-08  [lobpcg(block=6, seed=0, tol=1e-7, diag precond), 73s]
+  chair / random admissible decoration, seed 1         L3: [7.7217   7.7217   8.291257 8.291257]  res max 6.9e-14  [dense eigh (evr, subset_by_index=(0,3)), 0s]
+  chair / random admissible decoration, seed 1         L4: [6.928902 6.928902 7.276891 7.276891]  res max 6.5e-08  [lobpcg(block=8, seed=0, tol=1e-7, diag precond), 3s]
+  chair / random admissible decoration, seed 1         L5: [6.689189 6.689189 6.738913 6.738913]  res max 3.6e-08  [lobpcg(block=6, seed=0, tol=1e-7, diag precond), 32s]
+  chair / random admissible decoration, seed 2         L3: [8.333074 8.333074 8.738979 8.738979]  res max 6.4e-14  [dense eigh (evr, subset_by_index=(0,3)), 1s]
+  chair / random admissible decoration, seed 2         L4: [7.455466 7.455466 7.775898 7.775898]  res max 5.6e-08  [lobpcg(block=8, seed=0, tol=1e-7, diag precond), 5s]
+  chair / random admissible decoration, seed 2         L5: [7.158138 7.158138 7.163324 7.163324]  res max 4.0e-08  [lobpcg(block=6, seed=0, tol=1e-7, diag precond), 88s]
+  chair / random admissible decoration, seed 3         L3: [7.915784 7.915784 8.264971 8.264971]  res max 5.8e-14  [dense eigh (evr, subset_by_index=(0,3)), 0s]
+  chair / random admissible decoration, seed 3         L4: [7.274332 7.274332 7.38747  7.38747 ]  res max 1.8e-07  [lobpcg(block=8, seed=0, tol=1e-7, diag precond), 68s]
+  chair / random admissible decoration, seed 3         L5: [7.169573 7.169573 7.188704 7.188704]  res max 6.3e-08  [lobpcg(block=6, seed=0, tol=1e-7, diag precond), 35s]
+  FR30 graph / sign-stripped links (+ class rep.)      L3: [6.95908  6.95908  7.362655 7.362655]  res max 6.9e-14  [dense eigh (evr, subset_by_index=(0,3)), 0s]
+  FR30 graph / sign-stripped links (+ class rep.)      L4: [6.146264 6.146264 6.213371 6.213371]  res max 3.9e-08  [lobpcg(block=8, seed=0, tol=1e-7, diag precond), 4s]
+  FR30 graph / sign-stripped links (+ class rep.)      L5: [6.000946 6.000946 6.026319 6.026319]  res max 7.5e-08  [lobpcg(block=6, seed=0, tol=1e-7, diag precond), 44s]
+  FR30 graph / i.i.d. random Q8 links (seed 11)        L3: [15.144941 15.144941 15.252238 15.252238]  res max 7.1e-14  [dense eigh (evr, subset_by_index=(0,3)), 1s]
+  FR30 graph / i.i.d. random Q8 links (seed 11)        L4: [14.694943 14.694943 14.723245 14.723245]  res max 2.6e-08  [lobpcg(block=8, seed=0, tol=1e-7, diag precond), 3s]
+  FR30 graph / i.i.d. random Q8 links (seed 11)        L5: [14.408275 14.408275 14.416454 14.416454]  res max 6.7e-08  [lobpcg(block=6, seed=0, tol=1e-7, diag precond), 24s]
+  FR30 graph / trivial links (no flux)                 L3: [1.669512 1.669512 2.712476 2.712476]  res max 5.6e-14  [dense eigh (evr, subset_by_index=(0,3)), 0s]
+  FR30 graph / trivial links (no flux)                 L4: [0.502729 0.502729 0.812074 0.812074]  res max 3.8e-08  [lobpcg(block=8, seed=0, tol=1e-7, diag precond), 2s]
+  FR30 graph / trivial links (no flux)                 L5: [0.138602 0.138602 0.221824 0.221824]  res max 6.6e-08  [lobpcg(block=6, seed=0, tol=1e-7, diag precond), 33s]
+
+BOX COUNTING: effective number of occupied depth-d children 1/S2(d) (uniform: 8^d), per level
+  FR30 chair / Clifford Q8 (reference)                 L3: d=1:    2.405 (0.301)  d=2:   12.008 (0.188)  d=3:   79.697 (0.156)
+  FR30 chair / Clifford Q8 (reference)                 L4: d=1:    3.161 (0.395)  d=2:   13.576 (0.212)  d=3:   78.288 (0.153)  d=4:  447.829 (0.109)
+  FR30 chair / Clifford Q8 (reference)                 L5: d=1:    3.252 (0.407)  d=2:   17.356 (0.271)  d=3:   72.186 (0.141)  d=4:  301.777 (0.074)  d=5: 1644.123 (0.050)
+  unit cube / FR30-type decoration / Clifford (pinned 6) L3: d=1:    7.382 (0.923)  d=2:   13.742 (0.215)  d=3:   65.341 (0.128)
+  unit cube / FR30-type decoration / Clifford (pinned 6) L4: d=1:    6.846 (0.856)  d=2:   11.779 (0.184)  d=3:   67.849 (0.133)  d=4:  397.979 (0.097)
+  unit cube / FR30-type decoration / Clifford (pinned 6) L5: d=1:    6.589 (0.824)  d=2:   10.895 (0.170)  d=3:   49.022 (0.096)  d=4:  312.065 (0.076)  d=5: 1904.066 (0.058)
+  chair / random admissible decoration, seed 1         L3: d=1:    4.689 (0.586)  d=2:   11.269 (0.176)  d=3:   58.022 (0.113)
+  chair / random admissible decoration, seed 1         L4: d=1:    4.494 (0.562)  d=2:    4.833 (0.076)  d=3:   12.442 (0.024)  d=4:   56.880 (0.014)
+  chair / random admissible decoration, seed 1         L5: d=1:    4.338 (0.542)  d=2:    4.382 (0.068)  d=3:    5.619 (0.011)  d=4:   14.754 (0.004)  d=5:   68.594 (0.002)
+  chair / random admissible decoration, seed 2         L3: d=1:    3.352 (0.419)  d=2:   15.729 (0.246)  d=3:   73.074 (0.143)
+  chair / random admissible decoration, seed 2         L4: d=1:    4.312 (0.539)  d=2:    4.659 (0.073)  d=3:   14.326 (0.028)  d=4:   59.263 (0.014)
+  chair / random admissible decoration, seed 2         L5: d=1:    1.936 (0.242)  d=2:    5.281 (0.083)  d=3:    5.463 (0.011)  d=4:   15.961 (0.004)  d=5:   74.487 (0.002)
+  chair / random admissible decoration, seed 3         L3: d=1:    3.466 (0.433)  d=2:   15.378 (0.240)  d=3:   71.767 (0.140)
+  chair / random admissible decoration, seed 3         L4: d=1:    1.936 (0.242)  d=2:    9.699 (0.152)  d=3:   28.025 (0.055)  d=4:  139.882 (0.034)
+  chair / random admissible decoration, seed 3         L5: d=1:    1.643 (0.205)  d=2:    8.899 (0.139)  d=3:   27.100 (0.053)  d=4:  103.750 (0.025)  d=5:  535.554 (0.016)
+  FR30 graph / sign-stripped links (+ class rep.)      L3: d=1:    4.430 (0.554)  d=2:   27.453 (0.429)  d=3:  144.497 (0.282)
+  FR30 graph / sign-stripped links (+ class rep.)      L4: d=1:    3.615 (0.452)  d=2:   20.477 (0.320)  d=3:  110.425 (0.216)  d=4:  714.876 (0.175)
+  FR30 graph / sign-stripped links (+ class rep.)      L5: d=1:    3.140 (0.393)  d=2:   14.880 (0.233)  d=3:   94.379 (0.184)  d=4:  651.514 (0.159)  d=5: 4565.241 (0.139)
+  FR30 graph / i.i.d. random Q8 links (seed 11)        L3: d=1:    2.053 (0.257)  d=2:    5.716 (0.089)  d=3:   29.966 (0.059)
+  FR30 graph / i.i.d. random Q8 links (seed 11)        L4: d=1:    1.062 (0.133)  d=2:    2.374 (0.037)  d=3:    5.926 (0.012)  d=4:   32.659 (0.008)
+  FR30 graph / i.i.d. random Q8 links (seed 11)        L5: d=1:    1.000 (0.125)  d=2:    1.357 (0.021)  d=3:    1.411 (0.003)  d=4:    3.983 (0.001)  d=5:   19.362 (0.001)
+  FR30 graph / trivial links (no flux)                 L3: d=1:    4.860 (0.607)  d=2:   31.847 (0.498)  d=3:  226.631 (0.443)
+  FR30 graph / trivial links (no flux)                 L4: d=1:    4.375 (0.547)  d=2:   27.491 (0.430)  d=3:  183.831 (0.359)  d=4: 1419.987 (0.347)
+  FR30 graph / trivial links (no flux)                 L5: d=1:    4.157 (0.520)  d=2:   25.408 (0.397)  d=3:  166.019 (0.324)  d=4: 1267.030 (0.309)  d=5: 10039.400 (0.306)
+
+1/S2(d) GROWTH RATIOS AT FIXED DEPTH d BETWEEN CONSECUTIVE LEVELS (1 = same number of occupied depth-d children; the depth-d children are 8x larger at the next level)
+  FR30 chair / Clifford Q8 (reference)                 3->4: d=1: 1.314  d=2: 1.131  d=3: 0.982
+  FR30 chair / Clifford Q8 (reference)                 4->5: d=1: 1.029  d=2: 1.278  d=3: 0.922  d=4: 0.674
+  unit cube / FR30-type decoration / Clifford (pinned 6) 3->4: d=1: 0.927  d=2: 0.857  d=3: 1.038
+  unit cube / FR30-type decoration / Clifford (pinned 6) 4->5: d=1: 0.962  d=2: 0.925  d=3: 0.723  d=4: 0.784
+  chair / random admissible decoration, seed 1         3->4: d=1: 0.958  d=2: 0.429  d=3: 0.214
+  chair / random admissible decoration, seed 1         4->5: d=1: 0.965  d=2: 0.907  d=3: 0.452  d=4: 0.259
+  chair / random admissible decoration, seed 2         3->4: d=1: 1.286  d=2: 0.296  d=3: 0.196
+  chair / random admissible decoration, seed 2         4->5: d=1: 0.449  d=2: 1.134  d=3: 0.381  d=4: 0.269
+  chair / random admissible decoration, seed 3         3->4: d=1: 0.559  d=2: 0.631  d=3: 0.391
+  chair / random admissible decoration, seed 3         4->5: d=1: 0.848  d=2: 0.917  d=3: 0.967  d=4: 0.742
+  FR30 graph / sign-stripped links (+ class rep.)      3->4: d=1: 0.816  d=2: 0.746  d=3: 0.764
+  FR30 graph / sign-stripped links (+ class rep.)      4->5: d=1: 0.868  d=2: 0.727  d=3: 0.855  d=4: 0.911
+  FR30 graph / i.i.d. random Q8 links (seed 11)        3->4: d=1: 0.517  d=2: 0.415  d=3: 0.198
+  FR30 graph / i.i.d. random Q8 links (seed 11)        4->5: d=1: 0.942  d=2: 0.572  d=3: 0.238  d=4: 0.122
+  FR30 graph / trivial links (no flux)                 3->4: d=1: 0.900  d=2: 0.863  d=3: 0.811
+  FR30 graph / trivial links (no flux)                 4->5: d=1: 0.950  d=2: 0.924  d=3: 0.903  d=4: 0.892
+
+WITHIN-LEVEL BRANCHING S2(d)/S2(d+1) (occupied sub-children per occupied child; 8 uniform)
+  FR30 chair / Clifford Q8 (reference)                 L3: d=0->1: 2.405  d=1->2: 4.992  d=2->3: 6.637
+  FR30 chair / Clifford Q8 (reference)                 L4: d=0->1: 3.161  d=1->2: 4.294  d=2->3: 5.767  d=3->4: 5.720
+  FR30 chair / Clifford Q8 (reference)                 L5: d=0->1: 3.252  d=1->2: 5.336  d=2->3: 4.159  d=3->4: 4.181  d=4->5: 5.448
+  unit cube / FR30-type decoration / Clifford (pinned 6) L3: d=0->1: 7.382  d=1->2: 1.862  d=2->3: 4.755
+  unit cube / FR30-type decoration / Clifford (pinned 6) L4: d=0->1: 6.846  d=1->2: 1.721  d=2->3: 5.760  d=3->4: 5.866
+  unit cube / FR30-type decoration / Clifford (pinned 6) L5: d=0->1: 6.589  d=1->2: 1.653  d=2->3: 4.500  d=3->4: 6.366  d=4->5: 6.102
+  chair / random admissible decoration, seed 1         L3: d=0->1: 4.689  d=1->2: 2.403  d=2->3: 5.149
+  chair / random admissible decoration, seed 1         L4: d=0->1: 4.494  d=1->2: 1.076  d=2->3: 2.574  d=3->4: 4.572
+  chair / random admissible decoration, seed 1         L5: d=0->1: 4.338  d=1->2: 1.010  d=2->3: 1.282  d=3->4: 2.626  d=4->5: 4.649
+  chair / random admissible decoration, seed 2         L3: d=0->1: 3.352  d=1->2: 4.693  d=2->3: 4.646
+  chair / random admissible decoration, seed 2         L4: d=0->1: 4.312  d=1->2: 1.081  d=2->3: 3.075  d=3->4: 4.137
+  chair / random admissible decoration, seed 2         L5: d=0->1: 1.936  d=1->2: 2.728  d=2->3: 1.034  d=3->4: 2.922  d=4->5: 4.667
+  chair / random admissible decoration, seed 3         L3: d=0->1: 3.466  d=1->2: 4.437  d=2->3: 4.667
+  chair / random admissible decoration, seed 3         L4: d=0->1: 1.936  d=1->2: 5.009  d=2->3: 2.889  d=3->4: 4.991
+  chair / random admissible decoration, seed 3         L5: d=0->1: 1.643  d=1->2: 5.417  d=2->3: 3.045  d=3->4: 3.828  d=4->5: 5.162
+  FR30 graph / sign-stripped links (+ class rep.)      L3: d=0->1: 4.430  d=1->2: 6.197  d=2->3: 5.263
+  FR30 graph / sign-stripped links (+ class rep.)      L4: d=0->1: 3.615  d=1->2: 5.664  d=2->3: 5.393  d=3->4: 6.474
+  FR30 graph / sign-stripped links (+ class rep.)      L5: d=0->1: 3.140  d=1->2: 4.739  d=2->3: 6.343  d=3->4: 6.903  d=4->5: 7.007
+  FR30 graph / i.i.d. random Q8 links (seed 11)        L3: d=0->1: 2.053  d=1->2: 2.784  d=2->3: 5.242
+  FR30 graph / i.i.d. random Q8 links (seed 11)        L4: d=0->1: 1.062  d=1->2: 2.236  d=2->3: 2.497  d=3->4: 5.511
+  FR30 graph / i.i.d. random Q8 links (seed 11)        L5: d=0->1: 1.000  d=1->2: 1.357  d=2->3: 1.039  d=3->4: 2.823  d=4->5: 4.861
+  FR30 graph / trivial links (no flux)                 L3: d=0->1: 4.860  d=1->2: 6.553  d=2->3: 7.116
+  FR30 graph / trivial links (no flux)                 L4: d=0->1: 4.375  d=1->2: 6.284  d=2->3: 6.687  d=3->4: 7.724
+  FR30 graph / trivial links (no flux)                 L5: d=0->1: 4.157  d=1->2: 6.112  d=2->3: 6.534  d=3->4: 7.632  d=4->5: 7.924
+
+INTERFACE WEIGHTS w(d) [tile fraction |I_d|/n] AND BOUNDARY WEIGHT
+  FR30 chair / Clifford Q8 (reference)                 L3: d=1: 0.7821 [0.5254]  d=2: 0.9924 [0.9785]  d=3: 1.0000 [1.0000]   boundary 0.1327 [0.561]
+  FR30 chair / Clifford Q8 (reference)                 L4: d=1: 0.6557 [0.3118]  d=2: 0.8581 [0.7068]  d=3: 0.9996 [0.9973]  d=4: 1.0000 [1.0000]   boundary 0.0075 [0.325]
+  FR30 chair / Clifford Q8 (reference)                 L5: d=1: 0.5816 [0.1708]  d=2: 0.7735 [0.4454]  d=3: 0.8593 [0.7745]  d=4: 0.9999 [0.9997]  d=5: 1.0000 [1.0000]   boundary 0.0007 [0.175]
+  unit cube / FR30-type decoration / Clifford (pinned 6) L3: d=1: 0.8591 [0.5781]  d=2: 0.9999 [0.9844]  d=3: 1.0000 [1.0000]   boundary 0.0645 [0.578]
+  unit cube / FR30-type decoration / Clifford (pinned 6) L4: d=1: 0.5386 [0.3301]  d=2: 0.7733 [0.7559]  d=3: 1.0000 [0.9980]  d=4: 1.0000 [1.0000]   boundary 0.0064 [0.330]
+  unit cube / FR30-type decoration / Clifford (pinned 6) L5: d=1: 0.2895 [0.1760]  d=2: 0.4429 [0.4636]  d=3: 0.7735 [0.8220]  d=4: 1.0000 [0.9998]  d=5: 1.0000 [1.0000]   boundary 0.0006 [0.176]
+  chair / random admissible decoration, seed 1         L3: d=1: 0.8811 [0.5254]  d=2: 0.9990 [0.9785]  d=3: 1.0000 [1.0000]   boundary 0.1836 [0.561]
+  chair / random admissible decoration, seed 1         L4: d=1: 0.8609 [0.3118]  d=2: 0.8892 [0.7068]  d=3: 1.0000 [0.9973]  d=4: 1.0000 [1.0000]   boundary 0.0793 [0.325]
+  chair / random admissible decoration, seed 1         L5: d=1: 0.8513 [0.1708]  d=2: 0.8577 [0.4454]  d=3: 0.8974 [0.7745]  d=4: 1.0000 [0.9997]  d=5: 1.0000 [1.0000]   boundary 0.0012 [0.175]
+  chair / random admissible decoration, seed 2         L3: d=1: 0.8922 [0.5254]  d=2: 0.9980 [0.9785]  d=3: 1.0000 [1.0000]   boundary 0.1059 [0.561]
+  chair / random admissible decoration, seed 2         L4: d=1: 0.8722 [0.3118]  d=2: 0.9064 [0.7068]  d=3: 1.0000 [0.9973]  d=4: 1.0000 [1.0000]   boundary 0.0747 [0.325]
+  chair / random admissible decoration, seed 2         L5: d=1: 0.6379 [0.1708]  d=2: 0.8997 [0.4454]  d=3: 0.9177 [0.7745]  d=4: 1.0000 [0.9997]  d=5: 1.0000 [1.0000]   boundary 0.0000 [0.175]
+  chair / random admissible decoration, seed 3         L3: d=1: 0.9221 [0.5254]  d=2: 0.9990 [0.9785]  d=3: 1.0000 [1.0000]   boundary 0.1633 [0.561]
+  chair / random admissible decoration, seed 3         L4: d=1: 0.7188 [0.3118]  d=2: 0.9552 [0.7068]  d=3: 0.9999 [0.9973]  d=4: 1.0000 [1.0000]   boundary 0.0148 [0.325]
+  chair / random admissible decoration, seed 3         L5: d=1: 0.5036 [0.1708]  d=2: 0.8555 [0.4454]  d=3: 0.9547 [0.7745]  d=4: 1.0000 [0.9997]  d=5: 1.0000 [1.0000]   boundary 0.0016 [0.175]
+  FR30 graph / sign-stripped links (+ class rep.)      L3: d=1: 0.8735 [0.5254]  d=2: 0.9988 [0.9785]  d=3: 1.0000 [1.0000]   boundary 0.1469 [0.561]
+  FR30 graph / sign-stripped links (+ class rep.)      L4: d=1: 0.6383 [0.3118]  d=2: 0.9178 [0.7068]  d=3: 0.9999 [0.9973]  d=4: 1.0000 [1.0000]   boundary 0.0143 [0.325]
+  FR30 graph / sign-stripped links (+ class rep.)      L5: d=1: 0.3843 [0.1708]  d=2: 0.6838 [0.4454]  d=3: 0.9191 [0.7745]  d=4: 1.0000 [0.9997]  d=5: 1.0000 [1.0000]   boundary 0.0015 [0.175]
+  FR30 graph / i.i.d. random Q8 links (seed 11)        L3: d=1: 0.7472 [0.5254]  d=2: 0.9994 [0.9785]  d=3: 1.0000 [1.0000]   boundary 0.1322 [0.561]
+  FR30 graph / i.i.d. random Q8 links (seed 11)        L4: d=1: 0.0990 [0.3118]  d=2: 0.7149 [0.7068]  d=3: 1.0000 [0.9973]  d=4: 1.0000 [1.0000]   boundary 0.0839 [0.325]
+  FR30 graph / i.i.d. random Q8 links (seed 11)        L5: d=1: 0.0003 [0.1708]  d=2: 0.5607 [0.4454]  d=3: 0.6439 [0.7745]  d=4: 1.0000 [0.9997]  d=5: 1.0000 [1.0000]   boundary 0.0007 [0.175]
+  FR30 graph / trivial links (no flux)                 L3: d=1: 0.7272 [0.5254]  d=2: 0.9940 [0.9785]  d=3: 1.0000 [1.0000]   boundary 0.2148 [0.561]
+  FR30 graph / trivial links (no flux)                 L4: d=1: 0.5047 [0.3118]  d=2: 0.8172 [0.7068]  d=3: 0.9995 [0.9973]  d=4: 1.0000 [1.0000]   boundary 0.0408 [0.325]
+  FR30 graph / trivial links (no flux)                 L5: d=1: 0.3002 [0.1708]  d=2: 0.5612 [0.4454]  d=3: 0.8265 [0.7745]  d=4: 1.0000 [0.9997]  d=5: 1.0000 [1.0000]   boundary 0.0063 [0.175]
+
+COMPARISON WITH FR30 (two-point exponent alpha(4->5) and IPR*n ratio 4->5; criterion stated explicitly)
+  FR30: alpha(3->4) = 0.830, alpha(4->5) = 0.625, IPR*n ratio 4->5 = 2.179
+  'shares the FR30 growth' := |alpha_sys(4->5) - alpha_FR30(4->5)| <= 0.10 ; 'does not share' := difference >= 0.25 ; otherwise 'ambiguous'
+  unit cube / FR30-type decoration / Clifford (pinned 6) alpha(4->5) = 0.753 (diff +0.127), IPR*n ratio 1.672  -> ambiguous
+  chair / random admissible decoration, seed 1         alpha(4->5) = 0.090 (diff -0.535), IPR*n ratio 6.634  -> does not share
+  chair / random admissible decoration, seed 2         alpha(4->5) = 0.110 (diff -0.515), IPR*n ratio 6.365  -> does not share
+  chair / random admissible decoration, seed 3         alpha(4->5) = 0.646 (diff +0.020), IPR*n ratio 2.090  -> shares
+  FR30 graph / sign-stripped links (+ class rep.)      alpha(4->5) = 0.892 (diff +0.266), IPR*n ratio 1.253  -> does not share
+  FR30 graph / i.i.d. random Q8 links (seed 11)        alpha(4->5) = -0.251 (diff -0.877), IPR*n ratio 13.494  -> does not share
+  FR30 graph / trivial links (no flux)                 alpha(4->5) = 0.941 (diff +0.315), IPR*n ratio 1.132  -> does not share
+
+  (a) random decorations of the chair: ['does not share', 'does not share', 'shares']; (b) cube geometry, same decoration rule: ambiguous; (c) random links: does not share; sign-stripped: does not share; (d) no flux: does not share
+  VERDICT (numerical evidence, levels 3-5 only): the data are not clean enough to decide between the alternatives (mixed or ambiguous verdicts)

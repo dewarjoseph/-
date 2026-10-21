@@ -209,8 +209,45 @@ say(f" central child of pose (I,(-1,-1,-1)) is (g,T) = ({key(child[0])}, {tuple(
 say(" (0,0,0)-child of the root (I,0) is (I,0): the nested T_m exhaust the octant [0,oo)^3 only (box [0,2^(m+1))^3 minus [2^m,2^(m+1))^3)")
 for m in (1, 2, 3):
     pts = inflate_pose(np.eye(3, dtype=int), T, m)
-    allc = np.array([c for _, _, cs in pts for c in cs]); lo, hi = allc.min(axis=0), allc.max(axis=0)
-    say(f"  sigma^{m}(seed) bounding box {tuple(int(x) for x in lo)}..{tuple(int(x) + 1 for x in hi)} (expected [-2^(m-1), 3*2^(m-1)) ), cubes {len(allc)} = 7*8^{m}: {len(allc) == 7 * 8 ** m}")
+    allc = {c for _, _, cs in pts for c in cs}
+    arr = np.array(sorted(allc)); lo, hi = arr.min(axis=0), arr.max(axis=0)
+    N = 2 ** m
+    expected = {c for c in itertools.product(range(-N, N), repeat=3) if not all(ci >= 0 for ci in c)}
+    say(f"  sigma^{m}((I,-1)) bounding box {tuple(int(x) for x in lo)}..{tuple(int(x) + 1 for x in hi)}; equals [-2^m,2^m)^3 minus [0,2^m)^3: {allc == expected}")
+say(" => the central child touches the missing block of its supertile; the union of sigma^m((I,-1)) is R^3 minus the closed positive octant, NOT a tiling of R^3.")
+say(" Search for an INTERIOR fixed word: a word w of length k with g_w = I whose tile lies in the interior of T_k (all 26-neighbour cubes inside T_k).")
+found = None
+for k in (2, 3):
+    Tk = tiles_at_level(FR30, k); cubes_k = {c for _, _, cs in Tk for c in cs}
+    N = 2 ** (k + 1)
+    for idx, (G, Tt, cs) in enumerate(Tk):
+        if key(G) != key(np.eye(3, dtype=int)): continue
+        interior = all((c[0] + d[0], c[1] + d[1], c[2] + d[2]) in cubes_k for c in cs for d in itertools.product((-1, 0, 1), repeat=3))
+        if not interior: continue
+        word = [(idx // 8 ** (k - 1 - j)) % 8 for j in range(k)]
+        tau = Tt  # since M = I, T = tau_w
+        Tstar = [-int(x) for x in tau], 2 ** k - 1
+        if found is None: found = (k, idx, word, tuple(int(x) for x in tau))
+        say(f"   k={k}: interior identity-frame tile index {idx} (word {word}), tau_w = {tuple(int(x) for x in tau)}, fixed pose T* = -tau_w/{2**k-1}, integer: {all(int(x) % (2**k-1) == 0 for x in tau)}")
+        break
+    if found: break
+if found:
+    k, idx, word, tau = found
+    say(f" => p = (I, -tau_w/(2^k-1)) with k={k} is in the interior of its own level-{k} inflation; omega* = (U_n sigma^(nk)(p)) - T* is a tiling of R^3 with Z^3 cubes, legal patches, and sigma^k(omega*) = omega* + tau_w.")
+    # verify the nesting numerically for n=1,2 with the translated construction: sigma^(k)(p) contains p, and sigma^(2k)(p) contains sigma^k(p)
+    # work in 7*(2^k-1) scaled integer coordinates to avoid fractions: multiply all positions by (2^k-1)
+    D = 2 ** k - 1
+    def inflate_scaled(poses, levels):
+        # poses with translation in units of 1/D
+        for _ in range(levels): poses = [(G @ g, 2 * Tp + D * (G @ t)) for G, Tp in poses for g, t in ops]
+        return poses
+    p0 = (np.eye(3, dtype=int), -np.array(tau))        # translation -tau in units 1/D  (i.e. -tau/D)
+    lvl1 = inflate_scaled([p0], k); lvl2 = inflate_scaled([p0], 2 * k)
+    s1 = {(key(G), tuple(int(x) for x in Tp)) for G, Tp in lvl1}; s2 = {(key(G), tuple(int(x) for x in Tp)) for G, Tp in lvl2}
+    say(f"   check: p in sigma^k(p): {(key(p0[0]), tuple(int(x) for x in p0[1])) in s1};  sigma^k(p) subset sigma^(2k)(p): {s1 <= s2}  (|sigma^k(p)|={len(s1)}, |sigma^2k(p)|={len(s2)})")
+else:
+    say(" no interior identity-frame fixed word found for k<=3")
+say(" Non-emptiness of the hull does not need a fixed point: T_m - 2^(m-1)*(1,1,1) covers the ball of radius 2^(m-1) about the origin; a subsequence converges (compactness) to a tiling of R^3 all of whose patches are legal.")
 
 with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'results', 'phase5a_frame_substitution.txt'), 'w') as f:
     f.write("\n".join(OUT) + "\n")

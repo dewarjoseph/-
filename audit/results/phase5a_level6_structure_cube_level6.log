@@ -1,0 +1,5 @@
+=== unit-cube block substitution, FR30-type decoration, Q8 Clifford links, pinned diagonal 6: level 6 ===  (started 2026-10-21 06:15:28, OMP_NUM_THREADS=1)
+[cube L6] geometry: n=262144 tiles (1 unit cubes each), box 64^3, panels |E|=774144, 24 frames, max degree 6, boundary tiles (deg<6) 23816 = 0.0909 n; links {'-1': 407844, '+i': 37449, '-i': 37449, '+j': 112933, '-j': 112933, '+k': 32768, '-k': 32768}  (2.0s, rss 0.19 GB)
+   H = 6 I - A: dim 524288, nnz 3620864, max|H - H^dagger| = 0.0e+00  (0.9s, rss 0.40 GB)
+   lobpcg chunk:  503 it (385s, 0.76s/it), cumulative   503: lambda=[1.8508834 1.8508856 1.8511901 1.8512171] res=[0. 0. 0. 0.]  rss 0.78 GB
+   lobpcg chunk:  495 it (344s, 0.69s/it), cumulative   998: lambda=[1.8508823 1.8508823 1.8511827 1.8511827] res=[7.9e-07 8.8e-07 4.4e-06 1.2e-05]  rss 0.78 GB

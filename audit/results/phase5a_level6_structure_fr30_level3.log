@@ -1,0 +1,18 @@
+=== FR30 Chair44 tiling, Q8 Clifford links, pinned diagonal 24: level 3 ===  (started 2026-10-21 06:01:12, OMP_NUM_THREADS=1)
+[fr30 L3] geometry: n=512 tiles (7 unit cubes each), box 16^3, panels |E|=5376, 24 frames, max degree 24, boundary tiles (deg<24) 287 = 0.5605 n; links {'+1': 762, '-1': 2052, '+i': 329, '-i': 308, '+j': 644, '-j': 644, '+k': 308, '-k': 329}  (0.5s, rss 0.09 GB)
+   H = 24 I - A: dim 1024, nnz 8700, max|H - H^dagger| = 0.0e+00  (0.0s, rss 0.09 GB)
+   validation vs object builders (level 3): |E| 5376 vs 5376, max|H_grid - H_objects| = 0.0e+00, degrees identical: True  (0.2s)
+   solver: dense eigh (full spectrum)  iterations=None  (3s)  converged=True
+   lowest eigenvalues (Rayleigh quotients): [9.3784702 9.3784702 9.5894029 9.5894029]
+   residuals ||H psi - lambda psi||:        [9.45e-14 3.59e-14 8.81e-14 4.06e-14]
+   Kramers split lambda_2 - lambda_1 = 5.33e-15;  gap to next pair lambda_3 - lambda_1 = 2.109e-01;  eigenvector angle bound res_1/gap = 4.5e-13
+   Kramers pair check: IPR vec1 0.0125475, vec2 0.0125475, max_a |p1_a - p2_a| = 8.6e-16
+   ground state: tile IPR=0.0125475  IPR*n=6.4243  P=1/IPR=79.7  p_max=0.0362  s50=27 (0.0527 n)  s90=145 (0.2832 n)
+   boundary weight (deg < bulk) = 0.13271  (boundary tile fraction 0.5605, enhancement 0.237)
+    d     8^d       S2(d)    1/S2(d)  1/S2/8^d  D2(d) | interface w(d)    tiles fraction  w/frac
+    1       8    0.415749      2.405    0.3007  1.266 |        0.78207      269   0.5254   1.489
+    2      64   0.0832755     12.008    0.1876  2.320 |        0.99240      501   0.9785   1.014
+    3     512   0.0125475     79.697    0.1557  2.730 |        1.00000      512   1.0000   1.000
+   depth-1 child weights (depth-first child order): [0.6136 0.1578 0.0808 0.017  0.0111 0.0808 0.0278 0.0111]
+   second pair (lambda=9.5894029, res 8.8e-14): IPR*n=4.3216 s50=39 s90=186 1/S2(d)=[3.79, 20.23, 118.47] interface w(1)=0.8308
+   saved audit/results/phase5a_fr30_level3_groundstate_weights.npy and phase5a_level6_structure_fr30_level3.json;  total 3s, max rss 0.15 GB

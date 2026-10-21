@@ -1,0 +1,36 @@
+====================================================================================================
+LEVEL-4 PERIODIC APPROXIMANT: 4096 chairs per cell, Bloch dimension 8192, period lattice 2^4 Lambda_7, 98304 oriented panels (= 24 per chair), interface tiles (touching another supertile copy): 1331/4096 = 0.325  (build 6s)
+ exact torus flux: inter-tile plaquettes 73728 (=18.0 per chair), classes {'1': 38864, '-1': 6572, 'i': 8240, 'j': 11812, 'k': 8240};  fractions: nontriv=0.47287 (FR30 limit 17/36=0.47222), traceless=0.38373 (55/144=0.38194), -1=0.08914 (13/144=0.09028)  (31s)
+/home/user/-/audit/phase5a_periodic_approximants.py:70: UserWarning: Exited at iteration 3000 with accuracies 
+[2.00605270e-08 2.00261705e-08 8.54738532e-08 2.54479159e-06]
+not reaching the requested tolerance 1e-07.
+Use iteration 2979 instead with accuracy 
+6.495159756281569e-07.
+
+  w, V = spl.lobpcg(H, self._X, M=M, largest=False, tol=tol, maxiter=maxiter)
+/home/user/-/audit/phase5a_periodic_approximants.py:70: UserWarning: Exited postprocessing with accuracies 
+[1.76346707e-08 2.22321357e-08 8.47422438e-08 2.47257088e-06]
+not reaching the requested tolerance 1e-07.
+  w, V = spl.lobpcg(H, self._X, M=M, largest=False, tol=tol, maxiter=maxiter)
+   theta=(0.0, 0.0, 0.0): lowest [8.361024, 8.361024, 8.372299, 8.372299]  (LOBPCG residual 1.8e-08)  (52s)
+/home/user/-/audit/phase5a_periodic_approximants.py:70: UserWarning: Exited postprocessing with accuracies 
+[1.73744492e-08 1.71502607e-08 8.60184671e-08 1.05409296e-07]
+not reaching the requested tolerance 1e-07.
+  w, V = spl.lobpcg(H, self._X, M=M, largest=False, tol=tol, maxiter=maxiter)
+   theta=(0.0, 0.0, 0.5): lowest [8.361695, 8.361695, 8.369412, 8.369412]  (LOBPCG residual 1.7e-08)  (61s)
+   theta=(0.0, 0.5, 0.0): lowest [8.361693, 8.361693, 8.369453, 8.369453]  (LOBPCG residual 4.3e-08)  (69s)
+   theta=(0.0, 0.5, 0.5): lowest [8.361658, 8.361658, 8.369397, 8.369397]  (LOBPCG residual 4.2e-08)  (77s)
+   theta=(0.5, 0.0, 0.0): lowest [8.364599, 8.364599, 8.366434, 8.366434]  (LOBPCG residual 2.0e-08)  (82s)
+   theta=(0.5, 0.0, 0.5): lowest [8.364906, 8.364906, 8.368917, 8.368917]  (LOBPCG residual 1.1e-08)  (91s)
+   theta=(0.5, 0.5, 0.0): lowest [8.364891, 8.364891, 8.36893, 8.36893]  (LOBPCG residual 4.5e-09)  (102s)
+   theta=(0.5, 0.5, 0.5): lowest [8.364911, 8.364911, 8.368911, 8.368911]  (LOBPCG residual 6.6e-08)  (116s)
+ minimum over the 8 TRIMs: E=8.361024459 at theta=(0.0, 0.0, 0.0)  (116s)
+   BFGS from theta=[0.0, 0.0, 0.0]: E=8.359334294 at theta=[0.01403, 0.85217, 0.27484] |grad|=4.4e-04 evals=15 (250s)
+ BAND BOTTOM E_per(4) = 8.359334294 at theta=[0.01403, 0.85217, 0.27484] (generic);  lowest four at the minimum [8.3593343, 8.3653938, 8.3681216, 8.3707492] (gap12=6.1e-03);  ground-state tile IPR=0.00367 (1/n=0.00024), weight on interface tiles=0.7971 (their fraction 0.325)
+   degeneracy of the lowest band at a generic q: gap12=5.39e-03
+[level 4 done in 258s]
+
+SUMMARY periodic approximants (Bloch band bottom of 24 - A, cell = level-k FR30 supertile on 2^k Lambda_7):
+  level 4: E_per = 8.359334
+  FR30 pinned finite patches (upper bounds on E_bulk): level 2: 10.77695, 3: 9.37847, 4: 8.91963, 5: 8.79701, 6: 8.77013
+[total 258s]

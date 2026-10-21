@@ -1,0 +1,1067 @@
+{
+ "q8": {
+  "axioms": {
+   "relations": true,
+   "closed": true,
+   "associative": true,
+   "identity": true,
+   "inverses": true,
+   "centre": [
+    "-1",
+    "+1"
+   ],
+   "n_classes": 5,
+   "class_function_matches_orbits": true,
+   "classes_closed_under_inversion": true
+  },
+  "unique_table": true,
+  "n_candidates": 262144,
+  "n_valid": 1
+ },
+ "dictionary": {
+  "e1e2=e3": true,
+  "e2e3=e1": true,
+  "e3e1=e2": true,
+  "em^2=-1": true,
+  "e1e2e3=-1": true,
+  "phi_homomorphism_64": true,
+  "phi_injective": true,
+  "phi_in_SU2": true,
+  "n_pairs": 36,
+  "pauli_equals_minus_quaternion_product": 36,
+  "repo_int_routine_agrees": 36,
+  "repo_int_routine_disagreements": [],
+  "numpy_q8label_class_agrees": 36,
+  "numpy_q8label_signed_agrees": 12,
+  "numpy_q8label_signed_disagreements": [
+   [
+    [
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0
+    ],
+    "-k",
+    "+k"
+   ],
+   [
+    [
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     -1,
+     0
+    ],
+    "+k",
+    "-k"
+   ],
+   [
+    [
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    "+j",
+    "-j"
+   ],
+   [
+    [
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     -1
+    ],
+    "-j",
+    "+j"
+   ],
+   [
+    [
+     -1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0
+    ],
+    "+k",
+    "-k"
+   ],
+   [
+    [
+     -1,
+     0,
+     0
+    ],
+    [
+     0,
+     -1,
+     0
+    ],
+    "-k",
+    "+k"
+   ],
+   [
+    [
+     -1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    "-j",
+    "+j"
+   ],
+   [
+    [
+     -1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     -1
+    ],
+    "+j",
+    "-j"
+   ],
+   [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     1,
+     0,
+     0
+    ],
+    "+k",
+    "-k"
+   ],
+   [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     -1,
+     0,
+     0
+    ],
+    "-k",
+    "+k"
+   ],
+   [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    "-i",
+    "+i"
+   ],
+   [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     -1
+    ],
+    "+i",
+    "-i"
+   ],
+   [
+    [
+     0,
+     -1,
+     0
+    ],
+    [
+     1,
+     0,
+     0
+    ],
+    "-k",
+    "+k"
+   ],
+   [
+    [
+     0,
+     -1,
+     0
+    ],
+    [
+     -1,
+     0,
+     0
+    ],
+    "+k",
+    "-k"
+   ],
+   [
+    [
+     0,
+     -1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    "+i",
+    "-i"
+   ],
+   [
+    [
+     0,
+     -1,
+     0
+    ],
+    [
+     0,
+     0,
+     -1
+    ],
+    "-i",
+    "+i"
+   ],
+   [
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0
+    ],
+    "-j",
+    "+j"
+   ],
+   [
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     -1,
+     0,
+     0
+    ],
+    "+j",
+    "-j"
+   ],
+   [
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0
+    ],
+    "+i",
+    "-i"
+   ],
+   [
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     -1,
+     0
+    ],
+    "-i",
+    "+i"
+   ],
+   [
+    [
+     0,
+     0,
+     -1
+    ],
+    [
+     1,
+     0,
+     0
+    ],
+    "+j",
+    "-j"
+   ],
+   [
+    [
+     0,
+     0,
+     -1
+    ],
+    [
+     -1,
+     0,
+     0
+    ],
+    "-j",
+    "+j"
+   ],
+   [
+    [
+     0,
+     0,
+     -1
+    ],
+    [
+     0,
+     1,
+     0
+    ],
+    "-i",
+    "+i"
+   ],
+   [
+    [
+     0,
+     0,
+     -1
+    ],
+    [
+     0,
+     -1,
+     0
+    ],
+    "+i",
+    "-i"
+   ]
+  ],
+  "q8label_plus_m_is_matrix_i_sigma_m": true,
+  "i_sigma_m_is_quaternion_minus_m": true
+ },
+ "lean_qmul_matches": true,
+ "links_level1": {
+  "n_links": 48,
+  "reverse_normal_is_inverse": 48,
+  "reverse_normal_is_dagger": 48,
+  "repo_int_routine_agrees": 48,
+  "numpy_matrix_agrees": 48,
+  "link_classes": {
+   "-1": 24,
+   "k": 7,
+   "i": 7,
+   "j": 4,
+   "1": 6
+  }
+ },
+ "plaquettes": {
+  "1": {
+   "level": 1,
+   "n_plaquettes": 84,
+   "n_inter_tile": 60,
+   "n_class_independent_of_basepoint_orientation": 84,
+   "n_inter_tile_with_varying_signed_label": 31,
+   "inter_tile_class_counts": {
+    "1": 26,
+    "i": 12,
+    "j": 7,
+    "k": 12,
+    "-1": 3
+   },
+   "inter_tile_signed_label_counts_base_cube0": {
+    "+1": 26,
+    "+i": 6,
+    "-j": 2,
+    "-i": 6,
+    "+k": 6,
+    "-1": 3,
+    "+j": 5,
+    "-k": 6
+   },
+   "examples": [
+    {
+     "cubes": [
+      [
+       0,
+       0,
+       2
+      ],
+      [
+       1,
+       0,
+       2
+      ],
+      [
+       1,
+       1,
+       2
+      ],
+      [
+       0,
+       1,
+       2
+      ]
+     ],
+     "tiles": [
+      2,
+      2,
+      0,
+      2
+     ],
+     "labels_of_8_variants": [
+      "+i",
+      "+i",
+      "+i",
+      "+i",
+      "-i",
+      "-i",
+      "-i",
+      "-i"
+     ],
+     "classes": [
+      "i"
+     ]
+    },
+    {
+     "cubes": [
+      [
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       2,
+       1
+      ],
+      [
+       0,
+       2,
+       1
+      ]
+     ],
+     "tiles": [
+      1,
+      0,
+      0,
+      3
+     ],
+     "labels_of_8_variants": [
+      "-j",
+      "-j",
+      "-j",
+      "-j",
+      "+j",
+      "+j",
+      "+j",
+      "+j"
+     ],
+     "classes": [
+      "j"
+     ]
+    }
+   ]
+  },
+  "2": {
+   "level": 2,
+   "n_plaquettes": 984,
+   "n_inter_tile": 792,
+   "n_class_independent_of_basepoint_orientation": 984,
+   "n_inter_tile_with_varying_signed_label": 365,
+   "inter_tile_class_counts": {
+    "1": 385,
+    "i": 124,
+    "-1": 42,
+    "j": 117,
+    "k": 124
+   },
+   "inter_tile_signed_label_counts_base_cube0": {
+    "+1": 385,
+    "+i": 64,
+    "-1": 42,
+    "-j": 55,
+    "-i": 60,
+    "+k": 64,
+    "+j": 62,
+    "-k": 60
+   },
+   "examples": [
+    {
+     "cubes": [
+      [
+       0,
+       0,
+       2
+      ],
+      [
+       1,
+       0,
+       2
+      ],
+      [
+       1,
+       1,
+       2
+      ],
+      [
+       0,
+       1,
+       2
+      ]
+     ],
+     "tiles": [
+      10,
+      10,
+      8,
+      10
+     ],
+     "labels_of_8_variants": [
+      "+i",
+      "+i",
+      "+i",
+      "+i",
+      "-i",
+      "-i",
+      "-i",
+      "-i"
+     ],
+     "classes": [
+      "i"
+     ]
+    },
+    {
+     "cubes": [
+      [
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       1
+      ],
+      [
+       1,
+       2,
+       1
+      ],
+      [
+       0,
+       2,
+       1
+      ]
+     ],
+     "tiles": [
+      9,
+      8,
+      8,
+      11
+     ],
+     "labels_of_8_variants": [
+      "-j",
+      "-j",
+      "-j",
+      "-j",
+      "+j",
+      "+j",
+      "+j",
+      "+j"
+     ],
+     "classes": [
+      "j"
+     ]
+    }
+   ]
+  }
+ },
+ "gauge": {
+  "level": 1,
+  "n_inter_tile": 60,
+  "gauge": [
+   "-j",
+   "-j",
+   "+k",
+   "+i",
+   "-i",
+   "-k",
+   "-j",
+   "-j"
+  ],
+  "classes_equal": 60,
+  "signed_labels_equal": 39,
+  "example": {
+   "cubes": [
+    [
+     0,
+     0,
+     2
+    ],
+    [
+     1,
+     0,
+     2
+    ],
+    [
+     1,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "base_tile": 2,
+   "gauge_at_base": "+k",
+   "before": "+i",
+   "after": "-i"
+  }
+ },
+ "su2": {
+  "U=(1+j)/sqrt2": {
+   "image_of_i": "-k",
+   "class_before": "i",
+   "class_after": "k",
+   "trace_before": 0,
+   "trace_after": 0
+  },
+  "generic_U": {
+   "rotation": "1 rad about (1,2,3)/sqrt14",
+   "image_matrix": "[[(9.039317626806291e-19+0.35127851212351696j), (-0.7403488404607821-0.5731378554489869j)], [(0.7403488404607822-0.5731378554489869j), (-3.8990334055961484e-18-0.35127851212351696j)]]",
+   "min_frobenius_distance_to_Q8": 1.0191195406608942,
+   "trace": "(-2.9951016429155193e-18+0j)",
+   "in_Q8": false
+  }
+ },
+ "ambient": {
+  "1": {
+   "level": 1,
+   "n_inter_tile": 60,
+   "local_frame_classes": {
+    "1": 26,
+    "i": 12,
+    "j": 7,
+    "k": 12,
+    "-1": 3
+   },
+   "ambient_axis_classes_base_cube0": {
+    "1": 26,
+    "x": 12,
+    "y": 7,
+    "-1": 3,
+    "z": 12
+   },
+   "n_ambient_axis_depends_on_base_tile": 17,
+   "spinlift_numeric_checked": 31,
+   "spinlift_numeric_ok": 31,
+   "example": {
+    "cubes": [
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      0,
+      2,
+      1
+     ],
+     [
+      0,
+      2,
+      2
+     ],
+     [
+      0,
+      1,
+      2
+     ]
+    ],
+    "base_tiles": [
+     1,
+     3,
+     4,
+     2
+    ],
+    "local_class": "i",
+    "ambient_axis_per_base_tile": [
+     "x",
+     "z",
+     "z",
+     "x"
+    ]
+   }
+  },
+  "2": {
+   "level": 2,
+   "n_inter_tile": 792,
+   "local_frame_classes": {
+    "1": 385,
+    "i": 124,
+    "-1": 42,
+    "j": 117,
+    "k": 124
+   },
+   "ambient_axis_classes_base_cube0": {
+    "1": 385,
+    "x": 121,
+    "-1": 42,
+    "y": 123,
+    "z": 121
+   },
+   "n_ambient_axis_depends_on_base_tile": 253,
+   "spinlift_numeric_checked": 0,
+   "spinlift_numeric_ok": 0,
+   "example": {
+    "cubes": [
+     [
+      0,
+      1,
+      1
+     ],
+     [
+      0,
+      2,
+      1
+     ],
+     [
+      0,
+      2,
+      2
+     ],
+     [
+      0,
+      1,
+      2
+     ]
+    ],
+    "base_tiles": [
+     9,
+     11,
+     12,
+     10
+    ],
+    "local_class": "i",
+    "ambient_axis_per_base_tile": [
+     "x",
+     "z",
+     "z",
+     "x"
+    ]
+   }
+  }
+ },
+ "certificate": {
+  "nP": 49,
+  "nQ": 108,
+  "lim_N_over_8m": "18",
+  "freqs": {
+   "1": "19/36",
+   "-1": "13/144",
+   "i": "1/9",
+   "j": "23/144",
+   "k": "1/9"
+  },
+  "trace0_freq": "55/144",
+  "target_match": true,
+  "W8_match": true,
+  "normalization_ok": true,
+  "direct_match": true,
+  "residual_identity_ok": true,
+  "recursion": {
+   "1": {
+    "panels": 48,
+    "plaquettes": 60,
+    "classes": {
+     "1": 26,
+     "-1": 3,
+     "i": 12,
+     "j": 7,
+     "k": 12
+    },
+    "plaquette_formula": 60,
+    "panel_formula": 48
+   },
+   "2": {
+    "panels": 576,
+    "plaquettes": 792,
+    "classes": {
+     "1": 385,
+     "-1": 42,
+     "i": 124,
+     "j": 117,
+     "k": 124
+    },
+    "plaquette_formula": 792,
+    "panel_formula": 576
+   },
+   "3": {
+    "panels": 5376,
+    "plaquettes": 7728,
+    "classes": {
+     "1": 3945,
+     "-1": 530,
+     "i": 1020,
+     "j": 1213,
+     "k": 1020
+    },
+    "plaquette_formula": 7728,
+    "panel_formula": 5376
+   },
+   "4": {
+    "panels": 46080,
+    "plaquettes": 67680,
+    "classes": {
+     "1": 35161,
+     "-1": 5394,
+     "i": 8188,
+     "j": 10749,
+     "k": 8188
+    },
+    "plaquette_formula": 67680,
+    "panel_formula": 46080
+   },
+   "5": {
+    "panels": 380928,
+    "plaquettes": 565440,
+    "classes": {
+     "1": 296121,
+     "-1": 48146,
+     "i": 65532,
+     "j": 90109,
+     "k": 65532
+    },
+    "plaquette_formula": 565440,
+    "panel_formula": 380928
+   },
+   "6": {
+    "panels": 3096576,
+    "plaquettes": 4620672,
+    "classes": {
+     "1": 2429305,
+     "-1": 405522,
+     "i": 524284,
+     "j": 737277,
+     "k": 524284
+    },
+    "plaquette_formula": 4620672,
+    "panel_formula": 3096576
+   },
+   "7": {
+    "panels": 24969216,
+    "plaquettes": 37356288,
+    "classes": {
+     "1": 19677945,
+     "-1": 3325970,
+     "i": 4194300,
+     "j": 5963773,
+     "k": 4194300
+    },
+    "plaquette_formula": 37356288,
+    "panel_formula": 24969216
+   }
+  },
+  "direct_counts_read": {
+   "phase5a_independent_enumerator.txt": {
+    "1": {
+     "inter_tile": 60,
+     "total": 84,
+     "classes": {
+      "1": 26,
+      "-1": 3,
+      "i": 12,
+      "j": 7,
+      "k": 12
+     },
+     "panels": 48
+    },
+    "2": {
+     "inter_tile": 792,
+     "total": 984,
+     "classes": {
+      "1": 385,
+      "-1": 42,
+      "i": 124,
+      "j": 117,
+      "k": 124
+     },
+     "panels": 576
+    },
+    "3": {
+     "inter_tile": 7728,
+     "total": 9264,
+     "classes": {
+      "1": 3945,
+      "-1": 530,
+      "i": 1020,
+      "j": 1213,
+      "k": 1020
+     }
+    },
+    "4": {
+     "inter_tile": 67680,
+     "total": 79968,
+     "classes": {
+      "1": 35161,
+      "-1": 5394,
+      "i": 8188,
+      "j": 10749,
+      "k": 8188
+     }
+    },
+    "5": {
+     "inter_tile": 565440,
+     "total": 663744,
+     "classes": {
+      "1": 296121,
+      "-1": 48146,
+      "i": 65532,
+      "j": 90109,
+      "k": 65532
+     }
+    }
+   },
+   "phase3_plaquette_recursion_levels1-5.txt": {
+    "1": {
+     "total": 84,
+     "inter_tile": 60
+    },
+    "2": {
+     "total": 984,
+     "inter_tile": 792
+    },
+    "3": {
+     "total": 9264,
+     "inter_tile": 7728
+    },
+    "4": {
+     "total": 79968,
+     "inter_tile": 67680
+    },
+    "5": {
+     "total": 663744,
+     "inter_tile": 565440
+    }
+   },
+   "phase5a_type_system_audit.txt": {
+    "1": {
+     "panels": 48,
+     "inter_tile": 60
+    },
+    "2": {
+     "panels": 576,
+     "inter_tile": 792
+    },
+    "3": {
+     "panels": 5376,
+     "inter_tile": 7728
+    },
+    "4": {
+     "panels": 46080,
+     "inter_tile": 67680
+    },
+    "5": {
+     "panels": 380928,
+     "inter_tile": 565440
+    }
+   }
+  }
+ },
+ "decoration": {
+  "level1_plaquette_classes": {
+   "1": 26,
+   "i": 12,
+   "j": 7,
+   "k": 12,
+   "-1": 3
+  },
+  "tile3_frame_times_perm120_classes": {
+   "1": 31,
+   "i": 12,
+   "k": 11,
+   "j": 4,
+   "-1": 2
+  },
+  "classes_changed": true,
+  "fundamental_cycle_traces_before": [
+   [
+    -2,
+    1
+   ],
+   [
+    0,
+    23
+   ],
+   [
+    2,
+    17
+   ]
+  ],
+  "fundamental_cycle_traces_after": [
+   [
+    -2,
+    1
+   ],
+   [
+    0,
+    22
+   ],
+   [
+    2,
+    18
+   ]
+  ],
+  "mirror_links_equal_sigma1_C_sigma1": 48,
+  "n_links": 48,
+  "mirror_plaquette_classes": {
+   "1": 26,
+   "-1": 3,
+   "k": 12,
+   "i": 12,
+   "j": 7
+  },
+  "mirror_classes_equal": true
+ }
+}

@@ -8,7 +8,8 @@ true geometric frames, and the only non-FR30 feature is the way neighbouring sup
 ~2^-k of the tiles touch such an interface).  The pinned operator 24 - A is therefore periodic with 8^k chairs per
 cell and its spectrum is the union over the Brillouin zone of the (2*8^k)-dimensional Bloch matrices.
 
-Run from the repository root:  python3 -u -I audit/phase5a_periodic_approximants.py [kmax]
+Run from the repository root:  python3 -u -I audit/phase5a_periodic_approximants.py [comma-separated levels, default 1,2,3,4]
+                               python3 -u -I audit/phase5a_periodic_approximants.py interface   # interface vs bulk-like states at Gamma, levels 2,3,4
 """
 import os, sys, time, itertools, collections
 for _v in ('OPENBLAS_NUM_THREADS', 'OMP_NUM_THREADS', 'MKL_NUM_THREADS'): os.environ.setdefault(_v, '1')
@@ -59,15 +60,26 @@ class Approximant:
         H = sps.coo_matrix((vals.ravel(), (r, c)), shape=(self.dim, self.dim)).tocsr()
         H = H + sps.identity(self.dim, dtype=complex, format='csr') * 24.0
         return H.toarray() if dense else H
+    _X = None
+    def _lobpcg(self, q, nev=4, tol=1e-7, maxiter=3000):
+        """Matrix-free LOBPCG with diagonal preconditioner (as in audit/phase5_bulk_bottom_lobpcg.py), warm-started from
+        the eigenvectors of the previous call (the lowest Bloch states vary slowly with q)."""
+        H = self.Hq(q, dense=False)
+        if self._X is None or self._X.shape[1] != nev:
+            rng = np.random.default_rng(0); self._X = rng.standard_normal((self.dim, nev)) + 1j * rng.standard_normal((self.dim, nev))
+        dinv = 1.0 / H.diagonal().real; M = spl.LinearOperator(H.shape, matvec=lambda v: dinv * v, dtype=complex)
+        w, V = spl.lobpcg(H, self._X, M=M, largest=False, tol=tol, maxiter=maxiter)
+        o = np.argsort(w.real); w = w.real[o]; V = V[:, o]; self._X = V.copy()
+        self.last_residual = float(np.linalg.norm(H @ V[:, 0] - w[0] * V[:, 0]))
+        return w, V
     def lowest(self, q, nev=4):
         if self.dim <= 2048:
             return np.linalg.eigvalsh(self.Hq(q))[:nev]
-        w = spl.eigsh(self.Hq(q, dense=False), k=nev, sigma=0.0, which='LM', return_eigenvectors=False)
-        return np.sort(w)
+        w, V = self._lobpcg(q, nev=max(nev, 4)); return w[:nev]
     def lowest_vec(self, q):
         if self.dim <= 2048:
             w, V = np.linalg.eigh(self.Hq(q)); return w[:4], V[:, 0]
-        w, V = spl.eigsh(self.Hq(q, dense=False), k=4, sigma=0.0, which='LM'); o = np.argsort(w); return w[o], V[:, o[0]]
+        w, V = self._lobpcg(q); return w[:4], V[:, 0]
     def q_of_theta(self, th): return 2 * np.pi * np.linalg.solve(self.Bp.astype(float), np.asarray(th, dtype=float))
     def theta_of_q(self, q): return (self.Bp @ np.asarray(q) / (2 * np.pi)) % 1.0
     def fg(self, q):
@@ -109,12 +121,14 @@ def run(k, grid, budget):
     inter, cls = ap.flux()
     log(f" exact torus flux: inter-tile plaquettes {inter} (={inter/ap.n:.1f} per chair), classes {cls};  fractions: nontriv={1-cls['1']/inter:.5f} (FR30 limit 17/36={17/36:.5f}),"
         f" traceless={(cls['i']+cls['j']+cls['k'])/inter:.5f} (55/144={55/144:.5f}), -1={cls['-1']/inter:.5f} (13/144={13/144:.5f})  ({time.time()-t0:.0f}s)")
-    # TRIMs first
+    # TRIMs first (budget-aware: a large Bloch matrix under heavy machine load may not allow all eight)
     trims = list(itertools.product((0.0, 0.5), repeat=3))
     res = {}
     for th in trims:
+        if time.time() - t0 > 0.6 * budget: log(f"   TRIM loop: time budget reached after {len(res)} points"); break
         w = ap.lowest(ap.q_of_theta(th)); res[th] = w
-    for th in trims: log(f"   theta={th}: lowest {np.round(res[th], 6).tolist()}")
+        log(f"   theta={th}: lowest {np.round(w, 6).tolist()}" + (f"  (LOBPCG residual {ap.last_residual:.1e})" if ap.dim > 2048 else "") + f"  ({time.time()-t0:.0f}s)")
+    trims = list(res)
     best_th = min(trims, key=lambda th: res[th][0]); E_trim = res[best_th][0]
     log(f" minimum over the 8 TRIMs: E={E_trim:.9f} at theta={best_th}  ({time.time()-t0:.0f}s)")
     # grid
@@ -135,7 +149,9 @@ def run(k, grid, budget):
         if time.time() - t0 > budget: break
         q0 = ap.q_of_theta(th); cnt = [0]
         def fg(q): cnt[0] += 1; return ap.fg(q)
-        r = sopt.minimize(fg, q0, jac=True, method='BFGS', options=dict(gtol=1e-8, maxiter=60))
+        def cb(xk):
+            if time.time() - t0 > budget: raise StopIteration
+        r = sopt.minimize(fg, q0, jac=True, method='BFGS', callback=cb, options=dict(gtol=1e-8, maxiter=60 if ap.dim <= 2048 else 12))
         log(f"   BFGS from theta={np.round(th,4).tolist()}: E={r.fun:.9f} at theta={np.round(ap.theta_of_q(r.x),5).tolist()} |grad|={np.linalg.norm(r.jac):.1e} evals={cnt[0]} ({time.time()-t0:.0f}s)")
         if r.fun < best[0]: best = (r.fun, r.x)
     E, q = best if best[1] is not None else (E_trim, ap.q_of_theta(best_th))
@@ -152,11 +168,40 @@ def run(k, grid, budget):
     log(f"[level {k} done in {time.time()-t0:.0f}s]")
     return E
 
+def interface_analysis(k, nstates, budget):
+    """Lowest nstates Bloch states at Gamma of the level-k approximant, with tile IPR and weight on interface tiles, to
+    separate interface-localised states (weight >> interface fraction) from bulk-like states; the lowest bulk-like
+    energy is the approximant's own estimate of the bulk band edge."""
+    t0 = time.time(); ap = Approximant(k); q = np.zeros(3)
+    log("=" * 100); log(f"INTERFACE ANALYSIS, level-{k} approximant at Gamma: lowest {nstates} states (interface fraction {ap.interface.mean():.3f}, n={ap.n})")
+    if ap.dim <= 2048:
+        w, V = np.linalg.eigh(ap.Hq(q)); w, V = w[:nstates], V[:, :nstates]
+    else:
+        H = ap.Hq(q, dense=False); rng = np.random.default_rng(1)
+        X = rng.standard_normal((ap.dim, nstates)) + 1j * rng.standard_normal((ap.dim, nstates))
+        dinv = 1.0 / H.diagonal().real; M = spl.LinearOperator(H.shape, matvec=lambda v: dinv * v, dtype=complex)
+        w, V = spl.lobpcg(H, X, M=M, largest=False, tol=1e-6, maxiter=1500); o = np.argsort(w.real); w = w.real[o]; V = V[:, o]
+        log(f"   LOBPCG residuals: max {max(np.linalg.norm(H @ V[:, i] - w[i] * V[:, i]) for i in range(nstates)):.1e}  ({time.time()-t0:.0f}s)")
+    frac = ap.interface.mean(); first_bulk = None
+    for i in range(nstates):
+        wt = (np.abs(V[:, i].reshape(ap.n, 2)) ** 2).sum(1); wt /= wt.sum()
+        iw = wt[ap.interface].sum(); ipr = (wt ** 2).sum()
+        tag = 'interface' if iw > 1.5 * frac else 'bulk-like'
+        if tag == 'bulk-like' and first_bulk is None: first_bulk = (w[i], i)
+        if i < 12 or i % 2 == 0 or tag == 'bulk-like' and i == first_bulk[1]:
+            log(f"   state {i:3d}: E={w[i]:.6f}  tile IPR x n = {ipr*ap.n:7.2f}  interface weight = {iw:.3f} (fraction {frac:.3f}, ratio {iw/frac:.2f})  {tag}")
+    if first_bulk: log(f" lowest bulk-like state (interface weight <= 1.5 x fraction): E = {first_bulk[0]:.6f} (index {first_bulk[1]});  compare pinned patch level {k}: {dict([(2,10.77695),(3,9.37847),(4,8.91963)]).get(k)} and E_bulk <= 8.77013")
+    else: log(f" no bulk-like state among the lowest {nstates} at Gamma")
+    log(f"[interface analysis level {k} done in {time.time()-t0:.0f}s]")
+
 if __name__ == "__main__":
-    kmax = int(sys.argv[1]) if len(sys.argv) > 1 else 4
+    if len(sys.argv) > 1 and sys.argv[1] == 'interface':
+        for k, nst, bud in ((2, 128, 60), (3, 60, 200), (4, 40, 900)): interface_analysis(k, nst, bud)
+        sys.exit(0)
+    levels = [int(x) for x in sys.argv[1].split(',')] if len(sys.argv) > 1 else [1, 2, 3, 4]
     out = {}
-    for k, grid, budget in [(1, 8, 60), (2, 6, 200), (3, 4, 400), (4, 0, 500)]:
-        if k > kmax: break
+    for k, grid, budget in [(1, 8, 60), (2, 6, 200), (3, 4, 400), (4, 0, 700)]:
+        if k not in levels: continue
         out[k] = run(k, grid, budget)
     log("\nSUMMARY periodic approximants (Bloch band bottom of 24 - A, cell = level-k FR30 supertile on 2^k Lambda_7):")
     for k, E in out.items(): log(f"  level {k}: E_per = {E:.6f}")

@@ -522,6 +522,12 @@ def stage_T():
         f"  prediction at the FR30 fractions: {coef[0] + coef[1]*55/144 + coef[2]*13/144:.4f}  (FR30 actual <= 8.770)")
     log(f" minimum location: Gamma {sum(r['gamma'] for r in allr)}, other TRIM {sum(r['trim'] and not r['gamma'] for r in allr)}, generic {sum(not r['trim'] for r in allr)} of {len(allr)};"
         f"  lowest band exactly degenerate at generic q: {sum(r['gap12_generic'] < 1e-9 for r in allr)}")
+    import glob
+    chunks = sorted(glob.glob(REC_FILE.replace('records.jsonl', 'bijections_chunk*.npy')))
+    if chunks:
+        Es = np.concatenate([np.load(c) for c in chunks])
+        log(f" exhaustive FR30-frame bijections onto L/2L (stage C, {len(chunks)} chunks, {len(Es)} of 40320 bijections): E_per min={Es.min():.6f} max={Es.max():.6f} mean={Es.mean():.5f} sd={Es.std():.5f};"
+            f" fraction >= 8.770: {np.mean(Es >= 8.770):.4f};  distinct values (6 decimals): {len(np.unique(np.round(Es, 6)))}")
     log(f"[stage T done in {time.time()-T0:.0f}s]")
 
 # ----------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,28 @@
+phase5a referee geometry check (3x3 integer matrices, Counter/set arithmetic)
+ det(D_s(v) P(pi_v)) for v in U3 (exact integer): {'(0, 0, 0)': 1, '(0, 0, 1)': 1, '(0, 1, 0)': 1, '(0, 1, 1)': 1, '(1, 0, 0)': 1, '(1, 0, 1)': 1, '(1, 1, 0)': 1}
+ det(P(pi_0)) = 1
+ LEVEL 1: N=4 tiles=8 (8^m=8) cube_slots=56 distinct=56 (7*8^m=56) overlapping_cubes=0 disjoint=True target=56 missing=0 outside=0 fills_chair_exactly=True orthogonal=True frame_dets={1: 8} det+1=True [0.0s]
+ LEVEL 2: N=8 tiles=64 (8^m=64) cube_slots=448 distinct=448 (7*8^m=448) overlapping_cubes=0 disjoint=True target=448 missing=0 outside=0 fills_chair_exactly=True orthogonal=True frame_dets={1: 64} det+1=True [0.01s]
+ LEVEL 3: N=16 tiles=512 (8^m=512) cube_slots=3584 distinct=3584 (7*8^m=3584) overlapping_cubes=0 disjoint=True target=3584 missing=0 outside=0 fills_chair_exactly=True orthogonal=True frame_dets={1: 512} det+1=True [0.04s]
+ LEVEL 4: N=32 tiles=4096 (8^m=4096) cube_slots=28672 distinct=28672 (7*8^m=28672) overlapping_cubes=0 disjoint=True target=28672 missing=0 outside=0 fills_chair_exactly=True orthogonal=True frame_dets={1: 4096} det+1=True [0.55s]
+ LEVEL 5: N=64 tiles=32768 (8^m=32768) cube_slots=229376 distinct=229376 (7*8^m=229376) overlapping_cubes=0 disjoint=True target=229376 missing=0 outside=0 fills_chair_exactly=True orthogonal=True frame_dets={1: 32768} det+1=True [2.96s]
+ GEOMETRY CLAIM REPRODUCED (levels 1..5): True
+
+CROSS-COMPARISON OF TILE SETS {(G,T)}
+ level 1: referee vs A1: same set=True same order=True (|referee|=8, |A1|=8); referee vs repo tiles_at_level: same set=True (|repo|=8)
+ level 2: referee vs A1: same set=True same order=True (|referee|=64, |A1|=64); referee vs repo tiles_at_level: same set=True (|repo|=64)
+ level 3: referee vs A1: same set=True same order=True (|referee|=512, |A1|=512); referee vs repo tiles_at_level: same set=True (|repo|=512)
+ level 4: referee vs A1: same set=True same order=True (|referee|=4096, |A1|=4096); referee vs repo tiles_at_level: same set=True (|repo|=4096)
+ level 5: referee vs A1: same set=True same order=True (|referee|=32768, |A1|=32768)
+ ALL TILE SETS IDENTICAL: True
+
+NEGATIVE CONTROLS (sensitivity of the geometric check)
+ random pi_v (uniform in S3^7, 20 draws, levels 1..3): disjoint+exact-fill passed in 20/20; all-frames-det+1 passed in 0/20  (expected det pass rate 2^-7 = 0.16 draws)
+ all 128 parity patterns of pi_v at level 1: disjoint+exact fill ALWAYS hold; det+1 holds iff sgn(pi_v)=(-1)^|v| for all v (127/128 patterns violate det+1) -- i.e. the geometric part of the claim is independent of the FR30 permutations, only the det+1 part tests them
+ perturbed rule [centre offset (1,1,1)->(1,1,0)]: level 1 distinct=52 overlapping=4 missing=4 outside=0 fills_chair_exactly=False -> check FAILS as it should: True
+ perturbed rule [centre offset (1,1,1)->(0,0,0)]: level 1 distinct=49 overlapping=7 missing=7 outside=0 fills_chair_exactly=False -> check FAILS as it should: True
+ perturbed rule [octant offset 4Gv -> 2Gv]: level 1 distinct=14 overlapping=8 missing=42 outside=0 fills_chair_exactly=False -> check FAILS as it should: True
+ perturbed rule [octant offset 4Gv -> 3Gv]: level 1 distinct=26 overlapping=18 missing=30 outside=0 fills_chair_exactly=False -> check FAILS as it should: True
+ perturbed rule [D_s(v) -> identity (no reflection)]: level 1 distinct=56 overlapping=0 missing=42 outside=42 fills_chair_exactly=False -> check FAILS as it should: True
+
+VERDICT: geometry claim reproduced=True; tile sets identical across referee/A1/repo=True

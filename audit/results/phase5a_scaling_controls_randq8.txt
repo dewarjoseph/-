@@ -1,0 +1,25 @@
+=== randq8: FR30 graph / i.i.d. random Q8 links (seed 11) ===   (pinned operator; python 3.13.16, numpy 2.5.3, OMP_NUM_THREADS=1)
+[randq8] level 3: n=512 dim=1024 |E|=5376 nnz=14328 bulk coordination 24, boundary tiles 287 (0.561); interface tile counts {d: |I_d|} = {1: 269, 2: 501, 3: 512}; link labels {'-1': 652, '+k': 691, '-i': 672, '+j': 690, '-j': 700, '+1': 675, '-k': 650, '+i': 646}; build 0.6s
+   dense eigh (evr, subset_by_index=(0,3)) (1s, maxrss 0.12 GB)
+   lowest 4: [15.144941  15.144941  15.2522375 15.2522375]   residuals: [2.7e-14 7.1e-14 6.1e-14 6.0e-14]
+   ground pair (split 0.0e+00, gap to next pair 0.10730): IPR=0.0333717 [vec1 0.0333717, vec2 0.0333717]  IPR*n=17.0863  P=30.0  p_max=0.0909 s50=11 s90=64  boundary weight=0.1322 (tile fraction 0.561)
+   S2(d)    d=1..L: 0.48707  0.17495  0.03337   1/S2(d): 2.053  5.716  29.966   (uniform: 8  64  512)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.7472 [0.5254, 1.422]  d=2: 0.9994 [0.9785, 1.021]  d=3: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [0.2839 0.0456 0.001  0.005  0.0027 0.6356 0.0072 0.019 ]
+[randq8] level 4: n=4096 dim=8192 |E|=46080 nnz=120824 bulk coordination 24, boundary tiles 1331 (0.325); interface tile counts {d: |I_d|} = {1: 1277, 2: 2895, 3: 4085, 4: 4096}; link labels {'-1': 5779, '+k': 5785, '-i': 5744, '+j': 5716, '-j': 5841, '+1': 5714, '-k': 5792, '+i': 5709}; build 6.4s
+   lobpcg(block=8, seed=0, tol=1e-7, diag precond) (3s, maxrss 0.16 GB)  warnings: Exited postprocessing with accuracies 
+   lowest 4: [14.6949434 14.6949434 14.7232449 14.7232449]   residuals: [7.7e-09 1.6e-08 2.0e-08 2.6e-08]
+   ground pair (split -1.4e-14, gap to next pair 0.02830): IPR=0.0306192 [vec1 0.0306192, vec2 0.0306192]  IPR*n=125.4163  P=32.7  p_max=0.0833 s50=12 s90=82  boundary weight=0.0839 (tile fraction 0.325)
+   S2(d)    d=1..L: 0.94192  0.42130  0.16874  0.03062   1/S2(d): 1.062  2.374  5.926  32.659   (uniform: 8  64  512  4096)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.0990 [0.3118, 0.317]  d=2: 0.7149 [0.7068, 1.012]  d=3: 1.0000 [0.9973, 1.003]  d=4: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [5.9819e-03 1.0453e-06 1.3732e-08 1.3487e-02 1.5859e-06 1.0165e-02 1.7285e-06 9.7036e-01]
+[randq8] level 5: n=32768 dim=65536 |E|=380928 nnz=991224 bulk coordination 24, boundary tiles 5723 (0.175); interface tile counts {d: |I_d|} = {1: 5597, 2: 14595, 3: 25379, 4: 32757, 5: 32768}; link labels {'-1': 47728, '+k': 47628, '-i': 47594, '+j': 47524, '-j': 47931, '+1': 47534, '-k': 47554, '+i': 47435}; build 45.1s
+   lobpcg(block=6, seed=0, tol=1e-7, diag precond) (24s, maxrss 0.62 GB)  warnings: Exited at iteration 357 with accuracies ; Exited postprocessing with accuracies 
+   lowest 4: [14.4082749 14.4082749 14.4164535 14.4164535]   residuals: [4.3e-08 3.4e-08 2.7e-08 6.7e-08]
+   ground pair (split -7.1e-14, gap to next pair 0.00818): IPR=0.0516485 [vec1 0.0516485, vec2 0.0516485]  IPR*n=1692.4177  P=19.4  p_max=0.122 s50=7 s90=45  boundary weight=0.0007 (tile fraction 0.175)
+   S2(d)    d=1..L: 0.99992  0.73668  0.70888  0.25108  0.05165   1/S2(d): 1.000  1.357  1.411  3.983  19.362   (uniform: 8  64  512  4096  32768)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.0003 [0.1708, 0.002]  d=2: 0.5607 [0.4454, 1.259]  d=3: 0.6439 [0.7745, 0.831]  d=4: 1.0000 [0.9997, 1.000]  d=5: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [1.4492e-05 1.5322e-12 5.2203e-10 2.3143e-05 9.9996e-01 1.7489e-16 2.0260e-14 4.4515e-12]
+   scaling 3->4: IPR*n ratio 7.340, alpha = -log(IPR_(k+1)/IPR_k)/log 8 = 0.041; 1/S2(d) growth ratios: d=1: 0.517, d=2: 0.415, d=3: 0.198; bottom decrement +0.45000
+   scaling 4->5: IPR*n ratio 13.494, alpha = -log(IPR_(k+1)/IPR_k)/log 8 = -0.251; 1/S2(d) growth ratios: d=1: 0.942, d=2: 0.572, d=3: 0.238, d=4: 0.122; bottom decrement +0.28667
+   saved; maxrss 0.62 GB

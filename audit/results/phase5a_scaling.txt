@@ -1,0 +1,195 @@
+====================================================================================================
+1. SPECTRAL BOTTOMS (this run) vs stored values
+ level 2: n=64  H_pin lambda_min=10.776951 (res 1.3e-14; stored 10.77695)  H_free lambda_min=4.726465 (res 1.5e-14; stored 4.72646)  trivial pinned lambda_min=4.751193  LOBPCG cross-check 10.776951
+ level 3: n=512  H_pin lambda_min=9.378470 (res 8.0e-14; stored 9.37847)  H_free lambda_min=5.114941 (res 4.2e-14; stored 5.11494)  trivial pinned lambda_min=1.669512  LOBPCG cross-check 9.378470
+ level 4: n=4096  H_pin lambda_min=8.919634 (res 1.2e-13; stored 8.91963)  H_free lambda_min=5.209699 (res 1.6e-13; stored 5.2097)  trivial pinned lambda_min=0.502729  LOBPCG cross-check 8.919634
+ level 5: n=32768  H_pin lambda_min=8.797011 (res 1.9e-14; stored 8.79701)  H_free lambda_min=5.249931 (res 4.4e-10; stored 5.24993)  trivial pinned lambda_min=0.138602  LOBPCG cross-check 8.797011
+ level 6: n=262144  H_pin lambda_min=8.770134 (res 7.3e-08; stored 8.77013)  trivial pinned lambda_min=0.036461
+
+====================================================================================================
+2. FINITE-SIZE SCALING OF THE TILE IPR  (IPR = sum_a p_a^2, p_a tile weight; IPR*n = 1 for a uniform state)
+   alpha defined by IPR ~ n^(-alpha): alpha = 1 extended (IPR*n const), alpha = 0 localized, 0 < alpha < 1 critical / fractal support
+ H_pin Clifford ground state (index 0):
+   level:          2           3           4           5           6
+   n    :         64         512        4096       32768      262144
+   IPR  :   0.037302    0.012547    0.002233    0.000608    0.000163
+   IPR*n:      2.387       6.424       9.146      19.930      42.789
+   two-point alpha (consecutive levels): 0.524, 0.830, 0.625, 0.633;  least-squares alpha over all listed levels: 0.668
+ H_pin Clifford, mean IPR of lowest 8 eigenvectors:
+   level:          2           3           4           5           6
+   n    :         64         512        4096       32768      262144
+   IPR  :   0.028553    0.008973    0.001801    0.000560    0.000178
+   IPR*n:      1.827       4.594       7.377      18.359      46.682
+   two-point alpha (consecutive levels): 0.557, 0.772, 0.562, 0.551;  least-squares alpha over all listed levels: 0.622
+ H_pin Clifford, mean IPR of all K computed eigenvectors:
+   level:          2           3           4           5           6
+   n    :         64         512        4096       32768      262144
+   IPR  :   0.027988    0.004577    0.001353    0.000467    0.000178
+   IPR*n:      1.791       2.343       5.540      15.305      46.682
+   two-point alpha (consecutive levels): 0.871, 0.586, 0.511, 0.464;  least-squares alpha over all listed levels: 0.596
+ H_free Clifford ground state (surface band):
+   level:          2           3           4           5
+   n    :         64         512        4096       32768
+   IPR  :   0.027078    0.011515    0.011325    0.009573
+   IPR*n:      1.733       5.896      46.386     313.685
+   two-point alpha (consecutive levels): 0.411, 0.008, 0.081;  least-squares alpha over all listed levels: 0.151
+ H_free Clifford, mean IPR of lowest 8:
+   level:          2           3           4           5
+   n    :         64         512        4096       32768
+   IPR  :   0.036816    0.016230    0.015204    0.012144
+   IPR*n:      2.356       8.310      62.278     397.947
+   two-point alpha (consecutive levels): 0.394, 0.031, 0.108;  least-squares alpha over all listed levels: 0.163
+ trivial connection, pinned (24 - A_0) ground state:
+   level:          2           3           4           5           6
+   n    :         64         512        4096       32768      262144
+   IPR  :   0.024352    0.004412    0.000704    0.000100    0.000013
+   IPR*n:      1.559       2.259       2.885       3.264       3.471
+   two-point alpha (consecutive levels): 0.821, 0.882, 0.941, 0.970;  least-squares alpha over all listed levels: 0.905
+ trivial connection, pinned, mean IPR of lowest 8:
+   level:          2           3           4           5           6
+   n    :         64         512        4096       32768      262144
+   IPR  :   0.035394    0.005082    0.000749    0.000105    0.000014
+   IPR*n:      2.265       2.602       3.066       3.439       3.640
+   two-point alpha (consecutive levels): 0.933, 0.921, 0.945, 0.973;  least-squares alpha over all listed levels: 0.941
+ trivial connection, free (deg - A_0) ground state (= uniform, IPR*n = 1):
+   level:          2           3           4           5
+   n    :         64         512        4096       32768
+   IPR  :   0.015625    0.001953    0.000244    0.000031
+   IPR*n:      1.000       1.000       1.000       1.000
+   two-point alpha (consecutive levels): 1.000, 1.000, 1.000;  least-squares alpha over all listed levels: 1.000
+
+====================================================================================================
+3. INTERFACE NETWORK REFERENCE: tiles touching top-level child interfaces, T_L = 8, 53, 269, 1277, 5597 (phase 3), fraction |I_1|/n
+   T_L ~ n^beta: two-point beta = 0.909, 0.781, 0.749, 0.711; fit beta = 0.783 (levels 1-5); levels 3-5 fit beta = 0.730
+   a state uniform on the depth-1 interface tiles would have IPR = 1/T_L, i.e. alpha_interface = beta = 0.783 and IPR*n = n/T_L = 1.00, 1.21, 1.90, 3.21, 5.85 (levels 1-5)
+   level 2: depth-1 interface tiles computed here |I_1| = 53 (reference T_L = 53: phase 3 for L<=5, this run (grid builder) for L=6); all depths {'1': 53, '2': 64}
+   level 3: depth-1 interface tiles computed here |I_1| = 269 (reference T_L = 269: phase 3 for L<=5, this run (grid builder) for L=6); all depths {'1': 269, '2': 501, '3': 512}
+   level 4: depth-1 interface tiles computed here |I_1| = 1277 (reference T_L = 1277: phase 3 for L<=5, this run (grid builder) for L=6); all depths {'1': 1277, '2': 2895, '3': 4085, '4': 4096}
+   level 5: depth-1 interface tiles computed here |I_1| = 5597 (reference T_L = 5597: phase 3 for L<=5, this run (grid builder) for L=6); all depths {'1': 5597, '2': 14595, '3': 25379, '4': 32757, '5': 32768}
+   level 6: depth-1 interface tiles computed here |I_1| = 23453 (reference T_L = 23453: phase 3 for L<=5, this run (grid builder) for L=6); all depths {'1': 23453, '2': 65643, '3': 132479, '4': 210507, '5': 262133, '6': 262144}
+
+====================================================================================================
+4. INTERFACE DEPTH PROFILE: weight of the state on depth-d interface tiles vs. tile fraction |I_d|/n (ratio > 1 = enrichment)
+ level 2: tile fractions {d: |I_d|/n} = {'1': 0.8281, '2': 1.0}
+   H_pin ground state          : weight {d: w_d} = {'1': 0.9228, '2': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 1.114, '2': 1.0}
+   H_pin mean lowest 8         : weight {d: w_d} = {'1': 0.9264, '2': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 1.119, '2': 1.0}
+   H_free ground state         : weight {d: w_d} = {'1': 0.6091, '2': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 0.736, '2': 1.0}
+   trivial pinned ground state : weight {d: w_d} = {'1': 0.9183, '2': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 1.109, '2': 1.0}
+ level 3: tile fractions {d: |I_d|/n} = {'1': 0.5254, '2': 0.9785, '3': 1.0}
+   H_pin ground state          : weight {d: w_d} = {'1': 0.7821, '2': 0.9924, '3': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 1.489, '2': 1.014, '3': 1.0}
+   H_pin mean lowest 8         : weight {d: w_d} = {'1': 0.7969, '2': 0.9976, '3': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 1.517, '2': 1.019, '3': 1.0}
+   H_free ground state         : weight {d: w_d} = {'1': 0.1674, '2': 0.7648, '3': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 0.319, '2': 0.782, '3': 1.0}
+   trivial pinned ground state : weight {d: w_d} = {'1': 0.7272, '2': 0.994, '3': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 1.384, '2': 1.016, '3': 1.0}
+ level 4: tile fractions {d: |I_d|/n} = {'1': 0.3118, '2': 0.7068, '3': 0.9973, '4': 1.0}
+   H_pin ground state          : weight {d: w_d} = {'1': 0.6557, '2': 0.8581, '3': 0.9996, '4': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 2.103, '2': 1.214, '3': 1.002, '4': 1.0}
+   H_pin mean lowest 8         : weight {d: w_d} = {'1': 0.6671, '2': 0.8661, '3': 0.9997, '4': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 2.14, '2': 1.225, '3': 1.002, '4': 1.0}
+   H_free ground state         : weight {d: w_d} = {'1': 0.0077, '2': 0.2473, '3': 0.812, '4': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 0.025, '2': 0.35, '3': 0.814, '4': 1.0}
+   trivial pinned ground state : weight {d: w_d} = {'1': 0.5047, '2': 0.8172, '3': 0.9995, '4': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 1.619, '2': 1.156, '3': 1.002, '4': 1.0}
+ level 5: tile fractions {d: |I_d|/n} = {'1': 0.1708, '2': 0.4454, '3': 0.7745, '4': 0.9997, '5': 1.0}
+   H_pin ground state          : weight {d: w_d} = {'1': 0.5816, '2': 0.7735, '3': 0.8593, '4': 0.9999, '5': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 3.405, '2': 1.737, '3': 1.109, '4': 1.0, '5': 1.0}
+   H_pin mean lowest 8         : weight {d: w_d} = {'1': 0.6119, '2': 0.7857, '3': 0.8611, '4': 1.0, '5': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 3.583, '2': 1.764, '3': 1.112, '4': 1.0, '5': 1.0}
+   H_free ground state         : weight {d: w_d} = {'1': 0.0001, '2': 0.0321, '3': 0.268, '4': 0.8229, '5': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 0.001, '2': 0.072, '3': 0.346, '4': 0.823, '5': 1.0}
+   trivial pinned ground state : weight {d: w_d} = {'1': 0.3002, '2': 0.5612, '3': 0.8265, '4': 1.0, '5': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 1.757, '2': 1.26, '3': 1.067, '4': 1.0, '5': 1.0}
+ level 6: tile fractions {d: |I_d|/n} = {'1': 0.0895, '2': 0.2504, '3': 0.5054, '4': 0.803, '5': 1.0, '6': 1.0}
+   H_pin ground state          : weight {d: w_d} = {'1': 0.5661, '2': 0.744, '3': 0.7985, '4': 0.8624, '5': 1.0, '6': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 6.327, '2': 2.971, '3': 1.58, '4': 1.074, '5': 1.0, '6': 1.0}
+   H_pin mean lowest 8         : weight {d: w_d} = {'1': 0.5528, '2': 0.7429, '3': 0.7985, '4': 0.8625, '5': 1.0, '6': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 6.179, '2': 2.967, '3': 1.58, '4': 1.074, '5': 1.0, '6': 1.0}
+   trivial pinned ground state : weight {d: w_d} = {'1': 0.1638, '2': 0.329, '3': 0.5607, '4': 0.8278, '5': 1.0, '6': 1.0}  enrichment w_d/(|I_d|/n) = {'1': 1.831, '2': 1.314, '3': 1.11, '4': 1.031, '5': 1.0, '6': 1.0}
+
+====================================================================================================
+5. BOUNDARY WEIGHT (tiles with < 24 panels) of the ground states vs boundary tile fraction
+ level 2: boundary tile fraction 0.8281;  H_pin ground-state boundary weight 0.6308 (mean lowest 8: 0.7869);  H_free ground-state boundary weight 0.9288 (mean lowest 8: 0.9391);  trivial pinned ground-state boundary weight 0.6730 (mean lowest 8: 0.7001);
+ level 3: boundary tile fraction 0.5605;  H_pin ground-state boundary weight 0.1327 (mean lowest 8: 0.1873);  H_free ground-state boundary weight 0.9276 (mean lowest 8: 0.9287);  trivial pinned ground-state boundary weight 0.2148 (mean lowest 8: 0.3295);
+ level 4: boundary tile fraction 0.3250;  H_pin ground-state boundary weight 0.0075 (mean lowest 8: 0.0091);  H_free ground-state boundary weight 0.9271 (mean lowest 8: 0.9269);  trivial pinned ground-state boundary weight 0.0408 (mean lowest 8: 0.0717);
+ level 5: boundary tile fraction 0.1747;  H_pin ground-state boundary weight 0.0007 (mean lowest 8: 0.0005);  H_free ground-state boundary weight 0.9261 (mean lowest 8: 0.9261);  trivial pinned ground-state boundary weight 0.0063 (mean lowest 8: 0.0109);
+ level 6: boundary tile fraction 0.0905;  H_pin ground-state boundary weight 0.0000 (mean lowest 8: 0.0000);  trivial pinned ground-state boundary weight 0.0009 (mean lowest 8: 0.0015);
+
+====================================================================================================
+6. MULTIFRACTAL / BOX-COUNTING (H_pin ground state): S_q(d) = sum over the 8^d level-(L-d) children of (child weight)^q
+   uniform extended: S_2(d) = 8^(-d) (local dimension D_2(d) = 3 per depth step); single child: S_2 = 1 (D_2 = 0); D_2(d) := -log_2[S_2(d)/S_2(d-1)] (3 = uniform fill, 2 = surface-like)
+ level 2 H_pin ground state: IPR_2 = 3.730e-02 (n*IPR_2 = 2.39), IPR_3 = 2.338e-03 (n^2*IPR_3 = 9.58)
+    S_2(d), d=0..2: [1.      0.23407 0.0373 ]   local D_2 per depth step: [2.095, 2.65]   (uniform: 3.0)
+    S_3(d), d=0..2: [1.       0.077955 0.002338]   local D_3 per depth step: [1.841, 2.53]
+    top-level child weights (8 children, uniform = 0.125): [0.411, 0.1672, 0.1196, 0.0362, 0.0445, 0.1196, 0.0574, 0.0445]
+    mean over lowest 8: S_2(d) = [1.      0.17336 0.02855]  local D_2: [2.528, 2.602]
+ level 2 trivial pinned ground state: IPR_2 = 2.435e-02 (n*IPR_2 = 1.56), IPR_3 = 7.881e-04 (n^2*IPR_3 = 3.23)
+    S_2(d), d=0..2: [1.      0.17162 0.02435]   local D_2 per depth step: [2.543, 2.817]   (uniform: 3.0)
+    S_3(d), d=0..2: [1.000000e+00 3.890905e-02 7.880636e-04]   local D_3 per depth step: [2.342, 2.813]
+ level 2 H_free ground state: IPR_2 = 2.708e-02 (n*IPR_2 = 1.73), IPR_3 = 9.769e-04 (n^2*IPR_3 = 4.00)
+    S_2(d), d=0..2: [1.      0.14362 0.02708]   local D_2 per depth step: [2.8, 2.407]   (uniform: 3.0)
+    S_3(d), d=0..2: [1.000000e+00 2.211231e-02 9.769270e-04]   local D_3 per depth step: [2.75, 2.25]
+ level 3 H_pin ground state: IPR_2 = 1.255e-02 (n*IPR_2 = 6.42), IPR_3 = 2.630e-04 (n^2*IPR_3 = 68.94)
+    S_2(d), d=0..3: [1.      0.41575 0.08328 0.01255]   local D_2 per depth step: [1.266, 2.32, 2.73]   (uniform: 3.0)
+    S_3(d), d=0..3: [1.000000e+00 2.360190e-01 1.199464e-02 2.629917e-04]   local D_3 per depth step: [1.042, 2.149, 2.756]
+    top-level child weights (8 children, uniform = 0.125): [0.6136, 0.1578, 0.0808, 0.017, 0.0111, 0.0808, 0.0278, 0.0111]
+    mean over lowest 8: S_2(d) = [1.      0.28681 0.05612 0.00897]  local D_2: [1.802, 2.354, 2.645]
+ level 3 trivial pinned ground state: IPR_2 = 4.412e-03 (n*IPR_2 = 2.26), IPR_3 = 2.728e-05 (n^2*IPR_3 = 7.15)
+    S_2(d), d=0..3: [1.      0.20577 0.0314  0.00441]   local D_2 per depth step: [2.281, 2.712, 2.831]   (uniform: 3.0)
+    S_3(d), d=0..3: [1.000000e+00 6.043050e-02 1.414317e-03 2.727895e-05]   local D_3 per depth step: [2.024, 2.709, 2.848]
+ level 3 H_free ground state: IPR_2 = 1.152e-02 (n*IPR_2 = 5.90), IPR_3 = 2.401e-04 (n^2*IPR_3 = 62.93)
+    S_2(d), d=0..3: [1.      0.16941 0.05495 0.01152]   local D_2 per depth step: [2.561, 1.624, 2.255]   (uniform: 3.0)
+    S_3(d), d=0..3: [1.000000e+00 3.208707e-02 4.199795e-03 2.400600e-04]   local D_3 per depth step: [2.481, 1.467, 2.064]
+ level 4 H_pin ground state: IPR_2 = 2.233e-03 (n*IPR_2 = 9.15), IPR_3 = 9.143e-06 (n^2*IPR_3 = 153.39)
+    S_2(d), d=0..4: [1.      0.31631 0.07366 0.01277 0.00223]   local D_2 per depth step: [1.661, 2.102, 2.528, 2.516]   (uniform: 3.0)
+    S_3(d), d=0..4: [1.000000e+00 1.404578e-01 1.090890e-02 2.586865e-04 9.142567e-06]   local D_3 per depth step: [1.416, 1.843, 2.699, 2.411]
+    top-level child weights (8 children, uniform = 0.125): [0.5098, 0.1763, 0.106, 0.0242, 0.0193, 0.106, 0.0392, 0.0193]
+    mean over lowest 8: S_2(d) = [1.      0.27833 0.05198 0.01006 0.0018 ]  local D_2: [1.845, 2.421, 2.369, 2.482]
+ level 4 trivial pinned ground state: IPR_2 = 7.042e-04 (n*IPR_2 = 2.88), IPR_3 = 6.941e-07 (n^2*IPR_3 = 11.64)
+    S_2(d), d=0..4: [1.00000e+00 2.28589e-01 3.63758e-02 5.43979e-03 7.04232e-04]   local D_2 per depth step: [2.129, 2.652, 2.741, 2.949]   (uniform: 3.0)
+    S_3(d), d=0..4: [1.000000e+00 7.605282e-02 1.975117e-03 4.177571e-05 6.940958e-07]   local D_3 per depth step: [1.858, 2.633, 2.782, 2.956]
+ level 4 H_free ground state: IPR_2 = 1.132e-02 (n*IPR_2 = 46.39), IPR_3 = 2.380e-04 (n^2*IPR_3 = 3992.45)
+    S_2(d), d=0..4: [1.      0.32627 0.13793 0.05328 0.01132]   local D_2 per depth step: [1.616, 1.242, 1.372, 2.234]   (uniform: 3.0)
+    S_3(d), d=0..4: [1.000000e+00 1.075833e-01 2.082212e-02 4.011334e-03 2.379688e-04]   local D_3 per depth step: [1.608, 1.185, 1.188, 2.038]
+ level 5 H_pin ground state: IPR_2 = 6.082e-04 (n*IPR_2 = 19.93), IPR_3 = 9.392e-07 (n^2*IPR_3 = 1008.45)
+    S_2(d), d=0..5: [1.00000e+00 3.07464e-01 5.76159e-02 1.38532e-02 3.31371e-03 6.08227e-04]   local D_2 per depth step: [1.702, 2.416, 2.056, 2.064, 2.446]   (uniform: 3.0)
+    S_3(d), d=0..5: [1.000000e+00 1.320153e-01 5.608152e-03 2.856752e-04 2.240056e-05
+ 9.391939e-07]   local D_3 per depth step: [1.461, 2.279, 2.148, 1.836, 2.288]
+    top-level child weights (8 children, uniform = 0.125): [0.4956, 0.2075, 0.0818, 0.0601, 0.0243, 0.0818, 0.0246, 0.0243]
+    mean over lowest 8: S_2(d) = [1.00000e+00 2.40344e-01 4.36030e-02 1.19242e-02 3.04118e-03 5.60268e-04]  local D_2: [2.057, 2.463, 1.871, 1.971, 2.44]
+ level 5 trivial pinned ground state: IPR_2 = 9.961e-05 (n*IPR_2 = 3.26), IPR_3 = 1.387e-08 (n^2*IPR_3 = 14.89)
+    S_2(d), d=0..5: [1.00000e+00 2.40566e-01 3.93574e-02 6.02341e-03 7.89247e-04 9.96075e-05]   local D_2 per depth step: [2.055, 2.612, 2.708, 2.932, 2.986]   (uniform: 3.0)
+    S_3(d), d=0..5: [1.000000e+00 8.444928e-02 2.368644e-03 5.144224e-05 8.724186e-07
+ 1.386776e-08]   local D_3 per depth step: [1.783, 2.578, 2.762, 2.941, 2.988]
+ level 5 H_free ground state: IPR_2 = 9.573e-03 (n*IPR_2 = 313.69), IPR_3 = 1.926e-04 (n^2*IPR_3 = 206771.23)
+    S_2(d), d=0..5: [1.      0.33325 0.16256 0.10792 0.04472 0.00957]   local D_2 per depth step: [1.585, 1.036, 0.591, 1.271, 2.224]   (uniform: 3.0)
+    S_3(d), d=0..5: [1.000000e+00 1.110686e-01 2.675502e-02 1.406179e-02 3.190923e-03
+ 1.925707e-04]   local D_3 per depth step: [1.585, 1.027, 0.464, 1.07, 2.025]
+ level 6 H_pin ground state: IPR_2 = 1.632e-04 (n*IPR_2 = 42.79), IPR_3 = 7.171e-08 (n^2*IPR_3 = 4928.17)
+    S_2(d), d=0..6: [1.00000e+00 2.00713e-01 3.84480e-02 1.12565e-02 3.39612e-03 8.77097e-04
+ 1.63227e-04]   local D_2 per depth step: [2.317, 2.384, 1.772, 1.729, 1.953, 2.426]   (uniform: 3.0)
+    S_3(d), d=0..6: [1.000000e+00 5.466270e-02 1.925834e-03 1.697861e-04 1.950242e-05
+ 1.673438e-06 7.171429e-08]   local D_3 per depth step: [2.097, 2.414, 1.752, 1.561, 1.771, 2.272]
+    top-level child weights (8 children, uniform = 0.125): [0.3532, 0.1879, 0.1119, 0.0956, 0.0454, 0.1119, 0.0488, 0.0454]
+    mean over lowest 8: S_2(d) = [1.00000e+00 2.11071e-01 4.05162e-02 1.18756e-02 3.62855e-03 9.42841e-04
+ 1.78080e-04]  local D_2: [2.244, 2.381, 1.77, 1.711, 1.944, 2.404]
+ level 6 trivial pinned ground state: IPR_2 = 1.324e-05 (n*IPR_2 = 3.47), IPR_3 = 2.452e-10 (n^2*IPR_3 = 16.85)
+    S_2(d), d=0..6: [1.00000e+00 2.46736e-01 4.10823e-02 6.35072e-03 8.34949e-04 1.05667e-04
+ 1.32418e-05]   local D_2 per depth step: [2.019, 2.586, 2.694, 2.927, 2.982, 2.996]   (uniform: 3.0)
+    S_3(d), d=0..6: [1.000000e+00 8.880403e-02 2.618525e-03 5.733885e-05 9.778719e-07
+ 1.562154e-08 2.451979e-10]   local D_3 per depth step: [1.747, 2.542, 2.757, 2.937, 2.984, 2.997]
+
+====================================================================================================
+7. SPECTRAL DATA NEAR THE BOTTOM (H_pin): lowest 8 eigenvalues, doublet gaps, span of the computed block, IPR*n of each
+ level 2: K=32 lowest [10.776951, 10.776951, 11.677453, 11.677453, 11.878125, 11.878125, 12.427107, 12.427107]; lambda_K - lambda_1 = 7.05073; max residual 3.1e-14; IPR*n of the lowest 8: [2.39, 2.39, 1.88, 1.88, 1.61, 1.61, 1.44, 1.44]; IPR*n over all K: min 1.29 median 1.69 max 3.15
+ level 3: K=64 lowest [9.37847, 9.37847, 9.589403, 9.589403, 9.709187, 9.709187, 9.848797, 9.848797]; lambda_K - lambda_1 = 2.13931; max residual 8.4e-14; IPR*n of the lowest 8: [6.42, 6.42, 4.32, 4.32, 4.51, 4.51, 3.12, 3.12]; IPR*n over all K: min 1.54 median 1.98 max 6.42
+ level 4: K=128 lowest [8.919634, 8.919634, 8.948787, 8.948787, 8.956989, 8.956989, 8.968624, 8.968624]; lambda_K - lambda_1 = 0.65041; max residual 2.1e-13; IPR*n of the lowest 8: [9.15, 9.15, 7.37, 7.37, 7.01, 7.01, 5.98, 5.98]; IPR*n over all K: min 2.58 median 5.75 max 11.37
+ level 5: K=128 lowest [8.797011, 8.797011, 8.79898, 8.79898, 8.80043, 8.80043, 8.80138, 8.80138]; lambda_K - lambda_1 = 0.13349; max residual 9.9e-09; IPR*n of the lowest 8: [19.93, 19.93, 18.34, 18.34, 15.53, 15.53, 19.64, 19.64]; IPR*n over all K: min 3.69 median 15.91 max 51.79
+ level 6: K=8 lowest [8.770134, 8.770134, 8.770242, 8.770242, 8.770335, 8.770335, 8.770543, 8.770543]; lambda_K - lambda_1 = 0.00041; max residual 9.0e-07; IPR*n of the lowest 8: [42.79, 42.79, 44.39, 44.38, 41.67, 41.67, 57.89, 57.88]; IPR*n over all K: min 41.67 median 43.59 max 57.89
+
+====================================================================================================
+8. PARTICIPATION NUMBER vs INTERFACE NETWORK SIZE, GENERALISED DIMENSIONS, AND CONVERGENCE OF THE PINNED BOTTOM
+   P = 1/IPR (effective number of tiles); T_L = number of tiles touching the top-level child interfaces (T_L ~ 4^L asymptotically: 2-dimensional)
+ level 2: n=     64 T_L=    53 T_L/n=0.8281 | H_pin ground state P_2=     26.8 P_2/T_L=0.506 P_2/n=0.4189 | P_3=IPR_3^(-1/2)=    20.7 P_3/P_2=0.771 | mean lowest 8: P=    35.0 P/T_L=0.661 | trivial pinned P=     41.1 P/n=0.6416
+ level 3: n=    512 T_L=   269 T_L/n=0.5254 | H_pin ground state P_2=     79.7 P_2/T_L=0.296 P_2/n=0.1557 | P_3=IPR_3^(-1/2)=    61.7 P_3/P_2=0.774 | mean lowest 8: P=   111.4 P/T_L=0.414 | trivial pinned P=    226.6 P/n=0.4426
+ level 4: n=   4096 T_L=  1277 T_L/n=0.3118 | H_pin ground state P_2=    447.8 P_2/T_L=0.351 P_2/n=0.1093 | P_3=IPR_3^(-1/2)=   330.7 P_3/P_2=0.739 | mean lowest 8: P=   555.2 P/T_L=0.435 | trivial pinned P=   1420.0 P/n=0.3467
+ level 5: n=  32768 T_L=  5597 T_L/n=0.1708 | H_pin ground state P_2=   1644.1 P_2/T_L=0.294 P_2/n=0.0502 | P_3=IPR_3^(-1/2)=  1031.9 P_3/P_2=0.628 | mean lowest 8: P=  1784.9 P/T_L=0.319 | trivial pinned P=  10039.4 P/n=0.3064
+ level 6: n= 262144 T_L= 23453 T_L/n=0.0895 | H_pin ground state P_2=   6126.4 P_2/T_L=0.261 P_2/n=0.0234 | P_3=IPR_3^(-1/2)=  3734.2 P_3/P_2=0.610 | mean lowest 8: P=  5615.5 P/T_L=0.239 | trivial pinned P=  75518.6 P/n=0.2881
+   generalised dimensions from consecutive levels, IPR_q ~ n^(-(q-1) D_q / 3) (3 = uniform in 3D, 2 = surface-like, 0 = localized):
+   levels 2->3: ground state D_2 = 1.57, D_3 = 1.58; lowest-8 mean D_2 = 1.67
+   levels 3->4: ground state D_2 = 2.49, D_3 = 2.42; lowest-8 mean D_2 = 2.32
+   levels 4->5: ground state D_2 = 1.88, D_3 = 1.64; lowest-8 mean D_2 = 1.68
+   levels 5->6: ground state D_2 = 1.90, D_3 = 1.86; lowest-8 mean D_2 = 1.65
+   convergence of the pinned bottom lambda_min(L) (decrements and their ratios; Dirichlet L^-2 law for an extended band edge gives ratio 1/4):
+   Clifford H_pin: lambda_min = [10.776951, 9.37847, 8.919634, 8.797011, 8.770134]; decrements [1.39848, 0.45884, 0.12262, 0.02688]; ratios [0.328, 0.267, 0.219]
+   trivial pinned: lambda_min = [4.751193, 1.669512, 0.502729, 0.138602, 0.036461]; decrements [3.08168, 1.16678, 0.36413, 0.10214]; ratios [0.379, 0.312, 0.281]
+
+saved /home/user/-/audit/results/phase5a_scaling.json

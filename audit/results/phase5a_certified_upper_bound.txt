@@ -1,0 +1,6 @@
+level 2 dim     128: float lambda_min estimate 10.7769505 (residual 1.3e-14);  CERTIFIED exact Rayleigh quotient of rounded vector = 10.776950512  (= 3033441878476984/281474975238239, |p|^2=281474975238239);  E_bulk <= 10.7769505  (0s)
+level 3 dim    1024: float lambda_min estimate 9.3784702 (residual 8.2e-14);  CERTIFIED exact Rayleigh quotient of rounded vector = 9.378470210  (= 1319902366216346/140737490935935, |p|^2=281474981871870);  E_bulk <= 9.3784702  (4s)
+level 4 dim    8192: float lambda_min estimate 8.9196344 (residual 6.1e-07);  CERTIFIED exact Rayleigh quotient of rounded vector = 8.919634360  (= 1255326883536563/140737482371670, |p|^2=281474964743340);  E_bulk <= 8.9196344  (10s)
+levels [2, 3, 4] done: E_bulk <= lambda_min(H^pin_m) <= certified value at every level computed.
+level 5 dim   65536: float lambda_min estimate 8.7970113 (residual 6.6e-05);  CERTIFIED exact Rayleigh quotient of rounded vector = 8.797011333  (= 2476138622922986/281474983842677, |p|^2=281474983842677);  E_bulk <= 8.7970113  (99s)
+levels [5] done: E_bulk <= lambda_min(H^pin_m) <= certified value at every level computed.

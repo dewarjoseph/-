@@ -19,7 +19,7 @@ def log(s=''):
     print(s, flush=True); out.write(s + '\n')
 STORED = {'pinned': {2: 10.77695, 3: 9.37847, 4: 8.91963, 5: 8.79701, 6: 8.77013}, 'free': {2: 4.72646, 3: 5.11494, 4: 5.20970, 5: 5.24993},
           'pinned_ipr': {4: 0.00223, 5: 0.00061, 6: 0.00016}}
-T_INTERFACE = {1: 8, 2: 53, 3: 269, 4: 1277, 5: 5597}   # phase 3: tiles touching top-level child interfaces (T_k)
+T_INTERFACE = {1: 8, 2: 53, 3: 269, 4: 1277, 5: 5597, 6: 23453}   # phase 3 (levels 1-5) and this run's grid builder (level 6): tiles touching top-level child interfaces
 
 log("=" * 100); log("1. SPECTRAL BOTTOMS (this run) vs stored values")
 for L in levels:
@@ -76,7 +76,7 @@ log(f"   a state uniform on the depth-1 interface tiles would have IPR = 1/T_L, 
 summary['interface_reference'] = {'T': Ts, 'beta_two_point': twoT, 'beta_fit': fitT}
 for L in levels:
     d = data[L]
-    log(f"   level {L}: depth-1 interface tiles computed here |I_1| = {d['interface_tile_counts']['1']} (phase 3 T_L = {T_INTERFACE.get(L)}); all depths {d['interface_tile_counts']}")
+    log(f"   level {L}: depth-1 interface tiles computed here |I_1| = {d['interface_tile_counts']['1']} (reference T_L = {T_INTERFACE.get(L)}: phase 3 for L<=5, this run (grid builder) for L=6); all depths {d['interface_tile_counts']}")
 
 log(); log("=" * 100); log("4. INTERFACE DEPTH PROFILE: weight of the state on depth-d interface tiles vs. tile fraction |I_d|/n (ratio > 1 = enrichment)")
 prof = {}
@@ -131,5 +131,31 @@ for L in levels:
     iprn = np.array([r['ipr_n'] for r in d['pinned']['eigenpairs']])
     log(f" level {L}: K={len(ev)} lowest {np.round(ev[:8], 6).tolist()}; lambda_K - lambda_1 = {ev[-1]-ev[0]:.5f}; max residual {res.max():.1e}; "
         f"IPR*n of the lowest 8: {np.round(iprn[:8], 2).tolist()}; IPR*n over all K: min {iprn.min():.2f} median {np.median(iprn):.2f} max {iprn.max():.2f}")
+log(); log("=" * 100); log("8. PARTICIPATION NUMBER vs INTERFACE NETWORK SIZE, GENERALISED DIMENSIONS, AND CONVERGENCE OF THE PINNED BOTTOM")
+log("   P = 1/IPR (effective number of tiles); T_L = number of tiles touching the top-level child interfaces (T_L ~ 4^L asymptotically: 2-dimensional)")
+rows = []
+for L in levels:
+    d = data[L]; n = d['n']; r = d['pinned']['eigenpairs'][0]; T = d['interface_tile_counts']['1']
+    P2 = 1 / r['ipr']; P3 = r['ipr_q3'] ** -0.5; Pm = 1 / d['pinned']['avg_lowest8']['mean_ipr']
+    tp = 1 / d['trivial_pinned']['eigenpairs'][0]['ipr'] if 'trivial_pinned' in d else float('nan')
+    rows.append((L, n, T, P2, P3, Pm, tp))
+    log(f" level {L}: n={n:7d} T_L={T:6d} T_L/n={T/n:.4f} | H_pin ground state P_2={P2:9.1f} P_2/T_L={P2/T:.3f} P_2/n={P2/n:.4f} | P_3=IPR_3^(-1/2)={P3:8.1f} P_3/P_2={P3/P2:.3f} | "
+        f"mean lowest 8: P={Pm:8.1f} P/T_L={Pm/T:.3f} | trivial pinned P={tp:9.1f} P/n={tp/n:.4f}")
+summary['participation_vs_interface'] = [{'level': a, 'n': b, 'T_L': c, 'P2': d_, 'P3': e, 'P_mean8': f, 'P_trivial': g} for a, b, c, d_, e, f, g in rows]
+log("   generalised dimensions from consecutive levels, IPR_q ~ n^(-(q-1) D_q / 3) (3 = uniform in 3D, 2 = surface-like, 0 = localized):")
+Dq = {}
+for i in range(len(levels) - 1):
+    L0, L1 = levels[i], levels[i + 1]; r0 = data[L0]['pinned']['eigenpairs'][0]; r1 = data[L1]['pinned']['eigenpairs'][0]
+    D2 = -3 * np.log(r1['ipr'] / r0['ipr']) / np.log(8); D3 = -1.5 * np.log(r1['ipr_q3'] / r0['ipr_q3']) / np.log(8)
+    m0 = data[L0]['pinned']['avg_lowest8']['mean_ipr']; m1 = data[L1]['pinned']['avg_lowest8']['mean_ipr']; D2m = -3 * np.log(m1 / m0) / np.log(8)
+    Dq[f'{L0}-{L1}'] = {'D2_ground': float(D2), 'D3_ground': float(D3), 'D2_mean8': float(D2m)}
+    log(f"   levels {L0}->{L1}: ground state D_2 = {D2:.2f}, D_3 = {D3:.2f}; lowest-8 mean D_2 = {D2m:.2f}")
+summary['generalised_dimensions'] = Dq
+log("   convergence of the pinned bottom lambda_min(L) (decrements and their ratios; Dirichlet L^-2 law for an extended band edge gives ratio 1/4):")
+for key, lab in [('pinned', 'Clifford H_pin'), ('trivial_pinned', 'trivial pinned')]:
+    lam = [data[L][key]['lowest_eigenvalue'] for L in levels if key in data[L]]
+    dec = [lam[i] - lam[i+1] for i in range(len(lam) - 1)]; rat = [dec[i+1] / dec[i] for i in range(len(dec) - 1)]
+    log(f"   {lab}: lambda_min = {[round(x, 6) for x in lam]}; decrements {[round(x, 5) for x in dec]}; ratios {[round(x, 3) for x in rat]}")
+    summary[f'lambda_min_{key}'] = {'values': lam, 'decrements': dec, 'ratios': rat}
 json.dump(summary, open(os.path.join(RES, 'phase5a_scaling.json'), 'w'), indent=1)
 log(f"\nsaved {os.path.join(RES, 'phase5a_scaling.json')}")

@@ -8,7 +8,8 @@ Rayleigh quotient EXACTLY with Python integers: H^pin_m = 24 - A with A built fr
 {0, +-1, +-i}, so <psi, H psi> and <psi, psi> are integers.  The resulting rational number is a rigorous upper bound
 for lambda_min(H^pin_m), hence for E_bulk, independent of floating-point error.  Levels 2..5.
 
-Run from the repository root:  python3 -u -I audit/phase5a_certified_upper_bound.py [maxlevel]
+Run from the repository root:  OPENBLAS_NUM_THREADS=1 python3 -u -I audit/phase5a_certified_upper_bound.py [levels, default 2,3,4,5] [lobpcg tol, default 1e-6]
+Results are appended to audit/results/phase5a_certified_upper_bound.txt after each level.
 """
 import os, sys, time, collections
 from fractions import Fraction
@@ -16,10 +17,13 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np, scipy.sparse as sps, scipy.sparse.linalg as spl
 from independent_clifford_q8_audit import FR30, tiles_at_level, panel_edges, clifford_link
 
-maxlvl = int(sys.argv[1]) if len(sys.argv) > 1 else 5
+levels = [int(x) for x in sys.argv[1].split(',')] if len(sys.argv) > 1 else [2, 3, 4, 5]
+TOL = float(sys.argv[2]) if len(sys.argv) > 2 else 1e-6    # LOBPCG tolerance; only affects tightness, not rigor
 SCALE = 2 ** 24
-OUT = []
-def say(s): print(s, flush=True); OUT.append(s)
+RESULTS = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'results', 'phase5a_certified_upper_bound.txt')
+def say(s):
+    print(s, flush=True)
+    with open(RESULTS, 'a') as f: f.write(s + "\n")      # incremental: survives a timeout
 
 def gauss_int(C):
     """2x2 complex matrix with entries in {0,+-1,+-i} -> integer pairs (re, im)."""
@@ -40,7 +44,7 @@ def build(lvl):
     H = sps.coo_matrix((vals, (rows, cols)), shape=(2 * n, 2 * n)).tocsr()
     return H, n, links
 
-def lowest(H, k=4, seed=0, maxiter=4000, tol=1e-8):
+def lowest(H, k=4, seed=0, maxiter=2500, tol=1e-6):   # a rough vector still gives a rigorous Rayleigh-quotient bound
     rng = np.random.default_rng(seed); N = H.shape[0]
     X = rng.standard_normal((N, k)) + 1j * rng.standard_normal((N, k))
     dinv = 1.0 / H.diagonal().real
@@ -70,12 +74,12 @@ def exact_rayleigh(psi, n, links):
     quad = diag - 2 * re_sum
     return Fraction(quad, norm2), norm2
 
-for lvl in range(2, maxlvl + 1):
+for lvl in levels:
     t0 = time.time(); H, n, links = build(lvl)
     if 2 * n <= 2048:
         w, V = np.linalg.eigh(H.toarray()); w, V = w[:4], V[:, :4]
     else:
-        w, V = lowest(H)
+        w, V = lowest(H, tol=TOL)
     psi = V[:, 0]
     res = np.linalg.norm(H @ psi - w[0] * psi) / np.linalg.norm(psi)
     q, norm2 = exact_rayleigh(psi, n, links)
@@ -84,6 +88,4 @@ for lvl in range(2, maxlvl + 1):
         f"{qf:.9f}  (= {q.numerator}/{q.denominator}, |p|^2={norm2});  E_bulk <= {qf:.7f}  ({time.time()-t0:.0f}s)")
     # also a certified upper bound for the SECOND Kramers pair would need orthogonality; not attempted.
 
-say("Conclusion: E_bulk <= lambda_min(H^pin_m) <= certified value at every level; the sequence of certified values is non-increasing.")
-with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'results', 'phase5a_certified_upper_bound.txt'), 'w') as f:
-    f.write("\n".join(OUT) + "\n")
+say(f"levels {levels} done: E_bulk <= lambda_min(H^pin_m) <= certified value at every level computed.")

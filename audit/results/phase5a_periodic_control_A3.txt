@@ -31,3 +31,13 @@
       Hessian (Richardson FD, h=0.02/0.01) = [+12.45344 -1.65916 -4.37024; -1.65916 +18.61828 -3.35435; -4.37024 -3.35435 +17.96464]  eigs=[9.01617, 17.94069, 22.0795]  Richardson change=9.7e-05 raw |FD(0.02)-FD(0.01)|=7.7e-03
       Hessian (2nd-order PT, degeneracy g=2, non-scalar part 3.9e-14) = [+12.45344 -1.65916 -4.37024; -1.65916 +18.61828 -3.35435; -4.37024 -3.35435 +17.96464]  max|PT-FD|=6.5e-06  |grad|=5.7e-14
  number of index-8 sublattices (HNF count): 155
+ k=8 S=[[2, 1, 0], [0, 2, 0], [0, 0, 2]] random#1 frames=[0, 16, 21, 6, 1, 22, 11, 18] [top] k= 8  E_per=13.386662066  theta_min=[0.9733, 0.9056, 0.0377] (generic)  gap12=6.5e-01 (generic q: 9.9e-01) gap13=1.956e+00  distinct_minima=2  flux: nontriv=0.7500 traceless=0.6042 -1=0.1458  classes={'1': 36, '-1': 21, 'i': 29, 'j': 31, 'k': 27} (inter-tile plaquettes=144)
+      Hessian (Richardson FD, h=0.02/0.01) = [+15.07485 -2.03744 -5.45482; -2.03744 +13.76332 -0.96348; -5.45482 -0.96348 +7.59497]  eigs=[4.37034, 13.6946, 18.3682]  Richardson change=6.5e-04 raw |FD(0.02)-FD(0.01)|=1.4e-02
+      Hessian (2nd-order PT, degeneracy g=1, non-scalar part 0.0e+00) = [+15.07484 -2.03748 -5.45482; -2.03748 +13.76333 -0.96345; -5.45482 -0.96345 +7.59497]  max|PT-FD|=4.4e-05  |grad|=3.2e-12
+ k=8 S=[[1, 0, 4], [0, 1, 7], [0, 0, 8]] random#2 frames=[0, 7, 17, 20, 12, 1, 23, 3] [top] k= 8  E_per=13.514461759  theta_min=[0.4029, 0.2927, 0.543] (generic)  gap12=2.5e+00 (generic q: 1.3e+00) gap13=4.383e+00  distinct_minima=2  flux: nontriv=0.7500 traceless=0.5694 -1=0.1806  classes={'1': 36, '-1': 26, 'i': 26, 'j': 32, 'k': 24} (inter-tile plaquettes=144)
+      Hessian (Richardson FD, h=0.02/0.01) = [+12.79816 -5.15850 -2.26843; -5.15850 +12.39533 -1.00153; -2.26843 -1.00153 +11.37000]  eigs=[6.36585, 12.29177, 17.90587]  Richardson change=6.2e-06 raw |FD(0.02)-FD(0.01)|=6.6e-03
+      Hessian (2nd-order PT, degeneracy g=1, non-scalar part 0.0e+00) = [+12.79816 -5.15850 -2.26843; -5.15850 +12.39533 -1.00153; -2.26843 -1.00153 +11.37000]  max|PT-FD|=4.2e-07  |grad|=1.4e-10
+ 620 random decorations over all index-8 sublattices: E_per min=2.819232 max=13.514462 mean=9.5904 sd=2.0226 fraction >=8.77: 0.6806  (259s)
+   2L subset L' (quotient Z2^a): n=4  at Gamma 4, other TRIM 0, generic 0;  degenerate at generic q: 4
+   2L not subset L': n=616  at Gamma 1, other TRIM 0, generic 615;  degenerate at generic q: 1
+[stage A3 done in 338s; 1630 records saved]

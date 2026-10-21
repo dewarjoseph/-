@@ -5,7 +5,8 @@ Status labels used below: **[P]** proved in this document (ordinary mathematics,
 `certificates/TypeSubstitutionCertificate.lean` (earlier phase; re-parsed and re-verified here, not re-compiled);
 **[prior]** a saved result of an earlier phase quoted for context, not recomputed here.
 
-Reproduction (from the repository root; total about 6 minutes, < 1.5 GB):
+Reproduction (from the repository root; the main script took 343 s and 572 s in two runs on a machine shared with
+other jobs, single-threaded, well under 1.5 GB):
 
 ```
 python3 -u -I audit/phase5a_recursion_theorem_audit.py     # -> audit/results/phase5a_recursion_theorem_audit.txt
@@ -281,10 +282,15 @@ identical to the phase-4 rebuilt `M, B`.
 **Answer to the question "do non-clean spectra always come from cycles of length ≥ 2 or from irreducible blocks of
 size ≥ 2?"** In the four decorations analysed, yes: every non-clean factor originates in an SCC of size ≥ 2 — a
 3-cycle (`λ²+λ+1`, period-3 oscillation of finite-size counts), an irreducible non-sink block (random #1, size 11,
-Perron root ≈ 3.41 strictly between 1 and 4), or a sink block with a non-Perron eigenvalue outside `{0, 1}` (`2`,
-`−1`, `(−1±√17)/2`). No singleton with self-loop weight 2 or 3 occurred (self-loop weights in all four decorations
-are in `{0, 1}`). By the theorem, however, such a singleton would also be non-clean, so "always" is an empirical
-observation on this sample, not a theorem. In the achiral decoration the three stable interface families are
+Perron root ≈ 3.508, the real roots of `λ³−2λ²−7λ+6` being ≈ `−2.264, 0.756, 3.508`, strictly between 1 and 4 as
+the theorem requires), or a sink block with a non-Perron eigenvalue outside `{0, 1}` (`2`, `−1`,
+`(−1±√17)/2 ≈ 1.562, −2.562`). No non-sink singleton with self-loop weight 2 or 3 occurred. Self-loop histograms
+(`M[c,c]` values): FR30 `M {0: 41, 1: 8}`, `B {0: 102, 1: 6}`; achiral `M {0: 36, 1: 15}`, `B {0: 108, 1: 9}`;
+random #0 `M {0: 71, 1: 9, 2: 1}`, `B {0: 217, 1: 17}`; random #1 `M {0: 77, 1: 3, 2: 1}`, `B {0: 260, 1: 6}`. The
+two types with `M[c,c] = 2` (type 38 of random #0, type 23 of random #1) lie **inside** the sink blocks (the 21-type
+and the 9-type block respectively), where a weight-2 self-loop is just one entry of the block. By the theorem,
+however, a non-sink singleton with loop 2 or 3 would also be non-clean, so "always" is an empirical observation on
+this sample, not a theorem. In the achiral decoration the three stable interface families are
 rank-1 blocks (spectrum `{4, 0}`), the cleanest possible case; FR30's single stable family is rank 2 with trace
 `K + 1 = 5`, the only other clean possibility for rank 2.
 

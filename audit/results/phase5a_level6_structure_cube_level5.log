@@ -1,0 +1,23 @@
+=== unit-cube block substitution, FR30-type decoration, Q8 Clifford links, pinned diagonal 6: level 5 ===  (started 2026-10-21 06:13:14, OMP_NUM_THREADS=1)
+[cube L5] geometry: n=32768 tiles (1 unit cubes each), box 32^3, panels |E|=95232, 24 frames, max degree 6, boundary tiles (deg<6) 5768 = 0.1760 n; links {'-1': 50468, '+i': 4681, '-i': 4681, '+j': 13605, '-j': 13605, '+k': 4096, '-k': 4096}  (1.0s, rss 0.10 GB)
+   H = 6 I - A: dim 65536, nnz 446464, max|H - H^dagger| = 0.0e+00  (0.3s, rss 0.13 GB)
+   validation vs object builders (level 5): |E| 95232 vs 95232, max|H_grid - H_objects| = 0.0e+00, degrees identical: True  (12.5s)
+   lobpcg chunk:  503 it (115s, 0.23s/it), cumulative   503: lambda=[1.8521062 1.8521062 1.8535642 1.8535652] res=[7.7e-07 1.4e-06 2.9e-06 1.9e-04]  rss 0.28 GB
+   lobpcg chunk:  278 it (43s, 0.15s/it), cumulative   781: lambda=[1.8521062 1.8521062 1.8535642 1.8535642] res=[7.0e-07 7.5e-07 1.1e-06 1.0e-06]  rss 0.28 GB
+   lobpcg chunk:    3 it (0s, 0.09s/it), cumulative   784: lambda=[1.8521062 1.8521062 1.8535642 1.8535642] res=[7.0e-07 7.5e-07 7.6e-07 9.9e-07]  rss 0.28 GB
+   solver: lobpcg(block=4, seed=0, tol=1e-06, maxiter=4000, chunks of <= 500 it, warm restart)  iterations=784  (158s)  converged=True  stop: all 4 block residuals < tol=1e-06
+   lowest eigenvalues (Rayleigh quotients): [1.8521062 1.8521062 1.8535642 1.8535642]
+   residuals ||H psi - lambda psi||:        [6.96e-07 7.51e-07 7.58e-07 9.88e-07]
+   Kramers split lambda_2 - lambda_1 = 2.43e-13;  gap to next pair lambda_3 - lambda_1 = 1.458e-03;  eigenvector angle bound res_1/gap = 4.8e-04
+   Kramers pair check: IPR vec1 0.000525191, vec2 0.000525193, max_a |p1_a - p2_a| = 4.4e-08
+   ground state: tile IPR=0.000525192  IPR*n=17.2095  P=1/IPR=1904.1  p_max=0.0036  s50=786 (0.0240 n)  s90=5233 (0.1597 n)
+   boundary weight (deg < bulk) = 0.00056  (boundary tile fraction 0.1760, enhancement 0.003)
+    d     8^d       S2(d)    1/S2(d)  1/S2/8^d  D2(d) | interface w(d)    tiles fraction  w/frac
+    1       8    0.151761      6.589    0.8237  2.720 |        0.28951     5768   0.1760   1.645
+    2      64   0.0917886     10.895    0.1702  0.725 |        0.44289    15192   0.4636   0.955
+    3     512   0.0203991     49.022    0.0957  2.170 |        0.77350    26936   0.8220   0.941
+    4    4096  0.00320446    312.065    0.0762  2.670 |        1.00000    32760   0.9998   1.000
+    5   32768 0.000525192   1904.067    0.0581  2.609 |        1.00000    32768   1.0000   1.000
+   depth-1 child weights (depth-first child order): [0.1336 0.0394 0.2024 0.1246 0.1246 0.0394 0.2024 0.1336]
+   second pair (lambda=1.8535642, res 7.6e-07): IPR*n=8.0222 s50=1603 s90=8113 1/S2(d)=[6.47, 17.77, 107.36, 677.23, 4084.64] interface w(1)=0.1575
+   saved audit/results/phase5a_cube_level5_groundstate_weights.npy and phase5a_level6_structure_cube_level5.json;  total 172s, max rss 0.28 GB

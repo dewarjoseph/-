@@ -140,3 +140,117 @@ SECTION 4.  CLEAN-SPECTRUM CRITERION (H6): CONDENSATION OF THE TYPE GRAPHS
      SCC [10, 101]: irreducible SINK block of size 2; block charpoly lambda*(lambda - 2); column sums [2, 2]; rank 1, trace 2; clean=True
        block matrix (rows/cols in the listed order): [[1, 1], [1, 1]]
    self-loop weights Mat[c,c] histogram: {0: 108, 1: 9}  (types with Mat[c,c] = 2: [])
+
+--- decoration: random admissible #0 (seed 2026)  [132s]  perms: {'0': (2, 0, 1), (0, 0, 0): (0, 1, 2), (0, 0, 1): (0, 2, 1), (0, 1, 0): (1, 0, 2), (0, 1, 1): (1, 2, 0), (1, 0, 0): (1, 0, 2), (1, 0, 1): (0, 1, 2), (1, 1, 0): (1, 2, 0)}
+   types: 81 panel, 234 plaquette;  charpoly M = lambda**66*(lambda - 4)*(lambda - 2)**2*(lambda - 1)**6*(lambda**2 + lambda + 1)**3;  charpoly B = lambda**212*(lambda - 2)**4*(lambda - 1)**12*(lambda**2 + lambda + 1)**3
+   limiting frequencies: {'1': 50209/98112, '-1': 1321/32704, 'i': 3361/24528, 'j': 2045/12264, 'k': 589/4088}
+
+[random admissible #0 (seed 2026): panel block M]  n=81  K=4  #SCC=55  #sink SCC=1
+   charpoly = lambda**66*(lambda - 4)*(lambda - 2)**2*(lambda - 1)**6*(lambda**2 + lambda + 1)**3
+   charpoly == product of SCC block charpolys: True
+   multiplicity of eigenvalue 4 = 1  ==  number of sink SCCs = 1: True
+   Perron root 4 simple in every sink block and absent from every non-sink block: True
+   nonzero spectrum contained in {1,4}: False;  every SCC block clean: False;  iff holds: True
+   THEOREM clauses: (i) every non-sink SCC is a singleton with loop 0/1: False;  (ii) every sink SCC has non-Perron spectrum in {0,1}: False;  (i) and (ii) <=> clean: True
+   per-SCC theorem predictions agree with computed block spectra: True;  rank-1/rank-2 sink-block predictions agree: True
+   SCC kinds: {'irreducible SINK block of size 21': 1, 'transient singleton (loop 0)': 51, 'cycle of length 3 (permutation block)': 3}
+     SCC [0, 1, 2, 6, 9, 13, 15, 16, 17, 23, 24, 30, 31, 38, 45, 46, 47, 63, 70, 71, 78]: irreducible SINK block of size 21; block charpoly lambda**15*(lambda - 4)*(lambda - 2)**2*(lambda - 1)**3; column sums [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]; rank 6, trace 11; clean=False
+       block matrix (rows/cols in the listed order): [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], [0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0], [0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2], [0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0], [0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0], [0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], [0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0], [0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]]
+     SCC [3, 4, 5]: cycle of length 3 (permutation block); block charpoly (lambda - 1)*(lambda**2 + lambda + 1); column sums [1, 1, 1]; rank 3, trace 0; clean=False
+     SCC [7, 8, 10]: cycle of length 3 (permutation block); block charpoly (lambda - 1)*(lambda**2 + lambda + 1); column sums [1, 1, 1]; rank 3, trace 0; clean=False
+     SCC [11, 12, 14]: cycle of length 3 (permutation block); block charpoly (lambda - 1)*(lambda**2 + lambda + 1); column sums [1, 1, 1]; rank 3, trace 0; clean=False
+   self-loop weights Mat[c,c] histogram: {0: 71, 1: 9, 2: 1}  (types with Mat[c,c] = 4: [])
+   origin of each non-clean irreducible factor:
+     lambda - 2: from {'irreducible SINK block of size 21': 1}
+     lambda**2 + lambda + 1: from {'cycle of length 3 (permutation block)': 3}
+
+[random admissible #0 (seed 2026): plaquette block B]  n=234  K=2  #SCC=220  #sink SCC=4
+   charpoly = lambda**212*(lambda - 2)**4*(lambda - 1)**12*(lambda**2 + lambda + 1)**3
+   charpoly == product of SCC block charpolys: True
+   multiplicity of eigenvalue 2 = 4  ==  number of sink SCCs = 4: True
+   Perron root 2 simple in every sink block and absent from every non-sink block: True
+   nonzero spectrum contained in {1,2}: False;  every SCC block clean: False;  iff holds: True
+   THEOREM clauses: (i) every non-sink SCC is a singleton with loop 0/1: False;  (ii) every sink SCC has non-Perron spectrum in {0,1}: True;  (i) and (ii) <=> clean: True
+   per-SCC theorem predictions agree with computed block spectra: True;  rank-1/rank-2 sink-block predictions agree: True
+   SCC kinds: {'irreducible SINK block of size 4': 2, 'transient singleton (loop 0)': 204, 'fixed-point singleton (loop 1)': 9, 'irreducible SINK block of size 2': 2, 'cycle of length 3 (permutation block)': 3}
+     SCC [8, 12, 118, 121]: irreducible SINK block of size 4; block charpoly lambda**3*(lambda - 2); column sums [2, 2, 2, 2]; rank 2, trace 2; clean=True
+       block matrix (rows/cols in the listed order): [[1, 0, 0, 1], [0, 1, 1, 0], [1, 0, 0, 1], [0, 1, 1, 0]]
+     SCC [9, 119]: irreducible SINK block of size 2; block charpoly lambda*(lambda - 2); column sums [2, 2]; rank 1, trace 2; clean=True
+       block matrix (rows/cols in the listed order): [[1, 1], [1, 1]]
+     SCC [16, 42, 130, 223]: irreducible SINK block of size 4; block charpoly lambda**3*(lambda - 2); column sums [2, 2, 2, 2]; rank 2, trace 2; clean=True
+       block matrix (rows/cols in the listed order): [[1, 0, 0, 1], [0, 1, 1, 0], [1, 0, 0, 1], [0, 1, 1, 0]]
+     SCC [11, 120]: irreducible SINK block of size 2; block charpoly lambda*(lambda - 2); column sums [2, 2]; rank 1, trace 2; clean=True
+       block matrix (rows/cols in the listed order): [[1, 1], [1, 1]]
+     SCC [19, 23, 29]: cycle of length 3 (permutation block); block charpoly (lambda - 1)*(lambda**2 + lambda + 1); column sums [1, 1, 1]; rank 3, trace 0; clean=False
+     SCC [20, 24, 30]: cycle of length 3 (permutation block); block charpoly (lambda - 1)*(lambda**2 + lambda + 1); column sums [1, 1, 1]; rank 3, trace 0; clean=False
+     SCC [34, 37, 45]: cycle of length 3 (permutation block); block charpoly (lambda - 1)*(lambda**2 + lambda + 1); column sums [1, 1, 1]; rank 3, trace 0; clean=False
+   self-loop weights Mat[c,c] histogram: {0: 217, 1: 17}  (types with Mat[c,c] = 2: [])
+   origin of each non-clean irreducible factor:
+     lambda**2 + lambda + 1: from {'cycle of length 3 (permutation block)': 3}
+
+--- decoration: random admissible #1 (seed 2026)  [157s]  perms: {'0': (1, 2, 0), (0, 0, 0): (1, 2, 0), (0, 0, 1): (2, 1, 0), (0, 1, 0): (2, 1, 0), (0, 1, 1): (2, 0, 1), (1, 0, 0): (2, 1, 0), (1, 0, 1): (2, 0, 1), (1, 1, 0): (0, 1, 2)}
+   types: 81 panel, 266 plaquette;  charpoly M = lambda**66*(lambda - 4)*(lambda - 1)**3*(lambda**2 + lambda - 4)*(lambda**2 + lambda + 1)**3*(lambda**3 - 2*lambda**2 - 7*lambda + 6);  charpoly B = lambda**242*(lambda - 2)**7*(lambda - 1)**3*(lambda + 1)**8*(lambda**2 + lambda + 1)**3
+   limiting frequencies: {'1': 2208403/4040064, '-1': 25609/673344, 'i': 1468637/9090144, 'j': 1986247/18180288, 'k': 5255021/36360576}
+
+[random admissible #1 (seed 2026): panel block M]  n=81  K=4  #SCC=57  #sink SCC=1
+   charpoly = lambda**66*(lambda - 4)*(lambda - 1)**3*(lambda**2 + lambda - 4)*(lambda**2 + lambda + 1)**3*(lambda**3 - 2*lambda**2 - 7*lambda + 6)
+   charpoly == product of SCC block charpolys: True
+   multiplicity of eigenvalue 4 = 1  ==  number of sink SCCs = 1: True
+   Perron root 4 simple in every sink block and absent from every non-sink block: True
+   nonzero spectrum contained in {1,4}: False;  every SCC block clean: False;  iff holds: True
+   THEOREM clauses: (i) every non-sink SCC is a singleton with loop 0/1: False;  (ii) every sink SCC has non-Perron spectrum in {0,1}: False;  (i) and (ii) <=> clean: True
+   per-SCC theorem predictions agree with computed block spectra: True;  rank-1/rank-2 sink-block predictions agree: True
+   SCC kinds: {'irreducible SINK block of size 9': 1, 'transient singleton (loop 0)': 52, 'irreducible non-sink block of size 11': 1, 'cycle of length 3 (permutation block)': 3}
+     SCC [0, 6, 13, 15, 23, 40, 45, 71, 78]: irreducible SINK block of size 9; block charpoly lambda**6*(lambda - 4)*(lambda**2 + lambda - 4); column sums [4, 4, 4, 4, 4, 4, 4, 4, 4]; rank 3, trace 3; clean=False
+       block matrix (rows/cols in the listed order): [[0, 0, 1, 0, 0, 1, 0, 1, 0], [1, 0, 0, 0, 1, 0, 0, 0, 0], [0, 1, 0, 1, 0, 0, 1, 0, 1], [0, 0, 2, 0, 0, 2, 0, 2, 0], [2, 0, 0, 0, 2, 0, 0, 0, 0], [0, 2, 0, 2, 0, 0, 2, 0, 2], [0, 0, 1, 0, 0, 1, 0, 1, 0], [1, 0, 0, 0, 1, 0, 0, 0, 0], [0, 1, 0, 1, 0, 0, 1, 0, 1]]
+     SCC [1, 2, 9, 16, 17, 24, 33, 34, 46, 64, 72]: irreducible non-sink block of size 11; block charpoly lambda**8*(lambda**3 - 2*lambda**2 - 7*lambda + 6); column sums [4, 4, 3, 4, 3, 4, 4, 3, 3, 4, 3]; rank 3, trace 2; clean=False
+     SCC [3, 7, 11]: cycle of length 3 (permutation block); block charpoly (lambda - 1)*(lambda**2 + lambda + 1); column sums [1, 1, 1]; rank 3, trace 0; clean=False
+     SCC [4, 8, 12]: cycle of length 3 (permutation block); block charpoly (lambda - 1)*(lambda**2 + lambda + 1); column sums [1, 1, 1]; rank 3, trace 0; clean=False
+     SCC [5, 10, 14]: cycle of length 3 (permutation block); block charpoly (lambda - 1)*(lambda**2 + lambda + 1); column sums [1, 1, 1]; rank 3, trace 0; clean=False
+   self-loop weights Mat[c,c] histogram: {0: 77, 1: 3, 2: 1}  (types with Mat[c,c] = 4: [])
+   origin of each non-clean irreducible factor:
+     lambda**2 + lambda + 1: from {'cycle of length 3 (permutation block)': 3}
+     lambda**2 + lambda - 4: from {'irreducible SINK block of size 9': 1}
+     lambda**3 - 2*lambda**2 - 7*lambda + 6: from {'irreducible non-sink block of size 11': 1}
+
+[random admissible #1 (seed 2026): plaquette block B]  n=266  K=2  #SCC=219  #sink SCC=7
+   charpoly = lambda**242*(lambda - 2)**7*(lambda - 1)**3*(lambda + 1)**8*(lambda**2 + lambda + 1)**3
+   charpoly == product of SCC block charpolys: True
+   multiplicity of eigenvalue 2 = 7  ==  number of sink SCCs = 7: True
+   Perron root 2 simple in every sink block and absent from every non-sink block: True
+   nonzero spectrum contained in {1,2}: False;  every SCC block clean: False;  iff holds: True
+   THEOREM clauses: (i) every non-sink SCC is a singleton with loop 0/1: False;  (ii) every sink SCC has non-Perron spectrum in {0,1}: False;  (i) and (ii) <=> clean: True
+   per-SCC theorem predictions agree with computed block spectra: True;  rank-1/rank-2 sink-block predictions agree: True
+   SCC kinds: {'irreducible SINK block of size 6': 6, 'irreducible SINK block of size 12': 1, 'transient singleton (loop 0)': 209, 'cycle of length 3 (permutation block)': 3}
+     SCC [0, 5, 17, 66, 71, 100]: irreducible SINK block of size 6; block charpoly lambda**4*(lambda - 2)*(lambda + 1); column sums [2, 2, 2, 2, 2, 2]; rank 3, trace 1; clean=False
+       block matrix (rows/cols in the listed order): [[0, 1, 0, 0, 0, 1], [0, 0, 1, 0, 1, 0], [1, 0, 0, 1, 0, 0], [0, 1, 0, 0, 0, 1], [0, 0, 1, 0, 1, 0], [1, 0, 0, 1, 0, 0]]
+     SCC [1, 8, 10, 14, 19, 24, 67, 74, 80, 98, 179, 182]: irreducible SINK block of size 12; block charpoly lambda**9*(lambda - 2)*(lambda + 1)**2; column sums [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]; rank 6, trace 0; clean=False
+       block matrix (rows/cols in the listed order): [[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0], [0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0], [0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0]]
+     SCC [2, 15, 23, 68, 97, 180]: irreducible SINK block of size 6; block charpoly lambda**4*(lambda - 2)*(lambda + 1); column sums [2, 2, 2, 2, 2, 2]; rank 3, trace 1; clean=False
+       block matrix (rows/cols in the listed order): [[0, 1, 0, 0, 0, 1], [0, 0, 1, 1, 0, 0], [1, 0, 0, 0, 1, 0], [0, 1, 0, 0, 0, 1], [1, 0, 0, 0, 1, 0], [0, 0, 1, 1, 0, 0]]
+     SCC [3, 4, 6, 69, 70, 72]: irreducible SINK block of size 6; block charpoly lambda**4*(lambda - 2)*(lambda + 1); column sums [2, 2, 2, 2, 2, 2]; rank 3, trace 1; clean=False
+       block matrix (rows/cols in the listed order): [[0, 1, 0, 0, 1, 0], [0, 0, 1, 1, 0, 0], [1, 0, 0, 0, 0, 1], [0, 1, 0, 0, 1, 0], [0, 0, 1, 1, 0, 0], [1, 0, 0, 0, 0, 1]]
+     SCC [7, 12, 18, 73, 82, 181]: irreducible SINK block of size 6; block charpoly lambda**4*(lambda - 2)*(lambda + 1); column sums [2, 2, 2, 2, 2, 2]; rank 3, trace 1; clean=False
+       block matrix (rows/cols in the listed order): [[0, 0, 1, 0, 0, 1], [1, 0, 0, 0, 1, 0], [0, 1, 0, 1, 0, 0], [0, 0, 1, 0, 0, 1], [1, 0, 0, 0, 1, 0], [0, 1, 0, 1, 0, 0]]
+     SCC [11, 25, 49, 81, 186, 252]: irreducible SINK block of size 6; block charpoly lambda**4*(lambda - 2)*(lambda + 1); column sums [2, 2, 2, 2, 2, 2]; rank 3, trace 1; clean=False
+       block matrix (rows/cols in the listed order): [[0, 1, 0, 0, 0, 1], [0, 0, 1, 0, 1, 0], [1, 0, 0, 1, 0, 0], [0, 1, 0, 0, 0, 1], [0, 0, 1, 0, 1, 0], [1, 0, 0, 1, 0, 0]]
+     SCC [13, 16, 20, 83, 99, 101]: irreducible SINK block of size 6; block charpoly lambda**4*(lambda - 2)*(lambda + 1); column sums [2, 2, 2, 2, 2, 2]; rank 3, trace 1; clean=False
+       block matrix (rows/cols in the listed order): [[0, 1, 0, 0, 1, 0], [0, 0, 1, 0, 0, 1], [1, 0, 0, 1, 0, 0], [0, 1, 0, 0, 1, 0], [1, 0, 0, 1, 0, 0], [0, 0, 1, 0, 0, 1]]
+     SCC [28, 29, 43]: cycle of length 3 (permutation block); block charpoly (lambda - 1)*(lambda**2 + lambda + 1); column sums [1, 1, 1]; rank 3, trace 0; clean=False
+     SCC [32, 33, 46]: cycle of length 3 (permutation block); block charpoly (lambda - 1)*(lambda**2 + lambda + 1); column sums [1, 1, 1]; rank 3, trace 0; clean=False
+     SCC [36, 37, 52]: cycle of length 3 (permutation block); block charpoly (lambda - 1)*(lambda**2 + lambda + 1); column sums [1, 1, 1]; rank 3, trace 0; clean=False
+   self-loop weights Mat[c,c] histogram: {0: 260, 1: 6}  (types with Mat[c,c] = 2: [])
+   origin of each non-clean irreducible factor:
+     lambda + 1: from {'irreducible SINK block of size 6': 6, 'irreducible SINK block of size 12': 1}
+     lambda**2 + lambda + 1: from {'cycle of length 3 (permutation block)': 3}
+
+====================================================================================================
+SUMMARY
+ S1 column sums (M:4, A:4, B:2) exact: True;  S2 recursion by category exact for levels 1..4: True
+ S3 charpolys: M True, B True, S=M*B True; semisimple nonzero part: True; nilpotency index 2: True
+ S3 certificate: S from Lean lists == S: True; W recomputed == parsed: True; eigen-identities: True; closed form m=3..9: True; D = 64
+ S4 FR30: M clean=True (#sink=1, mult4=1, clauses i/ii True/True, predictions ok True); B clean=True (#sink=1, mult2=1, clauses i/ii True/True, predictions ok True)
+ S4 achiral (D_s only): M clean=True (#sink=3, mult4=3, clauses i/ii True/True, predictions ok True); B clean=True (#sink=3, mult2=3, clauses i/ii True/True, predictions ok True)
+ S4 random admissible #0 (seed 2026): M clean=False (#sink=1, mult4=1, clauses i/ii False/False, predictions ok True); B clean=False (#sink=4, mult2=4, clauses i/ii False/True, predictions ok True)
+ S4 random admissible #1 (seed 2026): M clean=False (#sink=1, mult4=1, clauses i/ii False/False, predictions ok True); B clean=False (#sink=7, mult2=7, clauses i/ii False/False, predictions ok True)
+ total time 572s

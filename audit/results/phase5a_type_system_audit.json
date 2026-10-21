@@ -64,7 +64,7 @@
     "k": 12
    },
    "panel_type_counts_match_recursion": true,
-   "seconds": 0.0,
+   "seconds": 0.1,
    "class_counts_match_recursion": true,
    "plaq_type_counts_match_recursion": true
   },
@@ -95,7 +95,7 @@
     "k": 124
    },
    "panel_type_counts_match_recursion": true,
-   "seconds": 0.5,
+   "seconds": 0.7,
    "class_counts_match_recursion": true,
    "plaq_type_counts_match_recursion": true,
    "image_checked_panels": 576,
@@ -130,7 +130,7 @@
     "k": 1020
    },
    "panel_type_counts_match_recursion": true,
-   "seconds": 5.5,
+   "seconds": 8.2,
    "class_counts_match_recursion": true,
    "plaq_type_counts_match_recursion": true
   },
@@ -161,7 +161,7 @@
     "k": 8188
    },
    "panel_type_counts_match_recursion": true,
-   "seconds": 47.7,
+   "seconds": 81.0,
    "class_counts_match_recursion": true,
    "plaq_type_counts_match_recursion": true
   },
@@ -192,7 +192,7 @@
     "k": 65532
    },
    "panel_type_counts_match_recursion": true,
-   "seconds": 431.9,
+   "seconds": 947.7,
    "class_counts_match_recursion": true,
    "plaq_type_counts_match_recursion": true
   },

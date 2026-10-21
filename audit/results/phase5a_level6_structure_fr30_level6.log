@@ -1,0 +1,7 @@
+=== FR30 Chair44 tiling, Q8 Clifford links, pinned diagonal 24: level 6 ===  (started 2026-10-21 06:13:14, OMP_NUM_THREADS=1)
+[fr30 L6] geometry: n=262144 tiles (7 unit cubes each), box 128^3, panels |E|=3096576, 24 frames, max degree 24, boundary tiles (deg<24) 23723 = 0.0905 n; links {'+1': 393210, '-1': 1163268, '+i': 163933, '-i': 163744, '+j': 442372, '-j': 442372, '+k': 163744, '-k': 163933}  (7.4s, rss 0.28 GB)
+   H = 24 I - A: dim 524288, nnz 4800508, max|H - H^dagger| = 0.0e+00  (11.2s, rss 0.91 GB)
+   lobpcg chunk:  475 it (470s, 0.99s/it), cumulative   475: lambda=[8.770199  8.7702527 8.7703743 8.7704747] res=[0. 0. 0. 0.]  rss 0.91 GB
+   lobpcg chunk:  411 it (295s, 0.72s/it), cumulative   886: lambda=[8.7701344 8.7701448 8.7702542 8.7703261] res=[0. 0. 0. 0.]  rss 0.91 GB
+   lobpcg chunk:  495 it (277s, 0.56s/it), cumulative  1381: lambda=[8.7701336 8.7701338 8.7702421 8.7702481] res=[1.3e-05 1.1e-04 1.6e-04 5.9e-04]  rss 0.91 GB
+   lobpcg chunk:  494 it (229s, 0.46s/it), cumulative  1875: lambda=[8.7701336 8.7701336 8.7702418 8.7702419] res=[8.4e-07 4.1e-06 1.3e-05 4.5e-05]  rss 0.91 GB

@@ -342,7 +342,7 @@ def weyl_fits(lam, E0, k1, k2):
     # all three fits minimize the RELATIVE residual (rows divided by N), so the misfits are comparable
     A = np.vstack([x**1.5, x]).T; c, *_ = np.linalg.lstsq(A / N[:, None], np.ones_like(N), rcond=None); rel_w = float(np.sqrt(np.mean(((A @ c - N) / N)**2)))
     B = np.vstack([np.log(x), np.ones_like(x)]).T; d, *_ = np.linalg.lstsq(B, np.log(N), rcond=None); rel_p = float(np.sqrt(np.mean((np.exp(B @ d) / N - 1)**2)))
-    A1 = x[:, None]**1.5; c1, *_ = np.linalg.lstsq(A1 / N[:, None], np.ones_like(N), rcond=None); rel_1 = float(np.sqrt(np.mean(((A1 @ c1).ravel() - N) / N)**2))
+    A1 = x[:, None]**1.5; c1, *_ = np.linalg.lstsq(A1 / N[:, None], np.ones_like(N), rcond=None); rel_1 = float(np.sqrt(np.mean((((A1 @ c1).ravel() - N) / N)**2)))
     return dict(weyl_a=float(c[0]), weyl_b=float(c[1]), weyl_rel_rms=rel_w, power_alpha=float(d[0]), power_rel_rms=rel_p, pure32_rel_rms=rel_1,
                 surface_over_volume_at_kmax=float(c[1] * x[-1] / (c[0] * x[-1]**1.5)))
 

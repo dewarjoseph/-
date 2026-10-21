@@ -1,0 +1,35 @@
+=== randdec3: chair / random admissible decoration, seed 3 ===   (pinned operator; python 3.13.16, numpy 2.5.3, OMP_NUM_THREADS=1)
+   decoration seed 3 (draw 1), permutation table pi_v (frame M_v = D_s(v) P(pi_v), P(pi)[i, pi_i] = 1):
+      0          -> (2, 0, 1)   (FR30 (0, 1, 2))
+      (0, 0, 0)  -> (0, 1, 2)   (FR30 same)
+      (0, 0, 1)  -> (0, 2, 1)   (FR30 same)
+      (0, 1, 0)  -> (0, 2, 1)   (FR30 (2, 1, 0))
+      (0, 1, 1)  -> (0, 1, 2)   (FR30 (1, 2, 0))
+      (1, 0, 0)  -> (2, 1, 0)   (FR30 (1, 0, 2))
+      (1, 0, 1)  -> (2, 0, 1)   (FR30 (0, 1, 2))
+      (1, 1, 0)  -> (1, 2, 0)   (FR30 (2, 0, 1))
+   tiling check (levels 1-3): no overlaps, exact chair supertile
+[randdec3] level 3: n=512 dim=1024 |E|=5376 nnz=14328 bulk coordination 24, boundary tiles 287 (0.561); interface tile counts {d: |I_d|} = {1: 269, 2: 501, 3: 512}; link labels {'+j': 616, '+i': 1160, '-1': 520, '-k': 582, '-i': 1038, '-j': 591, '+1': 368, '+k': 501}; build 0.7s
+   dense eigh (evr, subset_by_index=(0,3)) (0s, maxrss 0.12 GB)
+   lowest 4: [7.9157843 7.9157843 8.2649706 8.2649706]   residuals: [1.6e-14 5.8e-14 5.6e-14 2.4e-14]
+   ground pair (split 4.4e-15, gap to next pair 0.34919): IPR=0.013934 [vec1 0.013934, vec2 0.013934]  IPR*n=7.1342  P=71.8  p_max=0.0399 s50=26 s90=106  boundary weight=0.1633 (tile fraction 0.561)
+   S2(d)    d=1..L: 0.28851  0.06503  0.01393   1/S2(d): 3.466  15.378  71.767   (uniform: 8  64  512)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.9221 [0.5254, 1.755]  d=2: 0.9990 [0.9785, 1.021]  d=3: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [0.4908 0.1376 0.0921 0.0562 0.028  0.1031 0.0722 0.02  ]
+[randdec3] level 4: n=4096 dim=8192 |E|=46080 nnz=120824 bulk coordination 24, boundary tiles 1331 (0.325); interface tile counts {d: |I_d|} = {1: 1277, 2: 2895, 3: 4085, 4: 4096}; link labels {'-1': 5484, '+i': 9250, '+j': 4982, '-k': 4801, '-i': 8849, '-j': 5122, '+1': 2977, '+k': 4615}; build 6.1s
+   lobpcg(block=8, seed=0, tol=1e-7, diag precond) (68s, maxrss 0.17 GB)  warnings: Exited at iteration 8000 with accuracies ; Exited postprocessing with accuracies 
+   lowest 4: [7.2743321 7.2743321 7.38747   7.38747  ]   residuals: [4.0e-08 1.6e-07 4.9e-08 1.8e-07]
+   ground pair (split 4.2e-14, gap to next pair 0.11314): IPR=0.00714887 [vec1 0.00714887, vec2 0.00714887]  IPR*n=29.2818  P=139.9  p_max=0.0255 s50=53 s90=371  boundary weight=0.0148 (tile fraction 0.325)
+   S2(d)    d=1..L: 0.51646  0.10310  0.03568  0.00715   1/S2(d): 1.936  9.699  28.025  139.882   (uniform: 8  64  512  4096)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.7188 [0.3118, 2.306]  d=2: 0.9552 [0.7068, 1.351]  d=3: 0.9999 [0.9973, 1.003]  d=4: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [0.705  0.077  0.074  0.0102 0.0067 0.0606 0.0645 0.002 ]
+[randdec3] level 5: n=32768 dim=65536 |E|=380928 nnz=991224 bulk coordination 24, boundary tiles 5723 (0.175); interface tile counts {d: |I_d|} = {1: 5597, 2: 14595, 3: 25379, 4: 32757, 5: 32768}; link labels {'+j': 40690, '-1': 50988, '-i': 72463, '-k': 39123, '+i': 73582, '-j': 41460, '+1': 23843, '+k': 38779}; build 70.0s
+   lobpcg(block=6, seed=0, tol=1e-7, diag precond) (35s, maxrss 0.67 GB)  warnings: Exited postprocessing with accuracies 
+   lowest 4: [7.1695726 7.1695726 7.1887039 7.1887039]   residuals: [1.1e-08 3.0e-08 2.4e-08 6.3e-08]
+   ground pair (split -1.1e-14, gap to next pair 0.01913): IPR=0.00186723 [vec1 0.00186723, vec2 0.00186723]  IPR*n=61.1853  P=535.6  p_max=0.00923 s50=210 s90=1423  boundary weight=0.0016 (tile fraction 0.175)
+   S2(d)    d=1..L: 0.60879  0.11238  0.03690  0.00964  0.00187   1/S2(d): 1.643  8.899  27.100  103.750  535.554   (uniform: 8  64  512  4096  32768)
+   interface weight w(d) [tile fraction |I_d|/n, enhancement w/f]: d=1: 0.5036 [0.1708, 2.948]  d=2: 0.8555 [0.4454, 1.921]  d=3: 0.9547 [0.7745, 1.233]  d=4: 1.0000 [0.9997, 1.000]  d=5: 1.0000 [1.0000, 1.000]
+   depth-1 child weights: [7.7325e-01 5.5509e-02 4.8572e-02 8.7253e-03 6.4003e-04 5.3994e-02 4.8087e-02 1.1220e-02]
+   scaling 3->4: IPR*n ratio 4.104, alpha = -log(IPR_(k+1)/IPR_k)/log 8 = 0.321; 1/S2(d) growth ratios: d=1: 0.559, d=2: 0.631, d=3: 0.391; bottom decrement +0.64145
+   scaling 4->5: IPR*n ratio 2.090, alpha = -log(IPR_(k+1)/IPR_k)/log 8 = 0.646; 1/S2(d) growth ratios: d=1: 0.848, d=2: 0.917, d=3: 0.967, d=4: 0.742; bottom decrement +0.10476
+   saved; maxrss 0.67 GB
