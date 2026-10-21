@@ -1,0 +1,8 @@
+##############################################################################################################
+# phase5a_d2_census_verify.py  stages=['records']  cmd: OMP_NUM_THREADS=1 python3 -u -I audit/phase5a_d2_census_verify.py records
+# numpy 2.5.3; seeds: numpy default_rng(20261021)
+==============================================================================================================
+4. RECOMPUTATION OF A RANDOM SAMPLE OF B2a RECORDS (own Bloch solver: 8^3 grid + Nelder-Mead/BFGS refinement from 3 best grid points; own torus flux)
+ records loaded: 44685 lines, 44539 distinct (S, frames) decorations: {1: 2, 2: 168, 4: 42751, 8: 1618}   (claim (b): 44539)
+ claim (b) from records: E_per min=-0.000000 max=16.000000; fraction > 8.770: 0.3891; fraction >= 8.770: 0.3891
+ sample size: 326 (6 mandatory + k=2:60, k=4:160, k=8:100 random)
