@@ -2,3 +2,10 @@ PHASE 5B-E / E2: radius-2 collared census, closure, certified 3-block lower boun
 machine: OMP_NUM_THREADS=1, python3 -u -I; started 2026-10-21 17:33:36
 ====================================================================================================
 1. LEGAL 1-STAR TYPES V_1 (forward orbit) AND THE COLLARED MAP Phi_2 : V_1 -> 2-star types
+ seed = most frequent complete 1-star of T_4; forward Phi-orbit closes after 5 rounds: |V_1| = 72 types (T_4 realises 70)  (1.4s)
+ closure lemma verified computationally: for all 72 types the 2-stars of the 8 children are complete inside sigma(1-star)
+ V_2 := Phi_2(V_1): 165 two-star types; sizes 35..65 tiles  (1.6s)
+ Phi_22(V_2) subset V_2: True;  forward Phi_22-orbit of one 2-star: 165 types after 5 rounds, equals V_2: True  (6.0s)
+====================================================================================================
+2. CENSUS OF COMPLETE 2-STARS IN T_5, T_6, T_7
+ T_5: 32768 tiles, complete 2-stars 25648, distinct types 165; subset of V_2: True; equal to V_2: True; missing 0  (5s, rss 0.28 GB)
