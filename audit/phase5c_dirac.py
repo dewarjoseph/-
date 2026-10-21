@@ -169,4 +169,4 @@ if __name__ == '__main__':
     os.environ.setdefault('OMP_NUM_THREADS', '2')
     cmd = sys.argv[1]
     if cmd in ('dispersion', 'all'): dispersion(int(sys.argv[2]) if len(sys.argv) > 2 else 3)
-    if cmd in ('dirac', 'all'): dirac(int(sys.argv[3] if cmd == 'all' else sys.argv[2]) if len(sys.argv) > 2 else 2)
+    if cmd == 'dirac': dirac(int(sys.argv[2]) if len(sys.argv) > 2 else 2)
