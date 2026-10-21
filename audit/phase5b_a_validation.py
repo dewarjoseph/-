@@ -127,7 +127,11 @@ def link_table(tiles):
         return C
     return link
 
-def own_plaquettes(tiles, owner=None, classes_only=False):
+def classify_trace(W):
+    tr = (W[0, 0] + W[1, 1]).real
+    return '+1' if abs(tr - 2) < 1e-9 else ('-1' if abs(tr + 2) < 1e-9 else 'traceless')
+
+def own_plaquettes(tiles, owner=None, classes_only=False, link=None, classifier=None):
     """PER-TILE / PER-CUBE enumeration of the inter-tile plaquettes.
     For every tile a, every cube c of a and every transverse pair (i,j) the lattice edge with lower-corner cube c
     (parallel to the third axis) is surrounded by c, c+e_i, c+e_i+e_j, c+e_j.  The plaquette is counted iff all four
@@ -135,7 +139,7 @@ def own_plaquettes(tiles, owner=None, classes_only=False):
     with L = I inside a tile and L = Pauli link across a panel (normal = step direction); class by trace/axis.
     Returns (count per class, list of (owners 4-tuple, class) if not classes_only)."""
     owner = owner or own_owner(tiles)
-    link = link_table(tiles)
+    link = link or link_table(tiles); classifier = classifier or classify
     counts = collections.Counter(); recs = []
     for a, (_, _, cs) in enumerate(tiles):
         for c in cs:
@@ -149,7 +153,7 @@ def own_plaquettes(tiles, owner=None, classes_only=False):
                 W = I2
                 for (oa, ob, ax) in ((a, o1, i), (o1, o2, j), (o2, o3, i), (o3, a, j)):
                     if oa != ob: W = W @ link(oa, ob, ax)
-                cl = classify(W); counts[cl] += 1
+                cl = classifier(W); counts[cl] += 1
                 if not classes_only: recs.append(((a, o1, o2, o3), cl, (c, i, j)))
     return counts, recs
 

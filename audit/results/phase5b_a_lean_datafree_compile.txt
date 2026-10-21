@@ -1,0 +1,17 @@
+Phase V-B / A (f): kernel compile of the data-free extract audit/results/phase5b_a_lean_datafree_extract.lean (assembled in this session from the certificate's lines 40-79, 181-195, 205-222, 576-705)
+command: lean -j1 phase5b_a_datafree_extract.lean   (Lean 4.34.1 release binary, no Mathlib; single process alongside one Python job)
+'TypeSubstitution.closed_form_general' depends on axioms: [propext, Quot.sound]
+'TypeSubstitution.step_case_general' depends on axioms: [propext, Quot.sound]
+'TypeSubstitution.q8_closed' depends on axioms: [propext]
+'TypeSubstitution.q8_conj_is_inverse' does not depend on any axioms
+'TypeSubstitution.q8_class_conj_invariant' does not depend on any axioms
+'TypeSubstitution.q8_class_inverse_invariant' does not depend on any axioms
+
+real	0m4.396s
+user	0m2.422s
+sys	0m0.348s
+EXIT=0
+start 2026-10-21T17:21:17Z end 2026-10-21T17:21:21Z
+Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)
+7fa749eb8e4acf3622e421cb5c2587ef6e66aa88cdaf7b3b3a17dccfa99affeb  phase5b_a_datafree_extract.lean
+212 phase5b_a_datafree_extract.lean
