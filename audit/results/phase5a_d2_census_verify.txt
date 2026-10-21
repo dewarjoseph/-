@@ -85,3 +85,5 @@
  HILL-CLIMB (greedy best-improvement over all single-coset frame changes, flux-match constraint, 200 steps max, random constrained kick when stuck) from E_per=8.957872 on S=[[1, 0, 6], [0, 1, 6], [0, 0, 8]]
    step   0: current E=9.079873 best E=9.079873 (#constrained neighbours 29, kicks so far 0)
    step  25: current E=9.347249 best E=9.633732 (#constrained neighbours 33, kicks so far 8)
+   step  50: current E=8.753522 best E=9.633732 (#constrained neighbours 31, kicks so far 16)
+   step  75: current E=9.052328 best E=9.633732 (#constrained neighbours 37, kicks so far 24)
