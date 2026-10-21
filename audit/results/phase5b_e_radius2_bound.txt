@@ -9,3 +9,4 @@ machine: OMP_NUM_THREADS=1, python3 -u -I; started 2026-10-21 17:33:36
 ====================================================================================================
 2. CENSUS OF COMPLETE 2-STARS IN T_5, T_6, T_7
  T_5: 32768 tiles, complete 2-stars 25648, distinct types 165; subset of V_2: True; equal to V_2: True; missing 0  (5s, rss 0.28 GB)
+ T_6: 262144 tiles, complete 2-stars 232560, distinct types 165; subset of V_2: True; equal to V_2: True; missing 0  (45s, rss 0.32 GB)

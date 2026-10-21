@@ -1,0 +1,22 @@
+PHASE 5B-E / E3: exact limit frequencies of correlated local objects from the type recursion
+started 2026-10-21 17:37:10; OMP_NUM_THREADS=1
+====================================================================================================
+A. BOX-OBJECT TYPE SYSTEMS P (1x1x2), Q (1x2x2), V (2x2x2), R (1x2x3), W (1x3x3): closure, recursion, exact limits
+ T_1: inter-tile box objects P: 48 (33 types), Q: 60 (49 types), V: 19 (19 types), R: 96 (74 types), W: 24 (24 types)  (0s)
+ T_2: inter-tile box objects P: 576 (49 types), Q: 792 (88 types), V: 279 (44 types), R: 1632 (263 types), W: 672 (164 types)  (0s)
+ T_3: inter-tile box objects P: 5376 (49 types), Q: 7728 (108 types), V: 2863 (65 types), R: 17088 (366 types), W: 7872 (264 types)  (1s)
+ T_4: inter-tile box objects P: 46080 (49 types), Q: 67680 (108 types), V: 25695 (66 types), R: 153984 (366 types), W: 74112 (266 types)  (10s)
+ inflation closure of the type sets after 1 rounds: P: 49 types, Q: 108 types, V: 66 types, R: 366 types, W: 266 types  (16s)
+   S_PP: (49, 49), column sums [4]
+   S_QP: (108, 49), column sums [4]
+   S_QQ: (108, 108), column sums [2]
+   S_VP: (66, 49), column sums [1]
+   S_VQ: (66, 108), column sums [1]
+   S_VV: (66, 66), column sums [1]
+   S_RP: (366, 49), column sums [8]
+   S_RQ: (366, 108), column sums [8]
+   S_WQ: (266, 108), column sums [8]
+ exact recursion v_2 = 8^1 f + sum S v_1 verified coordinate-wise for all five shapes: True
+ exact recursion v_3 = 8^2 f + sum S v_2 verified coordinate-wise for all five shapes: True
+ exact recursion v_4 = 8^3 f + sum S v_3 verified coordinate-wise for all five shapes: True
+ P: limit per tile sum u = 12 = 12.000000; max denominator 8; charpoly(S_PP) = lambda**44*(lambda - 4)*(lambda - 1)**4  (17s)

@@ -97,9 +97,9 @@ def canon_keys(cubes, owners, G, T, fidx):
     allrows = []
     for j in range(k):
         b = owners[:, j]; Mb = Gs[fidx[b]]; Tb = T[b]
-        relc = (np.einsum('nji,nki->nkj', Mb, 2 * cubes + 1 - 2 * Tb[:, None, :]) - 1) // 2        # Mb^T (2c+1-2Tb), then corner
+        relc = (np.einsum('nji,nkj->nki', Mb, 2 * cubes + 1 - 2 * Tb[:, None, :]) - 1) // 2        # Mb^T (2c+1-2Tb), then corner
         relf = MULT[INV[fidx[b]][:, None], fidx[owners]]                                            # (n,k)
-        relt = np.einsum('nji,nki->nkj', Mb, T[owners] - Tb[:, None, :])                            # (n,k,3)
+        relt = np.einsum('nji,nkj->nki', Mb, T[owners] - Tb[:, None, :])                            # (n,k,3)
         assert (np.abs(relc) <= 8).all() and (np.abs(relt) <= 16).all()
         code = ((((((relc[..., 0] + 8) * 17 + relc[..., 1] + 8) * 17 + relc[..., 2] + 8) * 24 + relf) * 33 + relt[..., 0] + 16) * 33 + relt[..., 1] + 16) * 33 + relt[..., 2] + 16
         allrows.append(np.sort(code, axis=1))
