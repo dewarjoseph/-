@@ -29,7 +29,7 @@ T_START = time.time()
 def say(*a):
     s = " ".join(str(x) for x in a); print(s, flush=True); OUT.append(s)
 def flush():
-    with open(os.path.join(HERE, 'results', 'phase5a_c2_lower_bound_check.txt'), 'w') as f:
+    with open(os.path.join(HERE, 'results', 'phase5a_c2_lower_bound_check' + (('_stages' + sys.argv[1]) if len(sys.argv) > 1 else '') + '.txt'), 'w') as f:
         f.write("\n".join(OUT) + "\n")
 
 # ----------------------------------------------------------------------------------------------- basic data
@@ -100,10 +100,11 @@ def cubes_of_poses(G, T, odd=LB):
 def owner_grid(level, G, T):
     N = 2 ** (level + 1)
     grid = np.full((N, N, N), -1, np.int32)
-    cubes = cubes_of_poses(G, T)
-    assert cubes.min() >= 0 and cubes.max() < N
-    flat = cubes.reshape(-1, 3)
-    grid[flat[:, 0], flat[:, 1], flat[:, 2]] = np.repeat(np.arange(len(G), dtype=np.int32), 7)
+    for s in range(0, len(G), 65536):                     # chunked: keeps peak memory small for T_7
+        cubes = cubes_of_poses(G[s:s+65536], T[s:s+65536])
+        assert cubes.min() >= 0 and cubes.max() < N
+        flat = cubes.reshape(-1, 3)
+        grid[flat[:, 0], flat[:, 1], flat[:, 2]] = np.repeat(np.arange(s, s + len(cubes), dtype=np.int32), 7)
     assert (grid >= 0).sum() == 7 * len(G), "overlapping cubes"
     return grid
 

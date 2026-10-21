@@ -1,0 +1,22 @@
+==========================================================================================
+STAGE 3: star types, lambda_min(h_e), star sums, exact certificate
+ own vectorised pose generator agrees with tiles_at_level on T_3 (all 512 poses, same order)
+ T_4: 4096 tiles, complete 1-stars 2744, incomplete (touch boundary) 1352, distinct types 70
+ T_5: 32768 tiles, complete 1-stars 27000, incomplete (touch boundary) 5768, distinct types 72
+ types(T_4) subset of types(T_5): True
+ own closure orbit from one T_4 star: 72 types after 4 rounds; equals types(T_5): True
+ Phi(orbit) subset orbit: True
+ star sizes (tiles): min 9, max 27, histogram {9: 1, 27: 71}
+ distinct plaquette signatures (pattern, links): 205; distinct lambda_min values: [0.0, 0.152240935, 0.267949192, 0.585786438, 1.0, 2.0]
+   analytic: 2-2cos(pi/8)=0.152240935, 2-sqrt3=0.267949192, 2-sqrt2=0.585786438
+ inter-tile edges touching a tile: 48..48; non-flat: 19..37
+ star sums S(type): min 6.274966629, max 20.388421100, distinct values 16
+ FLOAT bound (1/4) min S = 1.568741657  (claim 1.5687255; float >= 1.5687: True)
+ argmin type: 27 tiles, 48 inter-tile edges, 24 non-flat; lambda_min multiset: {0.0: 24, 1.0: 2, 0.267949: 8, 0.152241: 14}
+ argmin type (relative poses (frame idx, dx,dy,dz)): [(0, (-1, -1, -1)), (0, (0, 0, 0)), (0, (1, 1, 1)), (1, (-2, -2, 2)), (1, (0, 0, 4)), (2, (-2, 2, -2)), (2, (0, 4, 0)), (3, (-2, 2, 2)), (3, (0, 4, 4)), (4, (2, -2, -2)), (4, (4, 0, 0)), (5, (2, -2, 2)), (5, (4, 0, 4)), (6, (2, 2, -2)), (6, (4, 4, 0)), (7, (0, 4, 0)), (10, (4, 0, 0)), (11, (0, 0, 4)), (11, (4, 4, 0)), (13, (4, 0, 0)), (15, (0, 0, 4)), (16, (0, 4, 0)), (16, (4, 0, 4)), (19, (0, 4, 4)), (19, (4, 0, 0)), (20, (0, 0, 4)), (23, (0, 4, 0))]
+ own exact LDL^* certificate: 161 non-flat signatures certified (h_e - mu_e I positive definite, mu_e = floor(1e6 lambda)-2 over 1e6), 0 failures; 44 flat signatures (mu=0)
+   sanity: for every non-flat signature the same test REJECTS mu_e + 2.2e-5 (so the pivots detect lambda_min)
+   flat signatures: exact elimination of h_e finds a non-positive pivot (singular) for all 44 -> mu=0 is the best constant
+ CERTIFIED (own arithmetic): (1/4) min_types sum mu_e = 3137451/500000/4 = 3137451/2000000 = 1.568725500
+   equals claimed 3137451/2000000: True
+ stage 3 wall time 10.6s
