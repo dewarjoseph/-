@@ -1,0 +1,16 @@
+PHASE V-B / A (d): substitution controls (seeds 1 and 108) at level 4 with own code; flux_vs_edge table re-run from a scratch copy of the JSONs
+ regression constants in audit/results/phase5a_periodic_control_T.txt: 'least-squares E_per ~ -1.904 + 14.303 f_traceless + 30.696 f_-1' present: True
+ seed 1: own decoration {'0': (1, 2, 0), (0, 0, 0): (1, 2, 0), (0, 0, 1): (2, 1, 0), (0, 1, 0): (2, 1, 0), (0, 1, 1): (0, 1, 2), (1, 0, 0): (0, 2, 1), (1, 0, 1): (2, 0, 1), (1, 1, 0): (2, 0, 1)}; equals scaling_controls.random_decoration: True; equals decoration stored in JSON: True
+   level 4 own: E0 = 6.928902 (pair 6.928902, residuals ['1.4e-14', '1.9e-14']) vs stored 6.928902 (diff +2.0e-14); IPR*n 72.011 vs stored 72.011; interface1 weight 0.861 vs stored 0.861  (9s)
+   level 4 own flux fractions: nontriv 0.4785 traceless 0.4427 -1 0.0359 (N=67680); stored level-5 fractions 0.4768/0.4381/0.0386
+   level 5 flux via phase5a_flux_vs_edge.plaquettes (re-run): nontriv 0.4768 traceless 0.4381 -1 0.0386; equal to stored: True; E_fit recomputed 5.549 vs stored 5.549; residual r = E0(L5) - E_fit = +1.141 (table: seed 1 +1.141, seed 108 +2.234)  (5s)
+ seed 108: own decoration {'0': (0, 1, 2), (0, 0, 0): (2, 0, 1), (0, 0, 1): (2, 1, 0), (0, 1, 0): (1, 0, 2), (0, 1, 1): (0, 1, 2), (1, 0, 0): (0, 2, 1), (1, 0, 1): (0, 1, 2), (1, 1, 0): (1, 2, 0)}; equals scaling_controls.random_decoration: True; equals decoration stored in JSON: True
+   level 4 own: E0 = 8.607741 (pair 8.607741, residuals ['2.4e-14', '1.8e-14']) vs stored 8.607741 (diff -7.5e-14); IPR*n 7.990 vs stored 7.990; interface1 weight 0.564 vs stored 0.564  (12s)
+   level 4 own flux fractions: nontriv 0.4751 traceless 0.3881 -1 0.0870 (N=67680); stored level-5 fractions 0.4705/0.3830/0.0875
+   level 5 flux via phase5a_flux_vs_edge.plaquettes (re-run): nontriv 0.4705 traceless 0.3830 -1 0.0875; equal to stored: True; E_fit recomputed 6.259 vs stored 6.259; residual r = E0(L5) - E_fit = +2.234 (table: seed 1 +1.141, seed 108 +2.234)  (5s)
+ phase5a_flux_vs_edge.table() re-run on copies of the 19 JSONs (written to /tmp/phase5b_a_fluxtable_ba5my9hg): generated table identical to the stored file's generated part: True
+   | fr30            0.4763  0.3912  0.0851 |   8.91963   8.79701  7.0e-08 |   6.304  +2.493 |   0.455    2.444     0.445    0.999 |   19.930   0.582
+   | randdec1        0.4768  0.4381  0.0386 |   6.92890   6.68919  6.4e-08 |   5.549  +1.141 |   0.858    2.618     0.766    1.289 |  477.713   0.851
+   | randdec108      0.4705  0.3830  0.0875 |   8.60774   8.49386  6.3e-08 |   6.259  +2.234 |   0.619    1.126     0.700    1.195 |   35.829   0.560
+   | FR30: E0(L5) = 8.79701, E_fit = 6.304, residual +2.493 (periodic census rms 0.532)
+   | random substitution decorations (n=18): E0(L5) range [5.272, 8.494], residual r range [+1.141, +2.234], mean +1.623, sd 0.306

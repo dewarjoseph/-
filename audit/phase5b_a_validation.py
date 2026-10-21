@@ -648,7 +648,8 @@ def part_controls():
                          E0_L4_stored=L4['lambda'], ipr_n_own=float((p ** 2).sum()) * n, ipr_n_stored=L4['ipr_n'], flux_L4_own=cs, flux_L5_rerun=f5, E_fit=efit, r=rec['levels']['5']['lambda'][0] - efit)
     # table re-run on a scratch copy (the production table() writes into audit/results, which must not be modified)
     import shutil, tempfile
-    scratch = tempfile.mkdtemp(prefix='phase5b_a_fluxtable_')
+    SCR = '/tmp/claude-0/-home-user--/3e28775d-be57-5932-b9d4-6e0f425b644f/scratchpad'
+    scratch = tempfile.mkdtemp(prefix='phase5b_a_fluxtable_', dir=SCR if os.path.isdir(SCR) else None)
     for fn in os.listdir(RES):
         if fn.startswith('phase5a_flux_vs_edge_') and fn.endswith('.json'): shutil.copy(os.path.join(RES, fn), scratch)
     fe.RES = scratch
