@@ -1,0 +1,5 @@
+PHASE 5B-E / E1: level-6 pinned FR30 Clifford operator, exact Rayleigh-quotient certificate   (started 2026-10-21 17:17:12, OMP_NUM_THREADS=1)
+[fr30 L4] geometry: n=4096 tiles (7 unit cubes each), box 32^3, panels |E|=46080, 24 frames, max degree 24, boundary tiles (deg<24) 1331 = 0.3250 n; links {'+1': 6138, '-1': 17412, '+i': 2581, '-i': 2536, '+j': 6148, '-j': 6148, '+k': 2536, '-k': 2581}  (0.3s, rss 0.09 GB)
+   validation vs object builders (level 4): |E| 46080 vs 46080, max|H_grid - H_objects| = 0.0e+00, degrees identical: True  (1.3s)
+[fr30 L6] geometry: n=262144 tiles (7 unit cubes each), box 128^3, panels |E|=3096576, 24 frames, max degree 24, boundary tiles (deg<24) 23723 = 0.0905 n; links {'+1': 393210, '-1': 1163268, '+i': 163933, '-i': 163744, '+j': 442372, '-j': 442372, '+k': 163744, '-k': 163933}  (2.5s, rss 0.29 GB)
+   H = 24 I - A: dim 524288, nnz 4800508, max|H - H^dagger| = 0.0e+00  (4.6s, rss 0.99 GB)
