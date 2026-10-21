@@ -170,3 +170,32 @@ if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd in ('dispersion', 'all'): dispersion(int(sys.argv[2]) if len(sys.argv) > 2 else 3)
     if cmd == 'dirac': dirac(int(sys.argv[2]) if len(sys.argv) > 2 else 2)
+
+def lowmodes(L, nev=6):
+    """Localisation of the lowest nonzero modes of D (FR30 connection): weight by form degree and on cells that touch
+    the patch boundary (some cube within Chebyshev distance 1 of the cell's lower-corner cube is missing)."""
+    tiles, cells, index, U = complex_cells(L)
+    d = [coboundary(cells, index, U, k) for k in range(3)]
+    Dfull = sps.bmat([[None, d[0].conj().T, None, None], [d[0], None, d[1].conj().T, None], [None, d[1], None, d[2].conj().T], [None, None, d[2], None]]).tocsc()
+    N = 2 ** (L + 1); occ = np.zeros((N + 2,) * 3, bool)
+    for x, _ in cells[0]: occ[tuple(np.array(x) + 1)] = True
+    def bnd(x):
+        y = np.array(x) + 1; return not occ[y[0]-1:y[0]+3, y[1]-1:y[1]+3, y[2]-1:y[2]+3].all()
+    deg_of, bflag = [], []
+    for k in range(4):
+        for (x, I) in cells[k]: deg_of += [k, k]; b = bnd(x); bflag += [b, b]
+    deg_of = np.array(deg_of); bflag = np.array(bflag)
+    D2 = (Dfull @ Dfull).tocsc()
+    w, V = spl.eigsh(D2, k=nev + 2, sigma=-1e-5, which='LM')
+    o = np.argsort(w); w, V = w[o], V[:, o]
+    out = []
+    for j in range(len(w)):
+        p = np.abs(V[:, j]) ** 2; p /= p.sum()
+        out.append({'E': float(np.sqrt(max(w[j], 0))), 'deg_weights': [float(p[deg_of == k].sum()) for k in range(4)],
+                    'boundary_weight': float(p[bflag].sum()), 'boundary_cell_fraction': float(bflag.mean()), 'ipr_n': float((p ** 2).sum() * len(p))})
+        log(f"[low L={L}] |E|={out[-1]['E']:.5f}  degree weights {np.round(out[-1]['deg_weights'],3)}  boundary weight {out[-1]['boundary_weight']:.3f} (boundary cell fraction {bflag.mean():.3f})  IPR*N {out[-1]['ipr_n']:.1f}")
+    with open(os.path.join(RES, f'phase5c_dirac_lowmodes_L{L}.json'), 'w') as f: json.dump(out, f, indent=1)
+    return out
+
+if __name__ == '__main__' and sys.argv[1] == 'lowmodes':
+    lowmodes(int(sys.argv[2]))
