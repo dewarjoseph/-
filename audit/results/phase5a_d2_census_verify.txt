@@ -66,3 +66,9 @@
    k=8 2L random#186                                              E_rec=9.875725115 E_mine=9.875725115 dE=-2.487e-14
    k=8 2L FR30 bijection [4, 5, 2, 7, 3, 0, 1, 6]                 E_rec=11.007956524 E_mine=11.007956524 dE=-2.487e-14
  claim (c) from records (own filter, strict <): n=1551, E_per min=4.4967 median=5.6073 max=8.1772; top-4 labels: ['k=4 S=[[1, 0, 2], [0, 1, 2], [0, 0, 4]] tri=(18, 2, 10)', 'k=4 S=[[1, 1, 1], [0, 2, 1], [0, 0, 2]] tri=(15, 20, 15', 'k=8 S=[[1, 0, 4], [0, 1, 5], [0, 0, 8]] random#1', 'k=4 S=[[1, 1, 0], [0, 2, 1], [0, 0, 2]] tri=(23, 23, 14']
+ extra A2 check: 1500 random '[exh]' records (coarse 4^3 minimiser in B2a) recomputed in 100.3s: #(record - mine > 1e-6) = 1 (0.0007), max overestimate = 0.0736, #(mine - record > 1e-6) = 0; records >= 8.770: 551, of which true value < 8.770: 0
+[records stage wall 129.3s]
+==============================================================================================================
+5. COUNTEREXAMPLE SEARCH: random decorations on ALL index-4 and index-8 HNF sublattices (own code)
+ 190 sublattices; frames: coset 0 fixed to I (global right factor is a unitary conjugation of H), others uniform in SO(3,Z)
+ flux computed for 100000 random decorations in 8.0s: flux-matched (|dfn|<0.03,|dft|<0.04,|dfm|<0.04): 2104 (0.0210)
