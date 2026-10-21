@@ -77,11 +77,6 @@ def frame_index(G):
 def gen_poses(level):
     G = I3[None].astype(np.int64); T = np.zeros((1, 3), np.int64)
     for _ in range(level):
-        G = np.einsum('nij,cjk->ncik', G, GOPS).reshape(-1, 3, 3); T = (2 * T[:, None, :] + np.einsum('nij,cj->nci', G.reshape(-1, 8, 3, 3)[:, 0], TOPS)).reshape(-1, 3) if False else T
-        # (the one-liner above is replaced by the explicit loop below for clarity)
-        break
-    G = I3[None].astype(np.int64); T = np.zeros((1, 3), np.int64)
-    for _ in range(level):
         G2 = np.einsum('nij,cjk->ncik', G, GOPS).reshape(-1, 3, 3)
         T2 = (2 * T[:, None, :] + np.einsum('nij,cj->nci', G, TOPS)).reshape(-1, 3)
         G, T = G2, T2

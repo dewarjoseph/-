@@ -244,8 +244,11 @@ def run_census(shard, nshards):
     path = shard_path('census', shard); done = set()
     if os.path.exists(path):
         for line in open(path): done.add(json.loads(line)['index'])
-    idx = [i for i in range(NDEC) if i % nshards == shard and i not in done]
-    print(f"[census shard {shard}/{nshards}] {len(idx)} decorations to do ({len(done)} already)", flush=True)
+    # process in a FIXED random order (seed 20261023) so that any completed prefix of the census is a uniform random
+    # subsample of the 6561 decorations (index order would bias the prefix towards particular frames of the last octants)
+    order = np.random.default_rng(20261023).permutation(NDEC)
+    idx = [int(i) for i in order if i % nshards == shard and int(i) not in done]
+    print(f"[census shard {shard}/{nshards}] {len(idx)} decorations to do ({len(done)} already); random order seed 20261023", flush=True)
     t0 = time.time()
     with open(path, 'a') as f:
         for k, i in enumerate(idx):
@@ -278,7 +281,9 @@ def merge():
     for fn in sorted(os.listdir(RES)):
         if fn.startswith('phase5b_sweep_census_shard'):
             for line in open(os.path.join(RES, fn)):
-                r = json.loads(line); recs[r['index']] = r
+                try: r = json.loads(line)
+                except json.JSONDecodeError: continue
+                recs[r['index']] = r
     for fn in sorted(os.listdir(RES)):
         if fn.startswith('phase5b_sweep_level4_shard'):
             for line in open(os.path.join(RES, fn)):
