@@ -40,7 +40,7 @@ def say(*a):
     s = " ".join(str(x) for x in a); print(s, flush=True); OUT.append(s)
     with open(RESF, 'w') as f: f.write("\n".join(OUT) + "\n")
 def rss(): return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1e6
-def F(x): return Fraction(x)
+def F(*a): return Fraction(*a)
 
 # ------------------------------------------------------------------------------------------------ substitution data
 ops = [(perm_mat(FR30['0']), np.array([1, 1, 1]))]
