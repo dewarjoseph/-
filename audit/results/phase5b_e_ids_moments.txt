@@ -1,0 +1,13 @@
+loaded 72 one-star and 165 two-star types with exact frequencies (sums 1, 1)
+from the 72 one-star types: m_0 = 2, m_1 = 48, m_2 = 1296 = 1296.000000, m_3 = 37908 = 37908.000000   (3s)
+3-star types V_3 = Phi_3(V_2): 445 types (Chebyshev radius 3, 511 positions), sizes 73..133 tiles; u_3 sum 1, max denominator 4096   (11s)
+from the 3-star types: m_0 = 2, m_1 = 48, m_2 = 1296, m_3 = 37908, m_4 = 1169988 = 1169988.000000   (158s)
+consistency: m_0 = 2: True; m_1 = 48: True; m_2 (1-stars) == m_2 (3-stars): True; m_3 (1-stars) == m_3 (3-stars): True
+IDS moments per state (dN has total mass 1 per spinor-tile dimension): <E> = 24, <E^2> = 648, <E^3> = 18954, <E^4> = 584994
+centred: variance 72 = 72.000000 (std 8.485281); 3rd central moment -54 = -54.0000 (skewness -0.088388); 4th central moment 9570 = 9570.000 (kurtosis 1.846065)
+trivial connection (same tiling, all links 1; framework 3.4 shows its E_bulk = 0) from the same u_1: m_2^triv = 1314, m_3^triv = 38826; per state <E^2>-<E>^2 = 81 = sum_b mult(a,b)^2 (Clifford: 72), 3rd central moment -243 (Clifford: -54)
+  T_3 (pinned): 8^-m Tr H^k, k=0..4: 2.0000, 48.0000, 1272.0938, 36186.9609, 1081959.8125   (limits 2.0, 48.0, 1296.0000, 37908.0000, 1169988.0000; boundary tiles lack panels, giving O(2^-m) deficits)
+  T_4 (pinned): 8^-m Tr H^k, k=0..4: 2.0000, 48.0000, 1284.0117, 37044.8701, 1125714.4766   (limits 2.0, 48.0, 1296.0000, 37908.0000, 1169988.0000; boundary tiles lack panels, giving O(2^-m) deficits)
+  T_5 (pinned): 8^-m Tr H^k, k=0..4: 2.0000, 48.0000, 1290.0015, 37476.1088, 1147799.3096   (limits 2.0, 48.0, 1296.0000, 37908.0000, 1169988.0000; boundary tiles lack panels, giving O(2^-m) deficits)
+Interpretation: these are exact spectral invariants of H_omega (moments of the hull IDS), fixed by the radius-<=3 pattern frequencies; the support infimum E_bulk is NOT determined by finitely many moments (a finite moment sequence is compatible with measures whose support extends down to any point allowed by the Chebyshev-Markov inequalities), so they constrain the IDS but do not locate the band edge.
+total 213s

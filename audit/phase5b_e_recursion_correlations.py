@@ -302,11 +302,19 @@ say(f"   Theorem A (PHASE5A_RECURSION_THEOREM.md): 18 per tile; 19/36, 13/144, 1
 rd = obs['R']; tr = sum(rd.values())
 say(f" R (two parallel plaquettes sharing a panel): total {tr} per tile (= {float(tr):.4f}); joint class distribution (unordered pair):")
 pq = {c: qd[c] / tq for c in CLASSES}
+# a plaquette of an R object may be intra-tile (class 1): the relevant single-edge marginal is over ALL 21 lattice edges per tile,
+# 18 inter-tile with frequencies pq and 3 intra-tile (flat): pall = (18 pq + 3 delta_1) / 21
+pall = {c: (18 * pq[c] + (3 if c == '1' else 0)) / 21 for c in CLASSES}
 for pair in sorted(rd, key=lambda p: -rd[p]):
-    indep = (2 if pair[0] != pair[1] else 1) * pq[pair[0]] * pq[pair[1]]
+    indep = (2 if pair[0] != pair[1] else 1) * pall[pair[0]] * pall[pair[1]]
     say(f"     {str(pair):14s} {str(rd[pair]/tr):>22s} = {float(rd[pair]/tr):.6f}   (independent-marginals prediction {float(indep):.6f}, ratio {float(rd[pair]/tr/indep) if indep else float('nan'):.3f})")
-say(f"   marginal of one plaquette of the pair: " + ", ".join(f"{c}: {sum(rd[p]*(p.count(c)) for p in rd)/(2*tr)}" for c in CLASSES) + "  (must equal the single-plaquette frequencies: "
-    f"{all(sum(rd[p]*p.count(c) for p in rd)/(2*tr) == pq[c] for c in CLASSES)})")
+say(f"   marginal of one plaquette of the pair: " + ", ".join(f"{c}: {sum(rd[p]*(p.count(c)) for p in rd)/(2*tr)}" for c in CLASSES) + "  (must equal the all-edge marginal (18 pq + 3 delta_1)/21: "
+    f"{all(sum(rd[p]*p.count(c) for p in rd)/(2*tr) == pall[c] for c in CLASSES)})")
+# conditional distribution of the neighbour's class given the class of one plaquette, versus the all-edge marginal
+for c0 in CLASSES:
+    tot0 = sum(rd[p] * p.count(c0) for p in rd)
+    cond = {c: sum(rd[p] * (p.count(c0) if c != c0 else 2) for p in rd if (c0 in p and c in p and (c != c0 or p == (c0, c0)))) for c in CLASSES}
+    say(f"   P(neighbour class | this plaquette has class {c0:>2s}): " + ", ".join(f"{c}: {float(cond[c]/tot0):.4f}" for c in CLASSES) + f"   (all-edge marginal: " + ", ".join(f"{float(pall[c]):.4f}" for c in CLASSES) + ")")
 wd = obs['W']; tw = sum(wd.values())
 loop = collections.defaultdict(Fraction)
 for (cls4, ring), v in wd.items(): loop[ring] += v
@@ -320,7 +328,7 @@ for cls6, v in vd.items(): n6[cls6.count('-1')] += v; nontriv[6 - cls6.count('1'
 say(f" V (8 cubes around a lattice point; 6 incident plaquettes): total {tv} per tile (every lattice point is inter-tile: 7 per tile expected: {tv == 7})")
 say(f"   number of class -1 plaquettes among the 6: " + ", ".join(f"{n}: {n6[n]/tv} = {float(n6[n]/tv):.5f}" for n in sorted(n6)))
 say(f"   number of non-flat plaquettes among the 6: " + ", ".join(f"{n}: {nontriv[n]/tv} = {float(nontriv[n]/tv):.5f}" for n in sorted(nontriv)))
-say(f"   mean number of -1 plaquettes per lattice point {sum(n*v for n, v in n6.items())/tv} (independent check: 6 x 13/144 = {F(6*13,144)}; equality is forced since each plaquette is incident to 2 lattice points: {sum(n*v for n, v in n6.items())/tv == F(78,144)})")
+say(f"   mean number of -1 plaquettes per lattice point {sum(n*v for n, v in n6.items())/tv} (independent check: each inter-tile plaquette is incident to 2 lattice points and there are 7 lattice points per tile, so the mean must be 2 x (13/8) / 7 = 13/28: {sum(n*v for n, v in n6.items())/tv == F(13,28)})")
 say(f" wall time Part A {time.time()-t0:.0f}s, rss {rss():.2f} GB")
 
 # ------------------------------------------------------------------------------------------------ Part B

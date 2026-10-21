@@ -5,3 +5,4 @@ PHASE 5B-E / E1: level-6 pinned FR30 Clifford operator, exact Rayleigh-quotient 
    H = 24 I - A: dim 524288, nnz 4800508, max|H - H^dagger| = 0.0e+00  (4.6s, rss 0.99 GB)
    lobpcg chunk:  603 it (538s, 0.89s/it), cumulative   603: lambda=[8.77015261 8.7701954  8.77032556 8.77034914] res=[1.0e-03 1.7e-03 2.0e-03 1.5e-03]  rss 0.99 GB
    lobpcg chunk:  598 it (648s, 1.08s/it), cumulative  1201: lambda=[8.77013365 8.77013394 8.77024254 8.77025124] res=[3.2e-05 1.4e-04 1.6e-04 4.9e-04]  rss 0.99 GB
+   lobpcg chunk:  598 it (565s, 0.94s/it), cumulative  1799: lambda=[8.77013363 8.77013363 8.7702418  8.77024193] res=[1.1e-06 4.3e-06 1.8e-05 8.1e-05]  rss 0.99 GB

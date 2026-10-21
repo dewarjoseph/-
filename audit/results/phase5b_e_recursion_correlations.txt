@@ -1,12 +1,12 @@
 PHASE 5B-E / E3: exact limit frequencies of correlated local objects from the type recursion
-started 2026-10-21 17:39:12; OMP_NUM_THREADS=1
+started 2026-10-21 17:48:40; OMP_NUM_THREADS=1
 ====================================================================================================
 A. BOX-OBJECT TYPE SYSTEMS P (1x1x2), Q (1x2x2), V (2x2x2), R (1x2x3), W (1x3x3): closure, recursion, exact limits
  T_1: inter-tile box objects P: 48 (33 types), Q: 60 (49 types), V: 19 (19 types), R: 96 (74 types), W: 24 (24 types)  (0s)
  T_2: inter-tile box objects P: 576 (49 types), Q: 792 (88 types), V: 279 (44 types), R: 1632 (263 types), W: 672 (164 types)  (0s)
  T_3: inter-tile box objects P: 5376 (49 types), Q: 7728 (108 types), V: 2863 (65 types), R: 17088 (366 types), W: 7872 (264 types)  (1s)
- T_4: inter-tile box objects P: 46080 (49 types), Q: 67680 (108 types), V: 25695 (66 types), R: 153984 (366 types), W: 74112 (266 types)  (9s)
- inflation closure of the type sets after 1 rounds: P: 49 types, Q: 108 types, V: 66 types, R: 366 types, W: 266 types  (14s)
+ T_4: inter-tile box objects P: 46080 (49 types), Q: 67680 (108 types), V: 25695 (66 types), R: 153984 (366 types), W: 74112 (266 types)  (15s)
+ inflation closure of the type sets after 1 rounds: P: 49 types, Q: 108 types, V: 66 types, R: 366 types, W: 266 types  (21s)
    S_PP: (49, 49), column sums [4]
    S_QP: (108, 49), column sums [4]
    S_QQ: (108, 108), column sums [2]
@@ -19,44 +19,49 @@ A. BOX-OBJECT TYPE SYSTEMS P (1x1x2), Q (1x2x2), V (2x2x2), R (1x2x3), W (1x3x3)
  exact recursion v_2 = 8^1 f + sum S v_1 verified coordinate-wise for all five shapes: True
  exact recursion v_3 = 8^2 f + sum S v_2 verified coordinate-wise for all five shapes: True
  exact recursion v_4 = 8^3 f + sum S v_3 verified coordinate-wise for all five shapes: True
- P: limit per tile sum u = 12 = 12.000000; max denominator 8; charpoly(S_PP) = lambda**44*(lambda - 4)*(lambda - 1)**4  (15s)
+ P: limit per tile sum u = 12 = 12.000000; max denominator 8; charpoly(S_PP) = lambda**44*(lambda - 4)*(lambda - 1)**4  (23s)
      max |8^-4 v_4 - u| over types = 1.245e-01  (expected O(2^-4..4^-4) surface corrections)
- Q: limit per tile sum u = 18 = 18.000000; max denominator 64; charpoly(S_QQ) = lambda**103*(lambda - 2)*(lambda - 1)**4  (22s)
+ Q: limit per tile sum u = 18 = 18.000000; max denominator 64; charpoly(S_QQ) = lambda**103*(lambda - 2)*(lambda - 1)**4  (35s)
      max |8^-4 v_4 - u| over types = 1.245e-01  (expected O(2^-4..4^-4) surface corrections)
- V: limit per tile sum u = 7 = 7.000000; max denominator 128; charpoly(S_VV) = lambda**64*(lambda - 1)**2  (24s)
+ V: limit per tile sum u = 7 = 7.000000; max denominator 128; charpoly(S_VV) = lambda**64*(lambda - 1)**2  (37s)
      max |8^-4 v_4 - u| over types = 1.245e-01  (expected O(2^-4..4^-4) surface corrections)
- R: limit per tile sum u = 42 = 42.000000; max denominator 64; charpoly(S_RR) = None  (24s)
+ R: limit per tile sum u = 42 = 42.000000; max denominator 64; charpoly(S_RR) = None  (37s)
      max |8^-4 v_4 - u| over types = 2.461e-01  (expected O(2^-4..4^-4) surface corrections)
- W: limit per tile sum u = 21 = 21.000000; max denominator 64; charpoly(S_WW) = None  (24s)
+ W: limit per tile sum u = 21 = 21.000000; max denominator 64; charpoly(S_WW) = None  (37s)
      max |8^-4 v_4 - u| over types = 2.461e-01  (expected O(2^-4..4^-4) surface corrections)
 ----------------------------------------------------------------------------------------------------
  class observables (exact rational limits, per tile):
  Q (plaquettes): total 18 per tile; class frequencies 1: 19/36, -1: 13/144, i: 1/9, j: 23/144, k: 1/9
    Theorem A (PHASE5A_RECURSION_THEOREM.md): 18 per tile; 19/36, 13/144, 1/9, 23/144, 1/9  -> agreement: True
  R (two parallel plaquettes sharing a panel): total 42 per tile (= 42.0000); joint class distribution (unordered pair):
-     ('1', '1')                   461/1344 = 0.343006   (independent-marginals prediction 0.278549, ratio 1.231)
-     ('1', 'j')                     85/448 = 0.189732   (independent-marginals prediction 0.168596, ratio 1.125)
-     ('-1', '1')                    53/448 = 0.118304   (independent-marginals prediction 0.095293, ratio 1.241)
-     ('1', 'k')                     11/112 = 0.098214   (independent-marginals prediction 0.117284, ratio 0.837)
-     ('1', 'i')                     11/112 = 0.098214   (independent-marginals prediction 0.117284, ratio 0.837)
-     ('i', 'j')                     11/448 = 0.024554   (independent-marginals prediction 0.035494, ratio 0.692)
-     ('j', 'k')                     11/448 = 0.024554   (independent-marginals prediction 0.035494, ratio 0.692)
-     ('i', 'i')                      9/448 = 0.020089   (independent-marginals prediction 0.012346, ratio 1.627)
-     ('k', 'k')                      9/448 = 0.020089   (independent-marginals prediction 0.012346, ratio 1.627)
-     ('i', 'k')                     13/672 = 0.019345   (independent-marginals prediction 0.024691, ratio 0.783)
-     ('j', 'j')                      3/224 = 0.013393   (independent-marginals prediction 0.025511, ratio 0.525)
-     ('-1', 'j')                   11/1344 = 0.008185   (independent-marginals prediction 0.028839, ratio 0.284)
-     ('-1', 'i')                   11/1344 = 0.008185   (independent-marginals prediction 0.020062, ratio 0.408)
-     ('-1', 'k')                   11/1344 = 0.008185   (independent-marginals prediction 0.020062, ratio 0.408)
-     ('-1', '-1')                    1/168 = 0.005952   (independent-marginals prediction 0.008150, ratio 0.730)
-   marginal of one plaquette of the pair: 1: 25/42, -1: 13/168, i: 2/21, j: 23/168, k: 2/21  (must equal the single-plaquette frequencies: False)
+     ('1', '1')                   461/1344 = 0.343006   (independent-marginals prediction 0.354308, ratio 0.968)
+     ('1', 'j')                     85/448 = 0.189732   (independent-marginals prediction 0.162982, ratio 1.164)
+     ('-1', '1')                    53/448 = 0.118304   (independent-marginals prediction 0.092120, ratio 1.284)
+     ('1', 'k')                     11/112 = 0.098214   (independent-marginals prediction 0.113379, ratio 0.866)
+     ('1', 'i')                     11/112 = 0.098214   (independent-marginals prediction 0.113379, ratio 0.866)
+     ('i', 'j')                     11/448 = 0.024554   (independent-marginals prediction 0.026077, ratio 0.942)
+     ('j', 'k')                     11/448 = 0.024554   (independent-marginals prediction 0.026077, ratio 0.942)
+     ('i', 'i')                      9/448 = 0.020089   (independent-marginals prediction 0.009070, ratio 2.215)
+     ('k', 'k')                      9/448 = 0.020089   (independent-marginals prediction 0.009070, ratio 2.215)
+     ('i', 'k')                     13/672 = 0.019345   (independent-marginals prediction 0.018141, ratio 1.066)
+     ('j', 'j')                      3/224 = 0.013393   (independent-marginals prediction 0.018743, ratio 0.715)
+     ('-1', 'j')                   11/1344 = 0.008185   (independent-marginals prediction 0.021188, ratio 0.386)
+     ('-1', 'i')                   11/1344 = 0.008185   (independent-marginals prediction 0.014739, ratio 0.555)
+     ('-1', 'k')                   11/1344 = 0.008185   (independent-marginals prediction 0.014739, ratio 0.555)
+     ('-1', '-1')                    1/168 = 0.005952   (independent-marginals prediction 0.005988, ratio 0.994)
+   marginal of one plaquette of the pair: 1: 25/42, -1: 13/168, i: 2/21, j: 23/168, k: 2/21  (must equal the all-edge marginal (18 pq + 3 delta_1)/21: True)
+   P(neighbour class | this plaquette has class  1): 1: 0.5763, -1: 0.0994, i: 0.0825, j: 0.1594, k: 0.0825   (all-edge marginal: 0.5952, 0.0774, 0.0952, 0.1369, 0.0952)
+   P(neighbour class | this plaquette has class -1): 1: 0.7644, -1: 0.0769, i: 0.0529, j: 0.0529, k: 0.0529   (all-edge marginal: 0.5952, 0.0774, 0.0952, 0.1369, 0.0952)
+   P(neighbour class | this plaquette has class  i): 1: 0.5156, -1: 0.0430, i: 0.2109, j: 0.1289, k: 0.1016   (all-edge marginal: 0.5952, 0.0774, 0.0952, 0.1369, 0.0952)
+   P(neighbour class | this plaquette has class  j): 1: 0.6929, -1: 0.0299, i: 0.0897, j: 0.0978, k: 0.0897   (all-edge marginal: 0.5952, 0.0774, 0.0952, 0.1369, 0.0952)
+   P(neighbour class | this plaquette has class  k): 1: 0.5156, -1: 0.0430, i: 0.1016, j: 0.1289, k: 0.2109   (all-edge marginal: 0.5952, 0.0774, 0.0952, 0.1369, 0.0952)
  W (2x2 rectangle of 4 parallel plaquettes; 8-cube boundary loop): total 21 per tile; class of the loop holonomy: 1: 151/1344 = 0.112351, -1: 205/1344 = 0.152530, i: 3/16 = 0.187500, j: 121/336 = 0.360119, k: 3/16 = 0.187500
    number of class -1 plaquettes among the 4: 0: 487/672 = 0.72470, 1: 27/112 = 0.24107, 2: 23/672 = 0.03423
  V (8 cubes around a lattice point; 6 incident plaquettes): total 7 per tile (every lattice point is inter-tile: 7 per tile expected: True)
    number of class -1 plaquettes among the 6: 0: 23/32 = 0.71875, 1: 59/448 = 0.13170, 2: 17/128 = 0.13281, 4: 15/896 = 0.01674
    number of non-flat plaquettes among the 6: 0: 27/112 = 0.24107, 2: 37/112 = 0.33036, 3: 19/112 = 0.16964, 4: 85/896 = 0.09487, 5: 47/448 = 0.10491, 6: 53/896 = 0.05915
-   mean number of -1 plaquettes per lattice point 13/28 (independent check: 6 x 13/144 = 13/24; equality is forced since each plaquette is incident to 2 lattice points: False)
- wall time Part A 25s, rss 0.16 GB
+   mean number of -1 plaquettes per lattice point 13/28 (independent check: each inter-tile plaquette is incident to 2 lattice points and there are 7 lattice points per tile, so the mean must be 2 x (13/8) / 7 = 13/28: True)
+ wall time Part A 39s, rss 0.16 GB
 ====================================================================================================
 B. 1-STAR AND 2-STAR TYPE FREQUENCIES FROM THE COLLARED SUBSTITUTION; PER-TILE -1 PLAQUETTE COUNT
  Phi (72 x 72): column sums [8]; row-sum histogram {1: 35, 3: 1, 2: 5, 14: 12, 6: 2, 8: 1, 72: 1, 63: 1, 13: 1, 4: 8, 12: 3, 62: 2}
@@ -79,4 +84,4 @@ B. 1-STAR AND 2-STAR TYPE FREQUENCIES FROM THE COLLARED SUBSTITUTION; PER-TILE -
  per-tile distribution of the number of NON-FLAT plaquettes among the 48: 19: 0.09375, 24: 0.21875, 26: 0.06250, 27: 0.10938, 28: 0.29688, 31: 0.06250, 32: 0.01562, 33: 0.01562, 37: 0.12500
  2-star types: 165; u_2 = Phi_2 u_1 / 8: sum 1, min 1/512 = 1.953e-03, max 3/32 = 0.0938, max denominator 512
    T_6: complete 2-stars 232560, max |census fraction - u_2| = 1.28e-02
- saved audit/results/phase5b_e_star_frequencies.txt;  wall time Part B 45s; total 70s, rss 0.35 GB
+ saved audit/results/phase5b_e_star_frequencies.txt;  wall time Part B 91s; total 130s, rss 0.34 GB

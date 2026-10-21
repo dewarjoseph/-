@@ -1,33 +1,17 @@
 PHASE 5B-E / E2: radius-2 collared census, closure, certified 3-block lower bound
-machine: OMP_NUM_THREADS=1, python3 -u -I; started 2026-10-21 17:33:36
+machine: OMP_NUM_THREADS=1, python3 -u -I; started 2026-10-21 17:43:31
 ====================================================================================================
 1. LEGAL 1-STAR TYPES V_1 (forward orbit) AND THE COLLARED MAP Phi_2 : V_1 -> 2-star types
- seed = most frequent complete 1-star of T_4; forward Phi-orbit closes after 5 rounds: |V_1| = 72 types (T_4 realises 70)  (1.4s)
+ seed = most frequent complete 1-star of T_4; forward Phi-orbit closes after 5 rounds: |V_1| = 72 types (T_4 realises 70)  (2.5s)
  closure lemma verified computationally: for all 72 types the 2-stars of the 8 children are complete inside sigma(1-star)
- V_2 := Phi_2(V_1): 165 two-star types; sizes 35..65 tiles  (1.6s)
- Phi_22(V_2) subset V_2: True;  forward Phi_22-orbit of one 2-star: 165 types after 5 rounds, equals V_2: True  (6.0s)
+ V_2 := Phi_2(V_1): 165 two-star types; sizes 35..65 tiles  (2.5s)
+ Phi_22(V_2) subset V_2: True;  forward Phi_22-orbit of one 2-star: 165 types after 5 rounds, equals V_2: True  (6.8s)
 ====================================================================================================
 2. CENSUS OF COMPLETE 2-STARS IN T_5, T_6, T_7
- T_5: 32768 tiles, complete 2-stars 25648, distinct types 165; subset of V_2: True; equal to V_2: True; missing 0  (5s, rss 0.28 GB)
- T_6: 262144 tiles, complete 2-stars 232560, distinct types 165; subset of V_2: True; equal to V_2: True; missing 0  (45s, rss 0.32 GB)
- T_7: 2097152 tiles, complete 2-stars 1976560, distinct types 165; subset of V_2: True; equal to V_2: True; missing 0  (272s, rss 0.67 GB)
+ T_5: 32768 tiles, complete 2-stars 25648, distinct types 165; subset of V_2: True; equal to V_2: True; missing 0  (9s, rss 0.28 GB)
+ T_6: 262144 tiles, complete 2-stars 232560, distinct types 165; subset of V_2: True; equal to V_2: True; missing 0  (67s, rss 0.32 GB)
+ T_7: 2097152 tiles, complete 2-stars 1976560, distinct types 165; subset of V_2: True; equal to V_2: True; missing 0  (358s, rss 0.67 GB)
  exact Sylvester/Bareiss positive-definiteness test: 600 random self-tests against numpy eigvalsh passed
- identity <psi,Hpsi> = (1/18) sum_c k_c(psi) checked on T_3: 160 tiles with all 63 blocks inside; max |(1/18) sum_c K_c - (24I - A)| on their rows = 0.0e+00  (3.5s)
+ identity <psi,Hpsi> = (1/18) sum_c k_c(psi) checked on T_3: 160 tiles with all 63 blocks inside; max |(1/18) sum_c K_c - (24I - A)| on their rows = 0.0e+00  (5.9s)
 ====================================================================================================
 4. 3-BLOCK (27-cube, weight 1/18) DECOMPOSITION ON THE 165 TWO-STAR TYPES, EXACT CERTIFICATE
- distinct rotation-canonical 3-block signatures over the 165 types x 63 blocks: 162; tiles per block 8..10 (matrix dim up to 20); lambda_min rotation-invariance re-checked on 162 repeats  (51s)
- lambda_min(k_c): min 0.586840, max 1.752998; flat (<=1e-9): 0
- FLOAT 3-block bound: min over 165 types of (1/18) sum_c lambda_min(k_c) = 4.008198  (C2 stage 6 reported 4.008198, uncertified)
-   certified 100/162 signatures  (0s)
- exact certificates: 162 signatures, 162 non-flat certified with mu_c = (floor(10^6 lambda) - 2)/10^6, 0 failures, 0 flat (mu = 0)  (0s)
- sharpness sanity: the exact test rejects mu_c + 1e-5 for 15 of 50 sampled non-flat blocks (expected all, since |lambda - mu| < 3e-6)
-
-====================================================================================================
- CERTIFIED: E_bulk >= (1/18) min_types sum_c mu_c = (72147403/1000000)/18 = 72147403/18000000 = 4.008189056
-   argmin type: 35 tiles in the 2-star; its float value 4.008197841; number of types attaining the minimum: 1
-   previous certified lower bound (vertex blocks, 72 one-star types): 12805833/4000000 = 3.201458250; edge decomposition: 3137451/2000000 = 1.5687255
-   hypotheses: framework Thms 1.8, 1.10, 3.2 and Lemma 3.5 (V_1 = 72 legal 1-star types), the closure theorem above (V_2 = Phi_2(V_1)), the 1/18 identity, and the exact Sylvester certificates
-====================================================================================================
- S_3/18 over the 165 types: min 4.008189, median 4.710741, max 5.262457
- total wall time 387s, max rss 0.67 GB
- saved audit/results/phase5b_e_radius2_types.json

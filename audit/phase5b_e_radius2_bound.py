@@ -357,7 +357,7 @@ say(f" exact certificates: {len(order)} signatures, {sum(1 for s in MU if MU[s] 
 rej = 0; tested = 0
 for s in order[:40] + order[-10:]:
     if MU[s] == 0: continue
-    tested += 1; ok, _ = leading_minors_positive(sig_data[s][0], sig_data[s][1], MU[s].numerator + 10, QDEN)
+    tested += 1; ok, _ = leading_minors_positive(sig_data[s][0], sig_data[s][1], MU[s].numerator * (QDEN // MU[s].denominator) + 10, QDEN)
     rej += (not ok)
 say(f" sharpness sanity: the exact test rejects mu_c + 1e-5 for {rej} of {tested} sampled non-flat blocks (expected all, since |lambda - mu| < 3e-6)")
 S3_cert = {k: sum(MU[s] for s in type_blocks[k]) for k in V2}
