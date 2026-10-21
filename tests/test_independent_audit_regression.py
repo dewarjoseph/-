@@ -145,3 +145,62 @@ class TestTypeSubstitutionRecursion(unittest.TestCase):
         self.assertEqual((len(ns["ptypes_all"]), len(ns["qtypes_all"])), (49, 108))
         for m in (1, 2, 3):
             self.assertEqual({c: ns["rec"][m][c] for c in ns["CLASSES"]}, ns["measured"][m])
+
+
+class TestPhase5(unittest.TestCase):
+    """Phase V: universality control, boundary-condition dynamics, and certificate pipeline consistency."""
+    def _exec_universality(self):
+        import io, contextlib
+        path = os.path.join(ROOT, "audit", "phase5_universality_types.py")
+        src = open(path).read().split("ACHIRAL = {k: (0, 1, 2) for k in FR30}")[0]
+        ns = {"__name__": "u", "__file__": path}
+        with contextlib.redirect_stdout(io.StringIO()):
+            exec(compile(src, path, "exec"), ns)
+        return ns
+
+    def test_unit_cube_control_spectrum_and_frequencies(self):
+        import io, contextlib, sympy as sp
+        ns = self._exec_universality()
+        V8 = list(itertools.product((0, 1), repeat=3)); dec = {v: FR30.get(v, (0, 2, 1)) for v in V8}
+        with contextlib.redirect_stdout(io.StringIO()):
+            cpM, cpB, freqs = ns['analyse']("cube", *ns['cube_geometry'](dec))
+        lam = sp.Symbol('lambda')
+        self.assertEqual(sp.expand(cpM - lam**5 * (lam - 4) * (lam - 1)**4), 0)
+        self.assertEqual(sp.expand(cpB - lam**11 * (lam - 2) * (lam - 1)**4), 0)
+        self.assertEqual(freqs['1'], sp.Rational(1, 7)); self.assertEqual(freqs['j'], sp.Rational(17, 42))
+
+    def test_fr30_type_spectrum_is_clean(self):
+        import io, contextlib, sympy as sp
+        ns = self._exec_universality()
+        with contextlib.redirect_stdout(io.StringIO()):
+            cpM, cpB, freqs = ns['analyse']("fr30", *ns['chair_geometry'](FR30))
+        lam = sp.Symbol('lambda')
+        self.assertEqual(sp.expand(cpM - lam**44 * (lam - 4) * (lam - 1)**4), 0)
+        self.assertEqual(sp.expand(cpB - lam**103 * (lam - 2) * (lam - 1)**4), 0)
+        self.assertEqual(freqs['1'], sp.Rational(19, 36)); self.assertEqual(freqs['-1'], sp.Rational(13, 144))
+
+    def test_level2_surface_state_and_pinned_bottom(self):
+        tiles = tiles_at_level(FR30, 2); owner, edges = panel_edges(tiles); n = len(tiles)
+        deg = collections.Counter()
+        for a, b, _, _, _ in edges: deg[a] += 1; deg[b] += 1
+        def H(pinned):
+            M = np.zeros((2*n, 2*n), dtype=complex)
+            for a in range(n): M[2*a, 2*a] = M[2*a+1, 2*a+1] = 24.0 if pinned else deg[a]
+            for a, b, nf, _, _ in edges:
+                C = clifford_link(tiles[a][0], tiles[b][0], nf); M[2*a:2*a+2, 2*b:2*b+2] -= C; M[2*b:2*b+2, 2*a:2*a+2] -= C.conj().T
+            return M
+        wf, Vf = np.linalg.eigh(H(False)); wp, Vp = np.linalg.eigh(H(True))
+        self.assertAlmostEqual(wf[0], 4.72646, places=4); self.assertAlmostEqual(wp[0], 10.77695, places=4)
+        psi = Vf[:, 0]; wt = np.abs(psi[0::2])**2 + np.abs(psi[1::2])**2
+        self.assertGreater(sum(wt[a] for a in range(n) if deg[a] < 24), 0.9)   # free ground state is a surface state
+        self.assertGreaterEqual(wp[0], wf[0])                                     # pinned >= free (diagonal perturbation >= 0)
+
+    def test_certificate_file_matches_exporter_template(self):
+        cert = os.path.join(ROOT, "certificates", "TypeSubstitutionCertificate.lean")
+        self.assertTrue(os.path.exists(cert))
+        s = open(cert).read()
+        for name in ("types_distinct", "panel_images_certified", "plaquette_images_certified", "equivariance_certified", "seed_certified",
+                     "level2_geometry_matches_recursion", "eigen_check", "closed_form_all", "class_counts_closed_form", "limit_frequencies"):
+            self.assertIn(f"theorem {name}", s)
+        self.assertNotIn("native_decide", s); self.assertNotIn("sorry", s)
+        self.assertIn("def D : Int := 64", s)

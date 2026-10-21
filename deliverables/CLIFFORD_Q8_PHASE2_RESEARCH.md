@@ -416,3 +416,18 @@ Both proofs are computer-assisted: the finite type system and the matrices are p
 computation from axioms A1–A6, the equivariance and decomposition arguments are the only non-computational steps,
 and the rational linear algebra is exact. The ledger entries "Prop. 3.1: conjecture" and "Cor. 3.2: conditional" in
 Section 5 are superseded by these theorems.
+
+
+---
+
+## 10. Correction (Phase V, 2026-10-21)
+
+Section 3.3 and Section 6 of this document describe $E_0\approx5.27$ as the spectral bottom of the infinite Clifford
+hopping operator. Phase V (`deliverables/PHASE5_UNIVERSAL_GEOMETRIC_DYNAMICS.md`, Section 3) shows this is the bottom
+of a **surface band** created by the free (degree-type) boundary: the free-boundary ground state carries 93% of its
+weight on boundary tiles at every level from 2 to 5. With bulk coordination imposed on every tile (the compression of
+the infinite bulk operator) the lowest eigenvalue decreases monotonically through 10.777, 9.378, 8.920, 8.797 at levels
+2 to 5, so the bulk spectral infimum satisfies $E_{\rm bulk}\le8.797$ and is numerically near 8.75. The limiting
+spectral measure is the same for both boundary conditions (Phase V Theorem D). Everything else in this document is
+unaffected; Proposition 3.1 and Corollary 3.2 were upgraded to theorems in Section 9 and are now also kernel-checked
+in `certificates/TypeSubstitutionCertificate.lean`.
