@@ -76,7 +76,185 @@
    "D_frac": 0.10104529616724739,
    "err": 0.01763,
    "seconds": 52
+  },
+  {
+   "train": [
+    6
+   ],
+   "d": 114,
+   "D": 7296,
+   "D_frac": 0.1986062717770035,
+   "err": 0.00326,
+   "seconds": 371
+  },
+  {
+   "train": [
+    7
+   ],
+   "d": 34,
+   "D": 2176,
+   "D_frac": 0.059233449477351915,
+   "err": 0.14858,
+   "seconds": 25
+  },
+  {
+   "train": [
+    7
+   ],
+   "d": 42,
+   "D": 2688,
+   "D_frac": 0.07317073170731707,
+   "err": 0.08275,
+   "seconds": 24
+  },
+  {
+   "train": [
+    7
+   ],
+   "d": 58,
+   "D": 3712,
+   "D_frac": 0.10104529616724739,
+   "err": 0.02707,
+   "seconds": 60
+  },
+  {
+   "train": [
+    7
+   ],
+   "d": 114,
+   "D": 7296,
+   "D_frac": 0.1986062717770035,
+   "err": 0.00516,
+   "seconds": 362
+  },
+  {
+   "train": [
+    4
+   ],
+   "d": 34,
+   "D": 1024,
+   "D_frac": 0.027874564459930314,
+   "err": 0.12106,
+   "seconds": 4
+  },
+  {
+   "train": [
+    4
+   ],
+   "d": 42,
+   "D": 1024,
+   "D_frac": 0.027874564459930314,
+   "err": 0.12106,
+   "seconds": 4
+  },
+  {
+   "train": [
+    4
+   ],
+   "d": 58,
+   "D": 1024,
+   "D_frac": 0.027874564459930314,
+   "err": 0.12106,
+   "seconds": 4
+  },
+  {
+   "train": [
+    4
+   ],
+   "d": 114,
+   "D": 1024,
+   "D_frac": 0.027874564459930314,
+   "err": 0.12106,
+   "seconds": 5
+  },
+  {
+   "train": [
+    4,
+    6,
+    7
+   ],
+   "d": 34,
+   "D": 2176,
+   "D_frac": 0.059233449477351915,
+   "err": 0.10965,
+   "seconds": 7
+  },
+  {
+   "train": [
+    4,
+    6,
+    7
+   ],
+   "d": 42,
+   "D": 2688,
+   "D_frac": 0.07317073170731707,
+   "err": 0.08335,
+   "seconds": 57
+  },
+  {
+   "train": [
+    4,
+    6,
+    7
+   ],
+   "d": 58,
+   "D": 3712,
+   "D_frac": 0.10104529616724739,
+   "err": 0.02441,
+   "seconds": 45
+  },
+  {
+   "train": [
+    4,
+    6,
+    7
+   ],
+   "d": 114,
+   "D": 7296,
+   "D_frac": 0.1986062717770035,
+   "err": 0.00363,
+   "seconds": 457
+  },
+  {
+   "train": [
+    5
+   ],
+   "d": 34,
+   "D": 2176,
+   "D_frac": 0.059233449477351915,
+   "err": 0.00701,
+   "seconds": 9
+  },
+  {
+   "train": [
+    5
+   ],
+   "d": 42,
+   "D": 2688,
+   "D_frac": 0.07317073170731707,
+   "err": 0.00156,
+   "seconds": 14
+  },
+  {
+   "train": [
+    5
+   ],
+   "d": 58,
+   "D": 3712,
+   "D_frac": 0.10104529616724739,
+   "err": 0.00013,
+   "seconds": 140
+  },
+  {
+   "train": [
+    5
+   ],
+   "d": 114,
+   "D": 7296,
+   "D_frac": 0.1986062717770035,
+   "err": 0.0,
+   "seconds": 365
   }
  ],
- "note": "parsed from the run log (stage still running at the reporting cut-off; the JSON is written only at the end of the stage)"
+ "note": "parsed from the run log of audit/phase5e_run.py closure5 (stopped after these rows; level-7 rows used the pass-19 vector and agree to >= 8 digits with phase5e_closure_converged_L7.json)"
 }

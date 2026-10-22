@@ -18,7 +18,7 @@ where c is the fraction of the exact boundary ground pair that W captures. Compr
 
 **The obstruction.** Theorem E5 gives the Eckart–Young bound for universal subspaces. Together with E2, which classifies gauge-invariant boundary data, it turns "no compression found" into a measurable obstruction. All bounds hold on 6606 (system, basis) pairs.
 
-**A certified improvement.** The exact integer Rayleigh quotient of the level-7 vector gives E_∞ ≤ 8.7649120248, which tightens the certified bracket from 8.7701336 to 8.7649121 (lower end 4.008189).
+**A certified improvement.** The exact integer Rayleigh quotient of the level-7 vector gives E_∞ ≤ 8.7649120247, which tightens the certified bracket from 8.7701336 to 8.7649121 (lower end 4.008189).
 
 ## Strongest negative result (computational, scoped)
 
@@ -32,7 +32,7 @@ Tested on the 264 frozen rule classes and the 18 intervention controls at level 
 ## What remains unresolved
 
 - **Whether the saturating local state is general.** At each level, the restrictions of the ground state to the copies of T₃ lie in a ≈ 20–40-dimensional subspace of 574. Through level 7 the union saturates (99.9 % in 56 dimensions). Trained on levels 6–7, this state predicts the level-5 edge to 0.019 at 10 % of the boundary dimension. That is the first compression meeting the accuracy bar, but it is exploratory, FR30-only, and fails at level 4 where every copy touches the pinned wall. Whether this asymptotic bulk state generalizes across rules, and how to construct it without solving deeper levels, is open.
-- **The infinite-volume limit.** E_∞ is bracketed in [4.008189, 8.7649120248] (certified; the upper end is new in this phase, from the level-7 vector) and E₇ = 8.7649120 (Ritz bound; residual 1.5×10⁻⁷). The decrement ratio r₇ = 0.194, so by the frozen rule it keeps falling. No single power law with p = 2 fits levels 4–7, and the apparent D₂ ≈ 1.9 depends on the boundary condition. No phase is inferred.
+- **The infinite-volume limit.** E_∞ is bracketed in [4.008189, 8.7649120247] (certified; the upper end is new in this phase, from the level-7 vector) and E₇ = 8.764911988 (converged; residual 1.0×10⁻⁸). The decrement ratio r₇ = 0.194, so by the frozen rule it keeps falling. No single power law with p = 2 fits levels 4–7, and the apparent D₂ ≈ 1.9 depends on the boundary condition. No phase is inferred.
 - **Nonlinear or energy-dependent closures** are not excluded by anything here.
 
 ## Single most informative next experiment

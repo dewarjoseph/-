@@ -133,7 +133,7 @@ The table gives each hypothesis's assumptions, its derived prediction, the exper
 - **H1.** It survives for the *operator* (R_c is nearly block-diagonal over faces). It fails for *states*.
 - **H2.** The pre-registered closure test fails: 86 % < 99 %. The within-level snapshot subspaces are low-dimensional and nested (exploratory).
 - **H3.** Supported for every a-priori compression.
-- **P4.** See the report's §7.
+- **P4 holds.** E₇ = 8.764912 (converged) lies inside the frozen envelope. r₇ = 0.194 ≤ 0.20, so by the frozen rule no single power law describes levels 4–7. Certified: E_∞ ≤ 8.7649120247.
 - **Revised conjecture.** In the report's §9.
 
 ## 5. Theorem targets (status after the run in the report)

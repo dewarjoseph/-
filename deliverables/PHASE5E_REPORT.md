@@ -54,12 +54,12 @@ What the evidence supports:
    - *What fails pre-registered.* The closure test trained on shallow levels (4–5 → 6 or 7) fails: 86 % < 99 %.
    - *What it supports.* An asymptotic, bulk renormalization state of about 40–60 variables per T₃ copy plausibly exists. It cannot be built from the child's spectrum, and it is not what the frozen level-4 criteria tested.
 5. **Scale law [E].**
-   - *Level 7.* E₇ = 8.7649120 (Ritz upper bound, residual 1.5×10⁻⁷; the 10⁻⁷ criterion on all four vectors was not reached by the cut-off).
+   - *Level 7.* E₇ = 8.764911988, converged: the residual on all four vectors is ≤ 7.8×10⁻⁸ and on the lowest 1.0×10⁻⁸, after 25 passes and 6.8 h.
    - *Frozen verdict.* r₇ = 0.194: by the frozen rule, the decrement ratio keeps falling (0.33 → 0.27 → 0.22 → 0.19). No single power law, L⁻² included, describes levels 4–7.
    - *Frozen envelope.* E₇ lies inside it. The geometric and ratio-trend predictions bracket it to within 7×10⁻⁴.
-   - *Gap collapse.* The three lowest Kramers pairs lie within 5×10⁻⁶ of each other. D₂(6→7) ≈ 1.50, outside V-D's frozen critical window [1.8, 2.0]; this is caveated by unresolved eigenvectors.
+   - *Gap collapse.* The three lowest Kramers pairs lie within 5×10⁻⁶ of each other. The ground pair is resolved (eigenvector angle bound 3.3×10⁻³). D₂(6→7) = 1.50, outside V-D's frozen critical window [1.8, 2.0].
    - *Boundary dependence.* The apparent D₂ ≈ 1.9 at levels 4–6 does not survive a Robin wall (≈ 1.1–1.2).
-   - *Certificate.* The exact rational Rayleigh quotient of the level-7 vector **certifies 4.008189 ≤ E_∞ ≤ 8.7649120248**, improving V-B's certified upper bound 8.7701336.
+   - *Certificate.* The exact rational Rayleigh quotient of the level-7 vector **certifies 4.008189 ≤ E_∞ ≤ 8.7649120247**, improving V-B's certified upper bound 8.7701336.
 
 The strongest negative statement supported is about the *tested families* and about *universal linear subspaces of the measured dimension at the tested levels* (E5). It is **not** a proof that every compression is impossible. Item 4 shows a compact state does exist asymptotically, selected by the environment rather than the child. Nonlinear states and non-subspace closures also remain open. §9 states the revised conjecture.
 
@@ -356,7 +356,7 @@ Figure: `deliverables/figures/phase5e_closure.{png,pdf}`. Panel (a) is within-le
    - *Setup.* FR30, the level-3 supertile surface (574 dimensions), with snapshots from every copy of T₃ in the ground pairs at levels 4, 5 and 6.
    - *Within a level the snapshots are strongly compressible.* 99 % of the weight lies in d = 10, 25 and 20 dimensions at levels 4, 5 and 6, and 99.9 % in 12, 38 and 41.
    - *Across levels they do not transfer at the pre-registered size.* Training on levels 4–5 captures 86.0 % of level 6 at d = 57, against the 99 % mark, and 95.2 % at d = 114.
-3. **Saturation at level 7 [E, X] (`phase5e_closure.json`; level-7 vector from the pass-19 checkpoint, §7).** The T₃ surface restrictions at levels 4, 5, 6 and 7 come from 8, 64, 512 and 4096 copies.
+3. **Saturation at level 7 [E, X] (`phase5e_closure.json`).** These were first computed with the pass-19 level-7 vector. Recomputed with the converged vector (`phase5e_closure_converged_L7.json`), every number is identical to ≥ 8 digits. The T₃ surface restrictions at levels 4, 5, 6 and 7 come from 8, 64, 512 and 4096 copies.
    - *The union of their spans saturates.* The cumulative dimension for 99 / 99.9 % is 10 / 12 (level 4), 28 / 43 (levels 4–5), 34 / 55 (levels 4–6) and **34 / 56 (levels 4–7)**.
    - *Within level 7 alone,* 16 / 34 dimensions hold 99 / 99.9 %.
    - *Exploratory transfers onto level 7.* Training on level 6 captures 99.87 % of level 7 at d = 57 and 99.990 % at d = 114. Training on levels 4–6 captures 99.81 % at d = 57; on levels 5–6, 99.85 %.
@@ -366,10 +366,15 @@ Figure: `deliverables/figures/phase5e_closure.{png,pdf}`. Panel (a) is within-le
    - *Setup.* E1 holds for any partition with block-diagonal interior. Level 5 is split into its 64 depth-2 copies of T₃ (dim S′ = 36736). Every copy gets the same d-dimensional subspace, trained on the ground pairs of levels 6 and 7 only.
    - *Result.* E_W − E₅ = +0.084 at d = 34 (D/dim S′ = 5.9 %), **+0.045 at d = 42 (7.3 %)** and **+0.019 at d = 58 (10.1 %)**.
    - *What that means.* A compact, gauge-covariant (E2: a fixed subspace in the copies' common substitution frame), training-free-at-the-target state meets C2's accuracy at C1's compression, for an unseen level.
-   - *Other training sets:* `phase5e_closure_level5.json` lists every row (levels 6, 7, 4, 4+6+7, and level 5 itself as the in-level reference).
+   - *Other training sets* (`phase5e_closure_level5.json`), errors at d = 42 / 58:
+     - level 6 alone: 0.036 / 0.018;
+     - level 7 alone: 0.083 / 0.027;
+     - levels 4 + 6 + 7: 0.083 / 0.024;
+     - level 4 alone: 0.121 (rank-limited to its 16 snapshots);
+     - in-level reference, trained on level 5 itself (tautological): 0.0016 / 0.0001.
    - *The same subspace fails at level 4.* Used as the 8 children there: 0.45 at d = 58 and 0.053 at d = 114. Trained on level 5: 0.14 at d = 58 and 0.037 at d = 114. (Training on level 4 itself is tautological: its 16 snapshots *are* the answer, error 10⁻¹³.)
    - *Why level 4 fails.* At level 4 every copy touches the pinned outer wall. At levels ≥ 5 most copies are interior. The compact state space describes *bulk* copies. The boundary copies need extra states, and their share vanishes as 1 − (fraction of copies touching the outer surface) → 1.
-   - *Scope.* FR30 only. One target level. Post-freeze. The level-7 training vector is not converged to 10⁻⁷ (§7).
+   - *Scope.* FR30 only. One target level. Post-freeze. The values are unchanged when the converged level-7 vector is used (0.04482 and 0.01945).
 5. **E5 bound.** Any d-dimensional universal subspace leaves uncaptured weight ≥ τ_d of each level's snapshot matrix. Here τ_57 ≤ 2×10⁻⁴ at every level. The bound therefore does **not** exclude a ≈ 57-dimensional universal state, and items 3–4 suggest one exists asymptotically. What fails at levels ≤ 5 is the *transfer from shallow to deep levels*, which E5 does not address.
 
 ### 6.3 H3: broadly distributed response
@@ -406,18 +411,18 @@ Figure: `deliverables/figures/phase5e_fr30_scaling.{png,pdf}`.
 - *Solver.* The existing V-B solver, run through the portable runner (validated at level 5 to 7×10⁻¹⁵).
 - *Size.* Dimension 4 194 304; 37.6 M non-zeros.
 - *Progress.* 20 Chebyshev-filtered passes, 3413 block matvecs, about 6 h of wall time on a shared machine.
-- *State at the reporting cut-off.* Pass 20 reached residual 9.3×10⁻⁸ on the lowest vector and 2–7×10⁻⁷ on the other three. The 10⁻⁷ criterion on all four was not yet met. Unless §0 says otherwise, the values below are the Rayleigh–Ritz values of the pass-19 checkpoint (`audit/phase5e_level7_extract.py`, `audit/results/phase5e_level7.json`, `"converged": false`).
+- *Converged.* The run converged at 04:34 (pass 25): residuals 1.0×10⁻⁸, 7.8×10⁻⁸, 2.6×10⁻⁸ and 5.1×10⁻⁸ against the 10⁻⁷ criterion. Results are in `audit/results/phase5e_level7.json` (`"converged": true`). A provisional extraction from the pass-19 checkpoint had been prepared for the deadline. It agreed with the converged eigenvalue to 4×10⁻¹¹ and is superseded.
 
 | quantity | value |
 |---|---|
-| E₇ (Ritz value; an upper bound up to rounding) | **8.764911988** (residual 1.45×10⁻⁷) |
+| E₇ (converged) | **8.764911988** (residual 1.0×10⁻⁸) |
 | lowest pairs | 8.7649120, 8.7649151, 8.7649166, 8.7649796 |
 | d₇ = E₆ − E₇ | 0.0052216 |
 | decrement ratio r₇ = d₇/d₆ | **0.1943** |
 | frozen decision rule (a781ad8) | r₇ ≤ 0.20 → **"the decrement ratio keeps falling: no single power law describes levels 4..7"** |
 | frozen envelope [8.7605, 8.7655] | E₇ inside |
 | frozen predictions − E₇ | G3 −6.7×10⁻⁴; D2 (L⁻²) −1.50×10⁻³; D48 −1.03×10⁻³; PL −4.40×10⁻³; ratio-trend +6.2×10⁻⁴ |
-| certified upper bound (exact integer Rayleigh quotient of the level-7 vector rounded at scale 2²⁴; `audit/results/phase5e_level7_certified.json`) | **λ_min(H₇) ≤ 2467103543526498/281474992168387 = 8.7649120248** |
+| certified upper bound (exact integer Rayleigh quotient of the converged level-7 vector rounded at scale 2²⁴; `audit/results/phase5e_level7_certified.json`) | **λ_min(H₇) ≤ 2467103454595458/281474982023175 = 8.7649120247** |
 
 **Reading of the frozen test.**
 - *The ratios keep falling.* The decrement ratios are 0.328, 0.267, 0.219 and 0.194, so the effective exponent p_m = −log₂ r_m rises: 1.61, 1.90, 2.19, 2.36.
@@ -428,24 +433,23 @@ Figure: `deliverables/figures/phase5e_fr30_scaling.{png,pdf}`.
   - Power law (levels 4–7): E_∞ = 8.76313, p = 2.21, rms 1.8×10⁻⁴.
   - With five decrements, log-periodic modulation and a crossover cannot be told apart.
 - *Conditional limit (E7).* If r_m ≤ 0.1943 for all m ≥ 8, then 8.76365 ≤ E_∞ ≤ 8.76491.
-- *Unconditional certified bracket [P + exact arithmetic].* By E6, E_∞ ≤ E₇. With V-B's certified lower bound, **4.008189 ≤ E_∞ ≤ 8.7649120248**. This improves V-B's upper bound 8.7701336 by 5.2×10⁻³ and is independent of convergence: it is the exact Rayleigh quotient of an explicit vector.
+- *Unconditional certified bracket [P + exact arithmetic].* By E6, E_∞ ≤ E₇. With V-B's certified lower bound, **4.008189 ≤ E_∞ ≤ 8.7649120247**. This improves V-B's upper bound 8.7701336 by 5.2×10⁻³ and is independent of convergence: it is the exact Rayleigh quotient of an explicit vector.
 
 **Spectral clustering at level 7.**
 - *The low pairs crowd.* The three lowest Kramers pairs lie within 4.6×10⁻⁶ of each other. The distance from the first to the second pair is 0.211 (L3), 0.029 (L4), 0.0020 (L5) and 3.1×10⁻⁶ (L7): it shrinks by far more than the factor 1/4 of a band edge.
-- *The eigenvectors are not resolved.* With residuals of 10⁻⁷–10⁻⁶ against splittings of about 3×10⁻⁶, the angle bound residual/gap is up to about 0.3 rad. Individual low eigenvectors at level 7 are therefore **not** resolved, and the eigenstate statistics below inherit that uncertainty.
-- *The eigenvalue is robust.* The cluster lies inside the Ritz block, so E₇ itself is not affected.
+- *The eigenvectors are now resolved.* At convergence the ground pair is separated from the next pair by 3.13×10⁻⁶, and the angle bound residual/gap is 3.3×10⁻³. At the pass-19 checkpoint, before convergence, it was about 0.3 rad.
 
 
 ### 7.3 Eigenstates
 
 - **Pinned ground pair [E] (stored V-A/V-B values, recomputed V-B).** IPR·n is 6.424, 9.146, 19.930 and 42.789 at levels 3–6. With IPR ∝ n^{−D₂/3}, the window values of D₂ are 2.49 (3→4), 1.88 (4→5) and 1.90 (5→6).
-- **Level 7, with the caveat above.** IPR·n = 121.1, so D₂(6→7) = **1.50**. Against V-D's frozen eigenstate predictions:
+- **Level 7 (converged).** IPR·n = 121.06, so D₂(6→7) = **1.50**. Against V-D's frozen eigenstate predictions:
   - D₂ in [1.80, 2.00]: **outside**. The value sits at V-D's own "toward localization" threshold, 1.5.
   - Depth-1 interface weight < 0.57: **0.507, holds**.
   - Enrichment > 10: **11.1, holds**.
   - Overlap with the level-6 state replicated in the centre child < 0.14: **0.0038, holds**.
 
-  The near-degeneracy and the falling D₂ point *away* from the critical-state reading, toward several nearly degenerate, spatially separated low states. Given the 0.3-rad uncertainty, this is suggestive only.
+  The near-degeneracy and the falling D₂ point *away* from the critical-state reading, toward several nearly degenerate, spatially separated low states. Five windows and one boundary condition cannot establish a phase.
 - **Boundary condition [E] (V-B `phase5b_d_scaling.txt`, re-read here).** The same windows give:
   - Robin (t = 0.5) boundary: 1.23 (3→4) and 1.13 (4→5);
   - free boundary: ≈ 0.0 and 0.24, a surface-localized band;
@@ -484,9 +488,9 @@ Figure: `deliverables/figures/phase5e_fr30_scaling.{png,pdf}`.
 
    That last test required generalizing `System` to deeper partitions (copies of T_{L−d}) and keeping block-diagonal P sparse. Both changes are validated by the unchanged test suite (12 core tests re-run).
 10. *Level 7.*
-   - **Not converged** to the 10⁻⁷ criterion on all four vectors by the reporting cut-off. Values come from the pass-19 checkpoint (`audit/phase5e_level7_extract.py`). The solver kept running; a converged run would overwrite `phase5e_level7.json`.
-   - The exact certificate is computed from the extracted vector, so it is valid regardless of convergence.
-   - V-B's `certify()` writes a `phase5b_d_…` file name. That new, untracked file was renamed `phase5e_level7_certified.json`, and the runner now refuses to overwrite any existing V-B certificate.
+   - A provisional extraction from the pass-19 checkpoint (`audit/phase5e_level7_extract.py`) was prepared in case the solver missed the deadline. The solver then converged (pass 25, 04:34) and overwrote it. The eigenvalue changed by < 10⁻¹⁰.
+   - The closure numbers in §6.2 that involve level 7 were first computed with the pass-19 vector. They were recomputed with the converged vector (`audit/phase5e_closure_converged.py` → `audit/results/phase5e_closure_converged_L7.json`) and agree to ≥ 8 digits.
+   - V-B's `certify()` writes a `phase5b_d_…` file name. The new, untracked file is renamed `phase5e_level7_certified.json`, and the runner now refuses to overwrite any existing V-B certificate.
 11. *Crowding diagnostic.* The first run was stopped for memory after FR30 m = 1–4. It was re-run in full later; that run is the source of `phase5e_cluster.json`.
 
 **Numerical limitations.**
@@ -510,7 +514,7 @@ Figure: `deliverables/figures/phase5e_fr30_scaling.{png,pdf}`.
 - **E3–E4.** The edge error of every gauge-covariant, Kramers-complete compression is pinned between μ₂(1 − c)/|g′| and μ_max(1 − c)/c. This makes the uncaptured boundary weight the exact currency of compression.
 - **E5.** An Eckart–Young lower bound for universal subspaces.
 - **E6–E7.** The monotone edge, and the conditional rate.
-- **Certified bracket.** E6 plus the exact integer Rayleigh quotient of the level-7 vector, with V-B's certified lower bound, give 4.008189 ≤ E_∞ ≤ 8.7649120248. The upper end is new.
+- **Certified bracket.** E6 plus the exact integer Rayleigh quotient of the level-7 vector, with V-B's certified lower bound, give 4.008189 ≤ E_∞ ≤ 8.7649120247. The upper end is new.
 - **Lean.** Four finite algebraic facts, kernel-checked.
 
 ### Computational observations [E]
@@ -569,6 +573,7 @@ The negative result concerns the tested families and universal linear subspaces 
 ```
 python -u -I audit/phase5e_scaling.py freeze                      # level-7 predictions (committed a781ad8 before convergence)
 python -u -I audit/phase5e_level7_runner.py run 7 [--resume]      # existing V-B solver, portable wrapper; checkpoints in .ckpt_phase5e_level7/
+python -u -I audit/phase5e_level7_runner.py certify 7             # exact rational Rayleigh quotient -> phase5e_level7_certified.json
 python -u -I audit/phase5e_scaling.py evaluate                    # score the frozen predictions; eigenstate checks
 python -u -I audit/phase5e_run.py level4 <shard> 16               # 286 level-4 systems (16 lanes; resumable)
 python -u -I audit/phase5e_run.py level3 <shard> 2                # 264 classes at level 3
@@ -576,6 +581,8 @@ python -u -I audit/phase5e_run.py levels <system>                 # level sweep 
 python -u -I audit/phase5e_run.py adaptive <shard> 16             # training-only tile selection + depth-resolved budget (after level4)
 python -u -I audit/phase5e_run.py gauge                           # random SU(2) gauge test, all families
 python -u -I audit/phase5e_run.py closure                         # H2 closure test (FR30 levels 4-7)
+python -u -I audit/phase5e_run.py closure5                        # universal state at level 5 (64 copies; exploratory)
+python -u -I audit/phase5e_closure_converged.py                   # level-7-dependent closure numbers with the converged vector
 python -u -I audit/phase5e_run.py closure_rule <system>           # per-rule closure diagnostic (exploratory)
 python -u -I audit/phase5e_run.py cluster fr30 3697 1387 2238     # low-spectrum crowding of R_m (m = 1..4)
 python -u -I audit/phase5e_run.py locality                        # face-to-face blocks of R_c (operator locality)
@@ -591,7 +598,7 @@ lean certificates/Phase5ESymmetry.lean                            # 4 kernel-che
 - *Gauge.* 2 h 33 min, 1 lane.
 - *Level sweep.* Levels 2–4 in 10–20 min per system. Level 5 was not completed (stopped after 2.5 h; §3.4).
 - *Adaptive.* 282 systems in about 55 min over 16 lanes.
-- *Level 7.* Started 21:49. Pass 19 (used here) at 03:31, pass 20 at 03:52; 4 threads, about 6 h. Extraction took 73 s and the exact certificate 39 s.
+- *Level 7.* Started 21:49 and converged at 04:34: 25 passes, 4418 block matvecs, 24 325 s, 4 threads, peak 5.4 GB. The exact certificate took 15 s.
 - *Peak memory.* About 4 GB per level-5 sweep lane, 3.9 GB for level 7, and 0.6–1.3 GB per level-4 lane.
 
 **Logs.** Session scratchpad `p5e/*.log` and `level7.out`. The level-7 solver also logs to `audit/results/phase5e_level7.log`.
