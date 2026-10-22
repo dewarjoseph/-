@@ -7,3 +7,6 @@ __pycache__/
 .venv/
 venv/
 .ckpt_phase5e_level7/
+audit/results/phase5e_density_geo_L4.npy
+audit/results/phase5e_fr30_level7_lowest4.npy
+audit/results/phase5e_fr30_level7_groundstate_weights.npy

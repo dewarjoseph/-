@@ -125,7 +125,16 @@ The table gives each hypothesis's assumptions, its derived prediction, the exper
 - **P3 (geometry of the support).** The pinned outer boundary carries < 1 % of ψ_S at level 4, so dropping it (`interface`) costs < 0.05 in E_W.
 - **P4 (scaling).** The level-7 edge E₇ lies in the frozen envelope [8.7605, 8.7655]. The decrement ratio r₇ decides between the L⁻² law and its alternatives (rules in a781ad8).
 
-*(post-run)* **Outcome.** See `PHASE5E_REPORT.md`. The conjecture is not supported in any tested form at levels 2–5. The strongest results are E1–E7 and the measured H3 lower bounds. §5 of the report states the revised conjecture.
+*(post-run)* **Outcome.** Full results are in `PHASE5E_REPORT.md`.
+
+- **P1 holds.** No family meets C1–C8. The best, child(16), has calibrated RMSE 0.197 at D = 256. As a single feature it is still a better held-out predictor than V-D's descriptors.
+- **P2 holds.** The 99.9 % support tracks the interface area, and the low-spectrum crowding of R_m follows an area law.
+- **P3 holds.** The outer boundary carries < 1 % at level 4, and `interface` is accurate to 0.035 RMS.
+- **H1.** It survives for the *operator* (R_c is nearly block-diagonal over faces). It fails for *states*.
+- **H2.** The pre-registered closure test fails: 86 % < 99 %. The within-level snapshot subspaces are low-dimensional and nested (exploratory).
+- **H3.** Supported for every a-priori compression.
+- **P4.** See the report's §7.
+- **Revised conjecture.** In the report's §10.
 
 ## 5. Theorem targets (status after the run in the report)
 

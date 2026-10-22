@@ -88,9 +88,8 @@ def fig_dimension():
         save(fig, name)
 
 def fig_level():
-    p = os.path.join(RES, 'phase5e_levels.jsonl')
-    if not os.path.exists(p): return
-    LV = [json.loads(l) for l in open(p)]
+    LV = [json.loads(l) for fn in sorted(glob.glob(os.path.join(RES, 'phase5e_levels_*.jsonl'))) for l in open(fn)]
+    if not LV: return
     prim = {'child': 16, 'face': 4, 'iface2': 8, 'fec': 2, 'patch2': 4, 'patch3': 1}
     fig, ax = plt.subplots(figsize=(6.0, 4.0))
     for fam, lab in FAM:

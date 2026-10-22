@@ -47,7 +47,7 @@ def main():
     L4 = merge_adaptive(jl('phase5e_L4_shard*.jsonl', 'rule'), jl('phase5e_adaptive_L4_shard*.jsonl', 'rule'))
     L4C = merge_adaptive(jl('phase5e_L4_shard*.jsonl', 'control'), jl('phase5e_adaptive_L4_shard*.jsonl', 'control'))
     L4D = jl('phase5e_L4_shard*.jsonl', 'dev')
-    L3 = jl('phase5e_L3_shard*.jsonl'); LV = [json.loads(l) for l in open(os.path.join(RES, 'phase5e_levels.jsonl'))] if os.path.exists(os.path.join(RES, 'phase5e_levels.jsonl')) else []
+    L3 = jl('phase5e_L3_shard*.jsonl'); LV = [json.loads(l) for fn in sorted(glob.glob(os.path.join(RES, 'phase5e_levels_*.jsonl'))) for l in open(fn)]
     vd_recs, pred = va.load(); vd_recs = sorted(vd_recs, key=lambda r: r['index'])
     rules = [r for r in vd_recs]; names = ['fr30' if r['is_fr30'] else str(r['index']) for r in rules]; n = len(rules)
     have = [nm in L4 for nm in names]

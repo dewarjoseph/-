@@ -29,6 +29,7 @@ def log(*a): print(*a, flush=True)
 def spec_of(name):
     if name == 'fr30': return FR30
     if isinstance(name, int): return name
+    if isinstance(name, str) and name.isdigit(): return int(name)
     if name.startswith('dec'): return int(name[3:])
     return name
 
@@ -134,7 +135,7 @@ def run_level(level, shard, nshards):
 # ------------------------------------------------------------------ level sweep
 def run_levels(name, levels=(2, 3, 4, 5)):
     spec = name if name == 'fr30' else int(name)
-    path = os.path.join(RES, 'phase5e_levels.jsonl')
+    path = os.path.join(RES, f'phase5e_levels_{name}.jsonl')            # one file per system (lanes run concurrently)
     done = set()
     if os.path.exists(path):
         for l in open(path): r = json.loads(l); done.add((str(r['name']), r['level']))
@@ -142,7 +143,7 @@ def run_levels(name, levels=(2, 3, 4, 5)):
         for L in levels:
             if (str(spec), L) in done: continue
             cfgs = [c for c in configs() if not (L == 5 and c[0] == 'interface')]
-            rec, p = analyse_system({'name': spec, 'kind': 'reference'}, L, cfgs, exact=(L <= 3), keep_psi=(L == 5))
+            rec, p = analyse_system({'name': spec, 'kind': 'reference'}, L, cfgs, exact=(L <= 3), keep_psi=(L >= 4))
             f.write(json.dumps(rec) + '\n'); f.flush()
             log(f"[levels {name} L{L}] E0 {rec['E0']:.7f} gap {rec['gap']:.2e} ({rec['seconds']:.0f}s)")
 
@@ -213,6 +214,7 @@ def run_adaptive(shard, nshards, level=4):
             rec = {'name': e['name'], 'kind': e['kind'], 'fold': int(fold_of[j]) if j < n else -1, 'E0': E0, 'bases': {}, 'bonds': depth_bonds(s, psi)}
             for m in ADAPT_M:
                 for tag, sc in (('adaptive', sc_loc), ('oracle', own)):
+                    if tag == 'oracle' and m != 229: continue          # non-admissible ceiling only at the primary size (compute)
                     order = np.argsort(-np.where(surf, sc, -np.inf)); mask = np.zeros(s.n, bool); mask[order[:m]] = True
                     t1 = time.time(); red = rg.Reduced(s, rg.P_tiles(s, mask)); E, it = red.root(); cap, _ = rg.captured(s, red, psi)
                     rec['bases'][f'{tag}:{m}'] = {'D': red.D, 'E_W': E, 'err': (E - E0) if E == E else None, 'it': it, 'seconds': time.time() - t1, 'capture': cap}
@@ -265,6 +267,12 @@ def run_closure(k=3):
                                'd_for_capture': {str(f): int(np.searchsorted(np.cumsum(e), f) + 1) for f in (0.9, 0.99, 0.999)}}
         log(f"[closure] L{L}: copies {8**(L-k)}, S-weight {out['per_level'][L]['surface_weight']:.4f}, d for 90/99/99.9% {out['per_level'][L]['d_for_capture']}, tau_57 {tail[56]:.4f}")
     def capture(U, X): return float(np.linalg.norm(U.conj().T @ X) ** 2 / np.linalg.norm(X) ** 2)
+    out['cumulative'] = {}                                         # does the union of the per-level snapshot spaces saturate?
+    Ls = sorted(Xs)
+    for j in range(1, len(Ls) + 1):
+        sv = np.linalg.svd(np.hstack([Xs[L] for L in Ls[:j]]), compute_uv=False); e = np.cumsum(sv ** 2) / (sv ** 2).sum()
+        out['cumulative'][''.join(map(str, Ls[:j]))] = {str(f): int(np.searchsorted(e, f) + 1) for f in (0.9, 0.99, 0.999)}
+        log(f"[closure] cumulative levels {Ls[:j]}: d for 90/99/99.9% {out['cumulative'][''.join(map(str, Ls[:j]))]}")
     out['transfer'] = {}
     for train in ([4], [4, 5], [4, 5, 6], [5], [6], [5, 6], [7], [6, 7]):     # [4]/[4,5] -> 6 pre-registered; the rest EXPLORATORY
         if not all(L in Xs for L in train): continue
@@ -307,6 +315,24 @@ def run_locality(names=('fr30', 1387, 3697, 2238), level=4):
         log(f"[locality {nm}] {len(rows)} group pairs: off-diagonal relative norm median {np.median(rn):.2e} max {rn.max():.2e}; rank(1e-3)/min dim median {np.median(rk):.3f}")
     json.dump(out, open(os.path.join(RES, 'phase5e_locality.json'), 'w'), indent=1)
 
+def run_closure_rule(name, k=3):
+    """EXPLORATORY per-rule version of the closure test for the level-sweep systems: snapshot subspace of the T3 copies trained on
+    the level-5 ground pair, tested on the level-4 contexts (capture) and used as the child basis at level 4 (edge error)."""
+    spec = spec_of(name if name == 'fr30' else int(name)); tag = str(name)
+    p4, p5 = (os.path.join(RES, f'phase5e_psi_{tag}_L{L}.npy') for L in (4, 5))
+    tiles = d.tiles_of(spec, k); _, edges = d.build(tiles); deg = d.degrees(len(tiles), edges); surf_k = np.nonzero(deg < 24)[0]
+    X = {}
+    for L, pth in ((4, p4), (5, p5)):
+        v = np.load(pth)[:, 0]; v = v / np.linalg.norm(v); Y = snapshots(v, L, k, surf_k); X[L] = Y / np.linalg.norm(Y)
+    U, sv, _ = np.linalg.svd(X[5], full_matrices=False); e = sv ** 2 / (sv ** 2).sum()
+    out = {'name': tag, 'd99_L5': int(np.searchsorted(np.cumsum(e), 0.99) + 1), 'd999_L5': int(np.searchsorted(np.cumsum(e), 0.999) + 1),
+           'capture_L4': {str(dd): float(np.linalg.norm(U[:, :dd].conj().T @ X[4]) ** 2) for dd in (20, 41, 57, 114)}, 'edge_L4': {}}
+    s4 = rg.System(spec, 4); E0 = rg.ground_state(s4)[0][0]
+    for dd in (20, 41, 58, 114):
+        red = rg.Reduced(s4, [U[:, :dd].copy() for _ in range(8)]); E, _ = red.root(); out['edge_L4'][str(dd)] = {'D': red.D, 'err': E - E0}
+    log(f"[closure-rule {tag}] d99/d999 at L5 {out['d99_L5']}/{out['d999_L5']}; capture of L4 by L5 subspace {out['capture_L4']}; L4 edge errors {out['edge_L4']}")
+    with open(os.path.join(RES, 'phase5e_closure_rules.jsonl'), 'a') as f: f.write(json.dumps(out) + chr(10))
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'level4': run_level(4, int(sys.argv[2]), int(sys.argv[3]))
@@ -318,4 +344,5 @@ if __name__ == '__main__':
     elif cmd == 'gauge': run_gauge()
     elif cmd == 'closure': run_closure()
     elif cmd == 'locality': run_locality()
+    elif cmd == 'closure_rule': run_closure_rule(sys.argv[2])
     else: raise SystemExit(__doc__)
