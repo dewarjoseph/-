@@ -44,8 +44,11 @@ def systems():
     dev = [{'name': i, 'index': i, 'Y4': None, 'kind': 'dev'} for i in DEV_RULES]
     return rules, controls, dev
 
-def configs():
-    out = [(f, k) for f, ks in rg.FAMILIES.items() for k in ks]
+# Compute-only deviation (recorded in the report): at level 4 the evaluation systems use the grid capped at D <~ 600, decided
+# before any level-4 evaluation system had completed.  The full grid is kept for the development rules and the level sweep.
+LEVEL4_DROP = {('child', 64), ('face', 16), ('fec', 8), ('fec', 16), ('patch2', 8), ('patch3', 2), ('iface2', 32)}
+def configs(full=True):
+    out = [(f, k) for f, ks in rg.FAMILIES.items() for k in ks if full or (f, k) not in LEVEL4_DROP]
     return out + [('interface', None)]
 
 # ------------------------------------------------------------------ per-system analysis
@@ -80,12 +83,9 @@ def energy_budget(s, psi, E0):
 
 def analyse_system(entry, level, cfgs, exact=False, keep_psi=False):
     t0 = time.time(); s = rg.System(spec_of(entry['name']), level)
-    w, psi = rg.ground_state(s); E0 = float(w[0])
-    try:
-        ww = np.sort(np.linalg.eigvalsh(s.H.toarray())[:8]) if s.n <= 600 else np.sort(rg.spl.eigsh(s.H.tocsc(), k=8, sigma=-1e-3, which='LM', tol=1e-12, return_eigenvectors=False))
-        distinct = [ww[0]] + [x for x in ww[1:] if x - ww[0] > 1e-7]
-        gap = float(distinct[1] - ww[0]) if len(distinct) > 1 else float('nan')
-    except Exception: gap = float('nan')
+    ww, psi = rg.ground_state(s); E0 = float(ww[0])
+    distinct = [x for x in ww[1:] if x - ww[0] > 1e-7]
+    gap = float(distinct[0] - ww[0]) if distinct else float('nan')         # next distinct level (second Kramers pair)
     sup, p = support_stats(s, psi)
     rec = {'name': entry['name'], 'kind': entry['kind'], 'level': level, 'n': s.n, 'E0': E0, 'gap': gap, 'lam_II': s.lam_II, 'dimS': int(s.offs[-1]),
            'build_s': s.build_seconds, 'support': sup, 'budget': energy_budget(s, psi, E0), 'bases': {}}
@@ -123,7 +123,7 @@ def run_level(level, shard, nshards):
     with open(path, 'a') as f:
         for j, e in enumerate(todo):
             exact = level == 4 and (e['name'] == 'fr30' or (e['kind'] == 'rule' and e['index'] % 20 == 0) or e['kind'] == 'dev')
-            rec, p = analyse_system(e, level, configs(), exact=exact, keep_psi=(level == 4 and (e['name'] in REFERENCE)))
+            rec, p = analyse_system(e, level, configs(full=(level != 4 or e['kind'] == 'dev')), exact=exact, keep_psi=(level == 4 and (e['name'] in REFERENCE)))
             if 'Y4' in e and e['Y4'] is not None and level == 3: rec['Y3_stored'] = e['Y3']; rec['E0_minus_stored'] = rec['E0'] - e['Y3']
             f.write(json.dumps(rec) + '\n'); f.flush()
             dens[str(e['name'])] = p.astype(np.float32); np.savez(dens_path, **dens)
@@ -167,6 +167,23 @@ def load_density(level=4):
         if fn.startswith(f'phase5e_density_L{level}_shard') and fn.endswith('.npz'): D.update(dict(np.load(os.path.join(RES, fn))))
     return D
 
+def depth_bonds(s, psi):
+    """EXPLORATORY exact hierarchical energy decomposition E_0 = 24 + sum_d B_d, B_d = bond energy <psi, -A_d psi> of the panels whose
+    two tiles have their lowest common ancestor at depth d (d = 0: different depth-1 children, i.e. the top seams; d = L-1: siblings
+    inside one level-1 supertile).  M_d = 2 sum_{panels at depth d} |psi_a||psi_b| bounds -B_d; eta_d = -B_d/M_d (gauge invariant)."""
+    v = psi[:, 0] / np.linalg.norm(psi[:, 0]); L = s.level; H = s.H.tocoo(); ta, tb = H.row // 2, H.col // 2; off = ta != tb
+    def lca(a, b):
+        out = np.full(len(a), -1)
+        for dd in range(L):
+            same = (a // 8 ** (L - dd)) == (b // 8 ** (L - dd)); out[same] = dd
+        return out
+    contrib = np.real(np.conj(v[H.row]) * H.data * v[H.col]); dl = lca(ta, tb)
+    amp = np.sqrt(np.abs(v[0::2]) ** 2 + np.abs(v[1::2]) ** 2); a = np.array([e[0] for e in s.edges]); b = np.array([e[1] for e in s.edges]); de = lca(a, b)
+    out = {'diag': float(contrib[~off].sum())}
+    for dd in range(L):
+        out[str(dd)] = {'B': float(contrib[off & (dl == dd)].sum()), 'M': float(2 * (amp[a] * amp[b])[de == dd].sum()), 'panels': int((de == dd).sum())}
+    return out
+
 def run_adaptive(shard, nshards, level=4):
     rules, controls, _ = systems(); dens = load_density(level); n = len(rules)
     names = [str(r['name']) for r in rules]; assert all(nm in dens for nm in names), 'densities missing: run the level4 stage first'
@@ -193,7 +210,7 @@ def run_adaptive(shard, nshards, level=4):
             sc_loc = score[geo2loc]; surf = np.zeros(s.n, bool); surf[s.Sall] = True
             w, psi = rg.ground_state(s); E0 = float(w[0])
             own = np.abs(psi[0::2, 0]) ** 2 + np.abs(psi[1::2, 0]) ** 2
-            rec = {'name': e['name'], 'kind': e['kind'], 'fold': int(fold_of[j]) if j < n else -1, 'E0': E0, 'bases': {}}
+            rec = {'name': e['name'], 'kind': e['kind'], 'fold': int(fold_of[j]) if j < n else -1, 'E0': E0, 'bases': {}, 'bonds': depth_bonds(s, psi)}
             for m in ADAPT_M:
                 for tag, sc in (('adaptive', sc_loc), ('oracle', own)):
                     order = np.argsort(-np.where(surf, sc, -np.inf)); mask = np.zeros(s.n, bool); mask[order[:m]] = True
@@ -216,6 +233,80 @@ def run_gauge():
             log(f"[gauge L{L} {nm}] max |dE_W| = {rec['max_dev']:.2e}")
     json.dump(out, open(os.path.join(RES, 'phase5e_gauge.json'), 'w'), indent=1)
 
+# ------------------------------------------------------------------ H2 closure test: universal T3-surface subspace (FR30)
+def fr30_vectors():
+    """FR30 ground vectors at levels 4..7 (tile order of tiles_at_level; levels 5-7 from the D.geometry builder, validated identical)."""
+    out = {}
+    p4 = os.path.join(RES, 'phase5e_psi_fr30_L4.npy')
+    if os.path.exists(p4): out[4] = np.load(p4)[:, 0]
+    p5 = os.path.join(RES, 'phase5e_fr30_level7_L5_lowest4.npy')
+    if os.path.exists(p5): out[5] = np.load(p5)[:, 0]
+    p6 = os.path.join(RES, 'phase5b_e_fr30_level6_groundstate.npy')
+    if os.path.exists(p6): out[6] = np.load(p6).ravel()
+    p7 = os.path.join(RES, 'phase5e_fr30_level7_lowest4.npy')
+    if os.path.exists(p7): out[7] = np.load(p7, mmap_mode='r')[:, 0]
+    return out
+
+def snapshots(psi, L, k, surf_k):
+    """columns: restrictions of psi and T psi to the surface of every depth-(L-k) copy of T_k (local tile order)."""
+    nk = 8 ** k; ncopy = 8 ** (L - k); loc = d.spinor(surf_k)
+    idx = (np.arange(ncopy)[:, None] * (2 * nk) + loc[None, :])          # spinor index of copy j, local surface spinor q
+    X = np.asarray(psi)[idx].T                                             # (2|surf|) x ncopy
+    return np.c_[X, rg.kramers_partner(X)]
+
+def run_closure(k=3):
+    vecs = fr30_vectors(); tiles = d.tiles_of(FR30, k); _, edges = d.build(tiles); deg = d.degrees(len(tiles), edges); surf_k = np.nonzero(deg < 24)[0]
+    out = {'k': k, 'surface_tiles': int(len(surf_k)), 'dim': int(2 * len(surf_k)), 'levels': sorted(vecs), 'per_level': {}}
+    Xs = {}
+    for L, v in vecs.items():
+        v = np.asarray(v, complex); v = v / np.linalg.norm(v); X = snapshots(v, L, k, surf_k); Xs[L] = X / np.linalg.norm(X)
+        sv = np.linalg.svd(Xs[L], compute_uv=False); e = sv ** 2 / (sv ** 2).sum(); tail = np.r_[np.clip(1 - np.cumsum(e), 0, None), np.zeros(600)]
+        out['per_level'][L] = {'copies': int(8 ** (L - k)), 'surface_weight': float(np.linalg.norm(X) ** 2 / 2), 'tau_d': {str(dd): float(tail[dd - 1]) for dd in (2, 8, 16, 32, 57, 114, 287, 400, 500)},
+                               'd_for_capture': {str(f): int(np.searchsorted(np.cumsum(e), f) + 1) for f in (0.9, 0.99, 0.999)}}
+        log(f"[closure] L{L}: copies {8**(L-k)}, S-weight {out['per_level'][L]['surface_weight']:.4f}, d for 90/99/99.9% {out['per_level'][L]['d_for_capture']}, tau_57 {tail[56]:.4f}")
+    def capture(U, X): return float(np.linalg.norm(U.conj().T @ X) ** 2 / np.linalg.norm(X) ** 2)
+    out['transfer'] = {}
+    for train in ([4], [4, 5], [4, 5, 6], [5], [6], [5, 6], [7], [6, 7]):     # [4]/[4,5] -> 6 pre-registered; the rest EXPLORATORY
+        if not all(L in Xs for L in train): continue
+        Xt = np.hstack([Xs[L] for L in train]); U, sv, _ = np.linalg.svd(Xt, full_matrices=False)
+        for test in [L for L in sorted(Xs) if L not in train]:
+            row = {str(dd): capture(U[:, :dd], Xs[test]) for dd in (8, 16, 20, 32, 41, 57, 114, 287)}
+            out['transfer'][f"train{''.join(map(str, train))}_test{test}"] = row
+            log(f"[closure] train {train} -> test L{test}: capture {row}")
+    # the universal subspace used as the child basis at level 4 (children = T3 copies): compressed edge, out-of-level trained
+    s4 = rg.System(FR30, 4); E0 = rg.ground_state(s4)[0][0]; out['level4_edge'] = {'E0': float(E0)}
+    for train in ([5], [5, 6], [4], [6], [7], [6, 7]):
+        if not all(L in Xs for L in train): continue
+        U, _, _ = np.linalg.svd(np.hstack([Xs[L] for L in train]), full_matrices=False)
+        for dd in (16, 20, 32, 41, 57, 114, 287):
+            m = dd
+            while m < U.shape[1] and m % 2: m += 1                     # keep Kramers pairs together (columns come in T-pairs)
+            red = rg.Reduced(s4, [U[:, :m].copy() for _ in range(8)]); E, it = red.root()
+            out['level4_edge'][f"train{''.join(map(str, train))}_d{m}"] = {'D': red.D, 'E_W': E, 'err': E - E0}
+            log(f"[closure] universal U (train {train}, d={m}) at level 4: D={red.D} E_W-E0 = {E-E0:+.4f}")
+    json.dump(out, open(os.path.join(RES, 'phase5e_closure.json'), 'w'), indent=1)
+
+# ------------------------------------------------------------------ H1 operator locality (exploratory diagnostic)
+def run_locality(names=('fr30', 1387, 3697, 2238), level=4):
+    """Is the child response LOCAL across faces?  For every child c and every pair of its face/hinge/corner groups (A, B): the
+    norm of R_c(E_REF)[A, B] relative to sqrt(||R_c[A, A]|| ||R_c[B, B]||), and its numerical rank at relative tolerance 1e-3
+    (an H-matrix-type compressibility of the operator, as opposed to compressibility of the state)."""
+    out = {}
+    for nm in names:
+        s = rg.System(spec_of(nm), level); rows = []
+        for c in range(8):
+            R = s.Rref(c); g = s.groups(c, 'face'); g.update(s.groups(c, 'hinge')); g.update(s.groups(c, 'corner')); labs = list(g)
+            for i, A in enumerate(labs):
+                for B in labs[i + 1:]:
+                    a, b = d.spinor(g[A]), d.spinor(g[B]); blk = R[np.ix_(a, b)]
+                    sv = np.linalg.svd(blk, compute_uv=False); na = np.linalg.norm(R[np.ix_(a, a)], 2); nb = np.linalg.norm(R[np.ix_(b, b)], 2)
+                    rows.append({'child': c, 'A': str(A), 'B': str(B), 'rel_norm': float(sv[0] / np.sqrt(na * nb)) if len(sv) else 0.0,
+                                 'rank_1e-3': int((sv > 1e-3 * sv[0]).sum()) if len(sv) and sv[0] > 0 else 0, 'shape': [len(a), len(b)]})
+        rn = np.array([r['rel_norm'] for r in rows]); rk = np.array([r['rank_1e-3'] / min(r['shape']) for r in rows if min(r['shape']) > 0])
+        out[str(nm)] = {'pairs': len(rows), 'rel_norm_median': float(np.median(rn)), 'rel_norm_max': float(rn.max()), 'rel_rank_median': float(np.median(rk)), 'rows': rows}
+        log(f"[locality {nm}] {len(rows)} group pairs: off-diagonal relative norm median {np.median(rn):.2e} max {rn.max():.2e}; rank(1e-3)/min dim median {np.median(rk):.3f}")
+    json.dump(out, open(os.path.join(RES, 'phase5e_locality.json'), 'w'), indent=1)
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'level4': run_level(4, int(sys.argv[2]), int(sys.argv[3]))
@@ -225,4 +316,6 @@ if __name__ == '__main__':
         res = {nm: child_cluster(nm) for nm in sys.argv[2:]}; json.dump(res, open(os.path.join(RES, 'phase5e_cluster.json'), 'w'), indent=1)
     elif cmd == 'adaptive': run_adaptive(int(sys.argv[2]), int(sys.argv[3]))
     elif cmd == 'gauge': run_gauge()
+    elif cmd == 'closure': run_closure()
+    elif cmd == 'locality': run_locality()
     else: raise SystemExit(__doc__)

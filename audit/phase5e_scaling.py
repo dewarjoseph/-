@@ -92,7 +92,22 @@ def evaluate():
                            'D2_6_7': {k: float(v) for k, v in dirichlet(E2, (6, 7)).items() if k != 'pred'},
                            'D48_5_6_7': {k: float(v) for k, v in d48(E2, (5, 6, 7)).items() if k != 'pred'},
                            'PL_4_7': {k: float(v) for k, v in powerlaw(E2, (4, 5, 6, 7)).items() if k != 'pred'}}
-    json.dump(out, open(os.path.join(RES, 'phase5e_level7_evaluation.json'), 'w'), indent=1); print(json.dumps(out, indent=1)); return out
+    # eigenstate: D2 in the 6 -> 7 window from IPR*n (IPR ~ n^(-D2/3)), interface weights, overlap with the level-6 state replicated
+    # in the centre child (child 0; its block of H(T_7) is H(T_6) in local order, Theorem D0) -- V-D's frozen eigenstate predictions
+    try:
+        w6 = np.load(os.path.join(RES, 'phase5a_fr30_level6_groundstate_weights.npy')); ipr6n = float((w6 ** 2).sum() * len(w6))
+        out['ipr_n'] = {'6': ipr6n, '7': L7['ipr_n']}; out['D2_window_6_7'] = 3 * (1 - np.log(L7['ipr_n'] / ipr6n) / np.log(8))
+        out['interface_weight'] = L7.get('interface_weight'); out['interface_fraction'] = L7.get('interface_fraction')
+        out['depth1_enrichment'] = L7['interface_weight']['1'] / L7['interface_fraction']['1'] if isinstance(L7['interface_weight'], dict) and '1' in L7['interface_weight'] else None
+        v6 = np.load(os.path.join(RES, 'phase5b_e_fr30_level6_groundstate.npy')).ravel(); v6 = v6 / np.linalg.norm(v6)
+        t6 = np.empty_like(v6); t6[0::2] = np.conj(v6[1::2]); t6[1::2] = -np.conj(v6[0::2])
+        V7 = np.load(os.path.join(RES, 'phase5e_fr30_level7_lowest4.npy'), mmap_mode='r'); ov = 0.0
+        for j in range(2):                                          # projector onto the level-7 ground pair
+            x = np.asarray(V7[:, j]); x = x / np.linalg.norm(x); ov += abs(np.vdot(x[:len(v6)], v6)) ** 2
+        out['overlap_level6_in_centre_child'] = float(ov)
+        out['frozen_eigenstate_predictions'] = P['frozen_eigenstate_predictions_from_V-D']
+    except Exception as ex: out['eigenstate_error'] = repr(ex)
+    json.dump(out, open(os.path.join(RES, 'phase5e_level7_evaluation.json'), 'w'), indent=1, default=float); print(json.dumps(out, indent=1, default=float)); return out
 
 if __name__ == '__main__':
     {'freeze': freeze, 'evaluate': evaluate}[sys.argv[1]]()

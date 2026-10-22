@@ -137,21 +137,24 @@ class Reduced:
             for c, P in enumerate(Ps): Pg[sysm.offs[c]:sysm.offs[c + 1], o:o + P.shape[1]] = P; o += P.shape[1]
         else: Pg = Ps
         self.D = int(Pg.shape[1]); self.Pg = sps.csr_matrix(Pg)
-        self.Pc = [Pg[sysm.offs[c]:sysm.offs[c + 1]] for c in range(8)]
-        self.act = [c for c in range(8) if np.abs(self.Pc[c]).max(initial=0) > 0]
-        self.A = {c: self.Pc[c].conj().T @ sysm.HSS[c] @ self.Pc[c] for c in self.act}
-        self.G = {c: self.Pc[c].conj().T @ self.Pc[c] for c in self.act}
-        self.C = {c: sysm.B[c] @ self.Pc[c] for c in self.act}
+        self.act, self.cols, self.A, self.G, self.C = [], {}, {}, {}, {}
+        for c in range(8):                                         # only the columns that live on child c enter its pole term
+            Pc = Pg[sysm.offs[c]:sysm.offs[c + 1]]; cols = np.nonzero(np.abs(Pc).max(axis=0) > 0)[0] if Pc.size else np.zeros(0, int)
+            if len(cols) == 0: continue
+            Pc = Pc[:, cols]; self.act.append(c); self.cols[c] = cols
+            self.A[c] = Pc.conj().T @ sysm.HSS[c] @ Pc; self.G[c] = Pc.conj().T @ Pc; self.C[c] = sysm.B[c] @ Pc
         self.O = (self.Pg.conj().T @ (sysm.Off @ self.Pg)).toarray() if self.D else np.zeros((0, 0))
         self.nev = 0
     def M(self, E):
         M = self.O.copy()
-        for c in self.act: M += self.A[c] - E * self.G[c] - (self.C[c].conj().T * (1.0 / (self.sys.lam[c] - E))) @ self.C[c]
+        for c in self.act:
+            ix = np.ix_(self.cols[c], self.cols[c])
+            M[ix] += self.A[c] - E * self.G[c] - (self.C[c].conj().T * (1.0 / (self.sys.lam[c] - E))) @ self.C[c]
         return M
     def dM_quad(self, E, x):
-        """x^+ M'(E) x (Hellmann-Feynman derivative of the eigenvalue branch); M' = -I - sum_c C_c^+ diag(1/(l_c - E)^2) C_c."""
+        """x^+ M'(E) x (Hellmann-Feynman derivative of the eigenvalue branch); M' = -P^+P - sum_c C_c^+ diag(1/(l_c - E)^2) C_c."""
         s = -np.vdot(x, x).real
-        for c in self.act: y = self.C[c] @ x; s -= float(np.sum(np.abs(y) ** 2 / (self.sys.lam[c] - E) ** 2))
+        for c in self.act: y = self.C[c] @ x[self.cols[c]]; s -= float(np.sum(np.abs(y) ** 2 / (self.sys.lam[c] - E) ** 2))
         return s
     def g(self, E, vec=False):
         self.nev += 1; M = self.M(E)
@@ -219,15 +222,16 @@ def P_tiles(s, mask):
 def P_iface2(s, k):
     """two-sided interface modes: for every adjacent child pair {c, c'}, the k lowest Kramers pairs of the GLUED operator
     K(E_REF) restricted to the face tiles of c facing c' and of c' facing c (bonding modes of the seam; columns span two
-    children).  Faces of different pairs are disjoint, so the columns are orthonormal."""
-    Kref = s.Kref(); pairs = {}
+    children).  Faces of different pairs are disjoint, so the columns are orthonormal.  Only the needed blocks of K are formed."""
+    pairs = {}
     for c in range(8):
-        for lab, pos in s.groups(c, 'face').items():
-            pairs.setdefault(frozenset((c, lab[0])), []).append((c, pos))
-    cols = []
+        for lab, pos in s.groups(c, 'face').items(): pairs.setdefault(frozenset((c, lab[0])), []).append((c, pos))
+    cols = []; Off = s.Off.tocsr()
     for pr, parts in sorted(pairs.items(), key=lambda t: sorted(t[0])):
-        idx = np.concatenate([s.offs[c] + spinor(pos) for c, pos in parts])
-        U, _ = low_modes(Kref[np.ix_(idx, idx)], k); blk = np.zeros((s.offs[-1], U.shape[1]), complex); blk[idx] = U; cols.append(blk)
+        loc = [spinor(pos) for _, pos in parts]; idx = np.concatenate([s.offs[c] + l for (c, _), l in zip(parts, loc)])
+        Kp = Off[idx][:, idx].toarray(); o = 0
+        for (c, _), l in zip(parts, loc): Kp[o:o + len(l), o:o + len(l)] += s.Rref(c)[np.ix_(l, l)]; o += len(l)
+        U, _ = low_modes(Kp, k); blk = np.zeros((s.offs[-1], U.shape[1]), complex); blk[idx] = U; cols.append(blk)
     return np.hstack(cols)
 def interface_mask(s):
     m = np.zeros(s.n, bool)
@@ -260,12 +264,22 @@ def geo_key(tile): return min(tile[2])                       # lowest cube of th
 def geo_keys(s): return [geo_key(t) for t in s.tiles]
 
 def ground_state(s, E0=None, k=2):
-    """exact lowest Kramers pair of H (shift-invert near E0 if given, else dense for small n)."""
+    """exact lowest Kramers pair of H and the four lowest eigenvalues (dense for n <= 600, shift-invert at 0 for n <= 5000
+    (H >= 0, so the eigenvalues nearest 0 are the lowest), LOBPCG with tolerance 1e-9 beyond)."""
     if s.n <= 600:
-        w, V = np.linalg.eigh(s.H.toarray()); return w[:k], kramers_pair(V[:, 0])
-    sig = (E0 - 1e-3) if E0 is not None else -1e-3          # H >= 0, so shift-invert at 0 returns the lowest eigenvalues
-    w, V = spl.eigsh(s.H.tocsc(), k=k, sigma=sig, which='LM', tol=1e-12)
-    o = np.argsort(w); return w[o], kramers_pair(V[:, o[0]])
+        w, V = np.linalg.eigh(s.H.toarray()); return w[:4], kramers_pair(V[:, 0])
+    if s.n <= 5000:
+        sig = (E0 - 1e-3) if E0 is not None else -1e-3
+        w, V = spl.eigsh(s.H.tocsc(), k=6, sigma=sig, which='LM', tol=1e-12)
+        o = np.argsort(w); return w[o][:4], kramers_pair(V[:, o[0]])
+    import warnings
+    rng = np.random.default_rng(0); N = s.H.shape[0]; X = rng.standard_normal((N, 8)) + 1j * rng.standard_normal((N, 8))
+    dinv = 1.0 / s.H.diagonal().real
+    M = spl.LinearOperator(s.H.shape, matvec=lambda v: dinv * v, matmat=lambda B: dinv[:, None] * B, dtype=complex)
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore'); w, V = spl.lobpcg(s.H, X, M=M, largest=False, tol=1e-9, maxiter=20000)
+    o = np.argsort(w); V = V[:, o]; w = np.real(np.einsum('ij,ij->j', V.conj(), s.H @ V)) / np.real(np.einsum('ij,ij->j', V.conj(), V))
+    return np.sort(w)[:4], kramers_pair(V[:, 0])
 
 def kramers_pair(psi):
     """orthonormal Kramers pair {psi, T psi} from one ground vector (ARPACK may return only one copy of a doublet)."""
