@@ -31,12 +31,20 @@ Tested on the 264 frozen rule classes and the 18 intervention controls at level 
 
 ## What remains unresolved
 
-- **Whether the local state saturates.** At each level, the restrictions of the ground state to the copies of T₃ lie in a ≈ 20–40-dimensional subspace of 574. Through level 7 the union saturates (99.9 % in 56 dimensions). Trained on levels 6–7, this state predicts the level-5 edge to 0.019 at 10 % of the boundary dimension. That is the first compression meeting the accuracy bar, but it is exploratory, FR30-only, and fails at level 4 where every copy touches the pinned wall. Whether this asymptotic bulk state generalizes across rules, and how to construct it without solving deeper levels, is open.
+- **Whether the saturating local state is general.** At each level, the restrictions of the ground state to the copies of T₃ lie in a ≈ 20–40-dimensional subspace of 574. Through level 7 the union saturates (99.9 % in 56 dimensions). Trained on levels 6–7, this state predicts the level-5 edge to 0.019 at 10 % of the boundary dimension. That is the first compression meeting the accuracy bar, but it is exploratory, FR30-only, and fails at level 4 where every copy touches the pinned wall. Whether this asymptotic bulk state generalizes across rules, and how to construct it without solving deeper levels, is open.
 - **The infinite-volume limit.** E_∞ is bracketed in [4.008189, 8.7649120248] (certified; the upper end is new in this phase, from the level-7 vector) and E₇ = 8.7649120 (Ritz bound; residual 1.5×10⁻⁷). The decrement ratio r₇ = 0.194, so by the frozen rule it keeps falling. No single power law with p = 2 fits levels 4–7, and the apparent D₂ ≈ 1.9 depends on the boundary condition. No phase is inferred.
 - **Nonlinear or energy-dependent closures** are not excluded by anything here.
 
 ## Single most informative next experiment
 
-Measure the crowding density N_m(w)/|surf_m| and the T₃ snapshot dimension at levels 5–7 by **sparse inertia counting**. By E1, n₋(R_m(E) − w) = n₋(H − E − wΠ_S) − n₋(H_II − E), so no dense diagonalisation is needed.
-- *Constant density and a non-saturating snapshot dimension* refute every finite-dimensional linear renormalization of this edge.
-- *Saturation* would establish the asymptotic local-state RG.
+**A pre-registered, cross-rule test of the bulk local-state renormalization at level 5.**
+
+- *Setup.* Take a frozen subset of the 264 rule classes and the 18 controls. For each, compute the level-6 ground pair with the existing ChebFSI solver (17 s per rule at level 5 on this machine; minutes at level 6) and build the rule's own T₃-copy snapshot subspace (d ≈ 42–58).
+- *Prediction.* Predict E₅ through the 64-copy reduction (`audit/phase5e_run.py closure5`, generalised per rule) and score it against a flux baseline at level 5.
+- *What it settles.*
+  - whether the saturated state exists for every rule, or only for FR30;
+  - whether it meets C2 out of sample;
+  - whether it explains FR30's level-5 residual and the intervention directions.
+
+  That is, whether the one positive structure found here is a theory or a property of one rule.
+- *A cheaper companion: the crowding density N_m(w)/|surf_m| at m = 5–7 by sparse inertia counting.* By E1, n₋(R_m(E) − w) = n₋(H − E − wΠ_S) − n₋(H_II − E). This would confirm that the child's own spectrum can never supply that state.

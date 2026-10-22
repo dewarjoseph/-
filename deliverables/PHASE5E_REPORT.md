@@ -544,10 +544,12 @@ The negative result concerns the tested families and universal linear subspaces 
 
 ### The single most informative next experiment
 
-**Measure the crowding law and the local-state saturation at levels 5–7, without diagonalising R_m.**
-- *Crowding by inertia.* By E1 applied with a surface shift, n₋(R_m(E) − w) = n₋(H − E − wΠ_S) − n₋(H_II − E). The crowding count N_m(w) is therefore obtainable from sparse LDLᵀ inertia of matrices of the original sparsity at m = 5, 6, 7.
-- *Saturation.* The level-7 ground pair (this phase) gives the T₃ snapshot dimension at a fourth level.
-- *Decision.* N_m(1)/|surf_m| constant through m = 7 together with a non-saturating snapshot dimension refutes any finite-dimensional linear RG for this edge. A saturating snapshot dimension with a bounded crowding density supports the local-state conjecture.
+**A pre-registered cross-rule test of the bulk local-state RG at level 5.**
+
+- *Setup.* For a frozen subset of the 264 classes and the 18 controls, compute the level-6 ground pair with the V-B ChebFSI solver (17 s per rule at level 5 on this machine, so minutes at level 6). Build each rule's T₃-copy snapshot subspace (d ≈ 42–58).
+- *Prediction.* Predict E₅ through the 64-copy reduction (§6.2, item 4). Score it with the C2–C6 criteria at level 5, against a level-5 flux baseline.
+- *What it settles.* Whether the saturating, environment-selected state is a property of the model or of FR30, and whether it explains FR30's residual and the intervention directions at a scale where boundary copies are a minority.
+- *Cheaper companion.* Count the crowding N_m(w) at m = 5–7 by sparse inertia, with n₋(R_m(E) − w) = n₋(H − E − wΠ_S) − n₋(H_II − E) from E1. This would confirm that the child's own spectrum cannot supply that state.
 
 ## 10. Reproduction
 
