@@ -333,6 +333,26 @@ def run_closure_rule(name, k=3):
     log(f"[closure-rule {tag}] d99/d999 at L5 {out['d99_L5']}/{out['d999_L5']}; capture of L4 by L5 subspace {out['capture_L4']}; L4 edge errors {out['edge_L4']}")
     with open(os.path.join(RES, 'phase5e_closure_rules.jsonl'), 'a') as f: f.write(json.dumps(out) + chr(10))
 
+def run_closure_level5(k=3, level=5):
+    """EXPLORATORY: the universal T3-surface subspace, trained on the FR30 ground pairs of OTHER levels, used as the per-copy state
+    at level 5 on the depth-2 partition (64 copies of T3; Theorem E1 holds for any partition with block-diagonal interior):
+    compressed edge E_W vs the exact level-5 bottom.  Training sets exclude level 5 except the in-level reference row."""
+    vecs = fr30_vectors(); tiles = d.tiles_of(FR30, k); _, edges = d.build(tiles); deg = d.degrees(len(tiles), edges); surf_k = np.nonzero(deg < 24)[0]
+    Xs = {}
+    for L, v in vecs.items():
+        v = np.asarray(v, complex); v = v / np.linalg.norm(v); Y = snapshots(v, L, k, surf_k); Xs[L] = Y / np.linalg.norm(Y)
+    s5 = rg.System(FR30, level, depth=level - k); assert s5.nc == 8 ** (level - k)
+    E0 = json.load(open(os.path.join(RES, 'phase5e_level7_L5.json')))['eigenvalues'][0]
+    out = {'E0_level5': E0, 'copies': s5.nc, 'copy_surface_dim': int(2 * len(surf_k)), 'lam_II': s5.lam_II, 'rows': []}
+    for train in ([6, 7], [6], [7], [4], [4, 6, 7], [5]):
+        if not all(L in Xs for L in train): continue
+        U, _, _ = np.linalg.svd(np.hstack([Xs[L] for L in train]), full_matrices=False)
+        for dd in (34, 42, 58, 114):
+            red = rg.Reduced(s5, [U[:, :dd].copy() for _ in range(s5.nc)]); t0 = time.time(); E, it = red.root()
+            row = {'train': train, 'd': dd, 'D': red.D, 'D_frac': red.D / s5.offs[-1], 'E_W': E, 'err': E - E0, 'seconds': time.time() - t0}
+            out['rows'].append(row); log(f"[closure L5] train {train} d={dd}: D={red.D} ({row['D_frac']:.3f} of {s5.offs[-1]})  E_W-E0 = {E-E0:+.5f}  ({row['seconds']:.0f}s)")
+    json.dump(out, open(os.path.join(RES, 'phase5e_closure_level5.json'), 'w'), indent=1)
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'level4': run_level(4, int(sys.argv[2]), int(sys.argv[3]))
@@ -345,4 +365,5 @@ if __name__ == '__main__':
     elif cmd == 'closure': run_closure()
     elif cmd == 'locality': run_locality()
     elif cmd == 'closure_rule': run_closure_rule(sys.argv[2])
+    elif cmd == 'closure5': run_closure_level5()
     else: raise SystemExit(__doc__)

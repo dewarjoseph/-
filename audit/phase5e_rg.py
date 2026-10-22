@@ -66,27 +66,27 @@ def low_modes(M, k):
 
 class System:
     """A level-L parent split into its 8 depth-1 children, with the pole representation of every child response."""
-    def __init__(self, spec, level, gauge_seed=None, tiles=None):
-        t0 = time.time(); self.spec = spec; self.level = level
+    def __init__(self, spec, level, gauge_seed=None, tiles=None, depth=1):
+        t0 = time.time(); self.spec = spec; self.level = level; self.nc = 8 ** depth   # depth > 1: copies of T_{level-depth}
         self.tiles = d.tiles_of(spec, level) if tiles is None else tiles
         H, edges = d.build(self.tiles); n = len(self.tiles); self.n = n
         if gauge_seed is not None: Gm = random_gauge(n, gauge_seed); H = (Gm @ H @ Gm.conj().T).tocsr()
         self.H = H; self.edges = edges
-        self.child, self.surf = d.partition(n, edges, level)
+        self.child, self.surf = d.partition(n, edges, level, depth)
         a = np.array([e[0] for e in edges]); b = np.array([e[1] for e in edges])
         self.deg = np.bincount(a, minlength=n) + np.bincount(b, minlength=n)
         cross = self.child[a] != self.child[b]; F = [set() for _ in range(n)]
         for x, y in zip(a[cross], b[cross]): F[x].add(int(self.child[y])); F[y].add(int(self.child[x]))
         self.F = F
-        self.S = [np.nonzero((self.child == c) & self.surf)[0] for c in range(8)]
-        self.I = [np.nonzero((self.child == c) & ~self.surf)[0] for c in range(8)]
+        self.S = [np.nonzero((self.child == c) & self.surf)[0] for c in range(self.nc)]
+        self.I = [np.nonzero((self.child == c) & ~self.surf)[0] for c in range(self.nc)]
         self.Sall = np.concatenate(self.S); self.sS = spinor(self.Sall)
         self.offs = np.cumsum([0] + [2 * len(s) for s in self.S])
         Hss = H[self.sS][:, self.sS].tocsr()
-        blk = np.repeat(np.arange(8), [2 * len(s) for s in self.S]); coo = Hss.tocoo(); keep = blk[coo.row] != blk[coo.col]
+        blk = np.repeat(np.arange(self.nc), [2 * len(s) for s in self.S]); coo = Hss.tocoo(); keep = blk[coo.row] != blk[coo.col]
         self.Off = sps.csr_matrix((coo.data[keep], (coo.row[keep], coo.col[keep])), shape=Hss.shape)
         self.HSS, self.B, self.lam = [], [], []
-        for c in range(8):
+        for c in range(self.nc):
             ss, ii = spinor(self.S[c]), spinor(self.I[c])
             self.HSS.append(H[ss][:, ss].toarray())
             if len(ii):
@@ -100,11 +100,11 @@ class System:
     def R(self, c, E):
         return self.HSS[c] - E * np.eye(self.HSS[c].shape[0]) - (self.B[c].conj().T * (1.0 / (self.lam[c] - E))) @ self.B[c]
     def Rref(self, c):
-        if self._Rref is None: self._Rref = [self.R(cc, E_REF) for cc in range(8)]
+        if self._Rref is None: self._Rref = [self.R(cc, E_REF) for cc in range(self.nc)]
         return self._Rref[c]
-    def K(self, E): return sla.block_diag(*[self.R(c, E) for c in range(8)]) + self.Off.toarray()
+    def K(self, E): return sla.block_diag(*[self.R(c, E) for c in range(self.nc)]) + self.Off.toarray()
     def Kref(self):
-        if getattr(self, '_Kref', None) is None: self._Kref = sla.block_diag(*[self.Rref(c) for c in range(8)]) + self.Off.toarray()
+        if getattr(self, '_Kref', None) is None: self._Kref = sla.block_diag(*[self.Rref(c) for c in range(self.nc)]) + self.Off.toarray()
         return self._Kref
 
     # ---------------------------------------------------------------- interface geometry
@@ -132,17 +132,25 @@ class Reduced:
     columns).  Child-local bases have block-diagonal P; two-sided interface bases have columns on two children."""
     def __init__(self, sysm, Ps, name=''):
         self.sys, self.name = sysm, name
-        if isinstance(Ps, list):                                   # child-local: list of 8 blocks -> block-diagonal global P
-            D = sum(P.shape[1] for P in Ps); Pg = np.zeros((sysm.offs[-1], D), complex); o = 0
-            for c, P in enumerate(Ps): Pg[sysm.offs[c]:sysm.offs[c + 1], o:o + P.shape[1]] = P; o += P.shape[1]
-        else: Pg = Ps
-        self.D = int(Pg.shape[1]); self.Pg = sps.csr_matrix(Pg)
         self.act, self.cols, self.A, self.G, self.C = [], {}, {}, {}, {}
-        for c in range(8):                                         # only the columns that live on child c enter its pole term
-            Pc = Pg[sysm.offs[c]:sysm.offs[c + 1]]; cols = np.nonzero(np.abs(Pc).max(axis=0) > 0)[0] if Pc.size else np.zeros(0, int)
-            if len(cols) == 0: continue
-            Pc = Pc[:, cols]; self.act.append(c); self.cols[c] = cols
-            self.A[c] = Pc.conj().T @ sysm.HSS[c] @ Pc; self.G[c] = Pc.conj().T @ Pc; self.C[c] = sysm.B[c] @ Pc
+        if isinstance(Ps, list):                                   # child-local: one block per child -> block-diagonal P (kept sparse)
+            rows, cols, vals, o = [], [], [], 0
+            for c, P in enumerate(Ps):
+                d_c = P.shape[1]
+                if d_c:
+                    self.act.append(c); self.cols[c] = np.arange(o, o + d_c)
+                    self.A[c] = P.conj().T @ sysm.HSS[c] @ P; self.G[c] = P.conj().T @ P; self.C[c] = sysm.B[c] @ P
+                    Pc = sps.coo_matrix(P); rows.append(Pc.row + sysm.offs[c]); cols.append(Pc.col + o); vals.append(Pc.data)
+                o += d_c
+            self.D = int(o)
+            self.Pg = sps.csr_matrix((np.concatenate(vals), (np.concatenate(rows), np.concatenate(cols))), shape=(sysm.offs[-1], o)) if vals else sps.csr_matrix((sysm.offs[-1], 0))
+        else:
+            Pg = Ps; self.D = int(Pg.shape[1]); self.Pg = sps.csr_matrix(Pg)
+            for c in range(sysm.nc):                               # only the columns that live on child c enter its pole term
+                Pc = Pg[sysm.offs[c]:sysm.offs[c + 1]]; cols = np.nonzero(np.abs(Pc).max(axis=0) > 0)[0] if Pc.size else np.zeros(0, int)
+                if len(cols) == 0: continue
+                Pc = Pc[:, cols]; self.act.append(c); self.cols[c] = cols
+                self.A[c] = Pc.conj().T @ sysm.HSS[c] @ Pc; self.G[c] = Pc.conj().T @ Pc; self.C[c] = sysm.B[c] @ Pc
         self.O = (self.Pg.conj().T @ (sysm.Off @ self.Pg)).toarray() if self.D else np.zeros((0, 0))
         self.nev = 0
     def M(self, E):

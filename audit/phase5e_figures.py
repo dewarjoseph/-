@@ -47,6 +47,8 @@ def level4_curves():
             fam = k.split(':')[0]
             if b.get('E_W') is None or b['E_W'] != b['E_W']: continue
             cur.setdefault(fam, {}).setdefault(k, []).append((b['D'], b['E_W'] - r['E0'], 1 - b.get('capture', np.nan)))
+    cur = {f: {k: v for k, v in d.items() if len(v) >= 0.9 * len(rules)} for f, d in cur.items()}     # configurations run on (almost) all rules
+    cur = {f: d for f, d in cur.items() if d}
     return rules, cur, L4
 
 def fig_dimension():
@@ -62,12 +64,12 @@ def fig_dimension():
                 a = np.array(v); pts.append((np.median(a[:, 0]), np.percentile(a[:, which], 25), np.median(a[:, which]), np.percentile(a[:, which], 75)))
             pts = np.array(sorted(pts))
             ax.fill_between(pts[:, 0], pts[:, 1], pts[:, 3], color=COL[fam], alpha=0.15, lw=0)
-            ax.plot(pts[:, 0], pts[:, 2], color=COL[fam], marker=MARK[fam], ms=6, label=lab, mec=SURF, mew=1)
+            ax.plot(pts[:, 0], pts[:, 2], color=COL[fam], marker=MARK[fam], ms=6 if len(pts) > 1 else 9, label=lab, mec=SURF if len(pts) > 1 else COL[fam], mew=1, zorder=5)
         sel = [r for r in rules if r['bases'].get('interface:None')]
         if sel:
             a = np.array([(r['bases']['interface:None']['D'], r['bases']['interface:None']['E_W'] - r['E0'], 1 - r['bases']['interface:None']['capture']) for r in sel])
             med = np.median(a[:, which]); ax.errorbar([np.median(a[:, 0])], [med], yerr=[[med - np.percentile(a[:, which], 25)], [np.percentile(a[:, which], 75) - med]],
-                                                     fmt='*', ms=11, color=SLOTS[7], label='all interface tiles (not a compression)', mec=SURF)
+                                                     fmt='*', ms=12, color=INK, label='all interface tiles (not a compression)', mec=SURF)
         ax.axvline(459, color=INK2, ls='--', lw=1)
         ax.set_xscale('log'); ax.set_yscale('log'); ax.set_xlabel('retained complex dimension $D$  (dim $S$ = 4592)'); ax.set_ylabel(ylabel)
         ax.text(470, ax.get_ylim()[0] * 1.15, '10 % of dim S', color=INK2, fontsize=8)
@@ -79,7 +81,7 @@ def fig_dimension():
                 pts = sorted((t['D'], t['cal_rmse']) for k, t in res['table'].items() if t['family'] == fam)
                 if pts: ax2.plot([p[0] for p in pts], [p[1] for p in pts], color=COL[fam], marker=MARK[fam], ms=6, label=lab, mec=SURF, mew=1)
             t = res['table'].get('interface:None')
-            if t: ax2.plot([t['D']], [t['cal_rmse']], marker='*', ms=11, color=SLOTS[7], ls='none', label='all interface tiles', mec=SURF)
+            if t: ax2.plot([t['D']], [t['cal_rmse']], marker='*', ms=12, color=INK, ls='none', label='all interface tiles', mec=SURF)
             ax2.axhline(0.05, color=INK2, ls=':', lw=1); ax2.text(20, 0.053, 'criterion C2: 0.05', color=INK2, fontsize=8)
             ax2.axvline(459, color=INK2, ls='--', lw=1)
             ax2.set_xscale('log'); ax2.set_yscale('log'); ax2.set_xlabel('retained complex dimension $D$')
@@ -103,7 +105,8 @@ def fig_level():
         ax.fill_between(Ls, lo, hi, color=COL[fam], alpha=0.12, lw=0)
         ax.plot(Ls, m, color=COL[fam], marker=MARK[fam], ms=6, label=f'{lab} ({k})', mec=SURF, mew=1)
     ax.set_xlabel('substitution level $L$ (fixed family parameter: fixed $D$)'); ax.set_ylabel('relative edge error  $(E_W - E_0)/E_0$')
-    ax.set_xticks([2, 3, 4, 5]); ax.set_yscale('log'); ax.legend(fontsize=7.5)
+    ax.set_xticks([2, 3, 4, 5]); ax.set_ylim(bottom=0); ax.legend(fontsize=7.5)
+    ax.text(2.02, 0.005, 'L2: child(16) and the 106-dim patch/fec bases span the whole child surface (exact)', fontsize=7, color=INK2)
     ax.set_title('Level sweep: 8 systems, mean and range', color=INK, fontsize=10, loc='left'); save(fig, 'error_vs_level')
 
 def fig_scaling():
@@ -125,15 +128,35 @@ def fig_scaling():
 def fig_closure():
     p = os.path.join(RES, 'phase5e_closure.json')
     if not os.path.exists(p): return
-    C = json.load(open(p)); fig, ax = plt.subplots(figsize=(6.0, 4.0))
-    ds = [2, 8, 16, 32, 57, 114, 287, 400, 500]
+    C = json.load(open(p)); p5 = os.path.join(RES, 'phase5e_closure_level5.json'); C5 = json.load(open(p5)) if os.path.exists(p5) else None
+    fig, axs = plt.subplots(1, 3, figsize=(14.5, 4.2))
+    ax = axs[0]; ds = [2, 8, 16, 32, 57, 114, 287, 400, 500]
     for i, (L, v) in enumerate(sorted(C['per_level'].items(), key=lambda t: int(t[0]))):
-        ax.plot(ds, [1 - v['tau_d'][str(dd)] for dd in ds], color=SLOTS[i], marker='osD^'[i], ms=6, mec=SURF, label=f"level {L}: best subspace for its own contexts ({v['copies']} copies)")
-    for i, (k, row) in enumerate(C['transfer'].items()):
-        dd = [int(x) for x in row]; ax.plot(dd, [row[str(x)] for x in dd], color=SLOTS[4 + i % 4], ls='--', marker='vPXx'[i % 4], ms=6, mec=SURF, label=k.replace('_', ' '))
-    ax.axvline(57, color=INK2, ls=':', lw=1); ax.axhline(0.99, color=INK2, ls=':', lw=1)
-    ax.set_xscale('log'); ax.set_xlabel('dimension $d$ of the universal $T_3$-surface subspace (of 574)'); ax.set_ylabel('captured weight')
-    ax.legend(fontsize=7); ax.set_title('H2 closure test (FR30)', color=INK, fontsize=10, loc='left'); save(fig, 'closure')
+        ax.plot(ds, [1 - v['tau_d'][str(dd)] for dd in ds], color=SLOTS[i], marker='osD^'[i], ms=6, mec=SURF, label=f"level {L} ({v['copies']} copies)")
+    ax.axhline(0.999, color=INK2, ls=':', lw=1); ax.set_xscale('log'); ax.set_ylim(0.45, 1.01)
+    ax.set_xlabel('dimension $d$ (of 574)'); ax.set_ylabel('captured weight'); ax.legend(fontsize=7.5, loc='lower right')
+    ax.set_title("(a) best subspace for each level's own copies", color=INK, fontsize=10, loc='left')
+    ax = axs[1]
+    sel = [('train45_test6', 'levels 4-5 -> 6 (pre-registered)', '--'), ('train45_test7', 'levels 4-5 -> 7', '--'),
+           ('train6_test7', 'level 6 -> 7 (exploratory)', '-'), ('train456_test7', 'levels 4-6 -> 7 (exploratory)', '-')]
+    for i, (k, lab, ls) in enumerate(sel):
+        row = C['transfer'].get(k)
+        if row: dd = sorted(int(x) for x in row); ax.plot(dd, [row[str(x)] for x in dd], color=SLOTS[4 + i], ls=ls, marker='vPXx'[i], ms=6, mec=SURF, label=lab)
+    ax.axvline(57, color=INK2, ls=':', lw=1); ax.axhline(0.99, color=INK2, ls=':', lw=1); ax.text(60, 0.70, 'd = 57 (10 %)', color=INK2, fontsize=8)
+    ax.set_xscale('log'); ax.set_xlabel('dimension $d$ of the universal subspace'); ax.set_ylabel('captured weight of the test level')
+    ax.legend(fontsize=7.5, loc='lower right'); ax.set_title('(b) transfer between levels', color=INK, fontsize=10, loc='left')
+    ax = axs[2]
+    if C5:
+        rows = [r for r in C5['rows'] if r['train'] == [6, 7]]
+        ax.plot([r['D_frac'] for r in rows], [r['err'] for r in rows], color=SLOTS[0], marker='o', ms=7, mec=SURF, label='level 5 (64 copies), trained on levels 6-7')
+    L4 = C.get('level4_edge', {}); dimS4 = 4592
+    for i, (tag, lab) in enumerate((('train5', 'level 4 (8 copies), trained on level 5'), ('train67', 'level 4 (8 copies), trained on levels 6-7'))):
+        pts = sorted((v['D'] / dimS4, v['err']) for k, v in L4.items() if k.startswith(tag + '_d'))
+        if pts: ax.plot([p[0] for p in pts], [p[1] for p in pts], color=SLOTS[1 + i], marker='sD'[i], ms=6, mec=SURF, label=lab)
+    ax.axhline(0.05, color=INK2, ls=':', lw=1); ax.axvline(0.10, color=INK2, ls='--', lw=1); ax.text(0.105, 0.6, 'C1: 10 %', color=INK2, fontsize=8); ax.text(0.26, 0.056, 'C2: 0.05', color=INK2, fontsize=8)
+    ax.set_xscale('log'); ax.set_yscale('log'); ax.set_xticks([0.03, 0.1, 0.3]); ax.set_xticklabels(['3 %', '10 %', '30 %']); ax.minorticks_off(); ax.set_xlabel('retained fraction of the boundary dimension'); ax.set_ylabel('edge error $E_W - E_0$')
+    ax.legend(fontsize=7.5, loc='lower left'); ax.set_title('(c) universal state as the per-copy basis', color=INK, fontsize=10, loc='left')
+    save(fig, 'closure')
 
 if __name__ == '__main__':
     fig_dimension(); fig_level(); fig_scaling(); fig_closure(); print('figures written to', OUT)

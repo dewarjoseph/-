@@ -134,7 +134,7 @@ The table gives each hypothesis's assumptions, its derived prediction, the exper
 - **H2.** The pre-registered closure test fails: 86 % < 99 %. The within-level snapshot subspaces are low-dimensional and nested (exploratory).
 - **H3.** Supported for every a-priori compression.
 - **P4.** See the report's §7.
-- **Revised conjecture.** In the report's §10.
+- **Revised conjecture.** In the report's §9.
 
 ## 5. Theorem targets (status after the run in the report)
 

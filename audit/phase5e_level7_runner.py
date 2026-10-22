@@ -38,5 +38,9 @@ if __name__ == '__main__':
     ap.add_argument('--tol', type=float, default=1e-7); ap.add_argument('--block', type=int, default=16); ap.add_argument('--K', type=int, default=4)
     a = ap.parse_args()
     if a.cmd == 'run': L7.run(a.level, a.resume, a.tol, a.block, a.K)
-    elif a.cmd == 'certify': L7.certify(a.level)
+    elif a.cmd == 'certify':
+        # V-B's certify() writes results/phase5b_d_level7[_L<l>]_certified.json; never overwrite a V-B file, rename the new one
+        suf = '' if a.level == 7 else f'_L{a.level}'; src = os.path.join(L7.RES, f'phase5b_d_level7{suf}_certified.json')
+        if os.path.exists(src): raise SystemExit(f'refusing to overwrite the existing V-B certificate {src}')
+        L7.certify(a.level); os.replace(src, os.path.join(L7.RES, f'phase5e_level7{suf}_certified.json'))
     else: raise SystemExit(__doc__)

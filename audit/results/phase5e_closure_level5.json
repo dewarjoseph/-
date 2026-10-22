@@ -1,0 +1,82 @@
+{
+ "E0_level5": 8.797011314651467,
+ "copies": 64,
+ "copy_surface_dim": 574,
+ "rows": [
+  {
+   "train": [
+    6,
+    7
+   ],
+   "d": 34,
+   "D": 2176,
+   "D_frac": 0.059233449477351915,
+   "err": 0.08445,
+   "seconds": 21
+  },
+  {
+   "train": [
+    6,
+    7
+   ],
+   "d": 42,
+   "D": 2688,
+   "D_frac": 0.07317073170731707,
+   "err": 0.04482,
+   "seconds": 72
+  },
+  {
+   "train": [
+    6,
+    7
+   ],
+   "d": 58,
+   "D": 3712,
+   "D_frac": 0.10104529616724739,
+   "err": 0.01945,
+   "seconds": 117
+  },
+  {
+   "train": [
+    6,
+    7
+   ],
+   "d": 114,
+   "D": 7296,
+   "D_frac": 0.1986062717770035,
+   "err": 0.00348,
+   "seconds": 693
+  },
+  {
+   "train": [
+    6
+   ],
+   "d": 34,
+   "D": 2176,
+   "D_frac": 0.059233449477351915,
+   "err": 0.07604,
+   "seconds": 9
+  },
+  {
+   "train": [
+    6
+   ],
+   "d": 42,
+   "D": 2688,
+   "D_frac": 0.07317073170731707,
+   "err": 0.03582,
+   "seconds": 23
+  },
+  {
+   "train": [
+    6
+   ],
+   "d": 58,
+   "D": 3712,
+   "D_frac": 0.10104529616724739,
+   "err": 0.01763,
+   "seconds": 52
+  }
+ ],
+ "note": "parsed from the run log (stage still running at the reporting cut-off; the JSON is written only at the end of the stage)"
+}
