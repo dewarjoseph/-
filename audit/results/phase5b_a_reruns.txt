@@ -1,0 +1,98 @@
+# Phase V-B / A: re-runs of Phase V-A scripts from scratch copies (same implementations; outputs compared, repository files untouched)
+## phase5a_star_closure_lower_bound.py (identical to stored audit/results file, timing lines excluded)
+==============================================================================
+1. LEGAL VERTEX-STAR TYPES = FORWARD ORBIT OF ONE LEGAL STAR UNDER THE COLLARED SUBSTITUTION
+ seed: interior tile 1 of T_3, vertex-star has 27 tiles
+   round 1: 8 new types, total 9
+   round 2: 33 new types, total 42
+   round 3: 30 new types, total 72
+   round 4: 0 new types, total 72
+ |V| = 72 legal vertex-star types (sizes 9..27 tiles)  (2s)
+ Phi(V) subset V (closure): True
+ complete vertex-stars of T_3: 40 types; all in V: True; V \ S_3: 32  (0s)
+ complete vertex-stars of T_4: 70 types; all in V: True; V \ S_4: 2  (2s)
+ complete vertex-stars of T_5: 72 types; all in V: True; V \ S_5: 0  (23s)
+ forward orbit from a second seed (tile 511): 72 types; equal to V: True
+==============================================================================
+2. PLAQUETTE FORMS h_e, lambda_min, AND S(type) = sum over edges touching the center
+ distinct plaquette signatures (pattern, links): 207
+ distinct lambda_min(h_e) values: [0.0, 0.152240935, 0.267949192, 0.585786438, 1.0, 2.0]
+ analytic check: simple l-cycle with holonomy angle theta has lambda_min = 2-2cos(theta/l):  l=4,theta=pi: 0.585786; l=4,theta=pi/2: 0.152241; l=3,theta=pi: 1.000000; l=3,theta=pi/2: 0.267949; l=2,theta=pi: 2.000000; l=2,theta=pi/2: 0.585786
+ S(type): min 6.274967, median 8.797064, max 20.388421
+ inter-tile plaquettes touching a tile: 48..48; non-flat among them: 19..37
+ weakest type: 27 tiles in star, 48 inter-tile plaquettes, 24 non-flat, S = 6.274967
+ FLOAT lower bound: E_bulk >= (1/4) min S = 1.568742
+==============================================================================
+3. EXACT CERTIFICATION lambda_min(h_e) >= mu_e BY RATIONAL LDL^* PIVOTS
+ certified 163 non-flat signatures (mu_e = lambda_min - 2e-6 rounded), 44 flat signatures assigned 0
+ CERTIFIED: E_bulk >= (1/4) min_types sum_e mu_e = 3137451/500000/4 = 1.568725
+ sanity: every legal star has at least one non-flat plaquette: True
+
+## phase5a_c2_lower_bound_check.py 36
+==========================================================================================
+STAGE 3: star types, lambda_min(h_e), star sums, exact certificate
+ own vectorised pose generator agrees with tiles_at_level on T_3 (all 512 poses, same order)
+ T_4: 4096 tiles, complete 1-stars 2744, incomplete (touch boundary) 1352, distinct types 70
+ T_5: 32768 tiles, complete 1-stars 27000, incomplete (touch boundary) 5768, distinct types 72
+ types(T_4) subset of types(T_5): True
+ own closure orbit from one T_4 star: 72 types after 4 rounds; equals types(T_5): True
+ Phi(orbit) subset orbit: True
+ star sizes (tiles): min 9, max 27, histogram {9: 1, 27: 71}
+ distinct plaquette signatures (pattern, links): 205; distinct lambda_min values: [0.0, 0.152240935, 0.267949192, 0.585786438, 1.0, 2.0]
+   analytic: 2-2cos(pi/8)=0.152240935, 2-sqrt3=0.267949192, 2-sqrt2=0.585786438
+ inter-tile edges touching a tile: 48..48; non-flat: 19..37
+ star sums S(type): min 6.274966629, max 20.388421100, distinct values 16
+ FLOAT bound (1/4) min S = 1.568741657  (claim 1.5687255; float >= 1.5687: True)
+ argmin type: 27 tiles, 48 inter-tile edges, 24 non-flat; lambda_min multiset: {0.0: 24, 1.0: 2, 0.267949: 8, 0.152241: 14}
+ argmin type (relative poses (frame idx, dx,dy,dz)): [(0, (-1, -1, -1)), (0, (0, 0, 0)), (0, (1, 1, 1)), (1, (-2, -2, 2)), (1, (0, 0, 4)), (2, (-2, 2, -2)), (2, (0, 4, 0)), (3, (-2, 2, 2)), (3, (0, 4, 4)), (4, (2, -2, -2)), (4, (4, 0, 0)), (5, (2, -2, 2)), (5, (4, 0, 4)), (6, (2, 2, -2)), (6, (4, 4, 0)), (7, (0, 4, 0)), (10, (4, 0, 0)), (11, (0, 0, 4)), (11, (4, 4, 0)), (13, (4, 0, 0)), (15, (0, 0, 4)), (16, (0, 4, 0)), (16, (4, 0, 4)), (19, (0, 4, 4)), (19, (4, 0, 0)), (20, (0, 0, 4)), (23, (0, 4, 0))]
+ own exact LDL^* certificate: 161 non-flat signatures certified (h_e - mu_e I positive definite, mu_e = floor(1e6 lambda)-2 over 1e6), 0 failures; 44 flat signatures (mu=0)
+   sanity: for every non-flat signature the same test REJECTS mu_e + 2.2e-5 (so the pivots detect lambda_min)
+   flat signatures: exact elimination of h_e finds a non-positive pivot (singular) for all 44 -> mu=0 is the best constant
+ CERTIFIED (own arithmetic): (1/4) min_types sum mu_e = 3137451/500000/4 = 3137451/2000000 = 1.568725500
+   equals claimed 3137451/2000000: True
+ stage 3 wall time 4.5s
+==========================================================================================
+STAGE 6: cheap improvements (FLOAT ONLY, UNCERTIFIED)
+ (a) vertex-block (2x2x2, weight 1/4) decomposition, 72 types: E_bulk >= min_type sum_v lambda_min(k_v) = 3.201472  (edge version: 1.568742)
+     distinct vertex-block signatures: 246 (non-flat 229, max dim 16); exact LDL^* failures: 0
+     CERTIFIED (own exact arithmetic, same closure/completeness hypotheses as the 72-type argument): E_bulk >= 12805833/4000000 = 3.201458250  (1.3s)
+     convex mixing edge/vertex decompositions: best t=0.000, bound 3.201472
+ (b) 2-stars (Chebyshev radius 2, 215 positions) of T_5: complete 25648, distinct types 165
+     cubes with full 3-block inside T_5: 205560 of 229376; distinct 3-block signatures: 3888
+     distinct lambda_min(B_c) values: 93, min 0.586840, max 1.752998 (19s)
+     tiles with complete 2-star and all 63 blocks defined: 25648
+     3-block (weight 1/18) decomposition evaluated on T_5 2-star types: E_bulk >= 4.008198   [UNCERTIFIED: completeness of 2-star types not established here]
+     for comparison on the same tiles: edge bound 1.568742, vertex-block bound 3.201472
+     best convex mix (edge, vertex, 3-block) weights (np.float64(0.0), np.float64(0.0), np.float64(1.0)): 4.008198  [UNCERTIFIED]
+     2-star types in T_6: 165 (complete 232560); T_5 types subset: True; new in T_6: 0 (42s)
+ stage 6 wall time 63.8s
+==========================================================================================
+total wall time 68.7s
+
+## phase5a_certified_upper_bound.py 2,3,4
+level 2 dim     128: float lambda_min estimate 10.7769505 (residual 1.3e-14);  CERTIFIED exact Rayleigh quotient of rounded vector = 10.776950512  (= 3033441878476984/281474975238239, |p|^2=281474975238239);  E_bulk <= 10.7769505  (0s)
+level 3 dim    1024: float lambda_min estimate 9.3784702 (residual 8.2e-14);  CERTIFIED exact Rayleigh quotient of rounded vector = 9.378470210  (= 1319902366216346/140737490935935, |p|^2=281474981871870);  E_bulk <= 9.3784702  (3s)
+/tmp/claude-0/-home-user--/3e28775d-be57-5932-b9d4-6e0f425b644f/scratchpad/phase5b_a_rerun/phase5a_certified_upper_bound.py:52: UserWarning: Exited postprocessing with accuracies 
+[6.08090152e-07 8.95900941e-07 8.26965352e-07 1.05028354e-06]
+not reaching the requested tolerance 1e-06.
+  w, V = spl.lobpcg(H, X, M=M, largest=False, tol=tol, maxiter=maxiter)
+level 4 dim    8192: float lambda_min estimate 8.9196344 (residual 6.1e-07);  CERTIFIED exact Rayleigh quotient of rounded vector = 8.919634360  (= 1255326883536563/140737482371670, |p|^2=281474964743340);  E_bulk <= 8.9196344  (14s)
+levels [2, 3, 4] done: E_bulk <= lambda_min(H^pin_m) <= certified value at every level computed.
+
+## phase5a_certified_upper_bound.py 5 1e-6
+/tmp/claude-0/-home-user--/3e28775d-be57-5932-b9d4-6e0f425b644f/scratchpad/phase5b_a_rerun/phase5a_certified_upper_bound.py:52: UserWarning: Exited at iteration 1547 with accuracies 
+[7.35440243e-07 5.36752306e-07 1.01746249e-06 9.95958069e-07]
+not reaching the requested tolerance 1e-06.
+Use iteration 1547 instead with accuracy 
+8.214032775938986e-07.
+
+  w, V = spl.lobpcg(H, X, M=M, largest=False, tol=tol, maxiter=maxiter)
+/tmp/claude-0/-home-user--/3e28775d-be57-5932-b9d4-6e0f425b644f/scratchpad/phase5b_a_rerun/phase5a_certified_upper_bound.py:52: UserWarning: Exited postprocessing with accuracies 
+[5.43195672e-07 7.30694058e-07 8.49987085e-07 1.14222779e-06]
+not reaching the requested tolerance 1e-06.
+  w, V = spl.lobpcg(H, X, M=M, largest=False, tol=tol, maxiter=maxiter)
+level 5 dim   65536: float lambda_min estimate 8.7970113 (residual 5.4e-07);  CERTIFIED exact Rayleigh quotient of rounded vector = 8.797011315  (= 1238069312580488/140737492338431, |p|^2=281474984676862);  E_bulk <= 8.7970113  (178s)
+levels [5] done: E_bulk <= lambda_min(H^pin_m) <= certified value at every level computed.
+
+## own enumerator level 5
+own level 5 {'N': 565440, 'plus': 296121, 'minus': 48146, 'i': 65532, 'j': 90109, 'k': 65532, 'traceless': 221173, 'f_nontriv': 0.4762998726655348, 'f_traceless': 0.3911520232031692, 'f_minus': 0.08514784946236559} seconds 12.0 rss 0.208088

@@ -1,0 +1,26 @@
+PHASE 5B-E / E1: level-6 pinned FR30 Clifford operator, exact Rayleigh-quotient certificate   (started 2026-10-21 17:17:12, OMP_NUM_THREADS=1)
+[fr30 L4] geometry: n=4096 tiles (7 unit cubes each), box 32^3, panels |E|=46080, 24 frames, max degree 24, boundary tiles (deg<24) 1331 = 0.3250 n; links {'+1': 6138, '-1': 17412, '+i': 2581, '-i': 2536, '+j': 6148, '-j': 6148, '+k': 2536, '-k': 2581}  (0.3s, rss 0.09 GB)
+   validation vs object builders (level 4): |E| 46080 vs 46080, max|H_grid - H_objects| = 0.0e+00, degrees identical: True  (1.3s)
+[fr30 L6] geometry: n=262144 tiles (7 unit cubes each), box 128^3, panels |E|=3096576, 24 frames, max degree 24, boundary tiles (deg<24) 23723 = 0.0905 n; links {'+1': 393210, '-1': 1163268, '+i': 163933, '-i': 163744, '+j': 442372, '-j': 442372, '+k': 163744, '-k': 163933}  (2.5s, rss 0.29 GB)
+   H = 24 I - A: dim 524288, nnz 4800508, max|H - H^dagger| = 0.0e+00  (4.6s, rss 0.99 GB)
+   lobpcg chunk:  603 it (538s, 0.89s/it), cumulative   603: lambda=[8.77015261 8.7701954  8.77032556 8.77034914] res=[1.0e-03 1.7e-03 2.0e-03 1.5e-03]  rss 0.99 GB
+   lobpcg chunk:  598 it (648s, 1.08s/it), cumulative  1201: lambda=[8.77013365 8.77013394 8.77024254 8.77025124] res=[3.2e-05 1.4e-04 1.6e-04 4.9e-04]  rss 0.99 GB
+   lobpcg chunk:  598 it (565s, 0.94s/it), cumulative  1799: lambda=[8.77013363 8.77013363 8.7702418  8.77024193] res=[1.1e-06 4.3e-06 1.8e-05 8.1e-05]  rss 0.99 GB
+   lobpcg chunk:  597 it (609s, 1.02s/it), cumulative  2396: lambda=[8.77013363 8.77013363 8.7702418  8.7702418 ] res=[2.2e-07 2.8e-07 1.2e-06 7.3e-06]  rss 0.99 GB
+   converged: ground Kramers pair residuals <= 1e-06
+ ground vector: Rayleigh quotient 8.7701336290, residual 2.19e-07, Kramers partner 8.7701336290 (split 1.7e-12), next pair 8.77024180 (gap 1.082e-04); iterations 2396, converged=True  (2370s)
+ saved audit/results/phase5b_e_fr30_level6_groundstate.npy  (complex128, 8.4 MB)
+ rounded vector p = round(2^26 psi): max |entry| = 2023796 (< 2^21), nonzero entries 523751 of 524288
+ (A) numpy-int64/chunked Python-int evaluation: <p,p> = 4503599622896284, Re sum_f <p_a, C_f p_b> = 34294610221854515, <p,Hp> = 39497170505801786  (1s)
+ (B) pure-Python per-tile evaluation:          <p,p> = 4503599622896284, Re sum_f <p_a, C_f p_b> = 34294610221854515, <p,Hp> = 39497170505801786  (13s)
+ (A) == (B) bit for bit: True
+ (C) scipy float Rayleigh quotient of the same integer vector: 8.770133629330  (|C - A| = 1.8e-15, sanity only)
+
+====================================================================================================
+ CERTIFIED (exact integer arithmetic, two independent evaluations agree):
+   E_bulk <= lambda_min(H^pin_6) <= 19748585252900893/2251799811448142
+   = 8.770133629330   (decimal; all digits shown are exact to the displayed precision)
+   float LOBPCG value 8.7701336290, difference certificate - float = 2.96e-10; residual of float vector 2.2e-07
+   previous certified bound (level 5): 2476138622922986/281474983842677 = 8.797011333;  improvement 0.026878
+ total wall time 2384s, max rss 0.99 GB
+====================================================================================================

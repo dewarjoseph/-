@@ -1,0 +1,40 @@
+[2026-10-21 17:41:10] === FR30 pinned level 4: ChebFSI K=4 block=16 deg 40->200 lam_max=48 tol=1e-07 resume=False OMP_NUM_THREADS=2 pid=3624 ===
+[2026-10-21 17:41:10]    geometry: n=4096 dim=8192 panels=46080 boundary tiles 1331 links {'+1': 6138, '-1': 17412, '+i': 2581, '-i': 2536, '+j': 6148, '-j': 6148, '+k': 2536, '-k': 2581} (0.4s, rss 0.09 GB)
+[2026-10-21 17:41:10]    axis 0: 15360 panels assembled, running nnz 37884, rss 0.10 GB
+[2026-10-21 17:41:10]    axis 1: 15360 panels assembled, running nnz 54652, rss 0.10 GB
+[2026-10-21 17:41:10]    axis 2: 15360 panels assembled, running nnz 70652, rss 0.10 GB
+[2026-10-21 17:41:10]    H = 24 I - A: nnz 70652 (17.249/tile), 0.001 GB, max|H-H^+|=0.0e+00, rss 0.10 GB
+[2026-10-21 17:41:11]    validation vs object builders: max|dH| = 0.0e+00
+[2026-10-21 17:41:11]    random start: theta_1=23.4352357 theta_m=24.5419719 res[:K] max 8.15e+00 orth 6.7e-16 rss 0.17 GB
+[2026-10-21 17:41:11]    pass deg    nmv    theta_1    theta_2    theta_3    theta_4    res_1    res_2    res_3    res_4  kramers   gap34-1    orth pass_s  elapsed   rss
+[2026-10-21 17:41:12]       0  40     42  9.1363048  9.1540949  9.1738609  9.1923603  2.9e-01  2.8e-01  2.9e-01  3.0e-01  1.8e-02  3.76e-02 4.4e-16      0        0  0.17
+[2026-10-21 17:41:12]       1  50     93  8.9244415  8.9277750  8.9535756  8.9585197  2.4e-02  2.8e-02  2.2e-02  2.7e-02  3.3e-03  2.91e-02 6.7e-16      0        1  0.17
+[2026-10-21 17:41:13]       2  62    156  8.9196354  8.9196459  8.9487890  8.9488245  3.2e-04  1.0e-03  4.3e-04  1.5e-03  1.0e-05  2.92e-02 8.9e-16      0        1  0.17
+[2026-10-21 17:41:13]       3  78    235  8.9196344  8.9196344  8.9487868  8.9487868  3.4e-07  2.9e-06  1.2e-06  1.6e-05  9.1e-11  2.92e-02 6.7e-16      0        2  0.17
+[2026-10-21 17:41:14]       4  97    333  8.9196344  8.9196344  8.9487868  8.9487868  5.8e-11  5.2e-10  1.7e-09  1.4e-08  5.3e-15  2.92e-02 6.7e-16      0        2  0.17
+[2026-10-21 17:41:14]    converged: 333 block matvecs, solve 2s (+0s before resume), total 4s, max rss 0.17 GB
+[2026-10-21 17:41:14]    RESULT level 4: lambda_1 = 8.9196344 (res 5.8e-11), pair 2 at 8.9487868, gap 2.915e-02, angle bound 2.0e-09
+[2026-10-21 17:41:14]    ground state: IPR*n = 9.1464 (vec1 9.1464, vec2 9.1464), P = 447.8, s50 166, s90 762, bw 0.007485 [0.3250]
+[2026-10-21 17:41:14]    S2(d) d=1..L: ['0.31631', '0.0736589', '0.0127734', '0.002233']  local D2: [1.661, 2.102, 2.528, 2.516]
+[2026-10-21 17:41:14]    interface weights d=1,2,3: [0.65569, 0.85807, 0.99963] [fractions [0.3118, 0.7068, 0.9973]]; second pair IPR*n 7.3723
+[2026-10-21 17:41:14]    saved /home/user/-/audit/results/phase5b_d_fr30_level7_L4_lowest4.npy, /home/user/-/audit/results/phase5b_d_fr30_level7_L4_groundstate_weights.npy, /home/user/-/audit/results/phase5b_d_level7_L4.json
+[2026-10-21 17:42:06] === FR30 pinned level 4: ChebFSI K=4 block=16 deg 40->200 lam_max=48 tol=1e-07 resume=True OMP_NUM_THREADS=2 pid=3655 ===
+[2026-10-21 17:42:06]    geometry: n=4096 dim=8192 panels=46080 boundary tiles 1331 links {'+1': 6138, '-1': 17412, '+i': 2581, '-i': 2536, '+j': 6148, '-j': 6148, '+k': 2536, '-k': 2581} (0.3s, rss 0.09 GB)
+[2026-10-21 17:42:06]    axis 0: 15360 panels assembled, running nnz 37884, rss 0.10 GB
+[2026-10-21 17:42:06]    axis 1: 15360 panels assembled, running nnz 54652, rss 0.10 GB
+[2026-10-21 17:42:06]    axis 2: 15360 panels assembled, running nnz 70652, rss 0.10 GB
+[2026-10-21 17:42:06]    H = 24 I - A: nnz 70652 (17.249/tile), 0.001 GB, max|H-H^+|=0.0e+00, rss 0.10 GB
+[2026-10-21 17:42:07]    validation vs object builders: max|dH| = 0.0e+00
+[2026-10-21 17:42:07]    resumed from checkpoint: pass 4 done, 334 block matvecs, elapsed 2s; re-Ritz theta_1=8.9196344 res[:K] max 1.32e-08
+[2026-10-21 17:42:08]    pass deg    nmv    theta_1    theta_2    theta_3    theta_4    res_1    res_2    res_3    res_4  kramers   gap34-1    orth pass_s  elapsed   rss
+[2026-10-21 17:42:08]       5 122    457  8.9196344  8.9196344  8.9487868  8.9487868  1.2e-14  1.4e-14  1.3e-12  4.7e-13  1.1e-14  2.92e-02 3.3e-16      1        3  0.17
+[2026-10-21 17:42:08]    converged: 457 block matvecs, solve 1s (+2s before resume), total 2s, max rss 0.17 GB
+[2026-10-21 17:42:08]    RESULT level 4: lambda_1 = 8.9196344 (res 1.2e-14), pair 2 at 8.9487868, gap 2.915e-02, angle bound 4.1e-13
+[2026-10-21 17:42:08]    ground state: IPR*n = 9.1464 (vec1 9.1464, vec2 9.1464), P = 447.8, s50 166, s90 762, bw 0.007485 [0.3250]
+[2026-10-21 17:42:08]    S2(d) d=1..L: ['0.31631', '0.0736589', '0.0127734', '0.002233']  local D2: [1.661, 2.102, 2.528, 2.516]
+[2026-10-21 17:42:08]    interface weights d=1,2,3: [0.65569, 0.85807, 0.99963] [fractions [0.3118, 0.7068, 0.9973]]; second pair IPR*n 7.3723
+[2026-10-21 17:42:08]    saved /home/user/-/audit/results/phase5b_d_fr30_level7_L4_lowest4.npy, /home/user/-/audit/results/phase5b_d_fr30_level7_L4_groundstate_weights.npy, /home/user/-/audit/results/phase5b_d_level7_L4.json
+[2026-10-21 17:42:10]    axis 0: 15360 panels assembled, running nnz 37884, rss 0.10 GB
+[2026-10-21 17:42:10]    axis 1: 15360 panels assembled, running nnz 54652, rss 0.10 GB
+[2026-10-21 17:42:10]    axis 2: 15360 panels assembled, running nnz 70652, rss 0.10 GB
+[2026-10-21 17:42:10]    CERTIFIED (exact integer arithmetic, scale 2^24): lambda_min(H_pin level 4) <= 2510653915122216/281474981341497 = 8.9196343602   (0s, rss 0.10 GB)

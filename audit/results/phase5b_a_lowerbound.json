@@ -1,0 +1,26 @@
+{
+ "n_signatures": 672,
+ "n_nonflat": 544,
+ "failures": 0,
+ "rejects": 544,
+ "T4": {
+  "n": 4096,
+  "complete": 2744,
+  "edges_per_complete_tile": [
+   48
+  ],
+  "min_S": "3137451/500000",
+  "n_distinct_S": 16,
+  "new_signatures": 0
+ },
+ "T5": {
+  "n": 32768,
+  "complete": 27000,
+  "edges_per_complete_tile": [
+   48
+  ],
+  "min_S": "3137451/500000",
+  "n_distinct_S": 16,
+  "new_signatures": 16
+ }
+}

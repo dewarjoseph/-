@@ -1,0 +1,31 @@
+PHASE V-B / A (b)+(e): pinned bottoms from own assembly + own solver calls; ground-state organisation statistics
+ level 2: n=64 dim=128 nnz=1592 Hermiticity defect 0.0e+00 (nonzeros 0), Gaussian-integer defect 0.0e+00, build 0.0s
+    dense eigh (scipy.linalg.eigh): lambda_1..4 = [10.776950512, 10.776950512, 11.677452972, 11.677452972]  residuals ['2.0e-14', '3.2e-14', '2.8e-14', '4.3e-14']  Kramers split lambda_2-lambda_1 = 5.33e-15, next pair gap 0.900502  (0s, rss 0.10 GB)
+    dossier bottom 10.776951: difference -4.88e-07
+    IPR*n = 2.3873 (dossier 2.39); pair densities max|p1-p2| = 7.5e-16; boundary weight 0.63078 (boundary fraction 0.8281)
+    interface weight by depth {d: w/frac (enrichment)}: d1: 0.9228/0.8281 (1.11)  d2: 1.0000/1.0000 (1.00)
+    box counting 1/S2(d): 4.272  26.808   D2(d)=log2(S2(d-1)/S2(d)): 2.09 2.65
+ level 3: n=512 dim=1024 nnz=14328 Hermiticity defect 0.0e+00 (nonzeros 0), Gaussian-integer defect 0.0e+00, build 0.1s
+    dense eigh (scipy.linalg.eigh): lambda_1..4 = [9.37847021, 9.37847021, 9.589402918, 9.589402918]  residuals ['9.5e-14', '3.6e-14', '8.8e-14', '4.1e-14']  Kramers split lambda_2-lambda_1 = 5.33e-15, next pair gap 0.210933  (2s, rss 0.15 GB)
+    dossier bottom 9.378470: difference +2.10e-07
+    IPR*n = 6.4243 (dossier 6.42); pair densities max|p1-p2| = 8.6e-16; boundary weight 0.13271 (boundary fraction 0.5605)
+    interface weight by depth {d: w/frac (enrichment)}: d1: 0.7821/0.5254 (1.49)  d2: 0.9924/0.9785 (1.01)  d3: 1.0000/1.0000 (1.00)
+    box counting 1/S2(d): 2.405  12.008  79.697   D2(d)=log2(S2(d-1)/S2(d)): 1.27 2.32 2.73
+    stored weight file phase5a_fr30_level3_groundstate_weights.npy: IPR*n 6.4243, max|p_own - p_stored| = 6.9e-18, L1 = 2.3e-16; stored interface w(1) 0.7821, 1/S2(d) 2.405 12.008 79.697
+ level 4: n=4096 dim=8192 nnz=120824 Hermiticity defect 0.0e+00 (nonzeros 0), Gaussian-integer defect 0.0e+00, build 1.8s
+    scipy eigsh shift-invert sigma=8.0 (sparse LU): lambda_1..4 = [8.91963436, 8.91963436, 8.948786823, 8.948786823]  residuals ['1.4e-14', '6.3e-14', '9.3e-14', '4.5e-14']  Kramers split lambda_2-lambda_1 = 7.28e-14, next pair gap 0.029152  (7s, rss 0.25 GB)
+    dossier bottom 8.919634: difference +3.60e-07
+    IPR*n = 9.1464 (dossier 9.15); pair densities max|p1-p2| = 1.5e-16; boundary weight 0.00748 (boundary fraction 0.3250)
+    interface weight by depth {d: w/frac (enrichment)}: d1: 0.6557/0.3118 (2.10)  d2: 0.8581/0.7068 (1.21)  d3: 0.9996/0.9973 (1.00)  d4: 1.0000/1.0000 (1.00)
+    box counting 1/S2(d): 3.161  13.576  78.288  447.829   D2(d)=log2(S2(d-1)/S2(d)): 1.66 2.10 2.53 2.52
+    stored weight file phase5a_fr30_level4_groundstate_weights.npy: IPR*n 9.1464, max|p_own - p_stored| = 6.9e-09, L1 = 8.3e-07; stored interface w(1) 0.6557, 1/S2(d) 3.161 13.576 78.288 447.829
+ level 5: n=32768 dim=65536 nnz=991224 Hermiticity defect 0.0e+00 (nonzeros 0), Gaussian-integer defect 0.0e+00, build 7.5s
+    scipy lobpcg block 6 seed 1 tol 1e-7 diag precond: lambda_1..4 = [8.797011315, 8.797011315, 8.798979985, 8.798979985]  residuals ['1.9e-08', '8.9e-09', '7.6e-09', '4.3e-09']  Kramers split lambda_2-lambda_1 = 1.31e-13, next pair gap 0.001969  (277s, rss 0.44 GB)
+    dossier bottom 8.797011: difference +3.15e-07
+    IPR*n = 19.9304 (dossier 19.93); pair densities max|p1-p2| = 4.1e-09; boundary weight 0.00070 (boundary fraction 0.1747)
+    interface weight by depth {d: w/frac (enrichment)}: d1: 0.5816/0.1708 (3.41)  d2: 0.7735/0.4454 (1.74)  d3: 0.8593/0.7745 (1.11)  d4: 0.9999/0.9997 (1.00)  d5: 1.0000/1.0000 (1.00)
+    box counting 1/S2(d): 3.252  17.356  72.186  301.777  1644.124   D2(d)=log2(S2(d-1)/S2(d)): 1.70 2.42 2.06 2.06 2.45
+    stored weight file phase5a_fr30_level5_groundstate_weights.npy: IPR*n 19.9304, max|p_own - p_stored| = 2.0e-08, L1 = 6.3e-06; stored interface w(1) 0.5816, 1/S2(d) 3.252 17.356 72.185 301.776 1644.121
+ monotonicity of pinned bottoms in level: 10.776951, 9.378470, 8.919634, 8.797011  non-increasing: True
+ two-level D2 = log2(IPR_L / IPR_{L+1}) (linear size doubles per level): 2->3: 1.57, 3->4: 2.49, 4->5: 1.88  (dossier 2.49, 1.88 for 3->4, 4->5)
+ stored level-6 weights (read, re-analysed only; interfaces need the level-6 panel list which is not built here): n=262144, IPR*n = 42.789 (dossier 42.79), 1/S2(d) = [4.982, 26.009, 88.838, 294.454, 1140.125, 6126.428], D2 5->6 from stored level-5/6 IPR: 1.90 (dossier 1.90)
