@@ -44,6 +44,7 @@ What the evidence supports:
    - The low spectrum of the supertile response obeys an *area law*: the eigenvalue count in a fixed window grows ×4.5–4.8 per level, exactly as the surface does (×4.64).
    - The support of the boundary ground pair tracks the interface area.
    - The only accurate reduction found removes the pinned outer boundary: interface tiles, a 1.8× compression. It is exact to 0.035 RMS and explains 98 % of FR30's residual. **So FR30's excess lives entirely in the seam region**, but not in any low-dimensional set of seam variables.
+   - *Where on the seams [X].* The exact, gauge-invariant depth decomposition of E₀ places FR30's flux residual (+0.767) at the coarse seams: +0.90, +0.57 and +0.39 at depths 0–2, partly offset by −1.10 at the finest bonds. FR30's bond efficiencies at depths 0–2 are the lowest of all 264 classes (§5).
 4. **The one positive structure is environment-selected, not child-intrinsic [E, X: exploratory, FR30, post-freeze].**
    - *Saturation.* The restrictions of the FR30 ground state to all copies of T₃ (8, 64, 512 and 4096 copies at levels 4–7) span a local state space that **saturates**: the cumulative dimension for 99.9 % is 12, 43, 55 and 56 out of 574.
    - *It is not the child's own low spectrum.* Low modes of R₃(E) capture only 48–63 % of it at k = 20, at any energy.
