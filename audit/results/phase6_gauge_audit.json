@@ -1,0 +1,328 @@
+{
+ "1": {
+  "level": 1,
+  "tiles": 8,
+  "panels": 48,
+  "max_degree": 21,
+  "boundary_tiles": 8,
+  "A_operator_max_abs_diff": 0.0,
+  "A_same_tile_order": true,
+  "links_in_Q8": true,
+  "link_census": {
+   "-1": 24,
+   "-k": 5,
+   "+i": 5,
+   "-i": 2,
+   "-j": 2,
+   "+j": 2,
+   "+k": 2,
+   "+1": 6
+  },
+  "B_lab_gauge_max_dev": 1.5700924586837752e-16,
+  "cycle_rank": 41,
+  "cycle_lengths": {
+   "2": 14,
+   "3": 27
+  },
+  "E_fundamental_cycle_classes": {
+   "traceless": 23,
+   "+1": 17,
+   "-1": 1
+  },
+  "E_two_cycles_from_parallel_panels": {
+   "traceless": 8,
+   "+1": 5,
+   "-1": 1
+  },
+  "E_holonomy_group": [
+   "+1",
+   "+i",
+   "+j",
+   "+k",
+   "-1",
+   "-i",
+   "-j",
+   "-k"
+  ],
+  "E_holonomy_group_order": 8,
+  "C_corner_max_dev": 0.0,
+  "D_axis_flat_max_dev": 0.0,
+  "E_gauge_links_changed_max": 1.8970943923742425,
+  "E_gauge_trace_invariance_max_dev": 8.881784197001252e-16,
+  "E_gauge_conjugation_max_dev": 4.47545209131181e-16,
+  "F_free_lowest": {
+   "fr30_q8": [
+    2.8894202550737225,
+    2.88942025507373,
+    5.87896074656725,
+    5.8789607465672535
+   ],
+   "trivial": [
+    -5.99535778282253e-15,
+    -6.659803649284155e-16,
+    7.145898033750307,
+    7.145898033750308
+   ],
+   "random_pure_gauge": [
+    2.91053838377577e-15,
+    4.194888973825232e-15,
+    7.145898033750309,
+    7.1458980337503135
+   ],
+   "fr30_gauge_transformed": [
+    2.889420255073718,
+    2.8894202550737194,
+    5.878960746567248,
+    5.878960746567252
+   ]
+  },
+  "F_axis_subgraph": {
+   "0": {
+    "zero_modes": 2,
+    "components": 1,
+    "expected_zero_modes": 2
+   },
+   "1": {
+    "zero_modes": 2,
+    "components": 1,
+    "expected_zero_modes": 2
+   },
+   "2": {
+    "zero_modes": 2,
+    "components": 1,
+    "expected_zero_modes": 2
+   }
+  },
+  "G_spectrum_max_dev": 2.1316282072803006e-14,
+  "G_transition_prob_max_dev": 4.440892098500626e-16,
+  "G_amplitude_max_change": 0.8511942495663166,
+  "seconds": 0.41547298431396484,
+  "plaquette_classes": {
+   "traceless": 31,
+   "+1": 26,
+   "-1": 3
+  }
+ },
+ "2": {
+  "level": 2,
+  "tiles": 64,
+  "panels": 576,
+  "max_degree": 24,
+  "boundary_tiles": 53,
+  "A_operator_max_abs_diff": 0.0,
+  "A_same_tile_order": true,
+  "links_in_Q8": true,
+  "link_census": {
+   "-1": 228,
+   "+i": 43,
+   "-i": 34,
+   "-j": 52,
+   "-k": 43,
+   "+j": 52,
+   "+k": 34,
+   "+1": 90
+  },
+  "B_lab_gauge_max_dev": 4.440892098500626e-16,
+  "cycle_rank": 513,
+  "cycle_lengths": {
+   "2": 126,
+   "3": 129,
+   "7": 36,
+   "4": 126,
+   "5": 96
+  },
+  "E_fundamental_cycle_classes": {
+   "+1": 158,
+   "traceless": 315,
+   "-1": 40
+  },
+  "E_two_cycles_from_parallel_panels": {
+   "+1": 97,
+   "traceless": 26,
+   "-1": 3
+  },
+  "E_holonomy_group": [
+   "+1",
+   "+i",
+   "+j",
+   "+k",
+   "-1",
+   "-i",
+   "-j",
+   "-k"
+  ],
+  "E_holonomy_group_order": 8,
+  "C_corner_max_dev": 0.0,
+  "D_axis_flat_max_dev": 0.0,
+  "E_gauge_links_changed_max": 1.978050118437692,
+  "E_gauge_trace_invariance_max_dev": 1.3334236103572998e-15,
+  "E_gauge_conjugation_max_dev": 6.866350197783356e-16,
+  "F_free_lowest": {
+   "fr30_q8": [
+    4.726464981572073,
+    4.726464981572101,
+    4.831174343364984,
+    4.831174343364994
+   ],
+   "trivial": [
+    -7.126002818820838e-15,
+    2.0575461219836354e-17,
+    1.7006272655482484,
+    1.700627265548291
+   ],
+   "random_pure_gauge": [
+    -7.111031415417898e-15,
+    2.13218861306199e-14,
+    1.7006272655482801,
+    1.7006272655482917
+   ],
+   "fr30_gauge_transformed": [
+    4.726464981572061,
+    4.726464981572069,
+    4.83117434336498,
+    4.8311743433649905
+   ]
+  },
+  "F_axis_subgraph": {
+   "0": {
+    "zero_modes": 2,
+    "components": 1,
+    "expected_zero_modes": 2
+   },
+   "1": {
+    "zero_modes": 2,
+    "components": 1,
+    "expected_zero_modes": 2
+   },
+   "2": {
+    "zero_modes": 2,
+    "components": 1,
+    "expected_zero_modes": 2
+   }
+  },
+  "G_spectrum_max_dev": 5.1514348342607263e-14,
+  "G_transition_prob_max_dev": 7.216449660063518e-16,
+  "G_amplitude_max_change": 0.5944356925896209,
+  "seconds": 0.08852744102478027,
+  "plaquette_classes": {
+   "traceless": 365,
+   "+1": 385,
+   "-1": 42
+  }
+ },
+ "3": {
+  "level": 3,
+  "tiles": 512,
+  "panels": 5376,
+  "max_degree": 24,
+  "boundary_tiles": 287,
+  "A_operator_max_abs_diff": 0.0,
+  "A_same_tile_order": true,
+  "links_in_Q8": true,
+  "link_census": {
+   "-1": 2052,
+   "+i": 329,
+   "-i": 308,
+   "-j": 644,
+   "-k": 329,
+   "+j": 644,
+   "+k": 308,
+   "+1": 762
+  },
+  "B_lab_gauge_max_dev": 4.440892098500626e-16,
+  "cycle_rank": 4865,
+  "cycle_lengths": {
+   "2": 1117,
+   "3": 543,
+   "4": 704,
+   "7": 559,
+   "5": 341,
+   "8": 323,
+   "11": 222,
+   "9": 396,
+   "15": 36,
+   "13": 108,
+   "10": 150,
+   "6": 339,
+   "12": 27
+  },
+  "E_fundamental_cycle_classes": {
+   "+1": 1571,
+   "traceless": 2799,
+   "-1": 495
+  },
+  "E_two_cycles_from_parallel_panels": {
+   "+1": 956,
+   "traceless": 104,
+   "-1": 57
+  },
+  "E_holonomy_group": [
+   "+1",
+   "+i",
+   "+j",
+   "+k",
+   "-1",
+   "-i",
+   "-j",
+   "-k"
+  ],
+  "E_holonomy_group_order": 8,
+  "C_corner_max_dev": 0.0,
+  "D_axis_flat_max_dev": 0.0,
+  "E_gauge_links_changed_max": 1.9969058391840917,
+  "E_gauge_trace_invariance_max_dev": 2.6658359842250048e-15,
+  "E_gauge_conjugation_max_dev": 1.3539997316610669e-15,
+  "F_free_lowest": {
+   "fr30_q8": [
+    5.114941317369971,
+    5.1149413173700395,
+    5.135239608893158,
+    5.135239608893215
+   ],
+   "trivial": [
+    -4.2011846411396596e-14,
+    3.7724269393888465e-14,
+    0.4386646789490826,
+    0.4386646789490891
+   ],
+   "random_pure_gauge": [
+    3.4023536759032627e-14,
+    4.452470062269854e-14,
+    0.4386646789490125,
+    0.43866467894902333
+   ],
+   "fr30_gauge_transformed": [
+    5.1149413173699925,
+    5.114941317369993,
+    5.1352396088931735,
+    5.135239608893213
+   ]
+  },
+  "F_axis_subgraph": {
+   "0": {
+    "zero_modes": 2,
+    "components": 1,
+    "expected_zero_modes": 2
+   },
+   "1": {
+    "zero_modes": 2,
+    "components": 1,
+    "expected_zero_modes": 2
+   },
+   "2": {
+    "zero_modes": 2,
+    "components": 1,
+    "expected_zero_modes": 2
+   }
+  },
+  "G_spectrum_max_dev": 1.9184653865522705e-13,
+  "G_transition_prob_max_dev": 5.516420653606247e-16,
+  "G_amplitude_max_change": 0.5647021676628186,
+  "seconds": 3.0523757934570312,
+  "plaquette_classes": {
+   "+1": 3945,
+   "traceless": 3253,
+   "-1": 530
+  }
+ }
+}
