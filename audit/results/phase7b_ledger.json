@@ -1,0 +1,619 @@
+{
+ "commit": "14a9c2dfa9ee331b33539cc307586269bcd02637",
+ "branch": "claude/phase7-local-determinacy",
+ "working_tree_status": "",
+ "definitions": "deliverables/PHASE7_DEFINITIONS.md",
+ "report": "deliverables/PHASE7_REPORT.md",
+ "claims": [
+  {
+   "id": "P1-forced-curvature",
+   "proposition": 1,
+   "status": "proved",
+   "statement": "every geometry-compatible frame field (proper or improper) has >= 12 of the 21 centre-octant two-cycles non-trivial in every level-1 supertile; sharp; hence never pure gauge",
+   "evidence": {
+    "exhaustive_min_nontrivial": 12,
+    "assignments": 1679616,
+    "pure_gauge": 0,
+    "two_cycle_formula_mismatches": 0,
+    "two_cycles_checked": 35271936
+   },
+   "certificates": [
+    "certificates/Phase7Counting.lean (octant_bound, total_bound, bound_attained)",
+    "audit/results/phase7_adversarial.json",
+    "audit/results/phase7_twocycle_formula.json"
+   ],
+   "tests": [
+    "python -m pytest -q tests/test_phase7.py tests/test_phase7b.py -k \"counting or two_cycle or lean\""
+   ],
+   "caveats": [
+    "Lean certifies the finite predicate; its correspondence to the geometry is the Python test test_lean_predicate_matches_explicit_holonomy"
+   ]
+  },
+  {
+   "id": "P1b-nine-forced",
+   "proposition": 1,
+   "status": "proved for proper frames; refuted for improper frames",
+   "statement": "the 9 two-cycles with s_v(m) = -1 are non-trivial for every proper compatible frame field (Phase VI F')",
+   "evidence": {
+    "proper_all_forced": true,
+    "improper_failures": 1391616,
+    "counterexample": {
+     "perms": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "det": [
+      1,
+      1,
+      -1,
+      -1,
+      1,
+      -1,
+      1,
+      1
+     ],
+     "nontrivial_two_cycle_configs": 12,
+     "nontrivial_fundamental_cycles": 27
+    }
+   },
+   "certificates": [
+    "certificates/Phase7Counting.lean (forced_proper, forced_fails_improper)"
+   ],
+   "tests": [
+    "python -m pytest -q tests/test_phase7.py tests/test_phase7b.py"
+   ],
+   "caveats": []
+  },
+  {
+   "id": "P2-uniform-gap",
+   "proposition": 2,
+   "status": "certified",
+   "statement": "H_pin >= H_U >= 41789/25000 for every compatible (O(3)) frame field on every union of level-1 supertiles, incl. infinite tilings with a level-1 composition",
+   "evidence": {
+    "proper_classes": 6561,
+    "improper_classes": 1672288,
+    "failures": 0,
+    "block_min_lambda": 1.6715739836483328,
+    "assignments_vs_classes": {
+     "assignments_all": 1679616,
+     "assignments_proper": 6561,
+     "assignments_improper": 1673055,
+     "keys_proper": 6561,
+     "keys_improper": 1672288,
+     "keys_overlap_proper_improper": 0,
+     "keys_total": 1678849,
+     "improper_class_sizes": {
+      "1": 1671525,
+      "6": 1,
+      "2": 762
+     },
+     "collision_mechanisms": {
+      "constant_pi": 1,
+      "one_tile_swap": 48,
+      "other": 714
+     },
+     "collision_classes_with_identical_raw_links": {
+      "True": 1,
+      "False": 762
+     },
+     "swap_pairs_differ_by_minus_one_only": true,
+     "check_sum": true
+    }
+   },
+   "certificates": [
+    "exact Bareiss/Sylvester over Z[i], audit/phase7_adversarial.py"
+   ],
+   "tests": [
+    "python -m pytest -q tests/test_phase7.py tests/test_phase7b.py -k \"uniform or gauge_class\""
+   ],
+   "caveats": [
+    "constant is the level-1 block optimum to 2e-5; the true uniform floor over frame fields is not known"
+   ]
+  },
+  {
+   "id": "P2b-lemma-K-scope",
+   "proposition": 2,
+   "status": "proved (corrected scope)",
+   "statement": "ker D_U^dag D_U != 0 iff pure gauge holds on finite connected graphs for the free operator only; false for pinned; not transferable to infinite volume",
+   "evidence": {
+    "free_trivial_kernel_dim": 2,
+    "pinned_trivial_lambda_min": 11.212838712216973,
+    "note": "pinned operator has trivial kernel for every connection (boundary term > 0 on a connected graph)"
+   },
+   "certificates": [],
+   "tests": [
+    "python -m pytest -q tests/test_phase7.py tests/test_phase7b.py"
+   ],
+   "caveats": []
+  },
+  {
+   "id": "P3-nonabelian-vs-Z2",
+   "proposition": 3,
+   "status": "certified",
+   "statement": "E_FR30 >= Lambda_12 > U(Z2) >= E_Z2 >= 41789/25000 on the same graph and operator",
+   "evidence": {
+    "Lambda_12": "601009330964533299746863/75557863725914323419136",
+    "U_Z2_L6": "42548994329742993/12673210835394248",
+    "U_Z2_L5": "7174916792026953/2076934020517807"
+   },
+   "certificates": [
+    "audit/results/phase7_ims.json",
+    "audit/results/phase7b_scaling.json (exact Rayleigh)"
+   ],
+   "tests": [
+    "python -m pytest -q tests/test_phase7.py tests/test_phase7b.py -k controls"
+   ],
+   "caveats": [
+    "upper bounds are compressions of the infinite-volume operator to a supertile of the same hull"
+   ]
+  },
+  {
+   "id": "P3b-abelian-shadows",
+   "proposition": 3,
+   "status": "certified",
+   "statement": "E_FR30 exceeds the floor of each Abelian shadow chi_k o U_FR30 (same geometry, hierarchy, Wilson density)",
+   "evidence": {
+    "U_chi1_L5": "536130956259157/69626189711900",
+    "U_chi2_L5": "1007846143256513/187089263888265",
+    "U_chi3_L5": "640798680748432/83219165006569",
+    "U_chi1_L6": "719226693112947/94207047029122",
+    "U_chi2_L6": "61065737070500008/11460021816284787",
+    "Lambda_12": "601009330964533299746863/75557863725914323419136",
+    "wilson_L4": {
+     "FR30": 0.5601802600472813,
+     "FR30_chi1": 0.5596040189125295,
+     "FR30_chi2": 0.48392434988179667,
+     "Z2_reflect": 0.5445035460992907
+    }
+   },
+   "certificates": [
+    "audit/results/phase7b_controls.json"
+   ],
+   "tests": [
+    "python -m pytest -q tests/test_phase7.py tests/test_phase7b.py -k controls"
+   ],
+   "caveats": [
+    "does NOT show Q8 is essential: Z2 reflection vs chi_1 (equal Wilson density) differ by 4.3; iid Z2 links exceed FR30 in finite volume (but have infinite-volume floor 0 a.s.)"
+   ]
+  },
+  {
+   "id": "P3c-rule-classes",
+   "proposition": 3,
+   "status": "partially certified",
+   "statement": "per-rule separation from Z2 via B_2 > U_Z2",
+   "evidence": {
+    "rules": 264,
+    "U_Z2_level6": "42548994329742993/12673210835394248",
+    "U_Z2_float": 3.357396549492451,
+    "status_counts": {
+     "certified_above_Z2": 134,
+     "inconclusive": 130,
+     "missing": 0
+    },
+    "B2_min": 2.382027467091215,
+    "B2_median": 3.3620985349012846,
+    "B2_max": 4.579832235971395,
+    "all_primitive": true,
+    "Y4_min": 6.095886384594531,
+    "Y4_max": 9.516866127104864
+   },
+   "certificates": [
+    "deliverables/PHASE7_RULE_TABLE.md"
+   ],
+   "tests": [],
+   "caveats": [
+    "inconclusive classes need Lambda_R per rule"
+   ]
+  },
+  {
+   "id": "P4-local-rules",
+   "proposition": 4,
+   "status": "proved (paper argument + finite checks)",
+   "statement": "T_1 = Omega_FR30: every tiling with proper frames and legal 1-stars is in the FR30 hull; non-periodic; E_inf(R) = E_FR30 for R >= 1",
+   "evidence": {
+    "V1": 72,
+    "primitivity_power": 2,
+    "R0": {
+     "types_with_roles": 72,
+     "V1_subset_PhiV1": true,
+     "max_roles_per_type": 1,
+     "role_counts_by_child_index": {
+      "0": 1,
+      "1": 3,
+      "2": 5,
+      "3": 13,
+      "4": 15,
+      "5": 5,
+      "6": 15,
+      "7": 15
+     }
+    },
+    "child_distance_matrix": [
+     [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     [
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      2
+     ],
+     [
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      2,
+      1
+     ],
+     [
+      1,
+      1,
+      1,
+      1,
+      0,
+      2,
+      1,
+      1
+     ],
+     [
+      1,
+      1,
+      1,
+      1,
+      2,
+      0,
+      1,
+      1
+     ],
+     [
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      0,
+      1
+     ],
+     [
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      0
+     ]
+    ],
+    "S": {
+     "distance1_siblings_inside_every_1star": true,
+     "centre_child_star_contains_all_8": true,
+     "distance2_siblings_missing_occurrences": 68
+    },
+    "A": {
+     "compatible_sibling_stars_checked": 1246,
+     "candidates_per_sibling_max": 15,
+     "candidates_per_sibling_min": 1,
+     "ok": true
+    },
+    "B": {
+     "nodes": 157,
+     "configurations": 72,
+     "branch_points": 25,
+     "pruned_inconsistent": 60,
+     "distinct_parent_1stars": 72,
+     "parent_1stars_subset_V1": true,
+     "parent_1stars_equal_V1": true,
+     "illegal_examples": [],
+     "mode": "grouped"
+    }
+   },
+   "certificates": [
+    "audit/results/phase7b_local_rules.json"
+   ],
+   "tests": [
+    "python -m pytest -q tests/test_phase7.py tests/test_phase7b.py -k local_rules"
+   ],
+   "caveats": [
+    "check B uses a sound over-approximation (grouped branching)",
+    "closure lemma: paper proof (report 6.1) plus per-instance assertions"
+   ]
+  },
+  {
+   "id": "P4b-legal-type-census",
+   "proposition": 4,
+   "status": "certified",
+   "statement": "|V_R| = 72, 165, 445, 762 and the generated sets are complete",
+   "evidence": {
+    "types": {
+     "1": 72,
+     "2": 165,
+     "3": 445,
+     "4": 762
+    },
+    "complete_stars": {
+     "1": 238328,
+     "2": 232560,
+     "3": 210232,
+     "4": 208880
+    },
+    "generated": {
+     "1": 72,
+     "2": 165,
+     "3": 445,
+     "4": 762
+    },
+    "equal_to_phase7_local": {
+     "1": true,
+     "2": true,
+     "3": true,
+     "4": true
+    }
+   },
+   "certificates": [
+    "audit/results/phase7b_census.json"
+   ],
+   "tests": [
+    "python -m pytest -q tests/test_phase7.py tests/test_phase7b.py -k census"
+   ],
+   "caveats": [
+    "completeness proof in the report section 6.1 uses primitivity (M^2 > 0)"
+   ]
+  },
+  {
+   "id": "P4c-periodic-search",
+   "proposition": 4,
+   "status": "corroborating only",
+   "statement": "no 1-legal tiling with period lattice m*Lambda for the exhausted m",
+   "evidence": {
+    "controls": {
+     "P1_illegal_1stars": 7,
+     "crystal_found_without_legality": true,
+     "P1_found_with_P1_types": true
+    },
+    "search": [
+     {
+      "lattice": "1 * ker(x*1 + y*2 + z*4 mod 7)",
+      "tiles_per_period": 1,
+      "nodes": 42,
+      "exhausted": true,
+      "solutions_found": 0,
+      "seconds": 0.061670780181884766
+     },
+     {
+      "lattice": "2 * ker(x*1 + y*2 + z*4 mod 7)",
+      "tiles_per_period": 8,
+      "nodes": 10338,
+      "exhausted": true,
+      "solutions_found": 0,
+      "seconds": 9.562580347061157
+     },
+     {
+      "lattice": "2 * ker(x*1 + y*4 + z*2 mod 7)",
+      "tiles_per_period": 8,
+      "nodes": 10338,
+      "node_cap": 2000000,
+      "exhausted": true,
+      "solutions_found": 0,
+      "seconds": 9.590254783630371
+     },
+     {
+      "lattice": "3 * ker(x*1 + y*4 + z*2 mod 7)",
+      "tiles_per_period": 27,
+      "nodes": 3000000,
+      "node_cap": 3000000,
+      "exhausted": false,
+      "solutions_found": 0,
+      "seconds": 2608.9445250034332
+     },
+     {
+      "lattice": "3 * ker(x*1 + y*2 + z*4 mod 7)",
+      "tiles_per_period": 27,
+      "nodes": 3000000,
+      "node_cap": 3000000,
+      "exhausted": false,
+      "solutions_found": 0,
+      "seconds": 2615.581778526306
+     },
+     {
+      "lattice": "1 * ker(x*1 + y*4 + z*2 mod 7)",
+      "tiles_per_period": 1,
+      "nodes": 42,
+      "node_cap": 2000000,
+      "exhausted": true,
+      "solutions_found": 0,
+      "seconds": 0.047013282775878906
+     }
+    ]
+   },
+   "certificates": [],
+   "tests": [
+    "python -m pytest -q tests/test_phase7.py tests/test_phase7b.py -k periodic"
+   ],
+   "caveats": [
+    "bounded search; the proof of non-periodicity is P4-local-rules"
+   ]
+  },
+  {
+   "id": "P5-localization",
+   "proposition": 5,
+   "status": "proved + certified",
+   "statement": "Lambda_R <= E_FR30 <= D_R, Lambda_R >= D_R - eps, D_R <= E_FR30 + eps, eps(rho) <= K(rho) S_1/rho^2; certified E_FR30 in [Lambda_12, 8.7649120247]",
+   "evidence": {
+    "6": {
+     "distinct_balls": 325,
+     "L_R_certified": "8838598317909672211830225/2417851639229258349412352",
+     "L_R_float": 3.6555585853593415,
+     "eps_upper": 10.041938985587553,
+     "D_R_certified_lower": 9.416632651737062
+    },
+    "8": {
+     "distinct_balls": 747,
+     "L_R_certified": "15867836210091888973338375/2417851639229258349412352",
+     "L_R_float": 6.562783238077461,
+     "eps_upper": 4.227451926415623,
+     "D_R_certified_lower": 9.051520344856677
+    },
+    "10": {
+     "distinct_balls": 1440,
+     "L_R_certified": "70941827122477493849563/9444732965739290427392",
+     "L_R_float": 7.511258113894646,
+     "eps_upper": 2.3565981132704477,
+     "D_R_certified_lower": 8.914371480039003
+    },
+    "12": {
+     "distinct_balls": 2315,
+     "L_R_certified": "601009330964533299746863/75557863725914323419136",
+     "L_R_float": 7.954292264597248,
+     "eps_upper": 1.5091221498821372,
+     "D_R_certified_lower": 8.856981246543153
+    },
+    "independent_check": {
+     "K": {
+      "4.2229": {
+       "rho0": 4.2229,
+       "eta_max": 0.5074373399458056,
+       "K_upper": 2.8536007405715496,
+       "max_on_grid": 1.8926163793201944,
+       "c_ge_1_minus_pi2eta2over6_on_grid": true,
+       "pi2_over_6": 1.6449340668482264
+      },
+      "6.2229": {
+       "rho0": 6.2229,
+       "eta_max": 0.34435024552172505,
+       "K_upper": 2.043527084963661,
+       "max_on_grid": 1.7081147920300979,
+       "c_ge_1_minus_pi2eta2over6_on_grid": true,
+       "pi2_over_6": 1.6449340668482264
+      },
+      "10.2229": {
+       "rho0": 10.2229,
+       "eta_max": 0.20961343091071447,
+       "K_upper": 1.7730832477198752,
+       "max_on_grid": 1.6448951090097808,
+       "c_ge_1_minus_pi2eta2over6_on_grid": true,
+       "pi2_over_6": 1.6449340668482264
+      }
+     },
+     "finite_patch": {
+      "FR30": {
+       "lambda_min_K": 9.378470210300506,
+       "ims_lower_bound_K": 4.057624575335657,
+       "holds": true,
+       "tiles_t_used": 2661,
+       "margin_cubes": 17
+      },
+      "Z2_reflect": {
+       "lambda_min_K": 5.132686379906197,
+       "ims_lower_bound_K": -0.9178865873630788,
+       "holds": true,
+       "tiles_t_used": 2661,
+       "margin_cubes": 17
+      },
+      "trivial": {
+       "lambda_min_K": 1.669512258382884,
+       "ims_lower_bound_K": -5.1660722739170915,
+       "holds": true,
+       "tiles_t_used": 2661,
+       "margin_cubes": 17
+      }
+     },
+     "census_R6": {
+      "R": 6,
+      "distinct_balls": 325,
+      "D_R_float": 9.416634264667982,
+      "Lambda_R_float": 3.655559948983093,
+      "seconds": 164.39931511878967
+     },
+     "census_R8": {
+      "R": 8,
+      "distinct_balls": 747,
+      "D_R_float": 9.051521980916187,
+      "Lambda_R_float": 6.56278479341412,
+      "seconds": 532.6670534610748
+     }
+    }
+   },
+   "certificates": [
+    "audit/results/phase7_ims.json",
+    "audit/results/phase7b_ims_check.json"
+   ],
+   "tests": [
+    "python -m pytest -q tests/test_phase7.py tests/test_phase7b.py -k ims"
+   ],
+   "caveats": [
+    "D_R certificates are lower bounds on D_R; D_R >= E_FR30 by interlacing, so they are not upper certificates"
+   ]
+  },
+  {
+   "id": "P6-hierarchy-signature",
+   "proposition": 6,
+   "status": "not established (negative)",
+   "statement": "no hierarchy-specific signature of the band bottom survives: the floor is a function of the legal patch set, which (P4) forces the hierarchy; the one separating scale observable (persistent r_L < 1/4) is FR30-specific against its hierarchy-preserving Abelian shadows, i.e. non-Abelian, not hierarchical",
+   "evidence": {
+    "r_L": {
+     "trivial": {
+      "4": 0.37861924013071707,
+      "5": 0.31207719245205584,
+      "6": 0.2805099483958266
+     },
+     "Z2_reflect": {
+      "4": 0.336423666967602,
+      "5": 0.2805800160058288,
+      "6": 0.26429076071482044
+     },
+     "FR30": {
+      "4": 0.3280960408318866,
+      "5": 0.26724817924175537,
+      "6": 0.21918951317022645,
+      "7": 0.19427419051988262
+     },
+     "FR30_chi1": {
+      "5": 0.17061137510946434,
+      "6": 0.2896692336262467
+     },
+     "FR30_chi2": {
+      "5": 0.1713078255427878,
+      "6": 0.2884094468078423
+     }
+    }
+   },
+   "certificates": [],
+   "tests": [],
+   "caveats": [
+    "IDS gap labels (frequency-dependent) untested"
+   ]
+  }
+ ]
+}
