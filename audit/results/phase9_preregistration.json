@@ -1,0 +1,20 @@
+{
+ "written_at": "2026-10-23T15:08:36-07:00",
+ "status": "fixed before audit/results/phase9_ladder.json existed or was read",
+ "pair": "rules 937 vs 938 (same graph and hierarchy, equal plaquette and two-cycle class counts at levels 3-5, not gauge-equivalent)",
+ "observable": {
+  "Delta_star": "Y_5(938) - Y_5(937) = -0.2443 (pinned level-5 supertile bottoms)",
+  "Delta_m": "U_m(938) - U_m(937), U_m(r) = min over the legal 1-star types tau of rule r of lambda_min(H | sigma^m(tau)), m = 0..3"
+ },
+ "null_model": "local frustration + graph geometry + boundary: the edge difference is already carried by radius-1 environments (m <= 1 patches, <= 216 tiles)",
+ "hierarchy_model": "longer-range substitution structure is needed: the difference is absent at m <= 1 and appears only at m >= 2",
+ "decision_rule": {
+  "null_supported_hierarchy_falsified": "sign(Delta_1) == sign(Delta_star) and |Delta_1 - Delta_star| <= 0.10",
+  "hierarchy_supported_null_falsified": "|Delta_1| <= 0.05 and |Delta_3 - Delta_star| <= 0.10",
+  "otherwise": "inconclusive"
+ },
+ "limitations": [
+  "finite volume: Y_5 and U_m are compressions (upper bounds on each rule hull floor); the infinite-volume difference is not certified",
+  "one matched pair; the decision concerns this pair only"
+ ]
+}

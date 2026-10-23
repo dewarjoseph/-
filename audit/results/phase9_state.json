@@ -1,0 +1,381 @@
+{
+ "decorations": 6561,
+ "orbits": 1125,
+ "max_Y3_spread_within_orbit": 6.217248937900877e-14,
+ "isospectral_orbit_groups": [
+  {
+   "Y3": 9.20566701,
+   "orbit_reps": [
+    63,
+    3262
+   ],
+   "gauge_equivalent_to_first": [
+    true
+   ]
+  },
+  {
+   "Y3": 7.80308992,
+   "orbit_reps": [
+    64,
+    3261,
+    3263
+   ],
+   "gauge_equivalent_to_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "Y3": 9.2217805,
+   "orbit_reps": [
+    66,
+    3259,
+    3265
+   ],
+   "gauge_equivalent_to_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "Y3": 6.69677062,
+   "orbit_reps": [
+    67,
+    3258,
+    3266
+   ],
+   "gauge_equivalent_to_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "Y3": 7.08786136,
+   "orbit_reps": [
+    68,
+    3260,
+    3264
+   ],
+   "gauge_equivalent_to_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "Y3": 8.39240126,
+   "orbit_reps": [
+    261,
+    3064,
+    3514
+   ],
+   "gauge_equivalent_to_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "Y3": 8.45968546,
+   "orbit_reps": [
+    262,
+    3063,
+    3515
+   ],
+   "gauge_equivalent_to_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "Y3": 7.68441222,
+   "orbit_reps": [
+    263,
+    3065,
+    3513
+   ],
+   "gauge_equivalent_to_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "Y3": 8.95225431,
+   "orbit_reps": [
+    264,
+    3061,
+    3517
+   ],
+   "gauge_equivalent_to_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "Y3": 8.1291985,
+   "orbit_reps": [
+    265,
+    3060,
+    3518
+   ],
+   "gauge_equivalent_to_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "Y3": 8.14642774,
+   "orbit_reps": [
+    266,
+    3062,
+    3516
+   ],
+   "gauge_equivalent_to_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "Y3": 8.13167575,
+   "orbit_reps": [
+    267,
+    3067,
+    3511
+   ],
+   "gauge_equivalent_to_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "Y3": 7.52537124,
+   "orbit_reps": [
+    268,
+    3066,
+    3512
+   ],
+   "gauge_equivalent_to_first": [
+    true,
+    true
+   ]
+  },
+  {
+   "Y3": 6.69407999,
+   "orbit_reps": [
+    269,
+    3068,
+    3510
+   ],
+   "gauge_equivalent_to_first": [
+    true,
+    true
+   ]
+  }
+ ],
+ "gauge_classes": 1098,
+ "isospectral_but_not_gauge_equivalent": 0,
+ "orbit_isospectral_check_Y2": 6.394884621840902e-14,
+ "feature_names": {
+  "counts": [
+   "f_m1",
+   "f_trl"
+  ],
+  "loops": [
+   "loop21_f_m1",
+   "loop21_f_trl",
+   "loop22_f_m1",
+   "loop22_f_trl"
+  ],
+  "correlations_extra": [
+   "enr1_m1",
+   "enr1_trl",
+   "enr2_m1",
+   "enr2_trl",
+   "enr3_m1",
+   "enr3_trl",
+   "cv_m1",
+   "hvar1_m1",
+   "hvar2_m1",
+   "cv_trl",
+   "cv_nt",
+   "pair_m1",
+   "Ct_p1_p1",
+   "Cp_p1_p1",
+   "Ct_p1_m1",
+   "Cp_p1_m1",
+   "Ct_p1_trl",
+   "Cp_p1_trl",
+   "Ct_m1_m1",
+   "Cp_m1_m1",
+   "Ct_m1_trl",
+   "Cp_m1_trl",
+   "Ct_trl_trl",
+   "Cp_trl_trl"
+  ],
+  "local_Y": [
+   "Y1",
+   "Y2"
+  ],
+  "response": [
+   "R2(E0=6.0) pair 0",
+   "R2(E0=6.0) pair 1",
+   "R2(E0=6.0) pair 2",
+   "R2(E0=6.0) pair 3"
+  ]
+ },
+ "results": {
+  "counts": {
+   "distinct_summaries": 1097,
+   "collisions_with_different_Y3": 1,
+   "example_collision": [
+    [
+     937,
+     8.4910257
+    ],
+    [
+     938,
+     8.2134341
+    ]
+   ],
+   "Y3_ols_cv_rmse": 0.24201502036847683,
+   "Y3_ols_cv_r2": 0.7960200875321564,
+   "Y3_ols_fr30_pred": 8.73954067942537,
+   "Y3_fr30_true": 9.378470210300526,
+   "Y3_knn_cv_rmse": 0.31869484005370463,
+   "Y3_knn_cv_r2": 0.6462855326231576,
+   "Y3_knn_fr30_pred": 8.407742192900042,
+   "Y4_ols_cv_rmse": 0.26359001337034826,
+   "Y4_ols_cv_r2": 0.774646057878239,
+   "Y4_ols_fr30_pred": 8.114396853717615,
+   "Y4_fr30_true": 8.919634360169171,
+   "Y4_knn_cv_rmse": 0.34732753620293816,
+   "Y4_knn_cv_r2": 0.6087217687486628,
+   "Y4_knn_fr30_pred": 8.199782151867954
+  },
+  "loops": {
+   "distinct_summaries": 6429,
+   "collisions_with_different_Y3": 0,
+   "example_collision": null,
+   "Y3_ols_cv_rmse": 0.2174610131707045,
+   "Y3_ols_cv_r2": 0.8353106278925198,
+   "Y3_ols_fr30_pred": 8.927468582669968,
+   "Y3_fr30_true": 9.378470210300526,
+   "Y3_knn_cv_rmse": 0.3205504040948341,
+   "Y3_knn_cv_r2": 0.6421546180592209,
+   "Y3_knn_fr30_pred": 8.640434622045465,
+   "Y4_ols_cv_rmse": 0.24183071088157593,
+   "Y4_ols_cv_r2": 0.8103162353974657,
+   "Y4_ols_fr30_pred": 8.237819795473712,
+   "Y4_fr30_true": 8.919634360169171,
+   "Y4_knn_cv_rmse": 0.3373456691250692,
+   "Y4_knn_cv_r2": 0.6308885364352093,
+   "Y4_knn_fr30_pred": 8.071507624453467
+  },
+  "correlations": {
+   "distinct_summaries": 6429,
+   "collisions_with_different_Y3": 0,
+   "example_collision": null,
+   "Y3_ols_cv_rmse": 0.19791276924077664,
+   "Y3_ols_cv_r2": 0.8635886865130252,
+   "Y3_ols_fr30_pred": 8.8901997870334,
+   "Y3_fr30_true": 9.378470210300526,
+   "Y3_knn_cv_rmse": 0.3247428386278877,
+   "Y3_knn_cv_r2": 0.6327329854216368,
+   "Y3_knn_fr30_pred": 9.228476120757707,
+   "Y4_ols_cv_rmse": 0.19780288087683415,
+   "Y4_ols_cv_r2": 0.8730968271791621,
+   "Y4_ols_fr30_pred": 8.192078110272695,
+   "Y4_fr30_true": 8.919634360169171,
+   "Y4_knn_cv_rmse": 0.3090705877634683,
+   "Y4_knn_cv_r2": 0.6901706103752937,
+   "Y4_knn_fr30_pred": 8.83982248460637
+  },
+  "local_Y": {
+   "distinct_summaries": 1098,
+   "collisions_with_different_Y3": 0,
+   "example_collision": null,
+   "Y3_ols_cv_rmse": 0.28447141037133034,
+   "Y3_ols_cv_r2": 0.7181746782982884,
+   "Y3_ols_fr30_pred": 8.287343136837432,
+   "Y3_fr30_true": 9.378470210300526,
+   "Y3_knn_cv_rmse": 0.403139588427619,
+   "Y3_knn_cv_r2": 0.4340036171553797,
+   "Y3_knn_fr30_pred": 9.062711446253568,
+   "Y4_ols_cv_rmse": 0.3081375657005122,
+   "Y4_ols_cv_r2": 0.6920384123208152,
+   "Y4_ols_fr30_pred": 7.632760265370318,
+   "Y4_fr30_true": 8.919634360169171,
+   "Y4_knn_cv_rmse": 0.33218271783980824,
+   "Y4_knn_cv_r2": 0.6421003089601123,
+   "Y4_knn_fr30_pred": 7.591464422893924
+  },
+  "response": {
+   "distinct_summaries": 1098,
+   "collisions_with_different_Y3": 0,
+   "example_collision": null,
+   "Y3_ols_cv_rmse": 0.2992490889230815,
+   "Y3_ols_cv_r2": 0.6881337104674186,
+   "Y3_ols_fr30_pred": 8.42554334415983,
+   "Y3_fr30_true": 9.378470210300526,
+   "Y3_knn_cv_rmse": 0.41639523884639407,
+   "Y3_knn_cv_r2": 0.3961705792076956,
+   "Y3_knn_fr30_pred": 9.228476120757703,
+   "Y4_ols_cv_rmse": 0.3325410026715383,
+   "Y4_ols_cv_r2": 0.6413278474399418,
+   "Y4_ols_fr30_pred": 7.957301654325732,
+   "Y4_fr30_true": 8.919634360169171,
+   "Y4_knn_cv_rmse": 0.3641837900559795,
+   "Y4_knn_cv_r2": 0.569821720835715,
+   "Y4_knn_fr30_pred": 7.876841682246
+  },
+  "local_Y+counts": {
+   "distinct_summaries": 1098,
+   "collisions_with_different_Y3": 0,
+   "example_collision": null,
+   "Y3_ols_cv_rmse": 0.23533267650595613,
+   "Y3_ols_cv_r2": 0.8071288686826686,
+   "Y3_ols_fr30_pred": 8.618200847753528,
+   "Y3_fr30_true": 9.378470210300526,
+   "Y3_knn_cv_rmse": 0.33904243252621,
+   "Y3_knn_cv_r2": 0.5996766980801365,
+   "Y3_knn_fr30_pred": 8.455785087160915,
+   "Y4_ols_cv_rmse": 0.2502409029275379,
+   "Y4_ols_cv_r2": 0.7968934860340499,
+   "Y4_ols_fr30_pred": 7.962049982425342,
+   "Y4_fr30_true": 8.919634360169171,
+   "Y4_knn_cv_rmse": 0.302499878671714,
+   "Y4_knn_cv_r2": 0.7032042587349998,
+   "Y4_knn_fr30_pred": 7.7448193818277336
+  },
+  "response+counts": {
+   "distinct_summaries": 1098,
+   "collisions_with_different_Y3": 0,
+   "example_collision": null,
+   "Y3_ols_cv_rmse": 0.23795547676211604,
+   "Y3_ols_cv_r2": 0.8028057853133242,
+   "Y3_ols_fr30_pred": 8.756336698928479,
+   "Y3_fr30_true": 9.378470210300526,
+   "Y3_knn_cv_rmse": 0.35852385823444644,
+   "Y3_knn_cv_r2": 0.5523496974487965,
+   "Y3_knn_fr30_pred": 8.975526434791405,
+   "Y4_ols_cv_rmse": 0.2318094813076796,
+   "Y4_ols_cv_r2": 0.8257111333833352,
+   "Y4_ols_fr30_pred": 8.332969637317893,
+   "Y4_fr30_true": 8.919634360169171,
+   "Y4_knn_cv_rmse": 0.32358242156361083,
+   "Y4_knn_cv_r2": 0.6603926375387879,
+   "Y4_knn_fr30_pred": 7.743728997767887
+  }
+ },
+ "n_Y4": 296,
+ "Y3_sd": 0.5359992568767626,
+ "Y4_sd": 0.5598581118806991,
+ "closure": {
+  "Y1->Y2": {
+   "distinct_inputs": 378,
+   "inputs_with_several_outputs": 364
+  },
+  "Y2->Y3": {
+   "distinct_inputs": 1098,
+   "inputs_with_several_outputs": 0
+  }
+ }
+}
