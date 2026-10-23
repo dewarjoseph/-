@@ -1,0 +1,373 @@
+{
+ "commit": "7c5b8ba",
+ "branch": "claude/phase8-interface-recursion",
+ "report": "deliverables/PHASE9_REPORT.md",
+ "bounds": [
+  {
+   "quantity": "E_*",
+   "direction": ">=",
+   "value": 7.954292264597248,
+   "exact": "601009330964533299746863/75557863725914323419136",
+   "label": "rigorous",
+   "statement": "E(Y) >= Lambda_12 for every Y in T_12 = Omega_FR30 (infinite volume)",
+   "depends_on": [
+    "Phase VII Thm 7.1 (exact IMS identity with explicit overlap c(eta); proof in PHASE7_REPORT s.7)",
+    "Phase VII Thm 6.2 (T_1 = Omega_FR30; computer-assisted finite checks P, R0, S, A, B)",
+    "completeness of the enumeration of the 2315 legal 12-balls (asserted instance by instance; single implementation at R = 12, two independent implementations agree at R = 6, 8)",
+    "floating Cholesky with Higham Thm 10.3 rounding bound; amplification factors in mpmath interval arithmetic"
+   ],
+   "not_dependent_on": [
+    "any ratio or extrapolation hypothesis"
+   ],
+   "artifact": "audit/results/phase7_ims.json",
+   "regenerate": "IMS_PROCS=12 IMS_PLAIN_MAX=12 python -u -I audit/phase7_ims.py 12 (about 1 h)"
+  },
+  {
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 8.764227038115036,
+   "exact": "95969095435322528/10950092349041091",
+   "label": "rigorous",
+   "statement": "E_* <= exact rational Rayleigh quotient of an integer vector supported on the legal patch sigma^5(tau_59) (884 736 tiles)",
+   "depends_on": [
+    "variational principle: the pinned patch operator is the compression P H_Y P (definitions s.5)",
+    "legality of sigma^5(tau_59): tau_59 is a 1-star occurring in FR30 supertiles, and sigma maps occurring patches to occurring patches",
+    "minimality of Omega_FR30 (every hull element has the same infimum)",
+    "H has Gaussian-integer entries (LINKGI in {-1,0,1}; verified), so the integer arithmetic of the quotient is exact"
+   ],
+   "not_dependent_on": [
+    "any ratio or extrapolation hypothesis"
+   ],
+   "artifact": "audit/results/phase8_chain_m5.json",
+   "regenerate": "python -u -I audit/phase8_chain5.py 5 59 (about 30 min)"
+  },
+  {
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 8.7649120247,
+   "label": "rigorous",
+   "statement": "V-E: exact Rayleigh quotient on the pinned level-7 supertile T_7 (superseded by the sigma^5(tau_59) bound)",
+   "depends_on": [
+    "compression",
+    "exact integer arithmetic"
+   ],
+   "artifact": "audit/results/phase5e_level7_certified.json"
+  },
+  {
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 8.76627105928954,
+   "label": "rigorous",
+   "statement": "m = 4 member (type 39): exact Rayleigh quotient",
+   "artifact": "audit/results/phase8_patch_bounds.json"
+  },
+  {
+   "quantity": "lambda_min(H_pin(T_7))",
+   "value": 8.764911988377174,
+   "label": "numerical",
+   "statement": "float eigenvalue, residual 1.0e-8 (its certificate is the upper bound 8.7649120247 on the same finite matrix: fv_certificate)",
+   "artifact": "audit/results/phase5e_level7.json"
+  },
+  {
+   "quantity": "lambda_min(H | sigma^5(tau_59))",
+   "value": 8.764227037707025,
+   "label": "numerical",
+   "statement": "float eigenvalue, residual 5e-12",
+   "artifact": "audit/results/phase8_chain_m5.json"
+  },
+  {
+   "quantity": "E_*",
+   "interval": [
+    8.76385,
+    8.76423
+   ],
+   "label": "conjectural",
+   "statement": "holds IF every later chain decrement ratio is <= 0.1541 (V-E Thm E7 then gives the lower end)",
+   "depends_on": [
+    "unproved ratio hypothesis"
+   ],
+   "artifact": "audit/results/phase8_patch_bounds.json, phase8_chain_m5.json"
+  },
+  {
+   "quantity": "E_*",
+   "interval": [
+    8.7631,
+    8.7637
+   ],
+   "label": "conjectural",
+   "statement": "V-E extrapolations of the pinned supertiles (last-ratio geometric tail)",
+   "depends_on": [
+    "unproved ratio hypothesis"
+   ]
+  },
+  {
+   "quantity": "E_*",
+   "interval": [
+    7.954292,
+    8.7642270381
+   ],
+   "label": "rigorous",
+   "statement": "two-sided enclosure: both endpoints are rigorous infinite-volume bounds on the same quantity inf sigma(H_Y), Y in Omega_FR30; neither uses an extrapolation"
+  },
+  {
+   "quantity": "lambda_min(H_pin(T_3)) for rule 937",
+   "interval": [
+    8.491024010107806,
+    8.491025746227317
+   ],
+   "label": "fv_certificate",
+   "statement": "finite matrix only: exact Rayleigh quotient above, Higham-certified Cholesky below",
+   "artifact": "audit/results/phase9_pair.json"
+  },
+  {
+   "quantity": "lambda_min(H_pin(T_3)) for rule 938",
+   "interval": [
+    8.2134323046562,
+    8.213434122453219
+   ],
+   "label": "fv_certificate",
+   "statement": "finite matrix only: exact Rayleigh quotient above, Higham-certified Cholesky below",
+   "artifact": "audit/results/phase9_pair.json"
+  },
+  {
+   "quantity": "lambda_min(H_pin(T_4)) for rule 937",
+   "interval": [
+    8.035707951579587,
+    8.035709621057293
+   ],
+   "label": "fv_certificate",
+   "statement": "finite matrix only: exact Rayleigh quotient above, Higham-certified Cholesky below",
+   "artifact": "audit/results/phase9_cert4.json"
+  },
+  {
+   "quantity": "lambda_min(H_pin(T_4)) for rule 938",
+   "interval": [
+    7.785480969633737,
+    7.7854825610104905
+   ],
+   "label": "fv_certificate",
+   "statement": "finite matrix only: exact Rayleigh quotient above, Higham-certified Cholesky below",
+   "artifact": "audit/results/phase9_cert4.json"
+  }
+ ],
+ "claims": [
+  {
+   "id": "N1-recursion",
+   "category": "A",
+   "statement": "exact child-to-parent Schur recursion of the labelled surface response; Loewner monotone, concave, gauge covariant (Phase V-D/VIII Prop 8.1)",
+   "evidence": "proof; tests/test_phase8.py",
+   "prior": [
+    "Haynsworth 1968 (inertia)",
+    "Li-Mathias 2000; Anderson-Trapp 1975 (Schur complement monotone/concave)",
+    "Sire-Bellissard 1990 (Schur-formula RG on the octagonal tiling)",
+    "Malozemov-Teplyaev 2003, Sabot 2003 (spectral decimation)",
+    "Chen-Guo 2020 (gauge-covariant U(1) decimation)"
+   ],
+   "gap": "none for the statement; applying it to an SU(2) connection on a substitution tiling appears new (provisional)"
+  },
+  {
+   "id": "N2-selection-chain",
+   "category": "B",
+   "statement": "Theorem 8.3: along every Phi-self-loop 1-star type, U_m(tau) decreases to E_*; the minimiser over the 72 types is the self-loop pair 59/63 for m <= 3 (4-way tie at m = 4)",
+   "evidence": "proof (interlacing + exhaustion + minimality) + computation (phase8_patch_bounds.json)",
+   "prior": [
+    "min-max principle; Lenz-Stollmann (constancy of spectrum on minimal hulls)"
+   ],
+   "gap": "selection for all m unproved; rate unproved"
+  },
+  {
+   "id": "N3-enclosure",
+   "category": "B",
+   "statement": "E_* in [7.954292, 8.7642270381], rigorous",
+   "evidence": "computer-assisted (bounds section)",
+   "prior": [
+    "Cycon-Froese-Kirsch-Simon (IMS)",
+    "Hege-Moscolari-Teufel 2022 (rigorous two-sided patch bounds, scalar/U(1) operators on quasicrystals)"
+   ],
+   "gap": "width 0.81; the lower side converges only as O(R^-2)"
+  },
+  {
+   "id": "N4-local-rules",
+   "category": "C (provisional)",
+   "statement": "Phase VII Thm 6.2: the FR30 frame decoration is itself a radius-1 matching rule (T_1 = Omega_FR30)",
+   "evidence": "computer-assisted proof (Phase VII s.6)",
+   "prior": [
+    "Mozes 1989, Goodman-Strauss 1998 (local rules for substitution hierarchies)",
+    "2026 preprints on 3D chair matching rules: Tsiokos arXiv:2609.19214, Flicker arXiv:2609.23783, Kamenetsky arXiv:2610.00916 (unrefereed; priority not settled)"
+   ],
+   "gap": "priority against the 2026 3D-chair preprints not assessed in full text"
+  },
+  {
+   "id": "N5-class-count-insufficiency",
+   "category": "B",
+   "statement": "Theorem 9.1 (necessity): plaquette and two-cycle conjugacy-class counts (also owner-resolved) and spectral moments of order <= 3 do not determine the spectral bottom; rules 937/938, certified at level 3",
+   "evidence": "exact counts and moments; certified enclosures (phase9_pair.json, phase9_moments.json)",
+   "prior": [
+    "Cavaleri-Donno 2022 (cospectral but not switching-isomorphic gain graphs; closed-walk gains)",
+    "Procesi 1976, Giles 1981 (trace invariants determine the connection up to gauge)"
+   ],
+   "gap": "infinite-volume separation of the two hull floors not certified (finite-volume levels 3-5 only)"
+  },
+  {
+   "id": "N6-census-classes",
+   "category": "B",
+   "statement": "the 6561 proper decorations form 1125 S3-orbits and 1098 gauge classes; the level-3 spectrum separates all 1098; class counts separate all but the 937/938 pair",
+   "evidence": "phase9_state.json (tree-gauge equivalence tests)",
+   "prior": [
+    "Cavaleri-Donno 2022 (switching equivalence via closed-walk gains)"
+   ],
+   "gap": "level 3 only; gauge equivalence is tested on T_3"
+  },
+  {
+   "id": "N7-predictive-state",
+   "category": "B",
+   "statement": "held-out (by gauge class) prediction of Y3/Y4 from local summaries: best CV-RMSE about 0.19-0.20 (R^2 0.87); FR30 is underpredicted by every summary",
+   "evidence": "phase9_state.json",
+   "prior": [
+    "Phase V-B flux regression (ungrouped CV; superseded)"
+   ],
+   "gap": "linear and k-NN models only"
+  },
+  {
+   "id": "N8-null-vs-hierarchy",
+   "category": "B",
+   "statement": "pre-registered matched-pair test: Delta_m (938 - 937) = {'0': -0.18095229901375554, '1': -0.22910590301741252, '2': -0.20636597635542486, '3': -0.22801913286009245}, Delta_star = -0.2443022292844672; verdict: null supported, hierarchy model falsified for this pair",
+   "evidence": "phase9_ladder.json",
+   "prior": [],
+   "gap": "",
+   "verdict": "null supported, hierarchy model falsified for this pair"
+  },
+  {
+   "id": "N9-physical-law",
+   "category": "D: none established",
+   "statement": "no candidate law with a defined observable, predictive content beyond standard machinery, and survival of controls was found",
+   "evidence": "report s.6-8",
+   "prior": [],
+   "gap": ""
+  }
+ ],
+ "copy_rg_runs": [
+  {
+   "L": 5,
+   "k": 3,
+   "fiber": "deep67",
+   "d": 58,
+   "copies": 64,
+   "dim": 3712,
+   "E_W": 8.816457115151804,
+   "exact": 8.797011314651467,
+   "err": 0.019445800500337285,
+   "iterations": 7,
+   "seconds": 77.79329895973206
+  },
+  {
+   "L": 5,
+   "k": 3,
+   "fiber": "env",
+   "d": 58,
+   "copies": 64,
+   "dim": 3712,
+   "E_W": 8.83225996139818,
+   "exact": 8.797011314651467,
+   "err": 0.03524864674671235,
+   "iterations": 8,
+   "seconds": 113.39254522323608
+  },
+  {
+   "L": 5,
+   "k": 3,
+   "fiber": "env",
+   "d": 58,
+   "copies": 64,
+   "dim": 3712,
+   "E_W": 8.832259961398167,
+   "exact": 8.797011314651467,
+   "err": 0.03524864674669992,
+   "iterations": 8,
+   "seconds": 24.044947147369385
+  },
+  {
+   "L": 6,
+   "k": 3,
+   "fiber": "env",
+   "d": 58,
+   "copies": 512,
+   "dim": 29696,
+   "E_W": 8.778631560886154,
+   "exact": 8.77013362902455,
+   "err": 0.008497931861604968,
+   "iterations": 7,
+   "seconds": 989.24427318573
+  },
+  {
+   "L": 5,
+   "k": 3,
+   "fiber": "env",
+   "d": 58,
+   "copies": 64,
+   "dim": 3712,
+   "E_W": 8.832259961398197,
+   "exact": 8.797011314651467,
+   "err": 0.03524864674673012,
+   "iterations": 8,
+   "seconds": 5.910623550415039,
+   "impl": "bsr-linop"
+  },
+  {
+   "L": 5,
+   "k": 3,
+   "fiber": "deep67",
+   "d": 58,
+   "copies": 64,
+   "dim": 3712,
+   "E_W": 8.816457115151897,
+   "exact": 8.797011314651467,
+   "err": 0.019445800500429655,
+   "iterations": 7,
+   "seconds": 3.400905132293701,
+   "impl": "bsr-linop"
+  },
+  {
+   "L": 6,
+   "k": 3,
+   "fiber": "deep67",
+   "d": 58,
+   "copies": 512,
+   "dim": 29696,
+   "E_W": 8.771251187085415,
+   "exact": 8.77013362902455,
+   "err": 0.0011175580608657754,
+   "iterations": 7,
+   "seconds": 182.00604248046875,
+   "impl": "bsr-linop"
+  },
+  {
+   "L": 6,
+   "k": 3,
+   "fiber": "env",
+   "d": 114,
+   "copies": 512,
+   "dim": 58368,
+   "E_W": 8.772187151335778,
+   "exact": 8.77013362902455,
+   "err": 0.002053522311229017,
+   "iterations": 8,
+   "seconds": 2467.178235769272,
+   "impl": "bsr-linop"
+  },
+  {
+   "L": 7,
+   "k": 3,
+   "fiber": "deep67",
+   "d": 58,
+   "copies": 4096,
+   "dim": 237568,
+   "E_W": 8.76570031236936,
+   "exact": 8.764911988377174,
+   "err": 0.0007883239921859797,
+   "iterations": 7,
+   "seconds": 6053.641462802887,
+   "impl": "bsr-linop"
+  }
+ ]
+}
