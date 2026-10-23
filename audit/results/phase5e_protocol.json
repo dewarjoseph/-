@@ -1,0 +1,110 @@
+{
+ "frozen_before_any_evaluation_value": true,
+ "operator": "H = 24 I - A, Q8 Clifford links (audit/phase5a_controls.build_H); partition and K(E) as audit/phase5d_schur.py",
+ "E_REF": 7.0,
+ "DEG_TOL": 1e-08,
+ "NEWTON_TOL": 1e-12,
+ "families": {
+  "child": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64
+  ],
+  "face": [
+   1,
+   2,
+   4,
+   8,
+   16
+  ],
+  "fec": [
+   1,
+   2,
+   4,
+   8,
+   16
+  ],
+  "patch2": [
+   1,
+   2,
+   4,
+   8
+  ],
+  "patch3": [
+   1,
+   2
+  ],
+  "iface2": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32
+  ]
+ },
+ "adaptive_m": [
+  64,
+  128,
+  229,
+  512
+ ],
+ "extra": [
+  "interface",
+  "oracle (non-admissible ceiling)",
+  "exact (validation subset, non-compressed)"
+ ],
+ "dev_rules": [
+  950,
+  1583,
+  1787,
+  3133
+ ],
+ "dev_seed": 20261026,
+ "evaluation": {
+  "rules": "264 V-D classes (audit/results/phase5d_protocol.json)",
+  "controls": 18,
+  "level_sweep": [
+   "fr30",
+   3697,
+   1387,
+   2238,
+   950,
+   1583,
+   1787,
+   3133
+  ],
+  "levels": [
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "primary_config": {
+  "child": 16,
+  "face": 4,
+  "iface2": 8,
+  "fec": 2,
+  "patch2": 4,
+  "adaptive": 229,
+  "patch3": null
+ },
+ "criteria": {
+  "C1": "D <= 0.10 dim S (459 at L4)",
+  "C2": "calibrated out-of-fold RMSE <= 0.05 and max <= 0.15 (offset = training-fold mean of E_W - Y4, V-D rep-0 10-fold)",
+  "C3": "max |dE_W| <= 1e-8 under random SU(2) gauge",
+  "C4": "M7 = flux + E_W: CV-R2 > M4 and M2 by > 2 sd (V-D CV); calibrated RMSE < 0.1747",
+  "C5": "all 17 sign(E_W(ctl)-E_W(FR30)) correct; M7 residual sign correct for |r_act|>=0.05; corr >= 0.8",
+  "C6": "M7 leave-FR30-out explained >= 0.5; FR30 calibrated error <= 0.10",
+  "C7": "fixed k: mean relative error growth <= 1.5x per level (3->4, 4->5) on the 8 sweep systems; 95th pct calibrated error <= 0.10 over 264",
+  "C8": "basis geometric/local-spectral/training-defined with D <= 10%"
+ },
+ "decision": "success only if C1..C8 all hold for the primary configuration; otherwise negative result; no additions after freeze",
+ "h2_closure_test": "FR30 universal T3-surface subspace: SVD trained on level-4,5 contexts, tested on level 6 (7 if available); closure plausible if d <= 57 captures >= 99% of held-out weight",
+ "level7": "frozen separately in audit/results/phase5e_level7_prediction.json (commit a781ad8)"
+}
