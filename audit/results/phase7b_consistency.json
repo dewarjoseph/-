@@ -1,0 +1,25 @@
+{
+ "assignments_all": 1679616,
+ "assignments_proper": 6561,
+ "assignments_improper": 1673055,
+ "keys_proper": 6561,
+ "keys_improper": 1672288,
+ "keys_overlap_proper_improper": 0,
+ "keys_total": 1678849,
+ "improper_class_sizes": {
+  "1": 1671525,
+  "6": 1,
+  "2": 762
+ },
+ "collision_mechanisms": {
+  "constant_pi": 1,
+  "one_tile_swap": 48,
+  "other": 714
+ },
+ "collision_classes_with_identical_raw_links": {
+  "True": 1,
+  "False": 762
+ },
+ "swap_pairs_differ_by_minus_one_only": true,
+ "check_sum": true
+}

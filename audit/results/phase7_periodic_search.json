@@ -1,0 +1,61 @@
+{
+ "controls": {
+  "P1_illegal_1stars": 7,
+  "crystal_found_without_legality": true,
+  "P1_found_with_P1_types": true
+ },
+ "search": [
+  {
+   "lattice": "1 * ker(x*1 + y*2 + z*4 mod 7)",
+   "tiles_per_period": 1,
+   "nodes": 42,
+   "exhausted": true,
+   "solutions_found": 0,
+   "seconds": 0.061670780181884766
+  },
+  {
+   "lattice": "2 * ker(x*1 + y*2 + z*4 mod 7)",
+   "tiles_per_period": 8,
+   "nodes": 10338,
+   "exhausted": true,
+   "solutions_found": 0,
+   "seconds": 9.562580347061157
+  },
+  {
+   "lattice": "2 * ker(x*1 + y*4 + z*2 mod 7)",
+   "tiles_per_period": 8,
+   "nodes": 10338,
+   "node_cap": 2000000,
+   "exhausted": true,
+   "solutions_found": 0,
+   "seconds": 9.590254783630371
+  },
+  {
+   "lattice": "3 * ker(x*1 + y*4 + z*2 mod 7)",
+   "tiles_per_period": 27,
+   "nodes": 3000000,
+   "node_cap": 3000000,
+   "exhausted": false,
+   "solutions_found": 0,
+   "seconds": 2608.9445250034332
+  },
+  {
+   "lattice": "3 * ker(x*1 + y*2 + z*4 mod 7)",
+   "tiles_per_period": 27,
+   "nodes": 3000000,
+   "node_cap": 3000000,
+   "exhausted": false,
+   "solutions_found": 0,
+   "seconds": 2615.581778526306
+  },
+  {
+   "lattice": "1 * ker(x*1 + y*4 + z*2 mod 7)",
+   "tiles_per_period": 1,
+   "nodes": 42,
+   "node_cap": 2000000,
+   "exhausted": true,
+   "solutions_found": 0,
+   "seconds": 0.047013282775878906
+  }
+ ]
+}

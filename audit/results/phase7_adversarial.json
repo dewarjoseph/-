@@ -1,0 +1,208 @@
+{
+ "geometry_matches_substitution": true,
+ "tiles": 8,
+ "panels": 48,
+ "fundamental_cycles": 41,
+ "two_cycle_configurations": 21,
+ "forced_configurations_by_geometry": 9,
+ "forced_list": [
+  [
+   [
+    0,
+    3
+   ],
+   0,
+   2
+  ],
+  [
+   [
+    0,
+    5
+   ],
+   1,
+   2
+  ],
+  [
+   [
+    0,
+    2
+   ],
+   0,
+   1
+  ],
+  [
+   [
+    0,
+    4
+   ],
+   0,
+   1
+  ],
+  [
+   [
+    0,
+    4
+   ],
+   0,
+   2
+  ],
+  [
+   [
+    0,
+    6
+   ],
+   0,
+   1
+  ],
+  [
+   [
+    0,
+    6
+   ],
+   1,
+   2
+  ],
+  [
+   [
+    0,
+    7
+   ],
+   0,
+   2
+  ],
+  [
+   [
+    0,
+    7
+   ],
+   1,
+   2
+  ]
+ ],
+ "proper": {
+  "count": 6561,
+  "pure_gauge": 0,
+  "min_nontrivial_fundamental_cycles": 11,
+  "min_nontrivial_two_cycle_configs": 12,
+  "all_forced_nontrivial": true,
+  "forced_failures": 0,
+  "lambda_min": {
+   "min": 1.6715739836483328,
+   "argmin": [
+    0,
+    0,
+    5,
+    1,
+    4,
+    2,
+    4,
+    4
+   ],
+   "median": 3.0632544236252297,
+   "max": 4.026182224057154
+  }
+ },
+ "improper": {
+  "count": 1673055,
+  "pure_gauge": 0,
+  "min_nontrivial_fundamental_cycles": 11,
+  "min_nontrivial_two_cycle_configs": 12,
+  "all_forced_nontrivial": false,
+  "forced_failures": 1391616,
+  "lambda_min": {
+   "min": 1.6715739836483343,
+   "argmin": [
+    5,
+    5,
+    4,
+    3,
+    2,
+    0,
+    2,
+    2
+   ],
+   "median": 3.47298585015531,
+   "max": 5.002452128276909
+  }
+ },
+ "all": {
+  "count": 1679616,
+  "pure_gauge": 0,
+  "min_nontrivial_fundamental_cycles": 11,
+  "min_nontrivial_two_cycle_configs": 12,
+  "all_forced_nontrivial": false,
+  "forced_failures": 1391616,
+  "lambda_min": {
+   "min": 1.6715739836483328,
+   "argmin": [
+    0,
+    0,
+    5,
+    1,
+    4,
+    2,
+    4,
+    4
+   ],
+   "median": 3.471818461523693,
+   "max": 5.002452128276909
+  }
+ },
+ "improper_pure_gauge_examples": [],
+ "improper_forced_failure_example": {
+  "perms": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "det": [
+   1,
+   1,
+   -1,
+   -1,
+   1,
+   -1,
+   1,
+   1
+  ],
+  "nontrivial_two_cycle_configs": 12,
+  "nontrivial_fundamental_cycles": 27
+ },
+ "certificate_proper": {
+  "gauge_classes": 6561,
+  "c": "167/100",
+  "value": 1.67,
+  "failures": 0,
+  "min_lambda": 1.6715739836483328,
+  "rejects_min_plus_1e-5": true,
+  "seconds": 3.2016713619232178
+ },
+ "certificate_proper_sharper": {
+  "gauge_classes": 6561,
+  "c": "41789/25000",
+  "value": 1.67156,
+  "failures": 0,
+  "min_lambda": 1.6715739836483328,
+  "rejects_min_plus_1e-5": true,
+  "seconds": 3.897698163986206
+ },
+ "certificate_improper": {
+  "gauge_classes": 1672288,
+  "c": "41789/25000",
+  "value": 1.67156,
+  "failures": 0,
+  "min_lambda": 1.6715739836483343,
+  "rejects_min_plus_1e-5": true,
+  "seconds": 1375.464274406433
+ },
+ "zero_mode": {
+  "free_trivial_kernel_dim": 2,
+  "pinned_trivial_lambda_min": 11.212838712216973,
+  "note": "pinned operator has trivial kernel for every connection (boundary term > 0 on a connected graph)"
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "a_identity_frames": {
+  "nontrivial_cycles": 0,
+  "classes": {
+   "+1": 41
+  },
+  "free_lambda_min": -5.99535778282253e-15,
+  "abelian_links": true
+ },
+ "b_reflection_only": {
+  "nontrivial_cycles": 27,
+  "classes": {
+   "+1": 14,
+   "-1": 27
+  },
+  "free_lambda_min": 2.922645532516756,
+  "abelian_links": true
+ },
+ "c_random_permutation_choices": {
+  "samples": 20000,
+  "proper": 82,
+  "improper": 19918,
+  "pure_gauge_proper": 0,
+  "pure_gauge_improper": 0,
+  "min_lambda_proper": 2.1214357748917805,
+  "min_lambda_improper": 1.8993572765620315,
+  "pure_gauge_examples_improper": []
+ }
+}

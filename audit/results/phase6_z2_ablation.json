@@ -1,0 +1,68 @@
+{
+ "2": {
+  "fr30": {
+   "pinned": 10.776950511885527,
+   "free": 4.726464981572073,
+   "abelian": false,
+   "minus_one_link_fraction": 0.3958333333333333
+  },
+  "reflection_only_Z2": {
+   "pinned": 9.027874734241317,
+   "free": 3.277749136146472,
+   "abelian": true,
+   "minus_one_link_fraction": 0.6875
+  },
+  "trivial": {
+   "pinned": 4.751193247576443,
+   "free": -7.126002818820838e-15,
+   "abelian": true,
+   "minus_one_link_fraction": 0.0
+  }
+ },
+ "3": {
+  "fr30": {
+   "pinned": 9.378470210300499,
+   "free": 5.114941317369971,
+   "abelian": false,
+   "minus_one_link_fraction": 0.38169642857142855
+  },
+  "reflection_only_Z2": {
+   "pinned": 5.132686379906204,
+   "free": 3.318191756896846,
+   "abelian": true,
+   "minus_one_link_fraction": 0.7165178571428571
+  },
+  "trivial": {
+   "pinned": 1.6695122583828452,
+   "free": -4.2011846411396596e-14,
+   "abelian": true,
+   "minus_one_link_fraction": 0.0
+  }
+ },
+ "4": {
+  "fr30": {
+   "pinned": 8.919634360169246,
+   "free": 5.209699218816637,
+   "abelian": false,
+   "minus_one_link_fraction": 0.37786458333333334
+  },
+  "reflection_only_Z2": {
+   "pinned": 3.822252830211281,
+   "free": 3.323230757082624,
+   "abelian": true,
+   "minus_one_link_fraction": 0.73359375
+  },
+  "trivial": {
+   "pinned": 0.5027285439291646,
+   "free": 1.708702623837155e-15,
+   "abelian": true,
+   "minus_one_link_fraction": 0.0
+  }
+ },
+ "z2_level4_certified_upper": {
+  "numerator": "1075868655136284",
+  "denominator": "281475010395005",
+  "value": 3.82225283028314,
+  "float_eig": 3.8222528302112835
+ }
+}
