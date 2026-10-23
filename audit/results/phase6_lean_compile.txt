@@ -1,0 +1,8 @@
+Lean (version 4.35.0, x86_64-w64-windows-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)
+'Phase6Gauge.straight_identity' does not depend on any axioms
+'Phase6Gauge.corner_identity' does not depend on any axioms
+'Phase6Gauge.two_cycle_classes' does not depend on any axioms
+
+real	0m14.910s
+user	0m0.015s
+sys	0m0.000s
