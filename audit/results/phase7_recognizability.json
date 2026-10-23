@@ -1,0 +1,12 @@
+{
+ "1": {
+  "types": 72,
+  "max_roles_per_type": 1,
+  "ambiguous_types": 0
+ },
+ "2": {
+  "types": 165,
+  "max_roles_per_type": 1,
+  "ambiguous_types": 0
+ }
+}

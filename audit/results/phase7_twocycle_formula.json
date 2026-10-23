@@ -1,0 +1,10 @@
+{
+ "frame_choices": 1679616,
+ "two_cycles_checked": 35271936,
+ "mismatches": 0,
+ "holonomy_classes": {
+  "1": 5878656,
+  "-1": 5878656,
+  "traceless": 23514624
+ }
+}
