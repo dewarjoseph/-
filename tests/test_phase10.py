@@ -106,6 +106,33 @@ def test_ims_uses_the_phi_closed_type_set():
     balls, types_, _, rej = I.enumerate_balls(P9.decoration(4752), 6, 3); assert len(balls) == 325 and rej == 0
 
 
+def test_localization_certificate_for_1387_recomputes_on_a_sample():
+    """the stored R = 8 certificate of class 1387: the enumeration reproduces the ball count, and a random sample of the balls is
+    re-certified at the stored mu by an independent call of the certificate (CPU LAPACK); the stored R = 14 record is complete"""
+    import phase10_ims as I
+    rec = {r['R']: r for r in jsonl('phase10_ims.jsonl') if r.get('class') == 1387}
+    r8, r14 = rec[8], rec[14]; assert r14['all_balls_certified'] and r14['balls_failing'] == 0 and r14['distinct_balls'] == 7527
+    assert r14['Lambda_R_certified'] > float(Fraction(load('phase8_chain_m5.json')['rayleigh_upper_exact']))         # E_*(1387) > E_*(FR30)
+    dec = P9.decoration(1387); R = 8; rho = Fraction(R) - Fraction(311, 175); balls, types_, n5, rej = I.enumerate_balls(dec, R, 3)
+    assert len(balls) == r8['distinct_balls'] == 1450 and rej == 0 and len(types_) == n5 == 90
+    d2s = set()
+    for G, T, _ in types_.values():
+        X14 = 14 * T + 13 * G.sum(-1); a_, b_, _ = P9.panels(C.patch_ops(G, T)[2]); d2s |= set(((X14[a_] - X14[b_]) ** 2).sum(1).tolist())
+    amp = {v: float(1 / I.c_overlap(math.sqrt(v) / 14 / float(rho))) for v in sorted(d2s)}; mu = Fraction(r8['mu'])
+    for i in np.random.default_rng(8).choice(len(balls), 12, replace=False):
+        G, T = balls[i]; low, _ = I.work_at((G, T, float(rho), amp, mu, 4 * 2 ** -53)); assert low is not None and low >= r8['Lambda_R_certified'] - 1e-9
+
+
+def test_mirror_twins_of_the_top_classes():
+    """stage C: the improper leaders are the top proper classes with every child frame right-multiplied by the transposition (x y)"""
+    import phase10_improper as X
+    def twin(j):
+        return X.ext_index({k: tuple(int(np.argmax((P9.pmat(p) @ P9.pmat((1, 0, 2)))[i])) for i in range(3)) for k, p in X.dec_of(j).items()})
+    for proper_class, imp in ((1387, 539311), (1389, 539291), (1391, 539288)):
+        assert X.orbit_rep(twin(X.ext_index(P9.decoration(proper_class)))) == X.orbit_rep(imp)
+    n, irr, per, dets = X.frame_structure(X.dec_of(539311)); assert (n, irr, per) == (48, True, 2) and set(dets) == {-1}
+
+
 def test_prescribed_mu_certificate_matches_reference():
     import phase10_ims as I
     S = P9.build([P9.decoration(1387)] * 2); H = S['H']; lam = float(np.linalg.eigvalsh(H.toarray())[0])

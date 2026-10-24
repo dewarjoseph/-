@@ -86,8 +86,13 @@ def main():
     for r in JL('phase10_ims.jsonl'):
         if r.get('class') is None: ims_ext[r['extended_index']][r['R']] = r      # stage C (extended-space) decorations
         else: ims[cls_of[r['class']]][r['R']] = r                                # a later record at the same R supersedes an earlier one
-    sh = J('phase10_shadows.json') or {}
-    shadow_up = {cls_of[int(d)]: max(v[k] for v in rec.values() for k in v if k.endswith('_upper')) for d, rec in sh.items()}
+    # certified upper bounds on the Abelian-shadow floors: per shadow the best (smallest) exact Rayleigh quotient, then the largest
+    # over the three shadows; for FR30 also Phase VII-B's level-6 certificates (phase7b_scaling.json; chi_3 = chi_1)
+    sh = {d: {k: [x for kk, x in v.items() if kk.endswith('_upper')] for k, v in rec.items()} for d, rec in (J('phase10_shadows.json') or {}).items()}
+    sc = J('phase7b_scaling.json')
+    if sc and '4752' in sh:
+        for k, name in (('chi1', 'FR30_chi1'), ('chi3', 'FR30_chi1'), ('chi2', 'FR30_chi2')): sh['4752'][k].append(float(Fraction(sc[name]['rayleigh_upper_exact'])))
+    shadow_up = {cls_of[int(d)]: max(min(v) for v in rec.values()) for d, rec in sh.items()}
     per = collections.defaultdict(dict)
     for r in JL('phase10_periodic.jsonl'): per[cls_of[r['class']]][r['k']] = r
     import phase9_pair as P9, phase10_ims as I
