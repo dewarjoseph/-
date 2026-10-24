@@ -1,0 +1,42 @@
+{
+ "rule": "4753",
+ "type": 31,
+ "inflate_m5_s": 8.69834589958191,
+ "accepted_R22": 32768,
+ "load_note": "measured with 2 probe workers running on the 4 cores (memory-bandwidth contention)",
+ "14": {
+  "tiles": 1640,
+  "build_s": 0.023540258407592773,
+  "cholesky_s": 0.10872483253479004,
+  "bandwidth": 641,
+  "passed_at_8.5": true
+ },
+ "16": {
+  "tiles": 2509,
+  "build_s": 0.036154985427856445,
+  "cholesky_s": 0.243072509765625,
+  "bandwidth": 892,
+  "passed_at_8.5": true
+ },
+ "18": {
+  "tiles": 3507,
+  "build_s": 0.04927945137023926,
+  "cholesky_s": 1.5183205604553223,
+  "bandwidth": 1213,
+  "passed_at_8.5": true
+ },
+ "20": {
+  "tiles": 4808,
+  "build_s": 0.06884169578552246,
+  "cholesky_s": 1.9239788055419922,
+  "bandwidth": 1405,
+  "passed_at_8.5": true
+ },
+ "22": {
+  "tiles": 6376,
+  "build_s": 0.13108301162719727,
+  "cholesky_s": 3.5638837814331055,
+  "bandwidth": 1638,
+  "passed_at_8.5": true
+ }
+}

@@ -23,7 +23,7 @@ definitions (deliverables/PHASE7_DEFINITIONS.md sections 1-5).  The Phase X code
              unit u = 2^-52, minus the entrywise error of the rounded amplification factors.
 Usage (CLI): python -u -I audit/phase11_chair.py cert <rule> <R> <m> <nproc> <mu> [tag]
   <rule> = census index (proper), or x<j> (extended index j), -> audit/results/phase11_cert.jsonl"""
-import os, sys, json, time, math, itertools, types
+import os, sys, json, time, math, itertools, types, collections
 from fractions import Fraction
 sys.modules.setdefault('resource', types.SimpleNamespace(getrusage=lambda *a: types.SimpleNamespace(ru_maxrss=0), RUSAGE_SELF=0))
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE); RES = os.path.join(HERE, 'results')
@@ -250,6 +250,58 @@ def enumerate_balls(dec, R, m, types_=None, nproc=1):
             for kb, v in out.items(): balls.setdefault(kb, v)
     return balls, {'types': len(types_), 'centres': centres, 'rejected': rejected, 'distinct': len(balls)}
 
+# ---- streaming enumeration (certify at m >= 5): the same balls, the same completeness test, memory bounded by compressed keys.
+# At m = 5 every type's central supertile contains nearly every distinct ball, so holding the balls per worker exhausts memory.
+# Pass 1 returns, per type, {zlib(canonical bytes): tile index} (zlib is lossless and deterministic, so equal compressed keys <=>
+# equal balls: no hashing assumption); the first occurrence in type order owns the ball.  Pass 2 re-inflates and certifies.
+ZLEVEL = 1                                                 # zlib level: speed only; any fixed level is lossless and deterministic
+def _inflated_patch(G0, T0_, c, dec, R, m):
+    from scipy.spatial import cKDTree
+    G, T = G0, T0_
+    for _ in range(m): G, T = inflate(G, T, dec)
+    P = Patch(G, T); X = centroid14(G, T); tree = cKDTree(X.astype(float))
+    sh = np.array(P.shape); pad = -np.ones(tuple(sh + 2), dtype=np.int64); pad[1:-1, 1:-1, 1:-1] = P.grid
+    bad = np.argwhere(pad < 0) - 1 + P.lo; btree = cKDTree((14 * bad + 7).astype(float))
+    ts = np.arange(c * 8 ** m, (c + 1) * 8 ** m); dmin, _ = btree.query(X[ts].astype(float))
+    return G, T, X, tree, ts, dmin >= 14 * (R + math.sqrt(3) / 2)
+def _ball_at(G, T, X, cand, t, R):
+    """the canonical ball about tile t from its candidate neighbours: exactly the construction of _balls_of_type"""
+    cand = np.array(cand); d2 = ((X[cand] - X[t]) ** 2).sum(1); mem = cand[d2 < 196 * R * R]; Gt = G[t]
+    Grel = np.einsum('ji,njk->nik', Gt, G[mem]); Trel = (T[mem] - T[t]) @ Gt
+    rows = np.c_[Grel.reshape(len(mem), 9), Trel]; order = np.lexsort(rows.T[::-1])
+    return rows[order].astype(np.int16).tobytes(), Grel[order].astype(np.int8), Trel[order].astype(np.int16)
+def _ball_keys_of_type(args):
+    import zlib
+    ti, G0, T0_, c, dec, R, m = args
+    G, T, X, tree, ts, okm = _inflated_patch(G0, T0_, c, dec, R, m); good = ts[okm]; raw = {}
+    for s0 in range(0, len(good), 256):
+        g = good[s0:s0 + 256]
+        for t, cand in zip(g, tree.query_ball_point(X[g].astype(float), 14 * R + 1e-6)):
+            kb, _, _ = _ball_at(G, T, X, cand, t, R); raw.setdefault(kb, int(t - c * 8 ** m))    # exact within-type dedupe
+    out = {zlib.compress(kb, ZLEVEL): i for kb, i in raw.items()}; del raw
+    return ti, out, int((~okm).sum()), len(ts)
+def _cert_type_chunk(args):
+    import zlib
+    ti, G0, T0_, c, dec, R, m, idxs, zks = args; rho, tab, mu, err = _W['rho'], _W['tab'], _W['mu'], _W['err']
+    G, T, X, tree, ts, okm = _inflated_patch(G0, T0_, c, dec, R, m); out = []
+    tt = np.array([c * 8 ** m + i for i in idxs])
+    for t, cand, zk in zip(tt, tree.query_ball_point(X[tt].astype(float), 14 * R + 1e-6), zks):
+        kb, Gb, Tb = _ball_at(G, T, X, cand, t, R)
+        assert zlib.compress(kb, ZLEVEL) == zk                # the rebuilt ball is the enumerated one
+        Ha, _, _ = ball_amplified(Gb, Tb, rho, tab.__getitem__); low, bw = banded_cert(Ha, mu, err); out.append((low, bw, len(Gb)))
+    return ti, out
+def enumerate_ball_keys(dec, R, m, types_, nproc):
+    """pass 1: {compressed canonical key: (type index, tile index)} with first-occurrence ownership in type order, plus counts"""
+    import multiprocessing as mp
+    jobs = [(ti, G, T, c, dec, R, m) for ti, (G, T, c) in enumerate(types_.values())]; seen = {}; rejected = 0; centres = 0
+    with mp.Pool(nproc) as pool:
+        for ti, out, rej, n in pool.imap(_ball_keys_of_type, jobs):
+            rejected += rej; centres += n
+            for zk, i in out.items(): seen.setdefault(zk, (ti, i))
+            log(f"  type {ti + 1}/{len(jobs)}: {len(out)} distinct in type, {len(seen)} distinct so far")
+    return seen, {'types': len(types_), 'centres': centres, 'rejected': rejected, 'distinct': len(seen),
+                  'key_bytes_compressed': sum(len(k) for k in seen)}
+
 def ball_amplified(G, T, rho, amp_of):
     """the amplified ball operator 24 - A~ (complex CSR) and the plain one; amp_of(d2_196) = 1/c(d/rho) as float"""
     G = G.astype(np.int64); T = T.astype(np.int64); P = Patch(G, T); a, b, k = P.panels(); U = link_matrices(G, a, b, k)
@@ -304,12 +356,16 @@ def _cert_one(args):
 def _init(rho, tab, mu, err):
     os.environ['OMP_NUM_THREADS'] = '1'; _W.update(rho=rho, tab=tab, mu=mu, err=err)
 
-def certify(spec, R, m, nproc, mu_str, tag=None):
+def certify(spec, R, m, nproc, mu_str, tag=None, stream=None):
     import multiprocessing as mp
     dec = rule(spec); rho = Fraction(R) - RC_BOUND
     t0 = time.time(); types_, n0, _ = legal_types(dec); log(f"rule {spec}: {len(types_)} Phi-closed 1-star types ({n0} in T5) [{time.time()-t0:.0f}s]")
     fg = frame_graph(dec); log('frame substitution', fg)
-    t0 = time.time(); balls, info = enumerate_balls(dec, R, m, types_, nproc); log(f"R={R} m={m}: {info} [{time.time()-t0:.0f}s]")
+    stream = m >= 5 if stream is None else stream
+    t0 = time.time()
+    if stream: seen, info = enumerate_ball_keys(dec, R, m, types_, nproc)
+    else: balls, info = enumerate_balls(dec, R, m, types_, nproc)
+    log(f"R={R} m={m}: {info} [{time.time()-t0:.0f}s]")
     assert info['rejected'] == 0, 'incomplete balls: increase m'
     # the squared centroid distances across panels: collect from the legal 1-stars (every panel is a centre-tile panel of a 1-star)
     d2s = set()
@@ -318,13 +374,29 @@ def certify(spec, R, m, nproc, mu_str, tag=None):
     tab = amp_table_exact(rho, d2s); amax = max(tab.values())
     err = 24 * amax * 2.0 ** -52                         # entrywise error of the rounded amplification factors (row-sum bound)
     mu = Fraction(math.floor(Fraction(mu_str) * 2 ** 20), 2 ** 20)
-    items = [(kb, G, T) for kb, (G, T, _) in balls.items()]; res = []; fails = []
+    res = []; fails = []
     t0 = time.time()
     with mp.Pool(nproc, initializer=_init, initargs=(float(rho), tab, float(mu), err)) as pool:
-        for i, (kb, low, bw, nt) in enumerate(pool.imap_unordered(_cert_one, items, chunksize=8)):
-            res.append((low, bw, nt))
-            if low is None: fails.append(kb)
-            if i % 1000 == 0: log(f"{i + 1}/{len(items)} certified, {len(fails)} failed [{time.time()-t0:.0f}s]")
+        if not stream:
+            items = [(kb, G, T) for kb, (G, T, _) in balls.items()]
+            for i, (kb, low, bw, nt) in enumerate(pool.imap_unordered(_cert_one, items, chunksize=8)):
+                res.append((low, bw, nt))
+                if low is None: fails.append(kb)
+                if i % 1000 == 0: log(f"{i + 1}/{len(items)} certified, {len(fails)} failed [{time.time()-t0:.0f}s]")
+        else:
+            own = collections.defaultdict(list)
+            for zk, (ti, i) in seen.items(): own[ti].append((i, zk))
+            tv = list(types_.values()); jobs = []
+            for ti, lst in sorted(own.items()):
+                lst.sort()
+                for s0 in range(0, len(lst), 128):
+                    ch = lst[s0:s0 + 128]; G_, T_, c_ = tv[ti]; jobs.append((ti, G_, T_, c_, dec, R, m, [a for a, _ in ch], [b for _, b in ch]))
+            del seen
+            for ti, out in pool.imap_unordered(_cert_type_chunk, jobs):
+                for low, bw, nt in out:
+                    res.append((low, bw, nt))
+                    if low is None: fails.append(ti)
+                log(f"{len(res)}/{info['distinct']} certified, {len(fails)} failed [{time.time()-t0:.0f}s]")
     ok = not fails; lows = [r[0] for r in res if r[0] is not None]
     rec = {'rule': str(spec), 'R': R, 'm': m, 'rho': f'{rho.numerator}/{rho.denominator}', 'one_star_types': len(types_), 'one_star_types_T5': n0,
            'frame_graph': fg, 'centres': info['centres'], 'distinct_balls': info['distinct'], 'rejected_incomplete': info['rejected'],
@@ -332,7 +404,7 @@ def certify(spec, R, m, nproc, mu_str, tag=None):
            'mu': f'{mu.numerator}/{mu.denominator}', 'mu_float': float(mu), 'amp_max': amax, 'entry_err': err,
            'Lambda_R_certified': min(lows) if ok else None, 'all_balls_certified': ok, 'balls_failing': len(fails),
            'implementation': 'phase11_chair (independent): own enumeration, RCM + banded LAPACK dpbtrf, Higham Thm 10.3 with u = 2^-52',
-           'cert_seconds': time.time() - t0, 'tag': tag}
+           'cert_seconds': time.time() - t0, 'tag': tag, **({'enumeration': 'streaming: zlib-compressed canonical keys, two passes'} if stream else {})}
     log(rec)
     with open(os.path.join(RES, 'phase11_cert.jsonl'), 'a') as f: f.write(json.dumps(rec) + '\n')
     return rec
@@ -407,3 +479,17 @@ def probe_parallel(spec, Rs, m, type_indices, tiles_per_type, nproc=4, seed=0):
                'ball_tiles': [min(r['tiles'] for r in res), max(r['tiles'] for r in res)]}
         print(rec, flush=True); out.append(rec)
     return out
+
+def probe_lowest_types(spec, Rs, out_name, nproc=2, m=5, n_types=10, tiles_per_type=6):
+    """the probe of report section 2.4: the n_types legal 1-star types with the lowest U1 (bottom of the pinned inflated 1-star),
+    tiles_per_type random legal centres in each (seed 0) at level m -> audit/results/<out_name>"""
+    dec = rule(spec); ty, _, _ = legal_types(dec); U1 = []
+    for G, T, c in ty.values():
+        Gi, Ti = inflate(G, T, dec); U1.append(float(np.linalg.eigvalsh(operators(Gi, Ti).toarray())[0]))
+    low = [int(i) for i in np.argsort(U1)[:n_types]]
+    out = probe_parallel(spec, Rs, m, low, tiles_per_type, nproc=nproc)
+    json.dump({'types_lowest_U1': low, 'records': out}, open(os.path.join(RES, out_name), 'w'), indent=1)
+    return out
+
+if __name__ == '__main__' and sys.argv[1] == 'probe':     # probe <rule> <R,R,...> <out.json> [nproc]
+    probe_lowest_types(sys.argv[2], tuple(int(x) for x in sys.argv[3].split(',')), sys.argv[4], int(sys.argv[5]) if len(sys.argv) > 5 else 2)

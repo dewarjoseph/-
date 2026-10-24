@@ -53,7 +53,8 @@ def counterfactual():
         out[base] = {'base': b, 'n_neighbours': len(rows), 'P1_spearman': rho, 'P1_pass': rho >= 0.8,
                      'P2_sign_accuracy': float(np.mean(signs)), 'P2_pass': float(np.mean(signs)) >= 0.8,
                      'P3_best_Y5_neighbour': topY['j'], 'P3_pass': topY['j'] in [r['j'] for r in top3U],
-                     'neighbours_above_base_Y5': sum(r['Y5'] > b['Y5'] for r in rows),
+                     'neighbours_above_base_Y5': sum(sgn(r['Y5'] - b['Y5']) > 0 for r in rows),
+                     'neighbours_tied_with_base_Y5': sum(sgn(r['Y5'] - b['Y5']) == 0 for r in rows),
                      'spearman_twocycle_flat_vs_Y5': float(stats.spearmanr([r['twocycle_flat_types'] for r in rows], [r['Y5'] for r in rows]).statistic),
                      'rows': sorted(rows, key=lambda r: -r['Y5'])}
     return out
@@ -77,7 +78,23 @@ def census_bounds():
             'median_Y4_twocycle_frustrated': float(np.median(Y4[~flat])) if (~flat).any() else None, 'median_Y4_with_flat': float(np.median(Y4[flat])) if flat.any() else None,
             'mannwhitney_p_frustrated_higher': float(mw.pvalue) if mw else None,
             'top20_by_Y4_with_twocycle_flat_types': [r['class'] for r in top[:20] if r['twocycle_flat_types'] > 0],
-            'rows': rows}
+            'random200': random200(rows), 'rows': rows}
+
+def random200(rows):
+    """the same association restricted to the 200-class random sample of the census set (seed 20261024, phase11_local), with
+    Phase X's level-5 bounds where available: post hoc evidence, not a preregistered test"""
+    ids = sorted(r['class'] for r in J('phase10_census.json')['classes'])
+    sample = set(int(x) for x in np.random.default_rng(20261024).choice(ids, 200, replace=False))
+    p10y5 = {r['class']: r for r in JL('phase10_y5.jsonl')}; rs = [r for r in rows if r['class'] in sample]
+    Y4 = np.array([r['Y4'] for r in rs]); flat = np.array([r['twocycle_flat_types'] > 0 for r in rs])
+    mw = stats.mannwhitneyu(Y4[~flat], Y4[flat], alternative='greater')
+    rho = stats.spearmanr([r['twocycle_flat_types'] / r['n_types1'] for r in rs], Y4).statistic
+    y5 = [(r['twocycle_flat_types'] > 0, p10y5[r['class']]['Y5']) for r in rs if r['class'] in p10y5]
+    f = np.array([x[0] for x in y5]); v = np.array([x[1] for x in y5])
+    return {'n': len(rs), 'frustrated': int((~flat).sum()), 'with_flat': int(flat.sum()), 'median_Y4_frustrated': float(np.median(Y4[~flat])),
+            'median_Y4_flat': float(np.median(Y4[flat])), 'mannwhitney_p': float(mw.pvalue), 'spearman_flat_fraction_Y4': float(rho), 'Y5_n': len(y5),
+            'median_Y5_frustrated': float(np.median(v[~f])), 'median_Y5_flat': float(np.median(v[f])),
+            'mannwhitney_p_Y5': float(stats.mannwhitneyu(v[~f], v[f], alternative='greater').pvalue)}
 
 if __name__ == '__main__':
     out = {'twins': twins(), 'counterfactual': counterfactual(), 'census_bounds': census_bounds()}

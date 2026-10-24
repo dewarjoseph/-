@@ -123,6 +123,98 @@ def test_1387_above_fr30_without_phase8():
     q = Fraction(int(rows[j]['upper_num']), int(rows[j]['upper_den'])); assert q < Fraction(87999990, 10 ** 7) <= Fraction(_cert('audit_1387_R15')['Lambda_R_certified'])
     assert abs(float(q) - 8.797011315) < 1e-6
 
+@pytest.mark.parametrize('tag,balls,value', [('target_1389_R16', 12193, 8.7644993), ('target_twin_R15', 10321, 8.7999990), ('audit_539288_R8', 829, 6.8499994)])
+def test_new_certificates(tag, balls, value):
+    r = _cert(tag); assert r['all_balls_certified'] and r['rejected_incomplete'] == 0 and r['distinct_balls'] == balls and r['Lambda_R_certified'] >= value
+
+def test_1389_above_fr30_without_artifacts():
+    """FR30's inflated-star chain recomputed (exact rationals): U3 reproduces Phase VIII, U5 lies below the R = 16 bound of 1389"""
+    ch = J('phase11_fr30_upper.json')['chain']; assert [r['m'] for r in ch] == [3, 4, 5]
+    q = [Fraction(r['upper_exact']) for r in ch]; assert q[0] > q[1] > q[2]
+    assert abs(float(q[0]) - 8.7795327) < 1e-7 and abs(float(q[2]) - 8.764227038115036) < 1e-8      # Phase VIII's U3 and U5
+    assert q[2] < Fraction(_cert('target_1389_R16')['Lambda_R_certified'])
+
+def test_streaming_enumeration_matches(tmp_path, monkeypatch):
+    """the two-pass streaming certificate (used at m >= 5) gives the same balls and the same bound as the one-pass path"""
+    monkeypatch.setattr(C, 'RES', str(tmp_path))
+    a = C.certify('4752', 6, 3, 1, '3.6555', 'test_off', stream=False); b = C.certify('4752', 6, 3, 1, '3.6555', 'test_on', stream=True)
+    for k in ('distinct_balls', 'centres', 'rejected_incomplete', 'ball_tiles', 'bandwidth_max', 'Lambda_R_certified', 'all_balls_certified'): assert a[k] == b[k], k
+    assert a['distinct_balls'] == 325 and a['all_balls_certified']
+
+# ------------------------------------------------------------------ the certified funnel and the orbit (Part II.2-2.3)
+ORBIT = {184323, 184338, 184342, 539311, 539291, 539288}
+def test_funnel_flags_recomputed_from_stored_rationals():
+    import phase11_frontier as F
+    L = F.L_REF; assert L <= Fraction(_cert('audit_1387_R15')['Lambda_R_certified'])
+    reps = J('phase11_frontier_reps.json')['orbit_representatives']; assert len(reps) == len(set(reps)) == 280332
+    surv = set(reps)
+    for name in ('X3', 'X4', 'X5'):
+        rows = F.load_stage(name); assert set(rows) == surv, name
+        for r in rows.values(): assert r['inferior'] == (int(r['upper_num']) * L.denominator < L.numerator * int(r['upper_den']))
+        surv = {j for j, r in rows.items() if not r['inferior']}
+    x6 = {r['j']: r for r in JL('phase11_frontier_X6.jsonl')}; x7 = {r['j']: r for r in JL('phase11_frontier_X7.jsonl')}
+    for r in x6.values(): assert r['rejected'] == 0 and r['inferior'] == (Fraction(r['D8_upper_exact']) < L)
+    for r in x7.values(): assert r['inferior'] == (Fraction(int(r['upper_num']), int(r['upper_den'])) < L)
+    surv -= {j for j, r in {**x6, **x7}.items() if r['inferior']}
+    s = J('phase11_frontier_summary.json'); assert surv == set(s['final_survivors']) == ORBIT
+    assert [s[k]['proven_inferior'] for k in ('X3', 'X4', 'X5')] == [235644, 44650, 30]
+
+def test_orbit_reps_cover_the_extended_space():
+    """the stored representatives are distinct orbit minima, and Burnside's lemma gives exactly 280 332 S3-conjugation orbits on
+    the 6^8 decorations, so they are all of them"""
+    import phase11_frontier as F
+    reps = J('phase11_frontier_reps.json')['orbit_representatives']; rs = set(reps)
+    def conjp(p, Q):
+        Qm = C.perm_matrix(Q); M = Qm @ C.perm_matrix(p) @ Qm.T; return tuple(int(np.argmax(M[i])) for i in range(3))
+    fixed = 0
+    for Q in C.PERMS:                       # Fix(Q): the centre frame commutes with Q; along each cycle of the octant permutation
+        Qm = C.perm_matrix(Q); pi = [C.U3.index(tuple(int(x) for x in Qm @ np.array(v))) for v in C.U3]   # the frame is transported
+        n = sum(conjp(p, Q) == p for p in C.PERMS); seen = set()
+        for k in range(len(C.U3)):
+            if k in seen: continue
+            ell, x = 0, k
+            while True:
+                seen.add(x); x = pi[x]; ell += 1
+                if x == k: break
+            def it(p):
+                for _ in range(ell): p = conjp(p, Q)
+                return p
+            n *= sum(it(p) == p for p in C.PERMS)
+        fixed += n
+    assert fixed % 6 == 0 and fixed // 6 == len(rs) == 280332
+    rng = np.random.default_rng(1)
+    for j in rng.choice(6 ** 8, 300, replace=False):
+        d = C.extended_decoration(int(j)); assert min(F.ext_index(F.conj_decoration(d, Q)) for Q in C.PERMS) in rs
+    for j in rng.choice(reps, 300, replace=False):
+        d = C.extended_decoration(int(j)); assert min(F.ext_index(F.conj_decoration(d, Q)) for Q in C.PERMS) == j
+
+def test_right_S3_orbit_of_1387():
+    import phase11_frontier as F
+    d = C.proper_decoration(4753)
+    right = lambda p, Q: tuple(int(np.argmax((C.perm_matrix(p) @ C.perm_matrix(Q))[i])) for i in range(3))
+    rep = lambda e: min(F.ext_index(F.conj_decoration(e, Q)) for Q in C.PERMS)      # the S3-conjugation representative
+    assert {rep(tuple(right(p, Q) for p in d)) for Q in C.PERMS} == ORBIT and rep(d) == 184323
+
+def test_fr30_mirror_has_fr30_types():
+    """539315 = 1386 . (x y) has exactly FR30's legal 1-star types (hence, by Phase VII Thm 6.2, FR30's floor); FR30 = 4752, the
+    member in the frame of the Phase VII definitions (the canonical keys of the conjugate 1386 are written in a rotated frame)"""
+    a, _, _ = C.legal_types(C.rule(4752)); b, _, _ = C.legal_types(C.rule('x539315')); assert set(a) == set(b) and len(a) == 72
+
+def test_preregistered_evaluations():
+    import phase11_analysis as A
+    t = A.twins(); assert (t['n'], t['correct']) == (40, 31)
+    cf = A.counterfactual(); assert all(cf[b]['P1_pass'] and cf[b]['P2_pass'] and cf[b]['P3_pass'] for b in ('4752', '4753'))
+    assert cf['4753']['neighbours_above_base_Y5'] == 0 and cf['4753']['neighbours_tied_with_base_Y5'] == 1     # the tie: a neighbour in the base's own orbit
+
+def test_leaderboard_classification():
+    d = J('phase11_leaderboard.json'); assert d['counts'] == {'leader': 1, 'proven_inferior': 1095, 'contender': 2, 'proven_superior': 0}
+    Lb = Fraction(d['L_best'])
+    for r in d['rows']:
+        if r['status'] == 'proven_inferior': assert (Fraction(r['U_exact']) if r.get('U_exact') else Fraction(r['U'])) < Lb
+        if r['status'] == 'contender': assert r['U'] >= d['L_best'] and r['class'] in (1389, 1391)
+    o = d['orbit_1387']; assert {r['j'] for r in o['members']} == ORBIT and not o['resolved'] and all(0 < r['L'] <= r['U'] for r in o['members'])
+    assert {1387, 1389} <= set(d['classes_certified_above_FR30_without_artifacts'])
+
 # ------------------------------------------------------------------ Z^3
 def test_z3_pair_audit():
     a = J('phase11_z3.json')['audit']['class_matched']
@@ -142,8 +234,9 @@ def test_z3_no_trivial_plaquette_bound():
 def test_z3_islands():
     rows = J('phase11_z3.json')['islands']
     assert [r['island_side'] for r in rows] == sorted(r['island_side'] for r in rows)
-    for r in rows: assert abs(r['E_upper_island_bump'] - r['closed_form']) < 1e-12
-    assert rows[-1]['environment_TV_distance'] < rows[0]['environment_TV_distance'] and rows[-1]['E_upper_island_bump'] < 0.5
+    for r in rows: assert abs(r['E_upper_island_bump'] - r['closed_form']) < 1e-12 and abs(r['closed_form'] - 6 * (1 - math.cos(math.pi / (r['island_side'] + 1)))) < 1e-12
+    tv = [r['environment_TV_distance'] for r in rows]; eu = [r['E_upper_island_bump'] for r in rows]
+    assert tv == sorted(tv, reverse=True) and eu == sorted(eu, reverse=True) and len(set(eu)) == len(eu)      # both fall with s (Theorem G)
 
 # ------------------------------------------------------------------ the ladder (second geometry)
 def test_ladder_neumann_windows_saturate_below_floor():
@@ -197,3 +290,27 @@ def test_preregistration_committed_before_deep_results():
     for p in ('audit/results/phase11_frontier_twins_Y5.jsonl', 'audit/results/phase11_frontier_counterfactual_Y5.jsonl'):
         t = first_commit_time(p)
         if t is not None: assert t > t0
+
+def test_random_sample_association():
+    r = J('phase11_analysis.json')['census_bounds']['random200']
+    assert (r['n'], r['with_flat'], r['frustrated']) == (200, 69, 131) and r['mannwhitney_p_Y5'] < 1e-10
+    assert abs(r['median_Y5_frustrated'] - 7.5527) < 1e-3 and abs(r['median_Y5_flat'] - 6.9146) < 1e-3
+
+# ------------------------------------------------------------------ the ledger
+def test_ledger_claims_name_existing_tests():
+    d = J('phase11_ledger.json'); names = {n for n in globals() if n.startswith('test_')}
+    assert len(d['proof_obligations']) == 20 and len(d['claims']) >= 30
+    for c in d['claims']:
+        for t in c['test'].split(', '):
+            if t != '-': assert t in names, t
+
+def test_orbit_level6_bounds_reproduce_phase10():
+    """independent exact Y6 of the six orbit members; Phase X's stored-only values reproduced where they exist"""
+    y6 = {r['j']: r for r in JL('phase11_orbit_Y6.jsonl')}; assert set(y6) == ORBIT
+    p10 = {184323: 9.367950155, 184338: 9.210499828, 184342: 9.110400672}
+    for r in JL('phase10_improper_certify.jsonl'):
+        if r.get('Y6_upper'): p10[r['j']] = r['Y6_upper']
+    for j, r in y6.items():
+        q = Fraction(int(r['upper_num']), int(r['upper_den'])); assert abs(float(q) - r['upper']) < 1e-12 and q >= Fraction(r['float']) - Fraction(1, 10 ** 9)
+        if j in p10: assert abs(r['upper'] - p10[j]) < 1e-8, j
+    assert y6[539288]['upper'] < 9.1105 < y6[184342]['upper'] + 1e-4
