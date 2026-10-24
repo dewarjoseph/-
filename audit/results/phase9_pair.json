@@ -1,0 +1,270 @@
+{
+ "decorations": {
+  "937": {
+   "0": [
+    1,
+    2,
+    0
+   ],
+   "(0, 0, 0)": [
+    0,
+    1,
+    2
+   ],
+   "(0, 0, 1)": [
+    2,
+    1,
+    0
+   ],
+   "(0, 1, 0)": [
+    1,
+    0,
+    2
+   ],
+   "(0, 1, 1)": [
+    2,
+    0,
+    1
+   ],
+   "(1, 0, 0)": [
+    0,
+    2,
+    1
+   ],
+   "(1, 0, 1)": [
+    1,
+    2,
+    0
+   ],
+   "(1, 1, 0)": [
+    0,
+    1,
+    2
+   ]
+  },
+  "938": {
+   "0": [
+    2,
+    0,
+    1
+   ],
+   "(0, 0, 0)": [
+    0,
+    1,
+    2
+   ],
+   "(0, 0, 1)": [
+    2,
+    1,
+    0
+   ],
+   "(0, 1, 0)": [
+    1,
+    0,
+    2
+   ],
+   "(0, 1, 1)": [
+    2,
+    0,
+    1
+   ],
+   "(1, 0, 0)": [
+    0,
+    2,
+    1
+   ],
+   "(1, 0, 1)": [
+    1,
+    2,
+    0
+   ],
+   "(1, 1, 0)": [
+    0,
+    1,
+    2
+   ]
+  }
+ },
+ "orbits": {
+  "937": [
+   937,
+   1190,
+   3943,
+   4142,
+   4502,
+   4951
+  ],
+  "938": [
+   938,
+   1189,
+   3944,
+   4141,
+   4501,
+   4952
+  ]
+ },
+ "levels": {
+  "3": {
+   "tiles": 512,
+   "panels": 5376,
+   "tile_translations_identical": true,
+   "frames_differ_fraction": 0.140625,
+   "plaquettes": 7728,
+   "class_counts": {
+    "937": {
+     "+1": 4072,
+     "-1": 467,
+     "i": 1239,
+     "j": 802,
+     "k": 1148
+    },
+    "938": {
+     "+1": 4072,
+     "-1": 467,
+     "i": 1239,
+     "j": 802,
+     "k": 1148
+    }
+   },
+   "trace_counts_equal": true,
+   "plaquettes_with_different_class": 2058,
+   "plaquettes_with_different_trace": 1116,
+   "two_cycles": 1533,
+   "two_cycle_class_counts": {
+    "937": {
+     "+1": 216,
+     "-1": 192,
+     "i": 375,
+     "j": 375,
+     "k": 375
+    },
+    "938": {
+     "+1": 216,
+     "-1": 192,
+     "i": 375,
+     "j": 375,
+     "k": 375
+    }
+   },
+   "two_cycles_with_different_class": 1464,
+   "two_cycles_with_different_trace": 756,
+   "Y": {
+    "937": 8.491025746146445,
+    "938": 8.213434122384806
+   },
+   "certified": {
+    "937": {
+     "upper_exact": "69953028343991/8238466168245",
+     "upper": 8.491025746227317,
+     "lower": 8.491024010107806
+    },
+    "938": {
+     "upper_exact": "324501702082808/39508650978975",
+     "upper": 8.213434122453219,
+     "lower": 8.2134323046562
+    }
+   },
+   "certified_separation": 0.27758988765458703
+  },
+  "4": {
+   "tiles": 4096,
+   "panels": 46080,
+   "tile_translations_identical": true,
+   "frames_differ_fraction": 0.140380859375,
+   "plaquettes": 67680,
+   "class_counts": {
+    "937": {
+     "+1": 35912,
+     "-1": 4551,
+     "i": 10253,
+     "j": 6794,
+     "k": 10170
+    },
+    "938": {
+     "+1": 35912,
+     "-1": 4551,
+     "i": 10253,
+     "j": 6794,
+     "k": 10170
+    }
+   },
+   "trace_counts_equal": true,
+   "plaquettes_with_different_class": 16443,
+   "plaquettes_with_different_trace": 8908,
+   "two_cycles": 12285,
+   "two_cycle_class_counts": {
+    "937": {
+     "+1": 1746,
+     "-1": 1536,
+     "i": 3001,
+     "j": 3001,
+     "k": 3001
+    },
+    "938": {
+     "+1": 1746,
+     "-1": 1536,
+     "i": 3001,
+     "j": 3001,
+     "k": 3001
+    }
+   },
+   "two_cycles_with_different_class": 11703,
+   "two_cycles_with_different_trace": 6036,
+   "Y": {
+    "937": 8.03570962089961,
+    "938": 7.78548256084682
+   }
+  },
+  "5": {
+   "tiles": 32768,
+   "panels": 380928,
+   "tile_translations_identical": true,
+   "frames_differ_fraction": 0.140350341796875,
+   "plaquettes": 565440,
+   "class_counts": {
+    "937": {
+     "+1": 301039,
+     "-1": 40811,
+     "i": 83222,
+     "j": 55461,
+     "k": 84907
+    },
+    "938": {
+     "+1": 301039,
+     "-1": 40811,
+     "i": 83222,
+     "j": 55461,
+     "k": 84907
+    }
+   },
+   "trace_counts_equal": true,
+   "plaquettes_with_different_class": 131583,
+   "plaquettes_with_different_trace": 71280,
+   "two_cycles": 98301,
+   "two_cycle_class_counts": {
+    "937": {
+     "+1": 13971,
+     "-1": 12288,
+     "i": 24014,
+     "j": 24014,
+     "k": 24014
+    },
+    "938": {
+     "+1": 13971,
+     "-1": 12288,
+     "i": 24014,
+     "j": 24014,
+     "k": 24014
+    }
+   },
+   "two_cycles_with_different_class": 93645,
+   "two_cycles_with_different_trace": 48288,
+   "Y": {
+    "937": 7.97284015488831,
+    "938": 7.728537925603843
+   }
+  }
+ },
+ "same_orbit": false,
+ "difference": "centre child only: pi_0 = (1, 2, 0) (937) vs (2, 0, 1) (938), the two 120-degree rotations about (1,1,1)"
+}

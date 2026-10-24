@@ -1,0 +1,44 @@
+{
+ "fr30": {
+  "complete_1stars": 27000,
+  "illegal": 0,
+  "illegal_fraction": 0.0,
+  "distinct_types": 72
+ },
+ "iid1": {
+  "complete_1stars": 27000,
+  "illegal": 26998,
+  "illegal_fraction": 0.9999259259259259,
+  "distinct_types": 25965
+ },
+ "coarse1": {
+  "complete_1stars": 27000,
+  "illegal": 27000,
+  "illegal_fraction": 1.0,
+  "distinct_types": 25965
+ },
+ "fine1": {
+  "complete_1stars": 27000,
+  "illegal": 23155,
+  "illegal_fraction": 0.8575925925925926,
+  "distinct_types": 2359
+ },
+ "shuffle1": {
+  "complete_1stars": 27000,
+  "illegal": 26987,
+  "illegal_fraction": 0.9995185185185185,
+  "distinct_types": 23121
+ },
+ "flip1,0.05": {
+  "complete_1stars": 27000,
+  "illegal": 18312,
+  "illegal_fraction": 0.6782222222222222,
+  "distinct_types": 11246
+ },
+ "flip1,0.2": {
+  "complete_1stars": 27000,
+  "illegal": 26381,
+  "illegal_fraction": 0.9770740740740741,
+  "distinct_types": 23584
+ }
+}
