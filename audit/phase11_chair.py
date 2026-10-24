@@ -220,9 +220,11 @@ def _balls_of_type(args):
     reach = 14 * (R + math.sqrt(3) / 2)
     ts = np.arange(c * 8 ** m, (c + 1) * 8 ** m); dmin, _ = btree.query(X[ts].astype(float))
     out = {}; rejected = int((dmin < reach).sum()); good = ts[dmin >= reach]
-    near = tree.query_ball_point(X[good].astype(float), 14 * R + 1e-6)
     R2_14 = 196 * R * R
-    for t, cand in zip(good, near):
+    def chunks():                                      # query in chunks: all centres at once would hold ~1e8 indices at m = 5
+        for s0 in range(0, len(good), 256):
+            g = good[s0:s0 + 256]; yield from zip(g, tree.query_ball_point(X[g].astype(float), 14 * R + 1e-6))
+    for t, cand in chunks():
         cand = np.array(cand); d2 = ((X[cand] - X[t]) ** 2).sum(1); mem = cand[d2 < R2_14]; Gt = G[t]
         Grel = np.einsum('ji,njk->nik', Gt, G[mem]); Trel = (T[mem] - T[t]) @ Gt
         rows = np.c_[Grel.reshape(len(mem), 9), Trel]; order = np.lexsort(rows.T[::-1])
@@ -367,3 +369,41 @@ def probe(spec, R, m, tiles_per_type=24, seed=0, types_subset=None, nproc=4):
     out.sort(key=lambda r: r['Lambda_ball'])
     return {'rule': str(spec), 'R': R, 'm': m, 'sampled_balls': len(out), 'Lambda_R_upper_float': out[0]['Lambda_ball'] + out[0]['residual'],
             'D_R_upper_float': min(r['D_ball'] for r in out), 'lowest': out[:5]}
+
+def _probe_ball(args):
+    G, T, rho, tab = args
+    import scipy.sparse.linalg as sla
+    Ha, Hp, _ = ball_amplified(G, T, rho, tab.__getitem__)
+    la, va = sla.eigsh(Ha, k=1, which='SA', tol=1e-11, ncv=60); lp = sla.eigsh(Hp, k=1, which='SA', tol=1e-11, ncv=60, return_eigenvectors=False)[0]
+    v = va[:, 0]; rq = float(np.real(np.vdot(v, Ha @ v)) / np.real(np.vdot(v, v)))       # Rayleigh quotient: >= Lambda of this ball
+    return {'tiles': int(len(G)), 'Lambda_ball_rayleigh': rq, 'D_ball': float(lp)}
+
+def probe_parallel(spec, Rs, m, type_indices, tiles_per_type, nproc=4, seed=0):
+    """upper bounds on Lambda_R and D_R from sampled legal balls (types chosen by the caller), parallel over balls"""
+    import multiprocessing as mp
+    from scipy.spatial import cKDTree
+    dec = rule(spec); types_, _, _ = legal_types(dec); keys = list(types_); rng = np.random.default_rng(seed); out = []
+    d2s = set()
+    for G, T, c in types_.values():
+        P = Patch(G, T); a, b, _ = P.panels(); X = centroid14(G, T); d2s |= set(((X[a] - X[b]) ** 2).sum(1).tolist())
+    inflated = {}
+    for ti in type_indices:
+        G, T, c = types_[keys[ti]]
+        for _ in range(m): G, T = inflate(G, T, dec)
+        inflated[ti] = (G, T, c)
+    for R in Rs:
+        rho = Fraction(R) - RC_BOUND; tab = amp_table_exact(rho, d2s); jobs = []
+        for ti, (G, T, c) in inflated.items():
+            X = centroid14(G, T); tree = cKDTree(X.astype(float)); P = Patch(G, T)
+            sh = np.array(P.shape); pad = -np.ones(tuple(sh + 2), dtype=np.int64); pad[1:-1, 1:-1, 1:-1] = P.grid
+            bad = np.argwhere(pad < 0) - 1 + P.lo; btree = cKDTree((14 * bad + 7).astype(float))
+            ts = np.arange(c * 8 ** m, (c + 1) * 8 ** m); dmin, _ = btree.query(X[ts].astype(float)); ok = ts[dmin >= 14 * (R + math.sqrt(3) / 2)]
+            for t in rng.choice(ok, min(tiles_per_type, len(ok)), replace=False):
+                mem = np.array(tree.query_ball_point(X[t].astype(float), 14 * R + 1e-6)); mem = mem[((X[mem] - X[t]) ** 2).sum(1) < 196 * R * R]
+                jobs.append((G[mem], T[mem], float(rho), tab))
+        with mp.Pool(nproc) as pool: res = pool.map(_probe_ball, jobs, chunksize=1)
+        rec = {'rule': str(spec), 'R': R, 'm': m, 'types': list(type_indices), 'sampled_balls': len(res),
+               'Lambda_R_upper': min(r['Lambda_ball_rayleigh'] for r in res), 'D_R_upper_float': min(r['D_ball'] for r in res),
+               'ball_tiles': [min(r['tiles'] for r in res), max(r['tiles'] for r in res)]}
+        print(rec, flush=True); out.append(rec)
+    return out

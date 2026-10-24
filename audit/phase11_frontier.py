@@ -102,7 +102,12 @@ def run_stage(name, L, js, nproc):
             if i % 5000 == 0: f.flush(); log(f'{name}: {i + 1}/{len(todo)} [{time.time()-t0:.0f}s]')
     return load_stage(name)
 def load_stage(name):
-    return {r['j']: r for r in (json.loads(l) for l in open(os.path.join(RES, f'phase11_frontier_{name}.jsonl')))}
+    """rows of a stage, from the .jsonl file or (as committed for X3, 280 332 rows) its gzip"""
+    p = os.path.join(RES, f'phase11_frontier_{name}.jsonl')
+    if not os.path.exists(p) and os.path.exists(p + '.gz'):
+        import gzip
+        return {r['j']: r for r in (json.loads(l) for l in gzip.open(p + '.gz', 'rt'))}
+    return {r['j']: r for r in (json.loads(l) for l in open(p))}
 
 def census_job(cls):
     """independent census bracket of one gauge class (representative cls): certified free level-3 lower bound (Theorem X.2, banded
@@ -122,7 +127,7 @@ if __name__ == '__main__':
         json.dump({'rows': rows}, open(os.path.join(RES, 'phase11_frontier_census.json'), 'w'), indent=0)
         fr = next(r for r in rows if r['class'] == 1386)
         log('census:', len(rows), 'min certified F3', min(r['F3_certified'] for r in rows), 'FR30 class', fr); sys.exit()
-    stage = sys.argv[1]; nproc = int(sys.argv[2]) if len(sys.argv) > 2 else 4
+    stage = sys.argv[1]; nproc = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() else 4
     if stage == 'reps':
         reps = orbit_reps(); json.dump({'orbit_representatives': reps}, open(os.path.join(RES, 'phase11_frontier_reps.json'), 'w')); log(len(reps), 'orbit representatives')
     elif stage in ('X3', 'X4', 'X5'):

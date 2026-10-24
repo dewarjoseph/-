@@ -12,3 +12,4 @@ audit/results/phase5e_fr30_level7_lowest4.npy
 audit/results/phase5e_fr30_level7_groundstate_weights.npy
 audit/results/phase10_improper_y2.npy
 audit/results/phase10_improper_f1.npy
+audit/results/phase11_frontier_X3.jsonl
