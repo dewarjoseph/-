@@ -1,5 +1,5 @@
 {
- "commit": "7c5b8ba",
+ "commit": "8901380",
  "branch": "claude/phase8-interface-recursion",
  "report": "deliverables/PHASE9_REPORT.md",
  "bounds": [
@@ -367,6 +367,20 @@
    "err": 0.0007883239921859797,
    "iterations": 7,
    "seconds": 6053.641462802887,
+   "impl": "bsr-linop"
+  },
+  {
+   "L": 7,
+   "k": 3,
+   "fiber": "env",
+   "d": 58,
+   "copies": 4096,
+   "dim": 237568,
+   "E_W": 8.770800979056773,
+   "exact": 8.764911988377174,
+   "err": 0.00588899067959936,
+   "iterations": 7,
+   "seconds": 12870.124277830124,
    "impl": "bsr-linop"
   }
  ]

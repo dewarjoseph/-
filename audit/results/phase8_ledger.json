@@ -1,5 +1,5 @@
 {
- "commit": "7c5b8ba",
+ "commit": "8901380",
  "branch": "claude/phase8-interface-recursion",
  "report": "deliverables/PHASE8_REPORT.md",
  "claims": [
@@ -1186,6 +1186,20 @@
       "iterations": 7,
       "seconds": 6053.641462802887,
       "impl": "bsr-linop"
+     },
+     {
+      "L": 7,
+      "k": 3,
+      "fiber": "env",
+      "d": 58,
+      "copies": 4096,
+      "dim": 237568,
+      "E_W": 8.770800979056773,
+      "exact": 8.764911988377174,
+      "err": 0.00588899067959936,
+      "iterations": 7,
+      "seconds": 12870.124277830124,
+      "impl": "bsr-linop"
      }
     ],
     "fiber_dimensions": {
@@ -1484,7 +1498,8 @@
     "python -u -I audit/phase8_diagnostics.py fiber"
    ],
    "caveats": [
-    "Ritz upper bounds; boundedness of the fiber for copies of T4 and beyond not verified"
+    "Ritz upper bounds; boundedness of the fiber for copies of T4 and beyond not verified",
+    "held-out error at d = 58 stalls: +0.0085 (L6), +0.0059 (L7), the L7 prediction lies above E_6; not controlled uniformly in the level"
    ]
   },
   {
