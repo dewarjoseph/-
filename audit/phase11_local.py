@@ -69,7 +69,13 @@ def record(spec, per_type=True):
 def specs(which):
     pre = json.load(open(os.path.join(RES, 'phase11_preregistration.json')))
     if which == 'census':
-        cen = json.load(open(os.path.join(RES, 'phase10_census.json')))['classes']; return [str(r['class']) for r in cen]
+        # CPU budget (Phase XI, 4 cores): the full census (median 1101 legal 1-star types per class) would take about 5 hours, so the
+        # census pass is restricted to the 100 classes with the largest Y4 plus Phase X's preregistered random sample of 200
+        # classes (numpy default_rng(20261024).choice over class ids, without replacement); the report states this restriction
+        cen = json.load(open(os.path.join(RES, 'phase10_census.json')))['classes']; ids = sorted(r['class'] for r in cen)
+        top = [r['class'] for r in sorted(cen, key=lambda r: -r['Y4'])[:100]]
+        sample = [int(x) for x in np.random.default_rng(20261024).choice(ids, 200, replace=False)]
+        return [str(c) for c in dict.fromkeys(top + sample)]
     if which == 'twins':
         import phase11_frontier as F
         S = C.perm_matrix((1, 0, 2)); out = []
