@@ -131,6 +131,9 @@ def test_mirror_twins_of_the_top_classes():
     for proper_class, imp in ((1387, 539311), (1389, 539291), (1391, 539288)):
         assert X.orbit_rep(twin(X.ext_index(P9.decoration(proper_class)))) == X.orbit_rep(imp)
     n, irr, per, dets = X.frame_structure(X.dec_of(539311)); assert (n, irr, per) == (48, True, 2) and set(dets) == {-1}
+    twin14 = [r for r in jsonl('phase10_ims.jsonl') if r.get('extended_index') == 539311 and r['R'] == 14][-1]        # certified above FR30
+    assert twin14['all_balls_certified'] and twin14['distinct_balls'] == 7527
+    assert twin14['Lambda_R_certified'] > float(Fraction(load('phase8_chain_m5.json')['rayleigh_upper_exact']))
 
 
 def test_prescribed_mu_certificate_matches_reference():

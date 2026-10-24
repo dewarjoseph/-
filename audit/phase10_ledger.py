@@ -38,6 +38,24 @@ if cert:
     lo = min(r['certified_lower'] for r in cert.values())
     bounds.append({'rule': 'every proper Chair44 rule (all 1098 classes)', 'quantity': 'E_*', 'direction': '>=', 'value': lo, 'label': 'rigorous',
                    'statement': 'Theorem X.2: E_* >= lambda_min H_free(T_3), Higham-certified Cholesky, per class; with the exact Y4 Rayleigh upper bound per class', 'artifact': 'audit/results/phase10_certify.jsonl'})
+for r in JL('phase10_deep.jsonl'):
+    if r.get('Y6_upper'): bounds.append({'rule': f"class {r['class']}", 'quantity': 'E_*', 'direction': '<=', 'value': r['Y6_upper'], 'exact': r['Y6_upper_exact'], 'label': 'rigorous',
+                                         'statement': 'exact rational Rayleigh quotient on the pinned level-6 supertile', 'artifact': 'audit/results/phase10_deep.jsonl'})
+for r in ims:
+    who = f"class {r['class']}" if r.get('class') is not None else f"extended decoration {r['extended_index']} (stage C)"
+    if r.get('D_R_upper'): bounds.append({'rule': who, 'quantity': 'E_*', 'direction': '<=', 'value': r['D_R_upper'], 'exact': r['D_R_upper_exact'], 'label': 'rigorous',
+                                          'statement': f"exact Rayleigh quotient on the minimising legal {r['R']}-ball (D_R)", 'artifact': 'audit/results/phase10_ims.jsonl'})
+    if r.get('class') is None and r.get('all_balls_certified'):
+        bounds.append({'rule': who, 'quantity': 'E_*', 'direction': '>=', 'value': r['Lambda_R_certified'], 'label': 'rigorous',
+                       'statement': f"Theorem X.7 at R = {r['R']} ({r['distinct_balls']} legal balls; period-2 frame substitution, mirror halves)", 'artifact': 'audit/results/phase10_ims.jsonl'})
+for r in JL('phase10_improper_certify.jsonl'):
+    bounds.append({'rule': f"extended decoration {r['j']} (stage C)", 'quantity': 'E_*', 'direction': '<=', 'value': r['Y6_upper'], 'exact': r['Y6_upper_exact'], 'label': 'rigorous',
+                   'statement': 'exact rational Rayleigh quotient on the pinned level-6 supertile', 'artifact': 'audit/results/phase10_improper_certify.jsonl'})
+z3c = J('phase10_z3_classpairs.json')
+if z3c and 'certificate' in z3c:
+    v = z3c['certificate']
+    bounds += [{'rule': 'Z^3 connection A (class-field-matched pair)', 'quantity': 'E_*', 'direction': '<=', 'value': v['E_low_upper'], 'exact': v['E_low_upper_exact'], 'label': 'rigorous', 'artifact': 'audit/results/phase10_z3_classpairs.json'},
+               {'rule': 'Z^3 connection B (class-field-matched pair)', 'quantity': 'E_*', 'direction': '>=', 'value': v['E_high_lower_free_cell'], 'label': 'rigorous', 'artifact': 'audit/results/phase10_z3_classpairs.json'}]
 if z3 and 'certificate_v2' in z3:
     v = z3['certificate_v2']
     bounds += [{'rule': 'Z^3 connection A (period 2)', 'quantity': 'E_*', 'direction': '<=', 'value': v['E_low_upper'], 'exact': v['E_low_upper_exact'], 'label': 'rigorous', 'artifact': 'audit/results/phase10_z3_pairs.json'},
@@ -57,12 +75,14 @@ claims = [
  {'id': 'X3-positivity', 'status': 'proved + census certified', 'category': '1/2', 'statement': 'E_*(r) > 0 <=> some T_k(r) is not flat; all 1098 proper classes have primitive frame substitutions and E_* >= 3.788 (certified)',
   'evidence': {'certified_lower_min': min(r['certified_lower'] for r in cert.values()) if cert else None, 'improper_flatness': impf}},
  {'id': 'X4-no-go', 'status': 'proved', 'category': '1 (mechanism) / 2 (explicit family)', 'statement': 'no lower bound on E_* from plaquette class frequencies: flat islands on Z^3, non-trivial fraction >= 0.78, E_* <= 6(1 - cos(pi/(R+1)))', 'tests': [T + ' -k no_go']},
- {'id': 'X5-insufficiency', 'status': 'proved + certified (infinite volume)', 'category': 2, 'statement': 'two period-2 Pauli-frame connections on Z^3 with identical plaquette trace fields and certified different floors (separation >= 0.18)',
-  'evidence': z3.get('certificate_v2') if z3 else None, 'tests': [T + ' -k z3_trace']},
+ {'id': 'X5-insufficiency', 'status': 'proved + certified (infinite volume)', 'category': 2, 'statement': 'two period-2 Pauli-frame connections on Z^3 with the same Q8 class on every plaquette (hence gauge-equivalent Abelian shadows) and certified different floors (separation >= 0.18)',
+  'evidence': z3c.get('certificate') if z3c else None, 'tests': [T + ' -k z3_trace']},
  {'id': 'X6-2D-abelian', 'status': 'proved', 'category': 1, 'statement': 'Pauli-frame connections are Z4-valued (Abelian) in two dimensions'},
  {'id': 'X7-localization', 'status': 'proved (Phase VII Thm 7.1 generalized; completeness via the Phi-closure)', 'category': '1 (machinery) / 2', 'statement': 'Lambda_R(r) <= E_*(r) <= D_R(r), D_R - Lambda_R = O(R^-2), for every decoration with a primitive frame substitution', 'tests': [T + ' -k ims']},
  {'id': 'D1-fr30-not-optimal-finite', 'status': 'certified at finite volume (fv_certificate) and numerical', 'category': 2, 'statement': 'class 1387 (FR30 with the centre child reframed) exceeds FR30 at levels 3, 4, 5',
   'evidence': {c: {k: y5[c].get(k) for k in ('Y5', 'Y5_upper')} for c in (1386, 1387) if c in y5}},
+ {'id': 'D3-twin-above-fr30-infinite', 'status': 'certified' if any(r.get('class') is None and r.get('extended_index') == 539311 and r.get('all_balls_certified') and ch5 and r['Lambda_R_certified'] > ch5['rayleigh_upper'] for r in ims) else 'pending or not established',
+  'category': 2, 'statement': 'the mirror twin 539311 (1387 with every child frame times the transposition (x y)): E_* >= Lambda_14 > E_*(FR30)'},
  {'id': 'D2-1387-above-fr30-infinite', 'status': 'certified' if (ims_rec(1387, 14) and ch5 and ims_rec(1387, 14)['Lambda_R_certified'] > ch5['rayleigh_upper']) else 'pending or not established',
   'category': 2, 'statement': 'E_*(1387) >= Lambda_14(1387) > 8.7642270381 >= E_*(FR30)', 'evidence': ims_rec(1387, 14)},
  {'id': 'S1-stageB-promotion', 'status': 'computed', 'category': 2, 'statement': 'registered promotion checks for the deep-stage classes', 'evidence': prom},

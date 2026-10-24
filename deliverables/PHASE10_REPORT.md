@@ -43,17 +43,18 @@ These three quantities are always kept apart:
 - **806 classes are rigorously below FR30.**
 
 **2. FR30 is not optimal.**
-- **Certified: E_\*(1387) ≥ 8.7644994 > 8.7642270 ≥ E_\*(FR30).**
+- **Certified: E_\*(1387) ≥ 8.7999988 > 8.7642270 ≥ E_\*(FR30).**
   - Class 1387 = {1387, 1388, 3691, 3692, 4753, 4754} is FR30 with only the frame of the central child changed.
-  - The lower bound is Theorem X.7 at R = 14. All 7527 legal balls are certified, on the GPU, with Higham's rounding bound.
+  - The lower bound is Theorem X.7 at R = 15. All 10 321 legal balls are certified, on the GPU, with Higham's rounding bound.
+  - A first certificate at R = 14 (7527 balls) gave ≥ 8.7644994. The certified separation from FR30 is now ≥ 0.0358.
   - The upper bound is Phase VIII's exact rational Rayleigh quotient.
 - **1387 leads the census.** It is first at every computed level and in the matched-radius localization bounds.
-  - Its certified enclosure is [8.7644994, 9.3928286] (a stronger R = 15 certificate at μ ≈ 8.80 was still running when this report was written: pending).
-  - Its lower bound exceeds the certified upper bound of 1094 of the other 1097 classes. The other three are 1389, 1391 and 901. 901 (Y₅ ≤ 8.7946) falls below if the pending R = 15 certificate passes.
+  - Its certified enclosure is [8.7999988, 9.3679502]: the lower end from R = 15, the upper end an exact Rayleigh quotient at level 6.
+  - Its lower bound exceeds the certified upper bound of 1095 of the other 1097 classes. The other two are 1389 and 1391.
 - **Outside the census (Stage C), 1387's mirror twin is higher still at every computed level.**
   - The twin composes every child frame with the reflection x ↔ y, so each generation alternates handedness.
   - Y₅ = 9.4159 against 9.3928, and its level-4 lead is certified.
-  - Its R = 14 certificate against FR30 was still running on the GPU when this report was written (no ball had failed after 2500 of 7527): pending.
+  - It is also certified above FR30: all 7527 of its legal R = 14 balls pass at the same μ, so E_\*(539311) ≥ 8.7644994 > E_\*(FR30).
   - Handedness is not a uniform improvement: FR30's own twin is lower.
 - **All three of the brief's discovery targets are met** (§3.4).
 
@@ -319,14 +320,25 @@ The 20 selected classes are 1387, 1389, 1391, 1144, 901, 1386 (FR30), 929, 1146,
 | **1387** | 0.0 | [9.5168643, 9.5168661] | 9.4963 | 9.3861 | **9.3679502** (7·10⁻¹²) |
 | 1389 | 0.0 | [9.3464284, 9.3464301] | 9.3147 | 9.2316 | 9.2104998 (6·10⁻¹²) |
 | 1391 | 0.0 | [9.1738468, 9.1738491] | 9.2269 | 9.1357 | 9.1104007 (2·10⁻¹²) |
-| FR30 | 0.0 (L4 enclosure [8.9196325, 8.9196344]) | — | 8.8608 | 8.7795 | pending (8.770134 from Phase V-E) |
-| 901 | pending | pending | pending | pending | pending |
+| FR30 | 0.0 | [8.9196325, 8.9196344] | 8.8608 | 8.7795 | 8.7701336 (1·10⁻¹¹), reproducing Phase V-E |
+| 901 | 0.0 | [9.0825191, 9.0825209] | 8.7317 | 8.5967 | **8.6366663** (4·10⁻¹⁰) |
 
-- The level-6 sequence keeps the order 1387 > 1389 > 1391 > FR30.
-- 1387's certified enclosure tightens to **[8.7644994, 9.3679502]**.
-- The last-ratio extrapolations (conjectural [X]) are about 9.362 (1387), 9.200 (1389) and 9.107 (1391), against FR30's 8.7639.
+- The level-6 sequence keeps the order 1387 > 1389 > 1391 > FR30 > 901.
+- With the R = 15 certificate, 1387's certified enclosure is **[8.7999988, 9.3679502]**.
+- Class 901's exact level-6 bound places it rigorously below 1387: E_\*(901) ≤ 8.6366663 < 8.7644994 ≤ E_\*(1387).
+- The last-ratio extrapolations (conjectural [X]) are 9.362 (1387), 9.210 (1389), 9.107 (1391), 8.763 (FR30) and 8.445 (901).
 
-**Promotion checks** (`phase10_stageB.py promote`): pending until the FR30 and 901 deep records finish. For 1387, 1389 and 1391 every computed check passes: reconstruction, residuals below 10⁻⁸, certified level-4 enclosure, monotone and convergent levels.
+**Promotion checks** (`phase10_stageB_promotion.json`, the registered rule: every check must pass).
+- **1387, 1389 and 1391 are promoted.** They pass:
+  - independent reconstruction at L3;
+  - residuals below 10⁻⁸ at levels 5 and 6;
+  - a certified level-4 enclosure;
+  - the free bottom below the pinned one at matched volume;
+  - monotone, convergent levels;
+  - the finite-size baseline above FR30's.
+- **901 is not promoted.** Its last-ratio baseline, 8.445, falls below FR30's 8.763.
+- FR30 is the benchmark.
+- The matched-volume comparison is made at level 4 (F₄ ≤ Y₄), because F₅ was dropped from the level-5 run.
 
 **Certified infinite-volume bounds** (`phase10_ims.jsonl`; Theorem X.7):
 
@@ -337,13 +349,13 @@ The 20 selected classes are 1387, 1389, 1391, 1144, 901, 1386 (FR30), 929, 1146,
 | FR30 | 12 | 72 | 2315 | 7.9542923 | 8.8570 | Phase VII |
 | 1387 | 8 | 90 | 1450 (290–321) | 7.3114948 | 9.7299 | full, CPU |
 | **1387** | **14** | 90 | 7527 (1580–1640) | **8.7644994** | — | μ = 2297561/262144, GPU (29 min) |
-| 1387 | 15 | 90 | 10321 | pending | — | μ ≈ 8.80, GPU |
+| **1387** | **15** | 90 | 10321 | **8.7999988** | — | μ = 2306867/262144, GPU (69 min) |
 | 1389 | 8 | 102 | 1431 | 7.0091524 | 9.4621 | full, CPU |
 | 1391 | 8 | 104 | 1614 | 6.9198389 | 9.4009 | full, CPU |
 | 901 | 8 | 239 | 5728 | 6.5510740 | 9.0556 | full, CPU |
 | 1144 | 8 | 427 | 11805 | 5.4726372 | **8.1414086** (exact) | full, CPU |
 | twin 539311 | 8 | 90 | 1450 | 7.3378239 | 9.7536 (exact) | full, CPU |
-| twin 539311 | 14 | 90 | 7527 | pending | — | μ = 2297561/262144, GPU |
+| **twin 539311** | **14** | 90 | 7527 | **8.7644994** | — | μ = 2297561/262144, GPU (42 min, sharing the GPU) |
 | twin 539291 | 8 | 97 | 1532 | 7.1408386 | 9.6034 (exact) | full, CPU |
 
 **Reading the table.**
@@ -351,6 +363,8 @@ The 20 selected classes are 1387, 1389, 1391, 1144, 901, 1386 (FR30), 929, 1146,
 - **The R = 14 certificate puts 1387's floor above FR30's certified upper bound**: E_\*(1387) ≥ 8.7644994 > 8.7642270 ≥ E_\*(FR30).
   - The completeness hypotheses hold: the Φ-closure equals the T₅ type set (90 types), the frame substitution is primitive with M² > 0, and no ball was rejected as incomplete.
   - Every one of the 7527 balls passes the Cholesky test. The certified bound is μ minus a rounding margin below 3·10⁻⁷.
+- **At R = 15 all 10 321 balls of 1387 pass at μ = 2306867/262144.** That raises its bound to 8.7999988, so the separation from FR30 is ≥ 0.0358.
+- **The mirror twin 539311 is certified above FR30 the same way.** All 7527 of its legal R = 14 balls pass at the same μ. Its frame substitution has period 2, which is covered by Theorem X.7 because irreducibility suffices.
 - **Class 1144's environment minimum D₈ = 8.1414 is far below its supertile values** (Y₄ = 9.10, Y₅ = 8.78). Its weakest legal environment is a rare 1-star type absent from T₅ (427 legal types, 365 in T₅). The certified upper bound E_\*(1144) ≤ 8.1414 is the exact Rayleigh quotient on that ball.
 
 
@@ -398,15 +412,15 @@ The 20 selected classes are 1387, 1389, 1391, 1144, 901, 1386 (FR30), 929, 1146,
 | | 1387 | **twin 539311** | 1389 | twin 539291 | FR30 | FR30's twin |
 |---|---|---|---|---|---|---|
 | Y₃ | 9.95592 | **9.95733** | 9.78693 | 9.79181 | 9.37847 | 9.22325 |
-| Y₄ (certified enclosure) | [9.516864, 9.516866] | **[9.522249, 9.522251]** | [9.346428, 9.346430] | 9.33435 | [8.919632, 8.919634] | 8.70178 |
+| Y₄ (certified enclosure) | [9.516864, 9.516866] | **[9.522249, 9.522251]** | [9.346428, 9.346430] | [9.334350, 9.334352] | [8.919632, 8.919634] | 8.70178 |
 | Y₅ (exact upper bound) | 9.392829 | **9.415853** | 9.218731 | 9.271826 | 8.797011 | — |
-| Y₆ | 9.367950 | pending | 9.210500 | pending | 8.770134 (Phase V-E) | — |
+| Y₆ (exact upper bound) | 9.367950 | **9.388594** | 9.210500 | 9.249940 | 8.770134 | — |
 | D₈ (exact upper bound on E_\*) / Λ₈ (certified) | 9.7299 / 7.3115 | **9.7536 / 7.3378** | 9.4621 / 7.0092 | 9.6034 / 7.1408 | 9.0515 / 6.5628 | — |
 | legal 1-star types, distinct 8-balls | 90, 1450 | 90, 1450 | 102, 1431 | 97, 1532 | 72, 747 | — |
 
 **Handedness is not a uniform improvement.**
 - FR30's twin is lower: Y₃ 9.2233 against 9.3785, Y₄ 8.7018 against 8.9196.
-- 1389's twin is lower at level 4 (9.3344 against 9.3464) but higher at level 5 (9.2718 against 9.2187).
+- 1389's twin is lower at level 4, where both values are certified (9.3344 against 9.3464), but higher at levels 5 and 6 (9.2718 against 9.2187, and 9.2499 against 9.2105).
 - 1391's twin is lower at level 5 (9.1124 against 9.1221).
 
 **A large Y₃ alone misleads here too.** The improper decoration with the largest Y₃ in the screen (10.3885, j = 343951) falls to Y₅ = 8.5920.
@@ -415,10 +429,10 @@ The 20 selected classes are 1387, 1389, 1391, 1144, 901, 1386 (FR30), 929, 1146,
 
 | discovery target (brief) | achieved? | evidence |
 |---|---|---|
-| a candidate that rigorously exceeds FR30's best certified lower bound | **yes** | Λ₁₄(1387) ≥ 8.7644994, above FR30's Λ₁₂ = 7.954292 and above even FR30's certified *upper* bound |
-| a demonstrably higher asymptotic floor | **yes, certified** | E_\*(1387) ≥ 8.7644994 > 8.7642270 ≥ E_\*(FR30); separation ≥ 2.7·10⁻⁴ |
-| a structural property FR30 does not possess | **yes** | the handedness-alternating frame substitution (period 2, every child det −1) of the Stage C leader 539311, 1387's mirror twin. Its R = 14 certificate against FR30 was still running on the GPU when this report was written (no ball had failed after 2500 of 7527): pending. |
-| the extremal rule of the census | **not decided** | 1387 is certified above 1094 of the other 1097 classes. 1389 and 1391, and the twin, are beyond both methods (§12) |
+| a candidate that rigorously exceeds FR30's best certified lower bound | **yes** | Λ₁₅(1387) ≥ 8.7999988, above FR30's Λ₁₂ = 7.954292 and above even FR30's certified *upper* bound 8.7642270 |
+| a demonstrably higher asymptotic floor | **yes, certified** | E_\*(1387) ≥ 8.7999988 > 8.7642270 ≥ E_\*(FR30); separation ≥ 0.0358 (R = 15; the first certificate, at R = 14, gave 2.7·10⁻⁴) |
+| a structural property FR30 does not possess | **yes** | the handedness-alternating frame substitution (period 2, every child det −1) of the Stage C leader 539311, 1387's mirror twin. It too is certified above FR30: Λ₁₄(539311) ≥ 8.7644994 > 8.7642270 ≥ E_\*(FR30) |
+| the extremal rule of the census | **not decided** | 1387 is certified above 1095 of the other 1097 classes. 1389 and 1391, and the twin, are beyond both methods (§12) |
 
 ---
 
@@ -798,7 +812,7 @@ Phase IX's categories map onto these as A → 1, B → 2, C → 3, D → 4.
 
 | # | conjecture or assumption | verdict | evidence |
 |---|---|---|---|
-| 1 | FR30 is spectrally optimal among the Chair44 frame rules | **[F]**, at finite volume and, certified, in infinite volume: E_\*(1387) ≥ 8.7644994 > 8.7642270 ≥ E_\*(FR30) | Class 1387 = {1387, 1388, 3691, 3692, 4753, 4754}, which contains FR30 with only its centre frame changed, is above FR30 at L = 3, 4, 5, 6. The L4 comparison is certified at finite volume: [9.51686, 9.51687] against [8.91963, 8.91963]. 1389 and 1391 are also above FR30 at every computed level |
+| 1 | FR30 is spectrally optimal among the Chair44 frame rules | **[F]**, at finite volume and, certified, in infinite volume: E_\*(1387) ≥ 8.7999988 > 8.7642270 ≥ E_\*(FR30) | Class 1387 = {1387, 1388, 3691, 3692, 4753, 4754}, which contains FR30 with only its centre frame changed, is above FR30 at L = 3, 4, 5, 6. The L4 comparison is certified at finite volume: [9.51686, 9.51687] against [8.91963, 8.91963]. 1389 and 1391 are also above FR30 at every computed level |
 | 2 | the fraction of non-trivial plaquettes (or any frequency of curvature classes) lower-bounds the floor | **[F]**, Theorem X.4 | flat islands: fraction ≥ 0.78 with E_\* ≤ 6(1 − cos(π/(R + 1))) → 0 |
 | 3 | the plaquette holonomy data determine the floor: traces, conjugacy classes per plaquette, or the Abelian shadows they fix | **[F]**, Theorem X.5, infinite volume, certified | identical Q₈ class on every plaquette, gauge-equivalent Abelian shadows, floors ≤ 0.4041 and ≥ 0.5858 |
 | 4 | a non-Abelian connection's floor is at least that of each of its Abelian shadows (as FR30 > χ₁) | **[F]**, certified | on ℤ³, E_\*(χ_k∘U_A) ≥ 0.7639 > 0.4041 ≥ E_\*(U_A) for two shadows (the trace-matched pair of §7). The direction depends on the connection |
@@ -832,11 +846,12 @@ Phase IX's categories map onto these as A → 1, B → 2, C → 3, D → 4.
 | X.7: localization (Λ_R ≤ E_\* ≤ D_R, O(R⁻²)) for every rule with an irreducible frame substitution | **proven** (Phase VII Thm 7.1 generalized; completeness through the Φ-closure) | §4 |
 | 937/938: class counts do not determine finite-level bottoms | **computationally certified** (Phase IX; re-verified) | §1 |
 | FR30 is spectrally optimal among Chair44 frame rules (finite levels) | **falsified** | §3 |
-| E_\*(1387) > E_\*(FR30) in infinite volume | **computationally certified** (Theorem X.7 at R = 14, 7527 balls; Phase VIII exact upper bound) | §3.2 |
-| 1387 is the maximizer of E_\* over the 1098 classes | **open**: certified against 1094 of the other 1097 | §3.2, §12 |
+| E_\*(1387) > E_\*(FR30) in infinite volume | **computationally certified** (Theorem X.7 at R = 14 and R = 15, with 7527 and 10 321 balls; separation ≥ 0.0358; Phase VIII exact upper bound) | §3.2 |
+| 1387 is the maximizer of E_\* over the 1098 classes | **open**: certified against 1095 of the other 1097 | §3.2, §12 |
 | U₁ (the radius-1 environment minimum) predicts held-out floors | **empirically supported** (ρ = 0.955 on the registered random sample) | §3.1 |
 | the mirror twin 539311 exceeds 1387 at finite levels | **certified at level 4** (enclosures); numerical at levels 3 and 5 | §3.3 |
-| the twin exceeds 1387 in infinite volume | **open** | §3.3 |
+| the twin exceeds FR30 in infinite volume | **computationally certified** (Theorem X.7 at R = 14 for the period-2 hull, 7527 balls) | §3.3 |
+| the twin exceeds 1387 in infinite volume | **open**. It leads at levels 3–6, by 0.021 at level 6 | §3.3 |
 | E_\*(1144) ≤ 8.1414 although Y₅(1144) = 8.7768 | **computationally certified** (exact Rayleigh quotient on a legal 8-ball) | §3.2 |
 | hierarchy descriptors add out-of-sample predictive power | **not established** (3 of 4 registered comparisons; the criterion fails) | §5 |
 | "non-Abelian holonomy raises the floor above its Abelian shadows" | **falsified** as a principle (certified counterexample on ℤ³). True and certified for FR30 (margin ≥ 0.32, Phase VII) and for 1387 (margin ≥ 0.99) | §7 |
@@ -866,7 +881,7 @@ Phase IX's categories map onto these as A → 1, B → 2, C → 3, D → 4.
 >
 > **Discovery.**
 > - The rule FR30, an independently known radius-1 matching rule (Kamenetsky 2026), is not extremal.
-> - Rule class 1387, which differs from FR30 only in the frame of the central child, exceeds it at every computed finite level. A computer-assisted proof shows that its infinite-volume floor is strictly larger: E_\* ≥ 8.7644994, against FR30's E_\* ≤ 8.7642270.
+> - Rule class 1387, which differs from FR30 only in the frame of the central child, exceeds it at every computed finite level. A computer-assisted proof shows that its infinite-volume floor is strictly larger: E_\* ≥ 8.7999988, against FR30's E_\* ≤ 8.7642270.
 > - The three classes above FR30 at every computed level are 1387, 1389 and 1391, all within one or two frame changes of FR30. They are among the six rules with the fewest legal local environments.
 >
 > **Limits of curvature summaries.**
@@ -885,7 +900,7 @@ Phase IX's categories map onto these as A → 1, B → 2, C → 3, D → 4.
 **Make the geometric tail rigorous: certify a contraction bound for the interface recursion, then use it to decide the extremal rule.**
 
 **Status after this phase.**
-- Class 1387 is certified above FR30 and above 1094 of the other 1097 proper classes.
+- Class 1387 is certified above FR30 and above 1095 of the other 1097 proper classes.
 - Open: 1387 against 1389 and 1391, and against its own mirror twin outside the census.
 
 **Why localization cannot finish the job.**
@@ -924,7 +939,7 @@ All commands run from the repository root with Python 3.12, numpy, scipy, mpmath
 | deep stage | `python -u -I audit/phase10_stageB.py deep_targets`, then `deep_one <class>` per class | `phase10_deep.jsonl` | 40–90 min per class, one process each (dominated by the level-6 eigensolve) |
 | promotion checks | `python -u -I audit/phase10_stageB.py promote` | `phase10_stageB_promotion.json` | seconds |
 | localization bounds | `python -u -I audit/phase10_ims.py <decoration> <R> <m> <nproc> [mu]` | `phase10_ims.jsonl` | R = 8: ≈ 4 min |
-| localization certificates on the GPU | `set IMS_GPU=1` and `C:/Users/super/.venvs/qisgpu/Scripts/python -u -I audit/phase10_ims.py 1387 14 4 6 8.7645`; likewise `1387 15 4 5 8.80` and `x539311 14 4 5 8.7645` (`x<j>` is an extended-space index). Needs a CUDA build of torch with Blackwell (sm_120) kernels: the venv's torch 2.11+cu128 has them, the system torch 2.6+cu124 does not | `phase10_ims.jsonl` | 29 min for 1387 at R = 14 (13 min CPU enumeration, 16 min GPU) |
+| localization certificates on the GPU | `set IMS_GPU=1` and `C:/Users/super/.venvs/qisgpu/Scripts/python -u -I audit/phase10_ims.py 1387 14 4 6 8.7645`; likewise `1387 15 4 5 8.80` and `x539311 14 4 5 8.7645` (`x<j>` is an extended-space index). Needs a CUDA build of torch with Blackwell (sm_120) kernels: the venv's torch 2.11+cu128 has them, the system torch 2.6+cu124 does not | `phase10_ims.jsonl` | 29 min for 1387 at R = 14 (13 min CPU enumeration, 16 min GPU); 69 min at R = 15 |
 | Abelian shadows | `python -u -I audit/phase10_shadows.py 5 4752 1387` | `phase10_shadows.json` | ≈ 7 min |
 | periodic approximants | `python -u -I audit/phase10_periodic.py <decoration> 1 2 3` | `phase10_periodic.jsonl` | minutes |
 | stage C (improper frames) | `phase10_improper.py f1 8`, `y2 8`, `y3 8`, `y45 8`, `pack 6`; then `certify <j>` for the leaders | `phase10_improper_*.json`, `phase10_improper_y2_reps.npz`. The full 6⁸ arrays `phase10_improper_{y2,f1}.npy` (13 MB each) are regenerated by `y2` and `f1` and are not committed | f1 1 min, y2 16 min, y3 7 min, y45 26 min with 8 processes; certify about 1–2 h per candidate |

@@ -64,13 +64,15 @@ def external_benchmarks():
                     'source': 'phase10_z3_pairs.json'})
     return out
 
-def extended_candidates(ims_ext):
+def extended_candidates(ims_ext, by_class=None, cls_of=None):
     """stage C: the ten best distinct extended-space decorations (phase10_improper_top.json) with their certificates
     (phase10_improper_certify.jsonl) and localization bounds; j indexes the 6^8 decorations, census_index marks proper ones"""
     top = (J('phase10_improper_top.json') or {}).get('top10_distinct', []); cert = {r['j']: r for r in JL('phase10_improper_certify.jsonl')}; out = []
     for r in top:
         j = r['j']; c = cert.get(j, {}); lam = max((v['Lambda_R_certified'] for v in ims_ext[j].values() if v.get('Lambda_R_certified') is not None), default=None)
         ups = [x for x in (c.get('Y5_upper'), c.get('Y6_upper'), *(v.get('D_R_upper') for v in ims_ext[j].values())) if x is not None]
+        if r['proper'] and by_class is not None:                                  # a proper decoration: its census class carries the certificates
+            row = by_class[cls_of[r['census_index']]]; lam = row['best_certified_lower']; ups.append(row['best_certified_upper']); c = dict(c, Y6=row['Y6'])
         out.append({'j': j, 'proper': r['proper'], 'census_index': r['census_index'], 'Y3': r['Y3'], 'Y4': r['Y4'], 'Y5': r['Y5'], 'Y5_residual': r['Y5_residual'],
                     'child_dets': c.get('child_dets'), 'frames': c.get('frames'), 'period': c.get('period'), 'n_types1': c.get('n_types1'),
                     'Y4_certified': c.get('Y4_certified'), 'Y6': c.get('Y6'), 'best_certified_lower': lam, 'best_certified_upper': min(ups) if ups else None,
@@ -141,7 +143,7 @@ def main():
     json.dump({'ranking': 'best certified lower bound on E_* (max of the free-supertile certificate F3, any IMS certificate and prior certificates)',
                'top30': top, 'pareto_frontier': sorted(front, key=lambda r: -(r['best_certified_lower'] or 0)),
                'census_benchmarks': [r for r in rows if r['class'] in (FR30_CLASS, 937, 938)], 'external_benchmarks': external_benchmarks(),
-               'extended_candidates': extended_candidates(ims_ext)},
+               'extended_candidates': extended_candidates(ims_ext, {r['class']: r for r in rows}, cls_of)},
               open(os.path.join(RES, 'phase10_leaderboard.json'), 'w'), default=float, indent=1)
     with open(os.path.join(RES, 'phase10_leaderboard.csv'), 'w', newline='') as f:
         w = csv.DictWriter(f, fieldnames=keys); w.writeheader(); [w.writerow(r) for r in top]

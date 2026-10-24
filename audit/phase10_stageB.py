@@ -119,7 +119,8 @@ def cmd_upper6(cls):
 def cmd_promote():
     """the registered promotion test for the deep-stage classes -> phase10_stageB_promotion.json.  Finite-size baseline: the
     last-ratio (geometric-tail) extrapolation from Y4, Y5, Y6, an estimate only [X]; a candidate survives it when its baseline
-    exceeds FR30's (the finite-level ordering is not reversed by the extrapolation)."""
+    exceeds FR30's (the finite-level ordering is not reversed by the extrapolation).  The matched-volume free-versus-pinned
+    comparison is made at level 4 (F4 <= Y4 from the census), since F5 was dropped from the level-5 run (y5_job)."""
     cen = load_census(); y5 = {json.loads(l)['class']: json.loads(l) for l in open(os.path.join(RES, 'phase10_y5.jsonl'))}
     deep = {json.loads(l)['class']: json.loads(l) for l in open(os.path.join(RES, 'phase10_deep.jsonl'))}
     def baseline(Y):
@@ -127,11 +128,11 @@ def cmd_promote():
     rows = {}
     for c, d in deep.items():
         Y = [cen[c]['Y3'], cen[c]['Y4'], y5[c]['Y5'], d['Y6']]; b, q = baseline(Y[1:]); lo4, up4 = d['Y4_certified']
-        rows[c] = {'class': c, 'Y3..Y6': Y, 'last_ratio': q, 'baseline_estimate': b, 'Y5_upper_certified': y5[c].get('Y5_upper'), 'F5': y5[c].get('F5'),
-                   'checks': {'independent_reconstruction_L3': d['reconstruction_L3_max_spectral_difference'] < 1e-9,
+        rows[c] = {'class': c, 'Y3..Y6': Y, 'last_ratio': q, 'baseline_estimate': b, 'Y5_upper_certified': y5[c].get('Y5_upper'), 'Y6_upper_certified': d.get('Y6_upper'),
+                   'F4': cen[c]['F4'], 'checks': {'independent_reconstruction_L3': d['reconstruction_L3_max_spectral_difference'] < 1e-9,
                               'residual_Y6_below_1e-8': d['Y6_residual'] < 1e-8, 'residual_Y5_below_1e-8': y5[c]['Y5_residual'] < 1e-8,
                               'certified_L4_enclosure': lo4 is not None and lo4 <= cen[c]['Y4'] <= up4 + 1e-12,
-                              'free_below_pinned_matched_volume_L5': y5[c].get('F5') is not None and y5[c]['F5'] <= y5[c]['Y5'],
+                              'free_below_pinned_matched_volume_L4': cen[c]['F4'] <= cen[c]['Y4'],
                               'monotone_convergent_levels': all(a > b_ for a, b_ in zip(Y, Y[1:])) and 0 < q < 1}}
     fr = rows.get(FR30_CLASS)
     for c, r in rows.items():
