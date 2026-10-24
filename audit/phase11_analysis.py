@@ -17,6 +17,9 @@ import phase11_chair as C, phase11_frontier as F
 def J(n): return json.load(open(os.path.join(RES, n)))
 def JL(n):
     p = os.path.join(RES, n); return [json.loads(l) for l in open(p)] if os.path.exists(p) else []
+def sgn(x, tol=1e-8):
+    """sign with ties: |x| < tol counts as 0 (neighbours in the base's own gauge class are isospectral)"""
+    return 0 if abs(x) < tol else (1 if x > 0 else -1)
 def cp(k, n):
     lo = stats.beta.ppf(0.025, k, n - k + 1) if k > 0 else 0.0; hi = stats.beta.ppf(0.975, k + 1, n - k) if k < n else 1.0; return [float(lo), float(hi)]
 
@@ -29,7 +32,7 @@ def twins():
         if str(r) not in loc or 'x%d' % jt not in loc or jr not in y5 or jt not in y5: continue
         dU = loc['x%d' % jt]['U1'] - loc[str(r)]['U1']; dY = y5[jt]['float'] - y5[jr]['float']
         rows.append({'class': r, 'twin_j': jt, 'U1': loc[str(r)]['U1'], 'U1_twin': loc['x%d' % jt]['U1'], 'Y5': y5[jr]['float'], 'Y5_twin': y5[jt]['float'],
-                     'dU1': dU, 'dY5': dY, 'correct': bool(np.sign(dU) == np.sign(dY))})
+                     'dU1': dU, 'dY5': dY, 'correct': sgn(dU) == sgn(dY)})
     k = sum(r['correct'] for r in rows); n = len(rows)
     rho = stats.spearmanr([r['dU1'] for r in rows], [r['dY5'] for r in rows]).statistic if n > 2 else None
     return {'n': n, 'correct': k, 'accuracy': k / n if n else None, 'ci95': cp(k, n) if n else None, 'spearman_dU1_dY5': float(rho) if rho is not None else None,
@@ -45,7 +48,7 @@ def counterfactual():
                  'twocycle_flat_types': loc['x%d' % j]['types_without_nontrivial_twocycle']} for j in nbs if 'x%d' % j in loc and j in y5]
         b = {'U1': loc[base]['U1'], 'Y5': y5[jb]['float']}
         rho = float(stats.spearmanr([r['U1'] for r in rows], [r['Y5'] for r in rows]).statistic)
-        signs = [np.sign(r['U1'] - b['U1']) == np.sign(r['Y5'] - b['Y5']) for r in rows]
+        signs = [sgn(r['U1'] - b['U1']) == sgn(r['Y5'] - b['Y5']) for r in rows]
         topY = max(rows, key=lambda r: r['Y5']); top3U = sorted(rows, key=lambda r: -r['U1'])[:3]
         out[base] = {'base': b, 'n_neighbours': len(rows), 'P1_spearman': rho, 'P1_pass': rho >= 0.8,
                      'P2_sign_accuracy': float(np.mean(signs)), 'P2_pass': float(np.mean(signs)) >= 0.8,
