@@ -1,0 +1,40 @@
+{
+ "written_at": "2026-10-23T18:46:46-07:00",
+ "status": "fixed before audit/results/phase10_census.json existed; the only census-wide quantities seen are those already in Phase V-B/IX (Y3 for all rules, Y4 for a 296-rule sample)",
+ "already_seen_in_this_phase": [
+  "FR30 class 1386: Y1..Y4, F1..F4, U0, U1, mu0",
+  "rules 937, 938: Y1..Y4, F1..F4",
+  "the three top-Y3 rules 1387, 1388, 4753 (one class): Y1..Y4, F1..F4 (Y3 9.9559, Y4 9.5169, F4 5.7299)"
+ ],
+ "objective": {
+  "target": "E_*(r) = inf sigma(H_Y), Y in the hull of rule r, H = 24 - A_U on l^2(Y) x C^2 (infinite volume)",
+  "primary": "the best certified LOWER bound on E_*(r); for all classes this is max_k F_k (free supertile bottoms, k <= 4); for stage-B candidates also the IMS bound at a common radius",
+  "kept_separate": [
+   "Y_L = lambda_min of the pinned level-L supertile (finite volume, an upper bound on E_*)",
+   "E_*(r)",
+   "certified bounds on E_*(r)"
+  ]
+ },
+ "stage_B_selection": {
+  "rule": "the 15 classes with the largest Y4, then the 5 classes with the largest F4 not already chosen, plus the mandatory benchmarks (FR30 class, the 937 and 938 classes)",
+  "deep_computations": "Y5 for every stage-B class; Y6 and the chain bounds U2, U3 only for the 5 stage-B classes with the largest Y5 (a second, pre-declared stage)",
+  "promotion": "a candidate is promoted only if it survives: independent operator reconstruction (census builder vs phase9 builder at level 3), eigensolver residual < 1e-8 at its deepest level, a certified level-4 enclosure (exact Rayleigh above, Higham Cholesky below), free-vs-pinned comparison at matched volume, and the last-ratio finite-size baseline",
+  "not_allowed": "choosing a winner from Y3 or Y4 alone; re-selecting after Y6 is seen"
+ },
+ "part_V_test": {
+  "unit": "gauge classes (one row each); grouped by class by construction; 10-fold CV with fixed seed 20261024",
+  "targets": [
+   "Y4 for all 1098 classes",
+   "Y5 for a pre-registered random sample of 200 classes (numpy default_rng(20261024).choice over class ids, without replacement) plus nothing selected by outcome"
+  ],
+  "models": {
+   "M1_local": "plaquette class fractions (f_m1, f_trl), two-cycle class fractions, U0, U1, mu0, n_types1",
+   "M2_loops": "M1 + closed-walk moments m2..m8 (level 3) + 2x2 Wilson-loop fractions",
+   "M3_correlations": "M1 + the V-B correlation statistics (Ct_*, Cp_*, pair_m1, cv_*)",
+   "M4_hierarchy": "M1 + M2 + M3 + hierarchy descriptors: depth enrichments enr1..3, hierarchical variances hvar1..2, Phi self-loops, Phi second eigenvalue, frequency of the U1-minimising type"
+  },
+  "learners": "OLS on standardised features and sklearn HistGradientBoostingRegressor with default hyperparameters (no tuning)",
+  "decision": "hierarchy adds out-of-sample information only if, for BOTH targets and BOTH learners, the paired bootstrap (2000 resamples of classes) 95% interval of RMSE(best of M1..M3) - RMSE(M4) lies entirely above 0",
+  "reported": "RMSE with bootstrap intervals, R^2, calibration slope (actual on predicted), the 10 largest residuals with class ids (FR30 and the top-Y4 classes named)"
+ }
+}
