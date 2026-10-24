@@ -1,0 +1,1190 @@
+{
+ "commit": "529bba9",
+ "branch": "claude/phase10-spectral-frustration",
+ "report": "deliverables/PHASE10_REPORT.md",
+ "bounds": [
+  {
+   "rule": "FR30 (class 1386)",
+   "quantity": "E_*",
+   "direction": ">=",
+   "value": 7.954292264597248,
+   "label": "rigorous",
+   "source": "Phase VII (phase7_ims.json, R = 12)"
+  },
+  {
+   "rule": "FR30 (class 1386)",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 8.764227038115036,
+   "exact": "95969095435322528/10950092349041091",
+   "label": "rigorous",
+   "source": "Phase VIII (phase8_chain_m5.json)"
+  },
+  {
+   "rule": "class 1387",
+   "quantity": "E_*",
+   "direction": ">=",
+   "value": 7.311494824213187,
+   "label": "rigorous",
+   "statement": "Theorem X.7 at R = 8: 1450 legal balls (90 Phi-closed 1-star types), each certified by a Higham-bounded Cholesky at mu = 3833329/524288",
+   "artifact": "audit/results/phase10_ims.jsonl",
+   "regenerate": "python -u -I audit/phase10_ims.py 1387 8 3 <nproc>"
+  },
+  {
+   "rule": "class 1387",
+   "quantity": "E_*",
+   "direction": ">=",
+   "value": 8.764499373071162,
+   "label": "rigorous",
+   "statement": "Theorem X.7 at R = 14: 7527 legal balls (90 Phi-closed 1-star types), each certified by a Higham-bounded Cholesky at mu = 2297561/262144 (prescribed-mu mode)",
+   "artifact": "audit/results/phase10_ims.jsonl",
+   "regenerate": "python -u -I audit/phase10_ims.py 1387 14 4 <nproc> 8.76449966430664"
+  },
+  {
+   "rule": "class 1387",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 9.392828542087184,
+   "exact": "2818642288615104/300084503404421",
+   "label": "rigorous",
+   "statement": "exact rational Rayleigh quotient of an integer vector on the pinned level-5 supertile (a legal patch; compression)",
+   "artifact": "audit/results/phase10_y5.jsonl"
+  },
+  {
+   "rule": "every proper Chair44 rule (all 1098 classes)",
+   "quantity": "E_*",
+   "direction": ">=",
+   "value": 3.788294784155753,
+   "label": "rigorous",
+   "statement": "Theorem X.2: E_* >= lambda_min H_free(T_3), Higham-certified Cholesky, per class; with the exact Y4 Rayleigh upper bound per class",
+   "artifact": "audit/results/phase10_certify.jsonl"
+  },
+  {
+   "rule": "class 1391",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 9.110400672560706,
+   "exact": "9317936522362447/1022780101255789",
+   "label": "rigorous",
+   "statement": "exact rational Rayleigh quotient on the pinned level-6 supertile",
+   "artifact": "audit/results/phase10_deep.jsonl"
+  },
+  {
+   "rule": "class 1387",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 9.367950157072443,
+   "exact": "929337608228675/99203944581949",
+   "label": "rigorous",
+   "statement": "exact rational Rayleigh quotient on the pinned level-6 supertile",
+   "artifact": "audit/results/phase10_deep.jsonl"
+  },
+  {
+   "rule": "class 1389",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 9.210499829336522,
+   "exact": "13455072902353664/1460840687439967",
+   "label": "rigorous",
+   "statement": "exact rational Rayleigh quotient on the pinned level-6 supertile",
+   "artifact": "audit/results/phase10_deep.jsonl"
+  },
+  {
+   "rule": "class 901",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 8.636666250386467,
+   "exact": "834388065518228/96609969787925",
+   "label": "rigorous",
+   "statement": "exact rational Rayleigh quotient on the pinned level-6 supertile",
+   "artifact": "audit/results/phase10_deep.jsonl"
+  },
+  {
+   "rule": "class 1386",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 8.770133630112703,
+   "exact": "10814068185044510/1233056261299583",
+   "label": "rigorous",
+   "statement": "exact rational Rayleigh quotient on the pinned level-6 supertile",
+   "artifact": "audit/results/phase10_deep.jsonl"
+  },
+  {
+   "rule": "extended decoration 539311 (stage C)",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 9.75355737858649,
+   "exact": "258985820305754/26552960140917",
+   "label": "rigorous",
+   "statement": "exact Rayleigh quotient on the minimising legal 8-ball (D_R)",
+   "artifact": "audit/results/phase10_ims.jsonl"
+  },
+  {
+   "rule": "extended decoration 539311 (stage C)",
+   "quantity": "E_*",
+   "direction": ">=",
+   "value": 7.337823864745354,
+   "label": "rigorous",
+   "statement": "Theorem X.7 at R = 8 (1450 legal balls; period-2 frame substitution, mirror halves)",
+   "artifact": "audit/results/phase10_ims.jsonl"
+  },
+  {
+   "rule": "extended decoration 539291 (stage C)",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 9.6033683345658,
+   "exact": "271805853504842/28303179055053",
+   "label": "rigorous",
+   "statement": "exact Rayleigh quotient on the minimising legal 8-ball (D_R)",
+   "artifact": "audit/results/phase10_ims.jsonl"
+  },
+  {
+   "rule": "extended decoration 539291 (stage C)",
+   "quantity": "E_*",
+   "direction": ">=",
+   "value": 7.1408386199582905,
+   "label": "rigorous",
+   "statement": "Theorem X.7 at R = 8 (1532 legal balls; period-2 frame substitution, mirror halves)",
+   "artifact": "audit/results/phase10_ims.jsonl"
+  },
+  {
+   "rule": "class 1144",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 8.141408609219209,
+   "exact": "112279879545783/13791210456952",
+   "label": "rigorous",
+   "statement": "exact Rayleigh quotient on the minimising legal 8-ball (D_R)",
+   "artifact": "audit/results/phase10_ims.jsonl"
+  },
+  {
+   "rule": "extended decoration 539311 (stage C)",
+   "quantity": "E_*",
+   "direction": ">=",
+   "value": 8.764499373071162,
+   "label": "rigorous",
+   "statement": "Theorem X.7 at R = 14 (7527 legal balls; period-2 frame substitution, mirror halves)",
+   "artifact": "audit/results/phase10_ims.jsonl"
+  },
+  {
+   "rule": "extended decoration 539311 (stage C)",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 9.388593716280619,
+   "exact": "3558865971615450/379062730709507",
+   "label": "rigorous",
+   "statement": "exact rational Rayleigh quotient on the pinned level-6 supertile",
+   "artifact": "audit/results/phase10_improper_certify.jsonl"
+  },
+  {
+   "rule": "extended decoration 539291 (stage C)",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 9.249940012369894,
+   "exact": "14852867575359498/1605725826923941",
+   "label": "rigorous",
+   "statement": "exact rational Rayleigh quotient on the pinned level-6 supertile",
+   "artifact": "audit/results/phase10_improper_certify.jsonl"
+  },
+  {
+   "rule": "Z^3 connection A (class-field-matched pair)",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 0.404134696137257,
+   "exact": "177943087298/440306385467",
+   "label": "rigorous",
+   "artifact": "audit/results/phase10_z3_classpairs.json"
+  },
+  {
+   "rule": "Z^3 connection B (class-field-matched pair)",
+   "quantity": "E_*",
+   "direction": ">=",
+   "value": 0.5857858657834083,
+   "label": "rigorous",
+   "artifact": "audit/results/phase10_z3_classpairs.json"
+  },
+  {
+   "rule": "Z^3 connection A (period 2)",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 0.40413469613679387,
+   "exact": "177740289079/439804576984",
+   "label": "rigorous",
+   "artifact": "audit/results/phase10_z3_pairs.json"
+  },
+  {
+   "rule": "Z^3 connection B (period 2)",
+   "quantity": "E_*",
+   "direction": ">=",
+   "value": 0.5857858657834083,
+   "label": "rigorous",
+   "statement": "free 2x2x2 cell (bracketing), Higham-certified",
+   "artifact": "audit/results/phase10_z3_pairs.json"
+  },
+  {
+   "rule": "Abelian shadow chi1 o U of decoration 4752",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 7.700133504665704,
+   "exact": "753082596817130/97801238947457",
+   "label": "rigorous",
+   "artifact": "audit/results/phase10_shadows.json"
+  },
+  {
+   "rule": "Abelian shadow chi2 o U of decoration 4752",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 5.386980109364814,
+   "exact": "537503258351624/99778214776999",
+   "label": "rigorous",
+   "artifact": "audit/results/phase10_shadows.json"
+  },
+  {
+   "rule": "Abelian shadow chi3 o U of decoration 4752",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 7.700133504665704,
+   "exact": "753082596817130/97801238947457",
+   "label": "rigorous",
+   "artifact": "audit/results/phase10_shadows.json"
+  },
+  {
+   "rule": "Abelian shadow chi1 o U of decoration 1387",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 7.728552204154817,
+   "exact": "865224171975920/111951650078883",
+   "label": "rigorous",
+   "artifact": "audit/results/phase10_shadows.json"
+  },
+  {
+   "rule": "Abelian shadow chi2 o U of decoration 1387",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 7.771643396498971,
+   "exact": "1083724784353828/139446025642663",
+   "label": "rigorous",
+   "artifact": "audit/results/phase10_shadows.json"
+  },
+  {
+   "rule": "Abelian shadow chi3 o U of decoration 1387",
+   "quantity": "E_*",
+   "direction": "<=",
+   "value": 5.412709184361983,
+   "exact": "9456152837265032/1747027692635895",
+   "label": "rigorous",
+   "artifact": "audit/results/phase10_shadows.json"
+  },
+  {
+   "rule": "class 1391",
+   "quantity": "E_*",
+   "value": 9.106982455778088,
+   "label": "conjectural",
+   "statement": "last-ratio geometric-tail extrapolation from Y4, Y5, Y6 (unproved ratio hypothesis)",
+   "artifact": "audit/results/phase10_stageB_promotion.json"
+  },
+  {
+   "rule": "class 1387",
+   "quantity": "E_*",
+   "value": 9.361708333228483,
+   "label": "conjectural",
+   "statement": "last-ratio geometric-tail extrapolation from Y4, Y5, Y6 (unproved ratio hypothesis)",
+   "artifact": "audit/results/phase10_stageB_promotion.json"
+  },
+  {
+   "rule": "class 1389",
+   "quantity": "E_*",
+   "value": 9.209932760395315,
+   "label": "conjectural",
+   "statement": "last-ratio geometric-tail extrapolation from Y4, Y5, Y6 (unproved ratio hypothesis)",
+   "artifact": "audit/results/phase10_stageB_promotion.json"
+  },
+  {
+   "rule": "class 901",
+   "quantity": "E_*",
+   "value": 8.444647075325037,
+   "label": "conjectural",
+   "statement": "last-ratio geometric-tail extrapolation from Y4, Y5, Y6 (unproved ratio hypothesis)",
+   "artifact": "audit/results/phase10_stageB_promotion.json"
+  },
+  {
+   "rule": "class 1386",
+   "quantity": "E_*",
+   "value": 8.762588511577759,
+   "label": "conjectural",
+   "statement": "last-ratio geometric-tail extrapolation from Y4, Y5, Y6 (unproved ratio hypothesis)",
+   "artifact": "audit/results/phase10_stageB_promotion.json"
+  }
+ ],
+ "claims": [
+  {
+   "id": "X1-flatness",
+   "status": "proved",
+   "category": 1,
+   "statement": "SU(2) links on a connected finite graph: flat <=> gauge-trivial <=> lambda_min(H_U) = 0",
+   "tests": [
+    "python -m pytest -q tests/test_phase10.py -k pauli"
+   ]
+  },
+  {
+   "id": "X2-bracketing",
+   "status": "proved",
+   "category": "1 (method) / 2 (application)",
+   "statement": "F_k(r) <= E_*(r) <= Y_L(r) for every decoration (lower side without recognizability or minimality)",
+   "tests": [
+    "python -m pytest -q tests/test_phase10.py -k bracketing"
+   ]
+  },
+  {
+   "id": "X3-positivity",
+   "status": "proved + census certified",
+   "category": "1/2",
+   "statement": "E_*(r) > 0 <=> some T_k(r) is not flat; all 1098 proper classes have primitive frame substitutions and E_* >= 3.788 (certified)",
+   "evidence": {
+    "certified_lower_min": 3.788294784155753,
+    "improper_flatness": {
+     "F1_min_proper": 1.6715739836483328,
+     "F1_min_improper": 1.6715739836483343,
+     "n_flat_T1": 0,
+     "n_flat_T1_proper": 0,
+     "n_flat_T2": 0,
+     "n_flat_T3": 0
+    }
+   }
+  },
+  {
+   "id": "X4-no-go",
+   "status": "proved",
+   "category": "1 (mechanism) / 2 (explicit family)",
+   "statement": "no lower bound on E_* from plaquette class frequencies: flat islands on Z^3, non-trivial fraction >= 0.78, E_* <= 6(1 - cos(pi/(R+1)))",
+   "tests": [
+    "python -m pytest -q tests/test_phase10.py -k no_go"
+   ]
+  },
+  {
+   "id": "X5-insufficiency",
+   "status": "proved + certified (infinite volume)",
+   "category": 2,
+   "statement": "two period-2 Pauli-frame connections on Z^3 with the same Q8 class on every plaquette (hence gauge-equivalent Abelian shadows) and certified different floors (separation >= 0.18)",
+   "evidence": {
+    "class_fields_identical": true,
+    "trace_fields_identical": true,
+    "class_counts": [
+     8,
+     0,
+     16
+    ],
+    "E_low_upper_exact": "177943087298/440306385467",
+    "E_low_upper": 0.404134696137257,
+    "E_high_lower_free_cell": 0.5857858657834083,
+    "certified_separation": 0.1816511696461513,
+    "float_floors": [
+     0.40413469613636555,
+     1.1715728752538048
+    ],
+    "shadow_floors_low": [
+     1.5278640450004162,
+     1.5278640450004164,
+     -4.204969965089723e-15
+    ],
+    "shadow_floors_high": [
+     1.5278640450004164,
+     1.5278640450004164,
+     -1.7393646830007209e-15
+    ]
+   },
+   "tests": [
+    "python -m pytest -q tests/test_phase10.py -k z3_trace"
+   ]
+  },
+  {
+   "id": "X6-2D-abelian",
+   "status": "proved",
+   "category": 1,
+   "statement": "Pauli-frame connections are Z4-valued (Abelian) in two dimensions"
+  },
+  {
+   "id": "X7-localization",
+   "status": "proved (Phase VII Thm 7.1 generalized; completeness via the Phi-closure)",
+   "category": "1 (machinery) / 2",
+   "statement": "Lambda_R(r) <= E_*(r) <= D_R(r), D_R - Lambda_R = O(R^-2), for every decoration with a primitive frame substitution",
+   "tests": [
+    "python -m pytest -q tests/test_phase10.py -k ims"
+   ]
+  },
+  {
+   "id": "D1-fr30-not-optimal-finite",
+   "status": "certified at finite volume (fv_certificate) and numerical",
+   "category": 2,
+   "statement": "class 1387 (FR30 with the centre child reframed) exceeds FR30 at levels 3, 4, 5",
+   "evidence": {
+    "1386": {
+     "Y5": 8.797011314650643,
+     "Y5_upper": 8.797011315188907
+    },
+    "1387": {
+     "Y5": 9.392828541556986,
+     "Y5_upper": 9.392828542087184
+    }
+   }
+  },
+  {
+   "id": "D3-twin-above-fr30-infinite",
+   "status": "certified",
+   "category": 2,
+   "statement": "the mirror twin 539311 (1387 with every child frame times the transposition (x y)): E_* >= Lambda_14 > E_*(FR30)"
+  },
+  {
+   "id": "D2-1387-above-fr30-infinite",
+   "status": "certified",
+   "category": 2,
+   "statement": "E_*(1387) >= Lambda_14(1387) > 8.7642270381 >= E_*(FR30)",
+   "evidence": {
+    "class": 1387,
+    "R": 14,
+    "m": 4,
+    "rho": "2139/175",
+    "one_star_types": 90,
+    "one_star_types_T5": 90,
+    "distinct_balls": 7527,
+    "rejected_incomplete": 0,
+    "ball_tiles": [
+     1580,
+     1640
+    ],
+    "frames": 24,
+    "primitive_power": 2,
+    "certificate_device": "NVIDIA GeForce RTX 5080, torch 2.11.0+cu128, float64 cholesky_ex, Higham bound with u = 4 * 2^-53",
+    "mode": "prescribed mu (no float pass; D_R not computed)",
+    "mu": "2297561/262144",
+    "mu_float": 8.76449966430664,
+    "Lambda_R_certified": 8.764499373071162,
+    "all_balls_certified": true,
+    "balls_failing": 0,
+    "failing_lambda_tilde_float_lowest": [],
+    "seconds": 1748.378437757492
+   }
+  },
+  {
+   "id": "S1-stageB-promotion",
+   "status": "computed",
+   "category": 2,
+   "statement": "registered promotion checks for the deep-stage classes",
+   "evidence": {
+    "rule": "promotion requires every check (phase10_preregistration.json stage_B_selection.promotion)",
+    "rows": [
+     {
+      "class": 1391,
+      "Y3..Y6": [
+       9.67109948648892,
+       9.173849122977249,
+       9.122100812877697,
+       9.11040067192322
+      ],
+      "last_ratio": 0.22609706349771497,
+      "baseline_estimate": 9.106982455778088,
+      "Y5_upper_certified": 9.122100813124275,
+      "Y6_upper_certified": 9.110400672560706,
+      "F4": 5.936064013872346,
+      "checks": {
+       "independent_reconstruction_L3": true,
+       "residual_Y6_below_1e-8": true,
+       "residual_Y5_below_1e-8": true,
+       "certified_L4_enclosure": true,
+       "free_below_pinned_matched_volume_L4": true,
+       "monotone_convergent_levels": true,
+       "baseline_above_FR30": true
+      },
+      "promoted": true
+     },
+     {
+      "class": 1387,
+      "Y3..Y6": [
+       9.955918832424736,
+       9.516866127104727,
+       9.392828541556986,
+       9.36795015545484
+      ],
+      "last_ratio": 0.2005713509520834,
+      "baseline_estimate": 9.361708333228483,
+      "Y5_upper_certified": 9.392828542087184,
+      "Y6_upper_certified": 9.367950157072443,
+      "F4": 5.729901486385549,
+      "checks": {
+       "independent_reconstruction_L3": true,
+       "residual_Y6_below_1e-8": true,
+       "residual_Y5_below_1e-8": true,
+       "certified_L4_enclosure": true,
+       "free_below_pinned_matched_volume_L4": true,
+       "monotone_convergent_levels": true,
+       "baseline_above_FR30": true
+      },
+      "promoted": true
+     },
+     {
+      "class": 1389,
+      "Y3..Y6": [
+       9.78692800299049,
+       9.346430076768797,
+       9.21873067305774,
+       9.210499828446704
+      ],
+      "last_ratio": 0.06445483981789109,
+      "baseline_estimate": 9.209932760395315,
+      "Y5_upper_certified": 9.218730673501753,
+      "Y6_upper_certified": 9.210499829336522,
+      "F4": 5.961280524412125,
+      "checks": {
+       "independent_reconstruction_L3": true,
+       "residual_Y6_below_1e-8": true,
+       "residual_Y5_below_1e-8": true,
+       "certified_L4_enclosure": true,
+       "free_below_pinned_matched_volume_L4": true,
+       "monotone_convergent_levels": true,
+       "baseline_above_FR30": true
+      },
+      "promoted": true
+     },
+     {
+      "class": 901,
+      "Y3..Y6": [
+       9.659550598074398,
+       9.082520877582787,
+       8.794624211819247,
+       8.636666242180857
+      ],
+      "last_ratio": 0.548662031981041,
+      "baseline_estimate": 8.444647075325037,
+      "Y5_upper_certified": 8.794624213915851,
+      "Y6_upper_certified": 8.636666250386467,
+      "F4": 5.737853363278927,
+      "checks": {
+       "independent_reconstruction_L3": true,
+       "residual_Y6_below_1e-8": true,
+       "residual_Y5_below_1e-8": true,
+       "certified_L4_enclosure": true,
+       "free_below_pinned_matched_volume_L4": true,
+       "monotone_convergent_levels": true,
+       "baseline_above_FR30": false
+      },
+      "promoted": false
+     },
+     {
+      "class": 1386,
+      "Y3..Y6": [
+       9.378470210300447,
+       8.919634360168976,
+       8.797011314650643,
+       8.770133629019728
+      ],
+      "last_ratio": 0.21918951300957631,
+      "baseline_estimate": 8.762588511577759,
+      "Y5_upper_certified": 8.797011315188907,
+      "Y6_upper_certified": 8.770133630112703,
+      "F4": 5.209699218814094,
+      "checks": {
+       "independent_reconstruction_L3": true,
+       "residual_Y6_below_1e-8": true,
+       "residual_Y5_below_1e-8": true,
+       "certified_L4_enclosure": true,
+       "free_below_pinned_matched_volume_L4": true,
+       "monotone_convergent_levels": true,
+       "baseline_above_FR30": null
+      },
+      "promoted": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "S2-improper-extension",
+   "status": "computed (numerical)",
+   "category": 2,
+   "statement": "stage C: improper frames (6^8 decorations), controlled baseline = the proper census",
+   "evidence": [
+    {
+     "j": 539311,
+     "proper": false,
+     "census_index": null,
+     "Y3": 9.95733063726218,
+     "Y4": 9.522250677210174,
+     "Y5": 9.415852961041631,
+     "Y5_residual": 5.399552829331069e-13,
+     "decoration": {
+      "0": [
+       0,
+       2,
+       1
+      ],
+      "(0, 0, 0)": [
+       2,
+       1,
+       0
+      ],
+      "(0, 0, 1)": [
+       2,
+       0,
+       1
+      ],
+      "(0, 1, 0)": [
+       0,
+       1,
+       2
+      ],
+      "(0, 1, 1)": [
+       1,
+       0,
+       2
+      ],
+      "(1, 0, 0)": [
+       1,
+       2,
+       0
+      ],
+      "(1, 0, 1)": [
+       2,
+       1,
+       0
+      ],
+      "(1, 1, 0)": [
+       0,
+       2,
+       1
+      ]
+     }
+    },
+    {
+     "j": 184323,
+     "proper": true,
+     "census_index": 1387,
+     "Y3": 9.955918832424732,
+     "Y4": 9.516866127104702,
+     "Y5": 9.392828541556963,
+     "Y5_residual": 7.71528062158897e-13,
+     "decoration": {
+      "0": [
+       1,
+       2,
+       0
+      ],
+      "(0, 0, 0)": [
+       0,
+       1,
+       2
+      ],
+      "(0, 0, 1)": [
+       1,
+       0,
+       2
+      ],
+      "(0, 1, 0)": [
+       0,
+       2,
+       1
+      ],
+      "(0, 1, 1)": [
+       2,
+       0,
+       1
+      ],
+      "(1, 0, 0)": [
+       2,
+       1,
+       0
+      ],
+      "(1, 0, 1)": [
+       1,
+       2,
+       0
+      ],
+      "(1, 1, 0)": [
+       0,
+       1,
+       2
+      ]
+     }
+    },
+    {
+     "j": 184338,
+     "proper": true,
+     "census_index": 1389,
+     "Y3": 9.786928002990447,
+     "Y4": 9.346430076768732,
+     "Y5": 9.218730673057559,
+     "Y5_residual": 6.583187304038564e-11,
+     "decoration": {
+      "0": [
+       0,
+       1,
+       2
+      ],
+      "(0, 0, 0)": [
+       1,
+       2,
+       0
+      ],
+      "(0, 0, 1)": [
+       1,
+       0,
+       2
+      ],
+      "(0, 1, 0)": [
+       0,
+       2,
+       1
+      ],
+      "(0, 1, 1)": [
+       2,
+       0,
+       1
+      ],
+      "(1, 0, 0)": [
+       2,
+       1,
+       0
+      ],
+      "(1, 0, 1)": [
+       1,
+       2,
+       0
+      ],
+      "(1, 1, 0)": [
+       0,
+       1,
+       2
+      ]
+     }
+    },
+    {
+     "j": 539291,
+     "proper": false,
+     "census_index": null,
+     "Y3": 9.791809405606582,
+     "Y4": 9.334352285628013,
+     "Y5": 9.27182582438568,
+     "Y5_residual": 4.590024106278113e-13,
+     "decoration": {
+      "0": [
+       2,
+       1,
+       0
+      ],
+      "(0, 0, 0)": [
+       0,
+       2,
+       1
+      ],
+      "(0, 0, 1)": [
+       2,
+       0,
+       1
+      ],
+      "(0, 1, 0)": [
+       0,
+       1,
+       2
+      ],
+      "(0, 1, 1)": [
+       1,
+       0,
+       2
+      ],
+      "(1, 0, 0)": [
+       1,
+       2,
+       0
+      ],
+      "(1, 0, 1)": [
+       2,
+       1,
+       0
+      ],
+      "(1, 1, 0)": [
+       0,
+       2,
+       1
+      ]
+     }
+    },
+    {
+     "j": 184342,
+     "proper": true,
+     "census_index": 1391,
+     "Y3": 9.671099486488956,
+     "Y4": 9.173849122976959,
+     "Y5": 9.122100812877644,
+     "Y5_residual": 6.786444196013846e-13,
+     "decoration": {
+      "0": [
+       2,
+       0,
+       1
+      ],
+      "(0, 0, 0)": [
+       1,
+       2,
+       0
+      ],
+      "(0, 0, 1)": [
+       1,
+       0,
+       2
+      ],
+      "(0, 1, 0)": [
+       0,
+       2,
+       1
+      ],
+      "(0, 1, 1)": [
+       2,
+       0,
+       1
+      ],
+      "(1, 0, 0)": [
+       2,
+       1,
+       0
+      ],
+      "(1, 0, 1)": [
+       1,
+       2,
+       0
+      ],
+      "(1, 1, 0)": [
+       0,
+       1,
+       2
+      ]
+     }
+    },
+    {
+     "j": 343952,
+     "proper": false,
+     "census_index": null,
+     "Y3": 9.774768509273281,
+     "Y4": 9.172235758218822,
+     "Y5": 8.732624141774272,
+     "Y5_residual": 1.5469188628565874e-11,
+     "decoration": {
+      "0": [
+       1,
+       0,
+       2
+      ],
+      "(0, 0, 0)": [
+       0,
+       2,
+       1
+      ],
+      "(0, 0, 1)": [
+       1,
+       0,
+       2
+      ],
+      "(0, 1, 0)": [
+       1,
+       0,
+       2
+      ],
+      "(0, 1, 1)": [
+       0,
+       2,
+       1
+      ],
+      "(1, 0, 0)": [
+       1,
+       0,
+       2
+      ],
+      "(1, 0, 1)": [
+       0,
+       2,
+       1
+      ],
+      "(1, 1, 0)": [
+       0,
+       2,
+       1
+      ]
+     }
+    },
+    {
+     "j": 539288,
+     "proper": false,
+     "census_index": null,
+     "Y3": 9.663000716695077,
+     "Y4": 9.162660304023905,
+     "Y5": 9.112363053103058,
+     "Y5_residual": 6.492988959006279e-13,
+     "decoration": {
+      "0": [
+       1,
+       0,
+       2
+      ],
+      "(0, 0, 0)": [
+       0,
+       2,
+       1
+      ],
+      "(0, 0, 1)": [
+       2,
+       0,
+       1
+      ],
+      "(0, 1, 0)": [
+       0,
+       1,
+       2
+      ],
+      "(0, 1, 1)": [
+       1,
+       0,
+       2
+      ],
+      "(1, 0, 0)": [
+       1,
+       2,
+       0
+      ],
+      "(1, 0, 1)": [
+       2,
+       1,
+       0
+      ],
+      "(1, 1, 0)": [
+       0,
+       2,
+       1
+      ]
+     }
+    },
+    {
+     "j": 343951,
+     "proper": false,
+     "census_index": null,
+     "Y3": 10.388527864298545,
+     "Y4": 9.14826602945579,
+     "Y5": 8.591976511707621,
+     "Y5_residual": 1.951922183526122e-12,
+     "decoration": {
+      "0": [
+       0,
+       2,
+       1
+      ],
+      "(0, 0, 0)": [
+       0,
+       2,
+       1
+      ],
+      "(0, 0, 1)": [
+       1,
+       0,
+       2
+      ],
+      "(0, 1, 0)": [
+       1,
+       0,
+       2
+      ],
+      "(0, 1, 1)": [
+       0,
+       2,
+       1
+      ],
+      "(1, 0, 0)": [
+       1,
+       0,
+       2
+      ],
+      "(1, 0, 1)": [
+       0,
+       2,
+       1
+      ],
+      "(1, 1, 0)": [
+       0,
+       2,
+       1
+      ]
+     }
+    },
+    {
+     "j": 160995,
+     "proper": true,
+     "census_index": 1144,
+     "Y3": 9.662613522903609,
+     "Y4": 9.103614463398308,
+     "Y5": 8.776802472359467,
+     "Y5_residual": 3.537253417045677e-13,
+     "decoration": {
+      "0": [
+       1,
+       2,
+       0
+      ],
+      "(0, 0, 0)": [
+       0,
+       1,
+       2
+      ],
+      "(0, 0, 1)": [
+       1,
+       0,
+       2
+      ],
+      "(0, 1, 0)": [
+       0,
+       2,
+       1
+      ],
+      "(0, 1, 1)": [
+       2,
+       0,
+       1
+      ],
+      "(1, 0, 0)": [
+       1,
+       0,
+       2
+      ],
+      "(1, 0, 1)": [
+       1,
+       2,
+       0
+      ],
+      "(1, 1, 0)": [
+       0,
+       1,
+       2
+      ]
+     }
+    },
+    {
+     "j": 153219,
+     "proper": true,
+     "census_index": 901,
+     "Y3": 9.659550598074267,
+     "Y4": 9.082520877582699,
+     "Y5": 8.794624211819219,
+     "Y5_residual": 7.97026303912426e-11,
+     "decoration": {
+      "0": [
+       1,
+       2,
+       0
+      ],
+      "(0, 0, 0)": [
+       0,
+       1,
+       2
+      ],
+      "(0, 0, 1)": [
+       1,
+       0,
+       2
+      ],
+      "(0, 1, 0)": [
+       0,
+       2,
+       1
+      ],
+      "(0, 1, 1)": [
+       2,
+       0,
+       1
+      ],
+      "(1, 0, 0)": [
+       0,
+       2,
+       1
+      ],
+      "(1, 0, 1)": [
+       1,
+       2,
+       0
+      ],
+      "(1, 1, 0)": [
+       0,
+       1,
+       2
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "H1-hierarchy",
+   "status": "no reproducible gain from hierarchy descriptors",
+   "category": 2,
+   "statement": "Part V pre-registered test: hierarchy descriptors vs local descriptors, held-out gauge classes, Y4 and Y5",
+   "evidence": {
+    "Y4": {
+     "ols": {
+      "rmse": {
+       "M1": 0.18736093887623692,
+       "M2": 0.14411434981099117,
+       "M3": 0.16863347724723196,
+       "M4": 0.1327771637377353
+      },
+      "gain_ci95": [
+       0.006639725363612942,
+       0.015869126518073515
+      ]
+     },
+     "hgb": {
+      "rmse": {
+       "M1": 0.19521400756025223,
+       "M2": 0.16506722169648327,
+       "M3": 0.17793172794566903,
+       "M4": 0.13898479329013605
+      },
+      "gain_ci95": [
+       0.020524775366639273,
+       0.03136220684834078
+      ]
+     }
+    },
+    "Y5_sample": {
+     "ols": {
+      "rmse": {
+       "M1": 0.13750640160665362,
+       "M2": 0.11444309454879655,
+       "M3": 0.13675853056560655,
+       "M4": 0.1225712168623785
+      },
+      "gain_ci95": [
+       -0.017895601911514226,
+       0.0012135436843706713
+      ]
+     },
+     "hgb": {
+      "rmse": {
+       "M1": 0.16347507382280632,
+       "M2": 0.15326953219163406,
+       "M3": 0.15773403689604637,
+       "M4": 0.14080623677827894
+      },
+      "gain_ci95": [
+       0.004250372194614252,
+       0.020411956733014245
+      ]
+     }
+    }
+   }
+  },
+  {
+   "id": "N1-kamenetsky",
+   "status": "falsified (novelty)",
+   "category": 2,
+   "statement": "Phase VII Thm 6.2 (radius-1 matching rule for FR30) is Kamenetsky Thm A (arXiv:2610.00916) for his assignment frames30 = FR30; Phase IX category C corrected to 2"
+  },
+  {
+   "id": "P1-physics",
+   "status": "none claimed",
+   "category": 4,
+   "statement": "no physical law, quantum mechanics, Standard Model or mass spectrum follows from a positive spectral floor"
+  }
+ ]
+}
