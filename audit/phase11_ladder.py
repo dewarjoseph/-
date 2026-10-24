@@ -196,7 +196,7 @@ def exp_finite_radius():
         per = 'a' * m + 'b'; f = bloch_floor(per, X, grid=96)
         W = 64; F = periodic_factors(per, 2 * W); e = enclosure(F, X, W)
         rows.append({'m': m, 'bloch_float': f, 'Lambda_W_certified': e['Lambda_certified'], 'D_W_upper': e['D_upper'], 'W': W,
-                     'flat_bump_bound': 2 * (1 - math.cos(math.pi / (m + 1)))})
+                     'flat_bump_bound': 2 * (1 - math.cos(math.pi / (m + 2)))})
         log(rows[-1])
     # language identity: radius-W factor sets of A_m and A_m' coincide for m, m' >= 2W
     Wl = 3; same = periodic_factors('a' * 6 + 'b', 2 * Wl) == periodic_factors('a' * 9 + 'b', 2 * Wl) == periodic_factors('a' * 13 + 'b', 2 * Wl)
@@ -210,20 +210,28 @@ def first_visible_level(sub, L2, maxlen=200000):
         if {s[i:i + 2] for i in range(len(s) - 1)} >= L2: return lev
     return None
 
+RARE_SUB = {'a': 'dd', 'b': 'cb', 'c': 'aa', 'd': 'bc'}     # found by a seeded search (phase11 report): 'cc' is legal, absent from sigma^10(a)
+
 def exp_rare():
-    """an environment absent from a finite 'training supertile' sigma^L(a) but legal: certificates computed from the visible
-    environments only are invalid.  Search: 3-letter primitive substitutions, maximise the first level exhibiting every legal 2-word"""
-    import random
-    rnd = random.Random(4); best = (None, 0)
-    for _ in range(30000):
-        sub = {c: ''.join(rnd.choice('abc') for _ in range(rnd.randint(1, 3))) for c in 'abc'}
-        if any(set(subst_power(sub, c, 6)) != set('abc') for c in 'abc'): continue           # primitive (every letter reaches all)
-        L2, _ = legal_2words(sub); lev = first_visible_level(sub, L2)
-        if lev and lev > best[1]: best = (sub, lev)
-    sub, lev = best; L2, _ = legal_2words(sub)
-    s = subst_power(sub, 'a', lev - 1); late = sorted(L2 - {s[i:i + 2] for i in range(len(s) - 1)})
-    out = {'substitution': sub, 'first_level_with_all_2words': lev, 'words_missing_at_level_minus_1': late}
-    log('rare search', out); save('rare_search', out)
+    """legal-patch coverage is a necessary hypothesis: with c flat (+1) and a, b, d frustrated, the flat seam 'cc' is legal but first
+    appears in sigma^11(a).  A 'certificate' computed from the environments visible in the 1024-letter supertile sigma^10(a) is
+    compared with the complete enumeration (2-letter closure)."""
+    out = {'substitution': RARE_SUB}
+    L2, _ = legal_2words(RARE_SUB); s = 'a'; lev = 0
+    while 'cc' not in s: s = ''.join(RARE_SUB[c] for c in s); lev += 1
+    out['cc_legal'] = 'cc' in L2; out['first_level_with_cc'] = lev
+    for name, X in (('frustrated_-1', {'a': Q['-1'], 'b': Q['-1'], 'c': Q['1'], 'd': Q['-1']}), ('frustrated_q1', {'a': Q['q1'], 'b': Q['q1'], 'c': Q['1'], 'd': Q['q1']})):
+        rows = []
+        for W in (8, 16, 32, 64):
+            Fall = subst_factors(RARE_SUB, 2 * W); Fvis = visible_factors(RARE_SUB, 2 * W, lev - 1)
+            ea = enclosure(Fall, X, W); ev = enclosure(Fvis, X, W)
+            rows.append({'W': W, 'environments_all': len(Fall), 'environments_visible': len(Fvis), 'missing': len(Fall - Fvis),
+                         'Lambda_visible_only': ev['Lambda_certified'], 'D_visible_only': ev['D_upper'],
+                         'Lambda_complete': ea['Lambda_certified'], 'D_complete_upper': ea['D_upper'],
+                         'visible_certificate_invalid': ev['Lambda_certified'] > ea['D_upper']})
+            log(name, rows[-1])
+        out[name] = rows
+    save('rare', out)
 
 def exp_rep_group():
     """representation and group dependence on the Fibonacci ladder: spinor Q8 vs its adjoint (= chi_1 + chi_2 + chi_3) vs

@@ -104,8 +104,24 @@ def run_stage(name, L, js, nproc):
 def load_stage(name):
     return {r['j']: r for r in (json.loads(l) for l in open(os.path.join(RES, f'phase11_frontier_{name}.jsonl')))}
 
+def census_job(cls):
+    """independent census bracket of one gauge class (representative cls): certified free level-3 lower bound (Theorem X.2, banded
+    Higham certificate) and exact level-4 pinned upper bound"""
+    dec = C.proper_decoration(cls); G, T = C.supertile(dec, 3); Hf = C.operators(G, T, free=True)
+    f = float(np.linalg.eigvalsh(Hf.toarray())[0]); mu = Fraction(math.floor((f - 1e-7) * 2 ** 20), 2 ** 20); low, _ = C.banded_cert(Hf, mu)
+    if '4' not in _LV: _LV['4'] = Level(4)
+    H = _LV['4'].H(C.extended_decoration(ext_index(dec))); lam, v = lowest(H); num, den = exact_upper(H, v)
+    return {'class': cls, 'F3_float': f, 'F3_certified': low, 'Y4_float': lam, 'Y4_num': str(num), 'Y4_den': str(den), 'Y4_upper': num / den}
+
 if __name__ == '__main__':
     os.environ.setdefault('OMP_NUM_THREADS', '1')
+    if sys.argv[1] == 'census':
+        import multiprocessing as mp
+        cen = json.load(open(os.path.join(RES, 'phase10_census.json')))['classes']; nproc = int(sys.argv[2]) if len(sys.argv) > 2 else 4
+        with mp.Pool(nproc) as pool: rows = pool.map(census_job, [r['class'] for r in cen], chunksize=8)
+        json.dump({'rows': rows}, open(os.path.join(RES, 'phase11_frontier_census.json'), 'w'), indent=0)
+        fr = next(r for r in rows if r['class'] == 1386)
+        log('census:', len(rows), 'min certified F3', min(r['F3_certified'] for r in rows), 'FR30 class', fr); sys.exit()
     stage = sys.argv[1]; nproc = int(sys.argv[2]) if len(sys.argv) > 2 else 4
     if stage == 'reps':
         reps = orbit_reps(); json.dump({'orbit_representatives': reps}, open(os.path.join(RES, 'phase11_frontier_reps.json'), 'w')); log(len(reps), 'orbit representatives')
@@ -116,3 +132,17 @@ if __name__ == '__main__':
             prev = load_stage(f'X{L - 1}'); js = sorted(j for j in reps if j in prev and not prev[j]['inferior'])
         res = run_stage(stage, L, js, nproc); surv = [j for j in js if not res[j]['inferior']]
         log(f'{stage}: {len(js)} evaluated, {len(js) - len(surv)} proven inferior, {len(surv)} survive')
+    elif stage == 'list':
+        # python phase11_frontier.py list <name> <L> <nproc>: Y_L exact upper bounds for a preregistered rule list
+        name, L, nproc = sys.argv[2], int(sys.argv[3]), int(sys.argv[4])
+        pre = json.load(open(os.path.join(RES, 'phase11_preregistration.json')))
+        S = C.perm_matrix((1, 0, 2))
+        def twin(d): return tuple(tuple(int(np.argmax((C.perm_matrix(p) @ S)[i])) for i in range(3)) for p in d)
+        if name == 'twins':
+            js = []
+            for r in pre['part_II_twin_criterion']['classes']:
+                d = C.proper_decoration(r); js += [ext_index(d), ext_index(twin(d))]
+        elif name == 'counterfactual':
+            cf = pre['part_V_counterfactuals']; js = [ext_index(C.proper_decoration(4752)), ext_index(C.proper_decoration(4753))] + cf['neighbours_FR30'] + cf['neighbours_4753']
+        else: raise ValueError(name)
+        run_stage(f'{name}_Y{L}', L, list(dict.fromkeys(js)), nproc)

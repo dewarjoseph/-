@@ -192,7 +192,7 @@ def frame_graph(dec):
 def c_overlap(eta, dps=50):
     """c(eta) = int phi(y) phi(y - eta e) dy / int phi^2, phi = Dirichlet ground state of the unit 3-ball (sin(pi r)/r)"""
     import mpmath as mp
-    mp.mp.dps = dps; e = mp.mpf(eta); pi = mp.pi
+    mp.mp.dps = dps; e = mp.mpf(eta.numerator) / eta.denominator if isinstance(eta, Fraction) else mp.mpf(eta); pi = mp.pi
     return (pi * (1 - e / 2) * mp.sin(pi * e) + 1 - mp.cos(pi * e)) / (pi ** 2 * e)
 def c_overlap_quadrature(eta, n=400):
     """direct numerical overlap, for checking c_overlap: radial-axial quadrature of phi(|y|) phi(|y - eta e_z|) over the unit ball"""
@@ -339,3 +339,31 @@ if __name__ == '__main__':
     if sys.argv[1] == 'cert':
         spec, R, m, nproc, mu = sys.argv[2], int(sys.argv[3]), int(sys.argv[4]), int(sys.argv[5]), sys.argv[6]
         certify(spec, R, m, nproc, mu, sys.argv[7] if len(sys.argv) > 7 else None)
+
+def probe(spec, R, m, tiles_per_type=24, seed=0, types_subset=None, nproc=4):
+    """an UPPER bound on Lambda_R (and on D_R): the minimum of the amplified (and plain) ball bottoms over a sample of legal balls.
+    Every sampled ball is legal and complete, so min over the sample >= Lambda_R; if it is below a target mu, no certificate at
+    radius R can reach mu.  Float eigenvalues (scipy eigsh, residual-checked)."""
+    import scipy.sparse.linalg as sla
+    from scipy.spatial import cKDTree
+    dec = rule(spec); rho = Fraction(R) - RC_BOUND; types_, _, _ = legal_types(dec); keys = list(types_)
+    d2s = set()
+    for G, T, c in types_.values():
+        P = Patch(G, T); a, b, _ = P.panels(); X = centroid14(G, T); d2s |= set(((X[a] - X[b]) ** 2).sum(1).tolist())
+    tab = amp_table_exact(rho, d2s); rng = np.random.default_rng(seed); out = []
+    for ti in (types_subset if types_subset is not None else range(len(keys))):
+        G, T, c = types_[keys[ti]]
+        for _ in range(m): G, T = inflate(G, T, dec)
+        X = centroid14(G, T); tree = cKDTree(X.astype(float)); P = Patch(G, T)
+        sh = np.array(P.shape); pad = -np.ones(tuple(sh + 2), dtype=np.int64); pad[1:-1, 1:-1, 1:-1] = P.grid
+        bad = np.argwhere(pad < 0) - 1 + P.lo; btree = cKDTree((14 * bad + 7).astype(float))
+        ts = np.arange(c * 8 ** m, (c + 1) * 8 ** m); dmin, _ = btree.query(X[ts].astype(float)); ok = ts[dmin >= 14 * (R + math.sqrt(3) / 2)]
+        for t in rng.choice(ok, min(tiles_per_type, len(ok)), replace=False):
+            mem = np.array(tree.query_ball_point(X[t].astype(float), 14 * R + 1e-6)); mem = mem[((X[mem] - X[t]) ** 2).sum(1) < 196 * R * R]
+            Ha, Hp, _ = ball_amplified(G[mem], T[mem], rho, tab.__getitem__)
+            la, va = sla.eigsh(Ha, k=1, which='SA', tol=1e-12, ncv=60); lp = sla.eigsh(Hp, k=1, which='SA', tol=1e-12, ncv=60, return_eigenvectors=False)[0]
+            res = float(np.linalg.norm(Ha @ va[:, 0] - la[0] * va[:, 0]))
+            out.append({'type': int(ti), 'tile': int(t), 'tiles': int(len(mem)), 'Lambda_ball': float(la[0]), 'residual': res, 'D_ball': float(lp)})
+    out.sort(key=lambda r: r['Lambda_ball'])
+    return {'rule': str(spec), 'R': R, 'm': m, 'sampled_balls': len(out), 'Lambda_R_upper_float': out[0]['Lambda_ball'] + out[0]['residual'],
+            'D_R_upper_float': min(r['D_ball'] for r in out), 'lowest': out[:5]}
