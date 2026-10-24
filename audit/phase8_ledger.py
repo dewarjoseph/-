@@ -32,7 +32,7 @@ claims = [
   'evidence': {'geo': geo, 'slab': slab, 'seam_controls': smc}, 'tests': [D + ' geo slab seamctl'], 'caveats': ['finite volume only; no infinite-volume localisation claim']},
  {'id': 'F1-environment-fiber', 'status': 'numerical [E]', 'statement': 'a T3-copy fiber built from the 72 legal 1-star environments alone captures the deep edge states and predicts held-out edges',
   'evidence': {'capture': ef['capture'] if ef else None, 'level5': ef['level5'] if ef else None, 'level4': ef['level4'] if ef else None, 'copy_lattice_rg': rg, 'fiber_dimensions': fib},
-  'tests': [T + ' -k fiber', D + ' fiber'], 'caveats': ['Ritz upper bounds; boundedness of the fiber for copies of T4 and beyond not verified']},
+  'tests': [T + ' -k fiber', D + ' fiber'], 'caveats': ['Ritz upper bounds; boundedness of the fiber for copies of T4 and beyond not verified', 'held-out error at d = 58 stalls: +0.0085 (L6), +0.0059 (L7), the L7 prediction lies above E_6; not controlled uniformly in the level']},
  {'id': 'C1-class-count-counterexample', 'status': 'proved by example (exact counts; float eigenvalues)', 'statement': 'identical axis-resolved level-4 plaquette class counts, different bottoms at levels 3-5 (the only such collision among the 1097 class-count values of the 6561-rule census)',
   'evidence': {'census_rules': cp['census_rules'] if cp else None, 'groups_with_distinct_bottoms': cp['groups_with_distinct_bottoms'] if cp else None,
                'pair_937_938': pair and {'rules': pair['rules'], 'identical_statistics': len(pair['identical_statistics']), 'different_statistics': pair['different_statistics']}},

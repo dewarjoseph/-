@@ -67,7 +67,7 @@ The null model (local frustration) is supported, and the hierarchy model is fals
 |---|---|---|---|
 | level-6 held-out copy-lattice edge, env fiber, d = 114 | done | E_W − E₆ = +0.00205 (Ritz, so ≥ 0) | `phase8_copy_rg.jsonl` |
 | level-6 copy-lattice edge, deep(6,7) fiber, d = 58 | done | +0.00112 (in-sample) | same |
-| level-7 copy-lattice edges, env and deep(6,7), d = 58 | deep(6,7) done; env in progress at this commit | deep(6,7): +0.00079 (in-sample). env (held-out): in progress | same |
+| level-7 copy-lattice edges, env and deep(6,7), d = 58 | done (env 3.6 h) | env (held-out): **+0.0059**. That is **above E₆**: the d = 58 fiber's error stalls while the decrement shrinks fivefold. deep(6,7) (in-sample): +0.00079 | same |
 | near-edge density of states, levels 3–5 | done | clustered finite-volume spectrum; no scaling form established [U] | `phase8_dos.json` |
 | first poles of R_k, k ≤ 5 | done | λ_II(k) − E_k = 6.66, 0.576, 0.0289, 0.0022 | `phase8_poles.json` |
 | selection-chain and supertile extrapolations | relabelled | conjectural: they rest on unproved ratio hypotheses (§2) | `phase8_patch_bounds.json` |
@@ -342,7 +342,7 @@ New here (`audit/phase9_state.py`, `phase9_state.json`):
 | plaquette class counts | **yes, on the census**: level-3 counts determine level-4 counts across all 1125 orbits (1097 distinct level-3 vectors, none with two level-4 images; `phase9_count_closure.json`). Exactly, counts of local patch types evolve linearly under the substitution matrix, and class counts are linear functions of them | **no**: the 937/938 counterexample (§4, Theorem 9.1) |
 | Y_L (the bottom itself) | **no**: of 378 distinct Y₁ values, 364 are shared by decorations with different Y₂ | not a summary of the parent |
 | local correlation statistics | linear in patch-type counts, so they close in the same way as the counts | **no collision, but not predictive** (RMSE 0.2) |
-| environment-selected fiber (FR30 only) | approximately: the converged T₃ fiber is stable from level 6 to level 7 (Phase VIII §4c) | to +0.0085 / +0.0021 at level 6 (d = 58 / 114), level 7 in progress at this commit; one-sided (Ritz) |
+| environment-selected fiber (FR30 only) | approximately: the converged T₃ fiber is stable from level 6 to level 7 (Phase VIII §4c) | to +0.0085 / +0.0021 at level 6 (d = 58 / 114); +0.0059 at level 7 (d = 58), where the error stalls; one-sided (Ritz) |
 | exact labelled response R_m(E) | **yes, exactly** (Prop. 8.1) | **yes, exactly**; its dimension grows like 4ᵐ |
 
 **Conclusion of Part IV.**
@@ -372,10 +372,10 @@ New here (`audit/phase9_state.py`, `phase9_state.json`):
 | form | E_\* ∈ [Λ_R, D_R], with D_R − Λ_R ≤ ε(ρ) ≤ K(ρ) S₁/ρ², ρ = R − 311/175 | E_\* = lim_m U_m(τ₅₉); U_m − E_\* ≈ C rᵐ, r ≈ 0.16 | E_L ≈ the root of λ_min[I ⊗ m(E) + Off_W] on the level-L copy lattice | Y_L ≈ a linear or kNN function of the statistics |
 | domain | any decoration with a minimal hull: the proof uses only legality, minimality and geometric constants | FR30 | FR30 pinned supertiles, L ≥ 4 | all 6561 decorations |
 | error | **rigorous**, O(R⁻²); ε(12) = 1.51 | upper side rigorous; the rate is a fit | one-sided (Ritz) plus measured | grouped CV-RMSE ≈ 0.2 |
-| held-out prediction | none needed: it is a theorem | U₅ predicted from U₁…U₄ = 8.7641066; actual 8.7642270, **error −1.2·10⁻⁴** (the ratio drifted from 0.163 to 0.154) | E₆: **+0.0085** (d = 58), **+0.0021** (d = 114). E₇ (d = 58): in progress at this commit | FR30's Y₃/Y₄ underpredicted by 0.15–1.33 |
-| strongest simple baseline | — | generic legal balls of equal size: D₁₂ = 8.857 (≈1 000 tiles) against U₂ = 8.861 (≤ 1 728 tiles), i.e. equal | last-ratio extrapolation of E₃…E₅: E₆ −0.0059, E₇ −0.00067. Dirichlet ratio ¼: E₆ −0.0038, E₇ −0.0015 | (the baseline itself) |
+| held-out prediction | none needed: it is a theorem | U₅ predicted from U₁…U₄ = 8.7641066; actual 8.7642270, **error −1.2·10⁻⁴** (the ratio drifted from 0.163 to 0.154) | E₆: **+0.0085** (d = 58), **+0.0021** (d = 114). E₇: **+0.0059** (d = 58), which lies above E₆ | FR30's Y₃/Y₄ underpredicted by 0.15–1.33 |
+| strongest simple baseline | — | generic legal balls of equal size: D₁₂ = 8.857 (≈1 000 tiles) against U₂ = 8.861 (≤ 1 728 tiles), i.e. equal | last-ratio extrapolation from the three preceding levels: E₆ −0.0059, E₇ −0.00067. Dirichlet ratio ¼: E₆ −0.0038, E₇ −0.0015 | (the baseline itself) |
 | controls it should fail if the hierarchy matters | none: it holds for every minimal hull, and its only hierarchy input is *which* balls are legal | χ₂ has no stable selected type, so the premise fails; χ₁/χ₃ select the same types as FR30, so selection is not specific to the non-Abelian connection | — | the 937/938 pair: identical class fractions, different bottoms |
-| verdict | a **theorem** of standard type (IMS localization, A/B) | convergence is a standard theorem; the rate is a **phenomenological fit** | a **variational approximation scheme**, not a law. Its point accuracy is matched by a two-parameter extrapolation, which, however, has no one-sided guarantee | **falsified** as a sufficient description |
+| verdict | a **theorem** of standard type (IMS localization, A/B) | convergence is a standard theorem; the rate is a **phenomenological fit** | a **variational approximation scheme**, not a law. Its point accuracy is matched at level 6, and beaten ninefold at level 7, by a two-parameter extrapolation, which, however, has no one-sided guarantee | **falsified** as a sufficient description |
 
 **Conclusion of Part V.**
 - The only statement with rigorous predictive content is L-A, together with the compression upper bounds.

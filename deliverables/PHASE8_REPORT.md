@@ -25,7 +25,7 @@
   - Every scalar or bounded-radius summary tested fails by explicit counterexample (§7).
   - The information the earlier low-rank compressions lost is identified: the **environment-selected seam modes** (§3).
 - **C.** No hierarchy-specific spectral law separate from local legality is supported. The control that could isolate one cannot exist (§6c).
-- **Not A.** A controlled truncation works numerically: one fixed local fiber per copy, held-out errors in §4(e). But no closed law has a proven or rigorously bounded relation to the edge.
+- **Not A.** A fixed local fiber per copy works numerically at levels 5–6, with held-out errors in §4(e). At level 7 its error (d = 58) stalls near 0.006 while the level decrement shrinks fivefold. No closed law has a proven or rigorously bounded relation to the edge.
 
 **Strongest theorem (Theorems 8.2–8.3, §5.2) [P], with a certified consequence [C].**
 - *Hypotheses.*
@@ -134,7 +134,7 @@ Every compressed representation below is tested on the same operator and the sam
 | 3 | low-rank child response (k softest Kramers pairs of R_c) | the child's own soft spectrum | modes excited by the environment | V-E: calibrated RMSE 0.197 at 5.6 % of the boundary. Child modes capture 48–63 % of the deep local state at k = 20 | **insufficient** |
 | 4 | face/hinge/corner bases, two-sided seam modes, patches | interface locality | in-seam structure | V-E: 0.25–0.26 at equal D, worse than child modes | **insufficient** |
 | 4′ | all interface tiles (56 % of the boundary) | every seam degree of freedom | only the pinned outer wall | V-E: 0.017 RMSE | sufficient, but not a compression |
-| 5 | **environment-selected fiber (new)**: U_env from the low states of the 72 legal 1-star patches σ³(τ), restricted to the central T₃ copy; no level ≥ 5 data | the response of a supertile to its legal 1-star environment | nothing systematic | captures **99.68 % / 99.79 %** of the level-6/7 copy restrictions at d = 58 (10 % of the T₃ surface), and 99.955 % at d = 114. Edge errors: E₅ +0.035 (d = 58), +0.005 (d = 114); E₄ +0.015 (d = 114), +0.0041 (d = 200); held-out E₆: +0.0085 (d = 58), +0.0021 (d = 114); held-out E₇ (d = 58): run in progress at this commit | **sufficient up to a quantified error** |
+| 5 | **environment-selected fiber (new)**: U_env from the low states of the 72 legal 1-star patches σ³(τ), restricted to the central T₃ copy; no level ≥ 5 data | the response of a supertile to its legal 1-star environment | nothing systematic | captures **99.68 % / 99.79 %** of the level-6/7 copy restrictions at d = 58 (10 % of the T₃ surface), and 99.955 % at d = 114. Edge errors: E₅ +0.035 (d = 58), +0.005 (d = 114); E₄ +0.015 (d = 114), +0.0041 (d = 200); held-out E₆: +0.0085 (d = 58), +0.0021 (d = 114); held-out E₇: +0.0059 (d = 58), above E₆ | **sufficient to ≈ 0.002–0.006 at levels 5–7**, not uniformly in the level |
 | 6 | exact labelled surface response R_m(E) | everything | — | exact (D2) | exact; dimension grows (§2e) |
 
 **The decisive answer.** The discarded degrees of freedom that account for the unexplained parent response are the **environment-selected seam modes**: the components of a supertile's surface response that its *neighbours* excite. Its own soft spectrum does not supply them.
@@ -183,11 +183,15 @@ The converged fiber grows mildly (38 → 56 from T₂ to T₃, while the surface
 | 4 | 8 | +0.211 | +0.0151 | +0.449 |
 | 5 | 64 | +0.0352 | +0.0050 | +0.0194 |
 | 6 | 512 | +0.0085 | +0.0021 | +0.0011 |
-| 7 | 4096 | in progress at this commit | — | +0.00079 |
+| 7 | 4096 | +0.0059 | — | +0.00079 |
 
 **Verdict on the brief's four options.**
 - The exact map is closed only on a growing space.
-- A *controlled truncation* exists: a fixed fiber of dimension ≈ 58–114 per T₃ copy, with an envelope over a copy lattice whose size grows with the volume. Its held-out error is +0.035 (L5) and +0.0085 (L6) at d = 58, about 0.29–0.32 of the level decrement E_{L−1} − E_L. At d = 114 it is +0.0050 (L5) and +0.0021 (L6), 0.04–0.08 of the decrement. The error is one-sided (Ritz) and measured, not bounded. The held-out level-7 value is in progress at this commit.
+- A truncation that works only down to a floor: a fixed fiber of dimension ≈ 58–114 per T₃ copy, with an envelope over a copy lattice whose size grows with the volume.
+  - At d = 58 its held-out error is +0.035 (L5), +0.0085 (L6) and +0.0059 (L7). As fractions of the level decrement E_{L−1} − E_L that is 0.29, 0.32 and **1.13**.
+  - At level 7 the d = 58 prediction, 8.7708, lies **above** E₆ = 8.7701: it does not even predict that the edge decreases. The fixed fiber's error stalls near 0.006 while the decrement shrinks fivefold.
+  - At d = 114 the error is +0.0050 (L5) and +0.0021 (L6), 0.04–0.08 of the decrement. Level 7 at d = 114 was not computed (estimated at more than 10 h).
+  - The error is one-sided (Ritz) and measured, not bounded. **It is not controlled uniformly in the level.**
 - No fixed point of 𝓡 itself was sought: 𝓡 acts on spaces of growing dimension. A fixed point is sought instead along the selection chain (§5).
 
 ---
@@ -370,7 +374,7 @@ The edge-selecting configuration is therefore **connection-dependent**, not fixe
 | + depth enrichments, hierarchical variances (28 statistics) | **no** | 937/938 agree on all 28 |
 | + per-tile class spread, −1 clustering, class-pair correlations, 2×1 and 2×2 loops (the other 17) | not refuted | these are exactly the statistics in which 937/938 differ |
 | child soft spectrum (k pairs per child) | **no** (only to 0.2 at 5.6 %) | V-D, V-E |
-| environment-selected fiber (d per copy) × envelope on the copy lattice | **yes, up to a quantified error**: 0.005 at d = 114 (L5) | §3, §4 |
+| environment-selected fiber (d per copy) × envelope on the copy lattice | **to a measured error at levels 5–7**: 0.005 / 0.0021 at d = 114 (L5 / L6); 0.0059 at d = 58 (L7), where it stalls | §3, §4 |
 | exact labelled response R_m(E) | **yes, exactly** | D2 |
 
 **How rare the counterexample is** (`phase8_classpair.json`, the full census of 6561 rules).
@@ -426,7 +430,7 @@ The edge-selecting configuration is therefore **connection-dependent**, not fixe
 **8. Corrected paper claim.**
 > For the FR30 Clifford–Q₈ connection on the three-dimensional chair hierarchy, the bottom of the spectrum E_* (certified in [7.954, 8.7642]) is approached, in every finite supertile computed, by states bound to supertile seams and extended along them. For m ≤ 4, the lowest patch energy over the 72 legal local configurations is attained (at m = 4 to within solver accuracy) at one self-similar configuration of the hierarchy. Along any self-similar configuration the patch energies decrease monotonically to E_*; this is proved. The m = 5 member of the selected chain gives the certified upper bound.
 >
-> Exactly, the information carried between scales is the labelled surface response, a growing object. To within 0.005 it is carried by a fixed local fiber of ≈ 114 dimensions per level-3 copy, computable from the 72 legal environments alone.
+> Exactly, the information carried between scales is the labelled surface response, a growing object. At levels 5–6 a fixed local fiber of ≈ 114 dimensions per level-3 copy, computable from the 72 legal environments alone, reproduces the supertile edge from above to within 0.005. At d = 58 the error stalls near 0.006 by level 7, so no accuracy uniform in the level is claimed.
 >
 > Plaquette-class frequencies do not determine the spectrum. No hierarchy-specific spectral law separate from local legality is established.
 
@@ -483,7 +487,7 @@ lean certificates/Phase8Shadows.lean
 
 Running times on the machine used here (24 threads, shared between concurrent runs):
 - env_fiber ≈ 30 min; patch_bounds through m = 4 ≈ 1.7 h; selection_controls ≈ 42 min; chain5 ≈ 29 min;
-- copy_rg ≈ 5 s (L5), 3 min (L6, d = 58), 1.7 h (L7, deep(6,7)); the L7 env run takes > 2.4 h;
+- copy_rg ≈ 5 s (L5), 3 min (L6, d = 58), 1.7 h (L7, deep(6,7)) and 3.6 h (L7, env);
 - diagnostics ≈ 6 min without `poles dos`, ≈ 23 min for those two.
 
 Data dependencies:
