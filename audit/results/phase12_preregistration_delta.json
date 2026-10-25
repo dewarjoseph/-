@@ -1,0 +1,17 @@
+{
+ "written": "2026-10-25, before any conjugation defect was paired with a spectral value (only the 1387 orbit defects were inspected)",
+ "part": "Phase XII Part II: the conjugation-defect law",
+ "definitions": {
+  "right_action": "d.Q: every child frame factor h_c replaced by h_c Q (Q a 3x3 permutation matrix)",
+  "conjugation_defect": "delta_Q(d) = number of the 8 child slots at which conj_Q(d) (phase11_frontier.conj_decoration) differs from d; delta_Q(d) = 0 iff Q stabilises d",
+  "theorem_part": "Orbit Lemma (b): delta_Q(d) = 0 implies T_L(dQ) unitarily equivalent to T_L(d) for every L and E_*(dQ) = E_*(d)"
+ },
+ "data": "exact Y3 of stage X3 (phase11_frontier_X3), all 280 332 S3-conjugation representatives d and the 5 non-identity Q; Y3(dQ) read at the representative of dQ",
+ "hypotheses": {
+  "H0_theorem_check": "delta = 0 implies |Y3(dQ) - Y3(d)| < 1e-9 for every such pair",
+  "H1_rank_law": "Spearman rho(delta, |Y3(dQ) - Y3(d)|) >= 0.3 over the pairs with delta >= 1",
+  "H2_monotone_medians": "the median of |Y3(dQ) - Y3(d)| is non-decreasing in delta over the delta values with at least 100 pairs"
+ },
+ "falsified_if": "any of H0-H2 fails; a failure is reported as such",
+ "sha256_of_content_without_this_field": "ec4f44327c2e48f5116e6238e2ddeac969970ba548c58b2f3aa759ce1e9e30ea"
+}
