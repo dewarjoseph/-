@@ -1,5 +1,14 @@
 {
- "commit": "131bd1d",
+ "implementation_findings": [
+  {
+   "id": "IF1",
+   "where": "audit/phase11_chair.py banded_cert (and the first version of phase12_independent.higham)",
+   "finding": "the assertion (d - mu) + mu == d in floating point does not prove that the diagonal shift d - mu was exact (24 - 0.1 passes it)",
+   "impact": "none on stored results: every stored certificate uses a dyadic mu = k / 2^20 (or 2^30), for which 24 - mu is exact; checked by test_stored_certificate_shifts_exact",
+   "fix": "phase12_independent now compares in rational arithmetic; Phase XI code left unchanged (frozen artifact)"
+  }
+ ],
+ "commit": "c2035f1",
  "report": "deliverables/PHASE12_REPORT.md",
  "claims": [
   {
@@ -81,6 +90,14 @@
    "assumptions": [],
    "evidence": "phase12_orbit.json",
    "test": "test_orbit_lemma_records"
+  },
+  {
+   "id": "XII.closure",
+   "claim": "inside right orbits the exact level-3 coincidences are precisely the closure of conjugation and the stabiliser clause (1612 ties among 1 401 660 pairs, 0 unexplained, 0 explained-but-split); sufficiency proved at all levels",
+   "status": "[P] sufficiency, [C] completeness at level 3, [X] completeness beyond",
+   "assumptions": [],
+   "evidence": "phase12_orbit.json:closure",
+   "test": "test_closure_explains_every_tie"
   },
   {
    "id": "XII.FR30",

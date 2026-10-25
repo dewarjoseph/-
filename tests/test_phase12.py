@@ -215,3 +215,16 @@ def test_phase12_ledger_links():
             if t == '-': continue
             if t.startswith('phase11:'): assert f'def {t[8:]}(' in p11, t
             else: assert t in names, t
+
+def test_stored_certificate_shifts_exact():
+    """phase11_chair.banded_cert's assertion (d - mu) + mu == d does not prove the shift exact (24 - 0.1 passes it); every stored
+    certificate is nevertheless exact because its mu is dyadic with a small numerator: 24 - mu is then representable"""
+    for name in ('phase11_cert.jsonl', 'phase12_independent.jsonl'):
+        for r in JL(name):
+            if not r.get('mu'): continue
+            mu = Fraction(r['mu']); assert mu.denominator & (mu.denominator - 1) == 0 and mu.denominator <= 2 ** 30
+            assert Fraction(24.0 - float(mu)) == 24 - mu
+
+def test_closure_explains_every_tie():
+    c = J('phase12_orbit.json')['closure']
+    assert c['pairs'] == 1401660 and c['ties'] >= 912 and c['ties_unexplained'] == 0 and c['explained_but_not_tied'] == 0

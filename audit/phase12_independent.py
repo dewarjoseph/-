@@ -208,7 +208,9 @@ def higham(Hs, mu, err):
     N = Hs.shape[0]; p = reverse_cuthill_mckee(Hs.tocsr(), symmetric_mode=True); A = Hs[p][:, p].tocoo()
     lo = A.row >= A.col; r, c, v = A.row[lo], A.col[lo], A.data[lo]; bw = int((r - c).max())
     ab = np.zeros((bw + 1, N)); ab[r - c, c] = v; d0 = ab[0].copy(); ab[0] = d0 - mu
-    assert np.array_equal(ab[0] + mu, d0), 'shift not exact'
+    # the shift must be exact: compared in rational arithmetic ((d - mu) + mu == d in floating point does not prove it)
+    fm = Fraction(mu)
+    assert all(Fraction(float(x)) == Fraction(float(y)) - fm for x, y in set(zip(ab[0].tolist(), d0.tolist()))), 'shift not exact'
     try: Lb = sl.cholesky_banded(ab, lower=True, overwrite_ab=True, check_finite=False)
     except np.linalg.LinAlgError: return None, bw
     if not (Lb[0] > 0).all(): return None, bw

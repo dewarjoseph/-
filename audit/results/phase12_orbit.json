@@ -284,5 +284,13 @@
    "7": 0.32260291250611567,
    "8": 0.2630190560108357
   }
+ },
+ "closure": {
+  "pairs": 1401660,
+  "ties": 1612,
+  "ties_unexplained": 0,
+  "examples_unexplained": [],
+  "explained_but_not_tied": 0,
+  "examples_explained_not_tied": []
  }
 }

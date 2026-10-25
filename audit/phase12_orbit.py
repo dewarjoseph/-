@@ -174,6 +174,38 @@ def defect_law():
             'H1_spearman_delta_vs_abs_dY3': rho, 'H1_pass': rho >= 0.3, 'H2_median_abs_dY3_by_delta': med, 'H2_pass': mono,
             'mean_abs_dY3_by_delta': {int(k): float(dy[dl == k].mean()) for k in range(9) if (dl == k).any()}}
 
+# ---------------------------------------------------------------- the closure of the lemma's moves
+def closure():
+    """the equivalence generated on decorations by (i) S3 conjugation (exact) and (ii) right multiplication by an element of the
+    conjugation stabiliser of the current decoration (Orbit Lemma (d)); exhaustive comparison with exact Y3 ties inside right orbits:
+    every pair in one class must tie (theorem), and every tie should be explained (the question: is there another mechanism?)"""
+    reps = np.array(json.load(open(os.path.join(RES, 'phase11_frontier_reps.json')))['orbit_representatives'])
+    X3 = {r['j']: r['float'] for r in JL('phase11_frontier_X3.jsonl')}; D = digits(reps)
+    def cls(d0):
+        seen = {tuple(d0)}; todo = [np.array(d0)]
+        while todo:
+            e = todo.pop(); E = e[None]
+            nxt = [digits(conj_index(E, q))[0] for q in range(6)]
+            nxt += [right(e, q) for q in range(6) if int(conj_index(E, q)[0]) == int(index(e))]
+            for x in nxt:
+                t = tuple(int(v) for v in x)
+                if t not in seen: seen.add(t); todo.append(np.array(t))
+        return {int(v) for v in rep(np.array(sorted(seen)))}
+    ties_unexplained, explained_not_tied, pairs, ties = [], [], 0, 0
+    for i, j in enumerate(reps):
+        C = cls(D[i]); yj = X3[int(j)]
+        for q in range(1, 6):
+            k = int(rep(right(D[i], q)[None])[0]); pairs += 1; tie = abs(X3[k] - yj) < 1e-9; ties += tie
+            if tie and k not in C: ties_unexplained.append((int(j), k, q))
+            if (k in C) and not tie: explained_not_tied.append((int(j), k, q, X3[k] - yj))
+    return {'pairs': pairs, 'ties': ties, 'ties_unexplained': len(ties_unexplained), 'examples_unexplained': ties_unexplained[:10],
+            'explained_but_not_tied': len(explained_not_tied), 'examples_explained_not_tied': explained_not_tied[:10]}
+
+if __name__ == '__main__' and len(sys.argv) > 1 and sys.argv[1] == 'closure':
+    d = json.load(open(os.path.join(RES, 'phase12_orbit.json'))); d['closure'] = closure()
+    json.dump(d, open(os.path.join(RES, 'phase12_orbit.json'), 'w'), indent=1, default=lambda o: o.item() if hasattr(o, 'item') else str(o))
+    print(json.dumps(d['closure'], indent=1)); sys.exit(0)
+
 if __name__ == '__main__' and len(sys.argv) > 1 and sys.argv[1] == 'defect':
     d = json.load(open(os.path.join(RES, 'phase12_orbit.json'))); d['defect_law'] = defect_law()
     json.dump(d, open(os.path.join(RES, 'phase12_orbit.json'), 'w'), indent=1, default=lambda o: o.item() if hasattr(o, 'item') else str(o))

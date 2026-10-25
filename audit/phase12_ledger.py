@@ -39,6 +39,7 @@ def claims():
         ('XII.OL', 'Orbit Lemma (a)-(e): sigma_{dQ} = rho_Q sigma_d; rho_Q a global gauge transformation; level-1 equivalence; full equivalence and equal E_* on the conjugation stabiliser; breaking otherwise', '[P]', ['Chair44 frame rules', 'Q in S3'],
          'phase12_orbit.json:lemma, phase12_formal.json', 'test_orbit_lemma_records, test_orbit_level1_equal_level2_split_live, test_formal_checks'),
         ('XII.OL.exh', 'exhaustive checks: level-1 spectra constant on all right orbits of the 280 332 representatives (7.8e-14); 912 stabilised pairs equal at level 3 (9.4e-14); exact integer-quaternion link identity', '[C]', [], 'phase12_orbit.json', 'test_orbit_lemma_records'),
+        ('XII.closure', 'inside right orbits the exact level-3 coincidences are precisely the closure of conjugation and the stabiliser clause (1612 ties among 1 401 660 pairs, 0 unexplained, 0 explained-but-split); sufficiency proved at all levels', '[P] sufficiency, [C] completeness at level 3, [X] completeness beyond', [], 'phase12_orbit.json:closure', 'test_closure_explains_every_tie'),
         ('XII.FR30', 'E_*(539315) = E_*(FR30): 1386 is fixed by (x y) and 1386.(x y) = 539315 (Orbit Lemma (d))', '[P]', [], 'phase12_orbit.json', 'test_orbit_lemma_stabiliser_clause'),
         ('XII.R20', 'E_*(1387) >= 9.1104981 (R = 20, 24 571 balls, preregistered)', '[C]', ['Higham Thm 10.3, u = 2^-52', 'completeness of the Phi-closure'], 'phase11_cert.jsonl:target_1387_R20', 'test_R20_certificate_record'),
         ('XII.R20.ind', 'the R = 20 certificate reproduced by an implementation sharing no code', ind_status, [], 'phase12_independent.jsonl:independent_1387_R20', 'test_independent_R20_reproduction'),
@@ -63,7 +64,11 @@ def claims():
     return [dict(zip(('id', 'claim', 'status', 'assumptions', 'evidence', 'test'), r)) for r in rows]
 
 if __name__ == '__main__':
-    out = {'commit': subprocess.run(['git', 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True, cwd=HERE).stdout.strip(),
+    findings = [{'id': 'IF1', 'where': 'audit/phase11_chair.py banded_cert (and the first version of phase12_independent.higham)',
+                 'finding': 'the assertion (d - mu) + mu == d in floating point does not prove that the diagonal shift d - mu was exact (24 - 0.1 passes it)',
+                 'impact': 'none on stored results: every stored certificate uses a dyadic mu = k / 2^20 (or 2^30), for which 24 - mu is exact; checked by test_stored_certificate_shifts_exact',
+                 'fix': 'phase12_independent now compares in rational arithmetic; Phase XI code left unchanged (frozen artifact)'}]
+    out = {'implementation_findings': findings, 'commit': subprocess.run(['git', 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True, cwd=HERE).stdout.strip(),
            'report': 'deliverables/PHASE12_REPORT.md', 'claims': claims(),
            'corrections': [dict(zip(('id', 'statement', 'problem', 'correction'), c)) for c in CORRECTIONS]}
     json.dump(out, open(os.path.join(RES, 'phase12_ledger.json'), 'w'), indent=1)

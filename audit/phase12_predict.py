@@ -53,6 +53,7 @@ if __name__ == '__main__':
         for tau in (8.5, 8.8):
             elim = pte + q95 < tau; rec[f'false_elimination_rate_tau_{tau}'] = (float(np.mean(yte[elim] >= tau)) if elim.any() else None)
             rec[f'eliminated_tau_{tau}'] = int(elim.sum())
+        if 1387 in te: rec['post_hoc_rank_of_leader_1387_in_test'] = int((pte > pte[te.index(1387)]).sum()) + 1   # 1 = top (post hoc, not preregistered)
         out['families'][fam] = rec
         for i in range(Xte.shape[1]):
             out['single_features'][f'{fam}[{i}]'] = float(stats.spearmanr(Xte[:, i], yte).statistic)
