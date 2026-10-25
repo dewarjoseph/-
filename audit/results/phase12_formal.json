@@ -1,0 +1,104 @@
+{
+ "ims_edge_identity": {
+  "1": true,
+  "2": true,
+  "3": true,
+  "4": true,
+  "5": true,
+  "6": true
+ },
+ "orbit_child_rule": {
+  "checked": 1728,
+  "violations": 0,
+  "holds": true
+ },
+ "orbit_link_exact": {
+  "x_by_Q": {
+   "(0, 1, 2)": [
+    -1,
+    0,
+    0,
+    0
+   ],
+   "(0, 2, 1)": [
+    0,
+    0,
+    -1,
+    1
+   ],
+   "(1, 0, 2)": [
+    0,
+    -1,
+    1,
+    0
+   ],
+   "(1, 2, 0)": [
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "(2, 0, 1)": [
+    -1,
+    1,
+    1,
+    1
+   ],
+   "(2, 1, 0)": [
+    0,
+    -1,
+    0,
+    1
+   ]
+  },
+  "holds": true
+ },
+ "shadow_formula": {
+  "checked": 20736,
+  "violations": 0,
+  "holds": true
+ },
+ "lean": "not available: the environment network policy denies the Lean toolchain hosts; no proof-assistant check was made",
+ "obligations": [
+  {
+   "name": "variational principle",
+   "statement": "for a bounded self-adjoint H, inf sigma(H) = inf of Rayleigh quotients over any dense subspace (here: finitely supported vectors)",
+   "status": "standard (min-max)"
+  },
+  {
+   "name": "compression",
+   "statement": "lambda_min(P_K H P_K) >= inf sigma(H) for every subspace",
+   "status": "standard"
+  },
+  {
+   "name": "Higham Theorem 10.3",
+   "statement": "if floating-point Cholesky of an n x n symmetric A completes, L L^T = A + dA with |dA| <= gamma_{n+1}|L||L^T|; the certificate uses ||dA||_2 <= gamma_{n+1}||L||_F^2 and an IEEE model with u = 2^-52 (two ulps, covering FMA)",
+   "status": "cited (Higham 2002), not re-proved; implementation-dependent assumption: LAPACK dpbtrf obeys the standard rounding model"
+  },
+  {
+   "name": "overlap function",
+   "statement": "c(eta) for the Dirichlet ground state of the unit 3-ball (Plancherel; symbolic derivation in phase11_proofs.overlap3d)",
+   "status": "derived symbolically in Phase XI; the radial Fourier transform step is classical analysis"
+  },
+  {
+   "name": "spin lift",
+   "statement": "every R in SO(3) has a lift W in SU(2) with W sigma.v W^+ = sigma.(R v)",
+   "status": "standard; for the 24 rotations used here the lift is exhibited and checked exactly (orbit_link_exact)"
+  },
+  {
+   "name": "cycle spectrum",
+   "statement": "the free operator of an l-cycle with holonomy W has spectrum {2 - 2cos((phi + 2 pi m)/l)}",
+   "status": "standard (gauge to one link, diagonalise)"
+  },
+  {
+   "name": "closure lemma",
+   "statement": "every child 1-star lies inside sigma of its parent 1-star",
+   "status": "finite, asserted on every Phi step of every run (not a general proof for all rules)"
+  },
+  {
+   "name": "primitivity and minimality",
+   "statement": "M^2 > 0 for the frame substitution implies a minimal hull",
+   "status": "standard for primitive substitutions; M^2 > 0 checked per rule"
+  }
+ ]
+}

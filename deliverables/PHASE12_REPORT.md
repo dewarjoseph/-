@@ -1,0 +1,576 @@
+# Phase XII — The geometric frustration principle: what the frontier's symmetry is, and what it is not
+
+**Repository state.**
+- Branch `claude/fervent-fermi-e2wi4y`, on top of the Phase XI commits (no pull request yet). Phase XI's last commit is 6410a6a.
+- Earlier phases and their artifacts are untouched. Everything new is under `audit/phase12_*`, `audit/results/phase12_*`, `tests/test_phase12.py`, this report, `deliverables/PHASE12_STRONGEST_THEOREM.md` and `deliverables/PHASE12_DECISION_MEMO.md`.
+- Two protocols were frozen and committed before their outcomes existed:
+  - the predictive study (`phase12_preregistration.json`, 2b10ecf);
+  - the conjugation-defect law (`phase12_preregistration_delta.json`, 131bd1d).
+
+**Labels** (as in Phases X–XI).
+- [P] proved;
+- [C] computer-certified: exact rational arithmetic, or a floating-point Cholesky with Higham's rounding bound;
+- [E] floating-point evidence;
+- [X] conjecture or extrapolation;
+- [F] falsified.
+
+**The objects, as the code defines them.**
+- A *frame rule* d is a choice of 8 child frame factors h_c (signed 3×3 permutation matrices), with translations t_c. It defines the substitution σ_d(M, T) = {(M h_c, 2T + M t_c)}_c on chair tiles (pose = frame M, position T).
+- The link across a panel with unit normal e_k is U(a→b) = (σ·M_aᵀe_k)(σ·M_bᵀe_k) ∈ Q₈ (`PHASE7_DEFINITIONS.md` §3).
+- On a tiling ω, H_ω = 24 − A_U on ℓ²(ω) ⊗ ℂ². Every tile of a tiling has 24 panels, so H_ω = D_U†D_U ≥ 0, a bounded operator with domain all of ℓ².
+- **The optimisation problem.** The brief's formula is exactly the repository's floor:
+
+  E_\*(r) = inf_{ω∈Ω_r} inf_{ψ≠0 finitely supported} ⟨ψ, H_ω ψ⟩/⟨ψ, ψ⟩ = inf_{ω∈Ω_r} inf σ(H_ω).
+
+  - Ω_r is the hull: tilings all of whose finite patches are legal (occur in some σ_rᵏ(t)).
+  - By Theorem XI.A, E_\*(r) is a function of the legal language of r alone. It is constant on Ω_r for primitive rules, and for the imprimitive (period-2) twins by XI.D(iv).
+  - The extremal problem is max_r E_\*(r) over the 6⁸ = 1 679 616 frame rules (proper rules: det h_c = 1; 6561 of them, 1098 gauge classes).
+
+---
+
+## 0. Answer
+
+⟨ANSWER⟩
+
+---
+
+## 1. Closing the loop (Part I)
+
+### 1.1 The radius-20 certificate for 1387
+
+**It finished and it passed** (`audit/results/phase11_cert.jsonl`, tag `target_1387_R20`; Phase XI commit 6410a6a).
+- The level-5 completeness test accepts all 2 949 120 centres (0 rejections). There are 24 571 distinct legal balls of 4737–4838 tiles, with RCM bandwidth ≤ 1626.
+- All of them pass the banded Higham test at μ = 9553051/1048576, the preregistered 9.1105 rounded down to 20 bits.
+- **E_\*(1387) ≥ 9.1104981** [C].
+- This exceeds the independent exact Y₆ of 1391 (9.1104007, margin 9.7·10⁻⁵) and of 539288 (9.0982534). Both are proven inferior without stored-only artifacts.
+
+**Independent verification.**
+- `audit/phase12_independent.py` is a second implementation written from `PHASE7_DEFINITIONS.md` alone. It imports no phase 5–11 module.
+- It differs from the certifying code at every point where a shared bug could hide:
+  - integer frame indices with exact product tables;
+  - links derived as quaternions, σ_k = i q_k, so (σ·u_a)(σ·u_b) = −s_a s_b q_{k_a}q_{k_b};
+  - the spinor operator realised as the real 4×4 left-multiplication form of ℍ, not the interleaved complex form;
+  - its own Φ-closure, its own completeness test against a KD-tree of unowned cube centres, and 4-column canonical keys.
+- **Validation** (`tests/test_phase12.py`):
+  - legal 1-star type counts 72 / 90 / 102 (94 in T₅) / 104 (95) / 79 (77) / 90 for FR30, 1387, 1389, 1391, 539288, 539311, all identical;
+  - exact Y₃, Y₄ of 1387 agree to 10⁻¹¹;
+  - FR30 at R = 6: 325 balls, Λ₆ ≥ 3.6555586, reproducing Phase X's 3.655558585;
+  - 1387 at R = 8: 1450 balls, certified at 7.3.
+- **The full radius-20 rerun:** ⟨IND_R20⟩
+
+### 1.2 The leaderboard, recomputed and cross-checked
+
+`audit/phase11_leaderboard.py` and `audit/phase12_frontier_table.py` regenerate every interval from the stored certificates.
+
+| check | result | test |
+|---|---|---|
+| every proper class has its proven-inferior flag recomputed from exact rationals against L_best = 9.1104981 | **1096** classes proven inferior; 1 contender (1389); leader 1387 | `test_leaderboard_classification` |
+| funnel flags X3–X7 recomputed from the stored rationals | 235 644 / 44 650 / 30 / 1 / 1 eliminated | `test_funnel_flags_recomputed_from_stored_rationals` |
+| the 280 332 representatives cover the extended space | Burnside count exact; orbit minima | `test_orbit_reps_cover_the_extended_space` |
+| orbit membership of the frontier | right-S₃ orbit of 4753 = the six survivors | `test_right_S3_orbit_of_1387` |
+| gauge equivalence FR30 ≅ 539315 | now a corollary of the Orbit Lemma (b): 1386 is fixed by (x y) (§2.2) | `test_orbit_lemma_stabiliser_clause` |
+| class labels (census index ↔ decoration) | independent decoder agrees on all 6561 proper and all 6⁸ extended indices sampled | `test_independent_decoder` |
+| claim ↔ test links | every test named in either ledger exists | `test_ledger_claims_name_existing_tests` (XI), `test_phase12_ledger_links` (XII) |
+
+### 1.3 Reconciliation: what Phase XI stated too strongly
+
+The Phase XI report's theorems were rechecked line by line. Five statements on the one-page theorem (`PHASE11_STRONGEST_THEOREM.md`) exceed their proofs. They are corrected in `PHASE12_STRONGEST_THEOREM.md` and recorded in `phase12_ledger.json` (`corrections`):
+
+| # | Phase XI statement | problem | corrected statement |
+|---|---|---|---|
+| C1 | (2) "If G is uniformly doubling … the error is ≤ 16dC_D²/R²" | hypothesis R ≥ 4C_D omitted (it is in the report's C(ii)) | add R ≥ 4C_D |
+| C2 | (2) "the error is ≤ K_D S_c/ρ²" | ρ undefined. The pieces are Euclidean balls c⁻¹(B_ρ(x)); K_D needs ρ > j_D h/√(2D); entering a graph-radius statement needs pieces inside graph balls | ρ is the Euclidean partition radius, with ρ > j_D h/√(2D); for the chair the pieces lie in centroid balls of radius ρ + r_c, so ρ = R − 311/175 |
+| C3 | (3) "on the lamplighter ℤ₂ ≀ ℤ^k, D_R − E_\* ≥ c_k R^{−2/k}" | the claim "bounded degree alone does not give R⁻²" needs k ≥ 2 | k ≥ 2 |
+| C4 | (4) "Suppose every ball of radius r contains a based loop whose holonomy has all eigenvalue arguments ≥ θ₀" | the proof (F2) needs the angle bound for the *fundamental loops of a breadth-first tree based at the centre* (length ≤ 2r + 1, each edge at most twice). "Some loop in the ball" does not imply it for continuous groups | the hypothesis of the report's F2; for finite subgroups of SU(2) in the spinor representation, "every r-ball non-flat" suffices |
+| C5 | (5c) "For a finite group, every non-spinor representation's floor is a function of [the plaquette class field]" | "non-spinor" is defined only for Q₈ (and similar groups). The proof (H2 + H3) needs representations whose irreducible constituents are 1-dimensional, and plaquettes generating H₁ over ℤ | for a finite structure group: every representation all of whose irreducible constituents are 1-dimensional, on a complex whose plaquettes generate H₁(·; ℤ) (e.g. ℤ³); for Q₈ these are exactly the non-spinor representations |
+
+Stale conclusions corrected in Phase XI itself after R = 20 (commit 6410a6a):
+- the frontier went from six to four members;
+- the proper-rule maximiser went from {1387, 1389, 1391} to {1387, 1389};
+- the leader's interval went to [9.1104981, 9.3679502].
+
+### 1.4 The regression suite
+
+⟨TESTS⟩
+
+### 1.5 Four kinds of quantity, kept apart
+
+| kind | examples in this phase | what it bounds | rigour |
+|---|---|---|---|
+| finite-supertile eigenvalues | Y_L (pinned T_L), F_L (free T_L), level-1 and level-2 spectra in §2 | Y_L ≥ E_\* (compression); F_L ≤ E_\* (Theorem X.2, free partition); spectra of T_L themselves are finite-volume facts | exact rational (Y_L), Higham (F_L, level-2 enclosures) |
+| local-environment bounds | D_R (min over legal R-balls, Dirichlet), Λ_R (IMS-amplified), probes | D_R ≥ E_\*; Λ_R ≤ E_\*; a probe value is an upper bound on Λ_R | Λ_R certified (Higham); probes float [E] |
+| certified infinite-volume enclosures | E_\*(1387) ∈ [9.1104981, 9.3679502], etc. (§10) | E_\* itself | [C] |
+| asymptotic conjectures | the edge exponent, the Λ_R ∝ ρ⁻² extrapolation, any "law" fitted across levels | nothing | [X] |
+
+---
+
+## 2. The extremal law (Part II)
+
+### 2.1 The Orbit Lemma
+
+For a permutation matrix Q ∈ S₃ (the chair's point group), let **d·Q** be the rule with child factors h_c Q. Let **ρ_Q**(M, T) = (MQ, T) be the relabelling of every frame. Let **conj_Q** be the S₃-conjugation of rules (`phase11_frontier.conj_decoration`): h_c ↦ Q h_c Qᵀ, with octant v moved to Qv.
+
+**Orbit Lemma** [P; every finite step also checked exhaustively, §2.2].
+- **(a)** σ_{dQ} = ρ_Q ∘ σ_d on poses, and ρ_Q preserves every tile's cube set. Hence d and dQ have the same tilings *as geometric objects*, the same panels and the same centroids.
+- **(b)** ρ_Q is a global gauge transformation of every patch. There is W_Q ∈ SU(2) with U^{ρ_Q}(a→b) = W_Q U(a→b) W_Q† for every panel, so H(ρ_Q P) = 𝒲 H(P) 𝒲† with 𝒲 = ⊕ W_Q.
+- **(c) Level one.** T₁(dQ) = ρ_Q(T₁(d)) is unitarily equivalent to T₁(d). All level-1 spectra coincide, and the three Abelian shadows are permuted: χ_k ↦ χ_{Q(k)}.
+- **(d) Stabiliser clause.** If conj_Q(d) = d, then σ_d ρ_Q = ρ_Q σ_d. Hence:
+  - T_L(dQ) = ρ_{Q^L}(T_L(d)) for every L;
+  - every legal patch of dQ is gauge-equivalent to a legal patch of d and conversely;
+  - **E_\*(dQ) = E_\*(d)**.
+- **(e) Otherwise the symmetry is broken from level 2 on.** σ_d ρ_Q = ρ_Q σ_{d′} with d′ = Qᵀ·conj_Q(d)·Q ≠ d, and T_L(dQ) = (ρ_Q σ_d)^L(t) is in general not gauge-equivalent to T_L(d).
+
+*Proof.*
+- **(a)** The child of (M, T) under dQ at slot c is (M h_c Q, 2T + M t_c). The child under ρ_Q σ_d is (M h_c Q, 2T + M t_c). The chair's cube set {(M(2u + 1) + 2T − 1)/2 : u ∈ U3} is invariant under M ↦ MQ, because Q(2u + 1) = 2Qu + 1 and Q permutes U3. Centroids T + (13/14)MQ(1,1,1) = T + (13/14)M(1,1,1).
+- **(b)** Row k of MQ is (Qᵀ M_kᵀ)ᵀ, so u ↦ Qᵀu. For an orthogonal O, σ·(Ou) = det(O)·W(σ·u)W†, with W the spin lift of det(O)·O ∈ SO(3). In the link (σ·Qᵀu_a)(σ·Qᵀu_b) the two determinants multiply to 1.
+- **(c)** T₁(dQ) = σ_{dQ}(id) = ρ_Q σ_d(id) = ρ_Q T₁(d), then (b). The shadow χ_k of a link (σ·u_a)(σ·u_b) depends only on the axes of u_a, u_b: it is −1 iff the axes differ and one of them is k. ρ_Q relabels axes by Q.
+- **(d)** For the centre child, σ_d ρ_Q gives (MQ h₀, 2T + MQ(1,1,1)) and ρ_Q σ_d gives (M h₀ Q, 2T + M(1,1,1)). Since Q(1,1,1) = (1,1,1), these agree iff Q h₀ = h₀ Q.
+  - For the octant child v, σ_d ρ_Q puts frame MQ h_v at position 2T + 4MQv, the geometric octant Qv of (M, T). There ρ_Q σ_d puts M h_{Qv} Q. These agree iff h_{Qv} = Q h_v Qᵀ.
+  - Both conditions together say exactly conj_Q(d) = d.
+  - Then (ρ_Q σ_d)^L = ρ_Q^L σ_d^L, so σ_{dQ}^L(t) = ρ_{Q^L}(σ_d^L(t)) for every tile t. Legal patches correspond under a global gauge transformation.
+  - E_\* is then equal by Theorem XI.A(A2), applied in both directions.
+- **(e)** The same computation without the hypothesis. ∎
+
+**So the six-member orbit is not a symmetry of the operator or of the infinite hull.** It is a symmetry of the *decoration encoding at level one*, and of the whole hierarchy exactly on the conjugation stabiliser of d.
+
+### 2.2 What was checked, and how (`audit/phase12_orbit.py` → `phase12_orbit.json`)
+
+| statement | check | result |
+|---|---|---|
+| (a) pose identity, cube-set invariance | 200 random rules × random parent poses | exact |
+| (b) link identity | **exact integer quaternions**: x u x̄ = \|x\|² u′ for all 48 × 48 × 3 (frame, frame, axis), with x = ±1 (identity), q_l ± q_m (the transpositions, \|x\|² = 2), ±1 ± i ± j ± k (the 3-cycles, \|x\|² = 4) | holds for all six Q |
+| (c) level-1 isospectrality | full level-1 spectra of d and dQ for **all 280 332 representatives** and all Q | max deviation 7.8·10⁻¹⁴ |
+| (d) stabiliser clause | the 912 pairs (d, dQ) of the whole space with conj_Q(d) = d, Q ≠ id: exact Y₃ compared | max \|ΔY₃\| = 9.4·10⁻¹⁴ |
+| (d), instance | 1386 is fixed by (x y), and 1386·(x y) = 539315: **E_\*(539315) = E_\*(FR30)** | Phase XI's mirror identity, proved there via Phase VII's matching rule, is a special case |
+| (e) breaking at level 2 | certified enclosures of λ_min(T₂) for the six members of 1387's orbit (Higham lower, exact Rayleigh upper) | **pairwise disjoint**: 11.2384, 11.2705, 11.5128, 11.5370, 11.5872, 11.6343 |
+| (e) breaking in infinite volume | stored certificates | E_\*(1387) ≥ 9.1104981 > 9.0982534 ≥ E_\*(539288), where 539288 = 4753·(0 2 1) |
+
+### 2.3 Why the orbit survives the certified funnel, and why the frontier is (nearly) an orbit
+
+- **The shared structure is exactly level one.** All six members have the same T₁ operator up to gauge, so the same Y₁ = 15.7244.
+  - Plaquette-class counts already differ at level 2 (+1: 211–218, −1: 164–189), and so do the T₂ spectra.
+  - Their legal 1-star type sets differ too: 90, 102, 104, 90, 97 and 79 types.
+- **Right orbits cluster the spectrum but do not determine it.** Over all 280 332 representatives:
+  - right orbits explain **62 %** of the variance of the exact Y₃, against 17 % for a random partition into blocks of the same sizes;
+  - the rank correlation of Y₃(d) with Y₃(dQ) is 0.46–0.56 (by Q).
+  - Of the 18 313 right orbits that contain an X3 survivor, only 701 survive entirely. At X4 the 38 survivors lie in 18 orbits.
+- So the funnel ends on one complete orbit for two reasons. The top orbit's internal spread at level 6 (9.098–9.389) is smaller than its gap to the next orbit (FR30's, at 8.79). And elimination worked orbit by orbit only to the extent of this partial clustering.
+- That is an observation about this family [E], not a theorem.
+
+**The conjugation-defect law (preregistered; falsified).** The stabiliser clause suggests a quantitative law: the splitting |Y_L(dQ) − Y_L(d)| should grow with the defect δ_Q(d), the number of child slots where conj_Q(d) ≠ d.
+- The defect of the element taking 1387 to its near-twin 539311 is **δ = 1**, and they are the closest pair in the orbit: ΔY₆ = 0.021.
+- The frozen test on all 1 401 660 pairs (d, dQ), Q ≠ id:
+
+| hypothesis (frozen in 131bd1d) | result |
+|---|---|
+| H0: δ = 0 ⇒ ΔY₃ = 0 | **pass** (912 pairs, max 9.4·10⁻¹⁴): the theorem |
+| H1: Spearman ρ(δ, \|ΔY₃\|) ≥ 0.3 for δ ≥ 1 | **fail**: ρ = −0.062 |
+| H2: median \|ΔY₃\| non-decreasing in δ | **fail**: 0.071, 0.178, 0.241, 0.280, 0.294, then 0.289, 0.257, 0.209 for δ = 1…8 |
+
+- Small defects do give small splittings: at δ = 1 the median is a quarter of that at δ = 5. But the relation reverses beyond δ ≈ 5, and **the defect is not a law** [F].
+- What survives is the exact clause (δ = 0 ⇒ equality) and a post hoc low-δ tendency [E].
+
+### 2.4 Where the residual spectral differences come from
+
+The brief lists four possible sources:
+
+| source | verdict | evidence |
+|---|---|---|
+| representation choice | **no** | the spinor representation is fixed. The shadow permutation at level one accounts for the shadows only; above level one the shadows are not permuted either (at T₃ the shadow bottoms of 1387 are 8.872, 6.768, 9.151, against 9.046, 6.757, 8.876 for 539311) |
+| boundary support (pinned vs free) | **no** | the lemma holds for pinned and free operators alike (ρ_Q is a gauge transformation of every patch); the splitting is present in both |
+| substitution hierarchy | **yes, as the mechanism** | ρ_Q fails to commute with σ_d; the T_L of dQ is (ρ_Qσ_d)^L, not ρ_Q^Lσ_d^L |
+| genuinely different legal environments | **yes, as the result** | different legal 1-star type sets (counts above) and certified different E_\*; by Theorem XI.A the floor is a function of the legal language, so different floors require different languages |
+
+### 2.5 Is 1387 the global maximiser?
+
+**No such claim is made.** The certified statement is the four-member frontier:
+
+> the maximiser of E_\* over all 6⁸ frame rules is one of **1387, 539311, 1389, 539291** (§10).
+
+- 1387 is the **best-resolved** member: it has the highest certified lower bound, 9.1104981.
+- 539311 has a *higher* exact upper bound (9.3885937 > 9.3679502). Equality with 1387 is not forced by any symmetry: their defect is 1, not 0.
+- By the Phase XI probes, no IMS certificate at the probed radii up to 22 separates them in either direction.
+- The four intervals overlap, so the comparison is **unresolved** in the preregistered sense: no available method decides it at feasible cost.
+
+---
+
+## 3. A minimal sufficient descriptor, or why none exists (Part III)
+
+**The program.** A descriptor is a computable map Π_R from rules to a set, invariant under gauge and under the symmetries of the family, defined from the radius-R legal data without reference to E_\*. The question is whether E_\* = F_R(Π_R) for some computable F_R.
+
+### 3.1 Two regimes, two answers
+
+**(i) Families with unbounded hierarchy: no finite radius suffices** [P + C] (Theorem XI.I).
+- On the substitution ladder the words A_m = (aᵐb)^∞ share their radius-R language for all m ≥ 2R. Yet each E_\*(A_m) > 0 and E_\*(A_m) → 0.
+- So for every R some two of them differ: Π_R = (the full radius-R language up to gauge) determines nothing uniformly.
+- Certified instance: A₂₄, A₃₂ (radius 12): E_\*(A₂₄) ≥ 0.013200 > 0.008176 ≥ E_\*(A₃₂).
+
+**(ii) A finite family (Chair44): determination is vacuous; the meaningful questions are coarse collisions and prediction.**
+- For a finite family, any descriptor that separates the rules with distinct legal languages admits an F_R by table look-up.
+- Two rules with different languages differ at a finite radius, and there are finitely many pairs. So E_\* = F_{R₀}(Π_{R₀}) for some R₀ — a statement with no content.
+- Example: the level-3 plaquette-class counts take **1096 distinct values on the 1098 classes**. They are almost injective, so a look-up F exists, and **no certified collision exists among them**.
+- The content lies elsewhere:
+  - (a) collisions of *coarse* descriptors, with certified-separated floors;
+  - (b) out-of-sample prediction (§8).
+
+### 3.2 An explicit Chair44 obstruction
+
+**Theorem 3.1** [P + C]. No function of level-one data determines E_\* on Chair44. Explicitly, for the pair **1387 and 539288 = 1387·(0 2 1)**:
+
+| descriptor field | agrees? | why |
+|---|---|---|
+| geometry at every radius (tiles, panels, centroids, geometric 1-star configurations) | **yes** | decoration-independent |
+| the level-1 supertile operator, up to unitary equivalence: all its spectra, all Wilson loops inside level-1 supertiles, plaquette classes inside T₁ | **yes** | Orbit Lemma (c) |
+| the shadow spectra of T₁ | **yes, up to the permutation χ_k ↦ χ_{Q(k)}** | Orbit Lemma (c) |
+| the support-sensitive transport data of §6 (α_min = 6.79706, α_max = 23.90314, W = 4, hence the bound 1.69927) | **yes** | computed (`phase12_transport.json`) |
+| the legal 1-star language | no | 90 against 79 types |
+| T₂ spectra | no | certified disjoint (§2.2) |
+| **E_\*** | **no** | **[9.1104981, 9.3679502] against [6.8499994, 9.0982534]: separated by ≥ 0.0122447** |
+
+- The separating observable is any certified enclosure of the floor, or already the certified λ_min(T₂).
+- The transport-data agreement is a computed coincidence for these two rules, not a theorem.
+
+### 3.3 What replaces a finite descriptor
+
+1. **The certified local frustration profile** Π_R = [Λ_R, D_R] (Phase XI).
+   - It is two-sided, gauge-invariant, nested and convergent (Theorem C).
+   - It is defined without reference to E_\*, but computing it *is* a certificate run (24 571 Cholesky factorizations at R = 20).
+   - It is a hierarchy of *bounds*, not a predictor, and it cannot separate the co-leaders below R ≈ 63 [X].
+2. **The support-sensitive frustration functional**: the weakest legal-environment energies (U₀, U₁, Λ_R). Their predictive value is measured in §8.
+3. **Two principled equivalence relations**, both stronger than curvature summaries and weaker than operator identity:
+   - d ∼₁ d′ iff T₁(d) ≅ T₁(d′) (level-one equivalence; right orbits are inside its classes). It does **not** preserve E_\* (Theorem 3.1).
+   - d ∼_stab dQ iff conj_Q(d) = d (stabiliser equivalence). It **does** preserve E_\* (Orbit Lemma (d)).
+   - Between them sits the open question of §2.3: what, beyond δ = 0, controls the splitting. The defect δ does not (falsified).
+
+---
+
+## 4. The support-sensitive spectral theorem, stated for audit (Part IV)
+
+### 4.1 Hypotheses
+
+- **(G) Graph.** G = (V, E) is countable and locally finite, with multi-edges allowed and no loops, and d := sup_v deg(v) < ∞. It need not be connected. No group action, repetitivity or embedding is assumed unless stated.
+- **(U) Connection.** Fix a rank n. Each oriented edge e = (v→w) carries U_e ∈ U(n), with U_{ē} = U_e⁻¹. The structure group is arbitrary.
+- **(H) Operator.** On ℓ²(V; ℂⁿ), let q_U(ψ) := Σ_{e={v,w}} |ψ(v) − U_{v→w}ψ(w)|², one term per unoriented edge. The term does not depend on the orientation, since |ψ(w) − U_{w→v}ψ(v)| = |U_{v→w}⁻¹(U_{v→w}ψ(w) − ψ(v))|.
+  - |a − Ub|² ≤ 2|a|² + 2|b|², so 0 ≤ q_U(ψ) ≤ 2d‖ψ‖².
+  - q_U is the form of the bounded self-adjoint H_U = D_U†D_U = Deg − A_U, with domain all of ℓ².
+  - **E_\* := inf σ(H_U) = inf{q_U(ψ)/‖ψ‖² : ψ ≠ 0 finitely supported}**, since finitely supported vectors are dense and H_U is bounded.
+  - Chair44 is the case G = the panel multigraph of a tiling, n = 2, U ∈ Q₈, Deg ≡ 24.
+- **(D) Boundary conditions.** For finite K ⊂ V:
+  - the **Dirichlet** operator H^D_K := P_K H_U P_K, with form q^D_K(ψ) = Σ_{e⊂K}|Dψ_e|² + Σ_{v∈K} b_K(v)|ψ(v)|², where b_K(v) is the number of edges from v to V∖K;
+  - the **Neumann** operator H^N_K, with form Σ_{e⊂K}|Dψ_e|² only.
+- **(L) Legal support.** For a family Ω of connections (a hull), an *environment* of radius R is a rooted ball (B_R(x), x) together with the degrees and the connection on it, up to rooted isomorphism and gauge. 𝓛_R(Ω) is the set that occurs in some member.
+  - λ^D of an environment is well defined, being invariant under isomorphism and gauge.
+- **(P) Partition.** {χ_j}_{j∈J} are real functions with Σ_j χ_j(v)² = 1 for every v and each supp χ_j =: K_j finite. For e = {v, w}, c_e := Σ_j χ_j(v)χ_j(w) > 0.
+  - J may be a measure space; sums then become integrals, and infima essential infima.
+
+### 4.2 The four quantities and their order
+
+| quantity | definition | relation to E_\* |
+|---|---|---|
+| (i) the floor | E_\* | — |
+| (ii) the support infimum | 𝓔 := inf{λ_min(H^D_K) : K finite legal patch} = lim_R D_R, with D_R := inf_{x} λ^D(B_R(x)) | **𝓔 = E_\*** (Theorem A) |
+| (iii) localised lower bounds | Λ(χ) := inf_j λ_min(P_{K_j}(Deg − Ã_U)P_{K_j}), Ã_U the adjacency with link e divided by c_e | **Λ(χ) ≤ E_\*** (Theorem B), and Λ(χ) ≥ inf_j λ^D(K_j) − ε(χ) |
+| (iv) Rayleigh upper bounds | q_U(ψ)/‖ψ‖² for ψ supported on a finite legal patch | **≥ E_\*** (variational principle) |
+
+**Theorem A (support)** [P]. Under (G), (U), (H):
+- (A1) D_R is non-increasing in R and D_R ↓ E_\*.
+- (A2) If 𝓛_R(U′) ⊆ 𝓛_R(U) for all R, then E_\*(U′) ≥ E_\*(U). So E_\* is a function of the legal language alone, not of frequencies, correlations or invariant measures.
+- (A3) For a hull, inf_{ω∈Ω} E_\*(U_ω) = lim_R inf over 𝓛_R(Ω).
+
+*Proof.*
+- (1) **Monotonicity.** B_R(x) ⊆ B_{R+1}(x), and min–max on the nested subspaces ℓ²(B_R) ⊆ ℓ²(B_{R+1}) gives λ^D(B_{R+1}(x)) ≤ λ^D(B_R(x)). Take the infimum over x.
+- (2) **Lower bound.** For ψ supported in K, q^D_K(ψ) = q_U(ψ), because P_K H P_K and H agree on such ψ. Hence λ^D(K) ≥ E_\*.
+- (3) **Convergence.** Given ε > 0, pick a finitely supported ψ with q_U(ψ) < (E_\* + ε)‖ψ‖².
+  - q_U and ‖·‖² are additive over the connected components of G, because no edge joins two components. So some component part ψ_C ≠ 0 satisfies q_U(ψ_C) < (E_\* + ε)‖ψ_C‖².
+  - Its support is finite and connected, hence contained in some B_R(x). So D_R ≤ λ^D(B_R(x)) < E_\* + ε.
+- (4) **Antitonicity (A2).** Every environment of U′ is one of U, so D_R(U′) ≥ D_R(U) for each R. Pass to the limit.
+- (5) **Hulls (A3).** Exchange the two infima. ∎
+
+**Theorem B (exact localisation identity)** [P]. Under (G), (U), (H), (P):
+- (B1) q_U(ψ) = Σ_j ⟨χ_jψ, (Deg − Ã_U)χ_jψ⟩ exactly, for finitely supported ψ.
+- (B2) E_\* ≥ Λ(χ).
+- (B3) Λ(χ) ≥ inf_j λ^D(K_j) − ε(χ), with ε(χ) := sup_v Σ_{e∋v}(1/c_e − 1).
+
+*Proof.*
+- (B1) **Per-edge identity.** For one edge e = {v, w} with a := ψ(v), b := ψ(w), U := U_{v→w},
+
+  Σ_j [χ_j(v)²|a|² + χ_j(w)²|b|² − (2/c_e)χ_j(v)χ_j(w) Re⟨a, Ub⟩] = |a|² + |b|² − 2Re⟨a, Ub⟩ = |a − Ub|².
+
+  It uses Σ_jχ_j(v)² = Σ_jχ_j(w)² = 1 and Σ_jχ_j(v)χ_j(w) = c_e. The left side is the edge's contribution to Σ_j⟨χ_jψ, (Deg − Ã)χ_jψ⟩.
+  - Every sum converges absolutely by Cauchy–Schwarz, since ψ is finitely supported.
+  - The algebraic identity is checked symbolically in `phase12_formal.py` (§9).
+- (B2) **Lower bound.** Each term of (B1) is ≥ λ_j‖χ_jψ‖², with λ_j the least eigenvalue of the j-th compression. And Σ_j‖χ_jψ‖² = ‖ψ‖².
+- (B3) **Comparison with Dirichlet.** Deg − Ã = (Deg − A) − (Ã − A). For each edge, 2|Re⟨a, Ub⟩| ≤ |a|² + |b|² and c_e ≤ 1 (Cauchy–Schwarz on χ(v), χ(w)). So the form of Ã − A on any vector is at most ε(χ)‖·‖². Then compress to K_j. ∎
+
+**Theorem C (when there is a rate)** [P; (v) from cited results]. Let ε_G(R) := inf ε(χ) over partitions with every K_j inside a graph ball of radius R. Then, for every connection of every rank, D_R − ε_G(R) ≤ E_\* ≤ D_R.
+
+| hypothesis on G | conclusion | constant | proof |
+|---|---|---|---|
+| bounded degree only (G) | D_R ↓ E_\*; **no rate** | — | Theorem A |
+| property A (Yu) | ε_G(R) → 0: uniform two-sided certificates, **no rate** | — | the χ ↔ Higson–Roe correspondence (Phase XI C(i)) |
+| uniformly doubling, \|B_{2r}\| ≤ C_D\|B_r\| | **ε_G(R) ≤ 16 d C_D²/R² for R ≥ 4C_D** | d, C_D only | Phase XI C(ii) |
+| proper realisation c: V → ℝ^D with S_c = sup_vΣ_{w∼v}\|c(v) − c(w)\|², h = max edge length | **ε ≤ K_D(ρ)S_c/ρ², K_D(ρ) = (j_D²/2D)/(1 − j_D²h²/(2Dρ²)), for ρ > j_D h/√(2D)**; pieces c⁻¹(B_ρ(x)) | D, S_c, h only | Phase XI C(iii); the overlap function is derived symbolically |
+| Chair44 | ρ = R − 311/175, S₁ = 4734/49, h = 15/7: ε(ρ) = max over legal 1-stars of Σ_f (1/c(\|h_f\|/ρ) − 1), computed exactly per run | — | the certificates of §1 |
+| ℤ^D, trivial connection | D_R − E_\* ≥ 2D/(R + 1)²: **R⁻² is optimal** | — | 1 − cos x ≥ 4x²/π² on [0, π/2] |
+| lamplighter ℤ₂ ≀ ℤ^k, k ≥ 2 (amenable, property A) | D_R − E_\* ≥ c_k R^{−2/k}: **property A does not give R⁻²** | — | Erschler's isoperimetry and Cheeger (Phase XI C(v)) |
+
+**The localisation error is derived, not assumed.**
+- For the Euclidean partition χ_x(v) = φ((c(v) − x)/ρ)/(ρ^{D/2}‖φ‖), with φ the Dirichlet ground state of the unit ball, Plancherel gives g_e = 2 − 2c_e ≤ (j_D²/D)|c(v) − c(w)|²/ρ² exactly.
+- Then 1/c_e − 1 = g_e/(2 − g_e) gives the bound in the table.
+- On Chair44 every certificate computes ε(ρ) from the exact c(η) at 60 digits. No asymptotic expansion is used.
+
+### 4.3 Why free windows lie below the floor, and why incomplete enumeration lies above it
+
+- **Neumann.** H^N_K ≤ H^D_K (it drops Σ b_K|ψ|²), but **H^N_K is not a compression of H_U**. Its Rayleigh quotients are not Rayleigh quotients of H_U, so nothing bounds λ^N(K) below by E_\*.
+  - On the π-flux ladder the free windows converge to **2 − √2 = 0.585786 < 3 − √5 = 0.763932 = E_\***. These are exact closed forms [P + C] (`test_ladder_neumann_windows_saturate_below_floor`).
+  - The mechanism: a free end is an extra boundary condition that the infinite system does not have. The window's lowest state lives on it, and it cannot be continued into the infinite ladder without paying the boundary energy b_K that the Dirichlet form keeps.
+  - Free *partitions* (disjoint pieces, edges between pieces dropped) still give valid lower bounds: q_U(ψ) ≥ Σ_j q^N_{K_j}(ψ|_{K_j}). They are simply not sharp; this is Theorem X.2 and the F_L of §1.5.
+- **Incomplete enumeration.** Theorem B2 needs the infimum over *every* piece of the partition, that is, over every legal environment.
+  - Replacing 𝓛_R by a subset 𝓜 ⊊ 𝓛_R (say, the environments visible in a finite training supertile) can only raise the infimum. The resulting number is not a lower bound on E_\*.
+  - On the ladder a → dd, b → cb, c → aa, d → bc, the flat seam cc is legal but first appears at level 11.
+  - At W = 8 the visible-only "certificate" is Λ = 0.49054 (130 of 207 environments). A complete enumeration gives Λ = 0.37560 and an exact upper bound **0.40791 < 0.49054**: the visible-only number is **false** [C] (`test_ladder_rare_environment_false_certificate`).
+  - Chair44 certificates are protected by the Φ-closure and the completeness test (XI.D). 1086 of the 1098 classes have legal 1-star types that never occur in T₅.
+
+### 4.4 Every statement tested on the ladder family
+
+| statement | ladder test | outcome |
+|---|---|---|
+| A1, A2 (support, antitonicity) | finite-radius obstruction A₂₄ / A₃₂; non-minimal hull a → aab, b → bb | consistent; minimality needed for constancy on a hull [C] |
+| B1–B3 (exact identity, two-sided) | certified enclosures of width ≤ ε on periodic and substitution words | Λ ≤ Bloch floor ≤ D, D − Λ ≤ ε in every case (`test_ladder_overlap_and_small_enclosure`) |
+| C (rate) | the ladder is quasi-1D, doubling with C_D = 2 | R⁻² on both sides (Phase XI) |
+| Neumann non-convergence | π-flux ladder | 2 − √2 against 3 − √5 [P] |
+| complete coverage needed | rare seam cc | false visible-only certificate [C] |
+| strongest plausible version: "a finite radius determines E_\*" | A_m words | **false for every R** [P + C] (§3.1) |
+
+---
+
+## 5. The one-child intervention (Part V)
+
+⟨INTERVENTION⟩
+
+---
+
+## 6. A quantitative frustration bound (Part VI)
+
+The goal is a bound of the shape inf σ(H_U) ≥ 𝓕(transport, geometry, legal support) − 𝓔_loc, derived from the quadratic form. The bound below has that shape with 𝓔_loc = 0. It is valid but far from sharp, and §6.3 proves that no bound built from these ingredients alone can be sharp.
+
+### 6.1 The theorem
+
+**Theorem 6.1 (support-sensitive transport bound)** [P].
+- Under (G), (U), (H), let 𝒞 be a family of simple cycles of G with weights w_C ≥ 0.
+- For each C, let θ_C ∈ [0, π] be the least |argument| of an eigenvalue of its holonomy, ℓ_C its length, and λ_C := 2(1 − cos(θ_C/ℓ_C)). Then
+
+  **E_\* ≥ inf_v α(v)/W,  α(v) := Σ_{C∋v} w_C λ_C,  W := sup_e Σ_{C∋e} w_C.**
+
+- If 𝒞 and the weights are chosen locally (each C through v lies in the 1-star of v, with weights a function of that 1-star), then α(v) and W are functions of the legal 1-star types alone. **The infimum runs over the legal support, and no localisation error enters**: 𝓔_loc = 0.
+
+*Proof.*
+- (1) **One cycle.** On a simple cycle C, gauge all links but one to the identity. The free cycle operator then has spectrum {2 − 2cos((φ + 2πm)/ℓ_C)} over the eigenvalues e^{iφ} of the holonomy, so its least eigenvalue is λ_C. That is, q_C(ψ) := Σ_{e∈C}|Dψ_e|² ≥ λ_C Σ_{v∈C}|ψ(v)|².
+- (2) **Sum over the family.** Σ_C w_C q_C(ψ) ≤ W·q_U(ψ), since each edge e is counted Σ_{C∋e}w_C ≤ W times.
+- (3) **Combine.** Σ_C w_C q_C(ψ) ≥ Σ_v α(v)|ψ(v)|². Divide by W. ∎
+
+**Theorem 6.2 (localised form)** [P]. With a partition as in (P), Theorem B3 gives E_\* ≥ inf_j λ^D(K_j) − ε(χ). Applying the argument of 6.1 to each Dirichlet form, with the boundary term kept:
+
+  **E_\* ≥ inf_j min_{v∈K_j} [α_{K_j}(v)/W_j + b_{K_j}(v)] − ε(χ),**
+
+with α_K, W_K computed from the cycles inside K. This is the requested schematic form, with 𝓔_loc = ε(χ) ≤ K_D S_c/ρ². It differs from 6.1 through the boundary terms b_K and the local overlap W_K ≤ W. It is stated because it localises the transport data to the legal pieces, at the price of ε(χ).
+
+### 6.2 Evaluation (`audit/phase12_transport.py` → `phase12_transport.json`)
+
+- The family: every two-cycle (two panels between the same tiles, with different normal axes) and every simple plaquette cycle (lattice-edge 4-cycles with 3 or 4 distinct owners), with w_C = 1.
+- Holonomies are exact Q₈ quaternions, so θ_C ∈ {0, π/2, π}.
+- W is the largest number of these cycles through one panel. Every cycle through a panel passes through both its tiles, so W is counted exactly from the legal 1-stars.
+
+| rule | legal types | α_min | α_max | W | **bound** | certified floor | captured |
+|---|---|---|---|---|---|---|---|
+| 1387 | 90 | 6.79706 | 23.90314 | 4 | **1.69927** | ≥ 9.1104981 | ≤ 18.7 % |
+| 539311, 1389, 1391, 539288 | 90, 102, 104, 79 | 6.79706 | 23.90314 | 4 | **1.69927** | ≥ 8.80, 8.76, 8.76, 6.85 | — |
+| FR30 (4752) | 72 | 6.27497 | 20.38842 | 4 | **1.56874** | ≥ 7.9542913 | ≤ 19.7 % |
+
+- **The bound is valid, positive and uniform**, but it captures less than a fifth of the floor.
+- It is **identical across the whole orbit of 1387**, so it cannot separate rules whose floors are certified different (1387 against 539288).
+- Single cycles are the regime where it is sharp: on 200 random graphs the ratio λ_min/bound is ≥ 1.0003, with equality approached on single cycles (`phase11_proofs.transport`).
+- **The Chair44 floor is cooperative.** It comes from the joint incompatibility of many overlapping frustrated cycles (24 panels per tile, up to 4 cycles per panel), which no sum of single-cycle bounds can see.
+
+### 6.3 Why no bound of this form can be sharp: a counterexample on ℤ³
+
+**Proposition 6.3** [P + C]. Let 𝓕 be any function of the following data:
+- the cycle family's lengths, overlaps and holonomy eigenangles;
+- the plaquette conjugacy-class field;
+- the legal support of these data at any radius.
+
+Then 𝓕 is not sharp on Pauli-frame Q₈ connections on ℤ³. Equivalently, inf σ(H_U) is not a function of these data.
+
+*Proof.*
+- Phase X's pair (X.5, re-audited in Phase XI §1, `phase11_z3.json:audit`) has **identical plaquette conjugacy-class fields** on every plaquette.
+- For Q₈ the class determines the holonomy's eigenvalues: ±1 give angles 0 or π, and the traceless class gives ±π/2. Lengths, overlaps and supports coincide because the geometry is the same.
+- So every input to 𝓕 coincides, while E_\*(A) ≤ 0.4041347 (exact) < 0.5857858 ≤ E_\*(B) (free cell, Higham).
+- A function of the inputs takes one value. It is ≤ min = E_\*(A) if it is a valid lower bound, so it misses E_\*(B) by ≥ 0.18165. ∎
+- The gap is closed only by the full holonomy *representation* of each ball. That is, by the environment up to gauge (Theorem XI.H1): the operator itself, not a summary of it.
+- So the honest form of Part VI's bound is Theorem 6.1, valid and computable from the legal support, together with Proposition 6.3, which says what it cannot do.
+
+**Adversarial ladder test.**
+- The Fibonacci (q₁, q₂) ladder has spinor floor 0.3486, *below* every Abelian shadow (0.3934, 0.4952, 0.7639; Phase XI §6).
+- Non-Abelian holonomy does not raise the floor above the commuting data either. The direction of the non-Abelian correction is not fixed by eigenangles.
+
+---
+
+## 7. Beyond Chair44: a cube substitution with a deformable connection (Part VII)
+
+**The family** (`audit/phase12_cube.py`; self-contained, it imports no Chair44 module).
+- **Geometry.** Tiles are unit cubes of ℤ³, so the degree is 6, against 24 for Chair44. The cube is invariant under all 48 signed permutations, so a frame is any of them.
+- **Rules.** A rule assigns a frame factor h_v (48 choices) to each octant v ∈ {0,1}³. The child of (F, x) at v is (F h_v, 2x + F(2v − 1)/2).
+  - The geometry is decoration-independent: T_L is the 2^L block. There are 48⁸ ≈ 2.8·10¹³ rules, against 6⁸ for Chair44.
+- **Connections.** For the panel from the lower cube a to the upper cube b along e_k, with u = row k of the frame:
+
+  U_θ(a→b) = R_{u_a}(θ) R_{u_b}(θ)⁻¹,  R_u(θ) = cos θ − i sin θ σ·u.
+
+  - At θ = π/2 this is exactly the Pauli link (σ·u_a)(σ·u_b) ∈ Q₈.
+  - For generic θ the holonomies leave every finite group. This is a connection family not limited to the Q₈ frame construction.
+- **Representations.** Spinor (2×2); adjoint (the SO(3) image, 3×3, non-Abelian for generic θ, the Klein four-group at θ = π/2); and at θ = π/2 the three shadows χ_k.
+
+**Results.**
+
+| test | outcome | status |
+|---|---|---|
+| Orbit Lemma (c), all 48 right multiplications Q of a rule found by a 500-rule search (the best Y₃ at θ = π/2) | **level-1 spectra identical for all 48 Q at θ = π/2** (spread 5·10⁻¹⁵) | [P] + [E] |
+| the same at θ = π/5 | **identical within each parity of Q** (spread 6·10⁻¹⁵). **Proper Q and improper Q give two different values**, 3.20437 and 3.23116 | [P] + [E] |
+| breaking from level 2 | 48 distinct T₂ and T₃ bottoms at both θ (spread 0.37 and 0.28 at π/2) | [E] |
+| flat rule (all h_v = I) | constant frames: every link is (σ·u)² = 1. Pinned T_L bottoms 3, 1.14590, 0.36184 equal the trivial Dirichlet values 6(1 − cos(π/(2^L + 1))), so E_\* = 0 | [P] |
+| representation order (T₃ of the base rule) | θ = π/2: adjoint 0.977 = χ₁ < spinor 1.926. θ = π/5: adjoint 1.550 > spinor 1.100. **The order flips between π/3 and π/4** | [E] |
+| small-θ scaling (free T₃, a lower bound on E_\*) | F₃(θ)/θ² → 1.97 (π/8: 1.87; π/16: 1.95; π/32: 1.97); the adjoint is about twice the spinor | [E]; consistent with Theorem F's "no angle gap ⇒ E_\* ∝ θ²" |
+
+**What transfers, and the precise boundary of validity.**
+- **The Orbit Lemma's level-1 equivalence transfers verbatim** to any geometry whose tiles are invariant under the right action. Its proof uses only (a) the invariance of each tile's cube set and (b) the gauge identity.
+- **The θ-family pins down where (b) holds.** For proper Q, R_{Qᵀu}(θ) = W R_u(θ) W†, a gauge transformation for every θ. For improper Q, σ·(Qᵀu) = −W(σ·u)W†, so R_{Qᵀu}(θ) = W R_u(−θ) W†.
+  - The relabelling maps U_θ to a gauge transform of U_{−θ}.
+  - That is a symmetry only where U_{−θ} ≅ U_θ, which holds at θ = π/2 (R_u(−π/2) = −R_u(π/2), and the signs cancel in the link).
+  - **So the improper half of the orbit symmetry is a property of the Pauli point θ = π/2, not of the geometry.** This is checked: the level-1 bottoms split by parity at θ = π/5.
+- The stabiliser clause (d) transfers too; its proof is geometric.
+- **Not certified here.** An infinite-volume separation inside a cube orbit was not certified. With all 48 frames reachable, the Φ-closure of the legal 1-star types of the base rule did not finish within 10 minutes. The number of types was not determined. Legal-ball certificates for this family need rules with a smaller frame group, and are left open.
+- **Chair44-specific.** Positivity of every rule (the identity cube rule is flat), and the near-equality of Chair44's spinor floor across a frontier orbit.
+
+**Universal against specific.**
+
+| result | universal consequence of covariant spectral theory | depends on |
+|---|---|---|
+| support principle, IMS two-sided bounds, Neumann failure, incomplete-enumeration failure | yes (§4) | bounded degree; rates need doubling or a Euclidean realisation |
+| Orbit Lemma, level 1 | yes, for tiles invariant under the right action | proper Q: any θ; improper Q: the Pauli point |
+| stabiliser clause | yes | — |
+| breaking from level 2 | generic (both families) | the hierarchy |
+| angle-gap bound (F2) | yes, for finite structure groups | fails for continuous θ (E_\* ∝ θ²) |
+| order of spinor and adjoint floors | **no** | the connection family (flips with θ) |
+| positivity of every rule | **no** | the chair's forced rotations |
+
+---
+
+## 8. A frozen predictive model (Part VIII)
+
+⟨PREDICT⟩
+
+---
+
+## 9. Formalization and independent reproduction (Part IX)
+
+### 9.1 Lean
+
+**Not done.** The environment's network policy denies the Lean toolchain hosts (`releases.lean-lang.org`, GitHub release downloads). No proof-assistant check was made, and nothing in this phase is described as formalized.
+
+### 9.2 The finite combinatorial core, checked exactly (`audit/phase12_formal.py` → `phase12_formal.json`)
+
+The checks below are exact computations over finite sets, or symbolic identities. They involve no floating point.
+
+| statement | method | result |
+|---|---|---|
+| per-edge IMS identity behind B1, for m = 1, …, 6 pieces | sympy: the constraints Σχ(v)² = Σχ(w)² = 1 eliminated, the difference simplifies to 0 | holds |
+| Orbit Lemma (b): U^{ρ_Q} = W_Q U W_Q† | integer quaternions x with x u x̄ = \|x\|² u′, exhaustive over 48 × 48 × 3, all six Q | holds (x listed in `phase12_orbit.json`) |
+| Orbit Lemma (d), reduced to one child | exhaustive over 8 slots × 6 × 6 frame-factor pairs × 6 Q: the two child poses agree ⟺ h_{Qv} = Q h_v Qᵀ | 1728 cases, 0 violations |
+| the shadow formula of Orbit Lemma (c): χ_k(link) = ε_k(a)ε_k(b) | exhaustive over 48 × 48 × 3 × 3 | 0 violations |
+| Burnside count of S₃-conjugation orbits on 6⁸ rules: 280 332 | exact fixed-point count (`test_orbit_reps_cover_the_extended_space`) | holds |
+| every Y_L, D₈ and U₅ upper bound | exact rational Rayleigh quotients of integer vectors (Python integers) | by construction |
+
+### 9.3 The analytic obligations that remain
+
+These are not finite computations. The proofs above rely on them, and a full formalization must supply them (`phase12_formal.json:obligations`).
+1. **Variational principle.** inf σ(H) is the infimum of Rayleigh quotients over a dense subspace, for bounded self-adjoint H.
+2. **Compression.** λ_min(P_K H P_K) ≥ inf σ(H).
+3. **Higham's Theorem 10.3.** It is cited, not re-proved. The certificates also assume that LAPACK `dpbtrf` obeys the standard IEEE rounding model. The unit u = 2⁻⁵² (two ulps) covers fused multiply-add.
+4. **The overlap function c(η).** It is derived symbolically (Phase XI), but the radial Fourier/Plancherel step is classical analysis.
+5. **Spin lifts.** For the 24 rotations used, the lifts are exhibited and checked exactly (9.2).
+6. **The spectrum of a cycle with holonomy.**
+7. **The closure lemma.** It is finite, but asserted run by run, not proved for all rules.
+8. **Primitivity implies minimality of the hull.**
+
+### 9.4 An independent reproduction path, and tests designed to falsify
+
+- **Independent path.** `audit/phase12_independent.py` shares no code with the certifying implementation (§1.1). Its full radius-20 run is the reproduction of the decisive certificate. It still uses the same libraries (numpy, scipy's banded Cholesky and RCM, mpmath).
+- **Adversarial tests** (`tests/test_phase12.py`). Each is designed so that a wrong implementation or a wrong claim fails it:
+  - a certificate requested just above the floor (μ = 3.6556 > Λ₆ = 3.65556) must fail and name its failing balls;
+  - a non-dyadic shift must be refused, because the diagonal subtraction would not be exact;
+  - flipping one link sign must break the exact gauge identity;
+  - the falsified defect law must stay recorded as falsified against its frozen thresholds;
+  - the transport theorem is tested on 30 random Q₈ multigraphs;
+  - Phase XI's rare-environment test shows a visible-only certificate being false.
+
+---
+
+## 10. The certified frontier
+
+`audit/results/phase12_frontier.json` / `.csv` (`phase12_frontier_table.py`). The endpoints are read from the stored certificates.
+
+| rule | certified lower L (source) | exact upper U (source) | status |
+|---|---|---|---|
+| **1387** | **9.1104981** (IMS R = 20, 24 571 balls) ⟨IND_NOTE⟩ | 9.3679502 (Y₆, 262 144 tiles) | **leader** |
+| 539311 | 8.7999990 (IMS R = 15, 10 321 balls) | 9.3885937 (Y₆) | contender |
+| 1389 | 8.7644993 (IMS R = 16, 12 193 balls) | 9.2104998 (Y₆) | contender |
+| 539291 | 7.1408386 (IMS R = 8, Phase X) | 9.2499400 (Y₆) | contender |
+| 1391 | 8.7644990 (IMS R = 18, 20 168 balls) | 9.1104007 (Y₆) | proven inferior (U < 9.1104981) |
+| 539288 | 6.8499994 (IMS R = 8, 829 balls) | 9.0982534 (Y₆) | proven inferior |
+| FR30 (1386) | 7.9542913 (IMS R = 12) | 8.7642270 (σ⁵ of a self-loop type, 884 736 tiles) | proven inferior |
+| every other rule (1 679 610) | — | exact Y₃–Y₆ or D₈ below 8.7999987 (funnel X3–X7) | proven inferior |
+
+---
+
+## 11. Novelty matrix
+
+Categories: **K** known theory (the result, or its method, is in the literature); **A** new application (a known method applied here, with new explicit content); **T** new theorem (a statement first proved here, in this project); **P** physical conjecture.
+
+The literature search is Phase XI's (`PHASE11_REPORT.md` §8). Phase XII made no new search for its own statements. "T" therefore means first stated and proved here, not a verified claim of priority. The Orbit Lemma and its corollaries are elementary.
+
+| result | K | A | T | P | references / remarks |
+|---|---|---|---|---|---|
+| support principle (Theorem A): the floor is the infimum over legal finite patches, antitone, frequency-free | **K** | | | | the variational principle; for operators on Delone sets and tilings the patch-determined spectrum is classical (Lenz–Stollmann) |
+| exact IMS identity in amplified-link form; two-sided certificates | **K** (IMS: Cycon–Froese–Kirsch–Simon) | **A**: connection Laplacians with explicit ε(χ) | | | |
+| uniform localisation ⟺ property A; R⁻² optimal; lamplighter R^{−2/k} | **K** (Higson–Roe; Špakula–Willett; Erschler) | **A** | | | |
+| Neumann windows below the floor; π-flux ladder 2 − √2 against 3 − √5 | **K** (surface states; de Gennes' Θ₀ < 1) | **A**: the exact discrete pair | | | |
+| a false certificate from visible-only enumeration | | **A** | | | an explicit counterexample |
+| **Orbit Lemma** (a)–(e): the right action is a gauge symmetry of one inflation step, a full symmetry exactly on the conjugation stabiliser, broken otherwise | | | **T** | | new in this project; elementary |
+| E_\*(539315) = E_\*(FR30) as a stabiliser instance | | | **T** | | it re-derives Phase XI's identity by a second proof |
+| certified frontier of four for 6⁸ frame rules; E_\*(1387) ≥ 9.1104981 | | **A** (computation) | | | new computational result |
+| the conjugation-defect law | | | **[F]** | | falsified (preregistered) |
+| Theorem 3.1: level-one data do not determine E_\* on Chair44 | | | **T** | | elementary, given the lemma and the certificates |
+| finite families: determination is vacuous; plaquette counts injective on 1096/1098 classes | | **A** | | | |
+| Theorem 6.1 (transport/cycle-cover bound with legal support) | **K** (cycle covers; frustration bounds for connection Laplacians, Bandeira–Singer–Spielman) | **A** | | | |
+| Proposition 6.3: no sharp bound from lengths, overlaps, eigenangles, classes and support | | | **T** | | elementary, given the Phase X ℤ³ pair |
+| cube family: level-one equivalence for all Q at the Pauli point, for proper Q only at generic θ | | | **T** | | elementary |
+| cube family: spinor/adjoint order flips with θ; F₃ ∝ θ² | | **A** (computation) [E] | | | evidence |
+| predictive study (frozen split) | | **A** (computation) [E] | | | |
+| any physical law, particle spectrum or dynamics | | | | **none claimed** | a spectral floor of a discrete operator is not a physical observable without an independently specified model |
+
+---
+
+## 12. Claims ledger
+
+`audit/results/phase12_ledger.json` (`audit/phase12_ledger.py`). Every claim carries its status, its assumptions, its evidence (artifact and key) and the test that rechecks it. ⟨LEDGER⟩
+
+---
+
+## 13. The five statements
+
+⟨FIVE⟩
+
+---
+
+## Reproduction
+
+⟨REPRO⟩

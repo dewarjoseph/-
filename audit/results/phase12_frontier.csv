@@ -1,0 +1,8 @@
+rule,L,L_source,U,U_source,status,L_independent
+1387,9.1104981,"IMS R=20, 24571 balls (phase11_chair)",9.3679502,"Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",leader,
+539311,8.7999990,"IMS R=15, 10321 balls (phase11_chair)",9.3885937,"Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",contender,
+1389,8.7644993,"IMS R=16, 12193 balls (phase11_chair)",9.2104998,"Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",contender,
+539291,7.1408386,"IMS R=8, 1532 balls (Phase X)",9.2499400,"Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",contender,
+1391,8.7644990,"IMS R=18, 20168 balls (phase11_chair)",9.1104007,"Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",proven_inferior,
+539288,6.8499994,"IMS R=8, 829 balls (phase11_chair)",9.0982534,"Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",proven_inferior,
+FR30 (1386),7.9542913,"IMS R=12, 2315 balls (phase11_chair)",8.7642270,"sigma^5 of the minimising self-loop 1-star type, 884 736 tiles (phase11_fr30_upper)",proven_inferior,

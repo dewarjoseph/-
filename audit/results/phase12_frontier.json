@@ -1,0 +1,104 @@
+{
+ "leader": "1387",
+ "L_leader": 9.110498143808444,
+ "frontier": [
+  "1387",
+  "539311",
+  "1389",
+  "539291"
+ ],
+ "statement": "the maximiser of E_* over all 6^8 frame rules is one of the frontier rules (phase11_frontier_summary.json for the other 1 679 610 rules; the two eliminations in this table)",
+ "rows": [
+  {
+   "rule": "1387",
+   "extended_index": 184323,
+   "L": 9.110498143808444,
+   "L_source": "IMS R=20, 24571 balls (phase11_chair)",
+   "L_type": "IMS + Higham banded Cholesky",
+   "L_independent": null,
+   "U": 9.367950157113038,
+   "U_exact": "7249509659237936/773862962297405",
+   "U_source": "Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",
+   "U_type": "exact rational Rayleigh quotient",
+   "status": "leader"
+  },
+  {
+   "rule": "539311",
+   "extended_index": 539311,
+   "L": 8.799999008540032,
+   "L_source": "IMS R=15, 10321 balls (phase11_chair)",
+   "L_type": "IMS + Higham banded Cholesky",
+   "L_independent": null,
+   "U": 9.388593716230208,
+   "U_exact": "3616195436680576/385169019554995",
+   "U_source": "Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",
+   "U_type": "exact rational Rayleigh quotient",
+   "status": "contender"
+  },
+  {
+   "rule": "1389",
+   "extended_index": 184338,
+   "L": 8.764499323536501,
+   "L_source": "IMS R=16, 12193 balls (phase11_chair)",
+   "L_type": "IMS + Higham banded Cholesky",
+   "L_independent": null,
+   "U": 9.210499829356626,
+   "U_exact": "3294592049422418/357699593991801",
+   "U_source": "Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",
+   "U_type": "exact rational Rayleigh quotient",
+   "status": "contender"
+  },
+  {
+   "rule": "539291",
+   "extended_index": 539291,
+   "L": 7.1408386199582905,
+   "L_source": "IMS R=8, 1532 balls (Phase X)",
+   "L_type": "IMS + Higham banded Cholesky",
+   "L_independent": null,
+   "U": 9.249940012336323,
+   "U_exact": "15442984412513604/1669522655489423",
+   "U_source": "Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",
+   "U_type": "exact rational Rayleigh quotient",
+   "status": "contender"
+  },
+  {
+   "rule": "1391",
+   "extended_index": 184342,
+   "L": 8.764498990547201,
+   "L_source": "IMS R=18, 20168 balls (phase11_chair)",
+   "L_type": "IMS + Higham banded Cholesky",
+   "L_independent": null,
+   "U": 9.110400672476517,
+   "U_exact": "5376637614129821/590164780608740",
+   "U_source": "Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",
+   "U_type": "exact rational Rayleigh quotient",
+   "status": "proven_inferior"
+  },
+  {
+   "rule": "539288",
+   "extended_index": 539288,
+   "L": 6.849999421512325,
+   "L_source": "IMS R=8, 829 balls (phase11_chair)",
+   "L_type": "IMS + Higham banded Cholesky",
+   "L_independent": null,
+   "U": 9.098253411795712,
+   "U_exact": "4478559387563225/492243860976312",
+   "U_source": "Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",
+   "U_type": "exact rational Rayleigh quotient",
+   "status": "proven_inferior"
+  },
+  {
+   "rule": "FR30 (1386)",
+   "extended_index": 184320,
+   "L": 7.954291278163518,
+   "L_source": "IMS R=12, 2315 balls (phase11_chair)",
+   "L_type": "IMS + Higham banded Cholesky",
+   "L_independent": null,
+   "U": 8.76422704349968,
+   "U_exact": "6534049968655174/745536364613169",
+   "U_source": "sigma^5 of the minimising self-loop 1-star type, 884 736 tiles (phase11_fr30_upper)",
+   "U_type": "exact rational Rayleigh quotient",
+   "status": "proven_inferior"
+  }
+ ]
+}
