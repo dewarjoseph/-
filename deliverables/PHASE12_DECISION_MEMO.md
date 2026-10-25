@@ -25,7 +25,7 @@
 - Compute the exact rational upper bound Y₇ (pinned T₇, 2 097 152 tiles) for the four frontier rules.
 - Freeze the following prediction before any Y₇ value exists.
 
-**The frozen prediction** (to be committed with the run script, before the computation):
+**The frozen prediction** (committed in `audit/results/phase12_preregistration_next.json` before any Y₇ value exists):
 1. the order 539311 > 1387 > 539291 > 1389 of Y₅ and Y₆ persists at L = 7. At L = 4 it was 539311 > 1387 > 1389 > 539291, so this part can fail too;
 2. Y₇(539311) − Y₇(1387) ∈ [0.010, 0.030]. Earlier values: 0.0054 (L = 4), 0.0231 (L = 5), 0.0206 (L = 6).
 

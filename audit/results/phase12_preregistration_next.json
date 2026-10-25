@@ -1,0 +1,24 @@
+{
+ "written": "2026-10-25, before any level-7 value of a frontier rule was computed",
+ "experiment": "Y7 (pinned T7, 2 097 152 tiles, exact rational Rayleigh quotient) for the four frontier rules 1387 (184323), 539311, 1389 (184338), 539291",
+ "prediction": {
+  "P1_order": "Y7(539311) > Y7(1387) > Y7(539291) > Y7(1389)",
+  "P2_gap": "0.010 <= Y7(539311) - Y7(1387) <= 0.030"
+ },
+ "falsified_if": "P1 or P2 fails",
+ "meaning": "evidence about the ordering of upper bounds only; no outcome certifies an ordering of floors",
+ "context": {
+  "Y6": {
+   "539311": 9.3885937,
+   "1387": 9.3679502,
+   "539291": 9.24994,
+   "1389": 9.2104998
+  },
+  "gap_history": {
+   "L4": 0.0054,
+   "L5": 0.0231,
+   "L6": 0.0206
+  }
+ },
+ "sha256_of_content_without_this_field": "94c71fc55cce16d36a3981795ba630674b7ab8c4471bae0f601f6bdc35d7219d"
+}

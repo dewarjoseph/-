@@ -51,6 +51,7 @@ The same holds verbatim for the cube family with the θ-connections, for proper 
 3. **The six-member S₃ orbit at the top of the frontier is not a symmetry of the operator.** E_\*(539288) ≤ 9.0982534 < 9.1104981 ≤ E_\*(1387), with 539288 = 4753·(0 2 1), although T₁ of the two rules are unitarily equivalent.
    - So **no function of level-one data determines E_\*** (Theorem 3.1 of the report).
 4. E_\*(539315) = E_\*(FR30): 1386 is fixed by conj_{(x y)}, an instance of (d).
+5. **The lemma's moves are complete at level 3.** Inside right orbits, the exact level-3 spectral coincidences are precisely the closure of conjugation and the stabiliser clause. There are 1612 tied pairs among 1 401 660, with 0 unexplained and 0 related-but-split. Beyond level 3 this completeness is a conjecture.
 
 ## What this does not establish
 
