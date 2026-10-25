@@ -240,7 +240,7 @@ A passing regression test only shows that an implementation is consistent; it is
   - **Passed.** At m = 5 the completeness test accepts all 3 407 872 centres (0 rejections). All 20 168 distinct legal balls (3 440–3 528 tiles) pass at μ = 2297561/262144.
   - So **E_\*(1391) ≥ 8.7644989**, and **E_\*(1391) > E_\*(FR30) without stored-only artifacts** [C]: the separation from the independent U₅(FR30) = 8.7642271 is ≥ 0.000271.
   - Run time 1.8 h on 4 cores: enumeration 46 min, certification 60 min (0.72 s per ball per core).
-- **1387, R = 20** (μ = 9.1105): ⟨T1387_R20⟩
+- **1387, R = 20** (μ = 9.1105): running (chained after 1391; ≈ 4 h on 4 cores). The probe does not exclude it, but its margin is only 0.015 (§2.4).
 
 ### 2.2 The extended space: a certified funnel instead of a screen
 
@@ -906,4 +906,4 @@ All commands run from the repository root (Python 3.13, numpy 2.5, scipy 1.18, s
 | certificate cost model | `python -u -I audit/phase11_costs.py "<load note>"` | `phase11_costs.json` | 1 min |
 | orbit level-6 bounds | `python -u -I audit/phase11_y6.py --out=phase11_orbit_Y6.jsonl 184342 539288 184338 539291 184323 539311` | `phase11_orbit_Y6.jsonl` | 4–8 min per member |
 | analysis, leaderboard, ledger | `python -u -I audit/phase11_analysis.py`; `audit/phase11_leaderboard.py`; `audit/phase11_ledger.py` | `phase11_analysis.json`, `phase11_leaderboard.*`, `phase11_ledger.json` | 1 min |
-| tests | `python -m pytest -q tests/test_phase11.py` | — | ⟨TEST_TIME⟩ |
+| tests | `python -m pytest -q tests/test_phase11.py` | 44 tests | 2 min |
