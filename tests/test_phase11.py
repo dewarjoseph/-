@@ -123,7 +123,8 @@ def test_1387_above_fr30_without_phase8():
     q = Fraction(int(rows[j]['upper_num']), int(rows[j]['upper_den'])); assert q < Fraction(87999990, 10 ** 7) <= Fraction(_cert('audit_1387_R15')['Lambda_R_certified'])
     assert abs(float(q) - 8.797011315) < 1e-6
 
-@pytest.mark.parametrize('tag,balls,value', [('target_1389_R16', 12193, 8.7644993), ('target_twin_R15', 10321, 8.7999990), ('audit_539288_R8', 829, 6.8499994)])
+@pytest.mark.parametrize('tag,balls,value', [('target_1389_R16', 12193, 8.7644993), ('target_twin_R15', 10321, 8.7999990), ('audit_539288_R8', 829, 6.8499994),
+                                              ('target_1391_R18', 20168, 8.7644989)])
 def test_new_certificates(tag, balls, value):
     r = _cert(tag); assert r['all_balls_certified'] and r['rejected_incomplete'] == 0 and r['distinct_balls'] == balls and r['Lambda_R_certified'] >= value
 
@@ -132,7 +133,8 @@ def test_1389_above_fr30_without_artifacts():
     ch = J('phase11_fr30_upper.json')['chain']; assert [r['m'] for r in ch] == [3, 4, 5]
     q = [Fraction(r['upper_exact']) for r in ch]; assert q[0] > q[1] > q[2]
     assert abs(float(q[0]) - 8.7795327) < 1e-7 and abs(float(q[2]) - 8.764227038115036) < 1e-8      # Phase VIII's U3 and U5
-    assert q[2] < Fraction(_cert('target_1389_R16')['Lambda_R_certified'])
+    assert q[2] < Fraction(_cert('target_1389_R16')['Lambda_R_certified']) and q[2] < Fraction(_cert('target_1391_R18')['Lambda_R_certified'])
+    assert _cert('target_1391_R18')['enumeration'].startswith('streaming') and _cert('target_1391_R18')['centres'] == 3407872
 
 def test_streaming_enumeration_matches(tmp_path, monkeypatch):
     """the two-pass streaming certificate (used at m >= 5) gives the same balls and the same bound as the one-pass path"""
@@ -140,6 +142,8 @@ def test_streaming_enumeration_matches(tmp_path, monkeypatch):
     a = C.certify('4752', 6, 3, 1, '3.6555', 'test_off', stream=False); b = C.certify('4752', 6, 3, 1, '3.6555', 'test_on', stream=True)
     for k in ('distinct_balls', 'centres', 'rejected_incomplete', 'ball_tiles', 'bandwidth_max', 'Lambda_R_certified', 'all_balls_certified'): assert a[k] == b[k], k
     assert a['distinct_balls'] == 325 and a['all_balls_certified']
+    f = C.certify('4752', 6, 3, 1, '3.6556', 'test_fail', stream=True)          # just above Lambda_6 = 3.65555995: failures are reported
+    assert not f['all_balls_certified'] and f['balls_failing'] >= 1 and all(3.6555 < b['lambda_float'] < 3.6556 for b in f['failing_balls_lowest'])
 
 # ------------------------------------------------------------------ the certified funnel and the orbit (Part II.2-2.3)
 ORBIT = {184323, 184338, 184342, 539311, 539291, 539288}
@@ -213,7 +217,7 @@ def test_leaderboard_classification():
         if r['status'] == 'proven_inferior': assert (Fraction(r['U_exact']) if r.get('U_exact') else Fraction(r['U'])) < Lb
         if r['status'] == 'contender': assert r['U'] >= d['L_best'] and r['class'] in (1389, 1391)
     o = d['orbit_1387']; assert {r['j'] for r in o['members']} == ORBIT and not o['resolved'] and all(0 < r['L'] <= r['U'] for r in o['members'])
-    assert {1387, 1389} <= set(d['classes_certified_above_FR30_without_artifacts'])
+    assert {1387, 1389, 1391} <= set(d['classes_certified_above_FR30_without_artifacts'])
 
 # ------------------------------------------------------------------ Z^3
 def test_z3_pair_audit():

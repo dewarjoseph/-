@@ -1,5 +1,5 @@
 {
- "commit": "2338ac9",
+ "commit": "81bb871",
  "report": "deliverables/PHASE11_REPORT.md",
  "reconciliation": {
   "1387_R14": {
@@ -326,11 +326,11 @@
   },
   {
    "id": "II.3",
-   "claim": "E_*(1391) >= 8.7645 (R = 18, preregistered)",
-   "status": "not completed",
+   "claim": "E_*(1391) >= 8.7644989 (R = 18, 20 168 balls, preregistered) > E_*(FR30): no artifacts",
+   "status": "[C]",
    "where": "\u00a72.1",
    "artifact": "phase11_cert.jsonl:target_1391_R18",
-   "test": "-"
+   "test": "test_new_certificates, test_1389_above_fr30_without_artifacts"
   },
   {
    "id": "II.4",

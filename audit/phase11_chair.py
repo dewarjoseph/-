@@ -288,7 +288,11 @@ def _cert_type_chunk(args):
     for t, cand, zk in zip(tt, tree.query_ball_point(X[tt].astype(float), 14 * R + 1e-6), zks):
         kb, Gb, Tb = _ball_at(G, T, X, cand, t, R)
         assert zlib.compress(kb, ZLEVEL) == zk                # the rebuilt ball is the enumerated one
-        Ha, _, _ = ball_amplified(Gb, Tb, rho, tab.__getitem__); low, bw = banded_cert(Ha, mu, err); out.append((low, bw, len(Gb)))
+        Ha, _, _ = ball_amplified(Gb, Tb, rho, tab.__getitem__); low, bw = banded_cert(Ha, mu, err)
+        if low is None:                                       # a failing ball: its float bottom, as the preregistration requires
+            import scipy.sparse.linalg as sla
+            out.append((low, bw, len(Gb), float(sla.eigsh(Ha, k=1, which='SA', tol=1e-10, ncv=60, return_eigenvectors=False)[0]), int(t - c * 8 ** m)))
+        else: out.append((low, bw, len(Gb)))
     return ti, out
 def enumerate_ball_keys(dec, R, m, types_, nproc):
     """pass 1: {compressed canonical key: (type index, tile index)} with first-occurrence ownership in type order, plus counts"""
@@ -393,9 +397,9 @@ def certify(spec, R, m, nproc, mu_str, tag=None, stream=None):
                     ch = lst[s0:s0 + 128]; G_, T_, c_ = tv[ti]; jobs.append((ti, G_, T_, c_, dec, R, m, [a for a, _ in ch], [b for _, b in ch]))
             del seen
             for ti, out in pool.imap_unordered(_cert_type_chunk, jobs):
-                for low, bw, nt in out:
-                    res.append((low, bw, nt))
-                    if low is None: fails.append(ti)
+                for o in out:
+                    res.append(o[:3])
+                    if o[0] is None: fails.append({'type': ti, 'tile': o[4], 'tiles': o[2], 'lambda_float': o[3]})
                 log(f"{len(res)}/{info['distinct']} certified, {len(fails)} failed [{time.time()-t0:.0f}s]")
     ok = not fails; lows = [r[0] for r in res if r[0] is not None]
     rec = {'rule': str(spec), 'R': R, 'm': m, 'rho': f'{rho.numerator}/{rho.denominator}', 'one_star_types': len(types_), 'one_star_types_T5': n0,
@@ -403,6 +407,7 @@ def certify(spec, R, m, nproc, mu_str, tag=None, stream=None):
            'ball_tiles': [min(r[2] for r in res), max(r[2] for r in res)], 'bandwidth_max': max(r[1] for r in res),
            'mu': f'{mu.numerator}/{mu.denominator}', 'mu_float': float(mu), 'amp_max': amax, 'entry_err': err,
            'Lambda_R_certified': min(lows) if ok else None, 'all_balls_certified': ok, 'balls_failing': len(fails),
+           **({'failing_balls_lowest': sorted(fails, key=lambda f: f['lambda_float'])[:50]} if stream and fails else {}),
            'implementation': 'phase11_chair (independent): own enumeration, RCM + banded LAPACK dpbtrf, Higham Thm 10.3 with u = 2^-52',
            'cert_seconds': time.time() - t0, 'tag': tag, **({'enumeration': 'streaming: zlib-compressed canonical keys, two passes'} if stream else {})}
     log(rec)

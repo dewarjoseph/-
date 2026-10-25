@@ -1,8 +1,8 @@
 rank,class,L,L_source,U,U_source,status
 1,1387,8.7999990,"phase11 IMS R=15 (10321 balls, independent)",9.3679502,phase11 orbit Y6 (independent),leader
 2,1389,8.7644993,"phase11 IMS R=16 (12193 balls, independent)",9.2104998,phase11 orbit Y6 (independent),contender
-3,1386,7.9542923,phase7 IMS R=12,8.7642270,phase8_chain_m5 (artifact; vector not stored),proven_inferior
-4,1391,6.9198389,phase10_ims R=8,9.1104007,phase11 orbit Y6 (independent),contender
+3,1391,8.7644990,"phase11 IMS R=18 (20168 balls, independent)",9.1104007,phase11 orbit Y6 (independent),contender
+4,1386,7.9542923,phase7 IMS R=12,8.7642270,phase8_chain_m5 (artifact; vector not stored),proven_inferior
 5,901,6.5510740,phase10_ims R=8,8.6366663,phase10_deep Y6 (artifact; vector not stored),proven_inferior
 6,3362,6.1197653,phase11 census F3 (independent),8.1475583,phase10_y5,proven_inferior
 7,1371,6.1132517,phase11 census F3 (independent),7.7819916,phase10_y5,proven_inferior

@@ -57,7 +57,7 @@
 **4. The extremal problem: a certified frontier, not an optimum.**
 - **Proper rules.** 1095 of the 1098 gauge classes are proven inferior to 1387 by exact rational upper bounds, so the maximiser is one of 1387, 1389 and 1391 [C].
   - E_\*(1389) > E_\*(FR30) is now certified without any stored-only artifact.
-  - ⟨T1391_SHORT⟩
+  - So is E_\*(1391) > E_\*(FR30): the preregistered R = 18 certificate passed on all 20 168 balls, giving E_\*(1391) ≥ 8.7644989.
 - **All 6⁸ frame rules.** An exhaustive certified funnel proves every rule outside six explicit rules inferior to 1387 [C]: exact Y₃ for all 280 332 S₃-orbit representatives, then Y₄, Y₅, D₈ and Y₆ for the survivors.
 - **The frontier is a single orbit.** Right-multiplying every child frame by the chair's own point group S₃ acts on rule space. **The orbit of 1387 is {1387, 1389, 1391, 539311, 539291, 539288}**, exactly the six largest level-5 bounds known. The remaining extremal question is which member of one orbit is highest.
 - The mirror twin of FR30 obtained through 1386 is FR30's exact mirror image, with **E_\* equal to FR30's** (proved via Phase VII's radius-1 matching rule).
@@ -69,14 +69,14 @@
   | 1387 | [8.7999990, 9.3679502] |
   | 539291 | [7.1408386, 9.2499400] (lower bound from Phase X) |
   | 1389 | [8.7644993, 9.2104998] |
-  | 1391 | [⟨L1391⟩, 9.1104007] |
+  | 1391 | [8.7644989, 9.1104007] |
   | 539288 | [6.8499994, 9.0982534] |
 
   No member is proven superior, so no optimum is claimed.
 - **How far certification can go** (§2.4).
   - Sampled probes bound what any IMS certificate can reach: Λ_R(1387) ≤ 9.1675 and Λ_R(539311) ≤ 9.1851 for R ≤ 22.
   - So **no certificate at R ≤ 22 separates the two co-leaders**, or 1387 from 1389 and 539291. The preregistered R = 20 target for 1387 could at most remove 1391 and 539288.
-  - The cost grows like R^{11–12}: R = 18 took ⟨T18⟩ on 4 cores; R = 20 would take ≈ ⟨T20⟩.
+  - The cost grows like R^{11–12}: R = 18 took 1.8 h on 4 cores; R = 20 would take ≈ 4 h.
 
 **5. Why 1387 is strong.**
 - The one-child intervention from FR30 changes the gauge class of every environment (0 shared of 72 at radius 1 and of 415 at radius 8). It keeps all geometric configurations and every localisation constant.
@@ -212,7 +212,7 @@ A passing regression test only shows that an implementation is consistent; it is
 |---|---|---|---|---|
 | 1 | **1387** | **8.7999990** (IMS R = 15, 10 321 balls, independent) | 9.3679502 (Y₆; Phase X's stored-only value, now recomputed independently) | **leader** |
 | 2 | 1389 | **8.7644993** (IMS R = 16, 12 193 balls, new) | 9.2104998 (Y₆, recomputed independently) | contender |
-| — | 1391 | ⟨L1391⟩ | 9.1104007 (Y₆, recomputed independently) | contender |
+| — | 1391 | **8.7644989** (IMS R = 18, 20 168 balls, new) | 9.1104007 (Y₆, recomputed independently) | contender |
 | — | 1386 (FR30) | 7.9542923 (Phase VII R = 12; independent 7.9542913) | 8.7642270 (σ⁵ of a self-loop type; Phase VIII value reproduced independently, §2.1) | proven inferior |
 | — | 901 | 6.5510740 (R = 8) | 8.6366663 (Y₆, artifact) | proven inferior |
 | — | 1144 | 5.4726372 (R = 8) | 8.1414086 (D₈, exact) | proven inferior |
@@ -237,7 +237,9 @@ A passing regression test only shows that an implementation is consistent; it is
   - At m = 4 the completeness check rejected balls, and the run stopped as designed.
   - Two m = 5 runs ran out of memory. The first, with unchunked neighbourhood queries, was stopped. The second was killed by the kernel when one worker held 12.5 GB of balls.
   - Before the third run, a probe showed the target was not excluded (§2.4). The certificate now streams (§2.4).
-  - ⟨T1391⟩
+  - **Passed.** At m = 5 the completeness test accepts all 3 407 872 centres (0 rejections). All 20 168 distinct legal balls (3 440–3 528 tiles) pass at μ = 2297561/262144.
+  - So **E_\*(1391) ≥ 8.7644989**, and **E_\*(1391) > E_\*(FR30) without stored-only artifacts** [C]: the separation from the independent U₅(FR30) = 8.7642271 is ≥ 0.000271.
+  - Run time 1.8 h on 4 cores: enumeration 46 min, certification 60 min (0.72 s per ball per core).
 - **1387, R = 20** (μ = 9.1105): ⟨T1387_R20⟩
 
 ### 2.2 The extended space: a certified funnel instead of a screen
@@ -267,7 +269,7 @@ Phase X computed Y₂ for all 6⁸ decorations, Y₃ for the top half by Y₂, a
 | 1387 (identity) | **8.7999990** (IMS R = 15, 10 321 balls) | 9.3679502 (Y₆) | co-leader |
 | 539291 = 1387·(y z) | 7.1408386 (IMS R = 8, Phase X) | 9.2499400 (Y₆) | contender |
 | 1389 = 1387·(2 0 1) | 8.7644993 (IMS R = 16, 12 193 balls) | 9.2104998 (Y₆) | contender |
-| 1391 = 1387·(1 2 0) | ⟨L1391⟩ | 9.1104007 (Y₆) | contender |
+| 1391 = 1387·(1 2 0) | 8.7644989 (IMS R = 18, 20 168 balls, new) | 9.1104007 (Y₆) | contender |
 | 539288 = 1387·(x z) | 6.8499994 (IMS R = 8, 829 balls, new) | **9.0982534** (Y₆, new) | contender |
 
 - Every interval overlaps the co-leaders' [8.7999990, 9.3679502]. **No member is proven inferior or superior within the orbit.**
@@ -305,7 +307,7 @@ Phase X computed Y₂ for all 6⁸ decorations, Y₃ for the top half by Y₂, a
 - Among all rules with a computed level-5 bound (Phase X), the six largest are 539311 (9.4159) > 1387 (9.3928) > 539291 (9.2718) > 1389 (9.2187) > 1391 (9.1221) > 539288 (9.1124).
 - **These are exactly the right-S₃ orbit of 1387.** The next value is FR30's 8.7970.
 - Whether any other rule of the 6⁸ space can compete is decided by the certified funnel (§2.2), not by this list.
-- The extremal problem, the three "unresolved contenders" 1389 and 1391, and the twins all reduce to one question: **which member of one orbit is highest.**
+- The extremal problem, the "unresolved contenders" 1389 and 1391, and the twins all reduce to one question: **which member of one orbit is highest.**
 - In the census index the proper part of the orbit is a cyclic shift of every child's frame choice. Classes 1387, 1389 and 1391 differ only in the first two digits.
 
 **The preregistered twin criterion.** On the 40 classes with the largest Y₄, with twins taken via each class's representative, the sign of ΔU₁ is used to predict the sign of ΔY₅ (`phase11_analysis.json:twins`).
@@ -349,9 +351,9 @@ Phase X computed Y₂ for all 6⁸ decorations, Y₃ for the top half by Y₂, a
 | 14 | 1 640 | 641 | 0.11 s | 7 527 (1387) | 4.4 min (measured, m = 4) |
 | 15 | — | — | — | 10 321 (1387) | 16 min (measured, m = 4) |
 | 16 | 2 509 | 892 | 0.24 s | 12 193 (1389) | 17 min (measured, m = 4) |
-| 18 | 3 507 | 1 213 | 1.5 s | ⟨N18⟩ (1391) | ⟨T18⟩ (measured, m = 5) |
-| 20 | 4 808 | 1 405 | 1.9 s | ≈ ⟨N20⟩ (1387, estimate) | ≈ ⟨T20⟩ (estimate) |
-| 22 | 6 376 | 1 638 | 3.6 s | ≈ ⟨N22⟩ (estimate) | ≈ ⟨T22⟩ (estimate) |
+| 18 | 3 507 | 1 213 | 1.5 s (0.72 s average over the run) | 20 168 (1391) | 1.8 h (measured, m = 5) |
+| 20 | 4 808 | 1 405 | 1.9 s (≈ 1.3 s in a run, by N·b²) | ≈ 33 000 (estimate) | ≈ 4 h (estimate) |
+| 22 | 6 376 | 1 638 | 3.6 s (≈ 2.4 s in a run) | ≈ 55 000 (estimate) | ≈ 10 h (estimate) |
 
 - The Cholesky cost grows like N·b², about R⁷: N ∝ R³ unknowns and RCM bandwidth b ∝ R². Above R = 16 the band (≥ 100 MB) leaves cache, and the measured cost grows faster.
 - The number of distinct legal balls grows roughly like R^4.6 at these radii [E]. Together that is about R^{11–12} per certificate.
@@ -362,7 +364,7 @@ Phase X computed Y₂ for all 6⁸ decorations, Y₃ for the top half by Y₂, a
 
 **Extrapolation [X]: a model, not a bound.**
 - Fitting Λ_R = E − C/ρ² to the R = 20 and R = 22 probes of 1387 gives C ≈ 75 and E ≈ 9.351. This is consistent with E_\* ≤ Y₆ = 9.368.
-- Under that model a certificate of 1387 reaches the present U(1389) = 9.2105 at ρ ≈ 23 (R ≈ 25, ≈ ⟨T25⟩ on 4 cores).
+- Under that model a certificate of 1387 reaches the present U(1389) = 9.2105 at ρ ≈ 23 (R ≈ 25: about 2 days on 4 cores, and probably a level-6 enumeration).
 - It resolves a gap of 0.02, the level-6 gap between 539311 and 1387, only at ρ ≈ 61 (R ≈ 63). That is out of reach for this method.
 
 ## 3. The general support-sensitive theorem (Part III)
@@ -813,7 +815,7 @@ It stores two numbers per scale, not the operator, the spectrum, or the environm
 | E_\*(1387) > E_\*(FR30) without unstored artifacts | **certified** (separation ≥ 0.0357719 with the independent U₅(FR30); ≥ 0.0029876 from Y₅ alone) | §1 |
 | E_\*(539311) > E_\*(FR30) without unstored artifacts | **certified** (R = 15 twin certificate) | §2 |
 | E_\*(1389) > E_\*(FR30) | **certified without artifacts** (R = 16 certificate against the independent exact U₅(FR30) = 8.7642270; separation ≥ 0.000272) | §2.1 |
-| E_\*(1391) > E_\*(FR30) | ⟨D1391⟩ | §2 |
+| E_\*(1391) > E_\*(FR30) | **certified without artifacts** (preregistered R = 18 certificate, 20 168 balls: 8.7644989 > U₅(FR30) = 8.7642271; separation ≥ 0.000271) | §2.1 |
 | the proper-rule maximiser is one of 1387, 1389, 1391 | **certified** (1095 classes proven inferior) | §2.1 |
 | **the maximiser over all 6⁸ frame rules lies in the right-S₃ orbit of 1387** | **certified** (exhaustive funnel X3–X7) | §2.2 |
 | 1387 (or its twin) is the maximiser | **open**: all six orbit intervals overlap; the co-leaders 1387 and 539311 share L = 8.7999990, with U = 9.3679502 and 9.3885937; no IMS certificate at R ≤ 22 separates them (probes) | §2.4 |
@@ -863,8 +865,8 @@ It stores two numbers per scale, not the operator, the spectrum, or the environm
 - Two members carry the certified lower bound 8.7999990.
 
 **Experiment 1 (decisive, computational): certify the tail of the orbit.**
-- **The only separation within reach** is 1387 > {1391, 539288}: the preregistered R = 20 certificate at μ = 9.1105, about ⟨T20⟩ on 4 cores. The probe margin is only 0.015.
-- Separating 1387 from 1389 needs R ≈ 25 under the [X] model of §2.4 (≈ ⟨T25⟩). Separating it from 539311 needs R ≈ 63, beyond this method.
+- **The only separation within reach** is 1387 > {1391, 539288}: the preregistered R = 20 certificate at μ = 9.1105, about 4 h on 4 cores. The probe margin is only 0.015.
+- Separating 1387 from 1389 needs R ≈ 25 under the [X] model of §2.4 (≈ 2 days, with a level-6 enumeration). Separating it from 539311 needs R ≈ 63, beyond this method.
 - **Outcome:** at best a four-member frontier {1387, 539311, 1389, 539291}. The rest needs Experiment 2.
 
 **Experiment 2 (the one most likely to produce new mathematics): the edge exponent.**
@@ -891,7 +893,7 @@ All commands run from the repository root (Python 3.13, numpy 2.5, scipy 1.18, s
 | step | command | output | time |
 |---|---|---|---|
 | exact checks (overlaps, r_c, panels, Q₈, IMS identity, transport bound) | `python -u -I audit/phase11_proofs.py` | `phase11_proofs.json` | 1 min |
-| independent re-certification | `python -u -I audit/phase11_chair.py cert <rule> <R> <m> <nproc> <mu> <tag>` (m ≥ 5 streams): `4752 12 4 4 7.9542922 audit_FR30_R12`; `x539288 8 3 1 6.85 audit_539288_R8`; `1387 14 4 4 2297561/262144 audit_1387_R14`; `1387 15 4 4 2306867/262144 audit_1387_R15`; `x539311 14 4 4 2297561/262144 audit_twin_R14`; `x539311 15 4 4 2306867/262144 target_twin_R15`; `1389 16 4 4 8.7645 target_1389_R16`; `1391 18 5 4 8.7645 target_1391_R18` | `phase11_cert.jsonl` | 2 min (R = 12) to 20 min (R = 15, 16); R = 18 at m = 5 ⟨T1391_TIME⟩ |
+| independent re-certification | `python -u -I audit/phase11_chair.py cert <rule> <R> <m> <nproc> <mu> <tag>` (m ≥ 5 streams): `4752 12 4 4 7.9542922 audit_FR30_R12`; `x539288 8 3 1 6.85 audit_539288_R8`; `1387 14 4 4 2297561/262144 audit_1387_R14`; `1387 15 4 4 2306867/262144 audit_1387_R15`; `x539311 14 4 4 2297561/262144 audit_twin_R14`; `x539311 15 4 4 2306867/262144 target_twin_R15`; `1389 16 4 4 8.7645 target_1389_R16`; `1391 18 5 4 8.7645 target_1391_R18` | `phase11_cert.jsonl` | 2 min (R = 12) to 20 min (R = 15, 16); R = 18 at m = 5 1.8 h (streaming) |
 | ℤ³ audit and profile | `python -u -I audit/phase11_z3.py audit profile cover islands` | `phase11_z3.json` | 15 min |
 | ladder (second geometry) | `python -u -I audit/phase11_ladder.py finite_radius insufficiency nonminimal rare rep_group support` | `phase11_ladder.json` | 1 h |
 | radius-1 local data | `python -u -I audit/phase11_local.py twins|counterfactual|census 4` | `phase11_local_*.jsonl` | 10–60 min each |

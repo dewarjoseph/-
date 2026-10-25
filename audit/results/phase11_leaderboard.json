@@ -10,11 +10,13 @@
 "classes_rigorously_below_FR30": 809,
 "classes_certified_above_FR30": [
 1387,
-1389
+1389,
+1391
 ],
 "classes_certified_above_FR30_without_artifacts": [
 1387,
-1389
+1389,
+1391
 ],
 "orbit_1387": {
 "L_max": 8.799999008540032,
@@ -74,8 +76,8 @@
 {
 "j": 184342,
 "proper_class": 1391,
-"L": 6.919838902205401,
-"L_source": "phase10_ims R=8",
+"L": 8.764498990547201,
+"L_source": "phase11 IMS R=18 (20168 balls, independent)",
 "U": 9.110400672476517,
 "U_source": "phase11 orbit Y6 (independent)",
 "U_exact": "21506550456519284/2360659122434960",
@@ -143,6 +145,28 @@
 "above_FR30_without_artifacts": true
 },
 {
+"class": 1391,
+"members": [
+1391,
+1393,
+3695,
+3697,
+4757,
+4759
+],
+"L": 8.764498990547201,
+"L_source": "phase11 IMS R=18 (20168 balls, independent)",
+"L_type": "IMS + Higham banded Cholesky",
+"U": 9.110400672476517,
+"U_source": "phase11 orbit Y6 (independent)",
+"U_type": "exact rational Rayleigh",
+"U_exact": "21506550456519284/2360659122434960",
+"width": 0.34590168192931614,
+"status": "contender",
+"above_FR30": true,
+"above_FR30_without_artifacts": true
+},
+{
 "class": 1386,
 "members": [
 1386,
@@ -160,28 +184,6 @@
 "status": "proven_inferior",
 "above_FR30": null,
 "above_FR30_without_artifacts": null
-},
-{
-"class": 1391,
-"members": [
-1391,
-1393,
-3695,
-3697,
-4757,
-4759
-],
-"L": 6.919838902205401,
-"L_source": "phase10_ims R=8",
-"L_type": "IMS + Higham (GPU or CPU dense)",
-"U": 9.110400672476517,
-"U_source": "phase11 orbit Y6 (independent)",
-"U_type": "exact rational Rayleigh",
-"U_exact": "21506550456519284/2360659122434960",
-"width": 2.190561770271116,
-"status": "contender",
-"above_FR30": false,
-"above_FR30_without_artifacts": false
 },
 {
 "class": 901,
