@@ -124,7 +124,7 @@ def test_1387_above_fr30_without_phase8():
     assert abs(float(q) - 8.797011315) < 1e-6
 
 @pytest.mark.parametrize('tag,balls,value', [('target_1389_R16', 12193, 8.7644993), ('target_twin_R15', 10321, 8.7999990), ('audit_539288_R8', 829, 6.8499994),
-                                              ('target_1391_R18', 20168, 8.7644989)])
+                                              ('target_1391_R18', 20168, 8.7644989), ('target_1387_R20', 24571, 9.1104981)])
 def test_new_certificates(tag, balls, value):
     r = _cert(tag); assert r['all_balls_certified'] and r['rejected_incomplete'] == 0 and r['distinct_balls'] == balls and r['Lambda_R_certified'] >= value
 
@@ -211,12 +211,14 @@ def test_preregistered_evaluations():
     assert cf['4753']['neighbours_above_base_Y5'] == 0 and cf['4753']['neighbours_tied_with_base_Y5'] == 1     # the tie: a neighbour in the base's own orbit
 
 def test_leaderboard_classification():
-    d = J('phase11_leaderboard.json'); assert d['counts'] == {'leader': 1, 'proven_inferior': 1095, 'contender': 2, 'proven_superior': 0}
+    d = J('phase11_leaderboard.json'); assert d['counts'] == {'leader': 1, 'proven_inferior': 1096, 'contender': 1, 'proven_superior': 0}
     Lb = Fraction(d['L_best'])
     for r in d['rows']:
         if r['status'] == 'proven_inferior': assert (Fraction(r['U_exact']) if r.get('U_exact') else Fraction(r['U'])) < Lb
-        if r['status'] == 'contender': assert r['U'] >= d['L_best'] and r['class'] in (1389, 1391)
+        if r['status'] == 'contender': assert r['U'] >= d['L_best'] and r['class'] == 1389
     o = d['orbit_1387']; assert {r['j'] for r in o['members']} == ORBIT and not o['resolved'] and all(0 < r['L'] <= r['U'] for r in o['members'])
+    st = {r['j']: r['status'] for r in o['members']}
+    assert st[184323] == 'leader' and st[184342] == st[539288] == 'proven_inferior' and {st[j] for j in (539311, 184338, 539291)} == {'contender'}
     assert {1387, 1389, 1391} <= set(d['classes_certified_above_FR30_without_artifacts'])
 
 # ------------------------------------------------------------------ Z^3
@@ -318,3 +320,10 @@ def test_orbit_level6_bounds_reproduce_phase10():
         q = Fraction(int(r['upper_num']), int(r['upper_den'])); assert abs(float(q) - r['upper']) < 1e-12 and q >= Fraction(r['float']) - Fraction(1, 10 ** 9)
         if j in p10: assert abs(r['upper'] - p10[j]) < 1e-8, j
     assert y6[539288]['upper'] < 9.1105 < y6[184342]['upper'] + 1e-4
+
+def test_1387_above_1391_and_539288_without_artifacts():
+    """the preregistered R = 20 certificate of 1387 against the independent exact level-6 bounds of 1391 and 539288"""
+    y6 = {r['j']: Fraction(int(r['upper_num']), int(r['upper_den'])) for r in JL('phase11_orbit_Y6.jsonl')}
+    r = _cert('target_1387_R20'); L = Fraction(r['Lambda_R_certified'])
+    assert r['all_balls_certified'] and r['rejected_incomplete'] == 0 and r['mu'] == '9553051/1048576'
+    assert y6[539288] < y6[184342] < L and not any(y6[j] < L for j in (184323, 184338, 539291, 539311))

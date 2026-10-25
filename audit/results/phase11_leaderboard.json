@@ -1,10 +1,10 @@
 {
-"L_best": 8.799999008540032,
+"L_best": 9.110498143808444,
 "leader": 1387,
 "counts": {
 "leader": 1,
-"proven_inferior": 1095,
-"contender": 2,
+"proven_inferior": 1096,
+"contender": 1,
 "proven_superior": 0
 },
 "classes_rigorously_below_FR30": 809,
@@ -19,7 +19,7 @@
 1391
 ],
 "orbit_1387": {
-"L_max": 8.799999008540032,
+"L_max": 9.110498143808444,
 "U_max": 9.388593716230208,
 "min_U_in_orbit": 9.098253411795712,
 "resolved": false,
@@ -35,19 +35,19 @@
 "U_exact": "3616195436680576/385169019554995",
 "U_independent": 9.388593716230208,
 "U_independent_source": "phase11 orbit Y6 (independent)",
-"status": "co-leader"
+"status": "contender"
 },
 {
 "j": 184323,
 "proper_class": 1387,
-"L": 8.799999008540032,
-"L_source": "phase11 IMS R=15 (10321 balls, independent)",
+"L": 9.110498143808444,
+"L_source": "phase11 IMS R=20 (24571 balls, independent)",
 "U": 9.367950157113038,
 "U_source": "phase11 orbit Y6 (independent)",
 "U_exact": "7249509659237936/773862962297405",
 "U_independent": 9.367950157113038,
 "U_independent_source": "phase11 orbit Y6 (independent)",
-"status": "co-leader"
+"status": "leader"
 },
 {
 "j": 539291,
@@ -83,7 +83,7 @@
 "U_exact": "21506550456519284/2360659122434960",
 "U_independent": 9.110400672476517,
 "U_independent_source": "phase11 orbit Y6 (independent)",
-"status": "contender"
+"status": "proven_inferior"
 },
 {
 "j": 539288,
@@ -95,7 +95,7 @@
 "U_exact": "17914237550252900/1968975443905248",
 "U_independent": 9.098253411795712,
 "U_independent_source": "phase11 orbit Y6 (independent)",
-"status": "contender"
+"status": "proven_inferior"
 }
 ]
 },
@@ -110,14 +110,14 @@
 4753,
 4754
 ],
-"L": 8.799999008540032,
-"L_source": "phase11 IMS R=15 (10321 balls, independent)",
+"L": 9.110498143808444,
+"L_source": "phase11 IMS R=20 (24571 balls, independent)",
 "L_type": "IMS + Higham banded Cholesky",
 "U": 9.367950157113038,
 "U_source": "phase11 orbit Y6 (independent)",
 "U_type": "exact rational Rayleigh",
 "U_exact": "7249509659237936/773862962297405",
-"width": 0.5679511485730053,
+"width": 0.25745201330459366,
 "status": "leader",
 "above_FR30": true,
 "above_FR30_without_artifacts": true
@@ -162,7 +162,7 @@
 "U_type": "exact rational Rayleigh",
 "U_exact": "21506550456519284/2360659122434960",
 "width": 0.34590168192931614,
-"status": "contender",
+"status": "proven_inferior",
 "above_FR30": true,
 "above_FR30_without_artifacts": true
 },

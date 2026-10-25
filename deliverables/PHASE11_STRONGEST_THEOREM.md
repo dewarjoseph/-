@@ -54,11 +54,11 @@ Here Λ(χ) is the minimum, over the pieces, of the least eigenvalue of Deg − 
 ## What it does not establish
 
 - It does not compute E_\* for any Chair44 rule. It brackets it, with every bound recomputed independently.
-  - Class 1387: [8.7999990, 9.3679502].
+  - Class 1387: [9.1104981, 9.3679502].
   - FR30: [7.9542913, 8.7642271].
 - It does not decide the extremal rule. What is certified instead (by (2) plus exact Rayleigh quotients, over all 6⁸ frame rules):
   - the maximiser lies in the six-rule orbit of 1387 under right multiplication of the child frames by the chair's point group: {1387, 1389, 1391, 539311, 539291, 539288};
-  - the six intervals all overlap;
+  - a radius-20 certificate (E_\*(1387) ≥ 9.1104981) removes two of them, so the maximiser is one of 1387, 539311, 1389, 539291, whose intervals overlap;
   - by sampled probes, no IMS certificate at the probed radii (even R ≤ 22) separates the co-leaders 1387 and 539311 (Λ_R ≤ 9.17 and ≤ 9.19, against upper bounds 9.37 and 9.39).
 - Bound (4) is valid but weak on Chair44: it is far below the certified floors. Curvature data certify positivity, not extremality.
 - Most of (1)–(3) is established mathematics: the variational principle, IMS, property A and isoperimetry, assembled here for connection Laplacians.

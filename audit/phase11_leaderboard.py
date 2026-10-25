@@ -120,7 +120,8 @@ def orbit(lo, up, ext2cls, F, C):
         rows.append({'j': j, 'proper_class': c, 'L': Lb['value'], 'L_source': Lb['source'], 'U': Ub['value'], 'U_source': Ub['source'], 'U_exact': Ub.get('exact'),
                      'U_independent': Ui['value'], 'U_independent_source': Ui['source']})
     top = max(r['L'] for r in rows); minU = min(r['U'] for r in rows)
-    for r in rows: r['status'] = 'co-leader' if r['L'] == top else 'contender' if r['U'] >= top else 'proven_inferior'
+    ntop = sum(r['L'] == top for r in rows)
+    for r in rows: r['status'] = ('leader' if ntop == 1 else 'co-leader') if r['L'] == top else 'contender' if r['U'] >= top else 'proven_inferior'
     return {'L_max': top, 'U_max': max(r['U'] for r in rows), 'min_U_in_orbit': minU, 'resolved': sum(r['L'] == top for r in rows) == 1 and top > max(r['U'] for r in rows if r['L'] < top),
             'note': 'the maximiser over all 6^8 frame rules lies in this orbit; its value lies in [L_max, U_max]', 'members': sorted(rows, key=lambda r: -r['U'])}
 
