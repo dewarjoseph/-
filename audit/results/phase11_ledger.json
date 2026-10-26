@@ -1,5 +1,5 @@
 {
- "commit": "e82c3e7",
+ "commit": "739168e",
  "report": "deliverables/PHASE11_REPORT.md",
  "reconciliation": {
   "1387_R14": {
@@ -43,7 +43,7 @@
    "mu": "8340679/1048576",
    "independent_implementation": "phase11_chair (independent): own enumeration, RCM + banded LAPACK dpbtrf, Higham Thm 10.3 with u = 2^-52"
   },
-  "statement": "The Phase X report cites both certificates; its ledger (written at 529bba9) and tests stopped at R = 14. Both are now independently re-certified (own enumeration, own completeness test, symbolic derivation of the overlap function, banded Higham certificates). The ledger and tests use the R = 15 value. With R = 15 the comparison E_*(1387) > E_*(FR30) no longer needs the Phase VIII bound 8.7642270 (a 1.77M-dimensional eigenvector that is not stored): the exact level-5 bound Y_5(FR30) = 8.797011 < 8.7999987 suffices, and it is recomputed independently in Phase XI."
+  "statement": "The Phase X report cites both certificates; its ledger (written at 529bba9) and tests stopped at R = 14. Both are now independently re-certified (own enumeration, own completeness test, symbolic derivation of the overlap function, banded Higham certificates). The ledger and tests use the R = 15 value. With R = 15 the comparison E_*(1387) > E_*(FR30) no longer needs the Phase VIII bound 8.7642271 (a 1.77M-dimensional eigenvector that is not stored): the exact level-5 bound Y_5(FR30) = 8.797012 < 8.7999987 suffices, and it is recomputed independently in Phase XI."
  },
  "proof_obligations": [
   {
@@ -132,14 +132,14 @@
   },
   {
    "id": "O13",
-   "obligation": "the localisation certificates of table 1.1: E_*(1387) >= 8.7999988 (R = 15) and >= 8.7644994 (R = 14), E_*(FR30) >= 7.954292 (Phase VII, R = 12), twin >= 8.7644994 (R = 14)",
+   "obligation": "the localisation certificates of table 1.1: E_*(1387) >= 8.7999987 (R = 15) and >= 8.7644993 (R = 14), E_*(FR30) >= 7.954292 (Phase VII, R = 12), twin >= 8.7644993 (R = 14)",
    "nature": "certificate",
    "how": "independently re-certified: {\"1387_R15\": {\"phase11_value\": 8.799999008540032, \"phase11_balls\": 10321, \"phase11_all_certified\": true}, \"1387_R14\": {\"phase11_value\": 8.764499518703467, \"phase11_balls\": 7527, \"phase11_all_certified\": true}, \"FR30_R12\": {\"phase11_value\": 7.954291278163518, \"phase11_balls\": 2315, \"phase11_all_certified\": true}, \"twin539311_R14\": {\"phase11_value\": 8.764499518703467, \"phase11_balls\": 7527, \"phase11_all_certified\": true}}",
    "status": "discharged"
   },
   {
    "id": "O14",
-   "obligation": "E_*(FR30) <= 8.7642270381 (Phase VIII sigma^5 of type 59, 884 736 tiles)",
+   "obligation": "E_*(FR30) <= 8.7642270382 (Phase VIII sigma^5 of type 59, 884 736 tiles)",
    "nature": "exact rational of an unstored vector",
    "how": "reproduced independently by phase11_fr30_upper (sigma^5 of the minimising self-loop type): U3 = 8.7795327464 (1089418384661472/124086146282361); U4 = 8.7662710594 (2710525311841648/309199349811387); U5 = 8.7642270435 (6534049968655174/745536364613169)",
    "status": "discharged (independent value 5e-9 higher)"
@@ -148,7 +148,7 @@
    "id": "O15",
    "obligation": "the mirror twin 539311 has a higher floor than FR30",
    "nature": "certificate + upper bound",
-   "how": "Phase X used the Phase VIII bound (artifact) against the R = 14 twin certificate. Phase XI: twin R = 15 certificate 8.799999008540032 > Y5(FR30) = 8.7970113 (independent exact)",
+   "how": "Phase X used the Phase VIII bound (artifact) against the R = 14 twin certificate. Phase XI: twin R = 15 certificate 8.799999008540032 > Y5(FR30) = 8.7970114 (independent exact)",
    "status": "discharged without artifacts"
   },
   {

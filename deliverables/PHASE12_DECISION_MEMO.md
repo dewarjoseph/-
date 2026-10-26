@@ -7,9 +7,9 @@
   | rule | interval |
   |---|---|
   | 1387 | [9.1104981, 9.3679502] |
-  | 539311 | [8.7999990, 9.3885937] |
-  | 1389 | [8.7644993, 9.2104998] |
-  | 539291 | [7.1408386, 9.2499400] |
+  | 539311 | [8.7999990, 9.3885938] |
+  | 1389 | [8.7644993, 9.2104999] |
+  | 539291 | [7.1408386, 9.2499401] |
 
 - **The six-member S₃ orbit that topped the funnel is explained, and it is not a symmetry.**
   - The right action of the chair's point group is a gauge symmetry of one inflation step (Orbit Lemma).
@@ -42,7 +42,7 @@
 
 ## What each outcome would mean
 
-- **The prediction holds.** It is evidence [E], not proof, that E_\*(539311) > E_\*(1387). That is, the extremiser is the mirror twin, and **1387 is not the maximiser**. Turning this into a theorem needs a lower bound for 539311 above 9.368, which no IMS certificate below R ≈ 63 provides. That is the bottleneck.
+- **The prediction holds.** It is evidence [E], not proof, that E_\*(539311) > E_\*(1387). That is, the extremiser is the mirror twin, and **1387 is not the maximiser**. Turning this into a theorem needs a lower bound for 539311 above 9.3679502 (the exact upper bound of 1387), which no IMS certificate below R ≈ 63 provides. That is the bottleneck.
 - **The gap closes or the order changes.** The working conjecture "the twin wins" fails. The extremal question is open in both directions, and the next target is an upper-bound method that converges faster than the supertile sequence.
 
 ## What it cannot do

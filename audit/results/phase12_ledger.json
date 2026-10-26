@@ -8,7 +8,7 @@
    "fix": "phase12_independent now compares in rational arithmetic; Phase XI code left unchanged (frozen artifact)"
   }
  ],
- "commit": "c2035f1",
+ "commit": "739168e",
  "report": "deliverables/PHASE12_REPORT.md",
  "claims": [
   {
@@ -195,7 +195,7 @@
   },
   {
    "id": "XII.T61",
-   "claim": "support-sensitive transport bound E_* >= inf_v alpha(v)/W; Chair44: 1.69927 for the whole orbit of 1387, 1.56874 for FR30 (< 20 % of the floors)",
+   "claim": "support-sensitive transport bound E_* >= inf_v alpha(v)/W; Chair44: 1.69926 for the whole orbit of 1387, 1.56874 for FR30 (< 20 % of the floors)",
    "status": "[P] bound, [C] values",
    "assumptions": [
     "(G) bounded degree",
@@ -251,8 +251,8 @@
   },
   {
    "id": "XII.pred",
-   "claim": "preregistered predictive study (frozen split, target Y5): results per descriptor family",
-   "status": "pending",
+   "claim": "preregistered predictive study (frozen split, target Y5): results per descriptor family (best test Spearman 0.960)",
+   "status": "[E]",
    "assumptions": [],
    "evidence": "phase12_predict.json",
    "test": "test_prediction_preregistered_before_targets, test_prediction_results"
@@ -304,6 +304,12 @@
    "statement": "PHASE11_STRONGEST_THEOREM (5c): \"for a finite group, every non-spinor representation's floor is a function of the class field\"",
    "problem": "\"non-spinor\" is defined for Q8 only; the proof needs 1-dimensional irreducible constituents and plaquettes generating H_1 over Z",
    "correction": "representations with only 1-dimensional irreducible constituents, on complexes whose plaquettes generate H_1(.; Z); for Q8 the non-spinor ones"
+  },
+  {
+   "id": "C6",
+   "statement": "PHASE11_REPORT, PHASE11_STRONGEST_THEOREM, PHASE12 drafts: printed interval endpoints (e.g. Y6(539311) <= 9.3885937)",
+   "problem": "88 printed bounds (36 distinct values) rounded to nearest in the wrong direction, by one unit in the last digit; transport bound 1.69927 and share <= 19.7 % rounded the wrong way",
+   "correction": "every printed bound rounded outward (phase12_rounding_audit.py, test_rounding_outward); no conclusion changes (every comparison using a corrected value keeps a margin >= 2.7e-4); the frozen preregistration file is left unchanged"
   }
  ]
 }

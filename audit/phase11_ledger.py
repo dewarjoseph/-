@@ -39,8 +39,8 @@ def main():
         'statement': ('The Phase X report cites both certificates; its ledger (written at 529bba9) and tests stopped at R = 14. Both are now '
                       'independently re-certified (own enumeration, own completeness test, symbolic derivation of the overlap function, banded '
                       'Higham certificates). The ledger and tests use the R = 15 value. With R = 15 the comparison E_*(1387) > E_*(FR30) no longer '
-                      'needs the Phase VIII bound 8.7642270 (a 1.77M-dimensional eigenvector that is not stored): the exact level-5 bound '
-                      'Y_5(FR30) = 8.797011 < 8.7999987 suffices, and it is recomputed independently in Phase XI.')}
+                      'needs the Phase VIII bound 8.7642271 (a 1.77M-dimensional eigenvector that is not stored): the exact level-5 bound '
+                      'Y_5(FR30) = 8.797012 < 8.7999987 suffices, and it is recomputed independently in Phase XI.')}
     proofs = J('phase11_proofs.json', {})
     y6 = {r['j']: r for r in JL('phase11_orbit_Y6.jsonl')}; p10y6 = {}
     cls_j = {1387: 184323, 1389: 184338, 1391: 184342}
@@ -76,12 +76,12 @@ def main():
         ('O11', 'Higham Cholesky certificate (Thm 10.3) implemented soundly', 'floating point with rounding bound',
          'independent path: RCM + banded LAPACK dpbtrf, u = 2^-52, Frobenius sum inflated by (1 + 2Ku); the GPU path used dense cuSOLVER with u = 2^-51', 'discharged'),
         ('O12', 'amplification factors rounded to double', 'rounding bound', 'evaluated at 60 digits; entry error 24 * max amp * 2^-52 subtracted', 'discharged'),
-        ('O13', 'the localisation certificates of table 1.1: E_*(1387) >= 8.7999988 (R = 15) and >= 8.7644994 (R = 14), E_*(FR30) >= 7.954292 (Phase VII, R = 12), twin >= 8.7644994 (R = 14)', 'certificate',
+        ('O13', 'the localisation certificates of table 1.1: E_*(1387) >= 8.7999987 (R = 15) and >= 8.7644993 (R = 14), E_*(FR30) >= 7.954292 (Phase VII, R = 12), twin >= 8.7644993 (R = 14)', 'certificate',
          'independently re-certified: ' + json.dumps({k: {kk: reconciliation[k][kk] for kk in ('phase11_value', 'phase11_balls', 'phase11_all_certified')} for k in ('1387_R15', '1387_R14', 'FR30_R12', 'twin539311_R14')}), 'discharged'),
-        ('O14', 'E_*(FR30) <= 8.7642270381 (Phase VIII sigma^5 of type 59, 884 736 tiles)', 'exact rational of an unstored vector',
+        ('O14', 'E_*(FR30) <= 8.7642270382 (Phase VIII sigma^5 of type 59, 884 736 tiles)', 'exact rational of an unstored vector',
          'reproduced independently by phase11_fr30_upper (sigma^5 of the minimising self-loop type): %s' % fr30_note, 'discharged (independent value 5e-9 higher)'),
         ('O15', 'the mirror twin 539311 has a higher floor than FR30', 'certificate + upper bound',
-         'Phase X used the Phase VIII bound (artifact) against the R = 14 twin certificate. Phase XI: twin R = 15 certificate %s > Y5(FR30) = 8.7970113 (independent exact)' % (rec('target_twin_R15').get('Lambda_R_certified'),), 'discharged without artifacts'),
+         'Phase X used the Phase VIII bound (artifact) against the R = 14 twin certificate. Phase XI: twin R = 15 certificate %s > Y5(FR30) = 8.7970114 (independent exact)' % (rec('target_twin_R15').get('Lambda_R_certified'),), 'discharged without artifacts'),
         ('O16', 'Z^3 class-field-matched pair (X.5): identical classes, gauge-equivalent shadows, separation >= 0.18', 'exact + certificate',
          'independent rebuild: %s' % json.dumps({k: z3.get('audit', {}).get('class_matched', {}).get(k) for k in ('class_fields_identical', 'shadow_ratio_flat', 'certified_separation')}), 'discharged'),
         ('O17', 'Z^3 trace-matched pair: two shadows certified above the non-Abelian floor', 'floating point with heuristic margin',

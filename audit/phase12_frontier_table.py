@@ -6,12 +6,17 @@ and FR30 for reference.  Each endpoint carries its source and its certificate ty
   lower  IMS + Higham banded Cholesky (phase11_cert.jsonl; phase12_independent.jsonl when the independent rerun is stored)
   upper  exact rational Rayleigh quotient on a pinned supertile (phase11_orbit_Y6.jsonl, phase11_fr30_upper.json)
 Status against the leader's certified lower bound: leader / contender (intervals overlap) / proven_inferior (U < L_leader).
+Printed decimals are rounded outward (lower endpoints down, upper endpoints up), computed exactly from the stored values.
 Usage: python -u -I audit/phase12_frontier_table.py -> audit/results/phase12_frontier.json, .csv"""
-import os, json, csv
+import os, json, csv, math
 from fractions import Fraction
 HERE = os.path.dirname(os.path.abspath(__file__)); RES = os.path.join(HERE, 'results')
 def JL(n):
     p = os.path.join(RES, n); return [json.loads(l) for l in open(p)] if os.path.exists(p) else []
+def outward(x, up, d=7):
+    """x (float or Fraction, positive) to d decimals, rounded up (upper bound) or down (lower bound), exactly."""
+    q = Fraction(x) * 10 ** d; n = math.ceil(q) if up else math.floor(q)
+    return f'{n // 10 ** d}.{n % 10 ** d:0{d}d}'
 if __name__ == '__main__':
     cert = {}
     for r in JL('phase11_cert.jsonl'):
@@ -30,7 +35,7 @@ if __name__ == '__main__':
         if best: L, Ls = best['Lambda_R_certified'], f"IMS R={best['R']}, {best['distinct_balls']} balls (phase11_chair)"
         else: L, Ls = p10[j]['Lambda_R_certified'], f"IMS R={p10[j]['R']}, {p10[j]['distinct_balls']} balls (Phase X)"
         ind_note = None
-        for r in ind.get(spec, []): ind_note = f"independently reproduced: IMS R={r['R']} >= {r['Lambda_R_certified']:.7f} (phase12_independent)"
+        for r in ind.get(spec, []): ind_note = f"independently reproduced: IMS R={r['R']} >= {outward(r['Lambda_R_certified'], False)} (phase12_independent)"
         U = Fraction(int(y6[j]['upper_num']), int(y6[j]['upper_den']))
         rows.append({'rule': name, 'extended_index': j, 'L': L, 'L_source': Ls, 'L_type': 'IMS + Higham banded Cholesky', 'L_independent': ind_note,
                      'U': float(U), 'U_exact': f'{U.numerator}/{U.denominator}', 'U_source': 'Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)',
@@ -49,5 +54,6 @@ if __name__ == '__main__':
     json.dump(out, open(os.path.join(RES, 'phase12_frontier.json'), 'w'), indent=1)
     with open(os.path.join(RES, 'phase12_frontier.csv'), 'w', newline='') as f:
         w = csv.writer(f); w.writerow(['rule', 'L', 'L_source', 'U', 'U_source', 'status', 'L_independent'])
-        for r in rows: w.writerow([r['rule'], f"{r['L']:.7f}", r['L_source'], f"{r['U']:.7f}", r['U_source'], r['status'], r['L_independent'] or ''])
-    for r in rows: print(f"{r['rule']:>12} [{r['L']:.7f}, {r['U']:.7f}] {r['status']}")
+        for r in rows: w.writerow([r['rule'], outward(r['L'], False), r['L_source'], outward(Fraction(r['U_exact']), True), r['U_source'],
+                                   r['status'], r['L_independent'] or ''])
+    for r in rows: print(f"{r['rule']:>12} [{outward(r['L'], False)}, {outward(Fraction(r['U_exact']), True)}] {r['status']}")

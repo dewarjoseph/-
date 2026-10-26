@@ -208,13 +208,45 @@ def test_intervention_both_signs():
 # ------------------------------------------------------------------ ledger
 def test_phase12_ledger_links():
     d = J('phase12_ledger.json'); names = {n for n in globals() if n.startswith('test_')}
-    assert len(d['claims']) >= 20 and len(d['corrections']) == 5
+    assert len(d['claims']) >= 20 and [c['id'] for c in d['corrections']] == ['C1', 'C2', 'C3', 'C4', 'C5', 'C6']
     p11 = open(os.path.join(ROOT, 'tests', 'test_phase11.py')).read()
     for c in d['claims']:
         for t in c['test'].split(', '):
             if t == '-': continue
             if t.startswith('phase11:'): assert f'def {t[8:]}(' in p11, t
             else: assert t in names, t
+
+def test_rounding_outward():
+    """every printed bound in the Phase XI-XII deliverables is rounded outward (correction C6)"""
+    import phase12_rounding_audit as A
+    assert A.audit() == []
+
+def test_rounding_audit_catches_inward_rounding(tmp_path, monkeypatch):
+    """adversarial: an upper bound rounded down, a lower bound rounded up and a low-precision claim after >= are each flagged;
+    an allowed requested level mu and a value marked approximate are not"""
+    import phase12_rounding_audit as A
+    (tmp_path / 'deliverables').mkdir()
+    (tmp_path / 'deliverables' / 'PHASE12_REPORT.md').write_text(
+        'E(539311) ≤ 9.3885937. E(1387) ≥ 8.7999988 (R = 15). E(539311) ≥ 8.80. Fine: 9.3885938, 9.1104981, '
+        'the preregistered 9.1105 rounded down; Lambda_6 ≈ 3.6555586.\n')
+    monkeypatch.setattr(A, 'ROOT', str(tmp_path))
+    found = sorted((r['printed'], r['outward']) for r in A.audit(docs=['deliverables/PHASE12_REPORT.md']))
+    assert found == [('8.7999988', '8.7999987'), ('8.80', '8.79'), ('9.3885937', '9.3885938')]
+
+def test_frontier_csv_outward():
+    """the frontier table prints its endpoints rounded outward from the exact stored values"""
+    import csv
+    d = {r['rule']: r for r in J('phase12_frontier.json')['rows']}
+    for row in csv.DictReader(open(os.path.join(RES, 'phase12_frontier.csv'))):
+        r = d[row['rule']]
+        assert Fraction(row['L']) <= Fraction(r['L']) < Fraction(row['L']) + Fraction(1, 10 ** 7)
+        assert Fraction(row['U']) - Fraction(1, 10 ** 7) < Fraction(r['U_exact']) <= Fraction(row['U'])
+
+def test_preregistration_next_frozen():
+    """the frozen prediction for the next experiment is byte-identical to its commit (562eb6d)"""
+    import hashlib
+    h = hashlib.sha256(open(os.path.join(RES, 'phase12_preregistration_next.json'), 'rb').read()).hexdigest()
+    assert h == 'fa14a29ff3c765a9e0bb9fde9159269c3bb6e185989aae04a820c16510d969ce'
 
 def test_stored_certificate_shifts_exact():
     """phase11_chair.banded_cert's assertion (d - mu) + mu == d does not prove the shift exact (24 - 0.1 passes it); every stored

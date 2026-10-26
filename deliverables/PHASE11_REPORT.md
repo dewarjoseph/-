@@ -66,12 +66,12 @@
 
   | member | certified E_\* interval |
   |---|---|
-  | 539311 | [8.7999990, 9.3885937] |
+  | 539311 | [8.7999990, 9.3885938] |
   | 1387 | [**9.1104981**, 9.3679502] |
-  | 539291 | [7.1408386, 9.2499400] (lower bound from Phase X) |
-  | 1389 | [8.7644993, 9.2104998] |
+  | 539291 | [7.1408386, 9.2499401] (lower bound from Phase X) |
+  | 1389 | [8.7644993, 9.2104999] |
   | 1391 | [8.7644989, 9.1104007] |
-  | 539288 | [6.8499994, 9.0982534] |
+  | 539288 | [6.8499994, 9.0982535] |
 
   1391 and 539288 lie wholly below 1387's interval. The remaining four intervals overlap, no member is proven superior, and no optimum is claimed.
 - **How far certification can go** (§2.4).
@@ -146,15 +146,15 @@
 
 | certificate | Phase X / VII value | balls (Phase X) | Phase XI value (independent) | balls (Phase XI), rejected | all pass |
 |---|---|---|---|---|---|
-| FR30, R = 12 | 7.954292265 | 2315 | **7.954291278** (μ chosen 10⁻⁶ lower) | 2315, 0 | yes |
-| 1387, R = 14 | 8.764499373 | 7527 | **8.764499519** | 7527, 0 | yes |
-| **1387, R = 15** | **8.799998780** | 10321 | **8.799999009** | 10321, 0 | **yes** |
-| twin 539311, R = 14 | 8.764499373 | 7527 | **8.764499519** | 7527, 0 | yes |
+| FR30, R = 12 | 7.954292264 | 2315 | **7.954291278** (μ chosen 10⁻⁶ lower) | 2315, 0 | yes |
+| 1387, R = 14 | 8.764499373 | 7527 | **8.764499518** | 7527, 0 | yes |
+| **1387, R = 15** | **8.799998779** | 10321 | **8.799999008** | 10321, 0 | **yes** |
+| twin 539311, R = 14 | 8.764499373 | 7527 | **8.764499518** | 7527, 0 | yes |
 
 **Resolution.**
 - The R = 15 certificate is independently verified. The ledger and tests now carry it.
 - The certified enclosure of class 1387 from the audited certificates is E_\*(1387) ∈ [8.7999990, 9.3679502]. The new R = 20 certificate raises it to **[9.1104981, 9.3679502]** (§2.1).
-- **The comparison with FR30 no longer depends on the Phase VIII bound.** Phase VIII's 8.7642270 comes from a 1.77M-dimensional eigenvector that is not stored. FR30's exact level-5 bound Y₅(FR30) = 8.7970113 (exact rational 3070587004765936/349048886578754) < 8.7999990, recomputed independently, already gives a certified separation ≥ 0.0029876.
+- **The comparison with FR30 no longer depends on the Phase VIII bound.** Phase VIII's 8.7642271 comes from a 1.77M-dimensional eigenvector that is not stored. FR30's exact level-5 bound Y₅(FR30) = 8.7970114 (exact rational 3070587004765936/349048886578754) < 8.7999990, recomputed independently, already gives a certified separation ≥ 0.0029876.
 - With FR30's inflated-star bound, now recomputed independently (U₅ = 8.7642271, §2.1), the separation is ≥ 0.0357719.
 
 ### 1.2 The proof-obligation table
@@ -175,12 +175,12 @@ A passing regression test only shows that an implementation is consistent; it is
 | O10 | every enumerated ball is complete | exact geometric check | independent criterion: nearest unowned cube centre at ≥ R + √3/2. 0 rejections at R = 8, 12, 14, 15, 16 (m = 4) and R = 18 (m = 5; m = 4 rejects 50 441 centres, and the run stops as designed) | **verified** |
 | O11 | the Higham certificate is implemented soundly | floating point with rounding bound | different factorization, ordering and code, with a two-ulp unit | **verified** |
 | O12 | rounding of the amplification factors | error bound | 60-digit evaluation; 24·max amp·2⁻⁵² subtracted | **verified** |
-| O13 | E_\*(1387) ≥ 8.7999988 (R = 15) | certificate | table 1.1 | **verified** |
-| O14 | E_\*(FR30) ≤ 8.7642270 (Phase VIII) | rational of an unstored vector | **re-derived independently**: U₅ = 8.7642270435 (`phase11_fr30_upper.py`), 5·10⁻⁹ above Phase VIII's value. It is load-bearing only for 1389 > FR30 and 1391 > FR30 (§2.1) | **verified** |
-| O15 | the twin's floor exceeds FR30's | certificate + upper bound | twin R = 14 re-certified (8.7644995); Phase X's comparison used Phase VIII's 8.7642270 (artifact). **The twin is now certified at R = 15** (8.7999990 > Y₅(FR30) = 8.7970113, both independent) | **verified without artifacts** (§2.2) |
-| O16 | ℤ³ class-field-matched pair (X.5) | exact plus certificate | independent rebuild: identical classes on all 24 plaquettes; shadow ratio connections flat for k = 1, 2, 3; upper bound 0.404134696 exact (θ = 0); lower bound 0.585785866 (free cell). **Separation 0.18165, confirmed** | **verified** |
+| O13 | E_\*(1387) ≥ 8.7999987 (R = 15) | certificate | table 1.1 | **verified** |
+| O14 | E_\*(FR30) ≤ 8.7642271 (Phase VIII) | rational of an unstored vector | **re-derived independently**: U₅ = 8.7642270435 (`phase11_fr30_upper.py`), 5·10⁻⁹ above Phase VIII's value. It is load-bearing only for 1389 > FR30 and 1391 > FR30 (§2.1) | **verified** |
+| O15 | the twin's floor exceeds FR30's | certificate + upper bound | twin R = 14 re-certified (8.7644995); Phase X's comparison used Phase VIII's 8.7642271 (artifact). **The twin is now certified at R = 15** (8.7999990 > Y₅(FR30) = 8.7970114, both independent) | **verified without artifacts** (§2.2) |
+| O16 | ℤ³ class-field-matched pair (X.5) | exact plus certificate | independent rebuild: identical classes on all 24 plaquettes; shadow ratio connections flat for k = 1, 2, 3; upper bound 0.404134697 exact (θ = 0); lower bound 0.585785865 (free cell). **Separation 0.18165, confirmed** | **verified** |
 | O17 | ℤ³ trace-matched pair: two shadows certified above the non-Abelian floor | floating point with heuristic margin | Phase X's Lipschitz branch-and-bound uses float eigenvalues with a 1.2·10⁻⁹ margin. This is strong evidence, **not a strict certificate** | **reclassified [E]** |
-| O18 | census-wide E_\* ≥ 3.788 and 806 classes rigorously below FR30 | certificates | independent recomputation of free-T₃ Higham bounds and exact Y₄ for all 1098 classes: minimum certified free-T₃ bound **3.7882948** (Phase X: 3.7882948); **806** classes with exact Y₄ < 7.954291 (identical to Phase X); all 1098 exact Y₄ rationals recomputed | **verified** |
+| O18 | census-wide E_\* ≥ 3.788 and 806 classes rigorously below FR30 | certificates | independent recomputation of free-T₃ Higham bounds and exact Y₄ for all 1098 classes: minimum certified free-T₃ bound **3.7882947** (Phase X: 3.7882947); **806** classes with exact Y₄ < 7.954291 (identical to Phase X); all 1098 exact Y₄ rationals recomputed | **verified** |
 | O19 | primitivity of every proper rule; period 2 for the twins | exact | recomputed independently. A bug in Phase XI's own irreducibility flag (integer overflow) was found and fixed; the affected record carries a note. The certificate does not use the flag | **verified** |
 | O20 | periodic-approximant floors (Phase X §9, row 11) | floating point | unchanged | **[E]** |
 
@@ -212,12 +212,12 @@ A passing regression test only shows that an implementation is consistent; it is
 | rank by L | class | certified lower L (source) | exact upper U (source) | status |
 |---|---|---|---|---|
 | 1 | **1387** | **9.1104981** (IMS R = 20, 24 571 balls, new; R = 15: 8.7999990) | 9.3679502 (Y₆; Phase X's stored-only value, now recomputed independently) | **leader** |
-| 2 | 1389 | **8.7644993** (IMS R = 16, 12 193 balls, new) | 9.2104998 (Y₆, recomputed independently) | contender |
+| 2 | 1389 | **8.7644993** (IMS R = 16, 12 193 balls, new) | 9.2104999 (Y₆, recomputed independently) | contender |
 | — | 1391 | **8.7644989** (IMS R = 18, 20 168 balls, new) | 9.1104007 (Y₆, recomputed independently) | **proven inferior** (R = 20) |
-| — | 1386 (FR30) | 7.9542923 (Phase VII R = 12; independent 7.9542913) | 8.7642270 (σ⁵ of a self-loop type; Phase VIII value reproduced independently, below) | proven inferior |
+| — | 1386 (FR30) | 7.9542922 (Phase VII R = 12; independent 7.9542912) | 8.7642271 (σ⁵ of a self-loop type; Phase VIII value reproduced independently, below) | proven inferior |
 | — | 901 | 6.5510740 (R = 8) | 8.6366663 (Y₆, artifact) | proven inferior |
-| — | 1144 | 5.4726372 (R = 8) | 8.1414086 (D₈, exact) | proven inferior |
-| — | every other class | free-T₃ Higham bound (min 3.7882948, independent) | exact Y₄, Y₅ or D_R | proven inferior |
+| — | 1144 | 5.4726371 (R = 8) | 8.1414086 (D₈, exact) | proven inferior |
+| — | every other class | free-T₃ Higham bound (min 3.7882947, independent) | exact Y₄, Y₅ or D_R | proven inferior |
 
 **Classification against the leader** (L_best = 9.1104981; `phase11_leaderboard.json`):
 - **1095 classes proven inferior** by the R = 15 certificate: each has an exact rational upper bound below 8.7999987. Phase X's count is confirmed with the independent R = 15 certificate.
@@ -226,14 +226,14 @@ A passing regression test only shows that an implementation is consistent; it is
 - **No class is proven superior.**
 - **Hence the maximiser of E_\* over all 6561 proper Chair44 rules is class 1387 or class 1389** [C].
 - Census side-results, recomputed independently:
-  - every class has E_\* ≥ 3.7882948;
+  - every class has E_\* ≥ 3.7882947;
   - **809** classes are rigorously below FR30 using every available upper bound. Phase X's 806 used Y₄ alone, and is reproduced exactly with Y₄.
 
 **The preregistered certificate targets.**
 - **1389, R = 16**: all 12 193 legal balls (no rejections, m = 4) pass at μ = 2297561/262144. So **E_\*(1389) ≥ 8.7644993**.
-  - This exceeds FR30's Phase VIII bound 8.7642270 (artifact), but **not** FR30's independent level-5 bound Y₅ = 8.7970113.
-  - To make the comparison artifact-free, FR30's inflated-star chain was re-implemented (`phase11_fr30_upper.py`). It reproduces Phase VIII's U₃ = 8.7795327 and gives an exact U₄ = 8.7662711, which is not yet low enough.
-  - **U₅ = 6534049968655174/745536364613169 = 8.7642270435** (σ⁵ of the minimising self-loop type, 884 736 tiles, exact rational Rayleigh quotient). It reproduces the Phase VIII artifact 8.7642270381 to 5·10⁻⁹.
+  - This exceeds FR30's Phase VIII bound 8.7642271 (artifact), but **not** FR30's independent level-5 bound Y₅ = 8.7970114.
+  - To make the comparison artifact-free, FR30's inflated-star chain was re-implemented (`phase11_fr30_upper.py`). It reproduces Phase VIII's U₃ = 8.7795328 and gives an exact U₄ = 8.7662711, which is not yet low enough.
+  - **U₅ = 6534049968655174/745536364613169 = 8.7642270435** (σ⁵ of the minimising self-loop type, 884 736 tiles, exact rational Rayleigh quotient). It reproduces the Phase VIII artifact 8.7642270382 to 5·10⁻⁹.
   - **Hence E_\*(1389) ≥ 8.7644993 > 8.7642271 ≥ E_\*(FR30), with no stored-only artifact** [C]. The separation is ≥ 0.000272.
 - **1391, R = 18**:
   - At m = 4 the completeness check rejected balls, and the run stopped as designed.
@@ -244,7 +244,7 @@ A passing regression test only shows that an implementation is consistent; it is
   - Run time 1.8 h on 4 cores: enumeration 46 min, certification 60 min (0.72 s per ball per core).
 - **1387, R = 20** (μ = 9.1105): **passed.** At m = 5 the completeness test accepts all 2 949 120 centres (0 rejections). All 24 571 distinct legal balls (4737–4838 tiles, RCM bandwidth ≤ 1626) pass at μ = 9553051/1048576.
   - So **E_\*(1387) ≥ 9.1104981** [C], up from 8.7999990.
-  - It exceeds the independent exact Y₆ of 1391 (9.1104007, by 0.0000974) and of 539288 (9.0982534). **Both are proven inferior to 1387 without artifacts.**
+  - It exceeds the independent exact Y₆ of 1391 (9.1104007, by 0.0000974) and of 539288 (9.0982535). **Both are proven inferior to 1387 without artifacts.**
   - Run time 2.8 h on 4 cores: enumeration 45 min, certification 2.1 h.
 
 ### 2.2 The extended space: a certified funnel instead of a screen
@@ -255,33 +255,33 @@ Phase X computed Y₂ for all 6⁸ decorations, Y₃ for the top half by Y₂, a
 |---|---|---|---|---|
 | X3: exact Y₃ | 280 332 (all) | **235 644** | 44 688 | 30 min |
 | X4: exact Y₄ | 44 688 | **44 650** | 38 | 34 min |
-| X5: exact Y₅ | 38 | **30** (FR30 and its mirror 539315 at Y₅ = 8.7970113 among them) | 8 | 2 min |
-| X6: exact D₈ (all legal 8-balls) | 2 outside the orbit: 515983 = 1144·(x y), 515963 = 901·(y z) | **515983**. A rare legal environment again: 476 legal 1-star types, only 265 visible in T₅. D₈ = 8.1678858 against Y₅ = 8.8090 | 7 | 15 min |
-| X7: exact Y₆ (262 144 tiles) | 515963 | **515963** (Y₆ = 8.7812558 against Y₅ = 8.8961) | **6** | 2 min |
+| X5: exact Y₅ | 38 | **30** (FR30 and its mirror 539315 at Y₅ = 8.7970114 among them) | 8 | 2 min |
+| X6: exact D₈ (all legal 8-balls) | 2 outside the orbit: 515983 = 1144·(x y), 515963 = 901·(y z) | **515983**. A rare legal environment again: 476 legal 1-star types, only 265 visible in T₅. D₈ = 8.1678858 against Y₅ = 8.8091 | 7 | 15 min |
+| X7: exact Y₆ (262 144 tiles) | 515963 | **515963** (Y₆ = 8.7812559 against Y₅ = 8.8961) | **6** | 2 min |
 
 - Every flag was rechecked from the stored rationals (`tests/test_phase11.py`).
 - **The certified statement** (`phase11_frontier_summary.json`) [C]:
   - every one of the 1 679 616 frame rules of the extended space outside the six rules {1387, 1389, 1391, 539311, 539291, 539288} has an exact rational upper bound on E_\* below 8.7999987 ≤ E_\*(1387);
   - **so the maximiser of E_\* over the whole extended space lies in this set of six.**
   - The set is exactly the right-S₃ orbit of 1387 (§2.3).
-  - The maximal floor satisfies 9.1104981 ≤ max E_\* ≤ 9.3885937, the independent exact Y₆ of 539311.
+  - The maximal floor satisfies 9.1104981 ≤ max E_\* ≤ 9.3885938, the independent exact Y₆ of 539311.
 
 **The orbit leaderboard** (`phase11_leaderboard.json:orbit_1387`; independent bounds unless marked):
 
 | member (P applied to 1387's child frames) | certified lower L (source) | exact upper U (source) | status |
 |---|---|---|---|
-| 539311 = 1387·(x y) | **8.7999990** (IMS R = 15, 10 321 balls) | 9.3885937 (Y₆) | contender |
+| 539311 = 1387·(x y) | **8.7999990** (IMS R = 15, 10 321 balls) | 9.3885938 (Y₆) | contender |
 | 1387 (identity) | **9.1104981** (IMS R = 20, 24 571 balls) | 9.3679502 (Y₆) | **leader** |
-| 539291 = 1387·(y z) | 7.1408386 (IMS R = 8, Phase X) | 9.2499400 (Y₆) | contender |
-| 1389 = 1387·(2 0 1) | 8.7644993 (IMS R = 16, 12 193 balls) | 9.2104998 (Y₆) | contender |
+| 539291 = 1387·(y z) | 7.1408386 (IMS R = 8, Phase X) | 9.2499401 (Y₆) | contender |
+| 1389 = 1387·(2 0 1) | 8.7644993 (IMS R = 16, 12 193 balls) | 9.2104999 (Y₆) | contender |
 | 1391 = 1387·(1 2 0) | 8.7644989 (IMS R = 18, 20 168 balls, new) | 9.1104007 (Y₆) | **proven inferior** |
-| 539288 = 1387·(x z) | 6.8499994 (IMS R = 8, 829 balls, new) | **9.0982534** (Y₆, new) | **proven inferior** |
+| 539288 = 1387·(x z) | 6.8499994 (IMS R = 8, 829 balls, new) | **9.0982535** (Y₆, new) | **proven inferior** |
 
 - **Within the orbit, 1391 and 539288 are proven inferior to 1387** (U < 9.1104981 ≤ E_\*(1387)).
 - The other three intervals overlap 1387's [9.1104981, 9.3679502], and no member is proven superior.
 - In the preregistered vocabulary these three comparisons are **unresolved**: the intervals overlap, and no available method decides them at feasible cost (§2.4).
 - The Y₆ recomputations reproduce Phase X's stored-only values to ≤ 10⁻⁹ where they exist. The bound for 539288 is new, and it moves 539288 to the bottom of the orbit.
-- The **mirror twin 539311** is certified at R = 15 as well: all 10 321 balls pass, E_\*(539311) ≥ 8.7999990. This makes "the twin is above FR30" independent of the Phase VIII artifact (Y₅(FR30) = 8.7970113 < 8.7999990).
+- The **mirror twin 539311** is certified at R = 15 as well: all 10 321 balls pass, E_\*(539311) ≥ 8.7999990. This makes "the twin is above FR30" independent of the Phase VIII artifact (Y₅(FR30) = 8.7970114 < 8.7999990).
 - **Cost.** The whole extended-space certification took about 1.5 CPU-hours per core on 4 cores. It used only small exact eigenproblems (≤ 262 144 tiles) and needed no screening assumption.
   - Phase X's screen had missed nothing: its top-10 list contained all six orbit members.
   - But the screen gave no proof that nothing else competes; the funnel does.
@@ -311,8 +311,8 @@ Phase X computed Y₂ for all 6⁸ decorations, Y₃ for the top half by Y₂, a
 | 937 | 937 | 941 | 942 | 516812 | 516791 | 516793 |
 
 **The finding.**
-- Among all rules with a computed level-5 bound (Phase X), the six largest are 539311 (9.4159) > 1387 (9.3928) > 539291 (9.2718) > 1389 (9.2187) > 1391 (9.1221) > 539288 (9.1124).
-- **These are exactly the right-S₃ orbit of 1387.** The next value is FR30's 8.7970.
+- Among all rules with a computed level-5 bound (Phase X), the six largest are 539311 (9.4159) > 1387 (9.3929) > 539291 (9.2719) > 1389 (9.2188) > 1391 (9.1222) > 539288 (9.1124).
+- **These are exactly the right-S₃ orbit of 1387.** The next value is FR30's 8.7971.
 - Whether any other rule of the 6⁸ space can compete is decided by the certified funnel (§2.2), not by this list.
 - The extremal problem, the "unresolved contenders" 1389 and 1391, and the twins all reduce to one question: **which member of one orbit is highest.**
 - In the census index the proper part of the orbit is a cyclic shift of every child's frame choice. Classes 1387, 1389 and 1391 differ only in the first two digits.
@@ -337,16 +337,16 @@ Phase X computed Y₂ for all 6⁸ decorations, Y₃ for the top half by Y₂, a
 
 | rule | Λ₁₆ ≤ | Λ₁₈ ≤ | Λ₂₀ ≤ | Λ₂₂ ≤ |
 |---|---|---|---|---|
-| 1387 (4753) | 8.97335 | 9.06194 | 9.12509 | 9.16748 |
-| 1391 | — | 8.80367 | — | — |
+| 1387 (4753) | 8.97336 | 9.06194 | 9.12509 | 9.16749 |
+| 1391 | — | 8.80368 | — | — |
 | 539311 | — | — | 9.14201 | 9.18506 |
 
 **Consequences** (exact, given the probe values):
 - **The 1391 target (R = 18, μ = 8.7645) is not excluded** (8.8037 > 8.7645). It was run (§2.1).
 - **The 1387 target (R = 20, μ = 9.1105) is not excluded** (9.1251 > 9.1105), but the margin is 0.015 over a 60-ball sample.
-  - **It passed** (§2.1): E_\*(1387) ≥ 9.1104981 exceeds the independent Y₆ of 1391 (9.1104007) and of 539288 (9.0982534, new), and removes both from the frontier.
+  - **It passed** (§2.1): E_\*(1387) ≥ 9.1104981 exceeds the independent Y₆ of 1391 (9.1104007) and of 539288 (9.0982535, new), and removes both from the frontier.
   - It does not touch the other three members.
-- **No certificate of 1387 at R ∈ {16, 18, 20, 22} exceeds 9.1675.** The exact upper bounds of 1389 (9.2104998), 539291 (9.2499400) and 539311 (9.3885937) lie above that. With these upper bounds, no certificate of 1387 at these radii separates it from them.
+- **No certificate of 1387 at R ∈ {16, 18, 20, 22} exceeds 9.1675.** The exact upper bounds of 1389 (9.2104999), 539291 (9.2499401) and 539311 (9.3885938) lie above that. With these upper bounds, no certificate of 1387 at these radii separates it from them.
   - A smaller upper bound for one of them would require a smaller E_\* for it, which nobody knows.
 - **The same holds in the other direction for the co-leader:** Λ_R(539311) ≤ 9.1851 < 9.3679502 = U(1387) at R ∈ {20, 22}.
 - **So the comparison of the co-leaders 1387 and 539311 is out of reach of IMS certificates at every probed radius up to 22, in both directions.** The probes cover even R only. The values increase with R, but monotonicity of Λ_R in R is not proved.
@@ -394,7 +394,7 @@ Under S:
 - The upper side converges with **no rate** and no hypothesis beyond bounded degree. Theorem C(iv)–(v) shows that no universal rate exists.
 - "min" in the brief's formula is a minimum when the language is finite at each radius (finite local complexity). Otherwise it is an infimum.
 - Dirichlet (pinned) boundary conditions are essential. **Neumann (free) windows do not converge to E_\*, under any geometric hypothesis.**
-  - On the π-flux ladder (§6), E_\* = 3 − √5 = 0.763932 exactly, but the free windows converge to 2 − √2 = 0.585786.
+  - On the π-flux ladder (§6), E_\* = 3 − √5 ≈ 0.763932 (an exact closed form), but the free windows converge to 2 − √2 ≈ 0.585786.
   - With flux π/2 they converge to (3 − √5)/2 = 0.381966, against E_\* = 3 − √6 = 0.550510.
   - End states sit below the bulk floor: a lattice analogue of the de Gennes surface-state constant Θ₀ < 1.
   - The Chair44 saturation of F_k observed in Phase X is the same phenomenon.
@@ -581,6 +581,8 @@ The same holds for any class of periodic Γ-connections on ℤ^D that is closed 
 
 ### 5.1 The weakest legal environments
 
+D₈ and Λ₈ in this table are floating-point bottoms (`phase11_mechanism.json`), rounded to nearest. They describe the environments and are not certificates; the certified values are in §1–2 (e.g. Λ₈(1391) ≥ 6.9198389, `phase10_ims.jsonl`).
+
 | rule | legal 8-balls (gauge-distinct) | D₈ | Λ₈ | centre of the minimising ball: largest two-cycle angle θ₂, triangle angle θ₃ | radius-1 types whose centre has **no non-trivial two-cycle** |
 |---|---|---|---|---|---|
 | FR30 (4752) | 747 (415) | 9.05152 | 6.56278 | **θ₂ = 0**, θ₃ = π | **3** |
@@ -671,7 +673,7 @@ The same holds for any class of periodic Γ-connections on ℤ^D that is closed 
 | **class-field insufficiency** (the analogue of X.5): Fibonacci word with X(a) = q₁, X(b) = −q₁, against the constant q₁ ladder. Every plaquette is in the Q₈ class {±q₁} in both, and the shadows χ_k coincide letter by letter | E_\*(Fib q₁/−q₁) ∈ [0.2535055, 0.2535409], E_\*(const q₁) ∈ [0.5504947, 0.5505254], **certified separation 0.29695**. Both holonomy groups are Abelian (⊂ ⟨q₁⟩ ≅ ℤ₄) | [C] |
 | **no finite radius determines E_\*** (Theorem I) | A_m = (aᵐb)^∞, a = +1, b = −1. Certified enclosures at W = 64: m = 1: [0.585613, 0.586124], m = 2: [0.410878, 0.411394], …, m = 24: [0.013200, 0.013795], m = 32: [0.007579, 0.008176], m = 64: [0.001617, 0.002216]. A₂₄ and A₃₂ share the radius-12 language | [P + C] |
 | **Π has no closed recursion** | A₆, A₉: identical radius-3 languages, so identical Π₃ (D₃ = 0.1522409 in both); radius-4 languages differ; D₄ = 0.1300649 against 0.0978870 (exact) | [C] |
-| **Neumann windows fail** (A1 remark) | π-flux ladder: free windows → 2 − √2 = 0.585786 < 3 − √5 = 0.763932 = E_\*. π/2-flux: → (3 − √5)/2 < 3 − √6 | [P + C] |
+| **Neumann windows fail** (A1 remark) | π-flux ladder: free windows → 2 − √2 ≈ 0.585786 < 3 − √5 ≈ 0.763932 = E_\*. π/2-flux: → (3 − √5)/2 < 3 − √6 | [P + C] |
 | **legal-patch coverage is necessary** (D(v)) | a → dd, b → cb, c → aa, d → bc: 'cc' is legal, first appearing in σ¹¹(a). With a, b, d = −1 and c = +1, the visible-only "certificate" from σ¹⁰(a) (1024 letters) claims Λ ≥ 0.4905, 0.5142, 0.5204, 0.5219 at W = 8, 16, 32, 64. The complete enumeration has a legal environment with exact bound ≤ 0.40789. **Each visible-only certificate is false.** With a, b, d = q₁ the visible certificate is false at W ≥ 16 | [C] |
 | **minimality** (A3) | a → aab, b → bb (reducible), a = +1, b = −1: E_\* ≤ 0.40816 on the fixed point's orbit closure, while b^∞ ∈ Ω has E_\* = 3 − √5 = 0.76393. E_\* is not constant on a non-minimal hull | [C] |
 | **representation** (H3) | Fibonacci (q₁, q₂): spinor E_\* ∈ [0.348565, 0.348699]. The adjoint (SO(3)) floor ∈ [0.393406, 0.393537] equals the χ₁-shadow floor [0.393406, 0.393537], the smallest of the three shadows (χ₂: 0.49515…, χ₃: 0.76393…). **Here the non-Abelian floor lies below every shadow**, the opposite of FR30 | [C] |
@@ -794,7 +796,7 @@ It stores two numbers per scale, not the operator, the spectrum, or the environm
 | 8 | "non-Abelian holonomy raises the floor above its shadows" | **[F]**, again | Fibonacci (q₁, q₂) ladder: spinor floor 0.3486 below every shadow (0.3934, 0.4952, 0.7639) |
 | 9 | "every frame rule has a positive floor" as a geometric universal | **[F]** outside the chair | on ℤ³ the identity-frame cube substitution is flat. On the chair it holds because the geometry forces rotated children |
 | 10 | Phase X ledger: the 1387 bound at R = 14 is the strongest | **corrected** | R = 15 independently verified (8.7999990) and carried into the ledger and tests |
-| 11 | Phase X: the twin is certified above FR30 | **correct but conditional** | it used the Phase VIII bound (vector not stored). Made independent only by the twin's R = 15 certificate: **passed**: all 10 321 balls of 539311 at R = 15, E_\*(539311) ≥ 8.7999990 > 8.7970113 = Y₅(FR30), independent |
+| 11 | Phase X: the twin is certified above FR30 | **correct but conditional** | it used the Phase VIII bound (vector not stored). Made independent only by the twin's R = 15 certificate: **passed**: all 10 321 balls of 539311 at R = 15, E_\*(539311) ≥ 8.7999990 > 8.7970114 = Y₅(FR30), independent |
 | 12 | Phase X: the ℤ³ trace-pair shadow bound is certified | **reclassified [E]** | the Lipschitz branch-and-bound uses float eigenvalues with a heuristic margin |
 | 13 | Phase X X.7: "O(R⁻²) uniformly in the rule" | **correct, now general** | a special case of C(iii), with every constant now derived symbolically |
 | 14 | preregistered P1–P4 (Part V) | **P1–P3 pass**; P4 is literally true and uninformative | §5 |
@@ -817,18 +819,18 @@ It stores two numbers per scale, not the operator, the spectrum, or the environm
 | XI.G: no lower-semicontinuous frequency functional bounds E_\* | **proved** (vanishing density) | §4 |
 | XI.H3: non-spinor floors are functions of the plaquette class field; X.5 lives in the spinor component | **proved**, verified on the X.5 pair | §4 |
 | XI.I: no fixed radius determines E_\*; Π has no closed recursion | **proved + certified** (A₂₄/A₃₂; A₆/A₉) | §4, §7 |
-| Phase X R = 15 certificate for 1387 (≥ 8.7999988) | **independently re-certified** (≥ 8.7999990) | §1 |
+| Phase X R = 15 certificate for 1387 (≥ 8.7999987) | **independently re-certified** (≥ 8.7999990) | §1 |
 | Phase X R = 14 (1387, twin) and Phase VII R = 12 (FR30) certificates | **independently re-certified** | §1 |
 | E_\*(1387) > E_\*(FR30) without unstored artifacts | **certified** (separation ≥ 0.0357719 with the independent U₅(FR30); ≥ 0.0029876 from Y₅ alone) | §1 |
 | E_\*(539311) > E_\*(FR30) without unstored artifacts | **certified** (R = 15 twin certificate) | §2 |
-| E_\*(1389) > E_\*(FR30) | **certified without artifacts** (R = 16 certificate against the independent exact U₅(FR30) = 8.7642270; separation ≥ 0.000272) | §2.1 |
+| E_\*(1389) > E_\*(FR30) | **certified without artifacts** (R = 16 certificate against the independent exact U₅(FR30) = 8.7642271; separation ≥ 0.000272) | §2.1 |
 | E_\*(1391) > E_\*(FR30) | **certified without artifacts** (preregistered R = 18 certificate, 20 168 balls: 8.7644989 > U₅(FR30) = 8.7642271; separation ≥ 0.000271) | §2.1 |
 | the proper-rule maximiser is 1387 or 1389 | **certified** (1096 classes proven inferior; 1391 by the R = 20 certificate) | §2.1 |
 | E_\*(1387) ≥ 9.1104981 (preregistered R = 20, 24 571 balls); hence 1387 > 1391 and 1387 > 539288 | **certified without artifacts** | §2.1 |
 | **the maximiser over all 6⁸ frame rules lies in the right-S₃ orbit of 1387**, and in fact in {1387, 539311, 1389, 539291} | **certified** (exhaustive funnel X3–X7, then the R = 20 certificate) | §2.2 |
-| 1387 (or its twin) is the maximiser | **open**: the four remaining intervals overlap. 1387 has L = 9.1104981 and U = 9.3679502; 539311 has L = 8.7999990 and U = 9.3885937. No IMS certificate at the probed radii up to 22 separates them | §2.4 |
+| 1387 (or its twin) is the maximiser | **open**: the four remaining intervals overlap. 1387 has L = 9.1104981 and U = 9.3679502; 539311 has L = 8.7999990 and U = 9.3885938. No IMS certificate at the probed radii up to 22 separates them | §2.4 |
 | sampled probes: no IMS certificate at the probed radii (even R ≤ 22) separates 1387 from 539311 (in either direction), or 1387 from 1389 and 539291 | **evidence [E]** (float Rayleigh quotients on legal balls; a model extrapolation puts the co-leader separation at R ≈ 63 [X]) | §2.4 |
-| Phase X's stored-only Y₆ bounds of the orbit and Phase VIII's U₅(FR30) | **reproduced independently** (to ≤ 10⁻⁹ and 5·10⁻⁹); Y₆(539288) = 9.0982534 is new | §2.1–2.2 |
+| Phase X's stored-only Y₆ bounds of the orbit and Phase VIII's U₅(FR30) | **reproduced independently** (to ≤ 10⁻⁹ and 5·10⁻⁹); Y₆(539288) = 9.0982535 is new | §2.1–2.2 |
 | E_\*(539315) = E_\*(FR30) (FR30's mirror via 1386) | **proved + certified** (Theorem 6.2 of Phase VII + equal type sets) | §2.3 |
 | "the mirror twin of a class" | **ill-defined** (member-dependent; corrected) | §2.3 |
 | twin criterion: sign ΔU₁ predicts sign ΔY₅ | **correlation**: 31/40 | §2.3 |
@@ -869,7 +871,7 @@ It stores two numbers per scale, not the operator, the spectrum, or the environm
 
 **Where the problem now stands.**
 - Over all 1 679 616 frame rules, the extremal problem is reduced, with certificates, to one six-rule orbit O(1387) of the right action of the chair's point group (§2.2–2.3).
-- Its members carry exact level-6 upper bounds, all recomputed independently in Phase XI (`phase11_orbit_Y6.jsonl`): 539311: 9.3886; 1387: 9.3680; 539291: 9.2499; 1389: 9.2105; 1391: 9.1104; 539288: 9.0983 (new; Phase X stopped at Y₅ = 9.1124 for it).
+- Its members carry exact level-6 upper bounds, all recomputed independently in Phase XI (`phase11_orbit_Y6.jsonl`): 539311: 9.3885938; 1387: 9.3679502; 539291: 9.2499401; 1389: 9.2104999; 1391: 9.1104007; 539288: 9.0982535 (new; Phase X stopped at Y₅ = 9.1123631 for it).
 - 1387 carries the certified lower bound 9.1104981 (R = 20); 539311 carries 8.7999990 (R = 15). 1391 and 539288 are proven inferior.
 
 **Experiment 1 (decisive, computational): certify the tail of the orbit.**

@@ -23,6 +23,9 @@ CORRECTIONS = [
     ('C5', 'PHASE11_STRONGEST_THEOREM (5c): "for a finite group, every non-spinor representation\'s floor is a function of the class field"',
      '"non-spinor" is defined for Q8 only; the proof needs 1-dimensional irreducible constituents and plaquettes generating H_1 over Z',
      'representations with only 1-dimensional irreducible constituents, on complexes whose plaquettes generate H_1(.; Z); for Q8 the non-spinor ones'),
+    ('C6', 'PHASE11_REPORT, PHASE11_STRONGEST_THEOREM, PHASE12 drafts: printed interval endpoints (e.g. Y6(539311) <= 9.3885937)',
+     '88 printed bounds (36 distinct values) rounded to nearest in the wrong direction, by one unit in the last digit; transport bound 1.69927 and share <= 19.7 % rounded the wrong way',
+     'every printed bound rounded outward (phase12_rounding_audit.py, test_rounding_outward); no conclusion changes (every comparison using a corrected value keeps a margin >= 2.7e-4); the frozen preregistration file is left unchanged'),
 ]
 
 def claims():
@@ -51,7 +54,7 @@ def claims():
         ('XII.defect', 'the conjugation defect delta_Q(d) controls the splitting (preregistered H1, H2)', '[F]' if law and not law.get('H1_pass') else 'pending', [], 'phase12_orbit.json:defect_law', 'test_defect_law_falsified_as_recorded'),
         ('XII.T31', 'no function of level-one data determines E_* on Chair44 (1387 vs 539288: identical T1 up to gauge, separated floors)', '[P]+[C]', [], 'phase12_orbit.json', 'test_orbit_lemma_records'),
         ('XII.vac', 'on the finite census a finite-radius map exists trivially; level-3 plaquette counts are injective on 1096/1098 classes, so no certified collision exists', '[P]+[C]', [], 'phase10_census.json', 'test_plaquette_counts_almost_injective_on_census'),
-        ('XII.T61', 'support-sensitive transport bound E_* >= inf_v alpha(v)/W; Chair44: 1.69927 for the whole orbit of 1387, 1.56874 for FR30 (< 20 % of the floors)', '[P] bound, [C] values', G, 'phase12_transport.json', 'test_transport_bound_records_and_live, test_transport_theorem_on_random_graphs'),
+        ('XII.T61', 'support-sensitive transport bound E_* >= inf_v alpha(v)/W; Chair44: 1.69926 for the whole orbit of 1387, 1.56874 for FR30 (< 20 % of the floors)', '[P] bound, [C] values', G, 'phase12_transport.json', 'test_transport_bound_records_and_live, test_transport_theorem_on_random_graphs'),
         ('XII.P63', 'no function of cycle lengths, overlaps, eigenangles, plaquette classes and their support is sharp (Z^3 pair: identical inputs, floors separated by 0.18165)', '[P]+[C]', [], 'phase11_z3.json:audit', 'phase11:test_z3_pair_audit'),
         ('XII.int', 'single-child interventions do not change Lambda_R monotonically: both signs occur', '[E]', ['float Lambda_R at R = 6, 8'], 'phase12_intervention.jsonl', 'test_intervention_both_signs'),
         ('XII.cube.OL', 'cube family: the Orbit Lemma transfers (level-1 equivalence for all 48 Q at theta = pi/2; for proper Q only at theta = pi/5; broken from level 2)', '[P]+[E]', ['Cube48, theta-connections'], 'phase12_cube.json:orbit', 'test_cube_orbit_lemma_transfers'),

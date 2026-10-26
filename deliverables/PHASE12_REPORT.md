@@ -92,7 +92,7 @@
 - The level-5 completeness test accepts all 2 949 120 centres (0 rejections). There are 24 571 distinct legal balls of 4737–4838 tiles, with RCM bandwidth ≤ 1626.
 - All of them pass the banded Higham test at μ = 9553051/1048576, the preregistered 9.1105 rounded down to 20 bits.
 - **E_\*(1387) ≥ 9.1104981** [C].
-- This exceeds the independent exact Y₆ of 1391 (9.1104007, margin 9.7·10⁻⁵) and of 539288 (9.0982534). Both are proven inferior without stored-only artifacts.
+- This exceeds the independent exact Y₆ of 1391 (9.1104007, margin 9.7·10⁻⁵) and of 539288 (9.0982535). Both are proven inferior without stored-only artifacts.
 
 **Independent verification.**
 - `audit/phase12_independent.py` is a second implementation written from `PHASE7_DEFINITIONS.md` alone. It imports no phase 5–11 module.
@@ -104,7 +104,7 @@
 - **Validation** (`tests/test_phase12.py`):
   - legal 1-star type counts 72 / 90 / 102 (94 in T₅) / 104 (95) / 79 (77) / 90 for FR30, 1387, 1389, 1391, 539288, 539311, all identical;
   - exact Y₃, Y₄ of 1387 agree to 10⁻¹¹;
-  - FR30 at R = 6: 325 balls, Λ₆ ≥ 3.6555586, reproducing Phase X's 3.655558585;
+  - FR30 at R = 6: 325 balls, Λ₆ ≥ 3.6555585, reproducing Phase X's 3.655558585;
   - 1387 at R = 8: 1450 balls, certified at 7.3.
 - **The full radius-20 rerun:** ⟨IND_R20⟩
 
@@ -124,7 +124,7 @@
 
 ### 1.3 Reconciliation: what Phase XI stated too strongly
 
-The Phase XI report's theorems were rechecked line by line. Five statements on the one-page theorem (`PHASE11_STRONGEST_THEOREM.md`) exceed their proofs. They are corrected in `PHASE12_STRONGEST_THEOREM.md` and recorded in `phase12_ledger.json` (`corrections`):
+The Phase XI report's theorems were rechecked line by line. Five statements (C1–C5) on the one-page theorem (`PHASE11_STRONGEST_THEOREM.md`) exceed their proofs. They are corrected in `PHASE12_STRONGEST_THEOREM.md` and recorded in `phase12_ledger.json` (`corrections`):
 
 | # | Phase XI statement | problem | corrected statement |
 |---|---|---|---|
@@ -133,6 +133,17 @@ The Phase XI report's theorems were rechecked line by line. Five statements on t
 | C3 | (3) "on the lamplighter ℤ₂ ≀ ℤ^k, D_R − E_\* ≥ c_k R^{−2/k}" | the claim "bounded degree alone does not give R⁻²" needs k ≥ 2 | k ≥ 2 |
 | C4 | (4) "Suppose every ball of radius r contains a based loop whose holonomy has all eigenvalue arguments ≥ θ₀" | the proof (F2) needs the angle bound for the *fundamental loops of a breadth-first tree based at the centre* (length ≤ 2r + 1, each edge at most twice). "Some loop in the ball" does not imply it for continuous groups | the hypothesis of the report's F2; for finite subgroups of SU(2) in the spinor representation, "every r-ball non-flat" suffices |
 | C5 | (5c) "For a finite group, every non-spinor representation's floor is a function of [the plaquette class field]" | "non-spinor" is defined only for Q₈ (and similar groups). The proof (H2 + H3) needs representations whose irreducible constituents are 1-dimensional, and plaquettes generating H₁ over ℤ | for a finite structure group: every representation all of whose irreducible constituents are 1-dimensional, on a complex whose plaquettes generate H₁(·; ℤ) (e.g. ℤ³); for Q₈ these are exactly the non-spinor representations |
+
+**C6: directed rounding (both phases).** A printed interval endpoint is a valid bound only if it is rounded outward: an upper bound up, a lower bound down.
+- `audit/phase12_rounding_audit.py` compares every number printed with ≥ 4 decimals (and every 2–3-decimal number after ≥ or ≤) in the five Phase XI–XII documents with the stored bounds and their directions. Its allow-list names each exempt occurrence and the reason: requested levels μ, command lines, one floating-point column, and Phase X's own value 3.655558585.
+- In the committed documents it found **88 printed bounds (36 distinct values) rounded to nearest in the wrong direction**, each by one unit in the last printed digit. Example: Y₆(539311) = 9.38859371623… had been printed 9.3885937 as an upper bound; it is now 9.3885938.
+- All are corrected, in the documents, in both ledgers and in the frontier table, which now formats its endpoints exactly from the stored rationals. Three related errors were fixed by hand:
+  - the transport bound of the 1387 orbit is 1.69926 (it was printed 1.69927), and its share of FR30's floor is ≤ 19.8 % (it was printed ≤ 19.7 %);
+  - §2.2 compared the orbit's level-6 spread with "FR30's at 8.79"; FR30's values are Y₅ = 8.7970114 and Y₆ = 8.7701337;
+  - the memo asked for a lower bound "above 9.368"; the threshold is 9.3679502.
+- **No conclusion changes.** Every comparison that uses a corrected value keeps a margin of at least 2.7·10⁻⁴. The smallest is FR30's U₅ = 8.7642271 against 1389's 8.7644993.
+- The frozen `phase12_preregistration_next.json` quotes three Y₆ values rounded to nearest in its `context` block. It is left unchanged because it is frozen; its predictions P1 and P2 do not use those digits.
+- The audit is a regression test (`test_rounding_outward`): it must report nothing.
 
 Stale conclusions corrected in Phase XI itself after R = 20 (commit 6410a6a):
 - the frontier went from six to four members;
@@ -193,7 +204,7 @@ For a permutation matrix Q ∈ S₃ (the chair's point group), let **d·Q** be t
 | (d) stabiliser clause | the 912 pairs (d, dQ) of the whole space with conj_Q(d) = d, Q ≠ id: exact Y₃ compared | max \|ΔY₃\| = 9.4·10⁻¹⁴ |
 | (d), instance | 1386 is fixed by (x y), and 1386·(x y) = 539315: **E_\*(539315) = E_\*(FR30)** | Phase XI's mirror identity, proved there via Phase VII's matching rule, is a special case |
 | (e) breaking at level 2 | certified enclosures of λ_min(T₂) for the six members of 1387's orbit (Higham lower, exact Rayleigh upper) | **pairwise disjoint**: 11.2384, 11.2705, 11.5128, 11.5370, 11.5872, 11.6343 |
-| (e) breaking in infinite volume | stored certificates | E_\*(1387) ≥ 9.1104981 > 9.0982534 ≥ E_\*(539288), where 539288 = 4753·(0 2 1) |
+| (e) breaking in infinite volume | stored certificates | E_\*(1387) ≥ 9.1104981 > 9.0982535 ≥ E_\*(539288), where 539288 = 4753·(0 2 1) |
 
 ### 2.3 Why the orbit survives the certified funnel, and why the frontier is (nearly) an orbit
 
@@ -204,7 +215,7 @@ For a permutation matrix Q ∈ S₃ (the chair's point group), let **d·Q** be t
   - right orbits explain **62 %** of the variance of the exact Y₃, against 17 % for a random partition into blocks of the same sizes;
   - the rank correlation of Y₃(d) with Y₃(dQ) is 0.46–0.56 (by Q).
   - Of the 18 313 right orbits that contain an X3 survivor, only 701 survive entirely. At X4 the 38 survivors lie in 18 orbits.
-- So the funnel ends on one complete orbit for two reasons. The top orbit's internal spread at level 6 (9.098–9.389) is smaller than its gap to the next orbit (FR30's, at 8.79). And elimination worked orbit by orbit only to the extent of this partial clustering.
+- So the funnel ends on one complete orbit for two reasons. The top orbit's internal spread at level 6 (9.098–9.389, width 0.290) is smaller than its distance to the next rule in Phase X's level-5 ranking, FR30 (Y₅ = 8.7970114, Y₆ = 8.7701337; distance ≥ 0.30). And elimination worked orbit by orbit only to the extent of this partial clustering.
 - That is an observation about this family [E], not a theorem.
 
 **The conjugation-defect law (preregistered; falsified).** The stabiliser clause suggests a quantitative law: the splitting |Y_L(dQ) − Y_L(d)| should grow with the defect δ_Q(d), the number of child slots where conj_Q(d) ≠ d.
@@ -256,7 +267,7 @@ The brief lists four possible sources:
 > the maximiser of E_\* over all 6⁸ frame rules is one of **1387, 539311, 1389, 539291** (§10).
 
 - 1387 is the **best-resolved** member: it has the highest certified lower bound, 9.1104981.
-- 539311 has a *higher* exact upper bound (9.3885937 > 9.3679502). Equality with 1387 is not forced by any symmetry: their defect is 1, not 0.
+- 539311 has a *higher* exact upper bound (9.3885938 > 9.3679502). Equality with 1387 is not forced by any symmetry: their defect is 1, not 0.
 - By the Phase XI probes, no IMS certificate at the probed radii up to 22 separates them in either direction.
 - The four intervals overlap, so the comparison is **unresolved** in the preregistered sense: no available method decides it at feasible cost.
 
@@ -290,10 +301,10 @@ The brief lists four possible sources:
 | geometry at every radius (tiles, panels, centroids, geometric 1-star configurations) | **yes** | decoration-independent |
 | the level-1 supertile operator, up to unitary equivalence: all its spectra, all Wilson loops inside level-1 supertiles, plaquette classes inside T₁ | **yes** | Orbit Lemma (c) |
 | the shadow spectra of T₁ | **yes, up to the permutation χ_k ↦ χ_{Q(k)}** | Orbit Lemma (c) |
-| the support-sensitive transport data of §6 (α_min = 6.79706, α_max = 23.90314, W = 4, hence the bound 1.69927) | **yes** | computed (`phase12_transport.json`) |
+| the support-sensitive transport data of §6 (α_min = 6.79706, α_max = 23.90314, W = 4, hence the bound 1.69926) | **yes** | computed (`phase12_transport.json`) |
 | the legal 1-star language | no | 90 against 79 types |
 | T₂ spectra | no | certified disjoint (§2.2) |
-| **E_\*** | **no** | **[9.1104981, 9.3679502] against [6.8499994, 9.0982534]: separated by ≥ 0.0122447** |
+| **E_\*** | **no** | **[9.1104981, 9.3679502] against [6.8499994, 9.0982535]: separated by ≥ 0.0122447** |
 
 - The separating observable is any certified enclosure of the floor, or already the certified λ_min(T₂).
 - The transport-data agreement is a computed coincidence for these two rules, not a theorem.
@@ -390,7 +401,7 @@ The brief lists four possible sources:
 ### 4.3 Why free windows lie below the floor, and why incomplete enumeration lies above it
 
 - **Neumann.** H^N_K ≤ H^D_K (it drops Σ b_K|ψ|²), but **H^N_K is not a compression of H_U**. Its Rayleigh quotients are not Rayleigh quotients of H_U, so nothing bounds λ^N(K) below by E_\*.
-  - On the π-flux ladder the free windows converge to **2 − √2 = 0.585786 < 3 − √5 = 0.763932 = E_\***. These are exact closed forms [P + C] (`test_ladder_neumann_windows_saturate_below_floor`).
+  - On the π-flux ladder the free windows converge to **2 − √2 ≈ 0.585786 < 3 − √5 ≈ 0.763932 = E_\***. These are exact closed forms [P + C] (`test_ladder_neumann_windows_saturate_below_floor`).
   - The mechanism: a free end is an extra boundary condition that the infinite system does not have. The window's lowest state lives on it, and it cannot be continued into the infinite ladder without paying the boundary energy b_K that the Dirichlet form keeps.
   - Free *partitions* (disjoint pieces, edges between pieces dropped) still give valid lower bounds: q_U(ψ) ≥ Σ_j q^N_{K_j}(ψ|_{K_j}). They are simply not sharp; this is Theorem X.2 and the F_L of §1.5.
 - **Incomplete enumeration.** Theorem B2 needs the infimum over *every* piece of the partition, that is, over every legal environment.
@@ -451,9 +462,9 @@ with α_K, W_K computed from the cycles inside K. This is the requested schemati
 
 | rule | legal types | α_min | α_max | W | **bound** | certified floor | captured |
 |---|---|---|---|---|---|---|---|
-| 1387 | 90 | 6.79706 | 23.90314 | 4 | **1.69927** | ≥ 9.1104981 | ≤ 18.7 % |
-| 539311, 1389, 1391, 539288 | 90, 102, 104, 79 | 6.79706 | 23.90314 | 4 | **1.69927** | ≥ 8.80, 8.76, 8.76, 6.85 | — |
-| FR30 (4752) | 72 | 6.27497 | 20.38842 | 4 | **1.56874** | ≥ 7.9542913 | ≤ 19.7 % |
+| 1387 | 90 | 6.79706 | 23.90314 | 4 | **1.69926** | ≥ 9.1104981 | ≤ 18.7 % |
+| 539311, 1389, 1391, 539288 | 90, 102, 104, 79 | 6.79706 | 23.90314 | 4 | **1.69926** | ≥ 8.7999990, 8.7644993, 8.7644989, 6.8499994 | — |
+| FR30 (4752) | 72 | 6.27497 | 20.38842 | 4 | **1.56874** | ≥ 7.9542912 | ≤ 19.8 % |
 
 - **The bound is valid, positive and uniform**, but it captures less than a fifth of the floor.
 - It is **identical across the whole orbit of 1387**, so it cannot separate rules whose floors are certified different (1387 against 539288).
@@ -604,7 +615,7 @@ These are not finite computations. The proofs above rely on them, and a full for
 
 - **Independent path.** `audit/phase12_independent.py` shares no code with the certifying implementation (§1.1). Its full radius-20 run is the reproduction of the decisive certificate. It still uses the same libraries (numpy, scipy's banded Cholesky and RCM, mpmath).
 - **Adversarial tests** (`tests/test_phase12.py`). Each is designed so that a wrong implementation or a wrong claim fails it:
-  - a certificate requested just above the floor (μ = 3.6556 > Λ₆ = 3.65556) must fail and name its failing balls;
+  - a certificate requested just above the floor (μ = 3.6556, above Λ₆ ≈ 3.6555586) must fail and name its failing balls;
   - a non-dyadic shift must be refused, because the diagonal subtraction would not be exact;
   - flipping one link sign must break the exact gauge identity;
   - the falsified defect law must stay recorded as falsified against its frozen thresholds;
@@ -620,12 +631,12 @@ These are not finite computations. The proofs above rely on them, and a full for
 | rule | certified lower L (source) | exact upper U (source) | status |
 |---|---|---|---|
 | **1387** | **9.1104981** (IMS R = 20, 24 571 balls) ⟨IND_NOTE⟩ | 9.3679502 (Y₆, 262 144 tiles) | **leader** |
-| 539311 | 8.7999990 (IMS R = 15, 10 321 balls) | 9.3885937 (Y₆) | contender |
-| 1389 | 8.7644993 (IMS R = 16, 12 193 balls) | 9.2104998 (Y₆) | contender |
-| 539291 | 7.1408386 (IMS R = 8, Phase X) | 9.2499400 (Y₆) | contender |
-| 1391 | 8.7644990 (IMS R = 18, 20 168 balls) | 9.1104007 (Y₆) | proven inferior (U < 9.1104981) |
-| 539288 | 6.8499994 (IMS R = 8, 829 balls) | 9.0982534 (Y₆) | proven inferior |
-| FR30 (1386) | 7.9542913 (IMS R = 12) | 8.7642270 (σ⁵ of a self-loop type, 884 736 tiles) | proven inferior |
+| 539311 | 8.7999990 (IMS R = 15, 10 321 balls) | 9.3885938 (Y₆) | contender |
+| 1389 | 8.7644993 (IMS R = 16, 12 193 balls) | 9.2104999 (Y₆) | contender |
+| 539291 | 7.1408386 (IMS R = 8, Phase X) | 9.2499401 (Y₆) | contender |
+| 1391 | 8.7644989 (IMS R = 18, 20 168 balls) | 9.1104007 (Y₆) | proven inferior (U < 9.1104981) |
+| 539288 | 6.8499994 (IMS R = 8, 829 balls) | 9.0982535 (Y₆) | proven inferior |
+| FR30 (1386) | 7.9542912 (IMS R = 12) | 8.7642271 (σ⁵ of a self-loop type, 884 736 tiles) | proven inferior |
 | every other rule (1 679 610) | — | exact Y₃–Y₆ or D₈ below 8.7999987 (funnel X3–X7) | proven inferior |
 
 ---
@@ -691,14 +702,14 @@ The literature search is Phase XI's (`PHASE11_REPORT.md` §8). Phase XII made no
   - every upper bound is a finite-supertile eigenvalue.
 
 **3. Most important negative result.**
-- **The symmetry orbit at the top of the frontier is not a symmetry of the operator.** 1387 and 539288 have unitarily equivalent level-1 operators, yet E_\*(1387) ≥ 9.1104981 > 9.0982534 ≥ E_\*(539288).
+- **The symmetry orbit at the top of the frontier is not a symmetry of the operator.** 1387 and 539288 have unitarily equivalent level-1 operators, yet E_\*(1387) ≥ 9.1104981 > 9.0982535 ≥ E_\*(539288).
 - This rules out every explanation of the frontier, and every descriptor, that sees only single-inflation (level-one) data.
 - The simplest quantitative replacement, the conjugation-defect law, failed its preregistered test (Spearman −0.06).
 - Alongside: no bound built from cycle lengths, overlaps, eigenangles, plaquette classes and their support can be sharp (Proposition 6.3, ℤ³ pair).
 
 **4. Open mathematical bottleneck.**
 - **A lower bound with localisation error o(R⁻²) for one fixed hierarchical hull.**
-- Concretely: prove E_\*(539311) > 9.3679502, or E_\*(1387) > 9.3885937.
+- Concretely: prove E_\*(539311) > 9.3679502, or E_\*(1387) > 9.3885938.
 - IMS needs R ≈ 63 for this [X]. Theorem C(iv) shows the improvement cannot come from the geometry alone: it must use the operator, for instance the hierarchical localisation of its low-energy states. No such estimate is known.
 
 **5. Next decisive experiment.**
