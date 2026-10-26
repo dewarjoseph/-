@@ -46,7 +46,7 @@ Here Λ(χ) is the minimum, over the pieces, of the least eigenvalue of Deg − 
 | hypothesis | needed for | fails without it |
 |---|---|---|
 | bounded degree | (1)–(4) | H_U unbounded |
-| complete legal-environment enumeration | any certificate built on (2) | a visible-only enumeration gave a **false** certificate: ≥ 0.522 claimed, true floor ≤ 0.408 (ladder) |
+| complete legal-environment enumeration | any certificate built on (2) | a visible-only enumeration gave a **false** certificate: ≥ 0.5219 claimed (W = 64), true floor ≤ 0.4079 (ladder) |
 | property A, or doubling, or a Euclidean realisation | uniform rate in (2) | lamplighters: R^{−2/k}; non-A graphs: no uniform IMS certificate |
 | angle gap (fixed-point-free holonomy) | (4) | ℤ², diag(1, π-flux): every ball non-flat, E_\* = 0 |
 | minimality (or components permuted by symmetries of H) | E_\* constant on a hull | a → aab, b → bb: E_\* ≤ 0.408 on the fixed point, 3 − √5 on b^∞ |

@@ -65,7 +65,7 @@
 - Rates exactly when the geometry gives them: none from bounded degree or property A; R⁻² from doubling or a Euclidean realisation; R⁻² optimal [P].
 - Neumann windows can lie below the floor, and incomplete enumeration can certify falsely. Both are explained, and both are exhibited on the ladder.
 
-**5. The intervention** (§5). ⟨INT_SHORT⟩
+**5. The intervention** (§5). Single-child changes are not monotone. Around FR30, 2 of 22 neighbours raise Λ₆ (1387, 1389) and 20 lower it; around 4753, all 38 non-trivial neighbours lower it [E]. Each change rewires 27–74 % of all panels, so interlacing gives nothing. The only general comparison principle, language inclusion, applies to none of the 60 non-trivial neighbours. Empirically, the sign of Δ equals the sign of the change of the worst inflated 1-star energy U₁ in all 61 cases, with no exception at R = 8 where computed; this is a correlation, not a theorem.
 
 **6. The frustration bound** (§6).
 - A support-sensitive transport bound is proved and evaluated: 1.699 for the whole orbit of 1387, under 20 % of the floor.
@@ -434,7 +434,61 @@ The brief lists four possible sources:
 
 ## 5. The one-child intervention (Part V)
 
-⟨INTERVENTION⟩
+**The intervention.** For a rule r, a child slot c ∈ {0, …, 7} and a permutation π, the rule T_{c,π} r replaces the frame permutation of slot c by π. All other slots, the translations and the geometry are unchanged. For each preregistered single-child neighbour (Phase XI, `phase11_preregistration.json:part_V_counterfactuals`: 22 neighbours of FR30 = 4752 and 39 of 4753 ∈ class 1387, one per S₃-conjugation orbit) the run records:
+
+  Δ(R) := Λ_R(T r) − Λ_R(r),  ΔD(R) := D_R(T r) − D_R(r),
+
+with Λ_R the bottom of the IMS-amplified ball operators (the quantity a radius-R certificate certifies) and D_R the bottom of the plain Dirichlet ball operators (an upper bound on E_\*), each the minimum over all legal R-balls (`audit/phase12_intervention.py` → `phase12_intervention.jsonl`; float eigenvalues [E], not certificates).
+- R = 6 for every rule. R = 8 only for rules with at most 150 legal 1-star types (the cost cap, fixed in the script before the run and applied from the R = 6 records).
+- R = 4 is excluded: there ρ = R − 311/175 lies below the largest panel distance 15/7 and the amplification degenerates.
+- At R = 6 the localisation error is large, so Λ₆ can be negative. Δ(6) compares the certificate quantity of two rules at the same radius, with the same geometry-only correction (the IMS constants depend only on the geometry, §4.2); it is not a statement about E_\*.
+
+### 5.1 What can be proved
+
+**Proposition 5.1 (the only general comparison principle)** [P]. If every legal R-environment of T r is, up to gauge, a legal R-environment of r, then Λ_R(T r) ≥ Λ_R(r) and D_R(T r) ≥ D_R(r). If this holds for every R, then E_\*(T r) ≥ E_\*(r).
+- *Proof.* Λ_R and D_R are minima over the legal R-environments of gauge-invariant quantities (Theorem B, §4.2), so a minimum over a subset is not smaller. The statement about E_\* is Theorem A2. ∎
+- The hypothesis needs, at radius 1, that every radius-1 gauge class of T r occurs in r. That is checked below for every neighbour.
+
+**Why interlacing gives nothing.** Interlacing and Weyl-type inequalities control a perturbation of bounded rank. A single-child intervention is not one:
+- it acts at every inflation step: in every tile's set of children, the slot-c child is reframed;
+- measured on the pinned supertiles T₂, T₃, T₄ of both bases (tiles identified by position, the geometry being the same), **every one of the 61 neighbours changes the link on 27–74 % of all panels**, stable in L (`changed_panel_fraction`). On a patch of n tiles the two operators therefore differ on order n panels, and rank counting gives no bound on Δ uniform in the patch;
+- the change can still be a symmetry: a neighbour in the base's own gauge class is isospectral, so Δ ≡ 0 (one such neighbour of 4753 occurs, §5.2).
+
+**Loop transport.** The intervention changes the holonomies of the two-cycles and plaquettes through the reframed tiles, so it changes the data α(v), W of Theorem 6.1. That theorem bounds the floor from below, but far below it (§6), so a change of the transport data does not bound Δ. In the data its direction agrees with Δ(6) in 60 of 61 cases. The exception is a neighbour whose transport data do not change at all (§5.2).
+
+### 5.2 What the data show (`audit/phase12_intervention_analysis.py` → `phase12_intervention_analysis.json`)
+
+| | FR30 (4752): 22 neighbours | 4753 (class 1387): 39 neighbours |
+|---|---|---|
+| Λ₆ of the base (float) | ≈ 3.65556 | ≈ 4.47052 |
+| Δ(6) > 0 | **2** (1387, 1389) | **0** |
+| Δ(6) < 0 | 20 | 38 |
+| Δ(6) = 0 | 0 | 1: 184323, a member of the base's own gauge class (isospectral) |
+| range of Δ(6) over the non-trivial neighbours | −4.57 to +0.81 | −4.92 to −0.49 |
+| sign Δ(6) = sign ΔD(6) | 22 / 22 | 39 / 39 |
+| Δ(8) available (≤ 150 legal 1-star types), sign persists from R = 6 to 8 | 3 neighbours (1387, 1389, 153216): the sign persists in 3 / 3 | 4 (184342, 184320, 184341 and the tie): the sign persists in 4 / 4 |
+| panels of T₃ whose link changes | 28–64 % | 30–74 % |
+| radius-1 language of the neighbour ⊆ that of the base (the hypothesis of Proposition 5.1 at radius 1) | 0 | 1 (the isospectral class-mate only) |
+| radius-1 language ⊇ that of the base | 0 | 1 (the same) |
+| neighbours sharing **no** radius-1 gauge class with the base | 11 | 23 |
+| sign Δ(6) = sign ΔU₁ (worst inflated 1-star energy, Phase XI) | 22 / 22 | 39 / 39 |
+| sign Δ(6) = sign ΔY₅ (exact level-5 bound, Phase XI) | 22 / 22 | 39 / 39 |
+| Spearman (Δ(6), ΔU₁) / (Δ(6), ΔY₅) / (Δ(6), ΔD(6)) | 0.992 / 0.871 / 0.994 | 0.997 / 0.911 / 0.997 |
+| sign Δ(6) = sign of the change of the transport bound (Theorem 6.1) | 22 / 22 | 38 / 39 |
+
+**Counterexamples to monotonicity** [E]. No direction of a single-child change is preferred in general.
+- Around FR30, changing one child raises Λ₆ for exactly two neighbours, 1387 (+0.81) and 1389 (+0.39), and lowers it for the other twenty.
+- Around 4753, every one of the 38 non-trivial single-child changes lowers it. This is Phase XI's finding that 1387 is a local maximum of Y₅ under single-child changes, now seen in the certificate quantity Λ₆ and in D₆.
+- So "changing one child raises the floor" and "changing one child lowers the floor" are both false as general statements, and the same change of slot and permutation can do either, depending on the rest of the rule.
+
+**Why no variational argument decides the sign.** Proposition 5.1 is the only general comparison, and its hypothesis fails for every non-trivial neighbour already at radius 1. Their radius-1 languages are incomparable with the base's, and 34 of the 60 share no radius-1 gauge class with it at all. The interventions act on 28–74 % of the panels. Rank counting therefore gives nothing as well.
+
+**An empirical condition** [E]. Within these 61 neighbourhoods the sign of Δ(6) is predicted exactly by radius-1 data:
+- **Δ(6) > 0 exactly when the worst inflated 1-star energy U₁ rises on every one of the 16 geometric 1-star shapes** (both positive cases, 16 of 16 shapes raised);
+- **Δ(6) < 0 whenever U₁ falls on some shape** (in every negative case it falls on at least 11 of the 16; 18 negative cases also raise U₁ on some shapes);
+- the global form, sign Δ(6) = sign ΔU₁, holds in all 61 cases, and agrees with the sign of ΔD(6) and of ΔY₅.
+- The transport bound of Theorem 6.1 moves the same way in 60 of 61 cases. The exception is 1391 (184342): Λ₆ falls by 0.49 while the transport data are identical (it is in 1387's orbit, §6.2). This is an instance of Proposition 6.3.
+- This is a correlation on two neighbourhoods, with float eigenvalues, at R = 6 (and 8 where computed). It is not a theorem, and nothing here certifies a floor.
 
 ---
 
@@ -674,6 +728,7 @@ The literature search is Phase XI's (`PHASE11_REPORT.md` §8). Phase XII made no
 | cube family: level-one equivalence for proper Q at every θ, for improper Q at the Pauli point (fails at θ = π/5) | | | **T** | | elementary |
 | cube family: spinor/adjoint order flips with θ; F₃ ∝ θ² | | **A** (computation) [E] | | | evidence |
 | predictive study (frozen split) | | **A** (computation) [E] | | | |
+| one-child intervention: both signs; language inclusion inapplicable; sign Δ = sign ΔU₁ on 61 neighbours | | **A** (computation) [E]; Proposition 5.1 is Theorem A2 | | | |
 | any physical law, particle spectrum or dynamics | | | | **none claimed** | a spectral floor of a discrete operator is not a physical observable without an independently specified model |
 
 ---
@@ -745,7 +800,7 @@ All commands run from the repository root (Python 3.13, numpy 2.5, scipy 1.18, s
 | exact finite core | `python -u -I audit/phase12_formal.py` | `phase12_formal.json` | 2 min |
 | transport bound | `python -u -I audit/phase12_transport.py 4752 4753 1389 1391 x539311 x539291 x539288` | `phase12_transport.json` | 90 s for the seven rules |
 | cube family | `python -u audit/phase12_cube.py flat`; `… orbit 20261025 500 3`; `… theta 42.29.46.31.24.45.13.31 3` | `phase12_cube.json` | 1 s; 16 min; 30 s |
-| intervention | `python -u -I audit/phase12_intervention.py 6 8`; then `audit/phase12_intervention_analysis.py` | `phase12_intervention.jsonl`, `phase12_intervention_analysis.json` | ⟨INT_TIME⟩ |
+| intervention | `python -u -I audit/phase12_intervention.py 6 8`; then `audit/phase12_intervention_analysis.py` | `phase12_intervention.jsonl`, `phase12_intervention_analysis.json` | about 3.9 h of single-process compute (sum over the 72 records); analysis about 1 h under load, dominated by the radius-1 local data of the 61 neighbours |
 | Y₅ census (target of the frozen study) | `python -u -I audit/phase12_y5census.py` | `phase12_y5_census.jsonl` | 70 min |
 | predictive study | `python -u -I audit/phase12_predict.py` | `phase12_predict.json` | 10 s |
 | frontier table | `python -u -I audit/phase12_frontier_table.py` | `phase12_frontier.json`, `.csv` | 1 s |

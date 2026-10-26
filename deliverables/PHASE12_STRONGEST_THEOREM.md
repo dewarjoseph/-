@@ -56,6 +56,7 @@ The same holds verbatim for the cube family with the θ-connections, for proper 
 ## What this does not establish
 
 - **No global optimum.** 1387 is the best-resolved frontier member. 539311 has a higher upper bound (9.3885938), and, by sampled probes, no IMS certificate at the probed radii up to 22 separates them.
+- **No monotonicity of single-child interventions** [E]. Around FR30 they raise Λ₆ for 2 of 22 neighbours and lower it for 20; the language-inclusion comparison (1a) applies to none of the 60 non-trivial neighbours.
 - **No quantitative law for the splitting** inside an orbit. The conjugation defect was preregistered as such a law and **failed** (Spearman −0.06).
 - **No sharp curvature bound.** The support-sensitive transport bound is valid (1.69926 for the orbit of 1387) but captures under a fifth of the floor. Lengths, overlaps, eigenangles and plaquette classes cannot be sharp: the ℤ³ pair has identical inputs and floors separated by 0.18165.
 - **No proof-assistant formalization.** Lean was unavailable; the finite core is checked by exact computation.

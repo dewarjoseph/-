@@ -643,7 +643,7 @@ D₈ and Λ₈ in this table are floating-point bottoms (`phase11_mechanism.json
   - U₁: Spearman 0.88–0.92 on single-child neighbourhoods, 100 % sign accuracy, 77.5 % on twins.
   - The absence of two-cycle-flat tiles: p = 4·10⁻¹¹ on the random sample.
   - The right-S₃ orbit, which contains the whole certified frontier.
-- **A sufficient criterion that guarantees a lower bound:** only the certified ones (Λ_R; the closed-form bounds E, F). These are sufficient but far from sharp: Theorem F certifies E_\*(1387) ≥ 1/2 (two-cycle transport) against the true floor ≈ 9.36.
+- **A sufficient criterion that guarantees a lower bound:** only the certified ones (Λ_R; the closed-form bounds E, F). These are sufficient but far from sharp: Theorem F certifies E_\*(1387) ≥ 1/2 (two-cycle transport) against the certified floor E_\*(1387) ≥ 9.1104981.
 - **A necessary-and-sufficient characterisation of the extremiser:** **not obtained, and not claimed.** Theorem I shows that no fixed-radius datum can provide one in general.
 
 ## 6. A second geometry: substitution ladders (Part VI)
@@ -788,7 +788,7 @@ It stores two numbers per scale, not the operator, the spectrum, or the environm
 |---|---|---|---|
 | 1 | "bounded geometry plus an IMS identity give an O(R⁻²) floor approximation" | **[F]** | lamplighter ℤ₂ ≀ ℤ^k: rate ≥ c R^{−2/k} (C(v)). R⁻² needs doubling or a Euclidean realisation |
 | 2 | "Neumann (free) local operators converge to the floor" | **[F]**, exactly | π-flux ladder: limit 2 − √2 against E_\* = 3 − √5 |
-| 3 | "environments visible in a large training supertile suffice for a certificate" | **[F]** | a false certificate on the ladder (0.522 claimed, ≤ 0.408 true) |
+| 3 | "environments visible in a large training supertile suffice for a certificate" | **[F]** | a false certificate on the ladder (0.5219 claimed at W = 64, ≤ 0.4079 true) |
 | 4 | "a non-flat SU(2)/U(n) connection on every ball has a positive floor" | **[F] in rank ≥ 2** without fixed-point-freeness | ℤ², diag(1, π-flux); the Q₈ adjoint representation |
 | 5 | "some finite list of local curvature statistics determines the floor" | **[F]** | Theorem I (any fixed radius), X.5, and H4 (plaquette classes) |
 | 6 | "frequency-type statistics give a positive lower bound" | **[F]** | Theorem G (vanishing island density) |

@@ -8,7 +8,7 @@
    "fix": "phase12_independent now compares in rational arithmetic; Phase XI code left unchanged (frozen artifact)"
   }
  ],
- "commit": "a281c00",
+ "commit": "37d43a5",
  "report": "deliverables/PHASE12_REPORT.md",
  "claims": [
   {
@@ -215,13 +215,32 @@
   },
   {
    "id": "XII.int",
-   "claim": "single-child interventions do not change Lambda_R monotonically: both signs occur",
+   "claim": "single-child interventions do not change Lambda_R monotonically: around FR30 2 of 22 neighbours raise Lambda_6 and 20 lower it; around 4753 all 38 non-trivial neighbours lower it",
    "status": "[E]",
    "assumptions": [
     "float Lambda_R at R = 6, 8"
    ],
    "evidence": "phase12_intervention.jsonl",
    "test": "test_intervention_both_signs"
+  },
+  {
+   "id": "XII.int.P51",
+   "claim": "language inclusion (Theorem A2) implies Lambda_R, D_R and E_* do not decrease; its radius-1 hypothesis fails for all 60 non-trivial neighbours; each intervention changes the link on 27-74 % of the panels of T_2..T_4",
+   "status": "[P] + [C]",
+   "assumptions": [],
+   "evidence": "phase12_intervention_analysis.json",
+   "test": "test_intervention_analysis"
+  },
+  {
+   "id": "XII.int.U1",
+   "claim": "sign Delta(6) = sign dU1 = sign dD(6) = sign dY5 on all 61 neighbours; signs persist from R = 6 to 8 on the 7 computed",
+   "status": "[E]",
+   "assumptions": [
+    "float eigenvalues",
+    "two neighbourhoods"
+   ],
+   "evidence": "phase12_intervention_analysis.json",
+   "test": "test_intervention_analysis"
   },
   {
    "id": "XII.cube.OL",

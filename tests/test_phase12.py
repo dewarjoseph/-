@@ -206,6 +206,18 @@ def test_intervention_both_signs():
     deltas = [r['Lambda_float'] - base[(r['base'], r['R'])]['Lambda_float'] for r in rows if (r['base'], r['R']) in base and r['change'] and r['change']['slot'] is not None]
     assert any(x > 0 for x in deltas) and any(x < 0 for x in deltas)                            # no universal monotonicity
 
+def test_intervention_analysis():
+    """section 5: counts recomputed from the records; the language-inclusion hypothesis fails for every non-trivial neighbour"""
+    d = J('phase12_intervention_analysis.json'); rows = JL('phase12_intervention.jsonl')
+    lam = {(r['base'], r['j'], r['R']): r['Lambda_float'] for r in rows}
+    for base, jb, n, pos, neg in (('4752', 1140300, 22, 2, 20), ('4753', 1140303, 39, 0, 38)):
+        s = d[base]['summary']; assert s['neighbours'] == n and s['Delta6_positive'] == pos and s['Delta6_negative'] == neg
+        for x in d[base]['rows']:
+            assert abs(x['Delta']['6'] - (lam[(base, x['j'], 6)] - lam[(base, jb, 6)])) < 1e-12
+            if abs(x['Delta']['6']) > 1e-8: assert not x['radius1_fingerprints_subset_of_base'] and not x['radius1_fingerprints_superset_of_base']
+            assert 0.27 < min(x['changed_panel_fraction'].values()) and max(x['changed_panel_fraction'].values()) < 0.75
+        assert s['sign_Delta6_eq_sign_dU1'] == [n, n] and s['sign_persists_6_to_8'][0] == s['sign_persists_6_to_8'][1] == s['Delta8_available']
+
 # ------------------------------------------------------------------ ledger
 def test_phase12_ledger_links():
     d = J('phase12_ledger.json'); names = {n for n in globals() if n.startswith('test_')}
