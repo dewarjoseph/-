@@ -46,7 +46,7 @@ The same holds verbatim for the cube family with the θ-connections, for proper 
 
 ## Certified corollaries [C]
 
-1. **E_\*(1387) ≥ 9.1104981** (radius 20, 24 571 legal balls). E_\*(1387) ∈ [9.1104981, 9.3679502].
+1. **E_\*(1387) ≥ 9.1104981** (radius 20, 24 571 legal balls; reproduced by an implementation sharing no code with the certifying one). E_\*(1387) ∈ [9.1104981, 9.3679502].
 2. **The maximiser of E_\* over all 6⁸ = 1 679 616 Chair44 frame rules is one of 1387, 539311, 1389, 539291.** Every other rule has an exact rational upper bound below a certified lower bound of 1387.
 3. **The six-member S₃ orbit at the top of the frontier is not a symmetry of the operator.** E_\*(539288) ≤ 9.0982535 < 9.1104981 ≤ E_\*(1387), with 539288 = 4753·(0 2 1), although T₁ of the two rules are unitarily equivalent.
    - So **no function of level-one data determines E_\*** (Theorem 3.1 of the report).

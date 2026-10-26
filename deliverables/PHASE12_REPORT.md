@@ -72,9 +72,9 @@
 - **No bound built from cycle lengths, overlaps, eigenangles, plaquette classes and their support can be sharp.** On the ℤ³ pair every input coincides and the floors differ by 0.18165.
 
 **7. Beyond Chair44** (§7).
-- On a cube substitution with a one-parameter connection family, the Orbit Lemma transfers, and the boundary of validity is sharp.
+- On a cube substitution with a one-parameter connection family, the Orbit Lemma transfers, and its proof shows where it can fail.
 - Proper relabellings are gauge symmetries for every θ. Improper ones map θ to −θ: they are symmetries at the Pauli point θ = π/2, and they fail at θ = π/5, the generic value tested.
-- The order of the spinor and adjoint floors flips with θ, and the small-θ floor scales like θ² (no angle gap).
+- The order of the spinor and adjoint bottoms flips with θ [E], and the free lower bound F₃ scales like θ² at small θ [E], as an angle-gap bound allows when there is no angle gap.
 
 **8. Formalization** (§9).
 - Lean was unavailable: the network policy denies its hosts.
@@ -166,7 +166,17 @@ Stale conclusions corrected in Phase XI itself after R = 20 (commit 6410a6a):
 
 ### 1.4 The regression suite
 
-⟨TESTS⟩
+- **`python -m pytest -q tests/test_phase12.py`: 41 passed** (3 min). The tests are of three kinds:
+  - recomputations with the independent implementation;
+  - artifact checks, which read every number back from `audit/results` and re-derive it where possible;
+  - adversarial tests designed to make a claim fail (§9.4).
+- **`python -m pytest -q tests/test_phase11.py`: 46 passed** (3 min), after the C6 corrections to the Phase XI documents and ledger.
+- **The whole repository suite** (`python -m pytest -q tests/`, 488 tests, all phases): **483 passed, 1 skipped, 4 failed** (12 min). None of the four is caused by Phases XI–XII:
+  - `test_phase10.py::test_z3_trace_matched_pair_certificate_recomputes` and `…class_field_matched_pair…` compare the exact rational Rayleigh quotient of a floating-point eigenvector with a stored *string*. That rational depends on the LAPACK build: here it differs from the stored one by at most 1.4·10⁻¹², and both are exact upper bounds. With the comparison relaxed to 10⁻¹¹ (a scratch copy; the Phase X test is left unchanged), every other assertion of both tests passes, including the certified separation > 0.18 behind Proposition 6.3.
+  - `test_adversarial_chair44.py::…test_03_supersymmetry_trace_cancellation_generalized`: a floating-point residue of 7.3·10⁻¹² against a tolerance of 10⁻¹².
+  - These three fail identically at the last Phase X commit (6879f6e) and at the last Phase XI commit (6410a6a) in this environment.
+  - `test_phase10.py::test_certified_brackets_recompute_for_fr30_and_1387` is flaky. It compares two exact Rayleigh quotients at ARPACK eigenvectors, whose random start changes their last digits (the test's own comment says so), with tolerance 10⁻¹⁰. It failed once (1.14·10⁻¹⁰) in two full runs, and passed 4/4 when repeated on HEAD and 4/4 at 6879f6e.
+- **Environment.** The cross-disciplinary tests need `matplotlib` (installed for this run) and `data/pdb_00001stm.pdb.gz`, a git-ignored download that is absent from this container. It was recreated locally from the tracked `data/1stm.pdb` (PDB entry 1STM) and not committed. Without `matplotlib`, 39 of those tests fail at import. With it but without the archive, one fails.
 
 ### 1.5 Four kinds of quantity, kept apart
 
@@ -586,9 +596,9 @@ Then 𝓕 is not sharp on Pauli-frame Q₈ connections on ℤ³. Equivalently, i
 | breaking from level 2 | 48 distinct T₂ and T₃ bottoms at both θ (spinor spread over the 48 Q at π/2: 0.374 at T₂, 0.310 at T₃) | [E] |
 | flat rule (all h_v = I) | constant frames: every link is (σ·u)² = 1. Pinned T_L bottoms 3, 1.14590, 0.36184 equal the trivial Dirichlet values 6(1 − cos(π/(2^L + 1))), so E_\* = 0 | [P] |
 | representation order (pinned T₃ of the base rule) | θ = π/2: adjoint 0.977 = χ₁ < spinor 1.926. θ = π/5: adjoint 1.550 > spinor 1.100. **The order flips between π/3 and π/4** (π/3: 1.405 < 1.750; π/4: 1.576 > 1.406) | [E] |
-| small-θ scaling (free T₃, a lower bound on E_\*) | F₃(θ)/θ² → 1.97 (π/8: 1.87; π/16: 1.95; π/32: 1.97); the adjoint is about twice the spinor | [E]; consistent with Theorem F's "no angle gap ⇒ E_\* ∝ θ²" |
+| small-θ scaling (free T₃, a lower bound on E_\*) | F₃(θ)/θ² → 1.97 (π/8: 1.87; π/16: 1.95; π/32: 1.97); the adjoint is about twice the spinor | [E]; θ² is the order of the angle-gap lower bound F2 (Phase XI) with θ₀ = θ |
 
-**What transfers, and the precise boundary of validity.**
+**What transfers, and where it can fail.**
 - **The Orbit Lemma's level-1 equivalence transfers verbatim** to any geometry whose tiles are invariant under the right action. Its proof uses only (a) the invariance of each tile's cube set and (b) the gauge identity.
 - **The θ-family pins down where (b) holds.** For proper Q, R_{Qᵀu}(θ) = W R_u(θ) W†, a gauge transformation for every θ. For improper Q, σ·(Qᵀu) = −W(σ·u)W†, so R_{Qᵀu}(θ) = W R_u(−θ) W†.
   - The relabelling maps U_θ to a gauge transform of U_{−θ}.
@@ -606,7 +616,7 @@ Then 𝓕 is not sharp on Pauli-frame Q₈ connections on ℤ³. Equivalently, i
 | Orbit Lemma, level 1 | yes, for tiles invariant under the right action | proper Q: any θ; improper Q: where U_{−θ} ≅ U_θ (θ = π/2 yes, θ = π/5 no) |
 | stabiliser clause | yes | — |
 | breaking from level 2 | generic (both families) | the hierarchy |
-| angle-gap bound (F2) | yes, for finite structure groups | fails for continuous θ (E_\* ∝ θ²) |
+| angle-gap bound (F2) | yes, for finite structure groups | for continuous θ the gap θ₀ = θ → 0, and so does E_\* (U₀ is flat and ‖H_θ − H₀‖ → 0) |
 | order of spinor and adjoint floors | **no** | the connection family (flips with θ) |
 | positivity of every rule | **no** | the chair's forced rotations |
 
@@ -806,10 +816,10 @@ All commands run from the repository root (Python 3.13, numpy 2.5, scipy 1.18, s
 | exact finite core | `python -u -I audit/phase12_formal.py` | `phase12_formal.json` | 2 min |
 | transport bound | `python -u -I audit/phase12_transport.py 4752 4753 1389 1391 x539311 x539291 x539288` | `phase12_transport.json` | 90 s for the seven rules |
 | cube family | `python -u audit/phase12_cube.py flat`; `… orbit 20261025 500 3`; `… theta 42.29.46.31.24.45.13.31 3` | `phase12_cube.json` | 1 s; 16 min; 30 s |
-| intervention | `python -u -I audit/phase12_intervention.py 6 8`; then `audit/phase12_intervention_analysis.py` | `phase12_intervention.jsonl`, `phase12_intervention_analysis.json` | about 3.9 h of single-process compute (sum over the 72 records); analysis about 1 h under load, dominated by the radius-1 local data of the 61 neighbours |
+| intervention | `python -u -I audit/phase12_intervention.py 6 8`; then `python -u -I audit/phase12_intervention_analysis.py` (optional per-rule cache: `PHASE12_CACHE=<file>`, filled by `… precompute`) | `phase12_intervention.jsonl`, `phase12_intervention_analysis.json` | about 3.9 h of single-process compute (sum over the 72 records); analysis about 1 h under load, dominated by the radius-1 local data of the 61 neighbours |
 | Y₅ census (target of the frozen study) | `python -u -I audit/phase12_y5census.py` | `phase12_y5_census.jsonl` | 70 min |
 | predictive study | `python -u -I audit/phase12_predict.py` | `phase12_predict.json` | 10 s |
 | frontier table | `python -u -I audit/phase12_frontier_table.py` | `phase12_frontier.json`, `.csv` | 1 s |
 | ledger | `python -u -I audit/phase12_ledger.py` | `phase12_ledger.json` | 1 s |
 | directed-rounding audit (C6) | `python -u -I audit/phase12_rounding_audit.py` | printed findings (none) | 1 s |
-| tests | `python -m pytest -q tests/test_phase12.py` | — | ⟨TEST_TIME⟩ |
+| tests | `python -m pytest -q tests/test_phase12.py` | — | 3 min (Phase XII); 3 min (`tests/test_phase11.py`); 12 min (`tests/`, all phases) |

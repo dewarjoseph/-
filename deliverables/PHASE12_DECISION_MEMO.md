@@ -11,6 +11,8 @@
   | 1389 | [8.7644993, 9.2104999] |
   | 539291 | [7.1408386, 9.2499401] |
 
+  The lower bound of 1387 (radius 20, 24 571 balls) is reproduced by an implementation sharing no code with the certifying one.
+
 - **The six-member S₃ orbit that topped the funnel is explained, and it is not a symmetry.**
   - The right action of the chair's point group is a gauge symmetry of one inflation step (Orbit Lemma).
   - It is a full symmetry on the conjugation stabiliser (and the closure of such moves), and it is certified broken in infinite volume for 1387 against 539288.
