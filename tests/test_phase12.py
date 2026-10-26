@@ -38,12 +38,17 @@ def test_independent_links_match_phase11():
         q = I.Q8[I.LINK[f[aa], f[bb], kk]]
         assert np.allclose(u, q[0] * np.eye(2) + sum(q[1 + m] * (-1j) * sig[m] for m in range(3)))
 
-@pytest.mark.parametrize('spec,n', [('4752', 72), ('4753', 90), ('x539288', 79)])
-def test_independent_legal_types(spec, n):
-    ty, n0 = I.legal_types(I.decoration(spec)); assert len(ty) == n
+@pytest.mark.parametrize('spec,n,n5', [('4752', 72, 72), ('4753', 90, 90), ('1389', 102, 94), ('1391', 104, 95), ('x539288', 79, 77),
+                                        ('x539311', 90, 90), ('x539291', 97, 95)])
+def test_independent_legal_types(spec, n, n5):
+    """all legal 1-star types (Phi-closure) and those visible in T5, by the independent implementation; the same numbers as Phase XI's"""
+    ty, n0 = I.legal_types(I.decoration(spec)); assert (len(ty), n0) == (n, n5)
 
 def test_independent_exact_Y3_matches():
-    lam, q = I.Y('4753', 3); assert abs(float(q) - 9.955918832466624) < 1e-9 and q >= Fraction(lam) - Fraction(1, 10 ** 9)
+    cen = {r['class']: r for r in JL('phase10_census.jsonl')}[1387]
+    for L in (3, 4):
+        lam, q = I.Y('4753', L); assert abs(lam - cen[f'Y{L}']) < 1e-11 and Fraction(lam) - Fraction(1, 10 ** 9) <= q
+        assert abs(float(q) - cen[f'Y{L}']) < 1e-9
 
 def test_independent_small_certificate_and_adversarial(tmp_path, monkeypatch):
     monkeypatch.setattr(I, 'OUT', str(tmp_path / 'ind.jsonl'))

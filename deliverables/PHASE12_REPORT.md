@@ -103,8 +103,8 @@
   - the spinor operator realised as the real 4×4 left-multiplication form of ℍ, not the interleaved complex form;
   - its own Φ-closure, its own completeness test against a KD-tree of unowned cube centres, and 4-column canonical keys.
 - **Validation** (`tests/test_phase12.py`):
-  - legal 1-star type counts 72 / 90 / 102 (94 in T₅) / 104 (95) / 79 (77) / 90 for FR30, 1387, 1389, 1391, 539288, 539311, all identical;
-  - exact Y₃, Y₄ of 1387 agree to 10⁻¹¹;
+  - legal 1-star type counts 72 / 90 / 102 (94 in T₅) / 104 (95) / 79 (77) / 90 / 97 (95) for FR30, 1387, 1389, 1391, 539288, 539311, 539291, all identical to Phase XI's (`test_independent_legal_types`);
+  - Y₃ and Y₄ of 1387: the eigenvalues agree with Phase X's to 2·10⁻¹³, and the independent exact rational upper bounds lie within 10⁻¹⁰ of the stored ones (they are Rayleigh quotients of independently rounded vectors);
   - FR30 at R = 6: 325 balls, Λ₆ ≥ 3.6555585, reproducing Phase X's 3.655558585;
   - 1387 at R = 8: 1450 balls, certified at 7.3.
 - **The full radius-20 rerun:** ⟨IND_R20⟩
