@@ -138,10 +138,11 @@ The Phase XI report's theorems were rechecked line by line. Five statements (C1�
 **C6: directed rounding (both phases).** A printed interval endpoint is a valid bound only if it is rounded outward: an upper bound up, a lower bound down.
 - `audit/phase12_rounding_audit.py` compares every number printed with ≥ 4 decimals (and every 2–3-decimal number after ≥ or ≤) in the five Phase XI–XII documents with the stored bounds and their directions. Its allow-list names each exempt occurrence and the reason: requested levels μ, command lines, one floating-point column, and Phase X's own value 3.655558585.
 - In the committed documents it found **88 printed bounds (36 distinct values) rounded to nearest in the wrong direction**, each by one unit in the last printed digit. Example: Y₆(539311) = 9.38859371623… had been printed 9.3885937 as an upper bound; it is now 9.3885938.
-- All are corrected, in the documents, in both ledgers and in the frontier table, which now formats its endpoints exactly from the stored rationals. Three related errors were fixed by hand:
+- All are corrected, in the documents, in both ledgers and in the frontier table, which now formats its endpoints exactly from the stored rationals. Related errors fixed by hand:
   - the transport bound of the 1387 orbit is 1.69926 (it was printed 1.69927), and its share of FR30's floor is ≤ 19.8 % (it was printed ≤ 19.7 %);
-  - §2.2 compared the orbit's level-6 spread with "FR30's at 8.79"; FR30's values are Y₅ = 8.7970114 and Y₆ = 8.7701337;
-  - the memo asked for a lower bound "above 9.368"; the threshold is 9.3679502.
+  - §2.3 compared the orbit's level-6 spread with "FR30's at 8.79"; FR30's values are Y₅ = 8.7970114 and Y₆ = 8.7701337;
+  - the memo asked for a lower bound "above 9.368"; the threshold is 9.3679502;
+  - in the Phase XI report: an unlabelled "true floor ≈ 9.36" (§5.2) is replaced by the certified E_\*(1387) ≥ 9.1104981; the ladder's false certificate is quoted with its W (0.5219 at W = 64); the floating-point D₈, Λ₈ table of §5.1 is labelled as such.
 - **No conclusion changes.** Every comparison that uses a corrected value keeps a margin of at least 2.7·10⁻⁴. The smallest is FR30's U₅ = 8.7642271 against 1389's 8.7644993.
 - The frozen `phase12_preregistration_next.json` quotes three Y₆ values rounded to nearest in its `context` block, and gives the level-5 gap Y₅(539311) − Y₅(1387) as 0.0231, a difference of rounded values (the stored rationals give 0.0230244). The file is left unchanged because it is frozen. Its predictions P1 and P2 do not use these digits.
 - The audit is a regression test (`test_rounding_outward`): it must report nothing.

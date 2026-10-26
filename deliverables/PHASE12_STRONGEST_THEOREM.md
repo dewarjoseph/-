@@ -22,11 +22,11 @@ and the lower side is ≥ inf_j λ^D(K_j) − ε(χ), with ε(χ) = sup_vΣ_{e�
 **(1c) Rates.**
 - ε ≤ 16dC_D²/R² on uniformly doubling graphs, for R ≥ 4C_D.
 - ε ≤ K_D(ρ)S_c/ρ² for a proper realisation in ℝ^D. Here the pieces are Euclidean balls of radius ρ > j_D h/√(2D), and K_D(ρ) = (j_D²/2D)/(1 − j_D²h²/(2Dρ²)).
-- R⁻² is optimal (ℤ^D). Property A alone gives no power: the lamplighter ℤ₂ ≀ ℤ^k, k ≥ 2, has rate ≥ c_kR^{−2/k}.
+- R⁻² is optimal (ℤ^D). Property A alone gives no power law: the lamplighter ℤ₂ ≀ ℤ^k, k ≥ 2, has rate ≥ c_kR^{−2/k}, so no exponent works for every property-A graph.
 
 **(1d) Boundary conditions and coverage.**
 - Neumann windows are not compressions. On the π-flux ladder they converge to 2 − √2 < 3 − √5 = E_\*.
-- A lower bound computed over a strict subset of the legal environments can be false (ladder: 0.49054 claimed, ≤ 0.40791 true).
+- A lower bound computed over a strict subset of the legal environments can be false (ladder at W = 8: 0.49054 claimed, ≤ 0.40791 true).
 
 ## Theorem 2 (Orbit Lemma; new) [P, with every finite step checked exhaustively]
 
