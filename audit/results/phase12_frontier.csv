@@ -1,5 +1,5 @@
 rule,L,L_source,U,U_source,status,L_independent
-1387,9.1104981,"IMS R=20, 24571 balls (phase11_chair)",9.3679502,"Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",leader,
+1387,9.1104981,"IMS R=20, 24571 balls (phase11_chair)",9.3679502,"Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",leader,independently reproduced: IMS R=20 >= 9.1104981 (phase12_independent)
 539311,8.7999990,"IMS R=15, 10321 balls (phase11_chair)",9.3885938,"Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",contender,
 1389,8.7644993,"IMS R=16, 12193 balls (phase11_chair)",9.2104999,"Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",contender,
 539291,7.1408386,"IMS R=8, 1532 balls (Phase X)",9.2499401,"Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",contender,

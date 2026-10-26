@@ -32,7 +32,7 @@
 
 **1. The loop is closed.**
 - **The preregistered radius-20 certificate passed:** E_\*(1387) ≥ 9.1104981, on all 24 571 legal balls.
-- It was rerun by an implementation that shares no code with the certifying one. That rerun reproduces the enumeration exactly: 2 949 120 centres, 0 rejected, 24 571 distinct balls. ⟨IND_SHORT⟩
+- It was rerun by an implementation that shares no code with the certifying one. That rerun reproduces the enumeration exactly: 2 949 120 centres, 0 rejected, 24 571 distinct balls. It certifies every one of them at the same level μ = 9553051/1048576: **E_\*(1387) ≥ 9.1104981, reproduced independently** [C].
 - The leaderboard is recomputed from the stored certificates. 1096 of the 1098 proper classes are proven inferior.
 - **Over all 1 679 616 frame rules, the maximiser is one of four: 1387, 539311, 1389, 539291** [C].
 - Five statements of the Phase XI one-page theorem exceeded their proofs (missing hypotheses, an over-general class-field claim); they are corrected (§1.3).
@@ -107,7 +107,11 @@
   - Y₃ and Y₄ of 1387: the eigenvalues agree with Phase X's to 2·10⁻¹³, and the independent exact rational upper bounds lie within 10⁻¹⁰ of the stored ones (they are Rayleigh quotients of independently rounded vectors);
   - FR30 at R = 6: 325 balls, Λ₆ ≥ 3.6555585, reproducing Phase X's 3.655558585;
   - 1387 at R = 8: 1450 balls, certified at 7.3.
-- **The full radius-20 rerun:** ⟨IND_R20⟩
+- **The full radius-20 rerun:** **passed.** `phase12_independent.jsonl`, tag `independent_1387_R20`.
+  - The enumeration agrees exactly with the certifying run: 2 949 120 centres, 0 rejected, 24 571 distinct balls of 4737–4838 tiles.
+  - Every ball passes the banded Higham test at μ = 9553051/1048576 (RCM bandwidth ≤ 1628; the certifying code's ordering gave 1626); 0 failures. Certified: E_\*(1387) ≥ 9.1104981.
+  - The certified value, 9.110498143808444, equals the certifying run's in every stored digit. This is expected rather than a coincidence: the bound is μ minus Higham's rounding allowance γ_N‖L‖_F² (plus the entry error), and ‖L‖_F² = trace(H − μ) does not depend on the ordering. Both runs therefore end at the value set by the largest ball, 4838 tiles.
+  - A container restart interrupted a first attempt during certification (5 376 of 24 571 balls certified at its last log line, 0 failed). The run reported here was started again from scratch, with checkpointing (`--ckpt`), and ran without interruption; nothing was restored. `test_independent_checkpoint_resume` shows that a resumed run would give exactly the record of an uninterrupted one. Wall time: 4.9 h with 3 workers, under load from concurrent runs.
 
 ### 1.2 The leaderboard, recomputed and cross-checked
 
@@ -442,6 +446,7 @@ The brief lists four possible sources:
 with Λ_R the bottom of the IMS-amplified ball operators (the quantity a radius-R certificate certifies) and D_R the bottom of the plain Dirichlet ball operators (an upper bound on E_\*), each the minimum over all legal R-balls (`audit/phase12_intervention.py` → `phase12_intervention.jsonl`; float eigenvalues [E], not certificates).
 - R = 6 for every rule. R = 8 only for rules with at most 150 legal 1-star types (the cost cap, fixed in the script before the run and applied from the R = 6 records).
 - R = 4 is excluded: there ρ = R − 311/175 lies below the largest panel distance 15/7 and the amplification degenerates.
+- A container restart interrupted the run once. It resumed from its stored records (one per rule and radius); the job in progress was recomputed from the start.
 - At R = 6 the localisation error is large, so Λ₆ can be negative. Δ(6) compares the certificate quantity of two rules at the same radius, with the same geometry-only correction (the IMS constants depend only on the geometry, §4.2); it is not a statement about E_\*.
 
 ### 5.1 What can be proved
@@ -694,7 +699,7 @@ These are not finite computations. The proofs above rely on them, and a full for
 
 | rule | certified lower L (source) | exact upper U (source) | status |
 |---|---|---|---|
-| **1387** | **9.1104981** (IMS R = 20, 24 571 balls) ⟨IND_NOTE⟩ | 9.3679502 (Y₆, 262 144 tiles) | **leader** |
+| **1387** | **9.1104981** (IMS R = 20, 24 571 balls); reproduced by the independent implementation, all 24 571 balls (§1.1) | 9.3679502 (Y₆, 262 144 tiles) | **leader** |
 | 539311 | 8.7999990 (IMS R = 15, 10 321 balls) | 9.3885938 (Y₆) | contender |
 | 1389 | 8.7644993 (IMS R = 16, 12 193 balls) | 9.2104999 (Y₆) | contender |
 | 539291 | 7.1408386 (IMS R = 8, Phase X) | 9.2499401 (Y₆) | contender |
@@ -758,7 +763,7 @@ The literature search is Phase XI's (`PHASE11_REPORT.md` §8). Phase XII made no
 
 **2. Strongest new computational result.**
 - **Over all 1 679 616 Chair44 frame rules, the maximiser of E_\* is one of 1387, 539311, 1389, 539291, and E_\*(1387) ∈ [9.1104981, 9.3679502].**
-- The lower bound is a preregistered radius-20 IMS certificate: 24 571 legal balls, every one passing a Higham-bounded banded Cholesky. ⟨IND_FIVE⟩
+- The lower bound is a preregistered radius-20 IMS certificate: 24 571 legal balls, every one passing a Higham-bounded banded Cholesky. An implementation sharing no code with the certifying one reproduces it: the same 24 571 balls, every one certified (§1.1).
 - The upper bounds are exact rational Rayleigh quotients.
 - *Reproduction:* the commands of the reproduction table.
 - *Limits:*
@@ -793,7 +798,7 @@ All commands run from the repository root (Python 3.13, numpy 2.5, scipy 1.18, s
 | step | command | output | time |
 |---|---|---|---|
 | independent implementation: validation runs | `python -u -I audit/phase12_independent.py cert 4752 6 3 4 3833131/1048576 validation_FR30_R6`; `… cert 1387 8 3 4 7.3 validation_1387_R8`; `… types <rule>`; `… Y <rule> <L>` | `phase12_independent.jsonl` | seconds to 1 min |
-| independent radius-20 reproduction | `python -u -I audit/phase12_independent.py cert 1387 20 5 3 9.1105 independent_1387_R20` | `phase12_independent.jsonl` | enumeration 68 min; certification ⟨IND_TIME⟩ (3 workers) |
+| independent radius-20 reproduction | `python -u -I audit/phase12_independent.py cert 1387 20 5 3 9.1105 independent_1387_R20 --ckpt=<dir>` | `phase12_independent.jsonl` | 4.9 h with 3 workers under load (enumeration 54 min) |
 | Orbit Lemma checks, funnel clustering | `python -u -I audit/phase12_orbit.py` | `phase12_orbit.json` (`lemma`, `funnel`) | 3 min |
 | the orbit of 1387, member by member (§2.3–2.4) | `python -u -I audit/phase12_orbit.py profile` | `phase12_orbit.json:profile` | 8 min |
 | conjugation-defect law (preregistered) | `python -u -I audit/phase12_orbit.py defect` | `phase12_orbit.json:defect_law` | 5 min |

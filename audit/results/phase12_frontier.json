@@ -15,7 +15,7 @@
    "L": 9.110498143808444,
    "L_source": "IMS R=20, 24571 balls (phase11_chair)",
    "L_type": "IMS + Higham banded Cholesky",
-   "L_independent": null,
+   "L_independent": "independently reproduced: IMS R=20 >= 9.1104981 (phase12_independent)",
    "U": 9.367950157113038,
    "U_exact": "7249509659237936/773862962297405",
    "U_source": "Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",

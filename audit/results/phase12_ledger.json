@@ -8,7 +8,7 @@
    "fix": "phase12_independent now compares in rational arithmetic; Phase XI code left unchanged (frozen artifact)"
   }
  ],
- "commit": "37d43a5",
+ "commit": "8b26767",
  "report": "deliverables/PHASE12_REPORT.md",
  "claims": [
   {
@@ -121,7 +121,7 @@
   {
    "id": "XII.R20.ind",
    "claim": "the R = 20 certificate reproduced by an implementation sharing no code",
-   "status": "running / not stored",
+   "status": "[C] reproduced",
    "assumptions": [],
    "evidence": "phase12_independent.jsonl:independent_1387_R20",
    "test": "test_independent_R20_reproduction"
