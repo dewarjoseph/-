@@ -228,3 +228,15 @@ def test_stored_certificate_shifts_exact():
 def test_closure_explains_every_tie():
     c = J('phase12_orbit.json')['closure']
     assert c['pairs'] == 1401660 and c['ties'] >= 912 and c['ties_unexplained'] == 0 and c['explained_but_not_tied'] == 0
+
+def test_independent_checkpoint_resume(tmp_path, monkeypatch):
+    """an interrupted, checkpointed run resumes to exactly the record of an uninterrupted run"""
+    monkeypatch.setattr(I, 'OUT', str(tmp_path / 'ind.jsonl')); ck = str(tmp_path / 'ck')
+    keys = ('distinct_balls', 'centres', 'rejected_incomplete', 'ball_tiles', 'bandwidth_max', 'Lambda_R_certified', 'all_balls_certified')
+    a = I.certify('4752', 6, 3, 1, '3833131/1048576', 't_plain')
+    b = I.certify('4752', 6, 3, 1, '3833131/1048576', 't_ckpt', ckpt=ck)
+    lines = open(os.path.join(ck, 'pass2.jsonl')).read().splitlines()
+    open(os.path.join(ck, 'pass2.jsonl'), 'w').write('\n'.join(lines[:len(lines) // 2]) + '\n' + lines[len(lines) // 2][:40])   # cut mid-line
+    c = I.certify('4752', 6, 3, 1, '3833131/1048576', 't_resumed', ckpt=ck)
+    for k in keys: assert a[k] == b[k] == c[k], k
+    assert len(lines) > 1 and c['checkpointed']

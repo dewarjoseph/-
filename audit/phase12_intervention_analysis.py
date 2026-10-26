@@ -17,10 +17,15 @@ import phase11_chair as C, phase11_frontier as F, phase11_mechanism as M, phase1
 def JL(n): return [json.loads(l) for l in open(os.path.join(RES, n))]
 def sgn(x, tol=1e-8): return 0 if abs(x) < tol else (1 if x > 0 else -1)
 
+_FP = {}
+def fingerprints(spec):
+    if spec not in _FP: _FP[spec] = M.star_fingerprints(spec)
+    return _FP[spec]
 def shape_minima(spec):
     out = {}
-    for r in M.star_fingerprints(spec): out[r['shape']] = min(out.get(r['shape'], 1e9), r['U1'])
+    for r in fingerprints(spec): out[r['shape']] = min(out.get(r['shape'], 1e9), r['U1'])
     return out
+def fpset(spec): return {(r['shape'], r['fp']) for r in fingerprints(spec)}
 
 if __name__ == '__main__':
     os.environ.setdefault('OMP_NUM_THREADS', '1')
@@ -43,7 +48,10 @@ if __name__ == '__main__':
                          'Delta': {str(k): v for k, v in d.items()}, 'dU1': (lj.get('U1', np.nan) - lb_.get('U1', np.nan)) if lj and lb_ else None,
                          'dY5': y5[j] - y5[jb] if j in y5 and jb in y5 else None, 'shapes_raised': raised, 'shapes_lowered': lowered,
                          'shapes_total': len(sb), 'transport_alpha_min': tj['alpha_min'], 'transport_bound': tj['bound'],
-                         'twocycle_flat_types': lj.get('types_without_nontrivial_twocycle')})
+                         'twocycle_flat_types': lj.get('types_without_nontrivial_twocycle'),
+                         'radius1_fingerprints_subset_of_base': fpset('x%d' % j) <= fpset('x%d' % jb),
+                         'radius1_fingerprints_superset_of_base': fpset('x%d' % j) >= fpset('x%d' % jb),
+                         'radius1_fingerprints_shared': len(fpset('x%d' % j) & fpset('x%d' % jb))})
         def frac(f):
             v = [f(x) for x in recs]; v = [x for x in v if x is not None]; return (sum(v), len(v))
         both = [x for x in recs if '6' in x['Delta'] and '8' in x['Delta']]
@@ -52,6 +60,8 @@ if __name__ == '__main__':
                    'sign_Delta6_eq_sign_dU1': frac(lambda x: sgn(x['Delta']['6']) == sgn(x['dU1']) if x['dU1'] is not None else None),
                    'sign_Delta6_eq_sign_dY5': frac(lambda x: sgn(x['Delta']['6']) == sgn(x['dY5']) if x['dY5'] is not None else None),
                    'Delta6_positive_iff_no_shape_lowered': frac(lambda x: (x['Delta']['6'] > 0) == (x['shapes_lowered'] == 0)),
+                   'A2_hypothesis_holds_at_radius1 (neighbour language subset of base)': sum(x['radius1_fingerprints_subset_of_base'] for x in recs),
+                   'neighbours_sharing_no_radius1_environment_with_base': sum(x['radius1_fingerprints_shared'] == 0 for x in recs),
                    'spearman_Delta6_dU1': float(stats.spearmanr([x['Delta']['6'] for x in recs if x['dU1'] is not None], [x['dU1'] for x in recs if x['dU1'] is not None]).statistic),
                    'spearman_Delta6_dY5': float(stats.spearmanr([x['Delta']['6'] for x in recs if x['dY5'] is not None], [x['dY5'] for x in recs if x['dY5'] is not None]).statistic),
                    'base': {'Lambda': lam[(base, jb)], 'transport_alpha_min': tb['alpha_min'], 'transport_bound': tb['bound']}}

@@ -15,9 +15,10 @@ phase11_chair at every step that a shared bug could hide in:
 Commands (results go to audit/results/phase12_independent.jsonl):
   types <rule>                         number of Phi-closed legal 1-star types
   Y <rule> <L>                         exact rational upper bound Y_L (pinned level-L supertile)
-  cert <rule> <R> <m> <nproc> <mu> <tag>   streaming legal-ball enumeration and IMS certificate at radius R
+  cert <rule> <R> <m> <nproc> <mu> <tag> [--ckpt=DIR]   streaming legal-ball enumeration and IMS certificate at radius R;
+                                       with --ckpt the run can be interrupted and restarted without loss
 Rule specs: census index (proper, base-3 digits) or x<extended index> (base-6 digits), as in Phases IX-XI."""
-import os, sys, json, math, time, zlib, itertools, collections
+import os, sys, json, math, time, zlib, itertools, collections, hashlib
 from fractions import Fraction
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); RES = os.path.join(HERE, 'results')
@@ -220,7 +221,8 @@ def _cert(args):
     ti, fs, Ts, c, dec, R, m, ts, zks = args; tab, mu, err = _W['tab'], _W['mu'], _W['err']
     f, T, X, tree, cen, ok = _patch((fs, Ts, c, dec, R, m)); out = []
     for t, cand, zk in zip(ts, tree.query_ball_point(X[np.array(ts)].astype(float), 14 * R + 1e-6), zks):
-        kb, mem = _ball(f, T, X, cand, t, R); assert zlib.compress(kb, 1) == zk
+        kb, mem = _ball(f, T, X, cand, t, R); z = zlib.compress(kb, 1)
+        assert (z == zk) if isinstance(zk, bytes) else (hashlib.sha256(z).hexdigest() == zk), 'rebuilt ball differs from the enumerated one'
         H = operator(f[mem], T[mem], weight=weight_fn(tab))
         low, bw = higham(H, mu, err)
         if low is None:
@@ -228,16 +230,34 @@ def _cert(args):
             out.append((None, bw, len(mem), float(sla.eigsh(H, k=1, which='SA', tol=1e-10, return_eigenvectors=False)[0]), int(t)))
         else: out.append((low, bw, len(mem)))
     return ti, out
-def certify(spec, R, m, nproc, mu_str, tag):
+def _cert_tagged(args):
+    ti, out = _cert(args); return ti, out, int(args[7][0])
+def certify(spec, R, m, nproc, mu_str, tag, ckpt=None):
+    """ckpt: optional directory for checkpoints.  Pass 1 (exact deduplication on full compressed keys) is saved as the owner
+    (type, tile) of every distinct ball with the sha256 of its key; pass 2 appends each finished chunk.  A restart with the same
+    directory recomputes nothing that was saved and gives the same record; the rebuilt balls are checked against the hashes."""
     import multiprocessing as mp
     dec = decoration(spec); rho = Fraction(R) - RC
     t0 = time.time(); types, n0 = legal_types(dec); tv = list(types.values()); log(f'{spec}: {len(types)} legal 1-star types ({n0} in T5)')
-    jobs = [(ti, fs, Ts, c, dec, R, m) for ti, (fs, Ts, c) in enumerate(tv)]; seen = {}; rej = 0; centres = 0
-    with mp.Pool(nproc) as pool:
-        for ti, ks, r_, n_ in pool.imap(_keys, jobs):
-            rej += r_; centres += n_
-            for zk, t in ks.items(): seen.setdefault(zk, (ti, t))
-            if ti % 10 == 0: log(f'  pass 1: type {ti + 1}/{len(jobs)}, {len(seen)} distinct')
+    tkey = hashlib.sha256(repr(list(types)).encode()).hexdigest()
+    p1 = os.path.join(ckpt, 'pass1.json') if ckpt else None; p2 = os.path.join(ckpt, 'pass2.jsonl') if ckpt else None
+    if ckpt: os.makedirs(ckpt, exist_ok=True)
+    if p1 and os.path.exists(p1):
+        c1 = json.load(open(p1)); assert c1['types_sha256'] == tkey and (c1['spec'], c1['R'], c1['m']) == (str(spec), R, m), 'checkpoint mismatch'
+        seen = {h: (ti, t) for ti, t, h in c1['assign']}; rej, centres = c1['rejected'], c1['centres']
+        log(f'pass 1 restored from {p1}: {len(seen)} distinct balls')
+    else:
+        jobs = [(ti, fs, Ts, c, dec, R, m) for ti, (fs, Ts, c) in enumerate(tv)]; seen = {}; rej = 0; centres = 0
+        with mp.Pool(nproc) as pool:
+            for ti, ks, r_, n_ in pool.imap(_keys, jobs):
+                rej += r_; centres += n_
+                for zk, t in ks.items(): seen.setdefault(zk, (ti, t))
+                if ti % 10 == 0: log(f'  pass 1: type {ti + 1}/{len(jobs)}, {len(seen)} distinct')
+        if p1:
+            seen = {hashlib.sha256(zk).hexdigest(): v for zk, v in seen.items()}
+            tmp = p1 + '.tmp'
+            json.dump({'spec': str(spec), 'R': R, 'm': m, 'types_sha256': tkey, 'rejected': rej, 'centres': centres,
+                       'assign': [[ti, t, h] for h, (ti, t) in seen.items()]}, open(tmp, 'w')); os.replace(tmp, p1)
     log(f'R={R} m={m}: {len(seen)} distinct balls, {centres} centres, {rej} rejected [{time.time() - t0:.0f}s]')
     assert rej == 0, 'incomplete balls: increase m'
     d2s = set()
@@ -252,19 +272,35 @@ def certify(spec, R, m, nproc, mu_str, tag):
         lst.sort(); fs, Ts, c = tv[ti]
         for s in range(0, len(lst), 128): cj.append((ti, fs, Ts, c, dec, R, m, [a for a, _ in lst[s:s + 128]], [b for _, b in lst[s:s + 128]]))
     nb = len(seen); del seen; res = []; fails = []; t1 = time.time()
+    def take(ti, out):
+        for o in out:
+            res.append(tuple(o[:3]))
+            if o[0] is None: fails.append({'type': ti, 'tile': o[4], 'tiles': o[2], 'lambda_float': o[3]})
+    done = set()
+    if p2 and os.path.exists(p2):
+        for line in open(p2):
+            try: rec2 = json.loads(line)
+            except json.JSONDecodeError: continue                     # a line cut by an interruption is recomputed
+            key = (rec2['ti'], rec2['t0'])
+            if key in done: continue
+            done.add(key); take(rec2['ti'], rec2['out'])
+        log(f'pass 2 restored from {p2}: {len(done)} chunks, {len(res)} balls')
+    todo = [j for j in cj if (j[0], j[7][0]) not in done]
     with mp.Pool(nproc, initializer=_init, initargs=(tab, mu, err)) as pool:
-        for ti, out in pool.imap_unordered(_cert, cj):
-            for o in out:
-                res.append(o[:3])
-                if o[0] is None: fails.append({'type': ti, 'tile': o[4], 'tiles': o[2], 'lambda_float': o[3]})
+        for ti, out, t_first in pool.imap_unordered(_cert_tagged, todo):
+            take(ti, out)
+            if p2:
+                with open(p2, 'a') as fh: fh.write(json.dumps({'ti': ti, 't0': t_first, 'out': [list(o) for o in out]}) + '\n')
             log(f'  pass 2: {len(res)}/{nb} certified, {len(fails)} failed [{time.time() - t1:.0f}s]')
+    assert len(res) == nb, f'{len(res)} results for {nb} balls'
     ok = not fails; lows = [r[0] for r in res if r[0] is not None]
     rec = {'rule': str(spec), 'R': R, 'm': m, 'rho': str(rho), 'one_star_types': len(types), 'one_star_types_T5': n0, 'centres': centres,
            'distinct_balls': nb, 'rejected_incomplete': rej, 'ball_tiles': [min(r[2] for r in res), max(r[2] for r in res)],
            'bandwidth_max': max(r[1] for r in res), 'mu': f'{Fraction(mu).numerator}/{Fraction(mu).denominator}', 'entry_err': err,
            'Lambda_R_certified': min(lows) if ok else None, 'all_balls_certified': ok, 'balls_failing': len(fails),
            'failing_balls_lowest': sorted(fails, key=lambda x: x['lambda_float'])[:50], 'tag': tag, 'seconds': time.time() - t0,
-           'implementation': 'phase12_independent: frame-index tables, quaternion links, realified spinor operator, own enumeration'}
+           'implementation': 'phase12_independent: frame-index tables, quaternion links, realified spinor operator, own enumeration',
+           **({'checkpointed': True} if ckpt else {})}
     log({k: v for k, v in rec.items() if k != 'failing_balls_lowest'})
     with open(OUT, 'a') as fh: fh.write(json.dumps(rec) + '\n')
     return rec
@@ -279,4 +315,5 @@ if __name__ == '__main__':
         print(rec)
         with open(OUT, 'a') as fh: fh.write(json.dumps({'kind': 'Y', **rec}) + '\n')
     elif cmd == 'cert':
-        certify(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]), int(sys.argv[5]), sys.argv[6], sys.argv[7])
+        ck = [a[7:] for a in sys.argv[8:] if a.startswith('--ckpt=')]
+        certify(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]), int(sys.argv[5]), sys.argv[6], sys.argv[7], ck[0] if ck else None)
