@@ -12,6 +12,9 @@ replaced by h_c Q, Q a permutation matrix).
               (e) failure in infinite volume: the stored certificates separate E_*(1387) from E_*(539288)
   funnel    the right-orbit structure of the certified funnel (all 280 332 representatives, exact Y3 of stage X3):
             share of the variance of Y3 explained by right orbits, rank correlation of Y3(d) with Y3(dQ), survival of whole orbits
+  profile   the six members of the orbit of 1387 side by side (report section 2.3-2.4): pinned bottoms Y1..Y3, plaquette-class
+            counts at levels 1-3, the number of legal 1-star types, and the bottoms of the three Abelian shadows on T3
+            (python -u -I audit/phase12_orbit.py profile -> key 'profile', merged)
 Usage: python -u -I audit/phase12_orbit.py -> audit/results/phase12_orbit.json  (uses phase12_independent for operators)"""
 import os, sys, json, gzip, math, itertools, time
 from fractions import Fraction
@@ -200,6 +203,26 @@ def closure():
             if (k in C) and not tie: explained_not_tied.append((int(j), k, q, X3[k] - yj))
     return {'pairs': pairs, 'ties': ties, 'ties_unexplained': len(ties_unexplained), 'examples_unexplained': ties_unexplained[:10],
             'explained_but_not_tied': len(explained_not_tied), 'examples_explained_not_tied': explained_not_tied[:10]}
+
+# ---------------------------------------------------------------- the orbit of 1387, member by member
+ORBIT_1387 = [('1387', '1387'), ('1389', '1389'), ('1391', '1391'), ('539311', 'x539311'), ('539291', 'x539291'), ('539288', 'x539288')]
+def orbit_profile():
+    import phase9_pair as P9, phase10_shadows as SH, phase11_chair as C
+    lmin = lambda H: float(np.linalg.eigvalsh(H.toarray())[0])
+    out = {}
+    for name, spec in ORBIT_1387:
+        d = C.rule(spec); dec = {'0': d[0], **{v: d[k + 1] for k, v in enumerate(P9.U3)}}; r = {}
+        for L in (1, 2, 3):
+            S = P9.build([dec] * L); r[f'Y{L}'] = lmin(S['H'])
+            _, pc = P9.plaquettes(S); r[f'plaquette_classes_L{L}'] = P9.class_counts(pc)
+            if L == 3: r['shadow_bottoms_T3'] = [lmin(SH.shadow_scalar(S, k)) for k in range(3)]
+        r['legal_1star_types'] = len(C.legal_types(d)[0]); out[name] = r
+    return out
+
+if __name__ == '__main__' and len(sys.argv) > 1 and sys.argv[1] == 'profile':
+    d = json.load(open(os.path.join(RES, 'phase12_orbit.json'))); d['profile'] = orbit_profile()
+    json.dump(d, open(os.path.join(RES, 'phase12_orbit.json'), 'w'), indent=1, default=lambda o: o.item() if hasattr(o, 'item') else str(o))
+    print(json.dumps(d['profile'], indent=1)); sys.exit(0)
 
 if __name__ == '__main__' and len(sys.argv) > 1 and sys.argv[1] == 'closure':
     d = json.load(open(os.path.join(RES, 'phase12_orbit.json'))); d['closure'] = closure()

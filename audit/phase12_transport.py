@@ -11,6 +11,10 @@ centre tile t, through t):
   plaquettes  the lattice-edge 4-cycles through a cube of t with 3 or 4 distinct owners (simple cycles of length 3 or 4);
               those with 2 owners are two-cycles (counted above) or not simple (excluded)
 Holonomies are exact Q8 quaternions (phase12_independent), so theta_C is 0 (W = 1), pi (W = -1) or pi/2 (traceless).
+Exactness of alpha and W: every cycle of the family through c must be visible inside c's legal 1-star patch.  Two-cycles are
+(they join c to a panel-neighbour); for plaquettes this is asserted: all four cubes around every lattice edge of a cube of c are
+owned by tiles of the patch.  (Were one missing, a plaquette through a panel of c could be absent from both end tiles' lists
+and W would be undercounted.)
 Usage: python -u -I audit/phase12_transport.py <rule> ... -> audit/results/phase12_transport.json (merged by rule)"""
 import os, sys, json, math, itertools, collections
 import numpy as np
@@ -53,7 +57,7 @@ def cycles_of_star(fs, Ts, c):
                     for dp in ((0, 0), (1, 0), (1, 1), (0, 1)):
                         r = list(q0); r[b_] += dp[0]; r[c_] += dp[1]; cyc.append((own(r), tuple(r)))
                     owners = [o for o, _ in cyc]
-                    if min(owners) < 0: continue
+                    assert min(owners) >= 0, 'a plaquette through the centre is not visible in its 1-star patch'
                     red = [o for i, o in enumerate(owners) if o != owners[i - 1]]     # cyclic owner sequence, repeats merged
                     if len(red) < 3 or len(set(red)) != len(red): continue          # not a simple cycle of length >= 3
                     W = (1, 0, 0, 0); edges = []; steps = (b_, c_, b_, c_); sgn = (1, 1, -1, -1)
@@ -79,7 +83,8 @@ def bound(spec):
     beta = min(t['alpha'] for t in per_type) / W
     return {'rule': str(spec), 'types': len(types), 'W': W, 'alpha_min': min(t['alpha'] for t in per_type),
             'alpha_max': max(t['alpha'] for t in per_type), 'bound': beta,
-            'types_without_frustrated_cycle': sum(t['frustrated_cycles'] == 0 for t in per_type)}
+            'types_without_frustrated_cycle': sum(t['frustrated_cycles'] == 0 for t in per_type),
+            'all_plaquettes_visible_in_1star': True}
 
 if __name__ == '__main__':
     d = json.load(open(OUT)) if os.path.exists(OUT) else {}

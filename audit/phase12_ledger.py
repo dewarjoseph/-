@@ -25,7 +25,7 @@ CORRECTIONS = [
      'representations with only 1-dimensional irreducible constituents, on complexes whose plaquettes generate H_1(.; Z); for Q8 the non-spinor ones'),
     ('C6', 'PHASE11_REPORT, PHASE11_STRONGEST_THEOREM, PHASE12 drafts: printed interval endpoints (e.g. Y6(539311) <= 9.3885937)',
      '88 printed bounds (36 distinct values) rounded to nearest in the wrong direction, by one unit in the last digit; transport bound 1.69927 and share <= 19.7 % rounded the wrong way',
-     'every printed bound rounded outward (phase12_rounding_audit.py, test_rounding_outward); no conclusion changes (every comparison using a corrected value keeps a margin >= 2.7e-4); the frozen preregistration file is left unchanged'),
+     'every printed bound rounded outward (phase12_rounding_audit.py, test_rounding_outward); no conclusion changes (every comparison using a corrected value keeps a margin >= 2.7e-4); the frozen preregistration file is left unchanged (its context block also gives the L5 gap as 0.0231; the stored rationals give 0.0230244)'),
 ]
 
 def claims():
@@ -39,7 +39,7 @@ def claims():
         ('XII.C', 'rates: none from bounded degree or property A; R^-2 from doubling (R >= 4 C_D) or a Euclidean realisation; R^-2 optimal; lamplighter R^(-2/k), k >= 2', '[P]', G, 'report 4.2 table', 'phase11:test_overlap_functions_are_exact'),
         ('XII.N', 'Neumann windows are not compressions and can lie below the floor (pi-flux ladder: 2 - sqrt 2 < 3 - sqrt 5)', '[P]+[C]', G, 'phase11_ladder.json', 'phase11:test_ladder_neumann_windows_saturate_below_floor'),
         ('XII.EN', 'an enumeration of visible environments only can give a false lower certificate (ladder rare seam: 0.49054 claimed, <= 0.40791 true)', '[C]', G, 'phase11_ladder.json:rare', 'phase11:test_ladder_rare_environment_false_certificate'),
-        ('XII.OL', 'Orbit Lemma (a)-(e): sigma_{dQ} = rho_Q sigma_d; rho_Q a global gauge transformation; level-1 equivalence; full equivalence and equal E_* on the conjugation stabiliser; breaking otherwise', '[P]', ['Chair44 frame rules', 'Q in S3'],
+        ('XII.OL', 'Orbit Lemma (a)-(e): sigma_{dQ} = rho_Q sigma_d; rho_Q a global gauge transformation; level-1 equivalence; full equivalence and equal E_* on the conjugation stabiliser; otherwise the commutation fails from level 2 (equivalence can fail: 1387 vs 539288)', '[P]', ['Chair44 frame rules', 'Q in S3'],
          'phase12_orbit.json:lemma, phase12_formal.json', 'test_orbit_lemma_records, test_orbit_level1_equal_level2_split_live, test_formal_checks'),
         ('XII.OL.exh', 'exhaustive checks: level-1 spectra constant on all right orbits of the 280 332 representatives (7.8e-14); 912 stabilised pairs equal at level 3 (9.4e-14); exact integer-quaternion link identity', '[C]', [], 'phase12_orbit.json', 'test_orbit_lemma_records'),
         ('XII.closure', 'inside right orbits the exact level-3 coincidences are precisely the closure of conjugation and the stabiliser clause (1612 ties among 1 401 660 pairs, 0 unexplained, 0 explained-but-split); sufficiency proved at all levels', '[P] sufficiency, [C] completeness at level 3, [X] completeness beyond', [], 'phase12_orbit.json:closure', 'test_closure_explains_every_tie'),
@@ -57,7 +57,7 @@ def claims():
         ('XII.T61', 'support-sensitive transport bound E_* >= inf_v alpha(v)/W; Chair44: 1.69926 for the whole orbit of 1387, 1.56874 for FR30 (< 20 % of the floors)', '[P] bound, [C] values', G, 'phase12_transport.json', 'test_transport_bound_records_and_live, test_transport_theorem_on_random_graphs'),
         ('XII.P63', 'no function of cycle lengths, overlaps, eigenangles, plaquette classes and their support is sharp (Z^3 pair: identical inputs, floors separated by 0.18165)', '[P]+[C]', [], 'phase11_z3.json:audit', 'phase11:test_z3_pair_audit'),
         ('XII.int', 'single-child interventions do not change Lambda_R monotonically: both signs occur', '[E]', ['float Lambda_R at R = 6, 8'], 'phase12_intervention.jsonl', 'test_intervention_both_signs'),
-        ('XII.cube.OL', 'cube family: the Orbit Lemma transfers (level-1 equivalence for all 48 Q at theta = pi/2; for proper Q only at theta = pi/5; broken from level 2)', '[P]+[E]', ['Cube48, theta-connections'], 'phase12_cube.json:orbit', 'test_cube_orbit_lemma_transfers'),
+        ('XII.cube.OL', 'cube family: the Orbit Lemma transfers (level-1 equivalence for all 48 Q at theta = pi/2; at theta = pi/5 for the 24 proper Q only; broken from level 2)', '[P]+[E]', ['Cube48, theta-connections'], 'phase12_cube.json:orbit', 'test_cube_orbit_lemma_transfers'),
         ('XII.cube.rep', 'cube family: the order of spinor and adjoint floors flips with theta (adjoint below at pi/2, above at pi/5)', '[E]', [], 'phase12_cube.json:orbit', 'test_cube_representation_order_flips'),
         ('XII.cube.flat', 'cube family: the identity rule is flat, E_* = 0 (pinned T_L bottoms equal the trivial Dirichlet values)', '[P]', [], 'phase12_cube.json:flat_identity_rule', 'test_cube_flat_rule'),
         ('XII.pred', 'preregistered predictive study (frozen split, target Y5): results per descriptor family' + (f" (best test Spearman {max(r['spearman_test'] for r in pred['families'].values()):.3f})" if pred else ''), '[E]' if pred else 'pending', [], 'phase12_predict.json', 'test_prediction_preregistered_before_targets, test_prediction_results'),

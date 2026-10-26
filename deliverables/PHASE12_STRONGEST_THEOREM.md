@@ -40,9 +40,9 @@ Then:
 - **(b)** ρ_Q is a global gauge transformation of every patch: U^{ρ_Q} = W_Q U W_Q†, with W_Q = x/|x| for an explicit integer quaternion x.
 - **(c)** T₁(dQ) ≅ T₁(d) (unitarily), and the shadows are permuted, χ_k ↦ χ_{Q(k)}.
 - **(d)** If conj_Q(d) = d, then T_L(dQ) ≅ T_L(d) for all L, and **E_\*(dQ) = E_\*(d)**.
-- **(e)** Otherwise σ_dρ_Q ≠ ρ_Qσ_d, and the equivalence fails from level 2 on.
+- **(e)** Otherwise σ_dρ_Q ≠ ρ_Qσ_d, so the argument stops at level 1, and the equivalence can fail from level 2 on (certified for 1387 against 539288, corollary 3). It need not fail: chains of moves (d) and conjugations relate some such pairs (corollary 5).
 
-The same holds verbatim for the cube family with the θ-connections, for proper Q and all θ. Improper Q map θ to −θ, so for them it holds only at the Pauli point θ = π/2.
+The same holds verbatim for the cube family with the θ-connections, for proper Q and all θ. Improper Q map θ to −θ, so for them it holds where U_{−θ} ≅ U_θ: at the Pauli point θ = π/2, but not at θ = π/5 (level-1 bottoms split by parity; other θ not determined).
 
 ## Certified corollaries [C]
 

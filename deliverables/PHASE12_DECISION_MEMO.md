@@ -13,7 +13,7 @@
 
 - **The six-member S₃ orbit that topped the funnel is explained, and it is not a symmetry.**
   - The right action of the chair's point group is a gauge symmetry of one inflation step (Orbit Lemma).
-  - It is a full symmetry only on the conjugation stabiliser, and it is certified broken in infinite volume (1387 against 539288).
+  - It is a full symmetry on the conjugation stabiliser (and the closure of such moves), and it is certified broken in infinite volume for 1387 against 539288.
 - **The localisation route has reached its limit for the remaining question.**
   - IMS certificates lose ∝ R⁻², and that is optimal for any method uniform over connections.
   - Sampled probes show that no IMS certificate at the probed radii up to 22 separates 1387 from 539311 in either direction.
@@ -27,7 +27,7 @@
 
 **The frozen prediction** (committed in `audit/results/phase12_preregistration_next.json` before any Y₇ value exists):
 1. the order 539311 > 1387 > 539291 > 1389 of Y₅ and Y₆ persists at L = 7. At L = 4 it was 539311 > 1387 > 1389 > 539291, so this part can fail too;
-2. Y₇(539311) − Y₇(1387) ∈ [0.010, 0.030]. Earlier values: 0.0054 (L = 4), 0.0231 (L = 5), 0.0206 (L = 6).
+2. Y₇(539311) − Y₇(1387) ∈ [0.010, 0.030]. Earlier values, from the stored exact bounds: 0.0054 (L = 4), 0.0230 (L = 5), 0.0206 (L = 6). The frozen file's context block gives 0.0231 for L = 5, a difference of rounded values; the band does not depend on it.
 
 **It could fail.** The gap is not monotone in L: it rose by a factor of 4 from L = 4 to 5, then fell. A change of order or a gap outside the band falsifies it.
 

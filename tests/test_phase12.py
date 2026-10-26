@@ -130,7 +130,8 @@ def test_plaquette_counts_almost_injective_on_census():
 
 def test_transport_bound_records_and_live():
     d = J('phase12_transport.json')
-    for k in ('4753', '1389', '1391', 'x539311', 'x539288'): assert abs(d[k]['bound'] - 1.6992660162749642) < 1e-12
+    for k in ('4753', '1389', '1391', 'x539311', 'x539291', 'x539288'): assert abs(d[k]['bound'] - 1.6992660162749642) < 1e-12
+    assert all(r['all_plaquettes_visible_in_1star'] for r in d.values())
     assert abs(d['4752']['bound'] - 1.5687416572832378) < 1e-12
     import phase12_transport as Tr
     r = Tr.bound('4752'); assert abs(r['bound'] - d['4752']['bound']) < 1e-12 and r['W'] == 4
@@ -257,9 +258,22 @@ def test_stored_certificate_shifts_exact():
             mu = Fraction(r['mu']); assert mu.denominator & (mu.denominator - 1) == 0 and mu.denominator <= 2 ** 30
             assert Fraction(24.0 - float(mu)) == 24 - mu
 
+def test_orbit_profile():
+    """section 2.3-2.4: the six members share level one (Y1, plaquette classes up to the axis permutation) and differ from level 2"""
+    p = J('phase12_orbit.json')['profile']; assert len(p) == 6
+    assert max(r['Y1'] for r in p.values()) - min(r['Y1'] for r in p.values()) < 1e-10
+    assert len({tuple(sorted(r['plaquette_classes_L1'].values())) for r in p.values()}) == 1
+    assert len({tuple(r['plaquette_classes_L2'].values()) for r in p.values()}) == 4 and {r['plaquette_classes_L2']['-1'] for r in p.values()} == {42}
+    assert [p[k]['legal_1star_types'] for k in ('1387', '1389', '1391', '539311', '539291', '539288')] == [90, 102, 104, 90, 97, 79]
+    a, b = sorted(p['1387']['shadow_bottoms_T3']), sorted(p['539311']['shadow_bottoms_T3'])
+    assert max(abs(x - y) for x, y in zip(a, b)) > 1e-3                        # not a permutation of each other at T3
+    import phase9_pair as P9, phase11_chair as C                                 # live: Y1 and Y2 of 1387
+    d = C.rule('1387'); dec = {'0': d[0], **{v: d[k + 1] for k, v in enumerate(P9.U3)}}
+    for L in (1, 2): assert abs(np.linalg.eigvalsh(P9.build([dec] * L)['H'].toarray())[0] - p['1387'][f'Y{L}']) < 1e-10
+
 def test_closure_explains_every_tie():
     c = J('phase12_orbit.json')['closure']
-    assert c['pairs'] == 1401660 and c['ties'] >= 912 and c['ties_unexplained'] == 0 and c['explained_but_not_tied'] == 0
+    assert c['pairs'] == 1401660 and c['ties'] == 1612 and c['ties_unexplained'] == 0 and c['explained_but_not_tied'] == 0
 
 def test_independent_checkpoint_resume(tmp_path, monkeypatch):
     """an interrupted, checkpointed run resumes to exactly the record of an uninterrupted run"""

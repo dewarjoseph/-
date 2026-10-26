@@ -54,7 +54,7 @@ def bounds():
         if r.get('Lambda_R_certified'): B.append((r['Lambda_R_certified'], 'L', f"phase10_ims {r.get('class', r.get('extended_index'))} R={r['R']}"))
     B.append((7.954292264597248, 'L', 'Phase VII R = 12 (FR30)'))
     for r in J('phase11_frontier_census.json')['rows']: B.append((r['F3_certified'], 'L', f"census F3 {r['class']}"))
-    for k, r in J('phase12_transport.json').items(): B.append((r['bound'], 'L', f'transport bound {k}'))
+    for k, r in J('phase12_transport.json').items(): B += [(r['bound'], 'L', f'transport bound {k}'), (r['alpha_min'], 'L', f'transport alpha_min {k}')]
     z = J('phase11_z3.json')['audit']['class_matched']
     B += [(z['E_A_upper'], 'U', 'Z3 pair E(A) upper'), (z['E_B_lower_free_cell'], 'L', 'Z3 pair E(B) lower'),
           (z['certified_separation'], 'L', 'Z3 pair separation')]

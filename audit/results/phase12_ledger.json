@@ -8,7 +8,7 @@
    "fix": "phase12_independent now compares in rational arithmetic; Phase XI code left unchanged (frozen artifact)"
   }
  ],
- "commit": "739168e",
+ "commit": "a281c00",
  "report": "deliverables/PHASE12_REPORT.md",
  "claims": [
   {
@@ -74,7 +74,7 @@
   },
   {
    "id": "XII.OL",
-   "claim": "Orbit Lemma (a)-(e): sigma_{dQ} = rho_Q sigma_d; rho_Q a global gauge transformation; level-1 equivalence; full equivalence and equal E_* on the conjugation stabiliser; breaking otherwise",
+   "claim": "Orbit Lemma (a)-(e): sigma_{dQ} = rho_Q sigma_d; rho_Q a global gauge transformation; level-1 equivalence; full equivalence and equal E_* on the conjugation stabiliser; otherwise the commutation fails from level 2 (equivalence can fail: 1387 vs 539288)",
    "status": "[P]",
    "assumptions": [
     "Chair44 frame rules",
@@ -225,7 +225,7 @@
   },
   {
    "id": "XII.cube.OL",
-   "claim": "cube family: the Orbit Lemma transfers (level-1 equivalence for all 48 Q at theta = pi/2; for proper Q only at theta = pi/5; broken from level 2)",
+   "claim": "cube family: the Orbit Lemma transfers (level-1 equivalence for all 48 Q at theta = pi/2; at theta = pi/5 for the 24 proper Q only; broken from level 2)",
    "status": "[P]+[E]",
    "assumptions": [
     "Cube48, theta-connections"
@@ -309,7 +309,7 @@
    "id": "C6",
    "statement": "PHASE11_REPORT, PHASE11_STRONGEST_THEOREM, PHASE12 drafts: printed interval endpoints (e.g. Y6(539311) <= 9.3885937)",
    "problem": "88 printed bounds (36 distinct values) rounded to nearest in the wrong direction, by one unit in the last digit; transport bound 1.69927 and share <= 19.7 % rounded the wrong way",
-   "correction": "every printed bound rounded outward (phase12_rounding_audit.py, test_rounding_outward); no conclusion changes (every comparison using a corrected value keeps a margin >= 2.7e-4); the frozen preregistration file is left unchanged"
+   "correction": "every printed bound rounded outward (phase12_rounding_audit.py, test_rounding_outward); no conclusion changes (every comparison using a corrected value keeps a margin >= 2.7e-4); the frozen preregistration file is left unchanged (its context block also gives the L5 gap as 0.0231; the stored rationals give 0.0230244)"
   }
  ]
 }
