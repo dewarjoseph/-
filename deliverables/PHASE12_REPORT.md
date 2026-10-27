@@ -924,6 +924,11 @@ All values are model estimates [X], printed to four places, and none is a bound.
 | order 539311 above 1387 | Y₇(1387) = 9.3616608 | 67 (E_up model) to 91 (E_low model) | 1–3·10⁶ | 2·10⁶–4·10⁷ core-hours |
 
 - **The co-leaders cannot be separated by localisation at any affordable radius.** The required radius has grown, not shrunk: Y₇ lowered the upper bound of 1387 by 0.0063, so the margin left between the floor estimates and the bound is 0.010–0.018.
+- **The obstruction is the rate, not the IMS constant** [X] (`audit/phase12_chair_dirichlet.py` → `phase12_chair_dirichlet.json`).
+  - Read the upper model as a Dirichlet problem: T₇ is a chair of side 256 (cube units, the units of R), and the continuum chair has first Dirichlet eigenvalue 42.15–42.20 (finite differences, extrapolated; 1.43 times the cube's).
+  - Then Y₇ − E_up = 0.0021–0.0023 corresponds to an effective kinetic constant κ_eff ≈ 3.3–3.5 for the low-energy states of 1387 and 539311. The IMS fits correspond to κ = C/π² ≈ 7.7–7.9.
+  - A localisation as good as the low-energy states themselves would have C ≈ 33–35 instead of 76–78. Even then the co-leaders need R ≈ 46–62: 3–8·10⁵ balls and 4·10⁴–8·10⁵ core-hours.
+  - So a better constant cannot close the gap. A certificate for the co-leaders needs a better *rate* than R⁻², which by Theorem C(iv) must use the operator, not only the geometry.
 - **The four-member frontier can be reduced to three now.** The radius-24 certificate of 539311 was preregistered (`phase12_preregistration_r24.json`, commit e7879ff, before Y₇(1389) and before any radius-24 data of 539311; byte-identical: `test_r24_protocol_frozen`).
 
 **Status of the radius-24 certificate.**
@@ -1026,6 +1031,7 @@ All commands run from the repository root (Python 3.13, numpy 2.5, scipy 1.18, s
 | radius-R probes | `python -u -I audit/phase12_probes.py 1389:1389:16,18,20,22 x539291:539291:16,18,20,22 x539311:539311:16,18,24 1387:1387:24` | `phase12_probe_<rule>_R<R>.json` | 2–10 min per radius |
 | prediction score, two-sided extrapolation | `python -u -I audit/phase12_extrapolation.py` | `phase12_extrapolation.json` | 1 s |
 | radius-24 certificate of 539311 (preregistered) | `python -u -I audit/phase12_independent.py cert x539311 24 5 4 9655658/1048576 prereg_539311_R24 --ckpt=<dir>` | `phase12_independent.jsonl` | about 13 h on 4 cores, estimated (running) |
+| effective kinetic constant (§14.3) [X] | `python -u -I audit/phase12_chair_dirichlet.py` | `phase12_chair_dirichlet.json` | 1 min |
 | unique games (§15) | `python -u -I audit/phase12_unique_games.py 3 1387 x539311 1389 x539291 1391 x539288 4752 1144 937`; the same with `4` | `phase12_unique_games.jsonl` | 30 s (L = 3); 3 min (L = 4), for the nine rules |
 | frontier table | `python -u -I audit/phase12_frontier_table.py` | `phase12_frontier.json`, `.csv` | 1 s |
 | ledger | `python -u -I audit/phase12_ledger.py` | `phase12_ledger.json` | 1 s |
