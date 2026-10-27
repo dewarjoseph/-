@@ -35,6 +35,8 @@ def claims():
     ext = J('phase12_extrapolation.json', {}); pr = ext.get('prediction', {})
     y7_status = ('[C] values; prediction ' + ('holds' if pr.get('prediction_holds') else 'falsified')) if 'P1_order' in pr else 'running / not stored'
     verdicts = '; '.join(x['verdict'] for x in ext.get('decision', {}).get('pairs', []) if x['verdict'].startswith('[X]')) or 'none'
+    r24 = [r for r in JL('phase12_independent.jsonl') if r.get('tag') == 'prereg_539311_R24']
+    r24_status = ('[C] passed' if r24 and r24[-1].get('all_balls_certified') else 'failed (see record)' if r24 else 'running / not stored')
     G = ['(G) bounded degree', '(U) unitary connection', '(H) H = D^+D']
     rows = [
         ('XII.A', 'support: E_* = inf over finite legal patches of lambda^D = lim D_R; antitone in the language; frequency-free', '[P]', G, 'report 4.2', 'phase11:test_ladder_finite_radius_obstruction'),
@@ -68,6 +70,8 @@ def claims():
         ('XII.pred', 'preregistered predictive study (frozen split, target Y5): results per descriptor family' + (f" (best test Spearman {max(r['spearman_test'] for r in pred['families'].values()):.3f})" if pred else ''), '[E]' if pred else 'pending', [], 'phase12_predict.json', 'test_prediction_preregistered_before_targets, test_prediction_results'),
         ('XII.y7', 'the frozen level-7 prediction (P1 order 539311 > 1387 > 539291 > 1389, P2 gap in [0.010, 0.030]) scored on exact rational Y7 of the four frontier rules', y7_status, ['pinned T7, 2 097 152 tiles'], 'phase12_y7.jsonl, phase12_extrapolation.json:prediction', 'test_y7_records, test_extrapolation_results'),
         ('XII.y7.method', 'the lean level-L assembly is Phase XI operator entry for entry; the checkpointed Lanczos agrees with ARPACK and resumes exactly', '[C]', [], 'audit/phase12_y7.py', 'test_y7_operator_identical_to_phase11, test_lanczos_matches_arpack_and_resumes'),
+        ('XII.r24', 'preregistered radius-24 certificate: E_*(539311) >= mu - (Higham term) > Y7(1389) = 9.2083453, mu = 9655658/2^20, so 1389 is not the maximiser', r24_status,
+         ['Higham Thm 10.3, u = 2^-52', 'completeness of the Phi-closure'], 'phase12_independent.jsonl:prereg_539311_R24, phase12_preregistration_r24.json', 'test_r24_protocol_frozen, test_r24_certificate'),
         ('XII.extrap', 'two-sided extrapolation of the frontier floors (frozen protocol, 2b450cc): ' + verdicts, '[X]' if ext else 'running / not stored', ['model Y_L = E + A q^L', 'model Lambda_R = E - C / rho^2'], 'phase12_extrapolation.json:decision', 'test_extrapolation_protocol_frozen, test_extrapolation_results'),
         ('XII.ug.P151', 'Proposition 15.1: for every Q8 gauge section s of a patch K, lambda_min(P_K H P_K) <= B(s) = [sum_e (2 - 2 Re d_e) + b(K)] / |K|', '[P]', ['quaternion form of the spinor operator'], 'report 15', 'test_unique_games_proposition_15_1'),
         ('XII.ug.E', 'Chair44 rules as Q8 unique games: best sections found satisfy 44.9-50.2 % of panels; frustration ranks the rules only loosely like the floor (Spearman 0.70-0.78)', '[E] heuristic', ['spectral rounding + local search'], 'phase12_unique_games.jsonl', 'test_unique_games_proposition_15_1'),

@@ -354,6 +354,20 @@ def test_r24_protocol_frozen():
     h = hashlib.sha256(open(os.path.join(RES, 'phase12_preregistration_r24.json'), 'rb').read()).hexdigest()
     assert h == R24_PROTOCOL_SHA256
 
+def test_r24_certificate():
+    """the radius-24 certificate of 539311 used the protocol's mu (from the stored Y7(1389)), passed the go/no-go probe, and, if it
+    passed, its certified value lies above every stored upper bound on E_*(1389)"""
+    import math
+    y = [r for r in JL('phase12_y7.jsonl') if r['j'] == 184338 and r['L'] == 7]
+    U = min([Fraction(int(r['upper_num']), int(r['upper_den'])) for r in y] + [Fraction(int(r['upper_num']), int(r['upper_den']))
+             for r in JL('phase11_orbit_Y6.jsonl') if r['j'] == 184338])
+    mu = Fraction(math.ceil(U * 2 ** 20) + 8, 2 ** 20); assert mu == Fraction(9655658, 2 ** 20)
+    probe = J('phase12_probe_539311_R24.json')['records'][0]; assert probe['rule'] == 'x539311' and probe['R'] == 24 and probe['Lambda_R_upper'] > mu
+    recs = [r for r in JL('phase12_independent.jsonl') if r.get('tag') == 'prereg_539311_R24']
+    if not recs: pytest.skip('the radius-24 certificate is not stored yet')
+    r = recs[-1]; assert (r['rule'], r['R'], r['rejected_incomplete']) == ('x539311', 24, 0) and Fraction(r['mu']) == mu
+    if r['all_balls_certified']: assert Fraction(r['Lambda_R_certified']) > U and r['balls_failing'] == 0
+
 def test_probes_recorded():
     for n in ('1389', '539291'):
         for R in (16, 18, 20, 22):

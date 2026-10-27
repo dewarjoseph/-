@@ -3,9 +3,12 @@
 **Repository state.**
 - Branch `claude/fervent-fermi-e2wi4y`, on top of the Phase XI commits (no pull request yet). Phase XI's last commit is 6410a6a.
 - Earlier phases and their artifacts are untouched. Everything new is under `audit/phase12_*`, `audit/results/phase12_*`, `tests/test_phase12.py`, this report, `deliverables/PHASE12_STRONGEST_THEOREM.md` and `deliverables/PHASE12_DECISION_MEMO.md`.
-- Two protocols were frozen and committed before their outcomes existed:
+- Five protocols were frozen and committed before their outcomes existed:
   - the predictive study (`phase12_preregistration.json`, 2b10ecf);
-  - the conjugation-defect law (`phase12_preregistration_delta.json`, 131bd1d).
+  - the conjugation-defect law (`phase12_preregistration_delta.json`, 131bd1d);
+  - the level-7 prediction (`phase12_preregistration_next.json`, 562eb6d);
+  - the two-sided extrapolation (`phase12_preregistration_extrapolation.json`, 2b450cc);
+  - the radius-24 certificate of 539311 (`phase12_preregistration_r24.json`, e7879ff).
 
 **Labels** (as in Phases X–XI).
 - [P] proved;
@@ -80,6 +83,28 @@
 - Lean was unavailable: the network policy denies its hosts.
 - The finite core is checked exactly: integer-quaternion gauge identities, exhaustive child rule, symbolic IMS identity.
 - The analytic obligations are listed.
+
+**9. The level-7 experiment** (§14.1).
+- **The frozen prediction passed.** Y₇ (pinned T₇, 2 097 152 tiles) was computed for the four frontier rules as exact rational upper bounds:
+  - 539311: 9.3817818; 1387: 9.3616608; 539291: 9.2483895; 1389: 9.2083453.
+  - The order 539311 > 1387 > 539291 > 1389 persists (P1), and the gap Y₇(539311) − Y₇(1387) = 0.020121 lies in the frozen band [0.010, 0.030] (P2).
+- This is evidence [E], not proof, that **the maximiser is the mirror twin 539311, not 1387**.
+- The new bounds are rigorous: **E_\*(1387) ∈ [9.1104981, 9.3616608]** [C].
+
+**10. A two-sided estimate of the four floors** [X] (§14.2).
+- Two extrapolations, frozen before their inputs existed: from above (Y₅–Y₇) and from below (sampled radius-R probes).
+- **[X] evidence that E_\*(539311) > E_\*(1387) > E_\*(539291), E_\*(1389)**, with the floors of the co-leaders estimated at 9.371–9.380 and 9.359–9.360. 539291 against 1389 is not resolved.
+- Neither model has an error bound; the lower one visibly overestimates 1389's floor. The decision rule was built for that and absorbs it.
+- **Separating the co-leaders by a certificate needs radius 67–91, about 10⁶ core-hours or more: out of reach.** The next certified step is narrower: a preregistered radius-24 certificate of 539311 to exclude 1389 (§14.3).
+
+**11. The Unique Games Theorem** (openai/math, claimed with a Lean proof; §15).
+- A Chair44 rule *is* a unique game: the alphabet is Q₈, and the panels carry the constraints s(a) = U(a→b)s(b). E_\* is its spectral relaxation. Exactly: **λ_min(P_K H P_K) ≤ [Σ_e (2 − 2 Re d_e) + b(K)]/|K| for every gauge section** (Proposition 15.1) [P].
+- The computed games are far from satisfiable: 44.9–50.2 % of panels satisfied. The game's frustration orders the rules only loosely like the floor (Spearman 0.70–0.78) [E].
+- **The theorem, and the companion Min-UnCut hardness, cannot bound, order or certify a Chair44 floor.**
+  - They are worst-case statements about families of finite instances. The Unique Games Theorem's alphabet grows as its errors shrink; Min-UnCut concerns the combinatorial frustration of ℤ₂ shadows, not their spectra.
+  - Chair44 has the fixed alphabet Q₈, and its floor reduces, at every radius, to finitely many local eigenvalue problems with a computable error.
+  - What they confirm is Proposition 6.3 from the other side: combinatorial frustration and the spectral floor are different quantities.
+- A keyword search of the release's 751 manuscript directories (the README catalogues 721 manuscripts) for tilings, Laplacians, spectra, frustration, connections, gauge, localisation and signed graphs found no other title bearing on floors of connection Laplacians on hierarchical tilings. Titles only were searched, not the papers.
 
 **No physical claim is made.**
 
@@ -709,10 +734,10 @@ These are not finite computations. The proofs above rely on them, and a full for
 
 | rule | certified lower L (source) | exact upper U (source) | status |
 |---|---|---|---|
-| **1387** | **9.1104981** (IMS R = 20, 24 571 balls); reproduced by the independent implementation, all 24 571 balls (§1.1) | 9.3679502 (Y₆, 262 144 tiles) | **leader** |
-| 539311 | 8.7999990 (IMS R = 15, 10 321 balls) | 9.3885938 (Y₆) | contender |
-| 1389 | 8.7644993 (IMS R = 16, 12 193 balls) | 9.2104999 (Y₆) | contender |
-| 539291 | 7.1408386 (IMS R = 8, Phase X) | 9.2499401 (Y₆) | contender |
+| **1387** | **9.1104981** (IMS R = 20, 24 571 balls); reproduced by the independent implementation, all 24 571 balls (§1.1) | 9.3616608 (Y₇, 2 097 152 tiles) | **leader** |
+| 539311 | 8.7999990 (IMS R = 15, 10 321 balls) | 9.3817818 (Y₇) | contender |
+| 1389 | 8.7644993 (IMS R = 16, 12 193 balls) | 9.2083453 (Y₇) | contender |
+| 539291 | 7.1408386 (IMS R = 8, Phase X) | 9.2483895 (Y₇) | contender |
 | 1391 | 8.7644989 (IMS R = 18, 20 168 balls) | 9.1104007 (Y₆) | proven inferior (U < 9.1104981) |
 | 539288 | 6.8499994 (IMS R = 8, 829 balls) | 9.0982535 (Y₆) | proven inferior |
 | FR30 (1386) | 7.9542912 (IMS R = 12) | 8.7642271 (σ⁵ of a self-loop type, 884 736 tiles) | proven inferior |
@@ -745,6 +770,10 @@ The literature search is Phase XI's (`PHASE11_REPORT.md` §8). Phase XII made no
 | cube family: spinor/adjoint order flips with θ; F₃ ∝ θ² | | **A** (computation) [E] | | | evidence |
 | predictive study (frozen split) | | **A** (computation) [E] | | | |
 | one-child intervention: both signs; language inclusion inapplicable; sign Δ = sign ΔU₁ on 61 neighbours | | **A** (computation) [E]; Proposition 5.1 is Theorem A2 | | | |
+| the frozen level-7 prediction (order and gap of Y₇ on the frontier) holds | | **A** (computation) [E] | | | exact rational Y₇ on 2 097 152 tiles |
+| two-sided extrapolation of the frontier floors: 539311 above 1387 | | **A** (computation) [X] | | | a frozen consistency rule between two models, no error bounds |
+| Proposition 15.1: the floor of a patch is at most the weighted frustration density of any Q₈ section | **K** (the Rayleigh-quotient side of spectral relaxations of unique games and of frustration bounds for signed graphs) | **A**: exact for the quaternion form | | | elementary |
+| the claimed Unique Games Theorem does not bear on Chair44 floors | | **A** (scope) | | | claim external, unverified |
 | any physical law, particle spectrum or dynamics | | | | **none claimed** | a spectral floor of a discrete operator is not a physical observable without an independently specified model |
 
 ---
@@ -772,9 +801,9 @@ The literature search is Phase XI's (`PHASE11_REPORT.md` §8). Phase XII made no
   - rates only under doubling (R ≥ 4C_D) or a Euclidean realisation.
 
 **2. Strongest new computational result.**
-- **Over all 1 679 616 Chair44 frame rules, the maximiser of E_\* is one of 1387, 539311, 1389, 539291, and E_\*(1387) ∈ [9.1104981, 9.3679502].**
+- **Over all 1 679 616 Chair44 frame rules, the maximiser of E_\* is one of 1387, 539311, 1389, 539291, and E_\*(1387) ∈ [9.1104981, 9.3616608].**
 - The lower bound is a preregistered radius-20 IMS certificate: 24 571 legal balls, every one passing a Higham-bounded banded Cholesky. An implementation sharing no code with the certifying one reproduces it: the same 24 571 balls, every one certified (§1.1).
-- The upper bounds are exact rational Rayleigh quotients.
+- The upper bounds are exact rational Rayleigh quotients, on the pinned level-7 supertiles (2 097 152 tiles) for the four frontier rules (§14.1).
 - *Reproduction:* the commands of the reproduction table.
 - *Limits:*
   - Higham's Theorem 10.3, and LAPACK's adherence to the IEEE rounding model, are assumed;
@@ -789,19 +818,118 @@ The literature search is Phase XI's (`PHASE11_REPORT.md` §8). Phase XII made no
 
 **4. Open mathematical bottleneck.**
 - **A lower bound with localisation error o(R⁻²) for one fixed hierarchical hull.**
-- Concretely: prove E_\*(539311) > 9.3679502, or E_\*(1387) > 9.3885938.
-- IMS needs R ≈ 63 for this [X]. Theorem C(iv) (the ℤ^D row of §4.2: R⁻² is optimal over all connections) shows the improvement cannot come from the geometry alone: it must use the operator, for instance the hierarchical localisation of its low-energy states. No such estimate is known.
+- Concretely: prove E_\*(539311) > 9.3616608, or E_\*(1387) > 9.3817818. The level-7 data and both extrapolations point to the first [E, X].
+- IMS needs R ≈ 67–91 for the first, 10⁶–10⁷ core-hours [X] (§14.3). Theorem C(iv) (the ℤ^D row of §4.2: R⁻² is optimal over all connections) shows the improvement cannot come from the geometry alone: it must use the operator, for instance the hierarchical localisation of its low-energy states. No such estimate is known.
 
 **5. Next decisive experiment.**
-- **Y₇** (2 097 152 tiles, exact rational) **for the four frontier rules**, with the frozen prediction:
-  - the order 539311 > 1387 > 539291 > 1389 of levels 5–6 persists;
-  - Y₇(539311) − Y₇(1387) ∈ [0.010, 0.030].
-- It fails if the order changes or the gap leaves the band.
-- If it holds, it is evidence that the maximiser is the mirror twin, not 1387. If it fails, the extremal question reopens in both directions (`deliverables/PHASE12_DECISION_MEMO.md`).
+- **Done in this phase:** the frozen level-7 prediction (Y₇ of the four frontier rules). **It held**: the order 539311 > 1387 > 539291 > 1389 persists, and Y₇(539311) − Y₇(1387) = 0.020121 ∈ [0.010, 0.030] (§14.1).
+- **Running:** the preregistered radius-24 certificate of 539311 at μ = 9.2083530 > Y₇(1389). If every ball passes, 1389 is proven inferior and the frontier shrinks to three (§14.3).
+- **Next after it:** a lower-bound method with localisation error o(R⁻²) for this one hull. A certificate cannot separate the co-leaders at any affordable radius, so only such a method can turn the evidence for 539311 into a theorem (`deliverables/PHASE12_DECISION_MEMO.md`).
 
 ---
 
-⟨SEC14⟩
+## 14. The level-7 experiment and a two-sided estimate of the frontier floors
+
+### 14.1 The frozen prediction, run
+
+**Protocol** (`phase12_preregistration_next.json`, frozen 2026-10-25, byte-identical: `test_preregistration_next_frozen`).
+- P1: Y₇(539311) > Y₇(1387) > Y₇(539291) > Y₇(1389).
+- P2: 0.010 ≤ Y₇(539311) − Y₇(1387) ≤ 0.030.
+- A failure of either falsifies it. No outcome certifies an ordering of floors: Y₇ is an upper bound on E_\*.
+
+**Computation** (`audit/phase12_y7.py` → `phase12_y7.jsonl`).
+- T₇ has 2 097 152 tiles: the operator has complex dimension 4 194 304 and about 4·10⁷ nonzeros.
+- Phase XI's assembly would not fit in memory. The new assembly merges the panels between each pair of tiles before building the matrix. It gives **Phase XI's matrix entry for entry** at L = 2, 3, 4 for six rules (`test_y7_operator_identical_to_phase11`).
+- The bottom is found by a thick-restart Lanczos solver with full reorthogonalisation. It checkpoints to disk because container restarts had twice killed uncheckpointed runs.
+  - It reproduces Y₅(1387) to 7·10⁻¹³ and agrees with ARPACK on Y₆(1387) to 3·10⁻¹¹.
+  - An interrupted, resumed run converges to the same eigenvalue (`test_lanczos_matches_arpack_and_resumes`).
+  - Block LOBPCG was tried first and rejected: it stalls 1.9·10⁻⁴ above Y₆.
+- Each Y₇ is the exact rational Rayleigh quotient of the integer rounding of the computed vector: a rigorous upper bound on E_\*, whatever the accuracy of the vector.
+- **How the runs were stopped**, and one change made during them.
+  - At level 7 the residual of the lowest Ritz pair stalls near 2–9·10⁻⁴: the bottom of T₇ lies in a cluster of close eigenvalues. A run therefore stops at the first of three rules, and the record states which one fired:
+    - residual ≤ 10⁻⁶;
+    - the lowest Ritz value moved by ≤ 2·10⁻⁷ over the last 10 restarts, and its last move is at most a tenth of that (slow, and not accelerating);
+    - 150 restarts in all.
+  - The first rule set was looser: ≤ 2·10⁻⁶ over 10 restarts, no acceleration test, 80 restarts. Under it the first 539311 run stopped at 9.3817834 *while its Ritz value was accelerating downwards* (successive moves 0.6, 0.7, 1.0, 1.7, 2.8·10⁻⁷). 1387 showed the same pattern.
+  - So both runs were stopped and the rule tightened before any other level-7 value existed. Both continued from their checkpoints, and 1389 and 539291 ran under the tightened rule from the start.
+  - The first 539311 record is kept: it is a valid upper bound. The extrapolation script takes the least stored bound of each rule.
+  - None of this touches the frozen protocols, which concern the values, not the solver.
+- **How far each value lies above the true bottom** [E] (`phase12_y7.py ritz` → `phase12_y7_ritz.jsonl`). Rayleigh–Ritz on the last checkpointed block gives θ₁ ≤ θ₂ and the residual ε of the lowest pair. θ₁ − ε²/(θ₂ − θ₁) is the Kato–Temple value. It would be a lower bound if θ₂ were a lower bound on the second eigenvalue; θ₂ is an upper bound, so the value is an estimate only.
+
+| rule | Y₅ | Y₆ | **Y₇** (exact, rounded up) | Y₆ − Y₇ | stop (restarts) | residual | Kato–Temple value [E] |
+|---|---|---|---|---|---|---|---|
+| 539311 | 9.4158530 | 9.3885938 | **9.3817818** | 0.00681 | drift (44, resumed) | 2.3·10⁻⁵ | 9.381772 |
+| 1387 | 9.3928286 | 9.3679502 | **9.3616608** | 0.00629 | drift (45, resumed) | 5.7·10⁻⁵ | 9.361475 |
+| 539291 | 9.2718259 | 9.2499401 | **9.2483895** | 0.00155 | budget (150) | 1.4·10⁻⁴ | 9.247803 |
+| 1389 | 9.2187307 | 9.2104999 | **9.2083453** | 0.00215 | drift (55) | 6.1·10⁻⁵ | 9.208291 |
+
+- Y₅–Y₇ are exact rational upper bounds on E_\* (rounded up). The restart counts start where the checkpoint began to keep a history; the earliest segments of the 1387 and 539311 runs are not counted.
+- The Kato–Temple values put the computed bottoms 1·10⁻⁵ (539311) to 6·10⁻⁴ (539291) above the true bottoms of T₇ [E]. The lowest Ritz values of each run lie within 2–7·10⁻⁵ of one another: the bottom of T₇ is a dense cluster, which is why the residuals stall.
+
+**The frozen prediction holds** (`phase12_extrapolation.json:prediction`).
+- **P1 holds:** Y₇(539311) > Y₇(1387) > Y₇(539291) > Y₇(1389), the order of levels 5 and 6.
+- **P2 holds:** Y₇(539311) − Y₇(1387) = 0.020121 ∈ [0.010, 0.030].
+  - The gap by level: 0.0014 (L = 3), 0.0054 (4), 0.0230 (5), 0.0206 (6), 0.0201 (7). After its jump at L = 5 it has settled.
+- **Robust to the solver.** The three margins of the order are 0.0201, 0.1133 and 0.0400. They exceed the largest Kato–Temple distance (6·10⁻⁴) more than thirtyfold.
+- **New exact upper bounds** [C, exact rational]. All four improve on Y₆, by 0.0016–0.0068. In particular E_\*(1387) ≤ 9.3616608 and E_\*(1389) ≤ 9.2083453.
+- **What it means.** It is evidence, not proof, that the maximiser is the mirror twin 539311, not 1387, as the decision memo said a pass would be. No outcome of this test could certify an ordering of floors: each Y₇ is an upper bound.
+
+### 14.2 A two-sided estimate of the four floors [X]
+
+**Protocol** (`phase12_preregistration_extrapolation.json`, committed in 2b450cc *before* any Y₇ value and before the new probes existed; byte-identical: `test_extrapolation_protocol_frozen`).
+- **From above.** Y₅, Y₆, Y₇ are fitted by Y_L = E + A q^L (Aitken's Δ²), giving E_up.
+- **From below.** Sampled probes Λ_R, R ∈ {16, 18, 20, 22}, are fitted by Λ_R = E − C/ρ² (least squares), giving E_low.
+  - The probes follow the Phase XI protocol: the 10 weakest legal environments, 6 centres each, seed 0.
+  - A probe is an upper bound on the best radius-R certificate, not a certificate.
+  - New in this phase: 1389 and 539291 at R = 16–22, and 539311 at R = 16, 18 (`audit/phase12_probes.py`).
+- **Decision rule, fixed in advance.** An ordering of two floors is reported as evidence only if both estimates agree in sign and the smaller margin exceeds the larger discrepancy |E_up − E_low|.
+
+| rule | q | E_up (Aitken) | E (Richardson, q = ¼) | E_low (ρ⁻² fit, R = 16–22) | C | largest fit residual | δ = \|E_up − E_low\| |
+|---|---|---|---|---|---|---|---|
+| 539311 | 0.2499 | 9.3795 | 9.3795 | 9.3712 | 76.2 | 0.0003 | 0.0083 |
+| 1387 | 0.2528 | 9.3595 | 9.3596 | 9.3588 | 78.0 | 0.0011 | 0.0008 |
+| 539291 | 0.0708 | 9.2483 | 9.2479 | 9.2295 | 79.6 | 0.0011 | 0.0188 |
+| 1389 | 0.2618 | 9.2076 | 9.2076 | 9.2156 | 85.0 | 0.0003 | 0.0080 |
+
+All values are model estimates [X], printed to four places, and none is a bound.
+
+**Verdicts of the frozen rule** (`phase12_extrapolation.json:decision`):
+
+| pair | margin from above | margin from below | largest δ | verdict |
+|---|---|---|---|---|
+| 539311 over 1387 | 0.0200 | 0.0124 | 0.0083 | **[X] evidence that E_\*(539311) > E_\*(1387)** |
+| 1387 over 539291 | 0.1113 | 0.1293 | 0.0188 | [X] evidence |
+| 1387 over 1389 | 0.1520 | 0.1432 | 0.0080 | [X] evidence |
+| 539311 over 539291 | 0.1312 | 0.1418 | 0.0188 | [X] evidence |
+| 539311 over 1389 | 0.1719 | 0.1556 | 0.0083 | [X] evidence |
+| 539291 over 1389 | 0.0407 | 0.0139 | 0.0188 | not resolved |
+
+- **The estimate.** E_\*(539311) ≈ 9.371–9.380 and E_\*(1387) ≈ 9.359–9.360, so the two floors differ by about 0.012–0.020 [X]. In both models the twin lies above 1387 by more than the two models disagree.
+- **Checks on the models.**
+  - **Aitken's q is ¼ within 5 %** for 539311, 1387 and 1389 (0.250–0.262). That is the Dirichlet scaling of a box whose side doubles with each level, as the model assumes.
+  - **539291 is the exception** (q = 0.071): its Y_L are not in the geometric regime at L = 5–7. Its two estimates disagree most (δ = 0.019), and the rule then leaves its pair with 1389 unresolved.
+  - **The lower model fails visibly once.** E_low(1389) = 9.2156 exceeds the rigorous bound Y₇(1389) = 9.2083453, so for 1389 it overestimates the floor by at least 0.0073. The rule absorbs this through δ.
+  - **Out of sample.** The lower model of 1387, fitted on R = 16–22, predicts Λ₂₄ = 9.2009. The R = 24 probe, computed after the protocol was frozen and not used in the fit, gives 9.1996: the model is high by 0.0013.
+  - **Sensitivity to the solver.** Lowering every Y₇ by its Kato–Temple distance moves E_up by at most 7·10⁻⁴ and changes no verdict.
+- **What it is not.** It is a consistency check between two extrapolations, under two models with no error bounds. It is not evidence of the strength of a certificate.
+
+### 14.3 What a certificate could still do (the next certified step)
+
+**What the estimates imply for certificates** [X]. The cost model scales the Phase XI radius-20 run (24 571 balls, 1.2 core-seconds each): per-ball cost ∝ R⁷ (banded Cholesky, n ∝ R³, bandwidth ∝ R²), ball count ∝ R^3.1 (fitted on R = 15–20).
+
+| goal | needs a certified level above | radius by the lower model (539311) | balls | time on 4 cores |
+|---|---|---|---|---|
+| exclude 1389 | U(1389) = Y₇(1389) = 9.2083453 | 24 | ≈ 43 000 | ≈ 13 h |
+| exclude 539291 | U(539291) = Y₇(539291) = 9.2483895 | 28 | ≈ 70 000 | ≈ 62 h |
+| order 539311 above 1387 | Y₇(1387) = 9.3616608 | 67 (E_up model) to 91 (E_low model) | 1–3·10⁶ | 2·10⁶–4·10⁷ core-hours |
+
+- **The co-leaders cannot be separated by localisation at any affordable radius.** The required radius has grown, not shrunk: Y₇ lowered the upper bound of 1387 by 0.0063, so the margin left between the floor estimates and the bound is 0.010–0.018.
+- **The four-member frontier can be reduced to three now.** The radius-24 certificate of 539311 was preregistered (`phase12_preregistration_r24.json`, commit e7879ff, before Y₇(1389) and before any radius-24 data of 539311; byte-identical: `test_r24_protocol_frozen`).
+
+**Status of the radius-24 certificate.**
+- Go/no-go: the 60-ball probe gives Λ₂₄(539311) ≤ 9.2177320. That is above μ = 9655658/2²⁰ = 9.2083530 by 0.0094, so the certificate was run (`phase12_probe_539311_R24.json`). The frozen lower model had predicted 9.2170.
+- μ is fixed by the protocol: the smallest multiple of 2⁻²⁰ that is ≥ U(1389) + 8·2⁻²⁰, with U(1389) = Y₇(1389) = 9.2083453.
+- **Running** at the time of writing (started 27 October 04:31, 4 workers, checkpointed). Its record will be `phase12_independent.jsonl`, tag `prereg_539311_R24`; `test_r24_certificate` checks μ against the protocol and, if it passed, the certified value against Y₇(1389).
 
 ---
 
@@ -893,6 +1021,12 @@ All commands run from the repository root (Python 3.13, numpy 2.5, scipy 1.18, s
 | intervention | `python -u -I audit/phase12_intervention.py 6 8`; then `python -u -I audit/phase12_intervention_analysis.py` (optional per-rule cache: `PHASE12_CACHE=<file>`, filled by `… precompute`) | `phase12_intervention.jsonl`, `phase12_intervention_analysis.json` | about 3.9 h of single-process compute (sum over the 72 records); analysis about 1 h under load, dominated by the radius-1 local data of the 61 neighbours |
 | Y₅ census (target of the frozen study) | `python -u -I audit/phase12_y5census.py` | `phase12_y5_census.jsonl` | 70 min |
 | predictive study | `python -u -I audit/phase12_predict.py` | `phase12_predict.json` | 10 s |
+| level 7 (frozen prediction) | `PHASE12_Y7_CKPT=<dir> python -u -I audit/phase12_y7.py 7 184323 184338`; `PHASE12_Y7_CKPT=<dir> PHASE12_Y7_M=40 PHASE12_Y7_KEEP=10 python -u -I audit/phase12_y7.py 7 539311 539291` | `phase12_y7.jsonl` | 1.5–3 h per rule, two rules at a time; about 7 GB (m = 60) or 5 GB (m = 40) each; restartable |
+| level 7, distance from the true bottom [E] | `PHASE12_Y7_CKPT=<dir> python -u -I audit/phase12_y7.py ritz 7 539311 184323 539291 184338` | `phase12_y7_ritz.jsonl` | 1 min per rule |
+| radius-R probes | `python -u -I audit/phase12_probes.py 1389:1389:16,18,20,22 x539291:539291:16,18,20,22 x539311:539311:16,18,24 1387:1387:24` | `phase12_probe_<rule>_R<R>.json` | 2–10 min per radius |
+| prediction score, two-sided extrapolation | `python -u -I audit/phase12_extrapolation.py` | `phase12_extrapolation.json` | 1 s |
+| radius-24 certificate of 539311 (preregistered) | `python -u -I audit/phase12_independent.py cert x539311 24 5 4 9655658/1048576 prereg_539311_R24 --ckpt=<dir>` | `phase12_independent.jsonl` | about 13 h on 4 cores, estimated (running) |
+| unique games (§15) | `python -u -I audit/phase12_unique_games.py 3 1387 x539311 1389 x539291 1391 x539288 4752 1144 937`; the same with `4` | `phase12_unique_games.jsonl` | 30 s (L = 3); 3 min (L = 4), for the nine rules |
 | frontier table | `python -u -I audit/phase12_frontier_table.py` | `phase12_frontier.json`, `.csv` | 1 s |
 | ledger | `python -u -I audit/phase12_ledger.py` | `phase12_ledger.json` | 1 s |
 | directed-rounding audit (C6) | `python -u -I audit/phase12_rounding_audit.py` | printed findings (none) | 1 s |
