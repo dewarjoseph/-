@@ -854,6 +854,7 @@ The literature search is Phase XI's (`PHASE11_REPORT.md` §8). Phase XII made no
   - So both runs were stopped and the rule tightened before any other level-7 value existed. Both continued from their checkpoints, and 1389 and 539291 ran under the tightened rule from the start.
   - The first 539311 record is kept: it is a valid upper bound. The extrapolation script takes the least stored bound of each rule.
   - None of this touches the frozen protocols, which concern the values, not the solver.
+  - **Calibration at level 6.** The same code and stopping rules reproduce Phase XI's ARPACK values of Y₆ for 539311, 1389 and 539291 to 1.7·10⁻¹¹, 1.1·10⁻¹⁰ and 2.4·10⁻⁹ (`phase12_y7.jsonl`, L = 6; `test_y7_records`). Two of the three stopped on the drift rule, not the residual rule.
 - **How far each value lies above the true bottom** [E] (`phase12_y7.py ritz` → `phase12_y7_ritz.jsonl`). Rayleigh–Ritz on the last checkpointed block gives θ₁ ≤ θ₂ and the residual ε of the lowest pair. θ₁ − ε²/(θ₂ − θ₁) is the Kato–Temple value. It would be a lower bound if θ₂ were a lower bound on the second eigenvalue; θ₂ is an upper bound, so the value is an estimate only.
 
 | rule | Y₅ | Y₆ | **Y₇** (exact, rounded up) | Y₆ − Y₇ | stop (restarts) | residual | Kato–Temple value [E] |
@@ -1027,6 +1028,7 @@ All commands run from the repository root (Python 3.13, numpy 2.5, scipy 1.18, s
 | Y₅ census (target of the frozen study) | `python -u -I audit/phase12_y5census.py` | `phase12_y5_census.jsonl` | 70 min |
 | predictive study | `python -u -I audit/phase12_predict.py` | `phase12_predict.json` | 10 s |
 | level 7 (frozen prediction) | `PHASE12_Y7_CKPT=<dir> python -u -I audit/phase12_y7.py 7 184323 184338`; `PHASE12_Y7_CKPT=<dir> PHASE12_Y7_M=40 PHASE12_Y7_KEEP=10 python -u -I audit/phase12_y7.py 7 539311 539291` | `phase12_y7.jsonl` | 1.5–3 h per rule, two rules at a time; about 7 GB (m = 60) or 5 GB (m = 40) each; restartable |
+| level 6 with the level-7 code (calibration) | `python -u -I audit/phase12_y7.py 6 539311 184338 539291` | `phase12_y7.jsonl` (L = 6) | 4–6 min per rule |
 | level 7, distance from the true bottom [E] | `PHASE12_Y7_CKPT=<dir> python -u -I audit/phase12_y7.py ritz 7 539311 184323 539291 184338` | `phase12_y7_ritz.jsonl` | 1 min per rule |
 | radius-R probes | `python -u -I audit/phase12_probes.py 1389:1389:16,18,20,22 x539291:539291:16,18,20,22 x539311:539311:16,18,24 1387:1387:24` | `phase12_probe_<rule>_R<R>.json` | 2–10 min per radius |
 | prediction score, two-sided extrapolation | `python -u -I audit/phase12_extrapolation.py` | `phase12_extrapolation.json` | 1 s |
