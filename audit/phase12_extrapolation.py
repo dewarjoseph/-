@@ -14,6 +14,7 @@ from fractions import Fraction
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); RES = os.path.join(HERE, 'results')
 RULES = {'1387': 184323, '539311': 539311, '1389': 184338, '539291': 539291}
+FROZEN_R = (16, 18, 20, 22)                                          # the radii of the frozen protocol; larger probes are reported, not fitted
 PROBES = {n: [f'phase11_probe_{n}.json'] + [f'phase12_probe_{n}_R{R}.json' for R in (16, 18, 20, 22, 24, 26)] for n in RULES}
 RC = Fraction(311, 175)
 def JL(n):
@@ -62,12 +63,14 @@ def e_low():
         for f in files:
             p = os.path.join(RES, f)
             if os.path.exists(p): pts += [(r['R'], r['Lambda_R_upper']) for r in json.load(open(p))['records']]
-        pts = sorted(set(pts))
+        pts = sorted(set(pts)); extra = [(R, v) for R, v in pts if R not in FROZEN_R]; pts = [(R, v) for R, v in pts if R in FROZEN_R]
         if len(pts) < 2: continue
         R = np.array([x for x, _ in pts], float); lam = np.array([y for _, y in pts]); rho = R - float(RC)
         A = np.c_[np.ones_like(rho), -1 / rho ** 2]; (E, Cc), *_ = np.linalg.lstsq(A, lam, rcond=None)
         out[n] = {'radii': [int(x) for x in R], 'Lambda': lam.tolist(), 'E_low': float(E), 'C': float(Cc),
-                  'max_abs_residual': float(np.abs(A @ np.array([E, Cc]) - lam).max())}
+                  'max_abs_residual': float(np.abs(A @ np.array([E, Cc]) - lam).max()),
+                  'outside_protocol_not_fitted': {int(R): v for R, v in extra},
+                  'fit_at_outside_radii': {int(R): float(E - Cc / (R - float(RC)) ** 2) for R, _ in extra}}
     return out
 
 def decide(up, low):

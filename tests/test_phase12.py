@@ -318,9 +318,12 @@ def test_lanczos_matches_arpack_and_resumes(tmp_path):
     H = Y.operator(Y.geometry(4), C.extended_decoration(184323)); lam0, _ = F.lowest(H)
     ck = str(tmp_path / 'c.npz')
     with pytest.raises(RuntimeError): Y.lowest_ckpt(H, ck, m=30, keep=6, rtol=1e-12, max_restarts=2, save_every=0)
-    lam, x = Y.lowest_ckpt(H, ck, m=30, keep=6, rtol=1e-8)
+    lam, x, info = Y.lowest_ckpt(H, ck, m=30, keep=6, rtol=1e-8, drift_tol=-1, max_total=10 ** 6)
+    assert info['stop'] == 'residual' and info['resumed'] and info['restarts'] >= 3   # the history of the interrupted run is kept
     assert abs(lam - lam0) < 1e-10 and np.linalg.norm(H @ x - lam * x) <= 1e-8
     assert Y.exact_upper(H, x, chunk=777) == F.exact_upper(H, x)
+    lam1, x1, info1 = Y.lowest_ckpt(H, None, m=30, keep=6, rtol=1e-14, drift_tol=-1, max_total=3)   # the budget rule
+    assert info1['stop'] == 'budget' and info1['restarts'] == 3 and not info1['resumed'] and lam1 >= lam0 - 1e-12
 
 def test_y7_records():
     """every stored level-7 bound is an exact rational above its eigenvalue estimate and below the stored level-6 bound
@@ -330,7 +333,9 @@ def test_y7_records():
     y6 = {r['j']: r for r in JL('phase11_orbit_Y6.jsonl')}
     for r in JL('phase12_y7.jsonl'):
         q = Fraction(int(r['upper_num']), int(r['upper_den'])); assert q >= Fraction(r['float']) - Fraction(1, 10 ** 9)
-        if r['L'] == 7: assert r['float'] <= y6[r['j']]['float'] + 1e-9 and r['residual'] <= 1e-6
+        if r['L'] == 7:                                  # the stopping rule that fired is recorded; the bound is rigorous whichever it was
+            assert q <= Fraction(int(y6[r['j']]['upper_num']), int(y6[r['j']]['upper_den']))
+            assert r['solver']['stop'] in ('residual', 'drift', 'budget') and r['residual'] <= (1e-6 if r['solver']['stop'] == 'residual' else 2e-3)
         if r['L'] == 6: assert abs(r['float'] - y6[r['j']]['float']) < 1e-8
 
 EXTRAPOLATION_PROTOCOL_SHA256 = 'b5f702dd55af326d976254a58583d9502d0c808374522687da575df16445f5f6'
