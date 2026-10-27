@@ -31,9 +31,11 @@ def upper_bounds():
         rows = {r['j']: r for r in JL(src)}
         for name, j in RULES.items():
             if j in rows: Y[name][L] = Fraction(int(rows[j]['upper_num']), int(rows[j]['upper_den']))
-    for r in JL('phase12_y7.jsonl'):
-        for name, j in RULES.items():
-            if r['j'] == j: Y[name][r['L']] = Fraction(int(r['upper_num']), int(r['upper_den']))
+    for r in JL('phase12_y7.jsonl'):                                  # several runs of one rule (a run continued from its checkpoint):
+        for name, j in RULES.items():                                  # every one is an upper bound on the same bottom; take the least
+            if r['j'] == j:
+                q = Fraction(int(r['upper_num']), int(r['upper_den'])); L = r['L']
+                Y[name][L] = min(q, Y[name][L]) if L in Y[name] else q
     return Y
 
 def score_prediction(Y):

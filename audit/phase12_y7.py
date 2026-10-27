@@ -7,8 +7,8 @@ with the panels (a, b, k) of phase11_chair.Patch.  Only the assembly is leaner, 
 4 194 304) fits in memory: each link is a signed Pauli product s * sigma_p sigma_q, coded by its 2x2 entries as small Gaussian
 integers; the panels between the same two tiles are summed before the sparse matrix is built, and no per-panel complex matrix
 is ever stored.  The bottom is found by ARPACK (eigsh, which='SA', tol 1e-10, as Phase XI) for L <= 5, and for L >= 6 by thick-restart Lanczos (lowest_ckpt)
-(stopping rules in lowest_ckpt: explicit residual <= 1e-6, or a drift of the lowest Ritz value <= 2e-6 over 10 restarts, or 80
-restarts; the record states which fired; PHASE12_Y7_CKPT=<dir> keeps the current block so that a restarted container resumes); the
+(stopping rules in lowest_ckpt: explicit residual <= 1e-6, or a drift of the lowest Ritz value <= 2e-7 over 10 restarts that is
+not accelerating, or 150 restarts; the record states which fired; PHASE12_Y7_CKPT=<dir> keeps the current block so that a restarted container resumes); the
 bound is the exact rational Rayleigh quotient of the integer rounding of the eigenvector (phase11_frontier.exact_upper), an upper
 bound on E_* whatever the accuracy of the eigenvector.
 How far the computed value lies above the true bottom of T_L is estimated afterwards, [E] only (`ritz`): Rayleigh-Ritz on the
@@ -85,15 +85,19 @@ def exact_upper(H, v, chunk=1 << 18):
     return num, den
 
 def lowest_ckpt(H, ckpt=None, m=int(os.environ.get('PHASE12_Y7_M', 60)), keep=int(os.environ.get('PHASE12_Y7_KEEP', 12)), rtol=1e-6,
-                max_restarts=100000, save_every=300, drift_tol=2e-6, max_total=80):
+                max_restarts=100000, save_every=300, drift_tol=float(os.environ.get('PHASE12_Y7_DRIFT', 2e-7)),
+                max_total=int(os.environ.get('PHASE12_Y7_BUDGET', 150))):
     """bottom eigenpair of the Hermitian H by thick-restart Lanczos (mathematically the implicitly restarted Lanczos of ARPACK with
     exact shifts): an orthonormal basis of m vectors is extended with full reorthogonalisation (twice), the projected matrix
     T = V^H H V is formed column by column from the computed products, and after m vectors the basis is compressed to the `keep`
     lowest Ritz vectors plus the normalised residual.  Every save_every seconds (default 5 min) the kept Ritz vectors and the residual direction are saved
     to `ckpt` (atomic), with the history of the lowest Ritz value, so that an interrupted run resumes.
     Stops at the first of: explicit residual of the lowest Ritz pair <= rtol ('residual'); the lowest Ritz value moved by at most
-    drift_tol over the last 10 restarts ('drift'); max_total restarts in all ('budget').  Returns (value, vector, info).  Whatever the
-    stopping reason, the exact Rayleigh quotient taken afterwards is a rigorous upper bound."""
+    drift_tol over the last 10 restarts and its last move is no larger than the mean move of those 10 ('drift': slow and not
+    accelerating); max_total restarts in all, counting those in a resumed history ('budget').  Returns (value, vector, info).
+    Whatever the stopping reason, the exact Rayleigh quotient taken afterwards is a rigorous upper bound.
+    (The first level-7 record of 539311 was stopped by an earlier rule, drift_tol = 2e-6 and no acceleration test, while its Ritz
+    value was accelerating downwards; the rule was then tightened to the present one and that run continued from its checkpoint.)"""
     n = H.shape[0]; Vt = np.zeros((m, n), dtype=np.complex128); T = np.zeros((m, m), dtype=np.complex128)
     def proj(j, w): return np.conj(Vt[:j] @ np.conj(w))            # V[:, :j]^H w without copying the basis
     def orth(w, j):
@@ -121,8 +125,11 @@ def lowest_ckpt(H, ckpt=None, m=int(os.environ.get('PHASE12_Y7_M', 60)), keep=in
         x = X[0]; rr = float(np.linalg.norm(H @ x - theta[0] * x))
         hist.append(float(theta[0])); drift = hist[-11] - hist[-1] if len(hist) >= 11 else None
         log(f'  restart {len(hist) - 1}: lambda {theta[0]!r}, residual {rr:.2e} (estimate {res_est:.2e})' + (f', drift over 10 {drift:.1e}' if drift is not None else ''))
-        stop = 'residual' if rr <= rtol else 'drift' if drift is not None and drift <= drift_tol else 'budget' if len(hist) >= max_total else None
-        if stop: return float(theta[0]), x, {'stop': stop, 'restarts': len(hist), 'resumed': resumed, 'residual': rr, 'drift_over_10': drift, 'history_tail': hist[-11:]}
+        slow = drift is not None and drift <= drift_tol and hist[-2] - hist[-1] <= drift / 10
+        stop = 'residual' if rr <= rtol else 'drift' if slow else 'budget' if len(hist) >= max_total else None
+        if stop: return float(theta[0]), x, {'stop': stop, 'restarts': len(hist), 'resumed': resumed, 'residual': rr, 'drift_over_10': drift,
+                                             'drift_tol': drift_tol, 'max_total': max_total, 'ritz_2_to_4': [float(t) for t in theta[1:4]],
+                                             'history_tail': hist[-11:]}
         Vt[:keep] = X; T[:] = 0; T[:keep, :keep] = np.diag(theta[:keep])
         r = w / np.linalg.norm(w); Vt[keep] = r; start = keep
         if ckpt and time.time() - last_save >= save_every:            # the coupling column of r is recomputed in the next sweep
