@@ -116,8 +116,12 @@
    "E_low": 9.371217139508087,
    "C": 76.15370491350234,
    "max_abs_residual": 0.0003161536643290219,
-   "outside_protocol_not_fitted": {},
-   "fit_at_outside_radii": {}
+   "outside_protocol_not_fitted": {
+    "24": 9.217731986064745
+   },
+   "fit_at_outside_radii": {
+    "24": 9.217014698752168
+   }
   },
   "1389": {
    "radii": [
