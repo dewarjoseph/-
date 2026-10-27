@@ -909,7 +909,7 @@ All values are model estimates [X], printed to four places, and none is a bound.
   - **Aitken's q is ¼ within 5 %** for 539311, 1387 and 1389 (0.250–0.262). That is the Dirichlet scaling of a box whose side doubles with each level, as the model assumes.
   - **539291 is the exception** (q = 0.071): its Y_L are not in the geometric regime at L = 5–7. Its two estimates disagree most (δ = 0.019), and the rule then leaves its pair with 1389 unresolved.
   - **The lower model fails visibly once.** E_low(1389) = 9.2156 exceeds the rigorous bound Y₇(1389) = 9.2083453, so for 1389 it overestimates the floor by at least 0.0073. The rule absorbs this through δ.
-  - **Out of sample.** The lower model of 1387, fitted on R = 16–22, predicts Λ₂₄ = 9.2009. The R = 24 probe, computed after the protocol was frozen and not used in the fit, gives 9.1996: the model is high by 0.0013.
+  - **Out of sample.** The lower models, fitted on R = 16–22, predict Λ₂₄ = 9.2009 (1387) and 9.2170 (539311). The R = 24 probes, computed after the protocol was frozen and not used in the fits, give 9.1996 and 9.2177. The model errs by 0.0013 and 0.0007, in opposite directions.
   - **Sensitivity to the solver.** Lowering every Y₇ by its Kato–Temple distance moves E_up by at most 7·10⁻⁴ and changes no verdict.
 - **What it is not.** It is a consistency check between two extrapolations, under two models with no error bounds. It certifies nothing.
 
