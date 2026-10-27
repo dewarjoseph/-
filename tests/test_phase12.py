@@ -346,6 +346,14 @@ def test_extrapolation_protocol_frozen():
     h = hashlib.sha256(open(os.path.join(RES, 'phase12_preregistration_extrapolation.json'), 'rb').read()).hexdigest()
     assert h == EXTRAPOLATION_PROTOCOL_SHA256
 
+R24_PROTOCOL_SHA256 = 'ff82e5aa54108c17f1c35638c816905d0e7b57e64df899af78e151b81dcaacfc'
+
+def test_r24_protocol_frozen():
+    """the radius-24 certificate protocol is byte-identical to its commit (before Y7(1389) and any radius-24 data of 539311)"""
+    import hashlib
+    h = hashlib.sha256(open(os.path.join(RES, 'phase12_preregistration_r24.json'), 'rb').read()).hexdigest()
+    assert h == R24_PROTOCOL_SHA256
+
 def test_probes_recorded():
     for n in ('1389', '539291'):
         for R in (16, 18, 20, 22):
