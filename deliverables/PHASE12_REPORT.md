@@ -864,7 +864,7 @@ The literature search is Phase XI's (`PHASE11_REPORT.md` §8). Phase XII made no
 | 1389 | 9.2187307 | 9.2104999 | **9.2083453** | 0.00215 | drift (55) | 6.1·10⁻⁵ | 9.208291 |
 
 - Y₅–Y₇ are exact rational upper bounds on E_\* (rounded up). The restart counts start where the checkpoint began to keep a history; the earliest segments of the 1387 and 539311 runs are not counted.
-- The Kato–Temple values put the computed bottoms 1·10⁻⁵ (539311) to 6·10⁻⁴ (539291) above the true bottoms of T₇ [E]. The lowest Ritz values of each run lie within 2–7·10⁻⁵ of one another: the bottom of T₇ is a dense cluster, which is why the residuals stall.
+- The Kato–Temple values suggest that the computed bottoms lie 1·10⁻⁵ (539311) to 6·10⁻⁴ (539291) above the true bottoms of T₇ [E]. In every run the second Ritz value lies only 2–7·10⁻⁵ above the first: the bottom of T₇ is a dense cluster, which is why the residuals stall.
 
 **The frozen prediction holds** (`phase12_extrapolation.json:prediction`).
 - **P1 holds:** Y₇(539311) > Y₇(1387) > Y₇(539291) > Y₇(1389), the order of levels 5 and 6.
@@ -911,7 +911,7 @@ All values are model estimates [X], printed to four places, and none is a bound.
   - **The lower model fails visibly once.** E_low(1389) = 9.2156 exceeds the rigorous bound Y₇(1389) = 9.2083453, so for 1389 it overestimates the floor by at least 0.0073. The rule absorbs this through δ.
   - **Out of sample.** The lower model of 1387, fitted on R = 16–22, predicts Λ₂₄ = 9.2009. The R = 24 probe, computed after the protocol was frozen and not used in the fit, gives 9.1996: the model is high by 0.0013.
   - **Sensitivity to the solver.** Lowering every Y₇ by its Kato–Temple distance moves E_up by at most 7·10⁻⁴ and changes no verdict.
-- **What it is not.** It is a consistency check between two extrapolations, under two models with no error bounds. It is not evidence of the strength of a certificate.
+- **What it is not.** It is a consistency check between two extrapolations, under two models with no error bounds. It certifies nothing.
 
 ### 14.3 What a certificate could still do (the next certified step)
 
