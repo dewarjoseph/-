@@ -1,0 +1,18 @@
+{
+ "written": "2026-10-27, before any level-7 value and before the new Lambda_R probes of 1389, 539291 and of 539311 at R = 16, 18 existed. Known at this time: Y3..Y6 of the four frontier rules, and the Phase XI probes of 1387 (R = 16..22) and 539311 (R = 20, 22).",
+ "purpose": "turn the level-7 upper bounds and the sampled radius-R probes into a model-based estimate of each frontier floor, from above and from below, with a fixed rule for when an ordering of floors may be reported as evidence. Nothing here is a certificate.",
+ "upper_model": {
+  "data": "exact upper bounds Y_L, L = 5, 6, 7 (phase11_frontier_X5, phase11_orbit_Y6, phase12_y7)",
+  "model": "Y_L = E + A q^L",
+  "estimate": "Aitken: q = (Y6 - Y7)/(Y5 - Y6); E_up = Y7 - (Y6 - Y7) q/(1 - q). Also reported, not used in the rule: Richardson with q = 1/4 fixed, E = (4 Y7 - Y6)/3"
+ },
+ "lower_model": {
+  "data": "sampled probes Lambda_R (upper bounds on the best radius-R certificate; Phase XI protocol: the 10 legal 1-star types of lowest U1, 6 random centres each, seed 0, m = 5), R in {16, 18, 20, 22}",
+  "model": "Lambda_R = E - C / rho^2, rho = R - 311/175",
+  "estimate": "least squares in (E, C) over the available radii; E_low"
+ },
+ "discrepancy": "delta(rule) = |E_up - E_low|",
+ "decision_rule": "For a pair of rules (x, y), report '[X] evidence that E_*(x) > E_*(y)' only if E_up(x) > E_up(y) and E_low(x) > E_low(y) and min(E_up(x) - E_up(y), E_low(x) - E_low(y)) > max(delta(x), delta(y)). Otherwise report 'not resolved by extrapolation'.",
+ "invalidation": "If for some rule q is not in (0, 1) (the Y_L sequence is not geometrically convergent on L = 5..7), its E_up is undefined and no pair involving it is reported.",
+ "meaning": "a consistency check between two independent extrapolations, labelled [X]; it can never certify an ordering of floors"
+}
