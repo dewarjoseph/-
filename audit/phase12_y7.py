@@ -78,11 +78,12 @@ def exact_upper(H, v, chunk=1 << 18):
     den = int(np.sum((xr * xr).astype(object))) + int(np.sum((xi * xi).astype(object)))
     return num, den
 
-def lowest_ckpt(H, ckpt=None, m=60, keep=12, rtol=1e-6, max_restarts=100000):
+def lowest_ckpt(H, ckpt=None, m=int(os.environ.get('PHASE12_Y7_M', 60)), keep=int(os.environ.get('PHASE12_Y7_KEEP', 12)), rtol=1e-6,
+                max_restarts=100000, save_every=300):
     """bottom eigenpair of the Hermitian H by thick-restart Lanczos (mathematically the implicitly restarted Lanczos of ARPACK with
     exact shifts): an orthonormal basis of m vectors is extended with full reorthogonalisation (twice), the projected matrix
     T = V^H H V is formed column by column from the computed products, and after m vectors the basis is compressed to the `keep`
-    lowest Ritz vectors plus the normalised residual.  Every 5 minutes the kept Ritz vectors and the residual direction are saved
+    lowest Ritz vectors plus the normalised residual.  Every save_every seconds (default 5 min) the kept Ritz vectors and the residual direction are saved
     to `ckpt` (atomic), so that an interrupted run resumes.  Stops when the lowest Ritz pair has explicit residual <= rtol."""
     n = H.shape[0]; Vt = np.zeros((m, n), dtype=np.complex128); T = np.zeros((m, m), dtype=np.complex128)
     def proj(j, w): return np.conj(Vt[:j] @ np.conj(w))            # V[:, :j]^H w without copying the basis
@@ -111,7 +112,7 @@ def lowest_ckpt(H, ckpt=None, m=60, keep=12, rtol=1e-6, max_restarts=100000):
         if rr <= rtol: return float(theta[0]), x
         Vt[:keep] = X; T[:] = 0; T[:keep, :keep] = np.diag(theta[:keep])
         r = w / np.linalg.norm(w); Vt[keep] = r; start = keep
-        if ckpt and time.time() - last_save > 300:            # the coupling column of r is recomputed in the next sweep
+        if ckpt and time.time() - last_save >= save_every:            # the coupling column of r is recomputed in the next sweep
             np.savez(ckpt + '.tmp.npz', V=Vt[:keep], r=r); os.replace(ckpt + '.tmp.npz', ckpt); last_save = time.time()
     raise RuntimeError('no convergence')
 

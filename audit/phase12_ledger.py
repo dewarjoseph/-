@@ -32,6 +32,9 @@ def claims():
     ind = [r for r in JL('phase12_independent.jsonl') if r.get('tag') == 'independent_1387_R20']
     ind_status = ('[C] reproduced' if ind and ind[-1].get('all_balls_certified') else 'failed (see record)' if ind else 'running / not stored')
     law = J('phase12_orbit.json', {}).get('defect_law', {}); pred = J('phase12_predict.json', {})
+    ext = J('phase12_extrapolation.json', {}); pr = ext.get('prediction', {})
+    y7_status = ('[C] values; prediction ' + ('holds' if pr.get('prediction_holds') else 'falsified')) if 'P1_order' in pr else 'running / not stored'
+    verdicts = '; '.join(x['verdict'] for x in ext.get('decision', {}).get('pairs', []) if x['verdict'].startswith('[X]')) or 'none'
     G = ['(G) bounded degree', '(U) unitary connection', '(H) H = D^+D']
     rows = [
         ('XII.A', 'support: E_* = inf over finite legal patches of lambda^D = lim D_R; antitone in the language; frequency-free', '[P]', G, 'report 4.2', 'phase11:test_ladder_finite_radius_obstruction'),
@@ -63,6 +66,12 @@ def claims():
         ('XII.cube.rep', 'cube family: the order of spinor and adjoint floors flips with theta (adjoint below at pi/2, above at pi/5)', '[E]', [], 'phase12_cube.json:orbit', 'test_cube_representation_order_flips'),
         ('XII.cube.flat', 'cube family: the identity rule is flat, E_* = 0 (pinned T_L bottoms equal the trivial Dirichlet values)', '[P]', [], 'phase12_cube.json:flat_identity_rule', 'test_cube_flat_rule'),
         ('XII.pred', 'preregistered predictive study (frozen split, target Y5): results per descriptor family' + (f" (best test Spearman {max(r['spearman_test'] for r in pred['families'].values()):.3f})" if pred else ''), '[E]' if pred else 'pending', [], 'phase12_predict.json', 'test_prediction_preregistered_before_targets, test_prediction_results'),
+        ('XII.y7', 'the frozen level-7 prediction (P1 order 539311 > 1387 > 539291 > 1389, P2 gap in [0.010, 0.030]) scored on exact rational Y7 of the four frontier rules', y7_status, ['pinned T7, 2 097 152 tiles'], 'phase12_y7.jsonl, phase12_extrapolation.json:prediction', 'test_y7_records, test_extrapolation_results'),
+        ('XII.y7.method', 'the lean level-L assembly is Phase XI operator entry for entry; the checkpointed Lanczos agrees with ARPACK and resumes exactly', '[C]', [], 'audit/phase12_y7.py', 'test_y7_operator_identical_to_phase11, test_lanczos_matches_arpack_and_resumes'),
+        ('XII.extrap', 'two-sided extrapolation of the frontier floors (frozen protocol, 2b450cc): ' + verdicts, '[X]' if ext else 'running / not stored', ['model Y_L = E + A q^L', 'model Lambda_R = E - C / rho^2'], 'phase12_extrapolation.json:decision', 'test_extrapolation_protocol_frozen, test_extrapolation_results'),
+        ('XII.ug.P151', 'Proposition 15.1: for every Q8 gauge section s of a patch K, lambda_min(P_K H P_K) <= B(s) = [sum_e (2 - 2 Re d_e) + b(K)] / |K|', '[P]', ['quaternion form of the spinor operator'], 'report 15', 'test_unique_games_proposition_15_1'),
+        ('XII.ug.E', 'Chair44 rules as Q8 unique games: best sections found satisfy 44.9-50.2 % of panels; frustration ranks the rules only loosely like the floor (Spearman 0.70-0.78)', '[E] heuristic', ['spectral rounding + local search'], 'phase12_unique_games.jsonl', 'test_unique_games_proposition_15_1'),
+        ('XII.ugt', 'the claimed Unique Games Theorem and Min-UnCut hardness (openai/math, 23 Sep 2026; not checked here) are worst-case statements on finite instances and do not bound, order or certify any Chair44 floor', '[P] (scope)', ['claims external, unverified'], 'report 15', '-'),
         ('XII.lean', 'Lean formalisation', 'not done: toolchain hosts denied by the environment network policy', [], 'phase12_formal.json:lean', '-'),
         ('XII.phys', 'a physical law, observable or discovery', 'not claimed', [], '-', '-'),
     ]

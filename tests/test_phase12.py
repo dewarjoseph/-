@@ -303,3 +303,67 @@ def test_independent_checkpoint_resume(tmp_path, monkeypatch):
     c = I.certify('4752', 6, 3, 1, '3833131/1048576', 't_resumed', ckpt=ck)
     for k in keys: assert a[k] == b[k] == c[k], k
     assert len(lines) > 1 and c['checkpointed']
+
+# ------------------------------------------------------------------ the level-7 experiment (frozen prediction) and extrapolation
+def test_y7_operator_identical_to_phase11():
+    """the lean level-L assembly gives Phase XI's matrix entry for entry"""
+    import phase12_y7 as Y, phase11_chair as C, phase11_frontier as F
+    lev, ref = Y.geometry(3), F.Level(3)
+    for j in (184323, 539311, 184338, 539291):
+        assert abs(Y.operator(lev, C.extended_decoration(j)) - ref.H(C.extended_decoration(j))).max() == 0
+
+def test_lanczos_matches_arpack_and_resumes(tmp_path):
+    """thick-restart Lanczos agrees with ARPACK; an interrupted run resumes from its checkpoint to the same eigenvalue"""
+    import phase12_y7 as Y, phase11_chair as C, phase11_frontier as F
+    H = Y.operator(Y.geometry(4), C.extended_decoration(184323)); lam0, _ = F.lowest(H)
+    ck = str(tmp_path / 'c.npz')
+    with pytest.raises(RuntimeError): Y.lowest_ckpt(H, ck, m=30, keep=6, rtol=1e-12, max_restarts=2, save_every=0)
+    lam, x = Y.lowest_ckpt(H, ck, m=30, keep=6, rtol=1e-8)
+    assert abs(lam - lam0) < 1e-10 and np.linalg.norm(H @ x - lam * x) <= 1e-8
+    assert Y.exact_upper(H, x, chunk=777) == F.exact_upper(H, x)
+
+def test_y7_records():
+    """every stored level-7 bound is an exact rational above its eigenvalue estimate and below the stored level-6 bound
+    (T_7 contains a copy of T_6 with the same operator, so Y_7 <= Y_6)"""
+    p = os.path.join(RES, 'phase12_y7.jsonl')
+    if not os.path.exists(p): pytest.skip('no level-7 record yet')
+    y6 = {r['j']: r for r in JL('phase11_orbit_Y6.jsonl')}
+    for r in JL('phase12_y7.jsonl'):
+        q = Fraction(int(r['upper_num']), int(r['upper_den'])); assert q >= Fraction(r['float']) - Fraction(1, 10 ** 9)
+        if r['L'] == 7: assert r['float'] <= y6[r['j']]['float'] + 1e-9 and r['residual'] <= 1e-6
+        if r['L'] == 6: assert abs(r['float'] - y6[r['j']]['float']) < 1e-8
+
+EXTRAPOLATION_PROTOCOL_SHA256 = 'b5f702dd55af326d976254a58583d9502d0c808374522687da575df16445f5f6'
+
+def test_extrapolation_protocol_frozen():
+    """the two-sided extrapolation protocol is byte-identical to its commit (2b450cc, before the level-7 values existed)"""
+    import hashlib
+    h = hashlib.sha256(open(os.path.join(RES, 'phase12_preregistration_extrapolation.json'), 'rb').read()).hexdigest()
+    assert h == EXTRAPOLATION_PROTOCOL_SHA256
+
+def test_probes_recorded():
+    for n in ('1389', '539291'):
+        for R in (16, 18, 20, 22):
+            r = J(f'phase12_probe_{n}_R{R}.json')['records'][0]
+            assert r['R'] == R and r['sampled_balls'] == 60 and r['Lambda_R_upper'] < r['D_R_upper_float']
+
+def test_unique_games_proposition_15_1():
+    """B(s) is exactly the Rayleigh quotient of psi = s xi in the quaternion form, and it bounds the pinned bottom, for random sections"""
+    import phase12_unique_games as UG
+    n, a, b, U, bnd, f, T = UG.game('1387', 2); H = I.operator(f, T).toarray(); lam = np.linalg.eigvalsh(H)[0]
+    rng = np.random.default_rng(1); xi = np.array([0.5, -0.5, 0.5, 0.5])
+    for _ in range(20):
+        s = rng.integers(0, 8, n); B = (UG.cost(s, a, b, U).sum() + bnd) / n
+        psi = np.array([I.qmul(tuple(UG.Q[s[v]]), tuple(xi)) for v in range(n)], dtype=float).ravel()
+        assert abs(psi @ H @ psi / (psi @ psi) - B) < 1e-9 and lam <= B + 1e-12
+    for r in JL('phase12_unique_games.jsonl'): assert r['Y_L_float'] <= r['B_best'] + 1e-9 and 0 < r['satisfied_fraction'] < 1
+
+def test_extrapolation_results():
+    """the stored prediction score and extrapolation verdicts are recomputed from the records by the frozen procedure"""
+    p = os.path.join(RES, 'phase12_extrapolation.json')
+    if not os.path.exists(p): pytest.skip('extrapolation not run yet')
+    import phase12_extrapolation as X
+    d = J('phase12_extrapolation.json'); Y = X.upper_bounds()
+    assert json.loads(json.dumps(X.score_prediction(Y))) == d['prediction']
+    up, low = X.e_up(Y), X.e_low()
+    assert json.loads(json.dumps(X.decide(up, low))) == d['decision']

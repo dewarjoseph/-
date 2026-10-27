@@ -8,7 +8,7 @@
    "fix": "phase12_independent now compares in rational arithmetic; Phase XI code left unchanged (frozen artifact)"
   }
  ],
- "commit": "0ceb6e0",
+ "commit": "cc1dd07",
  "report": "deliverables/PHASE12_REPORT.md",
  "claims": [
   {
@@ -275,6 +275,65 @@
    "assumptions": [],
    "evidence": "phase12_predict.json",
    "test": "test_prediction_preregistered_before_targets, test_prediction_results"
+  },
+  {
+   "id": "XII.y7",
+   "claim": "the frozen level-7 prediction (P1 order 539311 > 1387 > 539291 > 1389, P2 gap in [0.010, 0.030]) scored on exact rational Y7 of the four frontier rules",
+   "status": "running / not stored",
+   "assumptions": [
+    "pinned T7, 2 097 152 tiles"
+   ],
+   "evidence": "phase12_y7.jsonl, phase12_extrapolation.json:prediction",
+   "test": "test_y7_records, test_extrapolation_results"
+  },
+  {
+   "id": "XII.y7.method",
+   "claim": "the lean level-L assembly is Phase XI operator entry for entry; the checkpointed Lanczos agrees with ARPACK and resumes exactly",
+   "status": "[C]",
+   "assumptions": [],
+   "evidence": "audit/phase12_y7.py",
+   "test": "test_y7_operator_identical_to_phase11, test_lanczos_matches_arpack_and_resumes"
+  },
+  {
+   "id": "XII.extrap",
+   "claim": "two-sided extrapolation of the frontier floors (frozen protocol, 2b450cc): none",
+   "status": "running / not stored",
+   "assumptions": [
+    "model Y_L = E + A q^L",
+    "model Lambda_R = E - C / rho^2"
+   ],
+   "evidence": "phase12_extrapolation.json:decision",
+   "test": "test_extrapolation_protocol_frozen, test_extrapolation_results"
+  },
+  {
+   "id": "XII.ug.P151",
+   "claim": "Proposition 15.1: for every Q8 gauge section s of a patch K, lambda_min(P_K H P_K) <= B(s) = [sum_e (2 - 2 Re d_e) + b(K)] / |K|",
+   "status": "[P]",
+   "assumptions": [
+    "quaternion form of the spinor operator"
+   ],
+   "evidence": "report 15",
+   "test": "test_unique_games_proposition_15_1"
+  },
+  {
+   "id": "XII.ug.E",
+   "claim": "Chair44 rules as Q8 unique games: best sections found satisfy 44.9-50.2 % of panels; frustration ranks the rules only loosely like the floor (Spearman 0.70-0.78)",
+   "status": "[E] heuristic",
+   "assumptions": [
+    "spectral rounding + local search"
+   ],
+   "evidence": "phase12_unique_games.jsonl",
+   "test": "test_unique_games_proposition_15_1"
+  },
+  {
+   "id": "XII.ugt",
+   "claim": "the claimed Unique Games Theorem and Min-UnCut hardness (openai/math, 23 Sep 2026; not checked here) are worst-case statements on finite instances and do not bound, order or certify any Chair44 floor",
+   "status": "[P] (scope)",
+   "assumptions": [
+    "claims external, unverified"
+   ],
+   "evidence": "report 15",
+   "test": "-"
   },
   {
    "id": "XII.lean",

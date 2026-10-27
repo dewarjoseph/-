@@ -801,6 +801,80 @@ The literature search is Phase XI's (`PHASE11_REPORT.md` §8). Phase XII made no
 
 ---
 
+⟨SEC14⟩
+
+---
+
+## 15. The Unique Games Theorem and Chair44 (the openai/math release)
+
+**What was examined.**
+- The public repository `openai/math`, at its head commit 7ef5c0c (26 October 2026): 721 manuscripts produced by an unreleased OpenAI model, about 42 % with Lean formalizations.
+- In particular:
+  - *The Unique Games Theorem* (23 September 2026), with the Lean declaration `OAI.UniqueGamesTheorem.theorem11` (standard axioms only);
+  - *Constant-factor hardness of Min-UnCut* (23 September 2026).
+- Neither proof was checked here: the Lean toolchain is unreachable from this environment (§9.1), and the papers were read, not refereed. Their results are cited as **claimed** [external].
+- No code from the repository was executed.
+
+**What the two theorems state.**
+- *Unique Games Theorem.* For all fixed ε, δ ∈ (0, ½) there is an alphabet 𝔽₂ˢ (s depending on ε, δ) and a polynomial-time reduction from 3SAT to unique games whose value is ≥ 1 − ε on satisfiable formulas and ≤ δ on unsatisfiable ones. This is Khot's conjecture, in its usual form.
+- *Min-UnCut.* For every constant K there is a polynomial-time reduction from 3SAT to graphs separating "at most k edges must be deleted to make the graph bipartite" from "more than Kk". This is unconditional, assuming neither the Unique Games Conjecture nor any other hypothesis.
+- Both are **worst-case hardness statements about families of finite instances**.
+
+**The dictionary** [P, elementary].
+- A unique game is a graph with a permutation of the alphabet on each edge. A Chair44 rule is one:
+  - the graph is the panel graph of a supertile (or of a tiling), and the alphabet is Q₈;
+  - the panel (a, b) carries the constraint s(a) = U(a→b) s(b);
+  - a labelling s is a gauge section, and its defect on a panel is d_e = s(a)⁻¹ U(a→b) s(b).
+- The value of the game is the largest satisfied fraction of panels. Gauge transformations relabel the alphabet consistently, so the value is gauge-invariant.
+- The three Abelian shadows χ_k∘U are ℤ₂ games, that is, signed graphs. Their frustration (the fewest panels left unsatisfied by a ± section) is the frustration index of a signed graph, and Min-UnCut is its all-negative special case.
+- **E_\* is the spectral relaxation of this game.** Precisely:
+
+**Proposition 15.1** [P]. Let K be a finite patch, b(K) the number of its boundary panel-ends, and s : K → Q₈ any section. Then
+
+  λ_min(P_K H P_K) ≤ B(s) := [ Σ_{panels e ⊂ K} (2 − 2 Re d_e) + b(K) ] / |K|,
+
+where 2 − 2 Re d = 0, 2 or 4 for d = 1, d traceless, d = −1. Hence E_\* ≤ inf over legal patches K and sections s of B(s).
+
+*Proof.* In the quaternion form of the operator (ℓ²(K; ℍ), links acting by left multiplication; its spectrum is the spinor spectrum, each eigenvalue doubled) take ψ(v) = s(v)ξ for a unit quaternion ξ. Then |ψ(v)| = 1 and |ψ(a) − U ψ(b)| = |ξ − s(a)⁻¹U s(b) ξ| = |1 − d_e|, because the quaternion norm is multiplicative. Summing the panel terms and the boundary terms of the Dirichlet form gives ⟨ψ, P_K H P_K ψ⟩ = Σ_e |1 − d_e|² + b(K) and ‖ψ‖² = |K|. ∎
+
+- In the other direction no comparable linear bound exists in general.
+  - Cheeger-type inequalities for connection Laplacians and signed graphs (Bandeira–Singer–Spielman; Atay–Liu) lose a square root.
+  - The claimed Min-UnCut theorem implies (if P ≠ NP) that no polynomial-time procedure, spectral or otherwise, approximates the frustration of general finite ℤ₂ connections within any constant factor.
+
+**Computed** (`audit/phase12_unique_games.py` → `phase12_unique_games.jsonl`) [E, heuristic].
+- The supertiles T₃ and T₄ of nine rules were read as Q₈ games: the frontier orbit, FR30, 1144 and 937.
+- Good sections were found by the standard unique-games step, spectral rounding of the pinned ground state (each tile takes the label whose g·ξ best matches the eigenvector), followed by local search, and by seeded random starts with local search. Spectral rounding gave the best section in every case.
+- Proposition 15.1 is asserted on every run.
+
+| rule | Y₃ | B_best (T₃) | satisfied (T₃) | Y₄ | B_best (T₄) | satisfied (T₄) |
+|---|---|---|---|---|---|---|
+| 539311 | 9.9574 | 14.7930 | 45.5 % | 9.5223 | 14.3780 | 44.9 % |
+| 1387 | 9.9560 | 14.7500 | 46.0 % | 9.5169 | 14.3799 | 45.2 % |
+| 539291 | 9.7919 | 14.5000 | 47.0 % | 9.3344 | 14.0596 | 46.0 % |
+| 1389 | 9.7870 | 14.4102 | 48.0 % | 9.3465 | 14.1114 | 45.8 % |
+| 1391 | 9.6711 | 14.5625 | 46.7 % | 9.1739 | 14.2598 | 45.1 % |
+| 539288 | 9.6631 | 14.7266 | 46.1 % | 9.1627 | 14.2242 | 45.5 % |
+| 1144 | 9.6627 | 14.4454 | 47.1 % | 9.1037 | 14.2530 | 45.6 % |
+| FR30 (4752) | 9.3785 | 13.5977 | 50.2 % | 8.9197 | 13.5284 | 48.0 % |
+| 937 | 8.4911 | 14.0235 | 49.2 % | 8.0358 | 13.6919 | 47.7 % |
+
+Y_L are the pinned bottoms (floating point, rounded up; exact bounds in §2 and §10). B_best is the best section found (rounded up); it includes the boundary term b(K)/|K| = 3 (T₃) and 1.5 (T₄). Both are upper bounds on E_\* of the rule.
+
+- **The Chair44 games are far from satisfiable.** The best sections found satisfy 44.9–50.2 % of the panels. Their interior frustration density, 10.6–12.9 per tile, lies 1.2–4.2 above the spectral bottom of the same supertile. The relaxation gap is large.
+- **Frustration ranks the rules only loosely like the floor.** The Spearman correlation of B_best with Y_L is 0.78 (T₃) and 0.70 (T₄). At T₄ the best sections found make 1387 slightly *more* frustrated than 539311, the reverse of their spectral order. 539288, sixth of the nine spectrally at T₃, is third by frustration. The values are heuristic (upper bounds on min_s B(s)), so these orderings are evidence, not theorems.
+
+**What it means for the extremal problem.**
+- **The theorems do not bound, order or certify any Chair44 floor.**
+  - They concern worst-case families of finite instances.
+  - The Unique Games Theorem needs an alphabet that grows as its errors shrink; Chair44 has the fixed alphabet Q₈.
+  - Min-UnCut concerns the combinatorial frustration of the shadows, not their spectral floors.
+- **The Chair44 floor is not hard in their sense.** Theorems A–C reduce it, at every radius, to finitely many local eigenvalue problems with a computable error. The difficulty of the co-leader question is the R⁻² rate of that error: a cost, not a complexity class.
+- **What carries over is a confirmation of Proposition 6.3 from the other side.**
+  - Combinatorial frustration and the spectral floor are different quantities. Proposition 15.1 bounds the floor by the frustration; nothing efficient bounds the frustration by the floor within a constant factor.
+  - The computed games show the gap is large, and that it does not preserve the order of the floors.
+
+---
+
 ## Reproduction
 
 All commands run from the repository root (Python 3.13, numpy 2.5, scipy 1.18, sympy 1.14, mpmath 1.3), with `OMP_NUM_THREADS=1`. Wall times are on 4 CPU cores, usually under load from concurrent runs.
