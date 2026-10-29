@@ -1,7 +1,7 @@
 rule,L,L_source,U,U_source,status,L_independent
-1387,9.1104981,"IMS R=20, 24571 balls (phase11_chair)",9.3616608,"Y7, pinned T7, 2 097 152 tiles (phase12_y7)",leader,independently reproduced: IMS R=20 >= 9.1104981 (phase12_independent)
-539311,8.7999990,"IMS R=15, 10321 balls (phase11_chair)",9.3817818,"Y7, pinned T7, 2 097 152 tiles (phase12_y7)",contender,
-1389,8.7644993,"IMS R=16, 12193 balls (phase11_chair)",9.2083453,"Y7, pinned T7, 2 097 152 tiles (phase12_y7)",contender,
+1387,9.1104981,"IMS R=20, 24571 balls (phase11_chair)",9.3616608,"Y7, pinned T7, 2 097 152 tiles (phase12_y7)",contender,independently reproduced: IMS R=20 >= 9.1104981 (phase12_independent)
+539311,9.2083494,"IMS R=24, 39117 balls (phase12_independent)",9.3817818,"Y7, pinned T7, 2 097 152 tiles (phase12_y7)",leader,
+1389,8.7644993,"IMS R=16, 12193 balls (phase11_chair)",9.2083453,"Y7, pinned T7, 2 097 152 tiles (phase12_y7)",proven_inferior,
 539291,7.1408386,"IMS R=8, 1532 balls (Phase X)",9.2483895,"Y7, pinned T7, 2 097 152 tiles (phase12_y7)",contender,
 1391,8.7644989,"IMS R=18, 20168 balls (phase11_chair)",9.1104007,"Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",proven_inferior,
 539288,6.8499994,"IMS R=8, 829 balls (phase11_chair)",9.0982535,"Y6, pinned T6, 262 144 tiles (phase11_orbit_Y6)",proven_inferior,

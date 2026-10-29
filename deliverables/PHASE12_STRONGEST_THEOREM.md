@@ -47,7 +47,7 @@ The same holds verbatim for the cube family with the θ-connections, for proper 
 ## Certified corollaries [C]
 
 1. **E_\*(1387) ≥ 9.1104981** (radius 20, 24 571 legal balls; reproduced by an implementation sharing no code with the certifying one). E_\*(1387) ∈ [9.1104981, 9.3616608] (the upper end on the pinned level-7 supertile, 2 097 152 tiles).
-2. **The maximiser of E_\* over all 6⁸ = 1 679 616 Chair44 frame rules is one of 1387, 539311, 1389, 539291.** Every other rule has an exact rational upper bound below a certified lower bound of 1387.
+2. **The maximiser of E_\* over all 6⁸ = 1 679 616 Chair44 frame rules is one of 1387, 539311, 539291.** Every other rule has an exact rational upper bound below a certified lower bound: of 1387 (radius 20), or, for 1389, of 539311 (the preregistered radius-24 certificate, 39 117 legal balls: E_\*(539311) ≥ 9.2083494 > 9.2083453 ≥ E_\*(1389)). E_\*(539311) ∈ [9.2083494, 9.3817818].
 3. **The six-member S₃ orbit at the top of the frontier is not a symmetry of the operator.** E_\*(539288) ≤ 9.0982535 < 9.1104981 ≤ E_\*(1387), with 539288 = 4753·(0 2 1), although T₁ of the two rules are unitarily equivalent.
    - So **no function of level-one data determines E_\*** (Theorem 3.1 of the report).
 4. E_\*(539315) = E_\*(FR30): 1386 is fixed by conj_{(x y)}, an instance of (d).
@@ -55,7 +55,7 @@ The same holds verbatim for the cube family with the θ-connections, for proper 
 
 ## What this does not establish
 
-- **No global optimum.** 1387 is the best-resolved frontier member, but the evidence points to 539311:
+- **No global optimum.** 539311 now has the highest certified lower bound and the evidence points to it, but 1387 and 539291 are not excluded:
   - the frozen level-7 prediction held (Y₇(539311) − Y₇(1387) = 0.020121, order unchanged) [E];
   - two frozen extrapolations agree that E_\*(539311) > E_\*(1387) by about 0.012–0.020 [X].
   - No certificate separates them: IMS would need radius 67–91.

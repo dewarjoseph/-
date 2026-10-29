@@ -36,8 +36,8 @@
 **1. The loop is closed.**
 - **The preregistered radius-20 certificate passed:** E_\*(1387) ≥ 9.1104981, on all 24 571 legal balls.
 - It was rerun by an implementation that shares no code with the certifying one. That rerun reproduces the enumeration exactly: 2 949 120 centres, 0 rejected, 24 571 distinct balls. It certifies every one of them at the same level μ = 9553051/1048576: **E_\*(1387) ≥ 9.1104981, reproduced independently** [C].
-- The leaderboard is recomputed from the stored certificates. 1096 of the 1098 proper classes are proven inferior.
-- **Over all 1 679 616 frame rules, the maximiser is one of four: 1387, 539311, 1389, 539291** [C].
+- The leaderboard is recomputed from the stored certificates. 1097 of the 1098 proper classes are proven not to contain the global maximiser (1389 by the radius-24 certificate of the extended rule 539311; within the proper rules alone, 1387 against 1389 stays open).
+- **Over all 1 679 616 frame rules, the maximiser is one of three: 1387, 539311, 539291** [C]. The preregistered radius-24 certificate of 539311 passed on all 39 117 legal balls, E_\*(539311) ≥ 9.2083494 > 9.2083453 ≥ E_\*(1389), and removed 1389 from the frontier of four (§14.3).
 - Five statements of the Phase XI one-page theorem exceeded their proofs (missing hypotheses, an over-general class-field claim); they are corrected (§1.3).
 - 88 printed bounds in the Phase XI–XII documents had been rounded to nearest in the wrong direction, each by one unit in the last digit. All are now rounded outward, no conclusion changes, and the check is a regression test (C6, §1.3).
 - One implementation finding: Phase XI's exactness assertion for the diagonal shift proves nothing. Every stored certificate is nonetheless exact, because μ is dyadic (§12).
@@ -53,7 +53,7 @@
 - Phase XI's identity E_\*(539315) = E_\*(FR30) is one instance.
 - Why the orbit survived the funnel: shared level-1 structure, plus partial clustering (right orbits explain 62 % of the variance of Y₃).
 - **A preregistered quantitative law** (the conjugation defect δ controls the splitting) **is falsified**.
-- 1387 is the best-resolved member of an unresolved four-member frontier, **not a proven optimum**.
+- 1387 is a member of an unresolved three-member frontier, **not a proven optimum**; so is 539311, which now carries the highest certified lower bound.
 
 **3. Descriptors.**
 - For families with unbounded hierarchy no finite-radius descriptor determines E_\* (proved).
@@ -95,7 +95,7 @@
 - Two extrapolations, frozen before their inputs existed: from above (Y₅–Y₇) and from below (sampled radius-R probes).
 - **[X] evidence that E_\*(539311) > E_\*(1387) > E_\*(539291), E_\*(1389)**, with the floors of the co-leaders estimated at 9.371–9.380 and 9.359–9.360. 539291 against 1389 is not resolved.
 - Neither model has an error bound; the lower one visibly overestimates 1389's floor. The decision rule was built for that and absorbs it.
-- **Separating the co-leaders by a certificate needs radius 67–91, about 10⁶ core-hours or more: out of reach.** The next certified step is narrower: a preregistered radius-24 certificate of 539311 to exclude 1389 (§14.3).
+- **Separating the co-leaders by a certificate needs radius 67–91, about 10⁶ core-hours or more: out of reach.** The next certified step was narrower: the preregistered radius-24 certificate of 539311, to exclude 1389. **It passed** (§14.3).
 
 **11. The Unique Games Theorem** (openai/math, claimed with a Lean proof; §15).
 - A Chair44 rule *is* a unique game: the alphabet is Q₈, and the panels carry the constraints s(a) = U(a→b)s(b). E_\* is its spectral relaxation. Exactly: **λ_min(P_K H P_K) ≤ [Σ_e (2 − 2 Re d_e) + b(K)]/|K| for every gauge section** (Proposition 15.1) [P].
@@ -311,11 +311,11 @@ The brief lists four possible sources:
 
 ### 2.5 Is 1387 the global maximiser?
 
-**No such claim is made.** The certified statement is the four-member frontier:
+**No such claim is made.** The certified statement is the three-member frontier (four members until the radius-24 certificate of §14.3 excluded 1389):
 
-> the maximiser of E_\* over all 6⁸ frame rules is one of **1387, 539311, 1389, 539291** (§10).
+> the maximiser of E_\* over all 6⁸ frame rules is one of **1387, 539311, 539291** (§10).
 
-- 1387 is the **best-resolved** member: it has the highest certified lower bound, 9.1104981.
+- 1387 was the **best-resolved** member when Part II was written, with certified lower bound 9.1104981 (radius 20). Since §14.3, 539311 has the highest certified lower bound, 9.2083494 (radius 24).
 - 539311 has a *higher* exact upper bound (9.3885938 > 9.3679502). Equality with 1387 is not forced by any symmetry: their defect is 1, not 0.
 - By the Phase XI probes, no IMS certificate at the probed radii up to 22 separates them in either direction.
 - The four intervals overlap, so the comparison is **unresolved** in the preregistered sense: no available method decides it at feasible cost.
@@ -734,11 +734,11 @@ These are not finite computations. The proofs above rely on them, and a full for
 
 | rule | certified lower L (source) | exact upper U (source) | status |
 |---|---|---|---|
-| **1387** | **9.1104981** (IMS R = 20, 24 571 balls); reproduced by the independent implementation, all 24 571 balls (§1.1) | 9.3616608 (Y₇, 2 097 152 tiles) | **leader** |
-| 539311 | 8.7999990 (IMS R = 15, 10 321 balls) | 9.3817818 (Y₇) | contender |
-| 1389 | 8.7644993 (IMS R = 16, 12 193 balls) | 9.2083453 (Y₇) | contender |
+| 1387 | **9.1104981** (IMS R = 20, 24 571 balls); reproduced by the independent implementation, all 24 571 balls (§1.1) | 9.3616608 (Y₇, 2 097 152 tiles) | contender |
+| **539311** | **9.2083494** (IMS R = 24, 39 117 balls, preregistered; phase12_independent, §14.3) | 9.3817818 (Y₇) | **leader** (highest certified lower bound; not a proven maximiser) |
+| 1389 | 8.7644993 (IMS R = 16, 12 193 balls) | 9.2083453 (Y₇) | proven inferior (U < 9.2083494, §14.3) |
 | 539291 | 7.1408386 (IMS R = 8, Phase X) | 9.2483895 (Y₇) | contender |
-| 1391 | 8.7644989 (IMS R = 18, 20 168 balls) | 9.1104007 (Y₆) | proven inferior (U < 9.1104981) |
+| 1391 | 8.7644989 (IMS R = 18, 20 168 balls) | 9.1104007 (Y₆) | proven inferior (U < 9.1104981 ≤ E_\*(1387)) |
 | 539288 | 6.8499994 (IMS R = 8, 829 balls) | 9.0982535 (Y₆) | proven inferior |
 | FR30 (1386) | 7.9542912 (IMS R = 12) | 8.7642271 (σ⁵ of a self-loop type, 884 736 tiles) | proven inferior |
 | every other rule (1 679 610) | — | exact Y₃–Y₆ or D₈ below 8.7999987 (funnel X3–X7) | proven inferior |
@@ -760,7 +760,7 @@ The literature search is Phase XI's (`PHASE11_REPORT.md` §8). Phase XII made no
 | a false certificate from visible-only enumeration | | **A** | | | an explicit counterexample |
 | **Orbit Lemma** (a)–(e): the right action is a gauge symmetry of one inflation step, a full symmetry on the conjugation stabiliser (and its closure), with the commutation failing otherwise | | | **T** | | new in this project; elementary |
 | E_\*(539315) = E_\*(FR30) as a stabiliser instance | | | **T** | | it re-derives Phase XI's identity by a second proof |
-| certified frontier of four for 6⁸ frame rules; E_\*(1387) ≥ 9.1104981 | | **A** (computation) | | | new computational result |
+| certified frontier of three for 6⁸ frame rules; E_\*(1387) ≥ 9.1104981, E_\*(539311) ≥ 9.2083494 | | **A** (computation) | | | new computational result |
 | the conjugation-defect law | | | **[F]** | | falsified (preregistered) |
 | Theorem 3.1: level-one data do not determine E_\* on Chair44 | | | **T** | | elementary, given the lemma and the certificates |
 | finite families: determination is vacuous; plaquette counts injective on 1096/1098 classes | | **A** | | | |
@@ -801,13 +801,14 @@ The literature search is Phase XI's (`PHASE11_REPORT.md` §8). Phase XII made no
   - rates only under doubling (R ≥ 4C_D) or a Euclidean realisation.
 
 **2. Strongest new computational result.**
-- **Over all 1 679 616 Chair44 frame rules, the maximiser of E_\* is one of 1387, 539311, 1389, 539291, and E_\*(1387) ∈ [9.1104981, 9.3616608].**
-- The lower bound is a preregistered radius-20 IMS certificate: 24 571 legal balls, every one passing a Higham-bounded banded Cholesky. An implementation sharing no code with the certifying one reproduces it: the same 24 571 balls, every one certified (§1.1).
+- **Over all 1 679 616 Chair44 frame rules, the maximiser of E_\* is one of 1387, 539311, 539291; E_\*(1387) ∈ [9.1104981, 9.3616608] and E_\*(539311) ∈ [9.2083494, 9.3817818].**
+- The lower bound of 1387 is a preregistered radius-20 IMS certificate: 24 571 legal balls, every one passing a Higham-bounded banded Cholesky. An implementation sharing no code with the certifying one reproduces it: the same 24 571 balls, every one certified (§1.1).
+- The lower bound of 539311 is the preregistered radius-24 certificate (39 117 legal balls, all certified; §14.3). It excludes 1389, whose exact upper bound 9.2083453 lies below it by 4.1·10⁻⁶. It was run by one implementation (phase12_independent, the one that reproduced the radius-20 certificate) and has not been rerun by the other.
 - The upper bounds are exact rational Rayleigh quotients, on the pinned level-7 supertiles (2 097 152 tiles) for the four frontier rules (§14.1).
 - *Reproduction:* the commands of the reproduction table.
 - *Limits:*
   - Higham's Theorem 10.3, and LAPACK's adherence to the IEEE rounding model, are assumed;
-  - the four intervals overlap, so the frontier is unordered;
+  - the three intervals overlap, so the frontier is unordered;
   - every upper bound is a finite-supertile eigenvalue.
 
 **3. Most important negative result.**
@@ -823,7 +824,7 @@ The literature search is Phase XI's (`PHASE11_REPORT.md` §8). Phase XII made no
 
 **5. Next decisive experiment.**
 - **Done in this phase:** the frozen level-7 prediction (Y₇ of the four frontier rules). **It held**: the order 539311 > 1387 > 539291 > 1389 persists, and Y₇(539311) − Y₇(1387) = 0.020121 ∈ [0.010, 0.030] (§14.1).
-- **Started, 80 % done:** the preregistered radius-24 certificate of 539311 at μ = 9.2083530 > Y₇(1389). 31 287 of 39 117 balls passed and none failed when this phase closed. If the rest pass, 1389 is proven inferior and the frontier shrinks to three (§14.3; the checkpoint is committed).
+- **Done:** the preregistered radius-24 certificate of 539311 at μ = 9.2083530 > Y₇(1389). **It passed:** all 39 117 legal balls certified, none failed, E_\*(539311) ≥ 9.2083494 > Y₇(1389). 1389 is proven inferior and the frontier is three (§14.3).
 - **Next after it:** a lower-bound method with localisation error o(R⁻²) for this one hull. A certificate cannot separate the co-leaders at any affordable radius, so only such a method can turn the evidence for 539311 into a theorem (`deliverables/PHASE12_DECISION_MEMO.md`).
 
 ---
@@ -930,15 +931,19 @@ All values are model estimates [X], printed to four places, and none is a bound.
   - Then Y₇ − E_up = 0.0021–0.0023 corresponds to an effective kinetic constant κ_eff ≈ 3.3–3.5 for the low-energy states of 1387 and 539311. The IMS fits correspond to κ = C/π² ≈ 7.7–7.9.
   - A localisation as good as the low-energy states themselves would have C ≈ 33–35 instead of 76–78. Even then the co-leaders need R ≈ 46–62: 3–8·10⁵ balls and 4·10⁴–8·10⁵ core-hours.
   - So a better constant cannot close the gap. A certificate for the co-leaders needs a better *rate* than R⁻², which by Theorem C(iv) must use the operator, not only the geometry.
-- **The four-member frontier can be reduced to three now.** The radius-24 certificate of 539311 was preregistered (`phase12_preregistration_r24.json`, commit e7879ff, before Y₇(1389) and before any radius-24 data of 539311; byte-identical: `test_r24_protocol_frozen`).
+- **The four-member frontier is reduced to three.** The radius-24 certificate of 539311 was preregistered (`phase12_preregistration_r24.json`, commit e7879ff, before Y₇(1389) and before any radius-24 data of 539311; byte-identical: `test_r24_protocol_frozen`).
 
 **Status of the radius-24 certificate.**
 - Go/no-go: the 60-ball probe gives Λ₂₄(539311) ≤ 9.2177320. That is above μ = 9655658/2²⁰ = 9.2083530 by 0.0094, so the certificate was run (`phase12_probe_539311_R24.json`). The frozen lower model had predicted 9.2170.
 - μ is fixed by the protocol: the smallest multiple of 2⁻²⁰ that is ≥ U(1389) + 8·2⁻²⁰, with U(1389) = Y₇(1389) = 9.2083453.
-- **Status: incomplete, not a certificate.** The run was interrupted three times when the container was reclaimed (about 09:27 and 10:40 on 27 October, and again before 01:26 on 29 October); each time it resumed from its checkpoint. When this phase closed, it had:
-  - finished pass 1: 39 117 distinct legal balls from 2 949 120 centres, 0 rejected;
-  - finished 31 287 of the 39 117 balls of pass 2 (80.0 %), with **0 failures**. The lowest certified ball value is 9.2083494, above Y₇(1389) = 9.2083453.
-- The remaining 7 830 balls are unchecked, so **1389 is not yet excluded**, and the frontier stays at four. Partial record: `phase12_r24_partial.json`. The checkpoint is committed in `audit/results/ckpt_prereg_539311_R24/`; resuming it takes about 3 h on 4 cores.
+- **Status: passed [C].** Record `phase12_independent.jsonl`, tag `prereg_539311_R24` (`test_r24_certificate`):
+  - pass 1: 39 117 distinct legal balls from 2 949 120 centres, 0 rejected incomplete; ball sizes 8 168–8 293 tiles, bandwidth ≤ 2 268, entry error ≤ 5.5·10⁻¹⁵;
+  - pass 2: **all 39 117 balls certified, 0 failing**, at μ = 9655658/2²⁰;
+  - **E_\*(539311) ≥ 9.2083494 > 9.2083453 ≥ Y₇(1389) ≥ E_\*(1389)** (printed outward; the exact margin is 4.1·10⁻⁶). **1389 is proven inferior; the frontier is 1387, 539311, 539291.**
+- The run was interrupted three times when the container was reclaimed (about 09:27 and 10:40 on 27 October, and before 01:26 on 29 October). Each time it resumed from its checkpoint (`checkpointed: true` in the record). A restart restores pass 1 (checked against the sha256 of every ball key) and the pass-2 results of every finished chunk of 128 balls, recomputes only the unfinished chunks, and gives the same record. The last segment took 16 872 s; the whole run took about 13 h on 4 cores.
+- The complete pass-2 results are committed as `audit/results/ckpt_prereg_539311_R24/pass2_final.jsonl` (39 117 balls; its first 251 chunks are byte-identical to the interim checkpoint `pass2.jsonl`, `test_r24_final_checkpoint`). The interim record (31 287 balls passed) is kept as `phase12_r24_partial.json`.
+- The certificate was run by one implementation (phase12_independent) and has not been rerun by the Phase XI one.
+- **Next certified step:** a radius-28 certificate of 539311 (μ above Y₇(539291) = 9.2483895; about 70 000 balls and 60 h on 4 cores) would exclude 539291 and leave 1387 against 539311.
 
 ---
 
@@ -1035,7 +1040,7 @@ All commands run from the repository root (Python 3.13, numpy 2.5, scipy 1.18, s
 | level 7, distance from the true bottom [E] | `PHASE12_Y7_CKPT=<dir> python -u -I audit/phase12_y7.py ritz 7 539311 184323 539291 184338` | `phase12_y7_ritz.jsonl` | 1 min per rule |
 | radius-R probes | `python -u -I audit/phase12_probes.py 1389:1389:16,18,20,22 x539291:539291:16,18,20,22 x539311:539311:16,18,24 1387:1387:24` | `phase12_probe_<rule>_R<R>.json` | 2–10 min per radius |
 | prediction score, two-sided extrapolation | `python -u -I audit/phase12_extrapolation.py` | `phase12_extrapolation.json` | 1 s |
-| radius-24 certificate of 539311 (preregistered) | `python -u -I audit/phase12_independent.py cert x539311 24 5 4 9655658/1048576 prereg_539311_R24 --ckpt=<dir>` | `phase12_independent.jsonl` | about 13 h on 4 cores; 80 % done, resumable from the committed checkpoint |
+| radius-24 certificate of 539311 (preregistered) | `python -u -I audit/phase12_independent.py cert x539311 24 5 4 9655658/1048576 prereg_539311_R24 --ckpt=<dir>` | `phase12_independent.jsonl` | about 13 h on 4 cores; passed (resumable from a checkpoint with `--ckpt`) |
 | effective kinetic constant (§14.3) [X] | `python -u -I audit/phase12_chair_dirichlet.py` | `phase12_chair_dirichlet.json` | 1 min |
 | unique games (§15) | `python -u -I audit/phase12_unique_games.py 3 1387 x539311 1389 x539291 1391 x539288 4752 1144 937`; the same with `4` | `phase12_unique_games.jsonl` | 30 s (L = 3); 3 min (L = 4), for the nine rules |
 | frontier table | `python -u -I audit/phase12_frontier_table.py` | `phase12_frontier.json`, `.csv` | 1 s |

@@ -2,16 +2,17 @@
 
 ## Where things stand (certified)
 
-- Over all 1 679 616 Chair44 frame rules, **the maximiser of E_\* is one of 1387, 539311, 1389, 539291**, and the four intervals overlap:
+- Over all 1 679 616 Chair44 frame rules, **the maximiser of E_\* is one of 1387, 539311, 539291**, and the three intervals overlap:
 
   | rule | interval |
   |---|---|
+  | 539311 | [9.2083494, 9.3817818] |
   | 1387 | [9.1104981, 9.3616608] |
-  | 539311 | [8.7999990, 9.3817818] |
-  | 1389 | [8.7644993, 9.2083453] |
   | 539291 | [7.1408386, 9.2483895] |
+  | 1389 (excluded) | [8.7644993, 9.2083453], below the lower bound of 539311 |
 
   - The lower bound of 1387 (radius 20, 24 571 balls) is reproduced by an implementation sharing no code with the certifying one.
+  - The lower bound of 539311 is the preregistered radius-24 certificate (39 117 balls, all certified), run by one implementation.
   - The upper bounds are exact rational Rayleigh quotients on the pinned level-7 supertiles (2 097 152 tiles).
 - **The six-member S₃ orbit that topped the funnel is explained, and it is not a symmetry.**
   - The right action of the chair's point group is a gauge symmetry of one inflation step (Orbit Lemma).
@@ -29,24 +30,26 @@ A second protocol, frozen before the level-7 values and the new probes (`phase12
 
 ## The decision now
 
-**Started, 80 % done: the radius-24 certificate of 539311 at μ = 9655658/2²⁰ = 9.2083530** (`phase12_preregistration_r24.json`, frozen before Y₇(1389) and before any radius-24 data of 539311).
-- If every legal radius-24 ball passes, E_\*(539311) > Y₇(1389) ≥ E_\*(1389): **1389 is proven inferior, and the frontier shrinks to three.**
-- Go/no-go passed: the 60-ball probe gives 9.2177320 > μ.
-- Cost: 39 117 balls, about 13 h on 4 cores. When this phase closed, 31 287 had passed and none had failed. The checkpoint is committed (`audit/results/ckpt_prereg_539311_R24/`); finishing it takes about 3 h. Until then, 1389 is not excluded.
+**Run and passed: the radius-24 certificate of 539311 at μ = 9655658/2²⁰ = 9.2083530** (`phase12_preregistration_r24.json`, frozen before Y₇(1389) and before any radius-24 data of 539311).
+- Every one of the 39 117 legal radius-24 balls passed: E_\*(539311) ≥ 9.2083494 > 9.2083453 ≥ Y₇(1389) ≥ E_\*(1389). **1389 is proven inferior, and the frontier is three** (report §14.3).
+- Go/no-go had passed: the 60-ball probe gave 9.2177320 > μ.
+- Cost: 39 117 balls, about 13 h on 4 cores, resumed three times from its checkpoint after the container was reclaimed.
+
+**Next, if compute is available: the radius-28 certificate of 539311** (μ above Y₇(539291) = 9.2483895; about 70 000 balls, 60 h on 4 cores). It would leave 1387 against 539311. It must be preregistered before it is run.
 
 ## Why this, and not another
 
 | option | why not, or why |
 |---|---|
 | a certificate separating 1387 and 539311 | needs radius 67–91 by the two models [X]: 10⁶–10⁷ balls and 10⁶–10⁷ core-hours. Out of reach, and Theorem C(iv) says no geometry-only method does better than R⁻² |
-| **the radius-24 certificate of 539311** | **chosen.** It is the cheapest certificate that changes the certified frontier, its outcome was not known when it was frozen, and it can fail (any ball below μ) |
+| **the radius-24 certificate of 539311** | **chosen, and passed.** It is the cheapest certificate that changes the certified frontier, its outcome was not known when it was frozen, and it can fail (any ball below μ) |
 | a radius-28 certificate of 539311, to exclude 539291 as well | the same idea one step further (μ above Y₇(539291) = 9.2483895); about 70 000 balls and 60 h on 4 cores. The natural follow-up if radius 24 passes |
 | Y₈ (16.8 million tiles) | it would sharpen the extrapolation from above, but it is 8× the memory of Y₇ (over the 13.7 GB available) and could not change any certified statement |
 | a new lower-bound method that beats R⁻² | the only route to a theorem about the co-leaders, below. It has no concrete construction yet, so no falsifiable prediction can be frozen today |
 
 ## What each outcome means
 
-- **The certificate passes.** E_\*(539311) ≥ 9.20835 [C], 1389 is excluded, and 539311 also becomes the rule with the highest certified lower bound. The question of the maximiser is then 1387 against 539311 (and 539291, until radius 28).
+- **The certificate passes (this happened).** E_\*(539311) ≥ 9.2083494 [C], 1389 is excluded, and 539311 also becomes the rule with the highest certified lower bound. The question of the maximiser is then 1387 against 539311 (and 539291, until radius 28).
 - **It fails.** Some legal radius-24 ball of 539311 lies below μ. The frontier stays at four. The failing balls are recorded, and they show where the probe and the lower model were too optimistic.
 
 ## What none of this can do

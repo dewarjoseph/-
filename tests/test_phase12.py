@@ -75,7 +75,12 @@ def test_R20_certificate_record():
 
 def test_frontier_table():
     d = J('phase12_frontier.json'); st = {r['rule']: r['status'] for r in d['rows']}
-    assert st['1387'] == 'leader' and {st[x] for x in ('539311', '1389', '539291')} == {'contender'}
+    r24 = [r for r in JL('phase12_independent.jsonl') if r.get('tag') == 'prereg_539311_R24']
+    if r24 and r24[-1]['all_balls_certified']:      # the radius-24 certificate of 539311 passed: 1389 excluded (report 14.3)
+        assert st['539311'] == 'leader' and {st[x] for x in ('1387', '539291')} == {'contender'} and st['1389'] == 'proven_inferior'
+        assert d['frontier'] == ['1387', '539311', '539291']
+    else:
+        assert st['1387'] == 'leader' and {st[x] for x in ('539311', '1389', '539291')} == {'contender'}
     assert {st[x] for x in ('1391', '539288', 'FR30 (1386)')} == {'proven_inferior'}
     L = Fraction(d['L_leader'])
     for r in d['rows']:
@@ -382,6 +387,25 @@ def test_r24_partial_record():
             else: low = o[0] if low is None else min(low, o[0])
     assert (n, fails) == (d['pass2_balls_processed'], d['pass2_balls_failed']) == (31287, 0)
     assert low == d['lowest_certified_ball_value'] and low > d['U_1389_Y7']
+
+def test_r24_final_checkpoint():
+    """the complete pass-2 results of the radius-24 run extend the interim checkpoint byte for byte and reproduce the record:
+    every one of the 39 117 balls certified, and the lowest certified value is the stored Lambda_R"""
+    d = os.path.join(RES, 'ckpt_prereg_539311_R24'); part = open(os.path.join(d, 'pass2.jsonl'), 'rb').read()
+    full = open(os.path.join(d, 'pass2_final.jsonl'), 'rb').read(); assert full.startswith(part)
+    seen = set(); n = fails = 0; low = None
+    for line in full.decode().splitlines():
+        try: r = json.loads(line)
+        except json.JSONDecodeError: continue
+        if (r['ti'], r['t0']) in seen: continue
+        seen.add((r['ti'], r['t0']))
+        for o in r['out']:
+            n += 1
+            if o[0] is None: fails += 1
+            else: low = o[0] if low is None else min(low, o[0])
+    rec = [r for r in JL('phase12_independent.jsonl') if r.get('tag') == 'prereg_539311_R24'][-1]
+    assert (n, fails) == (rec['distinct_balls'], 0) == (39117, 0) and rec['all_balls_certified']
+    assert low == rec['Lambda_R_certified'] and low > J('phase12_r24_partial.json')['U_1389_Y7']
 
 def test_probes_recorded():
     for n in ('1389', '539291'):

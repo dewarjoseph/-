@@ -8,7 +8,7 @@
    "fix": "phase12_independent now compares in rational arithmetic; Phase XI code left unchanged (frozen artifact)"
   }
  ],
- "commit": "44e255c",
+ "commit": "2b569ce",
  "report": "deliverables/PHASE12_REPORT.md",
  "claims": [
   {
@@ -136,11 +136,12 @@
   },
   {
    "id": "XII.F4",
-   "claim": "the maximiser over all 6^8 frame rules is one of 1387, 539311, 1389, 539291",
+   "claim": "the maximiser over all 6^8 frame rules is one of 1387, 539311, 539291 (1389 excluded by XII.r24)",
    "status": "[C]",
    "assumptions": [
     "the funnel X3-X7",
-    "the R = 20 certificate"
+    "the R = 20 certificate",
+    "the R = 24 certificate (XII.r24)"
    ],
    "evidence": "phase12_frontier.json",
    "test": "test_frontier_table"
@@ -297,7 +298,7 @@
   {
    "id": "XII.r24",
    "claim": "preregistered radius-24 certificate: E_*(539311) >= mu - (Higham term) > Y7(1389) = 9.2083453, mu = 9655658/2^20, so 1389 is not the maximiser",
-   "status": "incomplete: 31287 of 39117 balls passed, 0 failed; not a certificate",
+   "status": "[C] passed",
    "assumptions": [
     "Higham Thm 10.3, u = 2^-52",
     "completeness of the Phi-closure"
