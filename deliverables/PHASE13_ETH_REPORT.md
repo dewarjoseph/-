@@ -41,7 +41,7 @@
 - "Corollary 1.3": the circuit bound is Corollary 1.4.
 - "Appendix A": the tensor contraction is Appendix D.
 - The measurement count O(n log log n/√log n): the paper's is 2τn = Θ(n(log log n)²/(log n)^{3/2}).
-- **Its descriptions of the user's local repositories cannot be checked here.** `p_vs_np_repo` is not on GitHub, and the GitHub copy of `QIS` (last pushed 21 August 2026) contains none of the files cited.
+- **Its descriptions of the user's local repositories are partly checkable.** Pillar 10 and its 14 533-line, zero-`sorry` Lean file are in this repository, as described. `p_vs_np_repo` is not on GitHub, and the GitHub copy of `QIS` (last pushed 21 August 2026) contains none of the other files cited.
 
 **5. Relation to Chair44 and to the user's p_vs_np programme** (§6).
 - The release bounds no spectral floor and changes no statement of Phases X–XII.
@@ -198,7 +198,8 @@ So the recorded check removes one row that breaks the condition for a real claus
 | "Corollary 1.3: C_L(n) > c n √log n, L ∈ E^NP" | **statement correct, number wrong** | Corollary 1.4 (the counter is shared within §1) |
 | Beigel–Tarui polynomial; 𝒜_ℓ = ℚ[V]/(V^ℓ) in Section 5 | **correct** | lines 1592, 2902, 2945 |
 | a Python prototype with "8 test suites pass" | **not checked** (local, not available) | not used here |
-| the user's `p_vs_np_repo` phases 1–3, Pillar 10 (76 sections, 14 533 zero-sorry Lean lines), `QIS` `CLAIMS_LEDGER.md`, `NEE_CLOSED_LOOP.md`, `SLRCompare.lean`, `proofs/PvsNPCliffordCertificates.lean` | **not checked** | `p_vs_np_repo` is not on GitHub; the GitHub `QIS` (head 952985c, 21 Aug 2026) has none of these files. They may exist in unpushed local work |
+| Pillar 10 manuscript and `PvsNPCliffordCertificates.lean`, 14 533 zero-sorry lines | **correct** (found later in *this* repository) | `deliverables/pillar10_p_vs_np_clifford_complexity.tex`; `certificates/PvsNPCliffordCertificates.lean`: 14 533 lines, 440 `#print axioms`, 508 theorems, no `sorry` (the abstract says 14 527 lines). Not compiled here |
+| the user's `p_vs_np_repo` phases 1–3; `QIS` `CLAIMS_LEDGER.md`, `NEE_CLOSED_LOOP.md`, `SLRCompare.lean` | **not checked** | `p_vs_np_repo` is not on GitHub; the GitHub `QIS` (head 952985c, 21 Aug 2026) has none of these files |
 
 ---
 

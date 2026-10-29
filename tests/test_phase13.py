@@ -67,3 +67,17 @@ def test_free_search_record():
     d = J('phase13_eth_costs.json')['free_search']['1']
     assert d['rate_with_exact_tail'] < 1 and d['log2_n_min'] > 15000
     t = K.exact_tail(d['Q'], d['r'], d['A0'], d['R']); assert abs(float(t) - d['tail_exact_float']) < 1e-20
+
+def test_label_extended_decomposition_record():
+    """the label-extended graph of each computed Chair44 game is trivial + three Z2 shadows + spinor (twice), and its
+    abelian F_2^2 quotient is not a coboundary"""
+    d = J('phase13_ug_label_extended.json')
+    assert len(d) == 6 and all(r['max_abs_difference_ext_vs_blocks'] < 1e-10 for r in d)
+    assert all(not r['quotient_F2^2_game_coboundary'] for r in d)
+    y3 = {r['rule']: r['floors']['spinor (quaternion form)'] for r in d if r['L'] == 3}
+    assert abs(y3['1387'] - 9.955919) < 1e-6 and abs(y3['x539311'] - 9.957331) < 1e-6
+
+def test_label_extended_decomposition_live():
+    import phase13_ug_label_extended as X
+    r = X.blocks('1387', 2)
+    assert r['max_abs_difference_ext_vs_blocks'] < 1e-10 and not r['quotient_F2^2_game_coboundary']
