@@ -823,7 +823,7 @@ The literature search is Phase XI's (`PHASE11_REPORT.md` §8). Phase XII made no
 
 **5. Next decisive experiment.**
 - **Done in this phase:** the frozen level-7 prediction (Y₇ of the four frontier rules). **It held**: the order 539311 > 1387 > 539291 > 1389 persists, and Y₇(539311) − Y₇(1387) = 0.020121 ∈ [0.010, 0.030] (§14.1).
-- **Running:** the preregistered radius-24 certificate of 539311 at μ = 9.2083530 > Y₇(1389). If every ball passes, 1389 is proven inferior and the frontier shrinks to three (§14.3).
+- **Started, 80 % done:** the preregistered radius-24 certificate of 539311 at μ = 9.2083530 > Y₇(1389). 31 287 of 39 117 balls passed and none failed when this phase closed. If the rest pass, 1389 is proven inferior and the frontier shrinks to three (§14.3; the checkpoint is committed).
 - **Next after it:** a lower-bound method with localisation error o(R⁻²) for this one hull. A certificate cannot separate the co-leaders at any affordable radius, so only such a method can turn the evidence for 539311 into a theorem (`deliverables/PHASE12_DECISION_MEMO.md`).
 
 ---
@@ -935,7 +935,10 @@ All values are model estimates [X], printed to four places, and none is a bound.
 **Status of the radius-24 certificate.**
 - Go/no-go: the 60-ball probe gives Λ₂₄(539311) ≤ 9.2177320. That is above μ = 9655658/2²⁰ = 9.2083530 by 0.0094, so the certificate was run (`phase12_probe_539311_R24.json`). The frozen lower model had predicted 9.2170.
 - μ is fixed by the protocol: the smallest multiple of 2⁻²⁰ that is ≥ U(1389) + 8·2⁻²⁰, with U(1389) = Y₇(1389) = 9.2083453.
-- **Running** at the time of writing (started 27 October 04:31, 4 workers, checkpointed). Its record will be `phase12_independent.jsonl`, tag `prereg_539311_R24`; `test_r24_certificate` checks μ against the protocol and, if it passed, the certified value against Y₇(1389).
+- **Status: incomplete, not a certificate.** The run was interrupted three times when the container was reclaimed (about 09:27 and 10:40 on 27 October, and again before 01:26 on 29 October); each time it resumed from its checkpoint. When this phase closed, it had:
+  - finished pass 1: 39 117 distinct legal balls from 2 949 120 centres, 0 rejected;
+  - finished 31 287 of the 39 117 balls of pass 2 (80.0 %), with **0 failures**. The lowest certified ball value is 9.2083494, above Y₇(1389) = 9.2083453.
+- The remaining 7 830 balls are unchecked, so **1389 is not yet excluded**, and the frontier stays at four. Partial record: `phase12_r24_partial.json`. The checkpoint is committed in `audit/results/ckpt_prereg_539311_R24/`; resuming it takes about 3 h on 4 cores.
 
 ---
 
@@ -1032,7 +1035,7 @@ All commands run from the repository root (Python 3.13, numpy 2.5, scipy 1.18, s
 | level 7, distance from the true bottom [E] | `PHASE12_Y7_CKPT=<dir> python -u -I audit/phase12_y7.py ritz 7 539311 184323 539291 184338` | `phase12_y7_ritz.jsonl` | 1 min per rule |
 | radius-R probes | `python -u -I audit/phase12_probes.py 1389:1389:16,18,20,22 x539291:539291:16,18,20,22 x539311:539311:16,18,24 1387:1387:24` | `phase12_probe_<rule>_R<R>.json` | 2–10 min per radius |
 | prediction score, two-sided extrapolation | `python -u -I audit/phase12_extrapolation.py` | `phase12_extrapolation.json` | 1 s |
-| radius-24 certificate of 539311 (preregistered) | `python -u -I audit/phase12_independent.py cert x539311 24 5 4 9655658/1048576 prereg_539311_R24 --ckpt=<dir>` | `phase12_independent.jsonl` | about 13 h on 4 cores, estimated (running) |
+| radius-24 certificate of 539311 (preregistered) | `python -u -I audit/phase12_independent.py cert x539311 24 5 4 9655658/1048576 prereg_539311_R24 --ckpt=<dir>` | `phase12_independent.jsonl` | about 13 h on 4 cores; 80 % done, resumable from the committed checkpoint |
 | effective kinetic constant (§14.3) [X] | `python -u -I audit/phase12_chair_dirichlet.py` | `phase12_chair_dirichlet.json` | 1 min |
 | unique games (§15) | `python -u -I audit/phase12_unique_games.py 3 1387 x539311 1389 x539291 1391 x539288 4752 1144 937`; the same with `4` | `phase12_unique_games.jsonl` | 30 s (L = 3); 3 min (L = 4), for the nine rules |
 | frontier table | `python -u -I audit/phase12_frontier_table.py` | `phase12_frontier.json`, `.csv` | 1 s |

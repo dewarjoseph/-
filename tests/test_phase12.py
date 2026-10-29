@@ -368,6 +368,21 @@ def test_r24_certificate():
     r = recs[-1]; assert (r['rule'], r['R'], r['rejected_incomplete']) == ('x539311', 24, 0) and Fraction(r['mu']) == mu
     if r['all_balls_certified']: assert Fraction(r['Lambda_R_certified']) > U and r['balls_failing'] == 0
 
+def test_r24_partial_record():
+    """the interrupted radius-24 run: the committed checkpoint reproduces the partial record (no ball failed)"""
+    d = J('phase12_r24_partial.json'); seen = set(); n = fails = 0; low = None
+    for line in open(os.path.join(RES, 'ckpt_prereg_539311_R24', 'pass2.jsonl')):
+        try: r = json.loads(line)
+        except json.JSONDecodeError: continue
+        if (r['ti'], r['t0']) in seen: continue
+        seen.add((r['ti'], r['t0']))
+        for o in r['out']:
+            n += 1
+            if o[0] is None: fails += 1
+            else: low = o[0] if low is None else min(low, o[0])
+    assert (n, fails) == (d['pass2_balls_processed'], d['pass2_balls_failed']) == (31287, 0)
+    assert low == d['lowest_certified_ball_value'] and low > d['U_1389_Y7']
+
 def test_probes_recorded():
     for n in ('1389', '539291'):
         for R in (16, 18, 20, 22):

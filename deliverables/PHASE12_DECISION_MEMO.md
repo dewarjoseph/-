@@ -29,10 +29,10 @@ A second protocol, frozen before the level-7 values and the new probes (`phase12
 
 ## The decision now
 
-**Running: the radius-24 certificate of 539311 at μ = 9655658/2²⁰ = 9.2083530** (`phase12_preregistration_r24.json`, frozen before Y₇(1389) and before any radius-24 data of 539311).
+**Started, 80 % done: the radius-24 certificate of 539311 at μ = 9655658/2²⁰ = 9.2083530** (`phase12_preregistration_r24.json`, frozen before Y₇(1389) and before any radius-24 data of 539311).
 - If every legal radius-24 ball passes, E_\*(539311) > Y₇(1389) ≥ E_\*(1389): **1389 is proven inferior, and the frontier shrinks to three.**
 - Go/no-go passed: the 60-ball probe gives 9.2177320 > μ.
-- Cost: about 43 000 balls, about 13 h on 4 cores. The run is checkpointed.
+- Cost: 39 117 balls, about 13 h on 4 cores. When this phase closed, 31 287 had passed and none had failed. The checkpoint is committed (`audit/results/ckpt_prereg_539311_R24/`); finishing it takes about 3 h. Until then, 1389 is not excluded.
 
 ## Why this, and not another
 

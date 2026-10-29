@@ -36,7 +36,9 @@ def claims():
     y7_status = ('[C] values; prediction ' + ('holds' if pr.get('prediction_holds') else 'falsified')) if 'P1_order' in pr else 'running / not stored'
     verdicts = '; '.join(x['verdict'] for x in ext.get('decision', {}).get('pairs', []) if x['verdict'].startswith('[X]')) or 'none'
     r24 = [r for r in JL('phase12_independent.jsonl') if r.get('tag') == 'prereg_539311_R24']
-    r24_status = ('[C] passed' if r24 and r24[-1].get('all_balls_certified') else 'failed (see record)' if r24 else 'running / not stored')
+    part = J('phase12_r24_partial.json', {})
+    r24_status = ('[C] passed' if r24 and r24[-1].get('all_balls_certified') else 'failed (see record)' if r24 else
+                  f"incomplete: {part['pass2_balls_processed']} of 39117 balls passed, {part['pass2_balls_failed']} failed; not a certificate" if part else 'running / not stored')
     G = ['(G) bounded degree', '(U) unitary connection', '(H) H = D^+D']
     rows = [
         ('XII.A', 'support: E_* = inf over finite legal patches of lambda^D = lim D_R; antitone in the language; frequency-free', '[P]', G, 'report 4.2', 'phase11:test_ladder_finite_radius_obstruction'),
