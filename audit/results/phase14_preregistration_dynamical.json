@@ -1,0 +1,31 @@
+{
+ "written": "2026-10-29, before any matter-floor value in a dynamical gauge ensemble had been computed. Known at this time: the Phase V-C Wilson theory (engine G) on the FR30 level-4 patch (inter-tile <P> = 0.103 -> 0.566 for beta = 0.4 -> 1.6, crossover between beta = 1.6 and 2.0); the frozen-background floors of the pinned supertile T3: 1387 Y3 = 9.95592, 539311 Y3 = 9.95733, FR30 Y3 = 9.37847, 937 Y3 = 8.49106; the trivial connection on T3: 1.66951 (Phase XIII label-extended trivial block).",
+ "question": "When the Q8 gauge field on the chair hull is dynamical (Wilson action), does the Chair44 matter floor survive as an order parameter, and are the frame-rule backgrounds typical or atypical configurations of the ensemble?",
+ "model": {
+  "complex": "phase5c_q8_gauge.fr30_complex(3): dual cubical complex of the pinned level-3 chair supertile (512 tiles, 3584 unit cubes); dual links = unit faces between cubes; links inside a tile frozen to 1 (rigid tiles); plaquettes = 2x2 squares of cubes",
+  "action": "S[U] = beta * sum_p (1 - (1/2) Re Tr U_p), U_l in Q8, all plaquettes of the complex (intra-tile links contribute 1)",
+  "sampler": "phase5c_q8_gauge.General (exact heat bath over the 8 elements, greedy colouring), unchanged",
+  "matter": "H_U = 24 - sum over dynamical links l = (x, mu) of [L(U_l) at (own x, own x+mu) + L(U_l)^T at (own x+mu, own x)], L(q) the 4x4 real left multiplication by the quaternion q (the realified spinor form of Phases X-XIII, eigenvalues doubled); pinned: diagonal 24 on every tile. lambda_min(H_U) by dense eigvalsh",
+  "gauge covariance": "tile-wise gauge transformations g_a act as U_l -> g_(own x) U_l g_(own x+mu)^-1 and preserve both the action and spec(H_U)"
+ },
+ "run": {
+  "betas": [0.0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 3.0, 3.5, 4.0, 6.0],
+  "starts": "for each beta independently: hot (uniform random links) and cold (all 1); seeds 0 (hot) and 1 (cold)",
+  "thermalisation": "300 sweeps",
+  "measurements": "40 configurations per beta and start, 10 sweeps apart; observables per configuration: inter-tile <P>, -1 plaquette density, lambda_min(H_U)",
+  "errors": "standard error over the 40 configurations (they are 10 sweeps apart); reported per start; hot and cold reported separately and averaged only where they agree within 3 standard errors"
+ },
+ "checks_before_predictions_are_scored": [
+  "C1: at beta = infinity (cold start, no sweeps) lambda_min(H_1) equals the trivial-connection floor of T3, 1.66951 (to 1e-6): the complex and the matter operator match the Phase XII-XIII geometry",
+  "C2: gauge covariance: lambda_min is unchanged (to 1e-9) under 3 random tile-wise gauge transformations of one sampled configuration",
+  "C3: at beta = 0 the sampled links are uniform (each of the 8 elements within 5 percent of 1/8 over all dynamical links of the 40 configurations)"
+ ],
+ "predictions": {
+  "H1 (monotone order parameter)": "<lambda_min>(beta) is non-increasing in beta: no increase between consecutive betas larger than 3 standard errors (hot-start series)",
+  "H2 (the frontier backgrounds are atypical)": "at every beta, Y3(1387) = 9.95592 exceeds the largest lambda_min among all 80 sampled configurations (hot and cold)",
+  "H3 (the floor tracks deconfinement)": "the beta at which <lambda_min> falls fastest (largest drop between consecutive grid points, hot start) is within one grid step of the beta at which inter-tile <P> rises fastest"
+ },
+ "failure": "each of H1, H2, H3 is scored separately as holds / fails; a failure is reported as [F] with the data; nothing is refitted",
+ "labels": "[E] floating-point evidence from a simulated (Monte Carlo) ensemble on one finite patch; no continuum, infinite-volume or physical claim follows from it",
+ "meaning": "a first dynamical test of whether the Chair44 frustration floor is a property of a typical gauge field or of the specific frame-rule backgrounds"
+}

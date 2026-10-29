@@ -1,0 +1,13 @@
+{
+ "tag": "prereg_539311_R24",
+ "status": "incomplete: interrupted by container restarts; not a certificate",
+ "rule": "x539311", "R": 24, "m": 5, "mu": "9655658/1048576",
+ "pass1": {"distinct_balls": 39117, "centres": 2949120, "rejected_incomplete": 0},
+ "pass2_balls_processed": 31287, "pass2_balls_failed": 0, "pass2_fraction": 0.7998,
+ "lowest_certified_ball_value": 9.20834942839425,
+ "U_1389_Y7": 9.208345294775214,
+ "bandwidth_max_so_far": 2268,
+ "checkpoint": "audit/results/ckpt_prereg_539311_R24 (pass1.json.gz: gunzip before resuming; pass2.jsonl: 251 chunks)",
+ "resume": "gunzip the pass1 file into a directory with pass2.jsonl, then: python -u -I audit/phase12_independent.py cert x539311 24 5 4 9655658/1048576 prereg_539311_R24 --ckpt=<that directory> (about 3 h on 4 cores for the remaining 7830 balls)",
+ "history": "started 2026-10-27 04:31 UTC; container restarts at about 09:27, 10:40 (no progress) and before 2026-10-29 01:26; resumed from the checkpoint each time"
+}

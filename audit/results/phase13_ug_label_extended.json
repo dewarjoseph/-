@@ -1,0 +1,110 @@
+[
+ {
+  "rule": "1387",
+  "L": 2,
+  "tiles": 64,
+  "panels": 576,
+  "label_extended_dim": 512,
+  "max_abs_difference_ext_vs_blocks": 9.059419880941277e-14,
+  "floors": {
+   "trivial": 4.751193247576431,
+   "chi_i": 11.843513039069833,
+   "chi_j": 12.145117768380683,
+   "chi_k": 11.476646783346283,
+   "spinor (quaternion form)": 11.58716055295647
+  },
+  "floor_label_extended": 4.751193247576441,
+  "quotient_F2^2_game_coboundary": false,
+  "quotient_tree_section_violated_panels (an upper bound on the minimum)": 289
+ },
+ {
+  "rule": "1387",
+  "L": 3,
+  "tiles": 512,
+  "panels": 5376,
+  "label_extended_dim": 4096,
+  "max_abs_difference_ext_vs_blocks": 3.765876499528531e-13,
+  "floors": {
+   "trivial": 1.6695122583829551,
+   "chi_i": 8.872030384793415,
+   "chi_j": 9.151154952178606,
+   "chi_k": 6.767717963066914,
+   "spinor (quaternion form)": 9.955918832424622
+  },
+  "floor_label_extended": 1.669512258382905,
+  "quotient_F2^2_game_coboundary": false,
+  "quotient_tree_section_violated_panels (an upper bound on the minimum)": 2881
+ },
+ {
+  "rule": "x539311",
+  "L": 2,
+  "tiles": 64,
+  "panels": 576,
+  "label_extended_dim": 512,
+  "max_abs_difference_ext_vs_blocks": 1.1368683772161603e-13,
+  "floors": {
+   "trivial": 4.751193247576431,
+   "chi_i": 11.436972554224157,
+   "chi_j": 11.809293288351464,
+   "chi_k": 12.020772037637169,
+   "spinor (quaternion form)": 11.634254876142252
+  },
+  "floor_label_extended": 4.751193247576464,
+  "quotient_F2^2_game_coboundary": false,
+  "quotient_tree_section_violated_panels (an upper bound on the minimum)": 297
+ },
+ {
+  "rule": "x539311",
+  "L": 3,
+  "tiles": 512,
+  "panels": 5376,
+  "label_extended_dim": 4096,
+  "max_abs_difference_ext_vs_blocks": 3.481659405224491e-13,
+  "floors": {
+   "trivial": 1.6695122583829076,
+   "chi_i": 6.756957395851583,
+   "chi_j": 8.876181980873891,
+   "chi_k": 9.046072725722926,
+   "spinor (quaternion form)": 9.957330637262093
+  },
+  "floor_label_extended": 1.6695122583828312,
+  "quotient_F2^2_game_coboundary": false,
+  "quotient_tree_section_violated_panels (an upper bound on the minimum)": 2898
+ },
+ {
+  "rule": "4752",
+  "L": 2,
+  "tiles": 64,
+  "panels": 576,
+  "label_extended_dim": 512,
+  "max_abs_difference_ext_vs_blocks": 1.0658141036401503e-13,
+  "floors": {
+   "trivial": 4.751193247576442,
+   "chi_i": 11.284189841035383,
+   "chi_j": 11.587279149206905,
+   "chi_k": 11.587279149206891,
+   "spinor (quaternion form)": 10.77695051188552
+  },
+  "floor_label_extended": 4.751193247576391,
+  "quotient_F2^2_game_coboundary": false,
+  "quotient_tree_section_violated_panels (an upper bound on the minimum)": 285
+ },
+ {
+  "rule": "4752",
+  "L": 3,
+  "tiles": 512,
+  "panels": 5376,
+  "label_extended_dim": 4096,
+  "max_abs_difference_ext_vs_blocks": 2.984279490192421e-13,
+  "floors": {
+   "trivial": 1.6695122583829245,
+   "chi_i": 6.77130174285152,
+   "chi_j": 9.254014464269021,
+   "chi_k": 9.254014464269016,
+   "spinor (quaternion form)": 9.378470210300506
+  },
+  "floor_label_extended": 1.6695122583829198,
+  "quotient_F2^2_game_coboundary": false,
+  "quotient_tree_section_violated_panels (an upper bound on the minimum)": 2842
+ }
+]

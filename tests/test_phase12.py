@@ -1,0 +1,435 @@
+"""Phase XII regression, reproduction and adversarial tests.
+
+Three kinds of test.
+- Recomputations with the independent implementation (audit/phase12_independent.py, which imports no phase 5-11 code): its
+  decoder, legal types, exact supertile bounds and small certificates agree with the certifying code.
+- Artifact checks: every number of deliverables/PHASE12_REPORT.md is read back from audit/results and re-derived where possible
+  (exact rationals re-compared, flags recomputed).
+- Adversarial tests designed to make a claim fail: a certificate above the floor must fail and report its failing balls; a corrupted
+  link must break the gauge identity; a non-dyadic shift must be refused; the falsified defect law must stay recorded as falsified.
+A passing test shows consistency, not truth; the proofs are in the report.
+Run: python -m pytest -q tests/test_phase12.py"""
+import os, sys, json, math, subprocess, itertools
+from fractions import Fraction
+import numpy as np
+import pytest
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); AUD = os.path.join(ROOT, 'audit'); RES = os.path.join(AUD, 'results')
+sys.path.insert(0, AUD)
+os.environ.setdefault('OMP_NUM_THREADS', '1')
+import phase12_independent as I
+def J(n): return json.load(open(os.path.join(RES, n)))
+def JL(n): return [json.loads(l) for l in open(os.path.join(RES, n))]
+ORBIT = {184323, 184338, 184342, 539311, 539291, 539288}
+
+# ------------------------------------------------------------------ the independent implementation
+def test_independent_decoder():
+    import phase11_chair as C
+    assert all(tuple(I.decoration(i)) == C.proper_decoration(i) for i in range(6561))
+    for j in list(range(0, 6 ** 8, 4999)) + sorted(ORBIT):
+        assert tuple(I.decoration('x%d' % j)) == C.extended_decoration(j)
+
+def test_independent_links_match_phase11():
+    import phase11_chair as C
+    f, T = I.supertile(I.decoration('4753'), 2); G, T2 = C.supertile(C.rule('4753'), 2)
+    assert np.array_equal(T, T2) and np.array_equal(I.FARR[f], G)
+    a, b, k = C.Patch(G, T2).panels(); U = C.link_matrices(G, a, b, k)
+    sig = [np.array([[0, 1], [1, 0]]), np.array([[0, -1j], [1j, 0]]), np.array([[1, 0], [0, -1]])]
+    for (aa, bb, kk), u in zip(zip(a, b, k), U):                     # quaternion q_k = -i sigma_k
+        q = I.Q8[I.LINK[f[aa], f[bb], kk]]
+        assert np.allclose(u, q[0] * np.eye(2) + sum(q[1 + m] * (-1j) * sig[m] for m in range(3)))
+
+@pytest.mark.parametrize('spec,n,n5', [('4752', 72, 72), ('4753', 90, 90), ('1389', 102, 94), ('1391', 104, 95), ('x539288', 79, 77),
+                                        ('x539311', 90, 90), ('x539291', 97, 95)])
+def test_independent_legal_types(spec, n, n5):
+    """all legal 1-star types (Phi-closure) and those visible in T5, by the independent implementation; the same numbers as Phase XI's"""
+    ty, n0 = I.legal_types(I.decoration(spec)); assert (len(ty), n0) == (n, n5)
+
+def test_independent_exact_Y3_matches():
+    cen = {r['class']: r for r in JL('phase10_census.jsonl')}[1387]
+    for L in (3, 4):
+        lam, q = I.Y('4753', L); assert abs(lam - cen[f'Y{L}']) < 1e-11 and Fraction(lam) - Fraction(1, 10 ** 9) <= q
+        assert abs(float(q) - cen[f'Y{L}']) < 1e-9
+
+def test_independent_small_certificate_and_adversarial(tmp_path, monkeypatch):
+    monkeypatch.setattr(I, 'OUT', str(tmp_path / 'ind.jsonl'))
+    ok = I.certify('4752', 6, 3, 1, '3833131/1048576', 'test_ok')
+    assert ok['all_balls_certified'] and ok['distinct_balls'] == 325 and ok['Lambda_R_certified'] > 3.6555585
+    bad = I.certify('4752', 6, 3, 1, '3.6556', 'test_above_floor')       # Lambda_6 = 3.65555995: must fail, with the balls named
+    assert not bad['all_balls_certified'] and bad['balls_failing'] >= 1 and all(3.6555 < b['lambda_float'] < 3.6556 for b in bad['failing_balls_lowest'])
+
+def test_independent_shift_must_be_exact():
+    import scipy.sparse as sps
+    H = sps.csr_matrix(np.diag([24.0, 24.0]) - np.array([[0, 1.0], [1.0, 0]]))
+    with pytest.raises(AssertionError): I.higham(H, 0.1, 0.0)            # 24 - 0.1 is not exact in binary
+
+def test_independent_R20_reproduction():
+    rows = [r for r in JL('phase12_independent.jsonl') if r.get('tag') == 'independent_1387_R20']; assert rows
+    r = rows[-1]; assert r['all_balls_certified'] and r['rejected_incomplete'] == 0 and r['distinct_balls'] == 24571
+    assert r['centres'] == 2949120 and r['Lambda_R_certified'] > 9.11049 and 'phase12_independent' in r['implementation']
+
+# ------------------------------------------------------------------ Part I: the radius-20 certificate and the frontier
+def test_R20_certificate_record():
+    r = [x for x in JL('phase11_cert.jsonl') if x.get('tag') == 'target_1387_R20'][-1]
+    assert r['all_balls_certified'] and r['distinct_balls'] == 24571 and r['mu'] == '9553051/1048576'
+    assert Fraction(math.floor(Fraction('9.1105') * 2 ** 20), 2 ** 20) == Fraction(9553051, 1048576)
+
+def test_frontier_table():
+    d = J('phase12_frontier.json'); st = {r['rule']: r['status'] for r in d['rows']}
+    r24 = [r for r in JL('phase12_independent.jsonl') if r.get('tag') == 'prereg_539311_R24']
+    if r24 and r24[-1]['all_balls_certified']:      # the radius-24 certificate of 539311 passed: 1389 excluded (report 14.3)
+        assert st['539311'] == 'leader' and {st[x] for x in ('1387', '539291')} == {'contender'} and st['1389'] == 'proven_inferior'
+        assert d['frontier'] == ['1387', '539311', '539291']
+    else:
+        assert st['1387'] == 'leader' and {st[x] for x in ('539311', '1389', '539291')} == {'contender'}
+    assert {st[x] for x in ('1391', '539288', 'FR30 (1386)')} == {'proven_inferior'}
+    L = Fraction(d['L_leader'])
+    for r in d['rows']:
+        if r['status'] == 'proven_inferior': assert Fraction(r['U_exact']) < L
+        if r['status'] == 'contender': assert Fraction(r['U_exact']) >= L
+
+# ------------------------------------------------------------------ Part II: the Orbit Lemma
+def test_orbit_lemma_records():
+    d = J('phase12_orbit.json')['lemma']
+    assert d['a_pose_identity'] and d['a_rhoQ_preserves_cubes'] and d['b_link_identity_max_error'] < 1e-14 and d['b_exact_identity_holds']
+    assert d['c_representatives_checked'] == 280332 and d['c_level1_spectrum_constant_on_right_orbits_max_dev'] < 1e-12
+    assert d['d_level2_pairwise_disjoint'] and d['e_separated'] and d['e_539288_is_1387_times_Q'] == [[0, 2, 1]]
+
+def test_orbit_lemma_stabiliser_clause():
+    """1386 is fixed by (x y); 1386.(x y) = 539315 (FR30's mirror); the lemma's clause (d) gives equal floors; checked live at T_3"""
+    import phase12_orbit as O
+    d = np.array([O.PIDX[p] for p in I.decoration('1386')]); q = I.PERM3.index((1, 0, 2))
+    assert int(O.conj_index(d[None], q)[0]) == int(O.index(d)) and int(O.rep(O.right(d, q)[None])[0]) == 539315
+    a, _ = I.Y('1386', 3); b, _ = I.Y('x539315', 3); assert abs(a - b) < 1e-10
+    law = J('phase12_orbit.json')['defect_law']; assert law['H0_pass'] and law['pairs_by_delta']['0'] == 912
+
+def test_orbit_level1_equal_level2_split_live():
+    import phase12_orbit as O
+    d0 = np.array([O.PIDX[p] for p in I.decoration('4753')]); v1, v2 = [], []
+    for q in range(6):
+        dq = [I.PERM3[x] for x in O.right(d0, q)]
+        for L, acc in ((1, v1), (2, v2)):
+            f, T = I.supertile(dq, L); acc.append(np.linalg.eigvalsh(I.operator(f, T).toarray())[:4])
+    assert max(np.abs(v - v1[0]).max() for v in v1) < 1e-12 and len({round(v[0], 6) for v in v2}) == 6
+
+def test_defect_law_falsified_as_recorded():
+    pre = J('phase12_preregistration_delta.json'); law = J('phase12_orbit.json')['defect_law']
+    assert '0.3' in pre['hypotheses']['H1_rank_law'] and law['H1_spearman_delta_vs_abs_dY3'] < 0.3 and not law['H1_pass'] and not law['H2_pass']
+    def first_commit(path):
+        out = subprocess.run(['git', 'log', '--diff-filter=A', '--format=%ct', '--', path], capture_output=True, text=True, cwd=ROOT).stdout.split()
+        return int(out[-1]) if out else None
+    t0 = first_commit('audit/results/phase12_preregistration_delta.json'); t1 = first_commit('audit/results/phase12_orbit.json')
+    assert t0 is not None and (t1 is None or t1 >= t0)
+
+def test_adversarial_corrupted_link_breaks_gauge_identity():
+    """flip the sign of one entry of the link table: the exact integer identity x u xbar = |x|^2 u' must then fail"""
+    x = (0, -1, 0, 1); Qf = I.fidx(I.pmat((2, 1, 0))); xb = (x[0], -x[1], -x[2], -x[3])
+    u = I.Q8[I.LINK[3, 17, 1]]; up = I.Q8[I.LINK[I.FMUL[3, Qf], I.FMUL[17, Qf], 1]]
+    assert I.qmul(I.qmul(x, u), xb) == tuple(2 * c for c in up)
+    bad = tuple(-c for c in up); assert I.qmul(I.qmul(x, u), xb) != tuple(2 * c for c in bad)
+
+def test_funnel_clustering_record():
+    f = J('phase12_orbit.json')['funnel']
+    assert f['representatives'] == 280332 and 0.5 < f['Y3_variance_explained_by_right_orbits'] < 0.7
+    assert f['Y3_variance_explained_random_partition_same_sizes'] < 0.2 and f['X4_survivors'] == 38
+
+# ------------------------------------------------------------------ Part III and VI
+def test_plaquette_counts_almost_injective_on_census():
+    import collections
+    cen = J('phase10_census.json')['classes']; g = collections.Counter((r['plaq_L3']['+1'], r['plaq_L3']['-1'], r['plaq_L3']['i'] + r['plaq_L3']['j'] + r['plaq_L3']['k']) for r in cen)
+    assert len(g) == 1096 and len(cen) == 1098
+
+def test_transport_bound_records_and_live():
+    d = J('phase12_transport.json')
+    for k in ('4753', '1389', '1391', 'x539311', 'x539291', 'x539288'): assert abs(d[k]['bound'] - 1.6992660162749642) < 1e-12
+    assert all(r['all_plaquettes_visible_in_1star'] for r in d.values())
+    assert abs(d['4752']['bound'] - 1.5687416572832378) < 1e-12
+    import phase12_transport as Tr
+    r = Tr.bound('4752'); assert abs(r['bound'] - d['4752']['bound']) < 1e-12 and r['W'] == 4
+
+def test_transport_theorem_on_random_graphs():
+    """Theorem 6.1 on random multigraphs with Q8 links: lambda_min(H) >= inf_v alpha(v)/W for the family of all 2-cycles"""
+    rng = np.random.default_rng(3)
+    for _ in range(30):
+        n = 6; edges = [(int(a), int(b)) for a, b in rng.integers(0, n, (14, 2)) if a != b]
+        U = [I.Q8[int(rng.integers(0, 8))] for _ in edges]
+        H = np.zeros((4 * n, 4 * n)); deg = np.zeros(n)
+        for (a, b), q in zip(edges, U):
+            L = I.Lmat(q); H[4 * a:4 * a + 4, 4 * b:4 * b + 4] -= L; H[4 * b:4 * b + 4, 4 * a:4 * a + 4] -= L.T; deg[a] += 1; deg[b] += 1
+        H += np.diag(np.repeat(deg, 4)); lam = np.linalg.eigvalsh(H)[0]
+        cyc = []
+        for i, j in itertools.combinations(range(len(edges)), 2):
+            (a, b), (c, d) = edges[i], edges[j]
+            if {a, b} != {c, d}: continue
+            u2 = U[j] if (c, d) == (a, b) else (U[j][0], -U[j][1], -U[j][2], -U[j][3])
+            W = I.qmul(U[i], (u2[0], -u2[1], -u2[2], -u2[3]))
+            th = 0.0 if W == (1, 0, 0, 0) else math.pi if W == (-1, 0, 0, 0) else math.pi / 2
+            cyc.append(((a, b), (i, j), 2 * (1 - math.cos(th / 2))))
+        if not cyc: continue
+        load = np.zeros(len(edges)); alpha = np.zeros(n)
+        for (a, b), (i, j), l in cyc: load[i] += 1; load[j] += 1; alpha[a] += l; alpha[b] += l
+        assert lam >= alpha.min() / load.max() - 1e-9
+
+# ------------------------------------------------------------------ Part IX
+def test_formal_checks():
+    d = J('phase12_formal.json'); assert all(d['ims_edge_identity'].values()) and d['orbit_child_rule']['holds'] and d['shadow_formula']['holds']
+    assert d['orbit_link_exact']['holds'] and 'not available' in d['lean']
+    import phase12_formal as Fm
+    assert Fm.orbit_child_rule()['violations'] == 0 and Fm.shadow_formula()['violations'] == 0
+
+# ------------------------------------------------------------------ Part VII: the cube family
+def test_cube_orbit_lemma_transfers():
+    s = J('phase12_cube.json')['orbit']['spreads']
+    assert s['pi/2:det+1:L1_spread'] < 1e-12 and s['pi/2:det-1:L1_spread'] < 1e-12            # all 48 Q at theta = pi/2
+    assert s['pi/5:det+1:L1_spread'] < 1e-12 and s['pi/5:det-1:L1_spread'] < 1e-12            # within each parity
+    rows = J('phase12_cube.json')['orbit']['rows']
+    p, m = [r['pi/5:L1']['spinor'] for r in rows if r['det'] == 1], [r['pi/5:L1']['spinor'] for r in rows if r['det'] == -1]
+    assert abs(p[0] - m[0]) > 1e-3                                                              # improper Q: theta -> -theta
+    assert s['pi/2:det+1:L2_spread'] > 0.1                                                      # broken from level 2 on
+
+def test_cube_flat_rule():
+    lv = J('phase12_cube.json')['flat_identity_rule']['levels']
+    for L, r in lv.items():
+        assert abs(r['spinor'] - 6 * (1 - math.cos(math.pi / (2 ** int(L) + 1)))) < 1e-9 and abs(r['spinor'] - r['adjoint']) < 1e-9
+
+def test_cube_representation_order_flips():
+    r0 = J('phase12_cube.json')['orbit']['rows'][0]
+    assert r0['pi/2:L3']['adjoint'] < r0['pi/2:L3']['spinor'] and r0['pi/5:L3']['adjoint'] > r0['pi/5:L3']['spinor']
+    assert abs(r0['pi/2:L3']['adjoint'] - min(r0['pi/2:L3']['chi%d' % k] for k in (1, 2, 3))) < 1e-9
+
+# ------------------------------------------------------------------ Part VIII: the preregistered prediction
+def test_prediction_preregistered_before_targets():
+    def first_commit(path):
+        out = subprocess.run(['git', 'log', '--diff-filter=A', '--format=%ct', '--', path], capture_output=True, text=True, cwd=ROOT).stdout.split()
+        return int(out[-1]) if out else None
+    t0 = first_commit('audit/results/phase12_preregistration.json'); t1 = first_commit('audit/results/phase12_y5_census.jsonl')
+    assert t0 is not None and (t1 is None or t1 > t0)
+    pre = J('phase12_preregistration.json'); assert len(pre['split']['train']) == len(pre['split']['test']) == 549
+    assert not set(pre['split']['train']) & set(pre['split']['test'])
+
+def test_prediction_results():
+    d = J('phase12_predict.json'); assert d['n_test'] == 549 and d['phase10_Y5_max_deviation'] < 1e-6
+    for fam, r in d['families'].items(): assert -1 <= r['spearman_test'] <= 1 and 0 <= r['interval_90_coverage_test'] <= 1
+
+# ------------------------------------------------------------------ Part V: the intervention
+def test_intervention_both_signs():
+    rows = JL('phase12_intervention.jsonl'); base = {(r['base'], r['R']): r for r in rows if r['change'] and r['change']['slot'] is None}
+    deltas = [r['Lambda_float'] - base[(r['base'], r['R'])]['Lambda_float'] for r in rows if (r['base'], r['R']) in base and r['change'] and r['change']['slot'] is not None]
+    assert any(x > 0 for x in deltas) and any(x < 0 for x in deltas)                            # no universal monotonicity
+
+def test_intervention_analysis():
+    """section 5: counts recomputed from the records; the language-inclusion hypothesis fails for every non-trivial neighbour"""
+    d = J('phase12_intervention_analysis.json'); rows = JL('phase12_intervention.jsonl')
+    lam = {(r['base'], r['j'], r['R']): r['Lambda_float'] for r in rows}
+    for base, jb, n, pos, neg in (('4752', 1140300, 22, 2, 20), ('4753', 1140303, 39, 0, 38)):
+        s = d[base]['summary']; assert s['neighbours'] == n and s['Delta6_positive'] == pos and s['Delta6_negative'] == neg
+        for x in d[base]['rows']:
+            assert abs(x['Delta']['6'] - (lam[(base, x['j'], 6)] - lam[(base, jb, 6)])) < 1e-12
+            if abs(x['Delta']['6']) > 1e-8: assert not x['radius1_fingerprints_subset_of_base'] and not x['radius1_fingerprints_superset_of_base']
+            assert 0.27 < min(x['changed_panel_fraction'].values()) and max(x['changed_panel_fraction'].values()) < 0.75
+        assert s['sign_Delta6_eq_sign_dU1'] == [n, n] and s['sign_persists_6_to_8'][0] == s['sign_persists_6_to_8'][1] == s['Delta8_available']
+
+# ------------------------------------------------------------------ ledger
+def test_phase12_ledger_links():
+    d = J('phase12_ledger.json'); names = {n for n in globals() if n.startswith('test_')}
+    assert len(d['claims']) >= 20 and [c['id'] for c in d['corrections']] == ['C1', 'C2', 'C3', 'C4', 'C5', 'C6']
+    p11 = open(os.path.join(ROOT, 'tests', 'test_phase11.py')).read()
+    for c in d['claims']:
+        for t in c['test'].split(', '):
+            if t == '-': continue
+            if t.startswith('phase11:'): assert f'def {t[8:]}(' in p11, t
+            else: assert t in names, t
+
+def test_rounding_outward():
+    """every printed bound in the Phase XI-XII deliverables is rounded outward (correction C6)"""
+    import phase12_rounding_audit as A
+    assert A.audit() == []
+
+def test_rounding_audit_catches_inward_rounding(tmp_path, monkeypatch):
+    """adversarial: an upper bound rounded down, a lower bound rounded up and a low-precision claim after >= are each flagged;
+    an allowed requested level mu and a value marked approximate are not"""
+    import phase12_rounding_audit as A
+    (tmp_path / 'deliverables').mkdir()
+    (tmp_path / 'deliverables' / 'PHASE12_REPORT.md').write_text(
+        'E(539311) ≤ 9.3885937. E(1387) ≥ 8.7999988 (R = 15). E(539311) ≥ 8.80. Fine: 9.3885938, 9.1104981, '
+        'the preregistered 9.1105 rounded down; Lambda_6 ≈ 3.6555586.\n')
+    monkeypatch.setattr(A, 'ROOT', str(tmp_path))
+    found = sorted((r['printed'], r['outward']) for r in A.audit(docs=['deliverables/PHASE12_REPORT.md']))
+    assert found == [('8.7999988', '8.7999987'), ('8.80', '8.79'), ('9.3885937', '9.3885938')]
+
+def test_frontier_csv_outward():
+    """the frontier table prints its endpoints rounded outward from the exact stored values"""
+    import csv
+    d = {r['rule']: r for r in J('phase12_frontier.json')['rows']}
+    for row in csv.DictReader(open(os.path.join(RES, 'phase12_frontier.csv'))):
+        r = d[row['rule']]
+        assert Fraction(row['L']) <= Fraction(r['L']) < Fraction(row['L']) + Fraction(1, 10 ** 7)
+        assert Fraction(row['U']) - Fraction(1, 10 ** 7) < Fraction(r['U_exact']) <= Fraction(row['U'])
+
+def test_preregistration_next_frozen():
+    """the frozen prediction for the next experiment is byte-identical to its commit (562eb6d)"""
+    import hashlib
+    h = hashlib.sha256(open(os.path.join(RES, 'phase12_preregistration_next.json'), 'rb').read()).hexdigest()
+    assert h == 'fa14a29ff3c765a9e0bb9fde9159269c3bb6e185989aae04a820c16510d969ce'
+
+def test_stored_certificate_shifts_exact():
+    """phase11_chair.banded_cert's assertion (d - mu) + mu == d does not prove the shift exact (24 - 0.1 passes it); every stored
+    certificate is nevertheless exact because its mu is dyadic with a small numerator: 24 - mu is then representable"""
+    for name in ('phase11_cert.jsonl', 'phase12_independent.jsonl'):
+        for r in JL(name):
+            if not r.get('mu'): continue
+            mu = Fraction(r['mu']); assert mu.denominator & (mu.denominator - 1) == 0 and mu.denominator <= 2 ** 30
+            assert Fraction(24.0 - float(mu)) == 24 - mu
+
+def test_orbit_profile():
+    """section 2.3-2.4: the six members share level one (Y1, plaquette classes up to the axis permutation) and differ from level 2"""
+    p = J('phase12_orbit.json')['profile']; assert len(p) == 6
+    assert max(r['Y1'] for r in p.values()) - min(r['Y1'] for r in p.values()) < 1e-10
+    assert len({tuple(sorted(r['plaquette_classes_L1'].values())) for r in p.values()}) == 1
+    assert len({tuple(r['plaquette_classes_L2'].values()) for r in p.values()}) == 4 and {r['plaquette_classes_L2']['-1'] for r in p.values()} == {42}
+    assert [p[k]['legal_1star_types'] for k in ('1387', '1389', '1391', '539311', '539291', '539288')] == [90, 102, 104, 90, 97, 79]
+    a, b = sorted(p['1387']['shadow_bottoms_T3']), sorted(p['539311']['shadow_bottoms_T3'])
+    assert max(abs(x - y) for x, y in zip(a, b)) > 1e-3                        # not a permutation of each other at T3
+    import phase9_pair as P9, phase11_chair as C                                 # live: Y1 and Y2 of 1387
+    d = C.rule('1387'); dec = {'0': d[0], **{v: d[k + 1] for k, v in enumerate(P9.U3)}}
+    for L in (1, 2): assert abs(np.linalg.eigvalsh(P9.build([dec] * L)['H'].toarray())[0] - p['1387'][f'Y{L}']) < 1e-10
+
+def test_closure_explains_every_tie():
+    c = J('phase12_orbit.json')['closure']
+    assert c['pairs'] == 1401660 and c['ties'] == 1612 and c['ties_unexplained'] == 0 and c['explained_but_not_tied'] == 0
+
+def test_independent_checkpoint_resume(tmp_path, monkeypatch):
+    """an interrupted, checkpointed run resumes to exactly the record of an uninterrupted run"""
+    monkeypatch.setattr(I, 'OUT', str(tmp_path / 'ind.jsonl')); ck = str(tmp_path / 'ck')
+    keys = ('distinct_balls', 'centres', 'rejected_incomplete', 'ball_tiles', 'bandwidth_max', 'Lambda_R_certified', 'all_balls_certified')
+    a = I.certify('4752', 6, 3, 1, '3833131/1048576', 't_plain')
+    b = I.certify('4752', 6, 3, 1, '3833131/1048576', 't_ckpt', ckpt=ck)
+    lines = open(os.path.join(ck, 'pass2.jsonl')).read().splitlines()
+    open(os.path.join(ck, 'pass2.jsonl'), 'w').write('\n'.join(lines[:len(lines) // 2]) + '\n' + lines[len(lines) // 2][:40])   # cut mid-line
+    c = I.certify('4752', 6, 3, 1, '3833131/1048576', 't_resumed', ckpt=ck)
+    for k in keys: assert a[k] == b[k] == c[k], k
+    assert len(lines) > 1 and c['checkpointed']
+
+# ------------------------------------------------------------------ the level-7 experiment (frozen prediction) and extrapolation
+def test_y7_operator_identical_to_phase11():
+    """the lean level-L assembly gives Phase XI's matrix entry for entry"""
+    import phase12_y7 as Y, phase11_chair as C, phase11_frontier as F
+    lev, ref = Y.geometry(3), F.Level(3)
+    for j in (184323, 539311, 184338, 539291):
+        assert abs(Y.operator(lev, C.extended_decoration(j)) - ref.H(C.extended_decoration(j))).max() == 0
+
+def test_lanczos_matches_arpack_and_resumes(tmp_path):
+    """thick-restart Lanczos agrees with ARPACK; an interrupted run resumes from its checkpoint to the same eigenvalue"""
+    import phase12_y7 as Y, phase11_chair as C, phase11_frontier as F
+    H = Y.operator(Y.geometry(4), C.extended_decoration(184323)); lam0, _ = F.lowest(H)
+    ck = str(tmp_path / 'c.npz')
+    with pytest.raises(RuntimeError): Y.lowest_ckpt(H, ck, m=30, keep=6, rtol=1e-12, max_restarts=2, save_every=0)
+    lam, x, info = Y.lowest_ckpt(H, ck, m=30, keep=6, rtol=1e-8, drift_tol=-1, max_total=10 ** 6)
+    assert info['stop'] == 'residual' and info['resumed'] and info['restarts'] >= 3   # the history of the interrupted run is kept
+    assert abs(lam - lam0) < 1e-10 and np.linalg.norm(H @ x - lam * x) <= 1e-8
+    assert Y.exact_upper(H, x, chunk=777) == F.exact_upper(H, x)
+    lam1, x1, info1 = Y.lowest_ckpt(H, None, m=30, keep=6, rtol=1e-14, drift_tol=-1, max_total=3)   # the budget rule
+    assert info1['stop'] == 'budget' and info1['restarts'] == 3 and not info1['resumed'] and lam1 >= lam0 - 1e-12
+
+def test_y7_records():
+    """every stored level-7 bound is an exact rational above its eigenvalue estimate and below the stored level-6 bound
+    (T_7 contains a copy of T_6 with the same operator, so Y_7 <= Y_6)"""
+    p = os.path.join(RES, 'phase12_y7.jsonl')
+    if not os.path.exists(p): pytest.skip('no level-7 record yet')
+    y6 = {r['j']: r for r in JL('phase11_orbit_Y6.jsonl')}
+    for r in JL('phase12_y7.jsonl'):
+        q = Fraction(int(r['upper_num']), int(r['upper_den'])); assert q >= Fraction(r['float']) - Fraction(1, 10 ** 9)
+        if r['L'] == 7:                                  # the stopping rule that fired is recorded; the bound is rigorous whichever it was
+            assert q <= Fraction(int(y6[r['j']]['upper_num']), int(y6[r['j']]['upper_den']))
+            assert r['solver']['stop'] in ('residual', 'drift', 'budget') and r['residual'] <= (1e-6 if r['solver']['stop'] == 'residual' else 2e-3)
+        if r['L'] == 6: assert abs(r['float'] - y6[r['j']]['float']) < 1e-8
+
+EXTRAPOLATION_PROTOCOL_SHA256 = 'b5f702dd55af326d976254a58583d9502d0c808374522687da575df16445f5f6'
+
+def test_extrapolation_protocol_frozen():
+    """the two-sided extrapolation protocol is byte-identical to its commit (2b450cc, before the level-7 values existed)"""
+    import hashlib
+    h = hashlib.sha256(open(os.path.join(RES, 'phase12_preregistration_extrapolation.json'), 'rb').read()).hexdigest()
+    assert h == EXTRAPOLATION_PROTOCOL_SHA256
+
+R24_PROTOCOL_SHA256 = 'ff82e5aa54108c17f1c35638c816905d0e7b57e64df899af78e151b81dcaacfc'
+
+def test_r24_protocol_frozen():
+    """the radius-24 certificate protocol is byte-identical to its commit (before Y7(1389) and any radius-24 data of 539311)"""
+    import hashlib
+    h = hashlib.sha256(open(os.path.join(RES, 'phase12_preregistration_r24.json'), 'rb').read()).hexdigest()
+    assert h == R24_PROTOCOL_SHA256
+
+def test_r24_certificate():
+    """the radius-24 certificate of 539311 used the protocol's mu (from the stored Y7(1389)), passed the go/no-go probe, and, if it
+    passed, its certified value lies above every stored upper bound on E_*(1389)"""
+    import math
+    y = [r for r in JL('phase12_y7.jsonl') if r['j'] == 184338 and r['L'] == 7]
+    U = min([Fraction(int(r['upper_num']), int(r['upper_den'])) for r in y] + [Fraction(int(r['upper_num']), int(r['upper_den']))
+             for r in JL('phase11_orbit_Y6.jsonl') if r['j'] == 184338])
+    mu = Fraction(math.ceil(U * 2 ** 20) + 8, 2 ** 20); assert mu == Fraction(9655658, 2 ** 20)
+    probe = J('phase12_probe_539311_R24.json')['records'][0]; assert probe['rule'] == 'x539311' and probe['R'] == 24 and probe['Lambda_R_upper'] > mu
+    recs = [r for r in JL('phase12_independent.jsonl') if r.get('tag') == 'prereg_539311_R24']
+    if not recs: pytest.skip('the radius-24 certificate is not stored yet')
+    r = recs[-1]; assert (r['rule'], r['R'], r['rejected_incomplete']) == ('x539311', 24, 0) and Fraction(r['mu']) == mu
+    if r['all_balls_certified']: assert Fraction(r['Lambda_R_certified']) > U and r['balls_failing'] == 0
+
+def test_r24_partial_record():
+    """the interrupted radius-24 run: the committed checkpoint reproduces the partial record (no ball failed)"""
+    d = J('phase12_r24_partial.json'); seen = set(); n = fails = 0; low = None
+    for line in open(os.path.join(RES, 'ckpt_prereg_539311_R24', 'pass2.jsonl')):
+        try: r = json.loads(line)
+        except json.JSONDecodeError: continue
+        if (r['ti'], r['t0']) in seen: continue
+        seen.add((r['ti'], r['t0']))
+        for o in r['out']:
+            n += 1
+            if o[0] is None: fails += 1
+            else: low = o[0] if low is None else min(low, o[0])
+    assert (n, fails) == (d['pass2_balls_processed'], d['pass2_balls_failed']) == (31287, 0)
+    assert low == d['lowest_certified_ball_value'] and low > d['U_1389_Y7']
+
+def test_r24_final_checkpoint():
+    """the complete pass-2 results of the radius-24 run extend the interim checkpoint byte for byte and reproduce the record:
+    every one of the 39 117 balls certified, and the lowest certified value is the stored Lambda_R"""
+    d = os.path.join(RES, 'ckpt_prereg_539311_R24'); part = open(os.path.join(d, 'pass2.jsonl'), 'rb').read()
+    full = open(os.path.join(d, 'pass2_final.jsonl'), 'rb').read(); assert full.startswith(part)
+    seen = set(); n = fails = 0; low = None
+    for line in full.decode().splitlines():
+        try: r = json.loads(line)
+        except json.JSONDecodeError: continue
+        if (r['ti'], r['t0']) in seen: continue
+        seen.add((r['ti'], r['t0']))
+        for o in r['out']:
+            n += 1
+            if o[0] is None: fails += 1
+            else: low = o[0] if low is None else min(low, o[0])
+    rec = [r for r in JL('phase12_independent.jsonl') if r.get('tag') == 'prereg_539311_R24'][-1]
+    assert (n, fails) == (rec['distinct_balls'], 0) == (39117, 0) and rec['all_balls_certified']
+    assert low == rec['Lambda_R_certified'] and low > J('phase12_r24_partial.json')['U_1389_Y7']
+
+def test_probes_recorded():
+    for n in ('1389', '539291'):
+        for R in (16, 18, 20, 22):
+            r = J(f'phase12_probe_{n}_R{R}.json')['records'][0]
+            assert r['R'] == R and r['sampled_balls'] == 60 and r['Lambda_R_upper'] < r['D_R_upper_float']
+
+def test_unique_games_proposition_15_1():
+    """B(s) is exactly the Rayleigh quotient of psi = s xi in the quaternion form, and it bounds the pinned bottom, for random sections"""
+    import phase12_unique_games as UG
+    n, a, b, U, bnd, f, T = UG.game('1387', 2); H = I.operator(f, T).toarray(); lam = np.linalg.eigvalsh(H)[0]
+    rng = np.random.default_rng(1); xi = np.array([0.5, -0.5, 0.5, 0.5])
+    for _ in range(20):
+        s = rng.integers(0, 8, n); B = (UG.cost(s, a, b, U).sum() + bnd) / n
+        psi = np.array([I.qmul(tuple(UG.Q[s[v]]), tuple(xi)) for v in range(n)], dtype=float).ravel()
+        assert abs(psi @ H @ psi / (psi @ psi) - B) < 1e-9 and lam <= B + 1e-12
+    for r in JL('phase12_unique_games.jsonl'): assert r['Y_L_float'] <= r['B_best'] + 1e-9 and 0 < r['satisfied_fraction'] < 1
+
+def test_extrapolation_results():
+    """the stored prediction score and extrapolation verdicts are recomputed from the records by the frozen procedure"""
+    p = os.path.join(RES, 'phase12_extrapolation.json')
+    if not os.path.exists(p): pytest.skip('extrapolation not run yet')
+    import phase12_extrapolation as X
+    d = J('phase12_extrapolation.json'); Y = X.upper_bounds()
+    assert json.loads(json.dumps(X.score_prediction(Y))) == d['prediction']
+    up, low = X.e_up(Y), X.e_low()
+    assert json.loads(json.dumps(X.decide(up, low))) == d['decision']

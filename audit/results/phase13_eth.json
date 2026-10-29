@@ -1,0 +1,778 @@
+{
+ "source": "openai/math 7ef5c0cc5, preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/build/main_full_version.tex",
+ "remark_4_4": {
+  "row_matches": true,
+  "M0_row": {
+   "((1, 0), (0, 1))": "1",
+   "((0, 1), (1, 0))": "1",
+   "((1, 1), (0, 0))": "-1"
+  },
+  "M0_is_Pi1+Pi2-Pi1Pi2": true
+ },
+ "aux": [
+  {
+   "r": 2,
+   "Q": 2,
+   "R": 2,
+   "A0": 0,
+   "D": 16,
+   "f_interpolates": true,
+   "g_vanishes_above_R-1": true,
+   "lemma_4_2_support": true,
+   "basis_size": 16,
+   "eigen_relation": true,
+   "lemma_4_1_fixes_I_directions": true,
+   "orthogonal_sample": true,
+   "c_B": 1,
+   "c_B_formula": 1,
+   "c_B_matches": true,
+   "lemma_4_3_P0": true,
+   "lemma_4_3_degree": true,
+   "lemma_4_3_kernel": true,
+   "lemma_4_6_denominator": true,
+   "M0_expansion_equals_matrix_product": true
+  },
+  {
+   "r": 2,
+   "Q": 3,
+   "R": 2,
+   "A0": 0,
+   "D": 64,
+   "f_interpolates": true,
+   "g_vanishes_above_R-1": true,
+   "lemma_4_2_support": true,
+   "basis_size": 64,
+   "eigen_relation": true,
+   "lemma_4_1_fixes_I_directions": true,
+   "orthogonal_sample": true,
+   "c_B": 10,
+   "c_B_formula": 10,
+   "c_B_matches": true,
+   "lemma_4_3_P0": true,
+   "lemma_4_3_degree": true,
+   "lemma_4_3_kernel": true,
+   "lemma_4_6_denominator": true,
+   "M0_expansion_equals_matrix_product": true
+  },
+  {
+   "r": 2,
+   "Q": 4,
+   "R": 2,
+   "A0": 0,
+   "D": 256,
+   "f_interpolates": true,
+   "g_vanishes_above_R-1": true,
+   "lemma_4_2_support": true,
+   "basis_size": 256,
+   "eigen_relation": true,
+   "lemma_4_1_fixes_I_directions": true,
+   "orthogonal_sample": true,
+   "c_B": 67,
+   "c_B_formula": 67,
+   "c_B_matches": true,
+   "lemma_4_3_P0": true,
+   "lemma_4_3_degree": true,
+   "lemma_4_3_kernel": true,
+   "lemma_4_6_denominator": true
+  },
+  {
+   "r": 2,
+   "Q": 4,
+   "R": 3,
+   "A0": 0,
+   "D": 256,
+   "f_interpolates": true,
+   "g_vanishes_above_R-1": true,
+   "lemma_4_2_support": true,
+   "basis_size": 256,
+   "eigen_relation": true,
+   "lemma_4_1_fixes_I_directions": true,
+   "orthogonal_sample": true,
+   "c_B": 13,
+   "c_B_formula": 13,
+   "c_B_matches": true,
+   "lemma_4_3_P0": true,
+   "lemma_4_3_degree": true,
+   "lemma_4_3_kernel": true,
+   "lemma_4_6_denominator": true
+  },
+  {
+   "r": 3,
+   "Q": 2,
+   "R": 1,
+   "A0": 0,
+   "D": 81,
+   "f_interpolates": true,
+   "g_vanishes_above_R-1": true,
+   "lemma_4_2_support": true,
+   "basis_size": 81,
+   "eigen_relation": true,
+   "lemma_4_1_fixes_I_directions": true,
+   "orthogonal_sample": true,
+   "c_B": 45,
+   "c_B_formula": 45,
+   "c_B_matches": true,
+   "lemma_4_3_P0": true,
+   "lemma_4_3_degree": true,
+   "lemma_4_3_kernel": true,
+   "lemma_4_6_denominator": true,
+   "M0_expansion_equals_matrix_product": true
+  },
+  {
+   "r": 3,
+   "Q": 3,
+   "R": 2,
+   "A0": 0,
+   "D": 729,
+   "f_interpolates": true,
+   "g_vanishes_above_R-1": true,
+   "lemma_4_2_support": true,
+   "basis_size": 729,
+   "eigen_relation": true,
+   "lemma_4_1_fixes_I_directions": true,
+   "orthogonal_sample": true,
+   "c_B": 189,
+   "c_B_formula": 189,
+   "c_B_matches": true,
+   "lemma_4_3_P0": true,
+   "lemma_4_3_degree": true,
+   "lemma_4_3_kernel": true,
+   "lemma_4_6_denominator": true
+  },
+  {
+   "r": 2,
+   "Q": 5,
+   "R": 3,
+   "A0": 0,
+   "D": 1024,
+   "f_interpolates": true,
+   "g_vanishes_above_R-1": true,
+   "lemma_4_2_support": true,
+   "basis_size": 1024,
+   "eigen_relation": true,
+   "lemma_4_1_fixes_I_directions": true,
+   "orthogonal_sample": true,
+   "c_B": 106,
+   "c_B_formula": 106,
+   "c_B_matches": true,
+   "lemma_4_3_P0": true,
+   "lemma_4_3_degree": true,
+   "lemma_4_3_kernel": true,
+   "lemma_4_6_denominator": true
+  }
+ ],
+ "layout": [
+  {
+   "n": 6,
+   "factors": 4,
+   "h": 2,
+   "incidences": 12,
+   "P0_is_delta": true,
+   "degree_le_R-1": true,
+   "kernel_condition": true,
+   "nonzero_measurement_rows_per_point": [
+    15,
+    12,
+    11
+   ],
+   "max_abs_row_sum": 2,
+   "row_sum_le_D": true,
+   "group_sizes": [
+    [
+     3,
+     3
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     4,
+     2
+    ]
+   ],
+   "r": 2,
+   "Q": 3,
+   "R": 2
+  },
+  {
+   "n": 7,
+   "factors": 5,
+   "h": 1,
+   "incidences": 15,
+   "P0_is_delta": true,
+   "degree_le_R-1": true,
+   "kernel_condition": true,
+   "nonzero_measurement_rows_per_point": [
+    28,
+    28,
+    28,
+    28
+   ],
+   "max_abs_row_sum": 1,
+   "row_sum_le_D": true,
+   "group_sizes": [
+    [
+     5,
+     2
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     3
+    ]
+   ],
+   "r": 2,
+   "Q": 4,
+   "R": 2
+  },
+  {
+   "n": 6,
+   "factors": 4,
+   "h": 1,
+   "incidences": 12,
+   "P0_is_delta": true,
+   "degree_le_R-1": true,
+   "kernel_condition": true,
+   "nonzero_measurement_rows_per_point": [
+    7,
+    8,
+    6
+   ],
+   "max_abs_row_sum": 2,
+   "row_sum_le_D": true,
+   "group_sizes": [
+    [
+     4,
+     2,
+     0
+    ],
+    [
+     1,
+     2,
+     3
+    ],
+    [
+     1,
+     0,
+     5
+    ]
+   ],
+   "r": 3,
+   "Q": 3,
+   "R": 2
+  }
+ ],
+ "count": [
+  {
+   "r": 2,
+   "Q": 3,
+   "R": 2,
+   "n": 4,
+   "clauses": 2,
+   "seed": 11,
+   "field": "Q",
+   "d": 6,
+   "d_H": 12,
+   "q": 4,
+   "J": 5,
+   "pairs_U_subset_E": 243,
+   "count_algorithm": 12,
+   "count_brute_force": 12,
+   "equal": true,
+   "seconds": 0.19,
+   "H_degree_le_dH": true,
+   "jets_equal_direct": true
+  },
+  {
+   "r": 2,
+   "Q": 3,
+   "R": 2,
+   "n": 5,
+   "clauses": 3,
+   "seed": 12,
+   "field": "GF(2^61-1)",
+   "d": 9,
+   "d_H": 18,
+   "q": 6,
+   "J": 7,
+   "pairs_U_subset_E": 729,
+   "count_algorithm": 21,
+   "count_brute_force": 21,
+   "equal": true,
+   "seconds": 0.37,
+   "H_degree_le_dH": true,
+   "jets_equal_direct": true
+  },
+  {
+   "r": 2,
+   "Q": 4,
+   "R": 2,
+   "n": 6,
+   "clauses": 3,
+   "seed": 13,
+   "field": "GF(2^61-1)",
+   "d": 9,
+   "d_H": 18,
+   "q": 4,
+   "J": 5,
+   "pairs_U_subset_E": 1892,
+   "count_algorithm": 40,
+   "count_brute_force": 40,
+   "equal": true,
+   "seconds": 3.22,
+   "H_degree_le_dH": true,
+   "jets_equal_direct": true
+  },
+  {
+   "r": 2,
+   "Q": 3,
+   "R": 2,
+   "n": 5,
+   "clauses": 4,
+   "seed": 14,
+   "field": "GF(2^61-1)",
+   "d": 12,
+   "d_H": 24,
+   "q": 8,
+   "J": 9,
+   "pairs_U_subset_E": 729,
+   "count_algorithm": 18,
+   "count_brute_force": 18,
+   "equal": true,
+   "seconds": 1.85,
+   "H_degree_le_dH": true,
+   "jets_equal_direct": true
+  },
+  {
+   "r": 3,
+   "Q": 3,
+   "R": 2,
+   "n": 5,
+   "clauses": 3,
+   "seed": 15,
+   "field": "GF(2^61-1)",
+   "d": 9,
+   "d_H": 18,
+   "q": 6,
+   "J": 7,
+   "pairs_U_subset_E": 729,
+   "count_algorithm": 20,
+   "count_brute_force": 20,
+   "equal": true,
+   "seconds": 1.98,
+   "H_degree_le_dH": true,
+   "jets_equal_direct": true
+  },
+  {
+   "r": 2,
+   "Q": 4,
+   "R": 3,
+   "n": 5,
+   "clauses": 3,
+   "seed": 16,
+   "field": "GF(2^61-1)",
+   "d": 9,
+   "d_H": 27,
+   "q": 6,
+   "J": 7,
+   "pairs_U_subset_E": 972,
+   "count_algorithm": 22,
+   "count_brute_force": 22,
+   "equal": true,
+   "seconds": 0.39,
+   "H_degree_le_dH": true,
+   "jets_equal_direct": true
+  },
+  {
+   "r": 2,
+   "Q": 5,
+   "R": 2,
+   "n": 7,
+   "clauses": 3,
+   "seed": 17,
+   "field": "GF(2^61-1)",
+   "d": 9,
+   "d_H": 18,
+   "q": 3,
+   "J": 4,
+   "pairs_U_subset_E": 1895,
+   "count_algorithm": 80,
+   "count_brute_force": 80,
+   "equal": true,
+   "seconds": 8.6,
+   "H_degree_le_dH": true,
+   "jets_equal_direct": true
+  },
+  {
+   "r": 2,
+   "Q": 4,
+   "R": 2,
+   "n": 6,
+   "clauses": 4,
+   "seed": 18,
+   "field": "Q",
+   "d": 12,
+   "d_H": 24,
+   "q": 6,
+   "J": 7,
+   "pairs_U_subset_E": 2916,
+   "count_algorithm": 34,
+   "count_brute_force": 34,
+   "equal": true,
+   "seconds": 18.82,
+   "H_degree_le_dH": true,
+   "jets_equal_direct": true
+  }
+ ],
+ "adversarial": [
+  {
+   "formula": [
+    [
+     [
+      1,
+      false
+     ],
+     [
+      3,
+      true
+     ],
+     [
+      4,
+      true
+     ]
+    ],
+    [
+     [
+      3,
+      false
+     ],
+     [
+      4,
+      true
+     ],
+     [
+      1,
+      true
+     ]
+    ],
+    [
+     [
+      2,
+      true
+     ],
+     [
+      4,
+      false
+     ],
+     [
+      3,
+      true
+     ]
+    ],
+    [
+     [
+      1,
+      true
+     ],
+     [
+      2,
+      false
+     ],
+     [
+      0,
+      false
+     ]
+    ]
+   ],
+   "separated_equals_direct": true,
+   "all_rows_removed": {
+    "kernel_condition_holds": false,
+    "separated_equals_direct": false
+   },
+   "one_essential_row_removed": {
+    "group": 0,
+    "row": 1,
+    "kernel_condition_holds": false,
+    "separated_equals_direct": false
+   }
+  },
+  {
+   "formula": [
+    [
+     [
+      1,
+      false
+     ],
+     [
+      5,
+      true
+     ],
+     [
+      0,
+      false
+     ]
+    ],
+    [
+     [
+      5,
+      true
+     ],
+     [
+      2,
+      false
+     ],
+     [
+      0,
+      true
+     ]
+    ],
+    [
+     [
+      4,
+      false
+     ],
+     [
+      1,
+      true
+     ],
+     [
+      3,
+      false
+     ]
+    ],
+    [
+     [
+      4,
+      true
+     ],
+     [
+      2,
+      true
+     ],
+     [
+      5,
+      true
+     ]
+    ]
+   ],
+   "separated_equals_direct": true,
+   "all_rows_removed": {
+    "kernel_condition_holds": false,
+    "separated_equals_direct": false
+   },
+   "one_essential_row_removed": {
+    "group": 1,
+    "row": 1,
+    "kernel_condition_holds": false,
+    "separated_equals_direct": false
+   }
+  },
+  {
+   "formula": [
+    [
+     [
+      2,
+      false
+     ],
+     [
+      0,
+      true
+     ],
+     [
+      4,
+      false
+     ]
+    ],
+    [
+     [
+      1,
+      true
+     ],
+     [
+      5,
+      true
+     ],
+     [
+      2,
+      true
+     ]
+    ],
+    [
+     [
+      0,
+      false
+     ],
+     [
+      5,
+      true
+     ],
+     [
+      4,
+      true
+     ]
+    ],
+    [
+     [
+      5,
+      false
+     ],
+     [
+      3,
+      true
+     ],
+     [
+      2,
+      true
+     ]
+    ]
+   ],
+   "separated_equals_direct": true,
+   "all_rows_removed": {
+    "kernel_condition_holds": false,
+    "separated_equals_direct": false
+   },
+   "one_essential_row_removed": {
+    "group": 1,
+    "row": 2,
+    "kernel_condition_holds": false,
+    "separated_equals_direct": false
+   }
+  },
+  {
+   "formula": [
+    [
+     [
+      5,
+      true
+     ],
+     [
+      3,
+      true
+     ],
+     [
+      1,
+      true
+     ]
+    ],
+    [
+     [
+      5,
+      false
+     ],
+     [
+      0,
+      true
+     ],
+     [
+      1,
+      false
+     ]
+    ],
+    [
+     [
+      0,
+      false
+     ],
+     [
+      3,
+      false
+     ],
+     [
+      4,
+      true
+     ]
+    ],
+    [
+     [
+      4,
+      false
+     ],
+     [
+      1,
+      true
+     ],
+     [
+      3,
+      true
+     ]
+    ]
+   ],
+   "separated_equals_direct": true,
+   "all_rows_removed": {
+    "kernel_condition_holds": false,
+    "separated_equals_direct": false
+   },
+   "one_essential_row_removed": {
+    "group": 0,
+    "row": 2,
+    "kernel_condition_holds": false,
+    "separated_equals_direct": false
+   }
+  },
+  {
+   "formula": [
+    [
+     [
+      3,
+      false
+     ],
+     [
+      0,
+      true
+     ],
+     [
+      4,
+      true
+     ]
+    ],
+    [
+     [
+      2,
+      false
+     ],
+     [
+      0,
+      true
+     ],
+     [
+      1,
+      false
+     ]
+    ],
+    [
+     [
+      4,
+      false
+     ],
+     [
+      1,
+      false
+     ],
+     [
+      2,
+      true
+     ]
+    ]
+   ],
+   "separated_equals_direct": true,
+   "all_rows_removed": {
+    "kernel_condition_holds": false,
+    "separated_equals_direct": false
+   },
+   "one_essential_row_removed": {
+    "group": 1,
+    "row": 7,
+    "kernel_condition_holds": false,
+    "separated_equals_direct": false
+   }
+  }
+ ]
+}

@@ -1,0 +1,456 @@
+{
+ "commit": "739168e",
+ "report": "deliverables/PHASE11_REPORT.md",
+ "reconciliation": {
+  "1387_R14": {
+   "phase10_value": 8.764499373071162,
+   "phase10_balls": 7527,
+   "phase11_value": 8.764499518703467,
+   "phase11_balls": 7527,
+   "phase11_all_certified": true,
+   "phase11_rejected": 0,
+   "mu": "2297561/262144",
+   "independent_implementation": "phase11_chair (independent): own enumeration, RCM + banded LAPACK dpbtrf, Higham Thm 10.3 with u = 2^-52"
+  },
+  "1387_R15": {
+   "phase10_value": 8.799998779973789,
+   "phase10_balls": 10321,
+   "phase11_value": 8.799999008540032,
+   "phase11_balls": 10321,
+   "phase11_all_certified": true,
+   "phase11_rejected": 0,
+   "mu": "2306867/262144",
+   "independent_implementation": "phase11_chair (independent): own enumeration, RCM + banded LAPACK dpbtrf, Higham Thm 10.3 with u = 2^-52"
+  },
+  "twin539311_R14": {
+   "phase10_value": null,
+   "phase10_balls": null,
+   "phase11_value": 8.764499518703467,
+   "phase11_balls": 7527,
+   "phase11_all_certified": true,
+   "phase11_rejected": 0,
+   "mu": "2297561/262144",
+   "independent_implementation": "phase11_chair (independent): own enumeration, RCM + banded LAPACK dpbtrf, Higham Thm 10.3 with u = 2^-52"
+  },
+  "FR30_R12": {
+   "phase7_value": 7.954292264597248,
+   "phase10_value": null,
+   "phase10_balls": null,
+   "phase11_value": 7.954291278163518,
+   "phase11_balls": 2315,
+   "phase11_all_certified": true,
+   "phase11_rejected": 0,
+   "mu": "8340679/1048576",
+   "independent_implementation": "phase11_chair (independent): own enumeration, RCM + banded LAPACK dpbtrf, Higham Thm 10.3 with u = 2^-52"
+  },
+  "statement": "The Phase X report cites both certificates; its ledger (written at 529bba9) and tests stopped at R = 14. Both are now independently re-certified (own enumeration, own completeness test, symbolic derivation of the overlap function, banded Higham certificates). The ledger and tests use the R = 15 value. With R = 15 the comparison E_*(1387) > E_*(FR30) no longer needs the Phase VIII bound 8.7642271 (a 1.77M-dimensional eigenvector that is not stored): the exact level-5 bound Y_5(FR30) = 8.797012 < 8.7999987 suffices, and it is recomputed independently in Phase XI."
+ },
+ "proof_obligations": [
+  {
+   "id": "O1",
+   "obligation": "Pauli links lie in Q8; reverse crossing gives the inverse; the sign of the normal is irrelevant",
+   "nature": "proof",
+   "how": "algebra: (sigma.u)^2 = 1 for a unit vector u; independent implementation agrees entrywise on T_3 of 4752, 1387, 937",
+   "status": "discharged"
+  },
+  {
+   "id": "O2",
+   "obligation": "Deg = 24 on every chair tiling, so H_Y = 24 - A_U = D_U^+ D_U",
+   "nature": "proof",
+   "how": "the chair has 24 unit boundary faces; each is shared with exactly one tile in a tiling of R^3",
+   "status": "discharged"
+  },
+  {
+   "id": "O3",
+   "obligation": "pinned operator on a legal patch = compression of H_Y, hence lambda_min >= E_*",
+   "nature": "proof",
+   "how": "variational principle; legality gives occurrence (minimality) or the language definition of E_*",
+   "status": "discharged"
+  },
+  {
+   "id": "O4",
+   "obligation": "exact rational Rayleigh quotients are rigorous upper bounds",
+   "nature": "exact arithmetic",
+   "how": "recomputed independently for Y3 (all 280 332 extended orbit representatives), Y4 (all survivors), Y5 (top-40 classes and twins, counterfactuals), Y6 of the six orbit members (184323: 9.3679501571 vs Phase X 9.3679501571; 184338: 9.2104998294 vs Phase X 9.2104998293; 184342: 9.1104006725 vs Phase X 9.1104006726; 539288: 9.0982534118 (new); 539291: 9.2499400123 vs Phase X 9.2499400124; 539311: 9.3885937162 vs Phase X 9.3885937163) and of 515963",
+   "status": "discharged for L <= 5 and for the orbit at L = 6"
+  },
+  {
+   "id": "O5",
+   "obligation": "free supertile bottom F_k is a lower bound on E_* (Theorem X.2)",
+   "nature": "proof",
+   "how": "every hull tiling is sigma^k of a hull tiling (compactness), hence partitioned into level-k supertiles; links are invariant under global proper or improper frames; dropping inter-supertile panels lowers the form",
+   "status": "discharged"
+  },
+  {
+   "id": "O6",
+   "obligation": "IMS identity with amplified links (Phase VII Thm 7.1, X.7)",
+   "nature": "proof",
+   "how": "Theorem XI.B1 (exact identity); randomized identity test max error 3.552713678800501e-15",
+   "status": "discharged"
+  },
+  {
+   "id": "O7",
+   "obligation": "c(eta) is the overlap of the 3D Dirichlet ground state",
+   "nature": "proof (symbolic)",
+   "how": "phase11_proofs.overlap3d: equals the Phase VII closed form: True",
+   "status": "discharged"
+  },
+  {
+   "id": "O8",
+   "obligation": "r_c = sqrt(619)/14 <= 311/175",
+   "nature": "exact",
+   "how": "phase11_proofs.rc: (311/175)^2 - r_c^2 = 9/122500 > 0",
+   "status": "discharged"
+  },
+  {
+   "id": "O9",
+   "obligation": "the Phi-closure of the T5 1-star types is the set of all legal 1-star types",
+   "nature": "proof + per-instance checks",
+   "how": "closure lemma asserted on every Phi step; frame substitution irreducible (Cayley digraph of the generated finite group); independent closure gives identical key sets for 4752, 1387, 1389, 1391",
+   "status": "discharged"
+  },
+  {
+   "id": "O10",
+   "obligation": "every enumerated R-ball is complete (no tile of any tiling containing the patch is missing)",
+   "nature": "exact geometric check",
+   "how": "independent criterion: nearest unowned cube centre at distance >= R + sqrt(3)/2; 0 rejections at R = 8, 12, 14, 15",
+   "status": "discharged"
+  },
+  {
+   "id": "O11",
+   "obligation": "Higham Cholesky certificate (Thm 10.3) implemented soundly",
+   "nature": "floating point with rounding bound",
+   "how": "independent path: RCM + banded LAPACK dpbtrf, u = 2^-52, Frobenius sum inflated by (1 + 2Ku); the GPU path used dense cuSOLVER with u = 2^-51",
+   "status": "discharged"
+  },
+  {
+   "id": "O12",
+   "obligation": "amplification factors rounded to double",
+   "nature": "rounding bound",
+   "how": "evaluated at 60 digits; entry error 24 * max amp * 2^-52 subtracted",
+   "status": "discharged"
+  },
+  {
+   "id": "O13",
+   "obligation": "the localisation certificates of table 1.1: E_*(1387) >= 8.7999987 (R = 15) and >= 8.7644993 (R = 14), E_*(FR30) >= 7.954292 (Phase VII, R = 12), twin >= 8.7644993 (R = 14)",
+   "nature": "certificate",
+   "how": "independently re-certified: {\"1387_R15\": {\"phase11_value\": 8.799999008540032, \"phase11_balls\": 10321, \"phase11_all_certified\": true}, \"1387_R14\": {\"phase11_value\": 8.764499518703467, \"phase11_balls\": 7527, \"phase11_all_certified\": true}, \"FR30_R12\": {\"phase11_value\": 7.954291278163518, \"phase11_balls\": 2315, \"phase11_all_certified\": true}, \"twin539311_R14\": {\"phase11_value\": 8.764499518703467, \"phase11_balls\": 7527, \"phase11_all_certified\": true}}",
+   "status": "discharged"
+  },
+  {
+   "id": "O14",
+   "obligation": "E_*(FR30) <= 8.7642270382 (Phase VIII sigma^5 of type 59, 884 736 tiles)",
+   "nature": "exact rational of an unstored vector",
+   "how": "reproduced independently by phase11_fr30_upper (sigma^5 of the minimising self-loop type): U3 = 8.7795327464 (1089418384661472/124086146282361); U4 = 8.7662710594 (2710525311841648/309199349811387); U5 = 8.7642270435 (6534049968655174/745536364613169)",
+   "status": "discharged (independent value 5e-9 higher)"
+  },
+  {
+   "id": "O15",
+   "obligation": "the mirror twin 539311 has a higher floor than FR30",
+   "nature": "certificate + upper bound",
+   "how": "Phase X used the Phase VIII bound (artifact) against the R = 14 twin certificate. Phase XI: twin R = 15 certificate 8.799999008540032 > Y5(FR30) = 8.7970114 (independent exact)",
+   "status": "discharged without artifacts"
+  },
+  {
+   "id": "O16",
+   "obligation": "Z^3 class-field-matched pair (X.5): identical classes, gauge-equivalent shadows, separation >= 0.18",
+   "nature": "exact + certificate",
+   "how": "independent rebuild: {\"class_fields_identical\": true, \"shadow_ratio_flat\": {\"1\": true, \"2\": true, \"3\": true}, \"certified_separation\": 0.18165116964674805}",
+   "status": "discharged"
+  },
+  {
+   "id": "O17",
+   "obligation": "Z^3 trace-matched pair: two shadows certified above the non-Abelian floor",
+   "nature": "floating point with heuristic margin",
+   "how": "Phase X used a Lipschitz branch and bound on float eigenvalues with margin 1.2e-9: evidence, not a strict certificate; see Phase XI z3 shadow free-cell bounds",
+   "status": "reclassified [E]"
+  },
+  {
+   "id": "O18",
+   "obligation": "census: every class has E_* >= 3.788; 806 classes rigorously below FR30 (Phase X, Y4 alone)",
+   "nature": "certificates",
+   "how": "independent recomputation of the free-T3 Higham bound and exact Y4 for all 1098 classes: min certified F3 = 3.7882948; 806 classes with exact Y4 < 7.954291 (Phase X: 806)",
+   "status": "discharged"
+  },
+  {
+   "id": "O19",
+   "obligation": "primitivity of every proper rule; period 2 for the twins",
+   "nature": "exact",
+   "how": "recomputed independently (frame substitution digraph, boolean closure); an integer-overflow bug in Phase XI's own flag was found and fixed; the certificate does not use the flag",
+   "status": "discharged"
+  },
+  {
+   "id": "O20",
+   "obligation": "periodic-approximant floors (Phase X section 9 row 11)",
+   "nature": "floating point evidence",
+   "how": "Bloch minima are float; stated as evidence",
+   "status": "unchanged [E]"
+  }
+ ],
+ "claims": [
+  {
+   "id": "XI.A",
+   "claim": "E_* = lim D_R over legal environments; antitone in the language; frequency-free (bounded degree only)",
+   "status": "[P]",
+   "where": "\u00a73",
+   "artifact": "-",
+   "test": "-"
+  },
+  {
+   "id": "XI.B",
+   "claim": "exact IMS identity with amplified links; Lambda <= E_* <= D",
+   "status": "[P]",
+   "where": "\u00a73",
+   "artifact": "phase11_proofs.json:ims_random",
+   "test": "test_ims_identity_and_lower_bound_random"
+  },
+  {
+   "id": "XI.C",
+   "claim": "uniform localisation <=> property A; O(R^-2) with explicit constants (doubling, Euclidean); R^-2 optimal; lamplighter R^(-2/k)",
+   "status": "[P]",
+   "where": "\u00a73",
+   "artifact": "phase11_proofs.json",
+   "test": "test_overlap_functions_are_exact, test_rc_panels_q8"
+  },
+  {
+   "id": "XI.C/N",
+   "claim": "Neumann windows converge to the wrong limit (pi-flux ladder: 2 - sqrt 2 < 3 - sqrt 5)",
+   "status": "[P]+[C]",
+   "where": "\u00a73, \u00a76",
+   "artifact": "phase11_ladder.json",
+   "test": "test_ladder_neumann_windows_saturate_below_floor"
+  },
+  {
+   "id": "XI.D",
+   "claim": "Phi-closed enumeration is complete; a visible-only enumeration gives a false certificate",
+   "status": "[P]+[C]",
+   "where": "\u00a73, \u00a76",
+   "artifact": "phase11_ladder.json:rare",
+   "test": "test_ladder_rare_environment_false_certificate"
+  },
+  {
+   "id": "XI.E",
+   "claim": "cycle-cover bound; Z^3 without trivial Q8 plaquettes has E_* >= 6(1 - cos(pi/8))",
+   "status": "[P]",
+   "where": "\u00a74",
+   "artifact": "phase11_z3.json:cover",
+   "test": "test_z3_no_trivial_plaquette_bound, test_cycle_laplacian_formula"
+  },
+  {
+   "id": "XI.F",
+   "claim": "loop-transport and flatness-radius bounds; E_* > 0 <=> finite flatness radius under the angle gap",
+   "status": "[P]",
+   "where": "\u00a74",
+   "artifact": "phase11_proofs.json:transport",
+   "test": "test_loop_transport_bound_random"
+  },
+  {
+   "id": "XI.G",
+   "claim": "no lower-semicontinuous frequency functional bounds E_*",
+   "status": "[P]",
+   "where": "\u00a74",
+   "artifact": "phase11_z3.json:islands",
+   "test": "test_z3_islands"
+  },
+  {
+   "id": "XI.H3",
+   "claim": "non-spinor floors are functions of the plaquette class field; X.5 lives in the spinor component",
+   "status": "[P]",
+   "where": "\u00a74",
+   "artifact": "phase11_z3.json:audit",
+   "test": "test_z3_pair_audit"
+  },
+  {
+   "id": "XI.I",
+   "claim": "no fixed radius determines E_*; the profile has no closed recursion",
+   "status": "[P]+[C]",
+   "where": "\u00a74, \u00a77",
+   "artifact": "phase11_ladder.json:finite_radius, profile_no_recursion",
+   "test": "test_ladder_finite_radius_obstruction"
+  },
+  {
+   "id": "VI.1",
+   "claim": "class-field insufficiency on the ladder (certified separation 0.297)",
+   "status": "[C]",
+   "where": "\u00a76",
+   "artifact": "phase11_ladder.json:insufficiency",
+   "test": "test_ladder_insufficiency"
+  },
+  {
+   "id": "VI.2",
+   "claim": "non-minimal hull: E_* not constant without minimality",
+   "status": "[C]",
+   "where": "\u00a76",
+   "artifact": "phase11_ladder.json:nonminimal",
+   "test": "test_ladder_nonminimal"
+  },
+  {
+   "id": "I.1",
+   "claim": "independent re-certification: FR30 R = 12, 1387 R = 14 and 15, twin R = 14",
+   "status": "[C]",
+   "where": "\u00a71",
+   "artifact": "phase11_cert.jsonl",
+   "test": "test_independent_recertification"
+  },
+  {
+   "id": "I.2",
+   "claim": "E_*(1387) > E_*(FR30) without stored-only artifacts (separation >= 0.0029876)",
+   "status": "[C]",
+   "where": "\u00a71",
+   "artifact": "phase11_cert.jsonl, phase11_frontier_counterfactual_Y5.jsonl",
+   "test": "test_1387_above_fr30_without_phase8"
+  },
+  {
+   "id": "I.3",
+   "claim": "the Phase X Z^3 trace-pair shadow bound is evidence, not a certificate",
+   "status": "[E] (reclassified)",
+   "where": "\u00a71",
+   "artifact": "-",
+   "test": "-"
+  },
+  {
+   "id": "II.1",
+   "claim": "E_*(539311) >= 8.7999990 (R = 15, 10 321 balls)",
+   "status": "[C]",
+   "where": "\u00a72.2",
+   "artifact": "phase11_cert.jsonl:target_twin_R15",
+   "test": "test_new_certificates"
+  },
+  {
+   "id": "II.2",
+   "claim": "E_*(1389) >= 8.7644993 (R = 16) > 8.7642271 >= E_*(FR30) (independent U5): no artifacts",
+   "status": "[C]",
+   "where": "\u00a72.1",
+   "artifact": "phase11_cert.jsonl, phase11_fr30_upper.json",
+   "test": "test_new_certificates, test_1389_above_fr30_without_artifacts"
+  },
+  {
+   "id": "II.3",
+   "claim": "E_*(1391) >= 8.7644989 (R = 18, 20 168 balls, preregistered) > E_*(FR30): no artifacts",
+   "status": "[C]",
+   "where": "\u00a72.1",
+   "artifact": "phase11_cert.jsonl:target_1391_R18",
+   "test": "test_new_certificates, test_1389_above_fr30_without_artifacts"
+  },
+  {
+   "id": "II.4",
+   "claim": "the proper-rule maximiser is 1387 or 1389 (1096 classes proven inferior; 1391 by the R = 20 certificate)",
+   "status": "[C]",
+   "where": "\u00a72.1",
+   "artifact": "phase11_leaderboard.json",
+   "test": "test_leaderboard_classification"
+  },
+  {
+   "id": "II.4b",
+   "claim": "E_*(1387) >= 9.1104981 (preregistered R = 20, 24571 balls) > Y6(1391), Y6(539288): both proven inferior without artifacts",
+   "status": "[C]",
+   "where": "\u00a72.1, \u00a72.2",
+   "artifact": "phase11_cert.jsonl:target_1387_R20, phase11_orbit_Y6.jsonl",
+   "test": "test_new_certificates, test_1387_above_1391_and_539288_without_artifacts"
+  },
+  {
+   "id": "II.5",
+   "claim": "the maximiser over all 6^8 frame rules lies in the right-S3 orbit of 1387 (exhaustive funnel X3-X7)",
+   "status": "[C]",
+   "where": "\u00a72.2",
+   "artifact": "phase11_frontier_*.jsonl, phase11_frontier_summary.json",
+   "test": "test_funnel_flags_recomputed_from_stored_rationals, test_orbit_reps_cover_the_extended_space, test_right_S3_orbit_of_1387"
+  },
+  {
+   "id": "II.6",
+   "claim": "which of 1387, 539311, 1389, 539291 is maximal: open (their intervals overlap; unresolved in the preregistered sense: no available method decides at feasible cost)",
+   "status": "open",
+   "where": "\u00a72.2, \u00a72.4",
+   "artifact": "phase11_leaderboard.json:orbit_1387",
+   "test": "test_leaderboard_classification"
+  },
+  {
+   "id": "II.7",
+   "claim": "E_*(539315) = E_*(FR30) (FR30 mirror via 1386)",
+   "status": "[P]+[C]",
+   "where": "\u00a72.3",
+   "artifact": "phase11_mechanism.json:twins_by_member",
+   "test": "test_fr30_mirror_has_fr30_types"
+  },
+  {
+   "id": "II.8",
+   "claim": "\"the mirror twin of a class\" is ill-defined (member-dependent)",
+   "status": "[P] (correction of Phase X)",
+   "where": "\u00a72.3",
+   "artifact": "phase11_mechanism.json:twin_triples",
+   "test": "-"
+  },
+  {
+   "id": "II.9",
+   "claim": "twin criterion: sign dU1 predicts sign dY5 in 31/40 (preregistered)",
+   "status": "[E] correlation",
+   "where": "\u00a72.3",
+   "artifact": "phase11_analysis.json:twins",
+   "test": "test_preregistered_evaluations"
+  },
+  {
+   "id": "II.10",
+   "claim": "probes: Lambda_R(1387) <= 9.1675 at R <= 22 (sampled legal balls; float Rayleigh quotients)",
+   "status": "[E]",
+   "where": "\u00a72.4",
+   "artifact": "phase11_probe_*.json",
+   "test": "-"
+  },
+  {
+   "id": "V.1",
+   "claim": "P1-P3 pass on the single-child neighbourhoods (preregistered)",
+   "status": "[E] preregistered",
+   "where": "\u00a75",
+   "artifact": "phase11_analysis.json:counterfactual",
+   "test": "test_preregistered_evaluations"
+  },
+  {
+   "id": "V.2",
+   "claim": "1387 is a local maximum of Y5 under single-child changes (one tie: a neighbour in its own orbit)",
+   "status": "[C] at level 5",
+   "where": "\u00a75",
+   "artifact": "phase11_analysis.json:counterfactual",
+   "test": "test_preregistered_evaluations"
+  },
+  {
+   "id": "V.3",
+   "claim": "FR30 -> 4753 raises the worst local energy on all 16 geometric 1-star configurations and removes the three two-cycle-flat types",
+   "status": "[C] at radius 1",
+   "where": "\u00a75",
+   "artifact": "phase11_mechanism.json",
+   "test": "test_mechanism_every_shape_raised"
+  },
+  {
+   "id": "V.4",
+   "claim": "two-cycle-flat tiles are associated with lower floors (random sample, p = 4e-11)",
+   "status": "[E] post hoc",
+   "where": "\u00a75",
+   "artifact": "phase11_analysis.json:census_bounds.random200",
+   "test": "test_random_sample_association"
+  },
+  {
+   "id": "VII.1",
+   "claim": "the certified local frustration profile separates the Z^3 pair at R = 5 and not 937/938",
+   "status": "[C]",
+   "where": "\u00a77",
+   "artifact": "phase11_z3.json:profile",
+   "test": "test_z3_profile_separates_the_pair"
+  },
+  {
+   "id": "XII.1",
+   "claim": "Chair44 edge exponent > 2",
+   "status": "[X]",
+   "where": "\u00a712",
+   "artifact": "-",
+   "test": "-"
+  },
+  {
+   "id": "VIII.1",
+   "claim": "a physical law, quantum dynamics or particle spectrum follows",
+   "status": "not claimed",
+   "where": "\u00a78",
+   "artifact": "-",
+   "test": "-"
+  }
+ ]
+}

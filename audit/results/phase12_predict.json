@@ -1,0 +1,109 @@
+{
+ "n_train": 549,
+ "n_test": 549,
+ "phase10_Y5_max_deviation": 6.853365874803785e-09,
+ "families": {
+  "D1_plaquette_classes": {
+   "spearman_test": 0.8202488206221605,
+   "rmse_test": 0.31100909052218095,
+   "interval_90_coverage_test": 0.8816029143897997,
+   "interval_width": 1.0038947790529333,
+   "cost": "one T3 holonomy pass (< 1 s)",
+   "top10_recall_in_model_top20": 0.4,
+   "top25_recall_in_model_top50": 0.64,
+   "false_elimination_rate_tau_8.5": 0.0,
+   "eliminated_tau_8.5": 488,
+   "false_elimination_rate_tau_8.8": 0.0,
+   "eliminated_tau_8.8": 539,
+   "post_hoc_rank_of_leader_1387_in_test": 1
+  },
+  "D2_radius_one_signature": {
+   "spearman_test": 0.8827949713722121,
+   "rmse_test": 0.3052797116315662,
+   "interval_90_coverage_test": 0.912568306010929,
+   "interval_width": 1.0056503975413784,
+   "cost": "legal 1-star closure + 1-star spectra (~5 s)",
+   "top10_recall_in_model_top20": 0.5,
+   "top25_recall_in_model_top50": 0.56,
+   "false_elimination_rate_tau_8.5": 0.002012072434607646,
+   "eliminated_tau_8.5": 497,
+   "false_elimination_rate_tau_8.8": 0.0,
+   "eliminated_tau_8.8": 532,
+   "post_hoc_rank_of_leader_1387_in_test": 1
+  },
+  "D3_radius_R_distributions": {
+   "spearman_test": 0.8224899467330962,
+   "rmse_test": 0.30909098306285665,
+   "interval_90_coverage_test": 0.8816029143897997,
+   "interval_width": 0.9989033376351117,
+   "cost": "one T3 holonomy pass (< 1 s)",
+   "top10_recall_in_model_top20": 0.4,
+   "top25_recall_in_model_top50": 0.6,
+   "false_elimination_rate_tau_8.5": 0.0,
+   "eliminated_tau_8.5": 493,
+   "false_elimination_rate_tau_8.8": 0.0,
+   "eliminated_tau_8.8": 541,
+   "post_hoc_rank_of_leader_1387_in_test": 1
+  },
+  "D4_multiscale_frustration": {
+   "spearman_test": 0.9596241220388643,
+   "rmse_test": 0.16045262370904173,
+   "interval_90_coverage_test": 0.9198542805100182,
+   "interval_width": 0.5303686656441932,
+   "cost": "U1 (inflated 1-stars, ~10 s) + free T1..T3 (< 1 s)",
+   "top10_recall_in_model_top20": 0.7,
+   "top25_recall_in_model_top50": 0.72,
+   "false_elimination_rate_tau_8.5": 0.0,
+   "eliminated_tau_8.5": 520,
+   "false_elimination_rate_tau_8.8": 0.0,
+   "eliminated_tau_8.8": 546,
+   "post_hoc_rank_of_leader_1387_in_test": 1
+  },
+  "D5_hierarchy": {
+   "spearman_test": 0.829637067093092,
+   "rmse_test": 0.3020880137690354,
+   "interval_90_coverage_test": 0.8925318761384335,
+   "interval_width": 0.9194602945105006,
+   "cost": "pinned T1..T3 eigenvalues (< 1 s)",
+   "top10_recall_in_model_top20": 0.4,
+   "top25_recall_in_model_top50": 0.8,
+   "false_elimination_rate_tau_8.5": 0.0,
+   "eliminated_tau_8.5": 509,
+   "false_elimination_rate_tau_8.8": 0.0,
+   "eliminated_tau_8.8": 545,
+   "post_hoc_rank_of_leader_1387_in_test": 1
+  }
+ },
+ "single_features": {
+  "D1_plaquette_classes[0]": -0.5847446813481935,
+  "D1_plaquette_classes[1]": 0.4437905249772498,
+  "D1_plaquette_classes[2]": 0.05784272917939054,
+  "D2_radius_one_signature[0]": 0.8789915664417558,
+  "D2_radius_one_signature[1]": 0.7606734829570112,
+  "D2_radius_one_signature[2]": -0.1586304659209703,
+  "D2_radius_one_signature[3]": 0.11024642600124047,
+  "D3_radius_R_distributions[0]": -0.29471265714588246,
+  "D3_radius_R_distributions[1]": 0.4254458137457472,
+  "D3_radius_R_distributions[2]": -0.024094038085349826,
+  "D3_radius_R_distributions[3]": -0.5847446813481935,
+  "D3_radius_R_distributions[4]": 0.4437905249772498,
+  "D3_radius_R_distributions[5]": 0.05784272917939054,
+  "D4_multiscale_frustration[0]": 0.8789915664417558,
+  "D4_multiscale_frustration[1]": 0.954498895863022,
+  "D4_multiscale_frustration[2]": 0.6948968627056117,
+  "D4_multiscale_frustration[3]": 0.8080980923268827,
+  "D4_multiscale_frustration[4]": 0.8113645972710231,
+  "D5_hierarchy[0]": 0.658497101031867,
+  "D5_hierarchy[1]": 0.7701672704065907,
+  "D5_hierarchy[2]": 0.8010461199284942
+ },
+ "certified_test_status": {
+  "leader": 1,
+  "contender": 0,
+  "proven_inferior": 548
+ },
+ "frontier_classes_in_test": [
+  1387
+ ],
+ "cost_target": "pinned T5 (32 768 tiles) eigsh + exact Rayleigh (~3 s)"
+}

@@ -1,0 +1,41 @@
+{
+ "commit": "ae96d2f",
+ "report": "deliverables/PHASE14_REPORT.md",
+ "claims": [
+  {
+   "id": "XIV.C",
+   "statement": "checks C1-C3 of the frozen protocol pass; C4 (frame-rule background gives Y3(1387)) passes",
+   "status": "[C]",
+   "evidence": "phase14_score.json:checks",
+   "test": "test_checks_record, test_c1_c2_live"
+  },
+  {
+   "id": "XIV.H1",
+   "statement": "hot-series <lambda_min>(beta) non-increasing within 3 SE",
+   "status": "[E] [F] fails",
+   "evidence": "phase14_score.json:H1",
+   "test": "test_scores_recomputed"
+  },
+  {
+   "id": "XIV.H2",
+   "statement": "Y3(1387) exceeds every sampled lambda_min at every beta",
+   "status": "[E] [F] fails",
+   "evidence": "phase14_score.json:H2",
+   "test": "test_scores_recomputed"
+  },
+  {
+   "id": "XIV.H3",
+   "statement": "the floor falls fastest where the inter-tile plaquette rises fastest (within one grid step)",
+   "status": "[E] holds",
+   "evidence": "phase14_score.json:H3",
+   "test": "test_scores_recomputed"
+  },
+  {
+   "id": "XIV.inf",
+   "statement": "any statement about the infinite hull or a continuum limit",
+   "status": "not claimed",
+   "evidence": "deliverables/PHASE14_REPORT.md section 5",
+   "test": ""
+  }
+ ]
+}
