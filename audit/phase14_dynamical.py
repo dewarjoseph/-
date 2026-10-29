@@ -87,7 +87,7 @@ def run(hull, beta, start, seed, ntherm, nmeas, every):
 
 if __name__ == '__main__':
     cmd = sys.argv[1] if len(sys.argv) > 1 else 'run'
-    path = os.path.join(RES, 'phase14_dynamical.json')
+    path = os.environ.get('PHASE14_OUT', os.path.join(RES, 'phase14_dynamical.json'))
     t0 = time.time(); ck, hull = checks(); print('checks', ck, flush=True)
     out = {'protocol_sha256_note': 'phase14_preregistration_dynamical.json, commit 429d370', 'checks': ck, 'runs': []}
     if cmd == 'run':
