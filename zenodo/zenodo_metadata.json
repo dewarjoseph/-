@@ -1,0 +1,13 @@
+{
+ "metadata": {
+  "title": "Certified spectral floors of Q₈ connections on the Chair44 hull",
+  "upload_type": "publication",
+  "publication_type": "report",
+  "creators": [{"name": "Dewar, Joseph"}],
+  "description": "Certified two-sided bounds on the spectral floor E_* of the pinned Chair44 operator over all 1 679 616 frame rules: the maximiser is one of 1387, 539311, 539291 [C]; 1389 is excluded by a preregistered radius-24 certificate. Contents: the Phase XII decision memo, the strongest theorems of Phases XI and XII, and the repository README. Code, data and Lean certificates: https://github.com/dewarjoseph/- . AI-assisted; every claim labelled [P]/[C]/[E]/[X]/[F].",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "keywords": ["aperiodic tiling", "Chair44", "lattice gauge", "spectral floor", "interval arithmetic", "Lean"],
+  "related_identifiers": [{"identifier": "https://github.com/dewarjoseph/-", "relation": "isSupplementTo", "scheme": "url"}]
+ }
+}
