@@ -1,0 +1,30 @@
+{
+ "written": "2026-11-08, before any value of w_L or g_L existed and before |Gamma_L| was counted. Known at this time: Y3..Y7 of 1387 (audit/results/phase12_extrapolation.json), the Aitken ratios q = 0.250-0.262 and kappa_eff = 3.3-3.5 (deliverables/PHASE12_REPORT.md section 14.3, audit/results/phase12_chair_dirichlet.json), the Neumann surface-state obstruction (deliverables/PHASE10_REPORT.md lines 501, 608, 820). No eigenvector of any T_L had been inspected for this protocol.",
+ "question": "Do the low-energy states of the pinned Chair44 operator of rule 1387 avoid the interface that T_{L+1} introduces between its eight copies of T_L (boundary weight ~ R^-3, Dirichlet-like), or are they spread (~ R^-1, uniform)?",
+ "rule": "1387 (census index; extended index 184323, audit/phase12_extrapolation.py RULES)",
+ "levels": [2, 3, 4, 5],
+ "operator": "pinned H = 24 - A_U on the tiles of T_{L+1}, panels (a, b, k) of audit/phase11_chair.py Patch.panels, links U(a->b) of phase11_chair.link_matrices, assembled by phase11_chair.hermitian (T_6 by the merged assembly audit/phase12_y7.py operator, which is the same matrix)",
+ "copies": "T_{L+1} = supertile(dec, L+1); its tile index i lies in copy c = i // 8^L (c = 0 the centre child, c = 1..7 the octant children), because phase11_chair.inflate orders children tile-major, so the first inflation's child index is the leading base-8 digit",
+ "Gamma_L": "the TOP-LEVEL inter-copy panels of T_{L+1}: panels (a, b, k) with a // 8^L != b // 8^L. Not recursive (lower-level interfaces inside each copy are not included).",
+ "observables": {
+  "A (decoupled; primary)": "psi_k, k = 0, 1, 2: the three lowest eigenvectors of the principal submatrix of H on copy c (the pinned H of a copy of T_L), normalised on the copy and extended by zero. w_L = <psi_k|P_Gamma|psi_k>, P_Gamma = projection onto the tiles of copy c incident to at least one panel of Gamma_L (both spinor components). g_L = sum over (a, b) in Gamma_L of |psi_a - U_ab psi_b|^2 (with psi = 0 off copy c). Reported for every copy c = 0..7, and for the 3-dimensional spectral subspace (trace of P_3 P_Gamma / 3, basis-independent).",
+  "B (glued; secondary)": "phi_k, k = 0, 1, 2: the three lowest eigenvectors of H on T_{L+1}. w^B = <phi_k|P_Gamma|phi_k> (incident tiles on both sides of Gamma_L), g^B = sum over Gamma_L of |phi_a - U_ab phi_b|^2, coupling c^B = <phi_k|A_Gamma|phi_k>, A_Gamma the part of A_U on Gamma_L.",
+  "C (geometry)": "|Gamma_L| for L = 1..5 (T_2..T_6) and the ratios |Gamma_{L+1}| / |Gamma_L|, expected 4 (a surface)."
+ },
+ "fit": "log2 w_L = const - p L for L = 2..5 (R ~ 2^L: T_L has 8^L tiles); p by least squares; error = jackknife standard error of the 4 leave-one-out slopes, and the largest |p_(i) - p|. Same for g.",
+ "primary statistic": "p_w for k = 0, observable A, w maximised over the 8 copies (a bound must hold on every copy).",
+ "predictions as specified by the brief": {
+  "w": "p_w = 3 (Dirichlet-like: the states avoid the future interface; hierarchical route alive) versus p_w = 1 (uniform; route dead)",
+  "g": "p_g = 5 versus p_g = 3",
+  "thresholds (applied to the primary statistic)": "PASS if p_w >= 2.5; FAIL if p_w <= 1.5; otherwise report the number and what it implies"
+ },
+ "derived predictions frozen here (before computing)": {
+  "1. Dirichlet box, side R, lattice spacing 1": "psi = (2/R)^{3/2} prod_i sin(pi x_i / R). The layer within distance 1 of one face carries int_0^1 (2/R) sin^2(pi x / R) dx = (2 pi^2 / 3) R^-3 (1 + O(R^-2)): w ~ R^-3, p_w = 3. A uniform state carries (layer volume R^2) / (box volume R^3): w ~ R^-1, p_w = 1.",
+  "2. g for observable A is not w + 2": "with psi extended by zero, g = sum_a n_Gamma(a) |psi_a|^2, n_Gamma(a) = number of Gamma panels at tile a, so w <= g <= n_max w and p_g = p_w (up to drift of the mean panel count). On the lattice the Dirichlet state drops to zero within one step, so the first-layer amplitude IS the jump: |psi_a - 0|^2 ~ (pi / R)^2 (2/R)^3 = O(R^-5) per site, times R^2 sites = R^-3. The brief's p_g = 5 / 3 presupposes |psi_a - U psi_b|^2 ~ R^-2 |psi_a|^2 (a smooth gradient across Gamma), which holds for neither observable A nor a frustrated glued state. Expected: p_g(A) = p_w(A).",
+  "3. observable B": "Gamma_L bisects T_{L+1}, so the glued ground state has its bulk on Gamma: Dirichlet model w^B ~ (2R)^2 (2R)^-3 ~ R^-1, p_w(B) ~ 1 whether the states are Dirichlet-like or uniform. B does not discriminate the two hypotheses; it measures the gluing loss.",
+  "4. exact bracketing identity (to be checked to rounding)": "H_{L+1} = (direct sum of the 8 copy operators) - A_Gamma exactly (the pinned diagonal 24 does not depend on the patch). Hence lambda_{L+1} <= lambda_L (embed a copy ground state; <A_Gamma> = 0 on it) and lambda_{L+1} >= lambda_L - <phi_0|A_Gamma|phi_0>, i.e. 0 <= lambda_L - lambda_{L+1} <= c^B_0 <= <phi_0|N_Gamma|phi_0> with N_Gamma = diag(n_Gamma). Every copy operator equals the T_L operator after reindexing (row k of h_c G = +/- row k' of G, the two signs cancel in U), so lambda(copy) = lambda_min(T_L).",
+  "5. consequence": "lambda_L - lambda_{L+1} shrinks like 4^-L (Aitken q ~ 1/4, R^-2), while c^B is predicted to shrink like 2^-L (R^-1): the one-step bracketing bound is expected to lose one power of R. This is gluing (geometric) error; localisation (epistemic) error does not enter observables A-C."
+ },
+ "outputs": "audit/phase15_boundary_weight.py -> audit/results/phase15_boundary_weight.json; tests/test_phase15.py; deliverables/PHASE15_REPORT.md",
+ "meaning": "Evidence [E] about finite supertiles of one rule. No statement about E_* follows from p_w alone; a lower bound needs an inequality valid for all states below the floor (PHASE15_REPORT.md section on the inequality)."
+}
