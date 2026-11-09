@@ -148,7 +148,16 @@ with A(R)·(pinned penalty) + B(R) = o(R⁻²) so that the pinned penalty 24 −
 
 ## 8. Handoff tasks A–D (with p_w in hand)
 
-- **A (rank A1–A5).** The A1–A5 list of the handoff brief is not in the repo, and its text was not supplied with this phase. It is not ranked here; ranking items whose statements are not on file would invent them.
+- **A (rank).** The A1–A5 list of the handoff brief is not in the repo, in the brief supplied with this phase, or in the parallel clone, so its items are not ranked. They are not reconstructed, since that would invent them. Ranked instead are the five routes that are on file (`PHASE12_DECISION_MEMO.md`, "Why this, and not another"; this report), on the brief's scale: (i) certified for the infinite hull, (ii) certifiable with on-file methods, (iii) needs the rate.
+
+  | route on file | class | reason |
+  |---|---|---|
+  | radius-24 certificate of 539311 (excludes 1389) | **(i)** | passed, 39 117 balls, E_\*(539311) ≥ 9.2083494 [C] (`PHASE12_REPORT.md` §14.3) |
+  | radius-28 certificate of 539311 (excludes 539291) | **(ii)** | same method, μ above Y₇(539291) = 9.2483895; about 70 000 balls, 60 h on 4 cores [X cost] |
+  | Y₈ upper bounds (16.8·10⁶ tiles) | **(ii)**, no frontier change | exact Rayleigh quotients, but upper side only, and 8× the memory of Y₇ |
+  | IMS certificate separating 1387 and 539311 | **(iii)** | needs R ≈ 67–91 (R ≈ 46–62 with an adapted localisation) at the R⁻² rate (§14.3) |
+  | hierarchical lower bound (Schur complement on Γ, §6) | **(iii)** | p_w = 3.58 ± 0.23 > 2 keeps it open [E]; the bottom of the Schur complement on the interface network has no estimate |
+
 - **B (one-step bracketing).** Upper side: λ_{L+1} ≤ λ_L with zero gluing error [P] (§2.4). Lower side: E_\* ≥ λ_min F(T_L) [P] (Theorem X.2, `PHASE10_REPORT.md`). It fails by O(1): F saturates at 5.77 against E_\*(1387) ≥ 9.1104981, because the free states put 94–96 % of their weight on Γ_L (§5). The measured p_w = 3.58 ± 0.23 belongs to the pinned states and does not rescue the Neumann side (§6). It bears only on the Schur-on-Γ route, as an [X] condition p_w > 2.
 - **C (preregistration).** Done before any value: `phase15_preregistration_boundary_weight.json`, commit d8adbb1.
 - **D.** The strongest certified statement about the hull today is unchanged by this phase. Over all 1 679 616 frame rules the maximiser of E_\* is 1387, 539311 or 539291, and E_\*(539311) ≥ 9.2083494 [C] (`PHASE12_DECISION_MEMO.md`). This phase adds three exact facts: |Γ_L| = 48·4^L, H(T_{L+1}) = ⊕₈ H(T_L) − A_Γ, and the Kramers pairing of every level [P, C]. It adds one measurement: the pinned low-energy states avoid the future interface like R^{−3.6±0.2}, while the free ones sit on it [E]. The single computation that most changes the certified picture is still the preregistered radius-28 certificate of 539311 (about 70 000 balls and 60 h on 4 cores, `PHASE12_DECISION_MEMO.md`), which would exclude 539291. No hierarchical certificate can be stated until the Schur complement on Γ has a bottom estimate (§6).
