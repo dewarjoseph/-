@@ -41,4 +41,4 @@ A later header-redacted import closure would be a different landing, and is not 
 
 ## Not in this folder
 
-The whole `lake-ef` package, any `.lake` cache, official FILE G, unpublished working notes, the public-screen v1 copies, and the uncorrected public-screen v2 FILE F are omitted on purpose. Frozen v0.6 is not modified by this folder. No v0.7 scratch is included. Commit `77b460f` is not this landing.
+The private build package, any `.lake` cache, official FILE G, unpublished working notes, the public-screen v1 copies, and the uncorrected public-screen v2 FILE F are omitted on purpose. Frozen v0.6 is not modified by this folder. No v0.7 scratch is included. Commit `77b460f` is not this landing.
