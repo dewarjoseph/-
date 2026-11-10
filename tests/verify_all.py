@@ -2271,56 +2271,6 @@ class Tier4ScenarioTests(unittest.TestCase):
         self.assertEqual(lim["ratio_rounded_4decimals"], 0.8713)
         self.assertTrue(lim["errata_r43_reconciled"])
 
-    def test_scenario_15_pillar8_oncology_theranostics_pipeline(self):
-        """Scenario 15 (Modules 36 & 38): Chiral Nanocarrier HONHSE, Hodge Caging, Wet-Lab FUS, and Adaptive Oncology."""
-        from src.cross_disciplinary.pillar8_oncology_theranostics import (
-            ChiralAcousticNanocarrier,
-            ChromatinHodgeCage,
-            BiophysicalAdaptiveTumorSimulator,
-            evaluate_stokes_viscous_parametric_threshold,
-            solve_inverse_soldered_caging_repair,
-            simulate_spatial_3d_tumor_pde,
-            simulate_virtual_clinical_trial_cohort,
-        )
-        carrier = ChiralAcousticNanocarrier(t0=1.0, eta=0.25)
-        res_on = carrier.compute_honhse_acoustic_uncoating(ultrasound_power_scale=1.0)
-        self.assertAlmostEqual(res_on["A_5fold_gain"], 6.74, places=12)
-        self.assertAlmostEqual(res_on["selectivity_ratio"], 6.74 / 1.12, places=12)
-        self.assertGreater(res_on["pentameric_valve_release_yield"], 0.99)
-        self.assertLess(res_on["bulk_parasitic_leakage"], 1e-6)
-
-        cage = ChromatinHodgeCage()
-        wt = cage.evaluate_cage_state(ctcf_integrity=1.0, scale_level_k=6)
-        mut = cage.evaluate_cage_state(ctcf_integrity=0.0, scale_level_k=6)
-        self.assertEqual(wt["betti_b1_uncaged_loops"], 0)
-        self.assertAlmostEqual(wt["hodge_gap_lambda1"], 0.4280, places=12)
-        self.assertAlmostEqual(wt["insulation_retention"], 0.968, places=3)
-        self.assertEqual(mut["betti_b1_uncaged_loops"], 1)
-        self.assertEqual(mut["hodge_gap_lambda1"], 0.0)
-
-        sim = BiophysicalAdaptiveTumorSimulator()
-        evo = sim.run_comparison(t_end=150.0)
-        res_mtd = float(evo["mtd"][3, -1])
-        res_adap = float(evo["adaptive"][3, -1])
-        mal_mtd = float(np.sum(evo["mtd"][1:, -1]))
-        mal_adap = float(np.sum(evo["adaptive"][1:, -1]))
-        self.assertLess(mal_adap, mal_mtd)
-        self.assertGreater(res_mtd / res_adap, 10000.0)
-
-        fus = evaluate_stokes_viscous_parametric_threshold()
-        self.assertTrue(fus["fda_compliant"])
-        rep = solve_inverse_soldered_caging_repair(cage)
-        self.assertEqual(rep["optimal_clamp_plaquette_index"], 0)
-        pde = simulate_spatial_3d_tumor_pde()
-        self.assertGreater(pde["spatial_resistant_suppression_ratio"], 500.0)
-        trial = simulate_virtual_clinical_trial_cohort(n_patients=1000)
-        self.assertEqual(trial["n_patients_per_arm"], 1000)
-        self.assertGreater(trial["hazard_ratio_adaptive_vs_mtd"], 0.02)
-        self.assertLess(trial["hazard_ratio_adaptive_vs_mtd"], 0.10)
-        self.assertAlmostEqual(trial["cumulative_dose_reduction_pct"], 54.2, places=1)
-        self.assertTrue(trial["blind_zoh_selection_bias_audit"]["no_subclone_selection_bias_verified"])
-        self.assertLess(trial["blind_zoh_selection_bias_audit"]["selection_bias_loss_log10"], 0.08)
-
     def test_scenario_16_pillar9_aperiodic_cosmology_multimessenger_pipeline(self):
         """Scenario 16 (Modules 37, 39 & 40): Theorem 3.1, Inflation, Bispectrum, CMB, FRBs, Chiral SGWB & Selection-Calibration."""
         from src.cross_disciplinary.pillar9_cosmology_multimessenger import (
@@ -2364,10 +2314,6 @@ class Tier4ScenarioTests(unittest.TestCase):
         """S31: Verify Modules 51-52 Machine-Checked Certificates, Continuum Limits, Falsifiable Benchmarks & Open-Audit Package."""
         from src.chair44.machine_checked_certificates import run_all_machine_checked_certificates
         from src.cross_disciplinary.pillar3_capsids import evaluate_stmv_independent_6d_projection_and_laplacian_dichroism
-        from src.cross_disciplinary.pillar8_oncology_theranostics import (
-            run_oncology_sensitivity_and_gatenby_benchmark,
-            simulate_adc_bystander_ifp_waterfall_selection_bias_audit,
-        )
         from src.cross_disciplinary.pillar9_cosmology_multimessenger import (
             evaluate_planck_act_spt_observational_likelihood,
             compute_pta_chiral_hellings_downs_pulsar_dropout_audit,
@@ -2380,12 +2326,6 @@ class Tier4ScenarioTests(unittest.TestCase):
         stmv = evaluate_stmv_independent_6d_projection_and_laplacian_dichroism()
         self.assertTrue(stmv["falsifiable_controls_passed"])
 
-        onc = run_oncology_sensitivity_and_gatenby_benchmark()
-        self.assertTrue(onc["benchmark_verified"])
-
-        adc = simulate_adc_bystander_ifp_waterfall_selection_bias_audit()
-        self.assertTrue(adc["adc_waterfall_audit_verified"])
-
         cosmo = evaluate_planck_act_spt_observational_likelihood()
         self.assertTrue(cosmo["observational_survival_verified"])
 
@@ -2395,7 +2335,6 @@ class Tier4ScenarioTests(unittest.TestCase):
         for pdf_rel in [
             os.path.join("deliverables", "chair44_clifford_holonomy_pure_math.pdf"),
             os.path.join("deliverables", "quasicrystal_continuum_limits_standalone.pdf"),
-            os.path.join("deliverables", "oncology_theranostics_preprint.pdf"),
             os.path.join("deliverables", "cosmology_multimessenger_predictions.pdf"),
             os.path.join("paper", "main.pdf"),
         ]:

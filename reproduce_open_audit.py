@@ -30,8 +30,7 @@ audit every algebraic identity, floating-point residual, and parity cancellation
      octant word encodings, 32-nt (4 x 8-nt domain) complementarity map, and
      polyhedral Hodge Delta_1 spectral gap caging.
   6. `falsifiable_hypotheses_benchmarks.json`:
-     Independent STMV (PDB: 1STM) 705 C_alpha 6D->3D projection calculation,
-     Oncology FUS/assay sensitivity sweeps & Gatenby-Zhang 50%-rule benchmark,
+     Independent STMV (PDB: 1STM) 705 C_alpha 6D->3D projection calculation
      and Cosmology Planck PR3/PR4/WMAP/ACTPol/SPTpol likelihood confrontation.
 ================================================================================
 """
@@ -69,10 +68,6 @@ from src.cross_disciplinary.pillar3_capsids import (
 from src.cross_disciplinary.pillar4_dna_genomics import (
     model_2adic_dna_brick_assembly,
     analyze_chromatin_hodge_caging,
-)
-from src.cross_disciplinary.pillar8_oncology_theranostics import (
-    run_oncology_sensitivity_and_gatenby_benchmark,
-    simulate_adc_bystander_ifp_waterfall_selection_bias_audit,
 )
 from src.cross_disciplinary.pillar9_cosmology_multimessenger import (
     evaluate_planck_act_spt_observational_likelihood,
@@ -335,16 +330,12 @@ def generate_open_audit_package(out_dir: str = "data/open_audit_package"):
     with open(os.path.join(out_dir, "dna_brick_2adic_address_scheme.json"), "w", encoding="utf-8") as f:
         json.dump(dna_payload, f, indent=2, default=_json_default)
 
-    # 6. Falsifiable domain hypotheses (Biology 1STM, Oncology Gatenby & ADC, Cosmology Planck/ACT/SPT & PTA)
+    # 6. Falsifiable domain hypotheses (Biology 1STM, Cosmology Planck/ACT/SPT & PTA)
     stmv_bench = evaluate_stmv_independent_6d_projection_and_laplacian_dichroism()
-    onc_bench = run_oncology_sensitivity_and_gatenby_benchmark()
-    adc_bench = simulate_adc_bystander_ifp_waterfall_selection_bias_audit()
     cosmo_bench = evaluate_planck_act_spt_observational_likelihood()
     pta_bench = compute_pta_chiral_hellings_downs_pulsar_dropout_audit()
     hyp_payload = {
         "biology_stmv_1stm_falsifiable_projection": stmv_bench,
-        "oncology_sensitivity_and_gatenby_benchmark": onc_bench,
-        "oncology_adc_bystander_ifp_waterfall_audit": adc_bench,
         "cosmology_planck_act_spt_likelihood": cosmo_bench,
         "cosmology_pta_chiral_hellings_downs_audit": pta_bench,
     }
@@ -362,8 +353,6 @@ def generate_open_audit_package(out_dir: str = "data/open_audit_package"):
         ),
         "all_machine_checked_certificates_passed": bool(certs["all_certificates_verified"]),
         "stmv_falsifiable_controls_passed": bool(stmv_bench["falsifiable_controls_passed"]),
-        "oncology_gatenby_benchmark_passed": bool(onc_bench["benchmark_verified"]),
-        "oncology_adc_waterfall_audit_passed": bool(adc_bench["adc_waterfall_audit_verified"]),
         "cosmology_observational_survival_passed": bool(cosmo_bench["observational_survival_verified"]),
         "cosmology_pta_dropout_audit_passed": bool(pta_bench["pta_chiral_hd_verified"]),
     }
