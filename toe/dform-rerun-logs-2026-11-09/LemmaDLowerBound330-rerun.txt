@@ -1,0 +1,12 @@
+'LeanLab.Scratch.LemmaDLowerBound330.gR_cθ'_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanLab.Scratch.LemmaDLowerBound330.abs_cθ'_lt_ninety_one_hundredths'' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDLowerBound330.sθ'_ge_two_div_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanLab.Scratch.LemmaDLowerBound330.abs_linform_ge_of_small' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanLab.Scratch.LemmaDLowerBound330.norm_structureFactor_ge_c0_div_N_pow_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDLowerBound330.normSq_structureFactor_ge_c0_sq_div_N_pow_six' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

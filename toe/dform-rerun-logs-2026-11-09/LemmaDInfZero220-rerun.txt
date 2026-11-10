@@ -1,0 +1,5 @@
+'LeanLab.Scratch.LemmaDInfZero220.exists_box_normSq_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanLab.Scratch.LemmaDInfZero220.sInf_boxNormSqSet220' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanLab.Scratch.LemmaDInfZero220.zero_not_mem_boxNormSqSet220' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

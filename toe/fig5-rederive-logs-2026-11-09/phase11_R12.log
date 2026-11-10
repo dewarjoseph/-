@@ -1,0 +1,7 @@
+[      4s] rule 4752: 72 Phi-closed 1-star types (72 in T5) [4s]
+[      4s] frame substitution {'frames': 24, 'irreducible': True, 'period': 1, 'primitive_power': 2, 'dets': [1]}
+[     80s] R=12 m=4: {'types': 72, 'centres': 294912, 'rejected': 0, 'distinct': 2315} [76s]
+[     82s] 1/2315 certified, 0 failed [1s]
+[     99s] 1001/2315 certified, 0 failed [19s]
+[    121s] 2001/2315 certified, 0 failed [41s]
+[    127s] {'rule': '4752', 'R': 12, 'm': 4, 'rho': '1789/175', 'one_star_types': 72, 'one_star_types_T5': 72, 'frame_graph': {'frames': 24, 'irreducible': True, 'period': 1, 'primitive_power': 2, 'dets': [1]}, 'centres': 294912, 'distinct_balls': 2315, 'rejected_incomplete': 0, 'ball_tiles': [1009, 1072], 'bandwidth_max': 606, 'mu': '8340679/1048576', 'mu_float': 7.954291343688965, 'amp_max': 1.0718631550615068, 'entry_err': 5.712034339183916e-15, 'Lambda_R_certified': 7.954291278163518, 'all_balls_certified': True, 'balls_failing': 0, 'implementation': 'phase11_chair (independent): own enumeration, RCM + banded LAPACK dpbtrf, Higham Thm 10.3 with u = 2^-52', 'cert_seconds': 46.41906714439392, 'tag': 'rederive_FR30_R12_2026-11-09'}

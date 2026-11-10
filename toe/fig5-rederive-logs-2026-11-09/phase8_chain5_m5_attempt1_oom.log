@@ -1,0 +1,7 @@
+[      3s] type 59, m = 5: 884736 tiles
+[     17s] operator dim 1769472, nnz 16240560
+
+# Attempt 1 ended: process was SIGKILL'd by the kernel OOM killer (no traceback in this log).
+# Time: Mon Nov 9 20:04:56-58 2026 America/Los_Angeles.
+# dmesg: killed python pid=2168450 (anon-rss 2497288 kB, total-vm 2741272 kB) then pid=2171066 (anon-rss 3248344 kB, total-vm 4448368 kB).
+# Concurrent large tasks were also present; this box has 15 GiB RAM and no swap.

@@ -1,0 +1,13 @@
+'LeanLab.Scratch.LemmaDLowerBound220.sin_four_pi_div_seven_ge_half' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDLowerBound220.gR_cθ_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanLab.Scratch.LemmaDLowerBound220.gQ_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanLab.Scratch.LemmaDLowerBound220.gZ_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanLab.Scratch.LemmaDLowerBound220.abs_linform_ge_of_small' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanLab.Scratch.LemmaDLowerBound220.norm_structureFactor_ge_c0_div_N_pow_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDLowerBound220.normSq_structureFactor_ge_c0_sq_div_N_pow_six' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

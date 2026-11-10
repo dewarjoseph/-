@@ -1,0 +1,100 @@
+id,paper label,source label,pending marker,ledger id,short text,evidence pointer
+S1-QIS-PNP,F,F,,QIS-322,QIS 'unconditional P != NP' claim is refuted by the repo's own audit,"TOE_ATTEMPT.md §8 l.401; CORE.md §5 l.84; ledger.json QIS-322 [F, excluded as falsified]"
+S1-QIS-PLANNER,F,F,,QIS-182,QIS '64-0 planner' record is refuted by the repo's own audit,"TOE_ATTEMPT.md §8 l.401; CORE.md §5 l.84; ledger.json QIS-182 [F, excluded as falsified]"
+K1,P,P,,CH10-X1-flatness,flat <=> gauge-trivial <=> lambda_min(H_U)=0 on finite connected graphs,CORE.md §2 l.38 (source: Chair44 X1)
+K2,P,P,,CH12-XII.A,E_* = inf over legal patches of Dirichlet floor; depends only on legal environments,CORE.md §2 l.39 (source: XII.A)
+K3,P,P,,CH12-XII.B,two-sided IMS localisation with optimal R^-2 rate,"CORE.md §2 l.40 (source: XII.B, XII.C)"
+K4,P,P,,CH7b-P1-forced-curvature,forced curvature: >=12 of 21 centre-octant two-cycles non-trivial (Lean checks encoded finite predicates only; geometric statement not kernel-checked),CORE.md §2 l.41 (source: Phase VII-B P1)
+K5,C,C,,CH10-X3-positivity,all 1098 gauge classes of the 6561 proper rules have E_* >= 3.788,CORE.md §2 l.42 (source: X3)
+K6,C,P/C,,CH10-X4-no-go,plaquette-class frequencies give no lower bound on E_*,"CORE.md §2 l.43 (source: X4, X5, XII.P63)"
+K7,P,P,,CH11-XI.H3,non-spinor floors are functions of the plaquette class field,CORE.md §2 l.44 (source: XI.H3)
+K8,P,P,,CH12-XII.OL,Orbit Lemma,CORE.md §2 l.45 (source: XII.OL)
+K9,C,C,,CH12-XII.R20,certified E_* enclosures for 1387 and 539311; maximiser among three rules,"CORE.md §2 l.46 (source: XII.R20, XII.r24, XII.F4)"
+K10,C,P+C,,CH12-XII.T31,no function of level-one data determines E_*,CORE.md §2 l.47 (source: XII.T31)
+K11,P,P,,CH12-XII.ug.P151,floor bounded by unique-games frustration energy of any gauge section,CORE.md §2 l.48 (source: XII.ug.P151)
+K12,P,P,,K12,Clifford transports lie in Q8; adjoint image V4; Z4-valued in 2D,CORE.md §2 l.49 (source: CLIFFORD_Q8_PHASE2 Thms 2.2-2.3; X6)
+K13,P,P,,K13,Wilson traces and plaquette classes are mirror-invariant,CORE.md §2 l.50 (source: CLIFFORD_Q8_PHASE2 Thm 2.4)
+K14,P,P,,K14,diamagnetic bound (Kato's inequality),CORE.md §2 l.51 (source: standard; prereg/G1_volume_scaling.json T1)
+K15,P,P,,K15,infinite-volume floor 0 a.s. for beta=0 and finite-beta finite-group Gibbs measures,CORE.md §2 l.52 (source: Phase VII §8; prereg/G1_volume_scaling.json T3)
+I-TSEITIN,P,P,,I-TSEITIN,Tseitin formulas unsat iff total charge odd; Z2 coboundary side of the core,TOE_ATTEMPT.md §2 l.63; CORE.md §3 l.61
+I-ENERGY,P,P,,I-ENERGY,multilinear energy of a Tseitin instance has floor >= 1,CORE.md §3 l.62
+I-ENERGY-INST,A,A,,I-ENERGY-INST,Tseitin energy floor as an instance of the core is analogy only,CORE.md §3 l.62
+I-XIII-SCOPE,P,P,,I-XIII-SCOPE,scope: external UG theorem is worst-case on finite instances and bounds no floor,TOE_ATTEMPT.md §2 l.64; CORE.md §3 l.60
+I-UG-EXT,X,X,,I-UG-EXT,"external UG / 'ETH is false' claims recorded as external, unchecked",CORE.md §3 l.69
+I-QIS320,E,E,,QIS-320,lambda_2 of SAT clause graphs plateaus near 1.01,CORE.md §3 l.64; ledger.json QIS-320
+I-QIS320-INST,A,A,,I-QIS320-INST,QIS lambda_2 as an instance of the core is analogy only,CORE.md §3 l.64; §5 l.87
+I-QIS299,F,F,,QIS-299,QIS-299 'frustrated clauses carry a non-trivial 1-cycle' is falsified,CORE.md §3 l.65; ledger.json QIS-299
+I-GU-C4,C,C,,GU-001,"4D chair C4 face counts, chi=1; boundary chi=0",CORE.md §3 l.67; ledger.json GU-001
+I-GU-A,A,A,,I-GU-A,Geometric Unity: structural analogy only,CORE.md §3 l.68
+I-WOLFRAM,A,A,,I-WOLFRAM,Wolfram hypergraph rewriting: analogy only,CORE.md §3 l.70
+I-XIV-H1,F,F,,CH14-XIV.H1,Phase XIV H1 (hot-series floor non-increasing) falsified,CORE.md §3 l.59; TOE_ATTEMPT.md §4 row 8 l.319; ledger.json CH14-XIV.H1
+I-XIV-H2,F,F,,CH14-XIV.H2,Phase XIV H2 falsified,CORE.md §3 l.59; TOE_ATTEMPT.md §4 row 8 l.319; ledger.json CH14-XIV.H2
+I-XIV-H3,E,E,,CH14-XIV.H3,Phase XIV H3 holds,CORE.md §3 l.59; ledger.json CH14-XIV.H3
+I-VI-017,F,F,,CH-VI-017,Phase VI 'random Q8 links are gapped (14.4)' withdrawn/falsified,TOE_ATTEMPT.md §3.1 l.115; ledger.json CH-VI-017
+G1-T1,P,P,,G1-T1,T1: lambda_1(T_L) <= lambda(T_L) <= min over 8 children,TOE_ATTEMPT.md §3.1 l.90
+G1-T2,P,P,,G1-T2,T2: P(lambda(T_L)>x) <= P(lambda(T_{L-1})>x)^8,TOE_ATTEMPT.md §3.1 l.91
+G1-T3,P,P,,TOE-G1-T3,T3: inf spec H_U = 0 a.s. at every beta (finite groups),TOE_ATTEMPT.md §3.1 l.92-94; ledger.json TOE-G1-T3
+G1-RARE,X,P-level estimate,label pending author ruling on 'P-level estimate',G1-RARE,rare regions first appear at ~1e22 tiles,TOE_ATTEMPT.md §3.1 l.95
+G1-FLOORS,E,E,,G1-FLOORS,Q8 mean floors T1..T5: 18.511 ... 14.367,TOE_ATTEMPT.md §3.1 l.98; results/g1_score.json
+G1-TRIVIAL,E,E,,G1-TRIVIAL,trivial floor 11.21 -> 0.139,TOE_ATTEMPT.md §3.1 l.99
+TOE-G1-T1,E,E,,TOE-G1-T1,every beta=0 sample obeys T1,TOE_ATTEMPT.md §3.1 l.100; ledger.json TOE-G1-T1 [C]
+TOE-G1-T2,E,E,,TOE-G1-T2,T2 holds at every level (data check),TOE_ATTEMPT.md §3.1 l.100; ledger.json TOE-G1-T2
+TOE-G1-H1,F,F,,TOE-G1-H1,H1 weakest-child localisation,TOE_ATTEMPT.md §3.1 l.106; ledger.json TOE-G1-H1
+TOE-G1-H2,F,F,,TOE-G1-H2,H2 min-stable median law,TOE_ATTEMPT.md §3.1 l.107; ledger.json TOE-G1-H2
+TOE-G1-H3a,E,E,,TOE-G1-H3a,H3a 2I and SU(2) agree,TOE_ATTEMPT.md §3.1 l.108; ledger.json TOE-G1-H3a
+TOE-G1-H3b,F,F,,TOE-G1-H3b,H3b Q8 significantly below SU(2),TOE_ATTEMPT.md §3.1 l.109; ledger.json TOE-G1-H3b
+TOE-G1-H4,E,E,,TOE-G1-H4,H4 medians above certified E_*(1387) (weak test),TOE_ATTEMPT.md §3.1 l.110; ledger.json TOE-G1-H4
+SC-8,P,P,,SC-8,row 8: floor is not an infinite-volume order parameter ([P] negative),TOE_ATTEMPT.md §3.1 l.116; §4 row 8 l.319
+G2B-DERIV,E,P-level,label pending author ruling on 'P-level',G2B-DERIV,"second-order expansion of lambda(T_L,theta)",TOE_ATTEMPT.md §3.2 l.129
+G2B-CL,E,E,,G2B-CL,"c_L table and geometric c_inf (FR30 13.364, 1387 14.285)","TOE_ATTEMPT.md §3.2 l.124,132-135; results/g2_partB.json"
+TOE-G2-B0,E,C,,TOE-G2-B0,B0 Taylor check,"TOE_ATTEMPT.md §3.2 l.124,139; ledger.json TOE-G2-B0"
+TOE-G2-B1,E,E,,TOE-G2-B1,B1 geometric convergence,TOE_ATTEMPT.md §3.2 l.140; ledger.json TOE-G2-B1
+TOE-G2-B2,E,E,,TOE-G2-B2,B2 c_6>0 and c_inf>0,TOE_ATTEMPT.md §3.2 l.141; ledger.json TOE-G2-B2
+TOE-G2-B3,E,E,,TOE-G2-B3,B3 scaling trajectory (remains [E]),"TOE_ATTEMPT.md §3.2 l.142,153; PROOF.md §0 not-proved item 1; ledger.json TOE-G2-B3"
+TOE-G2-B4,F,F,,TOE-G2-B4,B4 uniform shift of 20 levels,TOE_ATTEMPT.md §3.2 l.143; ledger.json TOE-G2-B4
+G2B-LIMIT,X,E,,G2B-LIMIT,continuum limit along theta = kappa a,TOE_ATTEMPT.md §3.2 l.146; §7 l.371
+G2B-MASS,X,E,,G2B-MASS,frustration survives as mass term kappa^2 c_inf,TOE_ATTEMPT.md §3.2 l.147; §4 row 7 l.318; §7 l.372
+G2B-POSTHOC,E,"E, post hoc",,G2B-POSTHOC,"post-hoc B4 diagnostic: eigensolver artifact plausible, not established",TOE_ATTEMPT.md §3.2 l.159-164; src/posthoc_b4.py
+TOE-PROOF-A,P,P,,TOE-PROOF-A,Theorem A: second-order expansion and variational formula for c_L,"PROOF.md §0 l.10, §2; ledger.json TOE-PROOF-A"
+TOE-PROOF-B,P,P,,TOE-PROOF-B,"Theorem B: monotone densities mu_l, nu~_l","PROOF.md §0 l.11, §3; ledger.json TOE-PROOF-B"
+TOE-PROOF-C,P,P,,TOE-PROOF-C,Theorem C: two-sided bracket of c_L,"PROOF.md §0 l.12, §4; ledger.json TOE-PROOF-C"
+TOE-PROOF-D,C,P+C,,TOE-PROOF-D,D: liminf c_L >= 3527/1012 for all 6^8 rules,"PROOF.md §0 l.13, §5; ledger.json TOE-PROOF-D [C]; results/proof_positivity.json"
+TOE-PROOF-E-FR30,C,C,,TOE-PROOF-E-FR30,"E FR30 bracket [13.232574, 15.465590]","PROOF.md §0 l.14, §5 l.184; ledger.json TOE-PROOF-E-FR30"
+TOE-PROOF-E-1387,C,C,,TOE-PROOF-E-1387,"E 1387 bracket [14.161980, 16.390966]","PROOF.md §0 l.14, §5 l.185; ledger.json TOE-PROOF-E-1387"
+PROOF-E-TABLE,C,C,,PROOF-E-TABLE,certified mu_l / nu0_l table l=1..6 (10 cells flagged),PROOF.md §5 l.173-182; results/proof_bounds.json
+TOE-PROOF-prim,C,C,,TOE-PROOF-prim,"primitivity holds for 1666486 rules, fails for 13130",PROOF.md §6 l.194-195; ledger.json TOE-PROOF-prim; src/proof_primitivity.py
+TOE-PROOF-F,P,P,,TOE-PROOF-F,Theorem F: c_L -> rho(d) corrector formula for primitive rules,"PROOF.md §0 l.15, §6; ledger.json TOE-PROOF-F"
+PROOF-L7,P,P,,PROOF-L7,Lemma 7 (sublinearity of the integrated corrector),PROOF.md §6 l.221-225
+TOE-G2-D1,E,P,,TOE-G2-D1,D1: weak-coupling limit C_pert (formal perturbation theory),"TOE_ATTEMPT.md §3.2 l.175-177,203; ledger.json TOE-G2-D1; src/pert.py"
+TOE-G2-W1,E,E,,TOE-G2-W1,W1 SU(2) approaches C_pert/beta,TOE_ATTEMPT.md §3.2 l.195; ledger.json TOE-G2-W1
+TOE-G2-W2,E,E,,TOE-G2-W2,W2 monotone approach,TOE_ATTEMPT.md §3.2 l.196; ledger.json TOE-G2-W2
+TOE-G2-W3a,E,E,,TOE-G2-W3a,W3a 2I tracks SU(2) at beta<=4,TOE_ATTEMPT.md §3.2 l.197; ledger.json TOE-G2-W3a
+TOE-G2-W3b,E,E,,TOE-G2-W3b,"W3b 2I frozen at beta=32,64",TOE_ATTEMPT.md §3.2 l.198; ledger.json TOE-G2-W3b
+TOE-G2-W3c,F,F,,TOE-G2-W3c,W3c Q8 tracks SU(2) at beta<=1,TOE_ATTEMPT.md §3.2 l.199; ledger.json TOE-G2-W3c
+TOE-G2-W4,E,E,,TOE-G2-W4,W4 2I within 25% of SU(2) at beta=8,TOE_ATTEMPT.md §3.2 l.200; ledger.json TOE-G2-W4
+G2A-SELFENERGY,E,E,,G2A-SELFENERGY,floor shift = perturbative self-energy to 1% at beta=64,TOE_ATTEMPT.md §3.2 l.203-205; §7 l.369
+TOE-G3-R0,P,P,,TOE-G3-R0,R0 positive self-adjoint transfer matrix (standard),TOE_ATTEMPT.md §3.3 l.217-220; ledger.json TOE-G3-R0
+TOE-G3-R1,E,E,,TOE-G3-R1,R1 positive log-convex correlators,TOE_ATTEMPT.md §3.3 l.231; ledger.json TOE-G3-R1
+TOE-G3-R2,E,E,,TOE-G3-R2,R2 r(1)/u^2 within band,TOE_ATTEMPT.md §3.3 l.232; ledger.json TOE-G3-R2
+TOE-G3-R3a,E,E,,TOE-G3-R3a,R3a Q8 above SU(2) at beta=1,TOE_ATTEMPT.md §3.3 l.233; ledger.json TOE-G3-R3a
+TOE-G3-R3b,E,E,,TOE-G3-R3b,R3b 2I = SU(2),TOE_ATTEMPT.md §3.3 l.234; ledger.json TOE-G3-R3b
+TOE-G3-R3c,E,E,,TOE-G3-R3c,R3c m_eff vs -2 ln u,TOE_ATTEMPT.md §3.3 l.235; ledger.json TOE-G3-R3c
+G3-SPECTRUM,E,E,,G3-SPECTRUM,strong-coupling spectrum matches derivation,TOE_ATTEMPT.md §3.3 l.238; §7 l.379
+SC-6,P,P,,SC-6,row 6: QM with unitary evolution at lattice level,TOE_ATTEMPT.md §4 row 6 l.317; §4 l.321
+TOE-G4-O1,P,P,,TOE-G4-O1,G4 obstruction: no chirality in the core,TOE_ATTEMPT.md §3.4 l.245-255; ledger.json TOE-G4-O1
+TOE-G4-O2,P,P,,TOE-G4-O2,Witten anomaly: even number of doublets needed,TOE_ATTEMPT.md §3.4 l.256; ledger.json TOE-G4-O2
+G4-INFVOL,X,X,,G4-INFVOL,infinite-volume Nielsen-Ninomiya for the hull: open,"TOE_ATTEMPT.md §3.4 l.251,258"
+G5-S1,P,P,,G5-S1,S1 axis symmetry -> constant shadow floors on orbits,TOE_ATTEMPT.md §3.5 l.267
+TOE-G5-S3,P,P,,TOE-G5-S3,S3 shadows are different Q8 characters,TOE_ATTEMPT.md §3.5 l.268; ledger.json TOE-G5-S3
+G5-S4,P,P,,G5-S4,"S4 spinor multiplicity 2, index 2chi=2",TOE_ATTEMPT.md §3.5 l.269
+G5-COUNT,C,C,,G5-COUNT,6456/24/80/1 symmetry count (rule 63 unique S3),TOE_ATTEMPT.md §3.5 l.271-275; src/rule_symmetry.py
+TOE-G5.1,E,C,,TOE-G5.1,G5.1 rule 63 threefold degenerate,TOE_ATTEMPT.md §3.5 l.281; ledger.json TOE-G5.1
+TOE-G5.2,E,C,,TOE-G5.2,G5.2 rule 64 threefold degenerate,TOE_ATTEMPT.md §3.5 l.282; ledger.json TOE-G5.2
+TOE-G5.3,E,C,,TOE-G5.3,G5.3 FR30 lambda_x = lambda_z != lambda_y,TOE_ATTEMPT.md §3.5 l.283; ledger.json TOE-G5.3
+TOE-G5.4,E,C,,TOE-G5.4,G5.4 three distinct floors for frontier rules,TOE_ATTEMPT.md §3.5 l.284; ledger.json TOE-G5.4
+TOE-G5.5,C,C,,TOE-G5.5,G5.5 conjugation permutes shadows,TOE_ATTEMPT.md §3.5 l.285; ledger.json TOE-G5.5
+TOE-G5-none,P,P,,TOE-G5-none,no mechanism for three generations,TOE_ATTEMPT.md §3.5 l.288; ledger.json TOE-G5-none
+G5-R63,A,A,,G5-R63,rule-63 triplet is at most a flavour/colour analogue,TOE_ATTEMPT.md §3.5 l.289
+TOE-G6-O1,P,P,,TOE-G6-O1,chair complex is flat and rigid (Regge deficits 0),TOE_ATTEMPT.md §3.6 l.297-300; ledger.json TOE-G6-O1
+TOE-G6-O2,P,P,,TOE-G6-O2,dynamical geometry leaves the substitution class,TOE_ATTEMPT.md §3.6 l.301; ledger.json TOE-G6-O2
+FIG5-ESTAR,E,C,,CH9-N3-enclosure,"E_*(FR30) enclosure [7.954291, 8.7642270382] (outward)","ledger.json CH9-N3-enclosure (l.624), CH8-B1-upper-bound (l.474); figures/proof-brackets/README.md Fig.5"

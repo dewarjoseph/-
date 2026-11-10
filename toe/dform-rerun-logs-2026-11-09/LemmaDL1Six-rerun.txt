@@ -1,0 +1,40 @@
+'LeanLab.Scratch.LemmaDL1Six.structureFactor_ne_zero_at_222' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanLab.Scratch.LemmaDL1Six.structureFactor_ne_zero_at_330' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanLab.Scratch.LemmaDL1Six.structureFactor_ne_zero_at_411' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanLab.Scratch.LemmaDL1Six.structureFactor_ne_zero_at_420' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LeanLab.Scratch.LemmaDL1Six.normSq_structureFactor_pos_at_222' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1Six.normSq_structureFactor_pos_at_330' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1Six.normSq_structureFactor_pos_at_411' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1Six.normSq_structureFactor_pos_at_420' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1Six.structureFactor_ne_zero_orbit_222' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1Six.structureFactor_ne_zero_orbit_330' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1Six.structureFactor_ne_zero_orbit_411' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1Six.structureFactor_ne_zero_orbit_420' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1Six.normSq_structureFactor_pos_orbit_222' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1Six.normSq_structureFactor_pos_orbit_330' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1Six.normSq_structureFactor_pos_orbit_411' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1Six.normSq_structureFactor_pos_orbit_420' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

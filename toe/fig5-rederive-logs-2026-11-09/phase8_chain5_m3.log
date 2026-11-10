@@ -1,0 +1,4 @@
+[      0s] type 59, m = 3: 13824 tiles
+[      1s] operator dim 27648, nnz 247728
+[      2s] lambda_min = 8.7795327458 (residual 4.0e-13)
+[      2s] exact Rayleigh certificate: E_* <= 8.7795327459

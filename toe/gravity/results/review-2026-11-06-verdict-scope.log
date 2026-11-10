@@ -1,0 +1,3 @@
+REPRODUCED: H3 remains pass with uncertified G; certification is only a separate flag.
+REPRODUCED: no tile levels can produce 'pass on run levels; incomplete' via vacuous all().
+Recorded complete certified run verdicts match live logic; historical run not changed.

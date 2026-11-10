@@ -1,0 +1,27 @@
+'LeanLab.Scratch.LemmaDL1SevenMore.structureFactor_ne_zero_at_331' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1SevenMore.structureFactor_ne_zero_at_430' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1SevenMore.structureFactor_ne_zero_at_520' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1SevenMore.normSq_structureFactor_pos_at_331' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1SevenMore.structureFactor_ne_zero_orbit_331' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1SevenMore.structureFactor_ne_zero_orbit_430' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1SevenMore.structureFactor_ne_zero_orbit_520' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1SevenMore.exists_box_structureFactor_eq_zero_at_421' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LeanLab.Scratch.LemmaDL1SevenMore.exists_box_structureFactor_eq_zero_at_124' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

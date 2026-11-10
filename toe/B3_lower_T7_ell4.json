@@ -1,0 +1,32 @@
+{
+  "id": "B3-lower-T7-ell4",
+  "owner": "Theory of Everything",
+  "status": "FROZEN when its sha256 is posted on bus #theory-of-everything. Never edited after.",
+  "date": "2026-11-07",
+  "theory": "/workspace/toe-gauge/B3_bounds_T5_T6.md, section 'Lemma T7 (Neumann bracketing on supertile cells)'; named next step in /workspace/toe-gauge/B3_trajectory.md (checkpoint 1 Nov 2026, 07:50 PT).",
+  "parent_prereg": {
+    "id": "B3-lower-T7",
+    "path": "/workspace/toe-gauge/prereg/B3_lower_T7.json",
+    "sha256": "2ce5f288793bbb7be8f7acf48b506d70136838d5b8b143b36c0981fa98d82c82"
+  },
+  "disclosure": [
+    "The frozen parent prereg B3-lower-T7 was scored on 2026-11-01 (bus #504). R0-R4 all PASS for FR30 and 1387. This file does not edit that prereg or its results.",
+    "Scored T7 certified lowers from results/lower2_score.json, used here as known comparison values: FR30 L5 ell=3 118.27956129269046, L6 ell=3 120.82531081169691; 1387 L5 ell=3 127.40207774886372, L6 ell=3 129.95780361073096.",
+    "Known from B3_trajectory.md: each ell step added less at FR30 L6 (ell 1 to 2 about +37, ell 2 to 3 about +11). That diminishing-return remark is disclosed; this prereg does not predict a numeric increment for ell=4.",
+    "Known: T6 [C] lowers and Lanczos G_L from the parent scoring chain (results/lower_score.json; toe/results/g2_partB.json as used by the T7 scorer).",
+    "Seen in the parent prereg disclosure and not scored: FR30 L2 ell=1 only.",
+    "Code files src/lower2.py and src/lower.py are unchanged from the parent prereg hashes and are mode 0444. This prereg does not modify them.",
+    "The L-uniform theoretical form of T7 named in B3_trajectory.md (a uniform lower bound from finitely many cell types) remains [X] and is not a prediction of this run."
+  ],
+  "procedure": "From /workspace/toe-gauge, do not run until this file's sha256 is posted on bus #theory-of-everything. Then: OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2; python -I src/lower2.py RULE 5 6 4 for RULE in FR30 then 1387; write logs to results/lower2_${RULE}_L5-6_ell4.log. The CLI is src/lower2.py NAME LMIN LMAX ELLS with ELLS a comma list; here ELLS is 4. Code skips ell > L-1, so ell=4 is only defined at L>=5. Problem size (hierarchical 8^L tiles, cell size 8^ell): L=5 has 8 cells of 4096 tiles (C^2 dimension 8192); L=6 has 64 cells of 4096 tiles. Expected to be much heavier than the parent ell<=3 run. Do not refit predictions after seeing output.",
+  "label": "GL_lower_certified is [C] in the cert.py sense: double precision + a-priori allowance, not interval arithmetic. The parent T7 lemma statement remains [P] (hand). An L-uniform remainder or L-uniform T7 bound is not claimed by a successful score of this run.",
+  "predictions": {
+    "S0 (consistency)": "every certified T7(ell=4) lower bound at L in {5,6} is <= the same Lanczos G_L used in the parent T7 scoring, both rules; a failure means a bug",
+    "S1 [X]": "for L in {5,6} and both rules, the certified T7(ell=4) bound is >= the disclosed parent T7(ell=3) value at that (rule, L). This continues the parent R2 monotonicity pattern; it may fail.",
+    "S2 (code checks)": "max_components_per_cell = 1, selftest_q2m < 1e-14, and 4^L * dmu_max < 1e-3 for every row"
+  },
+  "code_sha256": {
+    "src/lower2.py": "f6174564281995128bd4219b81f40f1237358c797ca78b225da374d3db25d30d",
+    "src/lower.py": "84ce60561f09f106677c289453601ddf52783358c68a78886da7c4238f409641"
+  }
+}

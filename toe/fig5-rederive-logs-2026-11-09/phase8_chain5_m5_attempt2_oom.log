@@ -1,0 +1,6 @@
+[      3s] type 59, m = 5: 884736 tiles
+
+# Attempt 2 ended: kernel OOM at Mon Nov 9 20:32:20 2026 America/Los_Angeles.
+# dmesg: Killed process 2205225 (python) anon-rss 5287136 kB, total-vm 5660652 kB.
+# This log only reached 'type 59, m = 5: 884736 tiles' at 3s (operator not yet finished).
+# Parent invocation pid was 2199116 (python -u -I audit/phase8_chain5.py 5).
