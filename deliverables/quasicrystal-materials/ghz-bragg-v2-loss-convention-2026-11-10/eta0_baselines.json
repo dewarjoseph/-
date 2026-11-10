@@ -1,0 +1,12 @@
+{
+ "note": "Derived eta=0 T(f0) baselines only. Taken from the original v2 results JSON sha256 6475ff5ab93536678ec80d8408aa105c17e3c66a5972c2868f5cdbb2702da892, which is not reproduced in this folder. These two numbers are the only eta=0 values this addendum reads. They are not a v2 verdict, they do not restate any scored hypothesis, and they do not carry the original key names or overall mark.",
+ "source_sha256": "6475ff5ab93536678ec80d8408aa105c17e3c66a5972c2868f5cdbb2702da892",
+ "stacks": {
+  "FIB21_tau": {
+   "T_f0": 1.498289783841481e-13
+  },
+  "PER21_tau": {
+   "T_f0": 1.0876673829901236e-17
+  }
+ }
+}

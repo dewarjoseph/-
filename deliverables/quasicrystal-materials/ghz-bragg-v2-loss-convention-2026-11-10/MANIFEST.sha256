@@ -1,0 +1,64 @@
+# MANIFEST.sha256 — public copy of the GHz Bragg v2 loss-convention packet, revision 3
+# Dated 2026-11-10 PT (America/Los_Angeles).
+# Built from revision 2. Changes versus rev 2: (N1) provenance wording
+# "redaction and paraphrase" at addendum L6-8; (N2) the descriptive
+# T_peak(B0) < 1e-2 / H6 sentence removed from the result note; runner
+# pin updated to the new addendum hash. Scientific numbers unchanged.
+# Originals, rev 1 (MANIFEST 8077e2de3d6b3ad4b2aac0697b343cb89730f839ac13ab1e5d91e2229065fe12)
+# and rev 2 (MANIFEST 7c47e15198f03ef455ec28e36871d36b6eca6977d29cab13e95222ee40954fbb)
+# were not edited. No landing and no push is performed by this pack.
+#
+# Labels unchanged:
+#   eta=0 isolator-advantage FAIL [F]
+#   V_L0 and V_L PASS [E]
+#   H7/H8 PASS [E] is ranking stability at the sampled eta values 1e-3 and
+#   1e-2 under assumed [A] only; that ranking disfavours Fibonacci and is
+#   not isolator-advantage evidence
+#   infima stay [X]; TLS stays [X]
+#
+# Runner standalone check: python3 -I (numpy only), run from this folder,
+# reproduced every scientific field of the original results JSON
+# 1e65984a68dffbf015c16e68daf9e87da831d55b50f5b14f8c1f4ce566ecdda2 exactly.
+# The new results JSON differs only in the pins block (new addendum hash)
+# and in the eta=0 baseline field names inside hypotheses.
+#
+# First step to verify this folder: sha256sum -c MANIFEST.sha256
+# Expected results-JSON sha256 (after a standalone run):
+# 39b8a8345d0b8e4156ea14158a0ffe2047d7dfd2d50a73dd16dad3736150038b
+
+# sha256  file (this folder)
+d4e473db20d57eeb33c98bcb54d89fc84713687905dfd0246793b7d4ce54f96f  PREREG_GHZ_BRAGG_v2_ADDENDUM_LOSS_CONVENTION_2026-11-09.md
+e8f55d5c2b545a9f65c9d9f9a7380c6a27b7e25c3779642d76f78c303027f781  RESULT_GHZ_BRAGG_v2_LOSS_CONVENTION_2026-11-09.md
+8f31454b2fddb1eefd42dbdc85b3fb968e54349b498454761937fbf7e1ea5a09  ghz_bragg_v2_loss_convention_run.py
+39b8a8345d0b8e4156ea14158a0ffe2047d7dfd2d50a73dd16dad3736150038b  results_ghz_bragg_v2_loss_convention.json
+5e8bc5fb11246573ee897faaaa634d95e6b5461921d93fd5aac4fee462e1edd3  eta0_baselines.json
+
+# Mapping: this-folder file -> this sha256 -> rev2 -> rev1 -> original
+# PREREG_GHZ_BRAGG_v2_ADDENDUM_LOSS_CONVENTION_2026-11-09.md
+#   this  d4e473db20d57eeb33c98bcb54d89fc84713687905dfd0246793b7d4ce54f96f
+#   rev2  1894f76cb69226d45d275eb44a6da9524f2ac342a63a758c926ca393b0c936dd
+#   rev1  c9647ffcd7c53ebd9b023e4b3aa0b0bbc0c49f1c766ab73debf1983c35672279
+#   orig  f4467b54c82a17255958e143d3d327ff33914e2025bc9439926635e49a1fea24
+#   DIFF (expected: N1 provenance wording only)
+# RESULT_GHZ_BRAGG_v2_LOSS_CONVENTION_2026-11-09.md
+#   this  e8f55d5c2b545a9f65c9d9f9a7380c6a27b7e25c3779642d76f78c303027f781
+#   rev2  165ab1d52d51227af4e0ffe0d300723c3e992e41d8c73570891cbdcbe7508478
+#   rev1  289c404c71ec1a0598ab2be292517451aed995fb8a38b5b98844f8ccff86c12b
+#   orig  ce6e4bc021d68a2efa538915b883e67cb02a914ec0917ecb477da6069039f87e
+#   DIFF (expected: N2 sentence removed; pin hashes and provenance wording)
+# ghz_bragg_v2_loss_convention_run.py
+#   this  8f31454b2fddb1eefd42dbdc85b3fb968e54349b498454761937fbf7e1ea5a09
+#   rev2  675b9d634fd98459463d496ab6df61b6ee7b7564fd0dd5c2e4858d8bb2379ddf
+#   rev1  af89890a3528ceb26b6c7a92f3939140038399c8793c8c1b2219536dab8f8030
+#   orig  9b2ff12c8f3f86a1231979537ae1a5c45a74711b3a3ebecb9799abf4cdc53c23
+#   DIFF (expected: pins the rev-3 addendum hash)
+# results_ghz_bragg_v2_loss_convention.json
+#   this  39b8a8345d0b8e4156ea14158a0ffe2047d7dfd2d50a73dd16dad3736150038b
+#   rev2  b5cf405024ac101a634a6af2505dea9abca3d5520f5a8e2562fc631650a33f8d
+#   rev1  24bdf86e05d2430bf00adc88fd13bb38108ab80c0d3382d6482d80532e3a46eb
+#   orig  1e65984a68dffbf015c16e68daf9e87da831d55b50f5b14f8c1f4ce566ecdda2
+#   DIFF (expected: pins block only; scientific fields MATCH exactly)
+# eta0_baselines.json
+#   this / rev2  5e8bc5fb11246573ee897faaaa634d95e6b5461921d93fd5aac4fee462e1edd3
+#   MATCH rev 2 (byte-identical). Derived from original v2 JSON 6475ff5a…;
+#   not a byte copy of that JSON.
