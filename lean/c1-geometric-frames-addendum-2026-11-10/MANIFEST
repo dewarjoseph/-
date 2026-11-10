@@ -1,0 +1,5 @@
+# Manifest of the C1 geometric-frames public addendum, 2026-11-10
+# sha256 of every file in this folder except this manifest.
+67c898ed267e0abc91c688cedfcb6b33cf1f5bf5400ac257d76ce700fba2d60f  IcosahedralFramesGeometric_v2_2026-11-10.lean
+c07c01c7bb807e64b91d47daba00d93dd3af5fd9cb61ef2c0afa37385f437fd1  README.md
+6a4fbe50d1b87f00479163e2164f7901cb4ca7737ffd03d00e19cfca8a4a4d7f  SHA256SUMS
