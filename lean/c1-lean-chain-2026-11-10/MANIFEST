@@ -1,0 +1,9 @@
+# Manifest of the C1 Lean-chain public-copy candidate, rev 3, 2026-11-10
+# sha256 of every file in this folder except this manifest.
+fe54b0312e751037ca217ab7e84657c4e0e8b230051bfc818b954184efd597c9  IcosahedralRotationGroup_2026-11-09.lean
+72424b02c07958f7ec5f6827c215c5f51cdd05381287b96fe2481dd0153b5c90  IcosahedralRotationGroupImportedMulEquiv_2026-11-10.lean
+37faea30eb0caccd3712fe3cd7f54b620ee862b6e6b3b9380adfb0bf15b86278  IcosahedralRotationGroupIsoAlternatingFive_v2_2026-11-10.lean
+17a2c2a05d1d640479485092b0249bd370084add488333ce1abfea216eb0ee21  IcosahedralRotationGroupIsSimple_2026-11-10.lean
+7d7f385d16f962a543226473c7a297631bfde480cf76e684acb006c8179f6b2f  NOTES.md
+4ed9710d60b03b58f6a1ff829fc61f6240d46643a02fdf6c65231fa9f0fdb62b  README.md
+cd265f96dc1e518c1b61109f61c2920fb1ee40019c985247674524e8a5faaf8b  SHA256SUMS
