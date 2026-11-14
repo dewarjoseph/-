@@ -206,12 +206,34 @@ def test_z3_no_go_family():
     assert rows[-1]['rayleigh_upper_on_E'] < 0.37
 
 
+# lambda_min of H_low(theta = 0) for both Z^3 matched pairs: 0.40413469613637319187... (mpmath eighe, 50 digits), multiplicity 2.
+# Because lambda_min is doubly degenerate, the eigenvector returned by LAPACK (and hence the rounded exact Rayleigh rational of
+# exact_rayleigh_dense) depends on the LAPACK build, driver and threading; the string pins in the JSON are environment artefacts.
+# The checks below use only basis-invariant quantities of the lambda_min eigenspace, plus the exact upper-bound property.
+Z3_LAMBDA_MIN = 0.40413469613637319187
+Z3_TOL = 1e-11      # observed |q - lambda_min| <= 3.4e-12 over 500 eigenspace bases; eigh error ~1e-14; rounded outward
+
+
+def _check_z3_low_certificate(Z, H, pin_exact):
+    """basis-invariant pin for H_low(0); returns the exact Rayleigh upper bound q recomputed on this machine"""
+    w, V = np.linalg.eigh(H)
+    assert abs(w[0] - Z3_LAMBDA_MIN) < Z3_TOL and abs(w[1] - Z3_LAMBDA_MIN) < Z3_TOL and w[2] - w[1] > 1.0   # doubly degenerate, gapped
+    P = V[:, :2] @ V[:, :2].conj().T                                    # spectral projector: independent of the basis LAPACK picks
+    assert abs(np.trace(P).real - 2) < 1e-10 and np.abs(P @ P - P).max() < 1e-10
+    assert abs(np.trace(H @ P).real / 2 - Z3_LAMBDA_MIN) < Z3_TOL and np.abs(H @ P - Z3_LAMBDA_MIN * P).max() < 1e-9
+    q = Z.exact_rayleigh_dense(H)                                       # exact Rayleigh quotient of an integer vector
+    assert -1e-12 <= float(q) - Z3_LAMBDA_MIN < Z3_TOL                  # valid (Rayleigh-Ritz) upper bound, tight to Z3_TOL
+    pin = Fraction(pin_exact)                                           # historical pin: also a valid upper bound, same tolerance
+    assert -1e-12 <= float(pin) - Z3_LAMBDA_MIN < Z3_TOL and abs(float(q - pin)) < Z3_TOL
+    return q
+
+
 def test_z3_trace_matched_pair_certificate_recomputes():
     """Theorem X.5: identical plaquette trace fields, E_*(A) <= exact Rayleigh < certified free-cell bound <= E_*(B)"""
     import phase10_z3 as Z, scipy.sparse as sp
     d = load('phase10_z3_pairs.json'); b, v = d['best'], d['certificate_v2']
     A, B = (Z.Cell(np.array(b[k]).reshape(2, 2, 2, 3, 3)) for k in ('frames_low', 'frames_high'))
-    q = Z.exact_rayleigh_dense(A.bloch(np.zeros(3))); assert f'{q.numerator}/{q.denominator}' == v['E_low_upper_exact']
+    q = _check_z3_low_certificate(Z, A.bloch(np.zeros(3)), v['E_low_upper_exact'])
     _, Hf = B.cell_ops(); f = float(np.linalg.eigvalsh(Hf)[0]); mu = Fraction(math.floor((f - 1e-7) * 2 ** 20), 2 ** 20)
     low = P9.certified_lower(sp.csr_matrix(Hf), mu); assert abs(low - v['E_high_lower_free_cell']) < 1e-12 and low - float(q) > 0.18
     pa, pb = A.plaquettes(), B.plaquettes(); assert Z.trace_field(pa) == Z.trace_field(pb) and Z.counts(pa) == Z.counts(pb) and pa != pb
@@ -223,7 +245,7 @@ def test_z3_class_field_matched_pair_certificate_recomputes():
     d = load('phase10_z3_classpairs.json'); b, v = d['best'], d['certificate']
     A, B = (Z.Cell(np.array(b[k]).reshape(2, 2, 2, 3, 3)) for k in ('frames_low', 'frames_high'))
     assert A.plaquettes() == B.plaquettes() and not np.array_equal(A.F, B.F)
-    q = Z.exact_rayleigh_dense(A.bloch(np.zeros(3))); assert f'{q.numerator}/{q.denominator}' == v['E_low_upper_exact']
+    q = _check_z3_low_certificate(Z, A.bloch(np.zeros(3)), v['E_low_upper_exact'])
     _, Hf = B.cell_ops(); f = float(np.linalg.eigvalsh(Hf)[0]); mu = Fraction(math.floor((f - 1e-7) * 2 ** 20), 2 ** 20)
     assert P9.certified_lower(sp.csr_matrix(Hf), mu) - float(q) > 0.18
     for k in range(3): assert abs(Z.Shadow(A, k).floor(grid=4)[0] - Z.Shadow(B, k).floor(grid=4)[0]) < 1e-9
