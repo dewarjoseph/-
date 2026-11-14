@@ -473,13 +473,27 @@ class TestAdversarialPolyhedralComplexAndCaging(unittest.TestCase):
             ("log_resolvent", lambda x: np.log1p(x)),
         ]
 
+        # (a) Exact check (rigorous): the Delta_p have integer entries, so sum_p (-1)^p Tr(Delta_p^k) is computed in Python
+        # integers and must be exactly 0 for k = 1, 2 (the linear and quadratic cases of the cancellation).
+        Ds = [D.toarray() for D in (D0, D1, D2, D3)]
+        Di = [np.rint(D).astype(np.int64) for D in Ds]
+        for D, M in zip(Ds, Di):
+            self.assertTrue(np.array_equal(D, M.astype(float)), "Hodge Laplacian entries must be integers")
+        for k in (1, 2):
+            tr = [int(np.trace(M)) if k == 1 else sum(int(x) for x in (M * M.T).ravel()) for M in Di]
+            self.assertEqual(tr[0] - tr[1] + tr[2] - tr[3], 0, f"exact alternating trace sum for Delta^{k} must be 0, got {tr}")
+
+        # (b) Float check with a derived bound. 4e-9 is the a-priori first-order roundoff bound for f = lambda^2 (3.70e-9,
+        # test-sweep-susy-phase10-diagnosis-2026-11-10.md), rounded outward, and is the largest of the five per-f bounds.
+        # A genuine cancellation failure is O(0.3) (smallest nonzero eigenvalue 0.3026), about 7.5e7 times larger.
+        susy_bound = 4e-9
         for name, f in test_functions:
             s0 = np.sum(f(evs[0][evs[0] > tol]))
             s1 = np.sum(f(evs[1][evs[1] > tol]))
             s2 = np.sum(f(evs[2][evs[2] > tol]))
             s3 = np.sum(f(evs[3][evs[3] > tol]))
             susy_sum = s0 - s1 + s2 - s3
-            self.assertLess(abs(susy_sum), 1e-12, f"SUSY cancellation for {name} failed: sum = {susy_sum:.2e}")
+            self.assertLess(abs(susy_sum), susy_bound, f"SUSY cancellation for {name} failed: sum = {susy_sum:.2e}")
 
     def test_04_metric_perturbation_invariance(self):
         tiles1 = generate_supertile_tiles(FR30, 1)
