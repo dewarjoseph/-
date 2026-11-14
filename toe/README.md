@@ -1,7 +1,7 @@
 # toe/ — unification-programme working record (Chair44 connection floor)
 
 This folder holds the research record behind the v0.6 preprint in `paper/toe-preprint-v0.6/`: preregistrations, scored results, certificate re-derivations, Lean scratch proofs with kernel re-run logs, and dated amendments.
-"ToE" is an internal project name. **Nothing here claims a theory of everything, or any physical theory.** The content is mathematics and lattice computation about one object, labelled claim by claim.
+**Status.** "ToE" is an internal project name for a unification programme. It is not a theory of everything, and it makes no physical claim. The content is mathematics and lattice computation about one object, labelled claim by claim. The target is a condition, not an award: every row of the physics scorecard proved or certified, each at its stated scope, is necessary before the larger name could be used, and it would not by itself be enough. Until then it stays a unification programme. The open rows, each with a next attempt and a proposed pass/fail test, are in [`OPEN_ATTACKS.md`](OPEN_ATTACKS.md).
 
 ## Contents
 
@@ -19,6 +19,7 @@ This folder holds the research record behind the v0.6 preprint in `paper/toe-pre
 | `amendments/` | dated ledger addenda; they never rewrite the files they amend |
 | `gravity/` | Regge / CDT feasibility scoping, the frozen T1 preregistration and scorer, results and a scorer-robustness amendment |
 | `REDACTIONS.md` | the two files changed for publication, with their original hashes |
+| `OPEN_ATTACKS.md` | invitation: every open scorecard row with its current label, a next attempt and a proposed pass/fail test (proposals for future preregistration, not preregistered) |
 
 ## How to read it
 
