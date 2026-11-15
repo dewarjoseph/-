@@ -1,0 +1,141 @@
+\documentclass[10pt]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb,booktabs,longtable,array,hyperref,xcolor,graphicx}
+\hypersetup{colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black}
+\newcommand{\lab}[1]{\textbf{[#1]}}
+\title{Phase 4.3 Physics Bottleneck Attacks}
+\author{Joey D}
+\date{15 November 2026 (America/Los\_Angeles)}
+\emergencystretch=4em
+\begin{document}
+\maketitle
+\noindent\textbf{Scope.} This report combines the Phase 4.2 results (baseline: ToE preprint v0.9.1, Foundations rev2.8, narrative rev3.8) with the Phase 4.3 specification, which revised the Phase 4.2 plan. Each scored Phase 4.3 run was preceded by a frozen preregistration (hypothesis, exact pass/fail criteria, parameters, sha256 of the scripts and of the frozen inputs) whose hash was logged before the run (Table~\ref{tab:hash43}). Nothing was submitted, committed to a repository or sent. Labels: \lab{P} proof or derivation (scope stated), \lab{C} exact computation, \lab{E} empirical or floating point, \lab{X} conjecture, \lab{A} analogy, \lab{F} falsified, \lab{S} standard. Anything done after seeing data is marked \emph{post hoc}. A spec claim that could not be checked is reported as untested; a spec claim that turned out wrong is reported as wrong (Section~\ref{sec:wrong}).
+
+\section*{Summary}
+\begin{longtable}{p{1.7cm}p{3.6cm}p{8.0cm}p{2.5cm}}
+\toprule
+Track & Spec claim / criterion & Result & Verdict\\ \midrule\endhead
+1A interface census & $I_b(\mathrm{FR30})=32\cdot4^b-140$ for $b\ge2$; 1387 recurrence with period 2 ($+426,+450$); proof by a 48-state contact automaton; tail $=0.249990$, $U_7=14.355051$. & Proved by an exact finite transition system (93 states for FR30, 105 for 1387) that reproduces the geometric census for $b\le7$ (\lab{C}); minimal annihilating polynomials $x(x-4)(x-1)$ and $x(x-4)(x-1)(x^2+x+1)$ give the all-$b$ statement (\lab{P}, computer-assisted). FR30 closed form and the tail $0.24999046$ confirmed; $U_7=14.355051$, $\delta=4.0688\%$ (gate not unlocked by 1A alone). The 1387 recurrence has period \emph{3}, not 2: $I_b=32\cdot4^b-\{104,98,134\}$. & PASS (FR30); spec wrong on 1387 period and on the state count\\
+1B collar & Relaxing a collar of depth $d_c=2,3$ at the child interfaces captures $\ge75\%$ of the drop; production $7\to8$ gives $U_8\le13.81$, $\delta\le2.14\%$ (spec). & Validation (exact rational energy certificate, \lab{C}): captured fraction $0.990$--$0.995$ at $5\to6$, $0.987$--$0.992$ at $6\to7$ ($d_c=2,3$). Production $7\to8$ (\lab{C}, conditional on Theorems B/C/F): $U_8=13.921169$ ($d_c=3$), $\delta=2.536\%$; the numerical gate $U\le14.179326$ is met; the spec's $13.81$ and $2.14\%$ are not reached. & Capture criterion PASS; production gate criteria PASS; spec numbers FAIL\\
+1C dual certificate & Level-7 rational dual certificate. & Not run (needs the heavy level-7 free-minimisation dual solve; not reachable on this machine). & NOT RUN\\
+2 OA-GAUGE-V2 & Rule 1387 Gaussian secular check; Lean TOE-LESECULAR. & Gaussian statistics of 1387 equal those of FR30 within $1.5\sigma$ at $L=2$ and bit-for-bit at $L=3$: the cube partition of $T_L$ is identical for the two rules (\lab{C}, $L\le6$, post hoc). The frame-twisted ensemble separates the rules at $>70\sigma$ (\lab{E}). Lean: compiles, standard axioms only (\lab{P}). & PASS; frame twist separates\\
+3 OA-CHIRAL & $\operatorname{tr}\gamma=0$ and $n_+=n_-$ from $\tau_1$ anticommutation in Lean; test $\Phi\otimes\tau_1$ (4D and frame parity) for a nonzero crossing. & Both Lean theorems compile (\lab{P}). Neither $\Phi\otimes\tau_1$ route opens a signature: $n_+-n_-=0$ at every $m_0$ for 14 rules in 3D and 4 rules in 4D. Post hoc: an antiunitary chiral symmetry survives, and the matching Lean lemma compiles. & routes FAIL (\lab{F}) to produce an index\\
+4A $d_s$ window & $d_s=3.0\pm0.15$ on $\tau\in[1,8]$ at $L=5,6$. & Not met: $L=6$ pinned $3.22$--$3.23$, free $2.76$--$2.79$; the two operators approach $3$ from opposite sides with $L$ (\lab{E}). & FAIL (close)\\
+4B $V_{\rm ind}(r)$ & 22 \texttt{eigsh} calls at $L=4$; decay law. & Nonzero ($10^{-4}$ at $r\approx2$), decays by about three orders of magnitude, changes sign twice; power law versus exponential undetermined (\lab{E}, on my reading of ``frame-flip''). & criteria H1,H2 PASS; H3 undetermined\\
+5A $d_L$ & $d_L$ for $L=1..5$, finite-difference check at $L\le3$. & $d_L=-6.03,-6.32,-4.88,-4.50,-4.40$; $d_L/c_L\to-0.33$; $4^{-L}d_L\to0$; Rayleigh--Schr\"odinger agrees with finite difference to $2\cdot10^{-4}$ (\lab{C}/\lab{E}); the spec's printed formula does not (post hoc). & PASS\\
+5B parity coset & Parity-coset check on 18 flagged rules plus x539311, x539291. & The flagged list is not on this machine. Exact check on x539311, x539291, all 14 rules with $|H|\le24$ and 4 random rules ($|H|=48$): all P1, P2, P4 hold (\lab{C}). Not the flagged set. & PASS on substitute set\\
+\bottomrule
+\end{longtable}
+
+\section{Protocol and conventions}
+All scored code ran as \texttt{python -I}. The Phase 4.3 work folder is \texttt{phase4.3-2026-11-15}; \texttt{SHA256SUMS} lists every file. Frozen chair-tiling code (the \texttt{chair}, \texttt{gauge}, \texttt{pert} modules, the OA-GAUGE runner and the OA-GRAV/CONT runner) was imported read-only; their sha256 are in the preregistrations. No frozen v0.6 file, no existing Lean file and no existing proof queue was touched; the Lean files are new scratch files.
+
+\paragraph{Rule conventions.} FR30 is \texttt{chair.FR30}. Rule 1387 is \texttt{chair.proper\_rule(1387)}, not \texttt{extended\_rule(1387)}. The block density $\nu^0_\ell$ (written $D_\ell$) is the mean over the 24 proper rotations $h$ of the Dirichlet minimum over the panels interior to the block $T_\ell^h$, slope $0$.
+
+\paragraph{Rounding.} Upper bounds are exact rationals ceiled at the sixth decimal; lower bounds would be floored. Other numbers are floating point and labelled \lab{E}, unless the object is an exact integer or rational (\lab{C}).
+
+\paragraph{Conditionality.} Every use below of a collar or census number as a bound on the constant is conditional on the hand-proved Theorems B, C, F (\lab{P}, unverified), exactly as the earlier bracket. The computed energies themselves are \lab{C}.
+
+\input{tab_hash43.tex}
+
+\section{Track 1A: interface census, recurrence and tail}\label{sec:t1a}
+\paragraph{Setting.} $I_b$ is the interface energy $\tfrac12\sum_{\rm ordered}|w|^2$ over the $48\cdot4^{b-1}$ cross-child panels of $T_b$, with $|w_e|^2=|u_a-u_b|^2\in\{0,2,4\}$. The exact census of Phase 4.2 gave $I_b$ for $b\le7$ (FR30: $132,372,1908,8052,32628,130932,524148$; 1387: $138,408,1950,8058,32664,130974,524154$) and mean $|w|^2\to8/3$.
+
+\paragraph{Finite transition system \lab{C}.} A state is (block rotation $R$, sign class $S$, contact orientation $c_a$, contact depth $d$) of a unit-square panel group on a child-child interface; one substitution step refines each state into 4 successors. The script \texttt{t1/t1a\_automaton.py} enumerates all reachable states from the 28 oriented contact types of the level-1 interfaces: 93 states for FR30 and 105 for 1387 (not 48), and it reproduces the geometric census \emph{exactly} for $b=1..7$ (both rules; the geometric census is an independent code path). $I_b=\tfrac12\sum$ of the squared weights over the state vector after $b-1$ refinements.
+
+\paragraph{Proof of the recurrences \lab{P}, computer-assisted.} The state vector $v_b$ satisfies $v_{b+1}=Mv_b$ with $M$ an exact integer matrix. Computing the minimal annihilating polynomial of the sequence $\{v_b\}$ in exact arithmetic gives $x(x-4)(x-1)$ for FR30 and $x(x-4)(x-1)(x^2+x+1)$ for 1387. Hence the scalar sequence $I_b$ obeys the corresponding linear recurrence for all $b$, and matching the initial values gives, for $b\ge2$,
+\[
+I_b(\mathrm{FR30})=32\cdot4^b-140,\qquad I_b(1387)=32\cdot4^b-\{104,98,134\}\ \ (b-2\equiv0,1,2 \bmod 3).
+\]
+Both closed forms were also checked against the recurrence to $b=80$ in exact integers. ($b=1$ is the exception: $132\neq32\cdot4-140$.) Equivalent form: $I_{b+1}=4I_b+420$ for FR30, $b\ge2$; for 1387, $I_{b+1}-4I_b$ cycles through $318,258,432$.
+
+\paragraph{Tail \lab{C}.} $\sum_{b\ge\ell+1}I_b/8^b=32\cdot2^{-\ell}-20\cdot8^{-\ell}$ exactly (FR30, $\ell\ge1$). At $\ell=7$ this is $0.24999046$ instead of $48\cdot2^{-7}=0.375$. With the class-averaged exact $\nu^0_7=14.105060$ this gives $U_7=14.355051$ (ceil 6), half-width $\delta=(U-L)/(U+L)=4.0688\%$ against $L_7=13.232574$, down from $4.5015\%$ (Table~\ref{tab:t1a43}). The gate needs $U\le14.179326$ ($\delta<3.4538\%$): \textbf{not reached by 1A alone}; the spec's $U_7\le14.1500$ is unreachable for the same reason ($\nu^0_7$ alone is $14.105$ and the tail is $\ge0.2499$).
+\input{tab_t1a43.tex}
+\input{tab_t1a_42.tex}
+The second table is the Phase 4.2 census itself (cross panels, $I_b$, mean $|w|^2$).
+
+\section{Track 1B: collar relaxation}\label{sec:t1b}
+\paragraph{Construction.} Let $L=\ell+1$. On $T_L^h$ take, on each of the 8 children, the level-$\ell$ Dirichlet minimiser of the child's rotation type (it vanishes on the child's boundary tiles). Its energy density is $D_{\rm trial}=D_\ell+I_L/8^L$. The collar is the set of tiles within panel-graph distance $d_c$ of a tile carrying a cross-child panel (my reading of $d_c$; a tile on the boundary of $T_L^h$ is never freed). Outside the collar the trial stays frozen, inside it the quadratic energy is minimised by CG. The collar field is rounded to the dyadic grid $2^{-40}$ and the energy of the rounded field is evaluated in exact integer arithmetic. Any admissible field gives an upper bound of $D_L^h$, so the certificate does not depend on the CG tolerance. The relation to the bracket is $U^{\rm collar}_L=D^{\rm collar}_L+\sum_{b>L}I_b/8^b$, and $D_{\rm trial}-D_L$ is exactly the improvement $U_\ell-U_L$ of the old scheme, so ``fraction captured'' $=(D_{\rm trial}-D^{\rm collar})/(D_{\rm trial}-D_{\rm full})$.
+
+\paragraph{Validation \lab{C}.} (Table~\ref{tab:t1b43}) $D_{\rm full}$ is the float CG minimum for $L\le6$ and the stored exact class mean $14.105060$ for $L=7$. The collar bound is above $D_{\rm full}$ in every case (criterion B1) and the captured fractions are far above the preregistered $0.80$ (B2 PASS). The uncaptured remainder at $d_c=3$ is $0.0060,0.0084,0.0067$ at $L=5,6,7$: it saturates. The 24 rotations fall into three classes of sizes $6,12,6$ with bit-identical energies (checked at $\ell=4,5,6$ for trial and collar), so four representatives with weights $1\!:\!1\!:\!1\!:\!1$ (classes $6,12,6,12$) give the exact mean.
+\input{tab_t1b43.tex}
+\input{sec_t1bprod.tex}
+
+\paragraph{Track 1C (not run).} The level-7 rational dual (free-boundary) certificate needs a monolithic dual solve on about $2.1\cdot10^6$ tiles with exact rational verification; it is not reachable on this machine and is listed in the not-run table. The stored lower end $L_7=13.232574$ is used unchanged.
+
+\section{Track 2: OA-GAUGE-V2}\label{sec:t2}
+\paragraph{Phase 4.2 result (retained).} The algebra of the secular term (\lab{P}, hand; \lab{C} to $2\cdot10^{-16}$) and the Gaussian and Wilson tests: SU(3) and SU(2)$\times$SU(3) have $\lambda_{\min}<$ centroid, SU(2) has equality, the centroid recovers $C_G$ to 1\%, all 10 preregistered criteria PASS (\lab{E}, $L=2,3$, FR30, quenched; the action is $\beta/N$). The frozen constant $C_G=\dim G(\mathrm{dia}-\mathrm{para})$ is the multiplet-centroid constant, not an error; what failed in the original test was the observable ($\lambda_{\min}$ instead of the centroid) and a non-increasing-deviation rule that a constant secular deficit violates.
+\input{tab_t2g_42.tex}
+\input{tab_t2w_42.tex}
+SU(2) control, $L=2$: \input{su2c.tex}.
+
+\paragraph{Rule 1387, Gaussian sampler \lab{E}.} Table~\ref{tab:t2g43}: $R_{\min}$ for 1387 agrees with FR30 (SU(3): $z=-1.45$ at $L=2$; SU(2)$\times$SU(3): $-0.67$), the SU(2) centroid equals the floor and every sample has $\lambda_{\min}<$ centroid for SU(3) and the product, all centroids within $3$ standard errors of 1. The preregistered criteria D2, D3, D5 pass. At $L=3$ the numbers are identical to $10^{-16}$: both runs used seed 20261116 and the \emph{same} panel graph, so this is one sample, not two.
+\input{tab_t2g43.tex}
+
+\paragraph{Graph identity.} The preregistered criterion D1 asked that the panel arrays \texttt{(a,b,k)} and owner grids of $T_L$ be identical for FR30 and 1387, $L\le5$. As written it \textbf{fails}: tile \emph{labels} differ (and 63 of 64 frames differ at $L=2$). Post hoc (\texttt{t2/t2f\_partition\_identity\_posthoc.py}) the right statement is that the cube-to-tile \emph{partition} (the owner grid up to relabelling) and the geometric positions of all panels are identical for the two rules at $L=1..6$ \lab{C}. Since panels are enumerated by position, $K$ and $M_q$ coincide, which explains the exact agreement at $L=3$ and settles the ``frame-blind'' premise of the spec for the untwisted observable.
+
+\paragraph{Frame-twisted ensemble \lab{E}.} Links are the frame link tensored with an SU(3) Gaussian fluctuation (Table~\ref{tab:t2tw}). The baseline ground level is 6-fold degenerate for both rules; $\lambda_0$ differs ($10.777$ versus $11.587$ at $L=2$, FR30 versus 1387, as the frame connection differs). The centroid shifts differ by $\ge70\sigma$ at both $\beta$ and $L=2,3$, so the twisted observable separates the rules (D4). The ratio of the shifts at $\beta=96$ and $192$ is $2.0\pm0.1$ for both rules: $1/\beta$ scaling, a secular (second-order) effect (D5). Scope: $T_2,T_3$, 5000 and 300 samples, Gaussian weak-coupling approximation only.
+\input{tab_t2tw.tex}
+
+\paragraph{Lean TOE-LESECULAR \lab{P}.} \texttt{lean/ToeLeSecular\_2026-11-15.lean}: for Hermitian $T^a$ and real symmetric $S$, $W=\tfrac12\sum S_{ab}\{T^a,T^b\}$ is Hermitian; (i) if $\{T^a,T^b\}=c\,\delta_{ab}$ then $W$ is scalar and $\lambda_{\min}=\operatorname{tr}W/N$; (ii) if $\{T^a,T^b\}=\tfrac1N\delta_{ab}+d_{abc}T^c$ with traceless, linearly independent $T^c$ then $\lambda_{\min}\le\operatorname{tr}W/N$, strictly if $\sum S_{ab}d_{abc}\ne0$. The file compiles with \texttt{lake env lean} (Lean 4.36.0-rc2, Mathlib), no error; \texttt{\#print axioms} of every theorem lists only \texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}, no \texttt{sorryAx}. The raw build output is stored beside the file. (The Gram-independence hypothesis in (ii) is explicit in the statement.)
+
+\section{Track 3: OA-CHIRAL}\label{sec:t3}
+\paragraph{Phase 4.2 result (retained).} The raw $D_{\rm naive}$ is not skew-Hermitian ($\max|D+D^\dagger|=4$), the Kramers operator $(i\sigma_2)K$ does not commute with $H_W$, and $\tau_1H_W\tau_1=-H_W$ forces $n_+-n_-=0$ at every $m_0$ for every rule and level.
+\input{tab_t3_42.tex}
+
+\paragraph{Lean TOE-G4-03 \lab{P}.} \texttt{lean/ToeG403\_2026-11-15.lean}: \texttt{tr\_grading\_zero} ($\operatorname{tr}(1_n\otimes\tau_3)=0$) and \texttt{index\_overlap\_zero\_of\_tau1\_anticomm} (a Hermitian $H$ on $\mathbb C^n\otimes\mathbb C^2$ anticommuting with $1\otimes\tau_1$ has as many positive as negative eigenvalues; the general form \texttt{pos\_neg\_card\_eq} needs only $U^2=1$). Both compile with standard axioms only. Scope: this is $n_+=n_-$; reading it as the vanishing of the overlap index is a hand step, not formalised. The existing Lean chirality file was not modified.
+
+\paragraph{The $\Phi\otimes\tau_1$ routes \lab{E}.} $H_W=(M-m_0)\otimes\tau_3+iK\otimes\tau_2+\Phi\otimes\tau_1$ on variant B (tile $\otimes$ spatial $\mathbb C^2\otimes$ gauge $\mathbb C^2\otimes$ grading), scanned over $m_0\in[0,24]$. Route 3B-2: $\Phi_a=\lambda\det G_a$ on the tiles of the 3D patch. Route 3B-1: the 4D complex $T_2\times\mathbb Z_4$ with $\Phi=\lambda\,(-\tfrac i2)(S-S^\dagger)\otimes1$ ($S$ the temporal shift) and $\Gamma_4=\tau_2$. Rules: FR30, 1387, x539311, x539291 and ten random extended rules (ten of which have improper tiles; note that FR30, 1387 and the two frontier rules have none, so for them route 3B-2 is a constant). Table~\ref{tab:t3n}: $n_+-n_-=0$ at every $m_0$ in every run, and the spectrum stays symmetric about $0$ to $6\cdot10^{-13}$ although $\tau_1$ is no longer a symmetry. Criteria E2 and E3 FAIL as preregistered (no crossing for any rule, $L=2,3$ in 3D and $L=2$ in 4D), E1 (control $\lambda=0$) holds. The spec's premise that $\Phi\otimes\tau_1$ ``must'' open a crossing is therefore wrong for these constructions.
+\input{tab_t3n.tex}
+
+\paragraph{Why \emph{(post hoc)}.} A smoke run before the freeze had already shown that the symmetry of the spectrum persists. Post hoc, a search over products of Pauli factors on (spatial, gauge, grading) found that $\Sigma=(\sigma_y\otimes\sigma_y\otimes\tau_y)K$ (antiunitary, $\Sigma^2=-1$) anticommutes with $H_W$ even with $\Phi\otimes\tau_1$ present, at $L=1,2$ for FR30 and an improper rule (script \texttt{t3/t3c\_posthoc\_symmetry\_search.py}). An antiunitary $\Sigma=VK$ with $V\bar HV^\dagger=-H$ makes the spectrum symmetric, hence $n_+=n_-$. In Lean this is \texttt{pos\_neg\_card\_eq\_antiunitary} (same file; compiles, standard axioms only): $V\,A^{\!\top}V^{-1}=-A$ for Hermitian $A$ gives equal charpolys of $A$ and $-A$. This is a no-go for the whole family: any index-producing construction must break this antiunitary chiral symmetry as well, for example with a term not covered by $\tau_{1}$-type coupling alone (a real mass-like $\mu\,\mathbf 1$ or a generic Hermitian perturbation); I did not run that test, so whether it opens a crossing is untested.
+
+\section{Track 4: gravity and spectral dimension}\label{sec:t4}
+\paragraph{Phase 4.2 results (retained).} (a) $\dim\ker C_L=6$ for $L=1..5$, FR30 and 1387 (\lab{C}); (b) the 4D heat-trace factorisation holds to $10^{-14}$ with a validity window that needs $L\ge5$ for $\tau\le128$ (\lab{C}); (c) the prescription $\tau\in[16,128]$ at $L=6$ fails (free $d_s\approx2.0$--$2.4$).
+\input{tab_t4r_42.tex}
+\input{tab_t4d_42.tex}
+
+\paragraph{4A: $d_s$ on the pre-saturation window \lab{E}.} The earlier runs did not store moments, so moments were recomputed (deflated KPM, $M=16$, $K=900$, two seeds, moments saved) for $L=5,6$, pinned ($24-A$) and free ($\deg-A$); this is a new build, not a re-read. $Z^\prime=\operatorname{Tr}e^{-\tau(H-\lambda_0)}-1$ (ground mode removed). Table~\ref{tab:t4a}. On $\tau\in[1,8]$ the fitted $d_s$ is $3.22,3.23$ (pinned) and $2.76,2.79$ (free) at $L=6$ (two seeds): \textbf{G1 fails}, and the seed spread ($\le0.04$) is below $0.15$, so the failure is conclusive at this accuracy, not merely uncertain. The pointwise curves are flat to within $\pm0.05$ for the pinned operator ($3.20$--$3.26$) and fall from $2.95$ to $2.6$ for the free operator. With $L$ the pinned fit moves down ($3.34\to3.22$ for $L=5\to6$) and the free fit moves up ($2.69\to2.78$), so the two operators bracket $3$ and approach it from opposite sides, consistent with $d_s=3$ in the continuum limit but not demonstrating it (no extrapolation was done). The KPM estimator at $L=4$ is within $0.14$ of exact $d_s$ over $\tau\le16$ (Hutchinson noise grows where $Z^\prime$ is small), which is why seeds are compared.
+\input{tab_t4a.tex}
+
+\paragraph{4B: two-defect induced interaction \lab{E}.} ``Frame-flip'' is not defined in the spec text I had; I used two readings, inversion $G_x\to-G_x$ and a $\pi$ rotation $G_x\to G_x\mathrm{diag}(-1,-1,1)$, in the $\theta$-family connection $U_e=R_{u_a}(\theta)R_{u_b}(\theta)^{-1}$, $R_u=\cos\theta-i\sin\theta\,\sigma\!\cdot\!u$, at $\theta_4=\pi/16$ (the Pauli frame link is $\theta=\pi/2$). Defect-free $T_4^\circ$ has 4096 tiles; $x_0$ is the interior tile nearest the barycentre; the ten $y_k$ are interior tiles at centroid distances nearest to $2,3.1,\dots,12$ (Table~\ref{tab:t4b}, 22 \texttt{eigsh} calls per type, Kramers splitting $\le6\cdot10^{-13}$). H1 and H2 pass for both types: $|V|$ is $10^{-4}$ at $r\approx2$ and $\sim10^{-7}$ for $r\ge6$. $V$ changes sign twice, so the log fits are poor ($R^2$ power law $0.87,0.89$ against exponential $0.81,0.79$); H3 is \textbf{undetermined}. A decay law is not supported by these ten points.
+\input{tab_t4b.tex}
+
+\section{Track 5}\label{sec:t5}
+\paragraph{5A: the fourth-order coefficient \lab{C}/\lab{E}.} With $U_e(\theta)=1+i\theta(B-A)+\theta^2(AB-1)-\tfrac{2i}{3}\theta^3(B-A)+\tfrac{\theta^4}{3}(1-AB)+O(\theta^5)$, $A=\sigma\!\cdot\!u_a$, $B=\sigma\!\cdot\!u_b$, the matter floor is $\lambda(\theta)=\lambda_1+c\theta^2+d\theta^4+O(\theta^5)$ (first and third orders vanish, checked to $10^{-14}$). The ground level is a Kramers doublet, so the effective Hamiltonian is a multiple of $1$ at every order; $d_L$ comes from Rayleigh--Schr\"odinger in intermediate normalisation (the formula printed in the spec is wrong, Section~\ref{sec:wrong}; I used the full recursion through $\psi_3$). Checks (F1--F4 all PASS): the operator series reproduces $H(0.01)$ to $1.1\cdot10^{-10}$; $c_L$ equals the frozen \texttt{pert} value to $10^{-14}$; $d_L$ is independent of the spinor to $3\cdot10^{-14}$; the partner-spinor solvability component is $\le4\cdot10^{-14}$; and a 5-point finite difference of the exact lowest eigenvalue (Richardson, $\epsilon=0.04,0.08$) agrees with $d_L$ within $1.9\cdot10^{-4}$ at $L=1,2,3$ ($\lambda(\theta)$ is even to $2\cdot10^{-14}$). Table~\ref{tab:t5a}: $d_L$ is negative, $d_L\to\approx-4.4$ and $d_L/c_L\to-0.33$, so $4^{-L}d_L\to0$ geometrically (as it must if $d_L$ stays bounded); \lab{E} for the trend, since only $L\le5$ was computed.
+\input{tab_t5a.tex}
+
+\paragraph{5B: parity coset \lab{C}.} The recomputed list of imprimitive rules has 13130 entries (12 with $|H|=16$, 2 with $|H|=24$, 13116 with $|H|=48$), matching the earlier census. The list of the 18 split-candidate rules (flag set at levels 3--5, counts only) is \emph{not available on this machine} and its definition is not documented in the files I could find, so the preregistered check ran on a substitute set: x539311, x539291, the 14 rules with $|H|\le24$ and 4 rules with $|H|=48$ drawn with seed 20261115. For every one and every $L=1..6$: P1 (the frames of $T_L$ lie in the class $C_{L\bmod p}$), P2 (they fill the class for $L\ge k_{\rm stable}$), and P4 (the parity character, $\det$ or the permutation sign, is constant on $T_L$) all hold (Table~\ref{tab:t5b}). The multiplicities are not exactly uniform at $L\le6$; the maximal relative deviation is $2^{-L}$-like for $|H|=16$ ($1.6\cdot10^{-2}$ at $L=6$) and larger for slowly mixing $|H|=48$ rules ($0.39$ for x655811). So the exact parity structure that the split question rests on is confirmed on these rules; it does \emph{not} by itself show equal even and odd limits of $c_L$, and the $-I$ argument of the spec (an involution $w\mapsto-w$) was not turned into a proof here: for rules whose odd coset is $N\cdot(-I)$ it is a hand argument \lab{P, not checked}, and no $c_L$ comparison was run.
+\input{tab_t5b.tex}
+
+\section{What in the spec turned out wrong}\label{sec:wrong}
+\begin{enumerate}
+\item Track 1A: the contact automaton does not have 48 states (93 for FR30, 105 for 1387). The 1387 recurrence is not period 2 with $+426,+450$: $I_{b+1}-4I_b$ cycles $318,258,432$ (period 3), and $I_{b+2}-4I_{b+1}$ does not give $426,450$ (it gives $432,318,258$); the minimal annihilating polynomial contains $x^2+x+1$. The spec's ``28 interior interfaces'' is the number of oriented level-1 contact types used as seeds, not the state count.
+\item Track 1A/1B arithmetic: the 1A tail alone cannot reach $U_7\le14.1500$ or $\delta\le2.14\%$; those numbers (and the projection $U_8\le13.81$ from a collar value $13.68$) are assertions in the spec, not derived; measured: collar value $13.7962$--$13.7986$, $U_8=13.921169$, $\delta=2.536\%$ (Section~\ref{sec:t1b}).
+\item Track 2: ``$C_G$ is erroneous'' is wrong (Section~\ref{sec:t2}); the spec's claim that the untwisted statistics of 1387 and FR30 coincide is correct, but literal equality of labelled panel arrays (my criterion D1) is false, only the partition and positions agree.
+\item Track 3: the claim that $\Phi\otimes\tau_1$ ``must be'' present for an index and then yields one is not borne out: both routes keep $n_+=n_-$ because an antiunitary chiral symmetry survives. The statement that $\tau_1$ anticommutation alone forces $n_+=n_-$ is correct (Lean).
+\item Track 4: the spec presumes a $d_s=3.0\pm0.15$ plateau on $\tau\in[1,8]$ at $L=5,6$; it is absent at the stated accuracy. ``Zero new matrix builds'' was not possible: the earlier runs did not store moments, so the KPM was repeated.
+\item Track 5A: the $d_L$ formula as printed (terms in $\psi_1,\psi_2$ only) is \textbf{wrong}: post hoc (\texttt{t5/t5a\_specformula\_posthoc.py}) it gives $-9.35,-10.12,-9.92$ at $L=1,2,3$ against the finite-difference values $-6.03,-6.32,-4.88$ (\lab{E}); the full recursion through $\psi_3$ matches.
+\item Track 5B: the 18-rule list is not in any file I could reach (only its hash and count in the preprint tables).
+\item Correct as stated (checked): $I_b(\mathrm{FR30})=32\cdot4^b-140$ for $b\ge2$ and the tail $32\cdot2^{-\ell}-20\cdot8^{-\ell}$; $U_7=14.355051$ with $\delta=4.07\%$; the Lean statements of TOE-LESECULAR and TOE-G4-03.
+\end{enumerate}
+
+\section{Not run}
+\begin{longtable}{p{3.8cm}p{8.6cm}p{2.4cm}}
+\toprule Item & Reason / scope & Status\\ \midrule\endhead
+Track 1C level-7 rational dual certificate & monolithic dual solve at about $2.1\cdot10^6$ tiles with exact verification; not reachable here; $L_7$ unchanged & NOT RUN\\
+1B at $d_c=4$ and the 1387 collar & only $d_c=2,3$ and FR30 were run & not run\\
+Gate with $\delta$ from a Track-1C lower end & needs 1C & NOT RUN\\
+Track 3: antiunitary-breaking perturbation test & the post hoc symmetry suggests it; not run & untested\\
+Track 3: $T_3$ in 4D, $T_4$, other $\lambda$ & only $L=2$ (4D) and $L\le3$ (3D) at $\lambda=0,0.3,1$ & reduced scope\\
+Track 4: $d_s$ at $L=7$; extrapolation in $L$ & not run & untested\\
+Track 4B: the spec's own meaning of ``frame flip'' & undefined in the text I had; two readings used & scope note\\
+Track 5A for 1387 & FR30 only (the spec said FR30 and 1387) & not run\\
+Track 5B on the 18 flagged rules; $c_L$ comparison at $L\le5$ & flagged list unavailable; no $c_L$ solves & NOT RUN (substitute set done)\\
+Hand proofs (Theorems B, C, F; $-I$ involution) & unchanged, unverified & \lab{P}\\
+\bottomrule
+\end{longtable}
+
+\section{Reproducibility}
+Scripts: \texttt{t1/t1a\_automaton.py}, \texttt{t1a\_proof.py}; \texttt{t1b/t1b\_collar.py}, \texttt{t1b\_prod.py}; \texttt{t2/t2d\_gauss\_rule.py}, \texttt{t2e\_frame\_twist.py}, \texttt{t2d\_graph\_identity.py}, \texttt{t2f\_partition\_identity\_posthoc.py} (post hoc); \texttt{t3/t3b\_phi\_routes.py}, \texttt{t3c\_posthoc\_symmetry\_search.py} (post hoc); \texttt{t4/t4f\_kpm\_window.py}, \texttt{t4g\_vind.py}; \texttt{t5/t5a\_dL.py}, \texttt{t5b\_parity.py}; \texttt{lean/*.lean}; \texttt{score\_all.py}, \texttt{finalize\_prod.py} and \texttt{build\_report.py} (post-run scoring and tables, not preregistered). Raw outputs are the JSON files beside each script; \texttt{results.json} collects them. Smoke runs before a freeze, re-freezes (T1B twice for performance and memory only) and post hoc items are disclosed in the preregistrations and above. \texttt{SHA256SUMS} covers every file in the folder.
+\end{document}
